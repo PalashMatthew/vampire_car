@@ -70,8 +70,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         screenCenter = Screen.width / 2;
-        boundXMin = (Screen.width / 100 * 5) * -boundX;
-        boundXMax = (Screen.width / 100 * 5) * boundX;
+        //boundXMin = (Screen.width / 100 * 5) * -boundX;
+        //boundXMax = (Screen.width / 100 * 5) * boundX;
     }
 
     private void Update()
@@ -110,34 +110,38 @@ public class PlayerMovement : MonoBehaviour
 
             if (playerScreenPos.x < (float)Screen.width / 100 * screenProcentToRotate)
             {
-                float _needPocent = (float)Screen.width / 100 * screenProcentToRotate;
-                cameraRotateSpeed = (_needPocent - playerScreenPos.x) / 10 * cameraRotateSpeedCoeff * Time.deltaTime;
+                Camera.main.GetComponent<CameraController>().follow = true;
 
-                cameraCenter.transform.position = new Vector3(cameraCenter.transform.position.x - cameraRotateSpeed * Time.deltaTime,
-                                                              cameraCenter.transform.position.y,
-                                                              cameraCenter.transform.position.z);
-                boundXMin -= cameraRotateSpeed * Time.deltaTime;
-                boundXMax -= cameraRotateSpeed * Time.deltaTime;
-                camMoveLeft = true;
-                camMoveRight = false;
+                //float _needPocent = (float)Screen.width / 100 * screenProcentToRotate;
+                //cameraRotateSpeed = (_needPocent - playerScreenPos.x) / 10 * cameraRotateSpeedCoeff * Time.deltaTime;
+
+                //cameraCenter.transform.position = new Vector3(cameraCenter.transform.position.x - cameraRotateSpeed * Time.deltaTime,
+                //                                              cameraCenter.transform.position.y,
+                //                                              cameraCenter.transform.position.z);
+                //boundXMin -= cameraRotateSpeed * Time.deltaTime;
+                //boundXMax -= cameraRotateSpeed * Time.deltaTime;
+                //camMoveLeft = true;
+                //camMoveRight = false;
             }
             else if (playerScreenPos.x > (float)Screen.width / 100 * (100 - screenProcentToRotate))
             {
-                float _needPocent = (float)Screen.width / 100 * (100 - screenProcentToRotate);
-                cameraRotateSpeed = (playerScreenPos.x - _needPocent) / 10 * cameraRotateSpeedCoeff * Time.deltaTime;
+                Camera.main.GetComponent<CameraController>().follow = true;
+                //float _needPocent = (float)Screen.width / 100 * (100 - screenProcentToRotate);
+                //cameraRotateSpeed = (playerScreenPos.x - _needPocent) / 10 * cameraRotateSpeedCoeff * Time.deltaTime;
 
-                cameraCenter.transform.position = new Vector3(cameraCenter.transform.position.x + cameraRotateSpeed * Time.deltaTime,
-                                                              cameraCenter.transform.position.y,
-                                                              cameraCenter.transform.position.z);
-                boundXMin += cameraRotateSpeed * Time.deltaTime;
-                boundXMax += cameraRotateSpeed * Time.deltaTime;
-                camMoveLeft = false;
-                camMoveRight = true;
+                //cameraCenter.transform.position = new Vector3(cameraCenter.transform.position.x + cameraRotateSpeed * Time.deltaTime,
+                //                                              cameraCenter.transform.position.y,
+                //                                              cameraCenter.transform.position.z);
+                //boundXMin += cameraRotateSpeed * Time.deltaTime;
+                //boundXMax += cameraRotateSpeed * Time.deltaTime;
+                //camMoveLeft = false;
+                //camMoveRight = true;
             }
             else
             {
-                camMoveLeft = false;
-                camMoveRight = false;
+                Camera.main.GetComponent<CameraController>().follow = false;
+                //camMoveLeft = false;
+                //camMoveRight = false;
             }
         }
     }

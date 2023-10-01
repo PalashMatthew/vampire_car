@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveController : MonoBehaviour
@@ -19,9 +21,14 @@ public class WaveController : MonoBehaviour
     public GameObject enemyS3Obj;
     public GameObject enemyS4Obj;
 
+    private Generate _generate;
+
     private void Awake()
     {
+        _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
+
         StartWave();
+        StartCoroutine(PatternSpawn());
     }
 
     public void StartWave()
@@ -110,18 +117,45 @@ public class WaveController : MonoBehaviour
         }
         #endregion
 
-        GameObject _newEnemy = _potencialEnemy[Random.Range(0, _potencialEnemy.Count)];
+        GameObject _newEnemy = _potencialEnemy[UnityEngine.Random.Range(0, _potencialEnemy.Count)];
         return _newEnemy;
+    }
+
+    IEnumerator PatternSpawn()
+    {
+        yield return new WaitForSeconds(waveList[currentWave - 1].patternSpawnTime);
+
+        List<GameObject> _potencialPattern = new List<GameObject>();
+
+        for (int i = 0; i < waveList[currentWave - 1].patterns.Count; i++)
+        {
+            if (waveList[currentWave - 1].patternsWeight[i] > 0)
+            {
+                for(int w = 0; w < waveList[currentWave - 1].patternsWeight[i]; w++)
+                {
+                    _potencialPattern.Add(waveList[currentWave - 1].patterns[i]);
+                }
+            }
+        }
+
+        GameObject _newPattern = _potencialPattern[UnityEngine.Random.Range(0, _potencialPattern.Count)];
+
+        int _a = System.Int32.Parse(_newPattern.name);
+
+        _generate.SpawnPattern(_newPattern, waveList[currentWave - 1].patternsX[_a - 1]);
+
+        StartCoroutine(PatternSpawn());
     }
 }
 
 [System.Serializable]
 public class Wave
 {
+    [Header("Base")]
     public int waveNum;
-
     public int enemyKillCount;  //Сколько нужно убить для конца волны
 
+    [Header("Enemy Settings")]
     [Range (0, 10)]
     public int enemyM1Weight;
     [Range(0, 10)]
@@ -138,4 +172,12 @@ public class Wave
     public int enemyS3Weight;
     [Range(0, 10)]
     public int enemyS4Weight;
+
+    [Header("Pattern Settings")]
+    public float patternSpawnTime;
+    public List<GameObject> patterns;
+    [Range(0, 10)]
+    public List<int> patternsWeight;
+
+    public List<float> patternsX;
 }

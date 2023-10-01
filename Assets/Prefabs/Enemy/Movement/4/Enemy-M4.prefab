@@ -285,14 +285,14 @@ MonoBehaviour:
   carType: 0
   isCarStop: 0
   moveSpeed: 0
-  hp: 10
-  damage: 20
-  brakeDamage: 15
-  moveSpeedMin: 5
-  moveSpeedMax: 8
+  hp: 45
+  brakeDamage: 20
+  moveSpeedMin: 10
+  moveSpeedMax: 15
   meshRenderer: {fileID: 1375119487729801382}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
+  isPattern: 0
   zInvisibleDestroy: 5
 --- !u!114 &8407633843209935950
 MonoBehaviour:

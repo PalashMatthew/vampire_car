@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector]
     public float moveSpeed;
     public float hp;
-    public float damage;
+    //public float damage;
     public float brakeDamage;
 
     public float moveSpeedMin;
@@ -28,6 +28,7 @@ public class EnemyController : MonoBehaviour
     public GameObject screwObj;
 
     public bool isVisible;
+    public bool isPattern;
 
     //AFK
     private float _timerAfk = 5;
@@ -37,6 +38,12 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);   
+
+        if (isPattern)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Add(gameObject);
+        }
     }
 
     private void Update()

@@ -13,6 +13,9 @@ public class Generate : MonoBehaviour
     GameplayController _gameplayController;
     public WaveController waveController;
 
+    public float minXSpawn;
+    public float maxXSpawn;
+
     private void Start()
     {
         _player = GameObject.Find("Player");
@@ -25,7 +28,7 @@ public class Generate : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnTime);
 
-        float _rand = Random.Range(_player.transform.position.x - 40f, _player.transform.position.x + 40f);
+        float _rand = Random.Range(minXSpawn, maxXSpawn);
         float _x = _rand / step;
         _x = (int)_x;
         _x *= step;
@@ -36,5 +39,10 @@ public class Generate : MonoBehaviour
         inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
         StartCoroutine(EnemyGen());
+    }
+
+    public void SpawnPattern(GameObject _pattern, float _xSpawn)
+    {
+        Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, 90), transform.rotation);
     }
 }

@@ -749,13 +749,13 @@ MonoBehaviour:
   isCarStop: 0
   moveSpeed: 0
   hp: 10
-  damage: 20
-  brakeDamage: 15
-  moveSpeedMin: 15
-  moveSpeedMax: 20
+  brakeDamage: 20
+  moveSpeedMin: 25
+  moveSpeedMax: 30
   meshRenderer: {fileID: 1356298671211282032}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
+  isPattern: 0
   zInvisibleDestroy: 5
 --- !u!114 &2713173453650896552
 MonoBehaviour:
@@ -783,8 +783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5f65e510a6d234886c1285e1183acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  shotSpeed: 4
+  damage: 20
+  shotSpeed: 5
   bulletMoveSpeed: 20
   pauseTime: 0
 --- !u!114 &6172056994096470475

@@ -19,7 +19,7 @@ public class DecorGenerate : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnTime);
 
-        GameObject inst = Instantiate(decorObj[Random.RandomRange(0, decorObj.Count)], new Vector3(Random.Range(-75f, 75f), 0, 75f), transform.rotation);
+        GameObject inst = Instantiate(decorObj[Random.RandomRange(0, decorObj.Count)], new Vector3(Random.Range(-22f, 22f), 0, 75f), transform.rotation);
 
         //float xPos = Random.Range(playerGlobalCenter.transform.eulerAngles.z - 25, playerGlobalCenter.transform.eulerAngles.z + 25);
         //float zPos = Random.Range(0, 360);
