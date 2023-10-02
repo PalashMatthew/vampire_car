@@ -16,12 +16,15 @@ public class Generate : MonoBehaviour
     public float minXSpawn;
     public float maxXSpawn;
 
+    public bool isSpawnAccess;
+
     private void Start()
     {
         _player = GameObject.Find("Player");
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
 
-        StartCoroutine(EnemyGen());
+        if (isSpawnAccess)
+            StartCoroutine(EnemyGen());
     }
 
     IEnumerator EnemyGen()

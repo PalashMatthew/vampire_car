@@ -11,12 +11,18 @@ public class PopUpDead : MonoBehaviour
 
     PopUpController controller;
 
+    public GameObject tSkip;
+    private float skipTimer = 2;
+    private bool isSkipAccess;
+
     private void Start()
     {
         controller = new PopUpController();
         controller.imgFade = imgFade;
         controller.objPopUp = objPopUp;
         controller.animTime = animSpeed;
+        tSkip.SetActive(false);
+        isSkipAccess = false;
 
         controller.Initialize();
     }
@@ -56,6 +62,16 @@ public class PopUpDead : MonoBehaviour
 
     public void ButSkip()
     {
-        
+        if (isSkipAccess)
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
+    }
+
+    public IEnumerator SkipTimer()
+    {
+        yield return new WaitForSeconds(skipTimer);
+        tSkip.SetActive(true);
+        isSkipAccess = true;
     }
 }

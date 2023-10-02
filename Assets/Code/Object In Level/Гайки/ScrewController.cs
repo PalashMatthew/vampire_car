@@ -63,6 +63,7 @@ public class ScrewController : MonoBehaviour
     void DestroyAnim()
     {
         GlobalStats.screwCount += screwCount;
+        GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().screwCountInThisLevel++;
         GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().UpdateScrewText();
         Destroy(gameObject);
     }

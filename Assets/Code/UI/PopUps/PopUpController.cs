@@ -31,12 +31,12 @@ public class PopUpController
 
     void StopTime()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     public void ClosedPopUp()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         imgFade.GetComponent<Image>().DOFade(0, animTime);
 
         objPopUp.transform.DOScale(0, animTime).SetEase(Ease.InBack).OnComplete(PopUpComponentOff);        

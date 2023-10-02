@@ -11,11 +11,15 @@ public class GameplayUIController : MonoBehaviour
     public TMP_Text tMoney;
 
     [Header("Wave")]
-    public TMP_Text tCurrentWave;
-    public TMP_Text tNextWave;
-    public Image imgFillWaveBar;
-
+    public TMP_Text tWaveTimer;
     public WaveController waveController;
+    private int _currentWaveTime;
+
+    [Header("Level")]
+    public TMP_Text tCurrentLevel;
+    public TMP_Text tNextLevel;
+    public Image imgFillLevelBar;
+    public PlayerLevelController playerLevelController;
 
 
     private void Start()
@@ -25,7 +29,7 @@ public class GameplayUIController : MonoBehaviour
 
     private void Update()
     {
-        UpdateWave();
+        UpdateLevel();
     }
 
     #region ScrewText
@@ -44,13 +48,55 @@ public class GameplayUIController : MonoBehaviour
     }
     #endregion
 
-    #region Wave
-    public void UpdateWave()
+    #region Level
+    void UpdateLevel()
     {
-        tCurrentWave.text = waveController.currentWave.ToString();
-        tNextWave.text = waveController.currentWave + 1 + "";
+        tCurrentLevel.text = playerLevelController.currentLevel.ToString();
+        tNextLevel.text = playerLevelController.currentLevel + 1 + "";
 
-        imgFillWaveBar.fillAmount = (float)waveController.enemyDestroy / waveController.waveList[waveController.currentWave - 1].enemyKillCount;
+        imgFillLevelBar.fillAmount = (float)playerLevelController.screwCountInThisLevel / playerLevelController.screwCountFromNewLevel[playerLevelController.currentLevel - 1];
+    }
+    #endregion
+
+    #region Wave
+    public void StartWave(int _waveTime)
+    {
+        _currentWaveTime = _waveTime;
+
+        if (_currentWaveTime > 9)
+        {
+            tWaveTimer.text = "00:" + _currentWaveTime;
+        }
+        else
+        {
+            tWaveTimer.text = "00:0" + _currentWaveTime;
+        }
+
+        StartCoroutine(WaveTimer());        
+    }
+
+    IEnumerator WaveTimer()
+    {
+        yield return new WaitForSeconds(1);
+        _currentWaveTime -= 1;
+
+        if (_currentWaveTime <= 0)
+        {
+            tWaveTimer.text = "00:00";
+            waveController.WaveEnd();
+        } 
+        else
+        {
+            if (_currentWaveTime > 9)
+            {
+                tWaveTimer.text = "00:" + _currentWaveTime;
+            }
+            else
+            {
+                tWaveTimer.text = "00:0" + _currentWaveTime;
+            }
+            StartCoroutine(WaveTimer());
+        }
     }
     #endregion
 }

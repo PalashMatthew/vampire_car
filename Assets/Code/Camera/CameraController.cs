@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour
 
     public float speed_back;
 
+    public float maxXBound;
+
 
     void Awake()
     {
@@ -39,18 +41,54 @@ public class CameraController : MonoBehaviour
 
     public void Update()
     {
-        
-
-        if (follow)
+        if (Input.GetMouseButton(0))
         {
-            desiredPosition = target.position + offset;
-            //smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.fixedDeltaTime);
-            smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            smoothedPosition = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
-            transform.position = smoothedPosition;
+            float coeff = Screen.width / (maxXBound * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+            Debug.Log(camPos);
+
+            float x = camPos.x / coeff - maxXBound;
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
-        Bounds();
+        //if (Input.touchCount > 0)
+        //{
+        //    Touch touch = Input.GetTouch(0);
+
+        //    if (touch.phase == TouchPhase.Moved)
+        //    {
+        //        desiredPosition = target.position + offset;
+        //        ////smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.fixedDeltaTime);
+        //        //smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        //        //smoothedPosition = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
+        //        //transform.position = desiredPosition;
+
+        //        if (desiredPosition.x < minCameraX)
+        //        {
+        //            desiredPosition = new Vector3(minCameraX, desiredPosition.y, desiredPosition.z);
+        //        }
+
+        //        if (desiredPosition.x > maxCameraX)
+        //        {
+        //            desiredPosition = new Vector3(maxCameraX, desiredPosition.y, desiredPosition.z);
+        //        }
+
+        //        transform.DOMoveX(desiredPosition.x, 0.1f);
+        //    }
+        //}
+
+        //if (follow)
+        //{
+        //    desiredPosition = target.position + offset;
+        //    //smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.fixedDeltaTime);
+        //    smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        //    smoothedPosition = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
+        //    transform.position = smoothedPosition;
+        //}
+
+        //Bounds();
     }
 
     public void BackSpeed()

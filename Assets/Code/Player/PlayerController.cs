@@ -34,11 +34,14 @@ public class PlayerController : MonoBehaviour
     public GameObject IceObj;
     public GameObject LazerObj;
 
+    public bool isDead;
+
 
     public void Initialize()
     {
         currentHp = maxHp;
         _playerUIController = GetComponentInChildren<PlayerUIController>();
+        isDead = false;
 
         GunActivate();
     }
@@ -51,10 +54,12 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(HitAnim());
 
-        if (currentHp <= 0)
+        if (currentHp <= 0 && !isDead)
         {
             //Смерть
-            Application.LoadLevel(Application.loadedLevel);
+            GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().ButOpen();
+            GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().StartCoroutine(GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().SkipTimer());
+            isDead = true;
         }
     }
 

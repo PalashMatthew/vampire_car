@@ -7,6 +7,8 @@ public class DefaultGunBullet : MonoBehaviour
     [HideInInspector]
     public Gun _gunController;
 
+    public bool isPlayerAttack = false;
+
     private void Start()
     {
         Destroy(gameObject, 5);
@@ -23,6 +25,12 @@ public class DefaultGunBullet : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyController>().Hit(_gunController.damage);
             Destroy(gameObject);
-        }        
+        }
+
+        if (other.tag == "player" && isPlayerAttack)
+        {
+            other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
+            Destroy(gameObject);
+        }
     }
 }

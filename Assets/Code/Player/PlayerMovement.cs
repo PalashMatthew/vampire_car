@@ -67,19 +67,23 @@ public class PlayerMovement : MonoBehaviour
 
     private bool camMoveLeft, camMoveRight;
 
+    PlayerController _playerController;
+
     private void Start()
     {
         screenCenter = Screen.width / 2;
-        //boundXMin = (Screen.width / 100 * 5) * -boundX;
-        //boundXMax = (Screen.width / 100 * 5) * boundX;
+        _playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
     {
-        MouseInputSettings();
-        PlayerAnimation();
-        CameraMove();
-        Move();
+        if (!_playerController.isDead)
+        {
+            MouseInputSettings();
+            PlayerAnimation();
+            CameraMove();
+            Move();
+        }
     }
 
     void MouseInputSettings()
@@ -180,31 +184,40 @@ public class PlayerMovement : MonoBehaviour
             #endregion
 
             #region Animations
-            if (currentX < transform.position.x - 0.1f || camMoveLeft)
-            {
-                mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-                //transform.eulerAngles = new Vector3(0, -10f, 0);
-            }
-            else if (currentX > transform.position.x + 0.1f || camMoveRight)
-            {
-                //transform.eulerAngles = new Vector3(0, 10f, 0);
-                mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-            }
-            else
-            {
-                //transform.eulerAngles = new Vector3(0, 0f, 0);
-                mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            }
+            //if (currentX < transform.position.x - 0.1f || camMoveLeft)
+            //{
+            //    mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
+            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+            //    //transform.eulerAngles = new Vector3(0, -10f, 0);
+            //}
+            //else if (currentX > transform.position.x + 0.1f || camMoveRight)
+            //{
+            //    //transform.eulerAngles = new Vector3(0, 10f, 0);
+            //    mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
+            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+            //}
+            //else
+            //{
+            //    //transform.eulerAngles = new Vector3(0, 0f, 0);
+            //    mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            //}
             #endregion
 
             //transform.DOMove(new Vector3(currentX, 0, currentZ), moveXSpeed);
             transform.position = new Vector3(currentX, 0, currentZ);
+
+            float coeff = Screen.width / (boundXMax * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+            Debug.Log(camPos);
+
+            float x = camPos.x / coeff - boundXMax;
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
         if (Input.GetMouseButtonUp(0))

@@ -9,7 +9,7 @@ public class InstObjectMove : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 20);
+        Destroy(gameObject, 35);
     }
 
     private void Update()

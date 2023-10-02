@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour
     private float _timerAfk = 5;
     public float zInvisibleDestroy;
 
+    public GameObject fxExplosion;
+
 
     private void Start()
     {
@@ -81,6 +83,7 @@ public class EnemyController : MonoBehaviour
     public void Hit(float _damage)
     {
         hp -= _damage;
+        GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage);
         StartCoroutine(HitAnim());
 
         if (hp <= 0)
@@ -101,7 +104,8 @@ public class EnemyController : MonoBehaviour
     {
         Instantiate(screwObj, transform.position, transform.rotation);
         GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
-        GameObject.Find("GameplayController").GetComponent<WaveController>().EnemyKillPlus();
+        GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
+        Destroy(_fx, 3);
         Destroy(gameObject);
     }
 

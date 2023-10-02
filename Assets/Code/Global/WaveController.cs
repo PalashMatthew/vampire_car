@@ -22,6 +22,7 @@ public class WaveController : MonoBehaviour
     public GameObject enemyS4Obj;
 
     private Generate _generate;
+    public GameplayUIController gameplayUIController;
 
     private void Awake()
     {
@@ -35,16 +36,12 @@ public class WaveController : MonoBehaviour
     {
         enemyDestroy = 0;
         currentWave++;
+        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime);
     }
 
-    public void EnemyKillPlus()
+    public void WaveEnd()
     {
-        enemyDestroy++;
-
-        if (enemyDestroy >= waveList[currentWave - 1].enemyKillCount)
-        {
-            StartWave();
-        }
+        Debug.Log("Wave End");
     }
 
     public GameObject ChoiseEnemy()
@@ -153,7 +150,7 @@ public class Wave
 {
     [Header("Base")]
     public int waveNum;
-    public int enemyKillCount;  //Сколько нужно убить для конца волны
+    public int waveTime;  //Сколько нужно убить для конца волны
 
     [Header("Enemy Settings")]
     [Range (0, 10)]
