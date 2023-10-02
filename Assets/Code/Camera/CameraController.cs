@@ -22,6 +22,9 @@ public class CameraController : MonoBehaviour
 
     public float maxXBound;
 
+    float startMousePosX = 0;
+    float startPlayerX = 0;
+
 
     void Awake()
     {
@@ -41,6 +44,53 @@ public class CameraController : MonoBehaviour
 
     public void Update()
     {
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    float coeff = Screen.width / (maxXBound * 2);
+
+        //    Vector3 camPos;
+        //    camPos = Input.mousePosition;
+
+        //    float x = camPos.x / coeff - maxXBound;
+
+
+        //    startMousePosX = camPos.x;
+
+        //    startPlayerX = transform.position.x;
+        //}
+
+        //if (Input.GetMouseButton(0))
+        //{
+        //    float coeff = Screen.width / (maxXBound * 2);
+
+        //    Vector3 camPos;
+        //    camPos = Input.mousePosition;
+
+        //    float x = camPos.x / coeff - maxXBound;
+
+        //    if (x < minCameraX) x = minCameraX;
+        //    if (x > maxCameraX) x = maxCameraX;
+
+        //    transform.DOMoveX(x, 0.1f);
+
+        //    //transform.position = new Vector3(x, transform.position.y, transform.position.z);
+        //}
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            float coeff = Screen.width / (maxXBound * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+
+            float x = camPos.x / coeff - maxXBound;
+
+            startMousePosX = x;
+
+            startPlayerX = transform.position.x;
+        }
+
         if (Input.GetMouseButton(0))
         {
             float coeff = Screen.width / (maxXBound * 2);
@@ -50,50 +100,15 @@ public class CameraController : MonoBehaviour
 
             float x = camPos.x / coeff - maxXBound;
 
-            if (x < minCameraX) x = minCameraX;
-            if (x > maxCameraX) x = maxCameraX;
+            
 
-            transform.DOMoveX(x, 0.1f);
+            float currentX = startPlayerX + (x - startMousePosX);
 
-            //transform.position = new Vector3(x, transform.position.y, transform.position.z);
+            if (currentX < minCameraX) currentX = minCameraX;
+            if (currentX > maxCameraX) currentX = maxCameraX;
+
+            transform.DOMoveX(currentX, 0.1f);
         }
-
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch touch = Input.GetTouch(0);
-
-        //    if (touch.phase == TouchPhase.Moved)
-        //    {
-        //        desiredPosition = target.position + offset;
-        //        ////smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.fixedDeltaTime);
-        //        //smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        //        //smoothedPosition = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
-        //        //transform.position = desiredPosition;
-
-        //        if (desiredPosition.x < minCameraX)
-        //        {
-        //            desiredPosition = new Vector3(minCameraX, desiredPosition.y, desiredPosition.z);
-        //        }
-
-        //        if (desiredPosition.x > maxCameraX)
-        //        {
-        //            desiredPosition = new Vector3(maxCameraX, desiredPosition.y, desiredPosition.z);
-        //        }
-
-        //        transform.DOMoveX(desiredPosition.x, 0.1f);
-        //    }
-        //}
-
-        //if (follow)
-        //{
-        //    desiredPosition = target.position + offset;
-        //    //smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.fixedDeltaTime);
-        //    smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        //    smoothedPosition = new Vector3(smoothedPosition.x, smoothedPosition.y, transform.position.z);
-        //    transform.position = smoothedPosition;
-        //}
-
-        //Bounds();
     }
 
     public void BackSpeed()

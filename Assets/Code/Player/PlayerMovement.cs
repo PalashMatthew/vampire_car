@@ -40,17 +40,6 @@ public class PlayerMovement : MonoBehaviour
     public GameObject cameraCenter;
     public GameObject cameraCenter2;
 
-    private float currentX;
-    private float currentZ;
-
-    private float cameraRotateSpeed;    
-
-    private float procentRotate = 0;
-
-    private float playerRotateX;
-    private float playerRotateCoeff;    
-
-    private float screenCenter;
     Vector3 mouseWorldPoint;
     Vector3 mouseScreenPoint;
 
@@ -65,13 +54,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float rotateSpeed;
 
-    private bool camMoveLeft, camMoveRight;
-
     PlayerController _playerController;
 
     private void Start()
     {
-        screenCenter = Screen.width / 2;
         _playerController = GetComponent<PlayerController>();
     }
 
@@ -81,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             MouseInputSettings();
             PlayerAnimation();
-            CameraMove();
+            //CameraMove();
             Move();
         }
     }
@@ -164,7 +150,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            startMousePosX = newPos.x;
+            float coeff = Screen.width / (boundX * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+
+            float x = camPos.x / coeff - boundX;
+
+            startMousePosX = x;
             startMousePosZ = newPos.z;
 
             startPlayerX = transform.position.x;
@@ -173,7 +166,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            float currentX = startPlayerX + (newPos.x - startMousePosX) * coeffX;
+            float coeff = Screen.width / (boundX * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+
+            float x = camPos.x / coeff - boundX;
+
+            //if (x < boundXMin) x = boundXMin;
+            //if (x > boundXMax) x = boundXMax;
+
+            float currentX = startPlayerX + (x - startMousePosX);
             float currentZ = startPlayerZ + (newPos.z - startMousePosZ) * coeffZ;
 
             #region Bounds
@@ -210,18 +213,9 @@ public class PlayerMovement : MonoBehaviour
 
             //transform.position = new Vector3(currentX, 0, currentZ);
 
-            float coeff = Screen.width / (boundX * 2);
+            
 
-            Vector3 camPos;
-            camPos = Input.mousePosition;
-            Debug.Log(camPos);
-
-            float x = camPos.x / coeff - boundX;
-
-            if (x < boundXMin) x = boundXMin;
-            if (x > boundXMax) x = boundXMax;
-
-            transform.DOMove(new Vector3(x, 0, currentZ), 0.1f);
+            transform.DOMove(new Vector3(currentX, 0, currentZ), 0.1f);
 
             //transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
