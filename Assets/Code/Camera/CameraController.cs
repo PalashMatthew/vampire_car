@@ -47,7 +47,6 @@ public class CameraController : MonoBehaviour
 
             Vector3 camPos;
             camPos = Input.mousePosition;
-            Debug.Log(camPos);
 
             float x = camPos.x / coeff - maxXBound;
             transform.position = new Vector3(x, transform.position.y, transform.position.z);

@@ -30,6 +30,20 @@ public class WaveController : MonoBehaviour
 
         StartWave();
         StartCoroutine(PatternSpawn());
+
+        foreach (int i in waveList[currentWave - 1].patternsSpawnTime)
+        {
+            if (i > 0)
+            { }
+        }
+
+        for (int i = 0; i < waveList[currentWave - 1].patternsSpawnTime.Count; i++)
+        {
+            if (waveList[currentWave - 1].patternsSpawnTime[i] > 0)
+            {
+                StartCoroutine(PatternPrioritySpawn(waveList[currentWave - 1].patterns[i], waveList[currentWave - 1].patternsSpawnTime[i]));
+            }
+        }
     }
 
     public void StartWave()
@@ -41,7 +55,7 @@ public class WaveController : MonoBehaviour
 
     public void WaveEnd()
     {
-        Debug.Log("Wave End");
+        StartWave();
     }
 
     public GameObject ChoiseEnemy()
@@ -122,26 +136,40 @@ public class WaveController : MonoBehaviour
     {
         yield return new WaitForSeconds(waveList[currentWave - 1].patternSpawnTime);
 
-        List<GameObject> _potencialPattern = new List<GameObject>();
-
-        for (int i = 0; i < waveList[currentWave - 1].patterns.Count; i++)
+        if (waveList[currentWave - 1].patterns.Count > 0)
         {
-            if (waveList[currentWave - 1].patternsWeight[i] > 0)
+
+            List<GameObject> _potencialPattern = new List<GameObject>();
+
+            for (int i = 0; i < waveList[currentWave - 1].patterns.Count; i++)
             {
-                for(int w = 0; w < waveList[currentWave - 1].patternsWeight[i]; w++)
+                if (waveList[currentWave - 1].patternsWeight[i] > 0)
                 {
-                    _potencialPattern.Add(waveList[currentWave - 1].patterns[i]);
+                    for (int w = 0; w < waveList[currentWave - 1].patternsWeight[i]; w++)
+                    {
+                        _potencialPattern.Add(waveList[currentWave - 1].patterns[i]);
+                    }
                 }
             }
+
+            GameObject _newPattern = _potencialPattern[UnityEngine.Random.Range(0, _potencialPattern.Count)];
+
+            int _a = System.Int32.Parse(_newPattern.name);
+
+            _generate.SpawnPattern(_newPattern, waveList[currentWave - 1].patternsX[_a - 1]);
         }
 
-        GameObject _newPattern = _potencialPattern[UnityEngine.Random.Range(0, _potencialPattern.Count)];
-
-        int _a = System.Int32.Parse(_newPattern.name);
-
-        _generate.SpawnPattern(_newPattern, waveList[currentWave - 1].patternsX[_a - 1]);
-
         StartCoroutine(PatternSpawn());
+    }
+
+    IEnumerator PatternPrioritySpawn(GameObject _pattern, float _time)
+    {
+        yield return new WaitForSeconds(_time);
+
+        int _a = System.Int32.Parse(_pattern.name);
+        _generate.SpawnPattern(_pattern, waveList[currentWave - 1].patternsX[_a - 1]);
+
+        StartCoroutine(PatternPrioritySpawn(_pattern, _time));
     }
 }
 
@@ -175,6 +203,8 @@ public class Wave
     public List<GameObject> patterns;
     [Range(0, 10)]
     public List<int> patternsWeight;
+
+    public List<int> patternsSpawnTime;  //Если 0 то похуй
 
     public List<float> patternsX;
 }

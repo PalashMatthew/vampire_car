@@ -600,6 +600,8 @@ MonoBehaviour:
   waveController: {fileID: 1390383696}
   minXSpawn: -22
   maxXSpawn: 22
+  minZSpawn: 0
+  maxZSpawn: 0
   isSpawnAccess: 1
 --- !u!114 &179750856
 MonoBehaviour:
@@ -1564,7 +1566,7 @@ MonoBehaviour:
   player_active: 1
   follow: 0
   speed_back: 0
-  maxXBound: 12
+  maxXBound: 17
   minCameraX: -12
   maxCameraX: 12
 --- !u!1001 &337132977
@@ -5956,7 +5958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveList:
   - waveNum: 1
-    waveTime: 30
+    waveTime: 59
     enemyM1Weight: 10
     enemyM2Weight: 10
     enemyM3Weight: 10
@@ -5970,11 +5972,12 @@ MonoBehaviour:
     - {fileID: 1494692556306556636, guid: 50f957929dab58846b0a5ae91069fef0, type: 3}
     - {fileID: 8470344085631690572, guid: a121e55501833ba43af9f324b9ba3972, type: 3}
     patternsWeight: 000000000a000000
+    patternsSpawnTime: 0200000000000000
     patternsX:
     - 10
     - 10
   - waveNum: 2
-    waveTime: 0
+    waveTime: 59
     enemyM1Weight: 6
     enemyM2Weight: 6
     enemyM3Weight: 2
@@ -5986,6 +5989,37 @@ MonoBehaviour:
     patternSpawnTime: 0
     patterns: []
     patternsWeight: 
+    patternsSpawnTime: 
+    patternsX: []
+  - waveNum: 2
+    waveTime: 59
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+    patternsX: []
+  - waveNum: 2
+    waveTime: 59
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
     patternsX: []
   - waveNum: 2
     waveTime: 0
@@ -6000,6 +6034,7 @@ MonoBehaviour:
     patternSpawnTime: 0
     patterns: []
     patternsWeight: 
+    patternsSpawnTime: 
     patternsX: []
   - waveNum: 2
     waveTime: 0
@@ -6014,34 +6049,7 @@ MonoBehaviour:
     patternSpawnTime: 0
     patterns: []
     patternsWeight: 
-    patternsX: []
-  - waveNum: 2
-    waveTime: 0
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
-    enemyM4Weight: 0
-    enemyS1Weight: 0
-    enemyS2Weight: 0
-    enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsX: []
-  - waveNum: 2
-    waveTime: 0
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
-    enemyM4Weight: 0
-    enemyS1Weight: 0
-    enemyS2Weight: 0
-    enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
+    patternsSpawnTime: 
     patternsX: []
   currentWave: 0
   enemyDestroy: 0
@@ -8218,8 +8226,8 @@ MonoBehaviour:
   boundX: 0.18
   boundZMin: -9
   boundZMax: 55
-  boundXMin: -22
-  boundXMax: 22
+  boundXMin: -25
+  boundXMax: 25
   mesh: {fileID: 6461683515156693361}
   playerAnimRotateSpeed: 0.2
   wheelsObj:
