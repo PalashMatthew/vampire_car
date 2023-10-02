@@ -207,17 +207,23 @@ public class PlayerMovement : MonoBehaviour
             //}
             #endregion
 
-            //transform.DOMove(new Vector3(currentX, 0, currentZ), moveXSpeed);
-            transform.position = new Vector3(currentX, 0, currentZ);
 
-            float coeff = Screen.width / (boundXMax * 2);
+            //transform.position = new Vector3(currentX, 0, currentZ);
+
+            float coeff = Screen.width / (boundX * 2);
 
             Vector3 camPos;
             camPos = Input.mousePosition;
             Debug.Log(camPos);
 
-            float x = camPos.x / coeff - boundXMax;
-            transform.position = new Vector3(x, transform.position.y, transform.position.z);
+            float x = camPos.x / coeff - boundX;
+
+            if (x < boundXMin) x = boundXMin;
+            if (x > boundXMax) x = boundXMax;
+
+            transform.DOMove(new Vector3(x, 0, currentZ), 0.1f);
+
+            //transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
         if (Input.GetMouseButtonUp(0))

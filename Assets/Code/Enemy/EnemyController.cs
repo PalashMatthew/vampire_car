@@ -56,19 +56,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (!isVisible)
-        {
-            _timerAfk -= Time.deltaTime;
-
-            if (_timerAfk <= 0)
-            {
-                GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
-                Destroy(gameObject);
-            }
-        }
-
         CheckVisible();
-        DestroyInvisibleDown();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -129,29 +117,19 @@ public class EnemyController : MonoBehaviour
         _timerAfk = 5;
     }
 
-    void DestroyInvisibleDown()  //”дал€ем врага если он невидимый и низко опустилс€
-    {
-        if (transform.position.z < zInvisibleDestroy && !isVisible)
-        {
-            GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
-            Destroy(gameObject);
-        }
-    }
-
     void CheckVisible()
     {
-        //Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        //if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
-        //{
-        //    isVisible = true;
-        //}
-        //else
-        //{
-        //    if (isVisible)
-        //    {
-        //        isVisible = false;
-        //        DestroyAfk();
-        //    }
-        //}        
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
+        {
+            isVisible = true;
+        }
+        else
+        {
+            if (isVisible)
+            {
+                isVisible = false;
+            }
+        }
     }
 }

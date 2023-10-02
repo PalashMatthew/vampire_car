@@ -49,7 +49,13 @@ public class CameraController : MonoBehaviour
             camPos = Input.mousePosition;
 
             float x = camPos.x / coeff - maxXBound;
-            transform.position = new Vector3(x, transform.position.y, transform.position.z);
+
+            if (x < minCameraX) x = minCameraX;
+            if (x > maxCameraX) x = maxCameraX;
+
+            transform.DOMoveX(x, 0.1f);
+
+            //transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
         //if (Input.touchCount > 0)

@@ -600,8 +600,8 @@ MonoBehaviour:
   waveController: {fileID: 1390383696}
   minXSpawn: -22
   maxXSpawn: 22
-  minZSpawn: 0
-  maxZSpawn: 0
+  minZSpawn: 77
+  maxZSpawn: 77
   isSpawnAccess: 1
 --- !u!114 &179750856
 MonoBehaviour:
@@ -1567,8 +1567,8 @@ MonoBehaviour:
   follow: 0
   speed_back: 0
   maxXBound: 17
-  minCameraX: -12
-  maxCameraX: 12
+  minCameraX: -10.8
+  maxCameraX: 10.8
 --- !u!1001 &337132977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5972,7 +5972,7 @@ MonoBehaviour:
     - {fileID: 1494692556306556636, guid: 50f957929dab58846b0a5ae91069fef0, type: 3}
     - {fileID: 8470344085631690572, guid: a121e55501833ba43af9f324b9ba3972, type: 3}
     patternsWeight: 000000000a000000
-    patternsSpawnTime: 0200000000000000
+    patternsSpawnTime: 0000000000000000
     patternsX:
     - 10
     - 10
@@ -8223,11 +8223,11 @@ MonoBehaviour:
   cameraRotateSpeedCoeff: 750
   coeffX: 1
   coeffZ: 1
-  boundX: 0.18
+  boundX: 35
   boundZMin: -9
   boundZMax: 55
-  boundXMin: -25
-  boundXMax: 25
+  boundXMin: -22
+  boundXMax: 22
   mesh: {fileID: 6461683515156693361}
   playerAnimRotateSpeed: 0.2
   wheelsObj:
