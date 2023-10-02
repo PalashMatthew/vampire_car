@@ -18,6 +18,9 @@ public class Generate : MonoBehaviour
     public float minZSpawn;
     public float maxZSpawn;
 
+    public float minZSpawnPattern;
+    public float maxZSpawnPattern;
+
     public bool isSpawnAccess;
 
     private void Start()
@@ -50,6 +53,7 @@ public class Generate : MonoBehaviour
 
     public void SpawnPattern(GameObject _pattern, float _xSpawn)
     {
-        Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, 90), transform.rotation);
+        float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
+        Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, _randZ), transform.rotation);
     }
 }
