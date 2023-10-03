@@ -31,12 +31,6 @@ public class WaveController : MonoBehaviour
         StartWave();
         StartCoroutine(PatternSpawn());
 
-        foreach (int i in waveList[currentWave - 1].patternsSpawnTime)
-        {
-            if (i > 0)
-            { }
-        }
-
         for (int i = 0; i < waveList[currentWave - 1].patternsSpawnTime.Count; i++)
         {
             if (waveList[currentWave - 1].patternsSpawnTime[i] > 0)
@@ -50,7 +44,10 @@ public class WaveController : MonoBehaviour
     {
         enemyDestroy = 0;
         currentWave++;
-        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime);
+        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
+        _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
+
+        _generate.StartSpawn();
     }
 
     public void WaveEnd()
@@ -181,6 +178,7 @@ public class Wave
     public int waveTime;  //Сколько нужно убить для конца волны
 
     [Header("Enemy Settings")]
+    public float waveSpeedCoeff;  //Скорость объектов на этой волне
     [Range (0, 10)]
     public int enemyM1Weight;
     [Range(0, 10)]

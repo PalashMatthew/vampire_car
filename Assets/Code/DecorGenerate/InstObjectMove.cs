@@ -5,11 +5,13 @@ using UnityEngine;
 public class InstObjectMove : MonoBehaviour
 {
     public float moveSpeed;
+    public bool isDontDestroy;
 
 
     private void Start()
     {
-        Destroy(gameObject, 35);
+        if (!isDontDestroy)
+            Destroy(gameObject, 35);
     }
 
     private void Update()

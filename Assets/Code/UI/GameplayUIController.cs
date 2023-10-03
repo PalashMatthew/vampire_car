@@ -14,12 +14,16 @@ public class GameplayUIController : MonoBehaviour
     public TMP_Text tWaveTimer;
     public WaveController waveController;
     private int _currentWaveTime;
+    public TMP_Text tCurrentWave;
+    public TMP_Text tNextWave;
+    public Image imgWaveFill;
+    public Image imgWaveEndFill;
 
     [Header("Level")]
     public TMP_Text tCurrentLevel;
-    public TMP_Text tNextLevel;
     public Image imgFillLevelBar;
     public PlayerLevelController playerLevelController;
+    public Image imgLevelEndFill;
 
 
     private void Start()
@@ -51,15 +55,15 @@ public class GameplayUIController : MonoBehaviour
     #region Level
     void UpdateLevel()
     {
-        tCurrentLevel.text = playerLevelController.currentLevel.ToString();
-        tNextLevel.text = playerLevelController.currentLevel + 1 + "";
+        tCurrentLevel.text = "Level " + playerLevelController.currentLevel.ToString();
 
-        imgFillLevelBar.fillAmount = (float)playerLevelController.screwCountInThisLevel / playerLevelController.screwCountFromNewLevel[playerLevelController.currentLevel - 1];
+        imgFillLevelBar.fillAmount = (float)playerLevelController.enemyCountInThisLevel / playerLevelController.enemyCountFromNewLevel[playerLevelController.currentLevel - 1];
+        imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 280f, 0);
     }
     #endregion
 
     #region Wave
-    public void StartWave(int _waveTime)
+    public void StartWave(int _waveTime, int _waveNum)
     {
         _currentWaveTime = _waveTime;
 
@@ -72,13 +76,22 @@ public class GameplayUIController : MonoBehaviour
             tWaveTimer.text = "00:0" + _currentWaveTime;
         }
 
-        StartCoroutine(WaveTimer());        
+        imgWaveFill.fillAmount = 0;
+        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 230f, 0);
+
+        tCurrentWave.text = _waveNum.ToString();
+        tNextWave.text = _waveNum + 1 + "";
+
+        StartCoroutine(WaveTimer(_waveTime));        
     }
 
-    IEnumerator WaveTimer()
+    IEnumerator WaveTimer(int _saveWaveTime)
     {
         yield return new WaitForSeconds(1);
         _currentWaveTime -= 1;
+
+        imgWaveFill.fillAmount = (float)(_saveWaveTime - _currentWaveTime) / _saveWaveTime;
+        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 230f, 0);
 
         if (_currentWaveTime <= 0)
         {
@@ -95,7 +108,7 @@ public class GameplayUIController : MonoBehaviour
             {
                 tWaveTimer.text = "00:0" + _currentWaveTime;
             }
-            StartCoroutine(WaveTimer());
+            StartCoroutine(WaveTimer(_saveWaveTime));
         }
     }
     #endregion

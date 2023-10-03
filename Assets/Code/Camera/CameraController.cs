@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
     float startMousePosX = 0;
     float startPlayerX = 0;
 
+    
+
 
     void Awake()
     {
@@ -39,76 +41,60 @@ public class CameraController : MonoBehaviour
         transform.position = smoothedPosition;
 
         player_active = true;
-        //follow = true;
+        follow = true;
     }
 
     public void Update()
+    {        
+        if (follow)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                float coeff = Screen.width / (maxXBound * 2);
+
+                Vector3 camPos;
+                camPos = Input.mousePosition;
+
+                float x = camPos.x / coeff - maxXBound;
+
+                startMousePosX = x;
+
+                startPlayerX = transform.position.x;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                float coeff = Screen.width / (maxXBound * 2);
+
+                Vector3 camPos;
+                camPos = Input.mousePosition;
+
+                float x = camPos.x / coeff - maxXBound;
+
+
+
+                float currentX = startPlayerX + (x - startMousePosX);
+
+                if (currentX < minCameraX) currentX = minCameraX;
+                if (currentX > maxCameraX) currentX = maxCameraX;
+
+                transform.DOMoveX(currentX, 0.1f);
+            }
+        }
+    }
+
+    public void UpdateCoord()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    float coeff = Screen.width / (maxXBound * 2);
+        float coeff = Screen.width / (maxXBound * 2);
 
-        //    Vector3 camPos;
-        //    camPos = Input.mousePosition;
+        Vector3 camPos;
+        camPos = Input.mousePosition;
 
-        //    float x = camPos.x / coeff - maxXBound;
+        float x = camPos.x / coeff - maxXBound;
 
+        startMousePosX = x;
 
-        //    startMousePosX = camPos.x;
-
-        //    startPlayerX = transform.position.x;
-        //}
-
-        //if (Input.GetMouseButton(0))
-        //{
-        //    float coeff = Screen.width / (maxXBound * 2);
-
-        //    Vector3 camPos;
-        //    camPos = Input.mousePosition;
-
-        //    float x = camPos.x / coeff - maxXBound;
-
-        //    if (x < minCameraX) x = minCameraX;
-        //    if (x > maxCameraX) x = maxCameraX;
-
-        //    transform.DOMoveX(x, 0.1f);
-
-        //    //transform.position = new Vector3(x, transform.position.y, transform.position.z);
-        //}
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            float coeff = Screen.width / (maxXBound * 2);
-
-            Vector3 camPos;
-            camPos = Input.mousePosition;
-
-            float x = camPos.x / coeff - maxXBound;
-
-            startMousePosX = x;
-
-            startPlayerX = transform.position.x;
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            float coeff = Screen.width / (maxXBound * 2);
-
-            Vector3 camPos;
-            camPos = Input.mousePosition;
-
-            float x = camPos.x / coeff - maxXBound;
-
-            
-
-            float currentX = startPlayerX + (x - startMousePosX);
-
-            if (currentX < minCameraX) currentX = minCameraX;
-            if (currentX > maxCameraX) currentX = maxCameraX;
-
-            transform.DOMoveX(currentX, 0.1f);
-        }
+        startPlayerX = transform.position.x;
     }
 
     public void BackSpeed()

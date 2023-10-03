@@ -6,17 +6,17 @@ public class PlayerLevelController : MonoBehaviour
 {
     public int currentLevel;
 
-    public List<int> screwCountFromNewLevel = new List<int>();
+    public List<int> enemyCountFromNewLevel = new List<int>();
 
     private int _globalScrewCount;
-    public int screwCountInThisLevel;
+    public int enemyCountInThisLevel;
 
     private void Update()
     {
-        if (screwCountInThisLevel >= screwCountFromNewLevel[currentLevel - 1])
+        if (enemyCountInThisLevel >= enemyCountFromNewLevel[currentLevel - 1])
         {
             currentLevel++;
-            screwCountInThisLevel = 0;
+            enemyCountInThisLevel = 0;
         }
     }
 }

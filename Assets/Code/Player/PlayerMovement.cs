@@ -6,6 +6,8 @@ using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("General")]
+    public bool isMoveAccess;
+
     public float moveXSpeed;
     public float moveZSpeed;
 
@@ -56,14 +58,17 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerController _playerController;
 
+    Vector3 newPos;
+
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        isMoveAccess = true;
     }
 
     private void Update()
     {
-        if (!_playerController.isDead)
+        if (!_playerController.isDead && isMoveAccess)
         {
             MouseInputSettings();
             PlayerAnimation();
@@ -141,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit _hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        Vector3 newPos = new Vector3(0, 0, 0);
+        newPos = new Vector3(0, 0, 0);
 
         if (Physics.Raycast(ray, out _hit, Mathf.Infinity, layer))
         {
@@ -187,33 +192,33 @@ public class PlayerMovement : MonoBehaviour
             #endregion
 
             #region Animations
-            //if (currentX < transform.position.x - 0.1f || camMoveLeft)
-            //{
-            //    mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
-            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-            //    //transform.eulerAngles = new Vector3(0, -10f, 0);
-            //}
-            //else if (currentX > transform.position.x + 0.1f || camMoveRight)
-            //{
-            //    //transform.eulerAngles = new Vector3(0, 10f, 0);
-            //    mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
-            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-            //}
-            //else
-            //{
-            //    //transform.eulerAngles = new Vector3(0, 0f, 0);
-            //    mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            //    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            //    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            //}
+            if (currentX < transform.position.x - 0.1f)
+            {
+                mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
+                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+                wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+                //transform.eulerAngles = new Vector3(0, -10f, 0);
+            }
+            else if (currentX > transform.position.x + 0.1f)
+            {
+                //transform.eulerAngles = new Vector3(0, 10f, 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
+                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+            }
+            else
+            {
+                //transform.eulerAngles = new Vector3(0, 0f, 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            }
             #endregion
 
 
             //transform.position = new Vector3(currentX, 0, currentZ);
 
-            
+
 
             transform.DOMove(new Vector3(currentX, 0, currentZ), 0.1f);
 
@@ -227,4 +232,61 @@ public class PlayerMovement : MonoBehaviour
             wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
         }
     }
+
+    //Ћужа
+    #region Puddle 
+    public void PuddleActivate()  //¬ключаем когда наехали на лужу
+    {
+        StartCoroutine(Puddle());
+        StartCoroutine(PuddleAnimation());
+    }
+
+    IEnumerator Puddle()
+    {
+        isMoveAccess = false;
+        cam.GetComponent<CameraController>().follow = false;
+        yield return new WaitForSeconds(1);
+
+        RaycastHit _hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        newPos = new Vector3(0, 0, 0);
+
+        if (Physics.Raycast(ray, out _hit, Mathf.Infinity, layer))
+        {
+            newPos = new Vector3(_hit.point.x, _hit.point.y, _hit.point.z);
+        }
+
+        float coeff = Screen.width / (boundX * 2);
+
+        Vector3 camPos;
+        camPos = Input.mousePosition;
+
+        float x = camPos.x / coeff - boundX;
+
+        startMousePosX = x;
+        startMousePosZ = newPos.z;
+
+        startPlayerX = transform.position.x;
+        startPlayerZ = transform.position.z;
+
+        isMoveAccess = true;
+        cam.GetComponent<CameraController>().UpdateCoord();
+        cam.GetComponent<CameraController>().follow = true;
+    }
+
+    IEnumerator PuddleAnimation()
+    {
+        transform.DORotate(new Vector3(0, -20, 0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        transform.DORotate(new Vector3(0, 20, 0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        transform.DORotate(new Vector3(0, -20, 0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        transform.DORotate(new Vector3(0, 20, 0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+        yield return new WaitForSeconds(0.2f);
+    }
+    #endregion
 }

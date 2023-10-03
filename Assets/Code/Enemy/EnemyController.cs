@@ -36,10 +36,20 @@ public class EnemyController : MonoBehaviour
 
     public GameObject fxExplosion;
 
+    public bool isTest;
+
 
     private void Start()
     {
-        moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);   
+        if (isTest)
+        {
+            Initialize();
+        }
+    }
+
+    public void Initialize()
+    {
+        moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
 
         if (isPattern)
         {
@@ -90,6 +100,8 @@ public class EnemyController : MonoBehaviour
 
     void Dead()
     {
+        GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
+
         Instantiate(screwObj, transform.position, transform.rotation);
         GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
         GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);

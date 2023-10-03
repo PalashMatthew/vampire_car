@@ -22,7 +22,8 @@ public class EnemyUI : MonoBehaviour
 
     private void Update()
     {
-        transform.eulerAngles = new Vector3(55.56f, 0, 0);
+        //transform.eulerAngles = new Vector3(55.56f, 0, 0);
+        transform.LookAt(Camera.main.transform.position);
     }
 
     public void ViewDamage(int _damage)
@@ -30,6 +31,8 @@ public class EnemyUI : MonoBehaviour
         GameObject _text;
         _text = Instantiate(tHpObj, transform.position, Quaternion.identity);
         _text.transform.parent = gameObject.transform;
+        _text.transform.LookAt(Camera.main.transform.position);
+        _text.GetComponent<RectTransform>().localEulerAngles = new Vector3(_text.GetComponent<RectTransform>().localEulerAngles.x, 180, _text.GetComponent<RectTransform>().localEulerAngles.z);
 
         if (_damage < 1) _damage = 1;
 

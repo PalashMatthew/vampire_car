@@ -5,6 +5,7 @@ using UnityEngine;
 public class Generate : MonoBehaviour
 {
     public float spawnTime;
+    public float moveSpeedCoeff;
 
     public float step;
 
@@ -27,9 +28,15 @@ public class Generate : MonoBehaviour
     {
         _player = GameObject.Find("Player");
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+    }
 
+    public void StartSpawn()
+    {
         if (isSpawnAccess)
+        {
+            StopAllCoroutines();
             StartCoroutine(EnemyGen());
+        }
     }
 
     IEnumerator EnemyGen()
@@ -47,6 +54,10 @@ public class Generate : MonoBehaviour
         _gameplayController.activeEnemy.Add(inst);
 
         inst.transform.eulerAngles = new Vector3(0, 180, 0);
+
+        inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
+        inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+        inst.GetComponent<EnemyController>().Initialize();
 
         StartCoroutine(EnemyGen());
     }

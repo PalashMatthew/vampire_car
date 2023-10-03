@@ -37,7 +37,7 @@ public class DecorGenerate : MonoBehaviour
 
         StartCoroutine(DecorGen());
         StartCoroutine(HighDecorGen());
-        StartCoroutine(SoilGen());
+        //StartCoroutine(SoilGen());
     }
 
     IEnumerator DecorGen()
@@ -55,23 +55,15 @@ public class DecorGenerate : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(minHighDecorTime, maxHighDecorTime));
 
-        int dir = Random.Range(1, 3);
+        Vector3 _pos1 = new Vector3(Random.Range(minHighDecorXPos, maxHighDecorXPos), highDecorYPos, highDecorZPos);
 
-        if (dir == 1)
-        {
-            Vector3 _pos = new Vector3(Random.Range(minHighDecorXPos, maxHighDecorXPos), highDecorYPos, highDecorZPos);
+        GameObject inst1 = Instantiate(highDecor[Random.Range(0, highDecor.Count)], _pos1, transform.rotation);
+        inst1.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
 
-            GameObject inst = Instantiate(highDecor[Random.Range(0, highDecor.Count)], _pos, transform.rotation);
-            inst.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
-        }
+        Vector3 _pos2 = new Vector3(Random.Range(-minHighDecorXPos, -maxHighDecorXPos), highDecorYPos, highDecorZPos);
 
-        if (dir == 2)
-        {
-            Vector3 _pos = new Vector3(Random.Range(-minHighDecorXPos, -maxHighDecorXPos), highDecorYPos, highDecorZPos);
-
-            GameObject inst = Instantiate(highDecor[Random.Range(0, highDecor.Count)], _pos, transform.rotation);
-            inst.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
-        }
+        GameObject inst2 = Instantiate(highDecor[Random.Range(0, highDecor.Count)], _pos2, transform.rotation);
+        inst2.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
 
         StartCoroutine(HighDecorGen());
     }
@@ -94,7 +86,7 @@ public class DecorGenerate : MonoBehaviour
     void FirstSpawn()
     {
         #region High Decor
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 17; i++)
         {
             int dir = Random.Range(1, 3);
 
@@ -117,20 +109,20 @@ public class DecorGenerate : MonoBehaviour
         #endregion
 
         #region Soil
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject inst = Instantiate(soilObj, new Vector3(Random.Range(minSoilXPos, maxSoilXPos), soilYPos, Random.Range(-9, soilZPos)), transform.rotation);
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    GameObject inst = Instantiate(soilObj, new Vector3(Random.Range(minSoilXPos, maxSoilXPos), soilYPos, Random.Range(-9, soilZPos)), transform.rotation);
 
-            float _scale = Random.Range(minSoilScale, maxSoilScale);
-            inst.transform.localScale = new Vector3(_scale, _scale, _scale);
-            inst.GetComponent<MeshRenderer>().material = soilMaterials[Random.Range(0, soilMaterials.Count)];
+        //    float _scale = Random.Range(minSoilScale, maxSoilScale);
+        //    inst.transform.localScale = new Vector3(_scale, _scale, _scale);
+        //    inst.GetComponent<MeshRenderer>().material = soilMaterials[Random.Range(0, soilMaterials.Count)];
 
-            inst.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
-        }
+        //    inst.GetComponent<InstObjectMove>().moveSpeed = decorMoveSpeed;
+        //}
         #endregion
 
         #region Decor
-        for (int i = 0; i < 40; i++)
+        for (int i = 0; i < 10; i++)
         {
             GameObject inst = Instantiate(decorObj[Random.Range(0, decorObj.Count)], new Vector3(Random.Range(minXSpawn, maxXSpawn), 0, Random.Range(-15, 75f)), transform.rotation);
 

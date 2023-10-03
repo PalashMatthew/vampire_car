@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    [Header("Base")]
     public float damage;
     public float hp;
 
@@ -11,13 +12,25 @@ public class Obstacle : MonoBehaviour
 
     public MeshRenderer meshRenderer;
 
+    [Header("Movement")]
+    public bool isMove;
+    public float moveSpeed;
+
+
+    private void Update()
+    {
+        if (isMove)
+        {
+            Move();
+        }
+    }
+
     #region Hit
     public void Hit(float _damage)
     {
         if (isDestroyedObj)
         {
             hp -= _damage;
-            GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage);
             StartCoroutine(HitAnim());
 
             if (hp <= 0)
@@ -37,6 +50,11 @@ public class Obstacle : MonoBehaviour
 
     void Dead()
     {
+        Destroy(gameObject);
+    }
 
+    private void Move()
+    {
+        transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
     }
 }

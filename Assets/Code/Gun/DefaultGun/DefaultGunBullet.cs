@@ -27,6 +27,12 @@ public class DefaultGunBullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (other.tag == "obstacle")
+        {
+            other.gameObject.GetComponent<Obstacle>().Hit(_gunController.damage);
+            Destroy(gameObject);
+        }
+
         if (other.tag == "player" && isPlayerAttack)
         {
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
