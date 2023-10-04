@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6523196557676037298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5716426212367184059}
+  - component: {fileID: 3622418176541468478}
+  - component: {fileID: 722207198381743359}
+  - component: {fileID: 781830476857618384}
+  m_Layer: 0
+  m_Name: GameplayController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5716426212367184059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523196557676037298}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 540, y: 960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3622418176541468478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523196557676037298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9bd466034d6ed4288e9023b8950098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeEnemy: []
+  _playerUIController: {fileID: 0}
+  _playerController: {fileID: 0}
+  currentWaveNum: 1
+--- !u!114 &722207198381743359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523196557676037298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763e22182808adc4da3b143252316c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveList:
+  - waveNum: 1
+    waveTime: 59
+    waveSpeedCoeff: 1
+    enemyM1Weight: 10
+    enemyM2Weight: 2
+    enemyM3Weight: 0
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 15
+    patterns:
+    - {fileID: 1494692556306556636, guid: 50f957929dab58846b0a5ae91069fef0, type: 3}
+    - {fileID: 8470344085631690572, guid: a121e55501833ba43af9f324b9ba3972, type: 3}
+    patternsWeight: 000000000a000000
+    patternsSpawnTime: 0000000000000000
+  - waveNum: 2
+    waveTime: 59
+    waveSpeedCoeff: 2
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+  - waveNum: 2
+    waveTime: 59
+    waveSpeedCoeff: 3
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+  - waveNum: 2
+    waveTime: 59
+    waveSpeedCoeff: 0
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+  - waveNum: 2
+    waveTime: 0
+    waveSpeedCoeff: 0
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+  - waveNum: 2
+    waveTime: 0
+    waveSpeedCoeff: 0
+    enemyM1Weight: 6
+    enemyM2Weight: 6
+    enemyM3Weight: 2
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 0
+    patterns: []
+    patternsWeight: 
+    patternsSpawnTime: 
+  currentWave: 0
+  enemyDestroy: 0
+  enemyM1Obj: {fileID: 2775943015700847028, guid: a5ef00e2b3a01624eb5a031d6fc1c84b, type: 3}
+  enemyM2Obj: {fileID: 7281141318535844410, guid: 1ee5231cc3cade846b2e927692de48d7, type: 3}
+  enemyM3Obj: {fileID: 5884661979407261822, guid: 82f93ca898591c54996096e04f5dc2c0, type: 3}
+  enemyM4Obj: {fileID: 2448940335617535150, guid: 4ddb69f93e989a34ba3e001d29557914, type: 3}
+  enemyS1Obj: {fileID: 1143483176832582894, guid: 25aea17adc8f8c14fac0734b298574e4, type: 3}
+  enemyS2Obj: {fileID: 6411367347841345111, guid: 1dfebe358d8abdc45b761da1fcc081ee, type: 3}
+  enemyS3Obj: {fileID: 6271080959004233775, guid: a7f5d0215a7b437438c0b9fe1c61125e, type: 3}
+  enemyS4Obj: {fileID: 8004459408459030513, guid: b496a625a2ca9ab4f825b8e221489b5a, type: 3}
+  gameplayUIController: {fileID: 0}
+--- !u!114 &781830476857618384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523196557676037298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64476596b8243c43ab94608abe15122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  enemyCountFromNewLevel: 050000000a0000000f0000001400000019000000
+  enemyCountInThisLevel: 0

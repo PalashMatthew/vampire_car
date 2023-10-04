@@ -101,6 +101,7 @@ public class EnemyController : MonoBehaviour
     void Dead()
     {
         GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
+        GameObject.Find("Player").GetComponent<PlayerPassiveController>().PassiveHealthRecovery();
 
         Instantiate(screwObj, transform.position, transform.rotation);
         GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);

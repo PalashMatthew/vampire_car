@@ -9,11 +9,16 @@ public class PlayerPassiveController : MonoBehaviour
     public bool isPassiveRage;
 
     PlayerController _playerController;
+    PlayerStats _playerStats;
+
+    //Rage
+    private float _savePlayerDamage;
 
 
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _playerStats = GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -22,21 +27,29 @@ public class PlayerPassiveController : MonoBehaviour
         {
             PassiveHealthRecovery();
         }
+
+        if (isPassiveRage)
+        {
+            PassiveRage();
+        }
     }
 
     public void PassiveHealthRecovery()
     {
         if (isPassiveHealthRecovery)
         {
-            //_playerController.currentHp = 
+            int _rand = Random.Range(1, 4);
+            _playerStats.currentHp += _playerStats.maxHp / 100 * _rand;
         }
     }
 
     public void PassiveRage()
     {
-        if (isPassiveRage)
+        if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 30)
         {
-            //_playerController.currentHp = 
+            float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;
+
+            _playerStats.rageValue = _procent;
         }
     }
 }

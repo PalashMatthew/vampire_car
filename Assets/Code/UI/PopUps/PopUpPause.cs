@@ -21,26 +21,15 @@ public class PopUpPause : MonoBehaviour
         controller.Initialize();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ButOpen();
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ButClosed();
-        }
-    }
-
     public void ButOpen()
     {
+        Time.timeScale = 0;
         controller.OpenPopUp();
     }
 
     public void ButClosed()
     {
+        Time.timeScale = 1;
         controller.ClosedPopUp();
     }
 

@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6229555590066330553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3723737417398808413}
+  - component: {fileID: 2315124116551502312}
+  - component: {fileID: 5336416963121399294}
+  - component: {fileID: 3742492922262604308}
+  - component: {fileID: 5042626941310523742}
+  m_Layer: 0
+  m_Name: Generate Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3723737417398808413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229555590066330553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.899468, y: 38.126804, z: -20.628157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2315124116551502312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229555590066330553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db17fc9437c47742adc9b56c8fc2797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highDecor:
+  - {fileID: 887249264257470637, guid: e480be1cc39b49747bd1d023ed5044ea, type: 3}
+  - {fileID: 4568067519423551289, guid: b1e9726934ea5f6488304fbdd02355ad, type: 3}
+  - {fileID: 8992890161208970119, guid: 151a9bf345b3f104ba050a09bb0a02a7, type: 3}
+  - {fileID: 1792822767031033892, guid: a059657c03287d44a8b686dca20a16bf, type: 3}
+  - {fileID: 8435785884678822335, guid: 0725c8ffe6149bb409497dd9802ec00f, type: 3}
+  - {fileID: 6206953864262794700, guid: 718fbdab06799764e8376dfee05cd7f7, type: 3}
+  - {fileID: 1092970354309252582, guid: 6c905b9c395a99a47bf7a1bba5132e45, type: 3}
+  - {fileID: 1242143141162875729, guid: 2863b3438d4a0cc4c9c08037e57cbf5c, type: 3}
+  - {fileID: 887249264257470637, guid: e480be1cc39b49747bd1d023ed5044ea, type: 3}
+  - {fileID: 887249264257470637, guid: e480be1cc39b49747bd1d023ed5044ea, type: 3}
+  minHighDecorTime: 1.3
+  maxHighDecorTime: 2
+  highDecorYPos: 0
+  highDecorZPos: 80
+  minHighDecorXPos: 23
+  maxHighDecorXPos: 27
+  soilObj: {fileID: 8424068042701886960, guid: ce2fcacbe372a5a4b8abe1ffa100d47c, type: 3}
+  soilMaterials:
+  - {fileID: 2100000, guid: 8e3351b0438a52a4e8e5f767a079318a, type: 2}
+  - {fileID: 2100000, guid: 401eb2f6d3c2d8f4eac4bbdda7050ab1, type: 2}
+  - {fileID: 2100000, guid: 18cbfc21f82fcd841a56b31e1de2d0fb, type: 2}
+  - {fileID: 2100000, guid: 8f04932daa1568c449578069a42b7313, type: 2}
+  - {fileID: 2100000, guid: e2ed5f1a092b3b34c92607c077e31ffc, type: 2}
+  soilTimeSpawn: 5
+  soilYPos: 0
+  soilZPos: 100
+  minSoilXPos: -18
+  maxSoilXPos: 18
+  minSoilScale: 2
+  maxSoilScale: 4
+  decorObj:
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  - {fileID: 3696703699962199115, guid: fd2b36ae92785c8428d22fa068f7e551, type: 3}
+  - {fileID: 9067172795995379066, guid: cc39eeca2ffe8b14fbaefae21f52198f, type: 3}
+  - {fileID: 1485396406814292027, guid: c327a22fcfe04064b857783d1b124c73, type: 3}
+  - {fileID: 152171107608848904, guid: 06a6edde54700c9458bf7e5aaeca4a09, type: 3}
+  - {fileID: 8733012527236807214, guid: da61055fb5748754496effe183c48de0, type: 3}
+  - {fileID: 8761781312042943648, guid: b6862869d3483a94e9be266b87bba04e, type: 3}
+  - {fileID: 407880205571135544, guid: 4f8f7f46951eab242b6ef0830f17995b, type: 3}
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  - {fileID: 4553682119949114919, guid: 657a8b9465408b2478ad81e6a8b17a0a, type: 3}
+  decorMoveSpeed: 3.5
+  spawnTime: 1.5
+  minXSpawn: -22
+  maxXSpawn: 22
+--- !u!114 &5336416963121399294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229555590066330553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b524ee1bea052a94ba7a44163ffa7704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnTime: 2
+  moveSpeedCoeff: 0
+  step: 3.5
+  waveController: {fileID: 0}
+  minXSpawn: -18
+  maxXSpawn: 18
+  minZSpawn: 77
+  maxZSpawn: 77
+  minZSpawnPattern: 77
+  maxZSpawnPattern: 77
+  isSpawnAccess: 1
+--- !u!114 &3742492922262604308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229555590066330553}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf0c41b40edae548834586eb47f5a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeObj: {fileID: 2671672532434440665, guid: e0d998c2322d46445b55619b7c68761c, type: 3}
+  _places:
+  - {fileID: 0}
+  placeWidth: 178.5
+--- !u!114 &5042626941310523742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229555590066330553}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb36b6f179e64e74995b33fd8ce1326e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclesObj:
+  - {fileID: 430157964049603943, guid: 46512b5cfbaad3f42917675b18356dd6, type: 3}
+  obstaclesMoveSpeed: 3.5
+  spawnTime: 5
+  minXSpawn: -18
+  maxXSpawn: 18

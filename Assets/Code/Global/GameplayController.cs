@@ -24,7 +24,6 @@ public class GameplayController : MonoBehaviour
     void InitializeGame()
     {
         _playerController.Initialize();
-        _playerUIController.Initialize();
 
         currentWaveNum = 1;
     }

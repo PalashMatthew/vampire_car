@@ -58,7 +58,16 @@ public class GameplayUIController : MonoBehaviour
         tCurrentLevel.text = "Level " + playerLevelController.currentLevel.ToString();
 
         imgFillLevelBar.fillAmount = (float)playerLevelController.enemyCountInThisLevel / playerLevelController.enemyCountFromNewLevel[playerLevelController.currentLevel - 1];
-        imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 280f, 0);
+
+        if (imgFillLevelBar.fillAmount > 0)
+        {
+            imgLevelEndFill.gameObject.SetActive(true);
+            imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 280f, 0);
+        }
+        else
+        {
+            imgLevelEndFill.gameObject.SetActive(false);
+        }
     }
     #endregion
 

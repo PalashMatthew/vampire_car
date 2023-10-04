@@ -22,24 +22,18 @@ public class PopUpController
         imgFade.SetActive(true);
         objPopUp.SetActive(true);
 
-        imgFade.GetComponent<Image>().DOFade(0, 0);
-        imgFade.GetComponent<Image>().DOFade(0.5f, animTime);
+        imgFade.GetComponent<Image>().DOFade(0, 0).SetUpdate(true);
+        imgFade.GetComponent<Image>().DOFade(0.5f, animTime).SetUpdate(true);
 
-        objPopUp.transform.DOScale(0, 0);
-        objPopUp.transform.DOScale(1, animTime).SetEase(Ease.OutBack).OnComplete(StopTime);
-    }
-
-    void StopTime()
-    {
-        //Time.timeScale = 0;
+        objPopUp.transform.DOScale(0, 0).SetUpdate(true);
+        objPopUp.transform.DOScale(1, animTime).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public void ClosedPopUp()
     {
-        //Time.timeScale = 1;
-        imgFade.GetComponent<Image>().DOFade(0, animTime);
+        imgFade.GetComponent<Image>().DOFade(0, animTime).SetUpdate(true);
 
-        objPopUp.transform.DOScale(0, animTime).SetEase(Ease.InBack).OnComplete(PopUpComponentOff);        
+        objPopUp.transform.DOScale(0, animTime).SetEase(Ease.InBack).OnComplete(PopUpComponentOff).SetUpdate(true);        
     }
 
     void PopUpComponentOff()

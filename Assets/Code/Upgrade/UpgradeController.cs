@@ -10,6 +10,7 @@ public class UpgradeController : MonoBehaviour
     PlayerController _playerController;
     PlayerPassiveController _playerPassiveController;
     PlayerStats _playerStats;
+    PlayerGuns _playerGuns;
 
     //Level Cards
     public int MaxHpUp_Level;
@@ -31,6 +32,7 @@ public class UpgradeController : MonoBehaviour
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         _playerPassiveController = GameObject.Find("Player").GetComponent<PlayerPassiveController>();
+        _playerGuns = GameObject.Find("Player").GetComponent<PlayerGuns>();
 
         MaxHpUp_Level = 0;
         HealthRecovery_Level = 0;
@@ -39,14 +41,6 @@ public class UpgradeController : MonoBehaviour
         DamageUp_Level = 0;
         KritDamageUp_Level = 0;
         ProjectileUp_Level = 0;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GenerateUpgrades();
-        }
     }
 
     public void GenerateUpgrades()
@@ -129,7 +123,6 @@ public class UpgradeController : MonoBehaviour
 
             _createdCards.Add(_card);
             cardsController[i].card = _card;
-            cardsController[i].Initialize();
         }
     }
 
@@ -142,48 +135,63 @@ public class UpgradeController : MonoBehaviour
     // Увеличение максимального HP
     public void MaxHpUp_Passive()
     {
-        _playerController.maxHp += _playerController.maxHp / 100f * 10f;
-        Debug.Log("MaxHpUp");
+        float _newHp = _playerStats.maxHp / 100f * 10f;
+        _playerStats.maxHp += _newHp;
+        _playerStats.currentHp += _newHp;
+
         MaxHpUp_Level++;
     }
     
     //Восстановление здоровья
     public void HealthRecovery_Passive()
-    {
+    {       
         _playerPassiveController.isPassiveHealthRecovery = true;
-        Debug.Log("HealthRecovery");
+
         HealthRecovery_Level++;
     }
 
     public void Rage_Passive()
     {
         _playerPassiveController.isPassiveRage = true;
-        Debug.Log("Rage");
+
         Rage_Level++;
+
+        if (Rage_Level == 1)
+            _playerStats.rageCoeff = 2;
+
+        if (Rage_Level == 2)
+            _playerStats.rageCoeff = 3;
+
+        if (Rage_Level == 3)
+            _playerStats.rageCoeff = 4;
     }
 
     public void AttackSpeedUp_Passive()
     {
-        _playerStats.attackSpeed += _playerStats.attackSpeed / 100f * 10f;
-        Debug.Log("AttackSpeedUp");
+        _playerStats.attackSpeed -= _playerStats.attackSpeed / 100f * 10f;
+
         AttackSpeedUp_Level++;
     }
 
     public void DamageUp_Passive()
     {
-        Debug.Log("DamageUp");
+        _playerStats.damage += _playerStats.damage / 100f * 10f;
+        _playerGuns.GunDamageUpgrade(10f);
+
         DamageUp_Level++;
     }
 
     public void KritDamageUp_Passive()
     {
-        Debug.Log("Krit");
+        _playerStats.kritDamage = _playerStats.kritDamage / 100 * 10;
+
         KritDamageUp_Level++;
     }
 
     public void ProjectileUp_Passive()
     {
-        Debug.Log("Projectile");
+        _playerStats.projectileCount++;
+
         ProjectileUp_Level++;
     }
     #endregion

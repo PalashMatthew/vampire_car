@@ -9,28 +9,30 @@ public class PlayerUIController : MonoBehaviour
     public TMP_Text tHp;
     public Image imgFill;
 
-    private float _currentHp;
-    private float _maxHp;
-
     PlayerController _playerController;
+    PlayerStats _playerStats;
 
     public void Initialize()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        UpdateHP();
+        _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();        
+    }
+
+    private void Start()
+    {
+        Initialize();
     }
 
     private void Update()
     {
         transform.eulerAngles = new Vector3(55.56f, 0, 0);
+
+        UpdateHP();
     }
 
     public void UpdateHP()
     {
-        _currentHp = _playerController.currentHp;
-        _maxHp = _playerController.maxHp;
-
-        imgFill.fillAmount = _currentHp / _maxHp;
-        tHp.text = _currentHp.ToString();
+        imgFill.fillAmount = _playerStats.currentHp / _playerStats.maxHp;
+        tHp.text = _playerStats.currentHp.ToString();
     }
 }

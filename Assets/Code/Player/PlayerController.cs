@@ -6,35 +6,10 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector]
-    public float currentHp;
-    public float maxHp;
-
     public List<MeshRenderer> meshRenderer;
 
     PlayerUIController _playerUIController;
-
-    [Header("Gun")]
-    public bool _isDefaultGun;
-    public bool _isRocketLauncher;
-    public bool _isLightning;
-    public bool _isOil;
-    public bool _isBoomerang;
-    public bool _isPartner;
-    public bool _isDron;
-    public bool _isIce;
-    public bool _isLazer;
-
-    [Header("Gun Object")]
-    public GameObject DefaultGunObj;
-    public GameObject RocketLauncherObj;
-    public GameObject LightningObj;
-    public GameObject OilObj;
-    public GameObject BoomerangObj;
-    public GameObject PartnerObj;
-    public GameObject DronObj;
-    public GameObject IceObj;
-    public GameObject LazerObj;
+    PlayerStats _playerStats;
 
     public bool isDead;
 
@@ -45,23 +20,20 @@ public class PlayerController : MonoBehaviour
 
     public void Initialize()
     {
-        currentHp = maxHp;
         _playerUIController = GetComponentInChildren<PlayerUIController>();
+        _playerStats = GetComponent<PlayerStats>();
+
         isDead = false;
         tLevelUp.gameObject.SetActive(false);
-
-        GunActivate();
     }
 
     public void Hit(float _damage)
     {
-        currentHp -= _damage;
-
-        _playerUIController.UpdateHP();
+        _playerStats.currentHp -= _damage;
 
         StartCoroutine(HitAnim());
 
-        if (currentHp <= 0 && !isDead)
+        if (_playerStats.currentHp <= 0 && !isDead)
         {
             //Смерть
             GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().ButOpen();
@@ -83,37 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             _mesh.material.DisableKeyword("_EMISSION");
         }
-    }
-
-    void GunActivate()
-    {
-        if (_isDefaultGun)
-            DefaultGunObj.SetActive(true);
-
-        if (_isRocketLauncher)
-            RocketLauncherObj.SetActive(true);
-
-        if (_isLightning)
-            LightningObj.SetActive(true);
-
-        if (_isOil)
-            OilObj.SetActive(true);
-
-        if (_isBoomerang)
-            BoomerangObj.SetActive(true);
-
-        if (_isPartner)
-            PartnerObj.SetActive(true);
-
-        if (_isDron)
-            DronObj.SetActive(true);
-
-        if (_isIce)
-            IceObj.SetActive(true);
-
-        if (_isLazer)
-            LazerObj.SetActive(true);
-    }
+    }    
 
     public void LevelUp()
     {
@@ -135,5 +77,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         tLevelUp.gameObject.SetActive(false);
+
+        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
     }
 }

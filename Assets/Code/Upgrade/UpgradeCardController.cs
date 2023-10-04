@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class UpgradeCardController : MonoBehaviour
 {
+    public int cardNum;
     public UpgradeCard card;
 
     public TMP_Text tName;
@@ -17,6 +18,7 @@ public class UpgradeCardController : MonoBehaviour
     public Sprite sprStarFull, sprStarEmpty;
 
     UpgradeController _upgradeController;
+    PopUpUpgrade _popUpUpgrade;
 
     public void Initialize()
     {
@@ -24,6 +26,7 @@ public class UpgradeCardController : MonoBehaviour
         tDescription.text = card.description;
 
         _upgradeController = GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>();
+        _popUpUpgrade = GetComponentInParent<PopUpUpgrade>();
 
         #region Stars
         switch (levelNum)
@@ -99,5 +102,7 @@ public class UpgradeCardController : MonoBehaviour
                     break;
             }
         }
+
+        _popUpUpgrade.ChoiceCard(cardNum);
     }
 }
