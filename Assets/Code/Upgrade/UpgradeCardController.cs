@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UpgradeCardController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class UpgradeCardController : MonoBehaviour
     public TMP_Text tName;
     public TMP_Text tDescription;
 
-    private int levelNum;
+    public int levelNum;
     public Image imgStar1, imgStar2, imgStar3;
     public Sprite sprStarFull, sprStarEmpty;
 
@@ -23,6 +24,44 @@ public class UpgradeCardController : MonoBehaviour
         tDescription.text = card.description;
 
         _upgradeController = GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>();
+
+        #region Stars
+        switch (levelNum)
+        {
+            case 0:
+                imgStar1.sprite = sprStarFull;
+                imgStar2.sprite = sprStarEmpty;
+                imgStar3.sprite = sprStarEmpty;
+
+                StartCoroutine(StarAnimation(imgStar1));
+                break;
+
+            case 1:
+                imgStar1.sprite = sprStarFull;
+                imgStar2.sprite = sprStarFull;
+                imgStar3.sprite = sprStarEmpty;
+
+                StartCoroutine(StarAnimation(imgStar2));
+                break;
+
+            case 2:
+                imgStar1.sprite = sprStarFull;
+                imgStar2.sprite = sprStarFull;
+                imgStar3.sprite = sprStarFull;
+
+                StartCoroutine(StarAnimation(imgStar3));
+                break;
+        }
+        #endregion
+    }
+
+    IEnumerator StarAnimation(Image _imgStar)
+    {
+        _imgStar.GetComponent<RectTransform>().DOScale(1.2f, 0.4f);
+        yield return new WaitForSeconds(0.4f);
+        _imgStar.GetComponent<RectTransform>().DOScale(1f, 0.4f);
+        yield return new WaitForSeconds(0.4f);
+        StartCoroutine(StarAnimation(_imgStar));
     }
 
     public void ChoiceCard()

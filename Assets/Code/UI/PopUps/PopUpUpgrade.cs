@@ -14,6 +14,7 @@ public class PopUpUpgrade : MonoBehaviour
     public float animSpeed;
 
     PopUpController controller;
+    public UpgradeController upgradeController;
 
     private void Start()
     {
@@ -62,13 +63,25 @@ public class PopUpUpgrade : MonoBehaviour
         controller.ClosedPopUp();
     }
 
-    public void ButSettings()
+    public void ButReroll()
     {
-
+        StartCoroutine(Reroll());
     }
 
-    public void ButExit()
+    IEnumerator Reroll()
     {
+        card1.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
+        card2.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
+        card3.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack);
 
+        yield return new WaitForSeconds(0.5f);
+
+        upgradeController.Reroll();
+
+        Sequence cardAnim = DOTween.Sequence();
+
+        cardAnim.Insert(0f, card1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack));
+        cardAnim.Insert(0.1f, card2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack));
+        cardAnim.Insert(0.2f, card3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack));
     }
 }

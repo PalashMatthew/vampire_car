@@ -6,6 +6,7 @@ public class PlayerPassiveController : MonoBehaviour
 {
     [Header("Passive")]
     public bool isPassiveHealthRecovery;
+    public bool isPassiveRage;
 
     PlayerController _playerController;
 
@@ -26,6 +27,14 @@ public class PlayerPassiveController : MonoBehaviour
     public void PassiveHealthRecovery()
     {
         if (isPassiveHealthRecovery)
+        {
+            //_playerController.currentHp = 
+        }
+    }
+
+    public void PassiveRage()
+    {
+        if (isPassiveRage)
         {
             //_playerController.currentHp = 
         }
