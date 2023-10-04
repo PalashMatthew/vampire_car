@@ -11,6 +11,10 @@ public class UpgradeCardController : MonoBehaviour
     public TMP_Text tName;
     public TMP_Text tDescription;
 
+    private int levelNum;
+    public Image imgStar1, imgStar2, imgStar3;
+    public Sprite sprStarFull, sprStarEmpty;
+
     UpgradeController _upgradeController;
 
     public void Initialize()

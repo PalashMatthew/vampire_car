@@ -10,11 +10,33 @@ public class UpgradeController : MonoBehaviour
     PlayerController _playerController;
     PlayerPassiveController _playerPassiveController;
 
+    //Level Cards
+    public int MaxHpUp_Level;
+    public int HealthRecovery_Level;
+    public int Rage_Level;
+    public int AttackSpeedUp_Level;
+    public int DamageUp_Level;
+    public int KritDamageUp_level;
+    public int ProjectileUp_Level;
+
 
     private void Start()
     {
+        Initialize();
+    }
+
+    void Initialize()
+    {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         _playerPassiveController = GameObject.Find("Player").GetComponent<PlayerPassiveController>();
+
+        MaxHpUp_Level = 0;
+        HealthRecovery_Level = 0;
+        Rage_Level = 0;
+        AttackSpeedUp_Level = 0;
+        DamageUp_Level = 0;
+        KritDamageUp_level = 0;
+        ProjectileUp_Level = 0;
     }
 
     private void Update()
