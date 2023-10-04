@@ -15,6 +15,7 @@ public class PlayerLevelController : MonoBehaviour
     {
         if (enemyCountInThisLevel >= enemyCountFromNewLevel[currentLevel - 1])
         {
+            GameObject.Find("Player").GetComponent<PlayerController>().LevelUp();
             currentLevel++;
             enemyCountInThisLevel = 0;
         }

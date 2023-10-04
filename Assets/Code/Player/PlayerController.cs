@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,12 +38,17 @@ public class PlayerController : MonoBehaviour
 
     public bool isDead;
 
+    [Header("Level Up")]
+    public ParticleSystem fxLevelUp;
+    public TMP_Text tLevelUp;    
+
 
     public void Initialize()
     {
         currentHp = maxHp;
         _playerUIController = GetComponentInChildren<PlayerUIController>();
         isDead = false;
+        tLevelUp.gameObject.SetActive(false);
 
         GunActivate();
     }
@@ -106,5 +113,27 @@ public class PlayerController : MonoBehaviour
 
         if (_isLazer)
             LazerObj.SetActive(true);
+    }
+
+    public void LevelUp()
+    {
+        fxLevelUp.Play();
+
+        StartCoroutine(LevelUpTextAnimation());
+    }    
+
+    IEnumerator LevelUpTextAnimation()
+    {
+        tLevelUp.gameObject.SetActive(true);
+        tLevelUp.transform.DOScale(0, 0);
+
+        tLevelUp.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+
+        yield return new WaitForSeconds(2);
+
+        tLevelUp.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+
+        yield return new WaitForSeconds(0.3f);
+        tLevelUp.gameObject.SetActive(false);
     }
 }

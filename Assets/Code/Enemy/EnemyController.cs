@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        if (isTest)
+        if (isTest || isPattern)
         {
             Initialize();
         }
