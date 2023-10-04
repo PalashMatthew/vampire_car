@@ -151,9 +151,7 @@ public class WaveController : MonoBehaviour
 
             GameObject _newPattern = _potencialPattern[UnityEngine.Random.Range(0, _potencialPattern.Count)];
 
-            int _a = System.Int32.Parse(_newPattern.name);
-
-            _generate.SpawnPattern(_newPattern, waveList[currentWave - 1].patternsX[_a - 1]);
+            _generate.SpawnPattern(_newPattern, _newPattern.GetComponent<Pattern>().patternX);
         }
 
         StartCoroutine(PatternSpawn());
@@ -163,8 +161,7 @@ public class WaveController : MonoBehaviour
     {
         yield return new WaitForSeconds(_time);
 
-        int _a = System.Int32.Parse(_pattern.name);
-        _generate.SpawnPattern(_pattern, waveList[currentWave - 1].patternsX[_a - 1]);
+        _generate.SpawnPattern(_pattern, _pattern.GetComponent<Pattern>().patternX);
 
         StartCoroutine(PatternPrioritySpawn(_pattern, _time));
     }
@@ -203,6 +200,4 @@ public class Wave
     public List<int> patternsWeight;
 
     public List<int> patternsSpawnTime;  //Если 0 то похуй
-
-    public List<float> patternsX;
 }

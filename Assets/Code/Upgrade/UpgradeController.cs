@@ -49,6 +49,11 @@ public class UpgradeController : MonoBehaviour
 
     public void GenerateUpgrades()
     {
+        UpgradeCard _card; 
+        _card = cards[Random.Range(0, cards.Count)];
+
+        //if (_card.)
+
         cardsController[0].card = cards[Random.Range(0, cards.Count)];
         cardsController[0].Initialize();
     }

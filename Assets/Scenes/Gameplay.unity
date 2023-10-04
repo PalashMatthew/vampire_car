@@ -7557,15 +7557,12 @@ MonoBehaviour:
     enemyS2Weight: 10
     enemyS3Weight: 10
     enemyS4Weight: 10
-    patternSpawnTime: 15
+    patternSpawnTime: 3
     patterns:
     - {fileID: 1494692556306556636, guid: 50f957929dab58846b0a5ae91069fef0, type: 3}
     - {fileID: 8470344085631690572, guid: a121e55501833ba43af9f324b9ba3972, type: 3}
     patternsWeight: 000000000a000000
     patternsSpawnTime: 0000000000000000
-    patternsX:
-    - 10
-    - 10
   - waveNum: 2
     waveTime: 59
     waveSpeedCoeff: 2
@@ -7581,7 +7578,6 @@ MonoBehaviour:
     patterns: []
     patternsWeight: 
     patternsSpawnTime: 
-    patternsX: []
   - waveNum: 2
     waveTime: 59
     waveSpeedCoeff: 3
@@ -7597,7 +7593,6 @@ MonoBehaviour:
     patterns: []
     patternsWeight: 
     patternsSpawnTime: 
-    patternsX: []
   - waveNum: 2
     waveTime: 59
     waveSpeedCoeff: 0
@@ -7613,7 +7608,6 @@ MonoBehaviour:
     patterns: []
     patternsWeight: 
     patternsSpawnTime: 
-    patternsX: []
   - waveNum: 2
     waveTime: 0
     waveSpeedCoeff: 0
@@ -7629,7 +7623,6 @@ MonoBehaviour:
     patterns: []
     patternsWeight: 
     patternsSpawnTime: 
-    patternsX: []
   - waveNum: 2
     waveTime: 0
     waveSpeedCoeff: 0
@@ -7645,7 +7638,6 @@ MonoBehaviour:
     patterns: []
     patternsWeight: 
     patternsSpawnTime: 
-    patternsX: []
   currentWave: 0
   enemyDestroy: 0
   enemyM1Obj: {fileID: 2775943015700847028, guid: a5ef00e2b3a01624eb5a031d6fc1c84b, type: 3}
