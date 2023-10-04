@@ -53,22 +53,22 @@ public class UpgradeController : MonoBehaviour
 
     public void AttackSpeedUp_Passive()
     {
-        Debug.Log("MaxHpUp");
+        Debug.Log("AttackSpeedUp");
     }
 
     public void DamageUp_Passive()
     {
-
+        Debug.Log("DamageUp");
     }
 
     public void KritDamageUp_Passive()
     {
-
+        Debug.Log("Krit");
     }
 
     public void ProjectileUp_Passive()
     {
-
+        Debug.Log("Projectile");
     }
     #endregion
 }
