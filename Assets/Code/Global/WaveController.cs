@@ -46,6 +46,7 @@ public class WaveController : MonoBehaviour
         currentWave++;
         gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
         _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
+        _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
 
         _generate.StartSpawn();
     }
@@ -173,6 +174,7 @@ public class Wave
     [Header("Base")]
     public int waveNum;
     public int waveTime;  //Сколько нужно убить для конца волны
+    public float enemySpawnTime;
 
     [Header("Enemy Settings")]
     public float waveSpeedCoeff;  //Скорость объектов на этой волне

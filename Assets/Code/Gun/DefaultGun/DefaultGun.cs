@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DefaultGun : MonoBehaviour
 {
+    [Header("Level")]
+    public int currentLevel;
+
+    [Header("Bullet")]
     public GameObject bulletObj;
     public GameObject muzzleObj;
 
@@ -35,12 +39,12 @@ public class DefaultGun : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
 
         _gunController.damage = _playerStats.damage;
-        _gunController.shotSpeed = _playerStats.attackSpeed;
+        //_gunController.shotSpeed = _playerStats.attackSpeedCoeff;
     }
 
     IEnumerator Shot()
     {
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed - _gunController.shotSpeed / 100 * _playerStats.attackSpeedCoeff);
 
         if (_playerStats.projectileCount == 1)
         {

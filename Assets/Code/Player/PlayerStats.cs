@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     public float kritChance;
     public float kritDamage;
 
-    public float attackSpeed;
+    public float attackSpeedCoeff;
 
     public float projectileCount;
 

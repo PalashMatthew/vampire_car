@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,11 +43,14 @@ public class PopUpDead : MonoBehaviour
 
     public void ButOpen()
     {
+        Time.timeScale = 0;
         controller.OpenPopUp();
+        StartCoroutine(SkipTimer());
     }
 
     public void ButClosed()
     {
+        Time.timeScale = 1;
         controller.ClosedPopUp();
     }
 
@@ -70,8 +74,10 @@ public class PopUpDead : MonoBehaviour
 
     public IEnumerator SkipTimer()
     {
-        yield return new WaitForSeconds(skipTimer);
+        yield return new WaitForSecondsRealtime(skipTimer);
         tSkip.SetActive(true);
+        tSkip.transform.localScale = Vector3.zero;
+        tSkip.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
         isSkipAccess = true;
     }
 }

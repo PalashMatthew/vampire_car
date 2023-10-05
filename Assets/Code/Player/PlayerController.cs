@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         {
             //Смерть
             GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().ButOpen();
-            GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().StartCoroutine(GameObject.Find("PopUp Dead").GetComponent<PopUpDead>().SkipTimer());
             isDead = true;
         }
     }

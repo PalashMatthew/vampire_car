@@ -10,6 +10,11 @@ public class ButtonPress : EventTrigger
 
     private bool negativeAnimationPlayed;
 
+    private void OnEnable()
+    {
+        transform.DOScale(1f, 0f).SetUpdate(true);
+    }
+
     public override void OnPointerDown(PointerEventData data)
     {
         if (!NegativeAnimation)

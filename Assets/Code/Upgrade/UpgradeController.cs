@@ -12,7 +12,8 @@ public class UpgradeController : MonoBehaviour
     PlayerStats _playerStats;
     PlayerGuns _playerGuns;
 
-    //Level Cards
+    //Level Cards Passive
+    [Header("Level Cards Passive")]
     public int MaxHpUp_Level;
     public int HealthRecovery_Level;
     public int Rage_Level;
@@ -20,6 +21,9 @@ public class UpgradeController : MonoBehaviour
     public int DamageUp_Level;
     public int KritDamageUp_Level;
     public int ProjectileUp_Level;
+
+    [Header("Level Cards Guns")]
+    public int DefaultGun_Level;
 
 
     private void Start()
@@ -168,7 +172,7 @@ public class UpgradeController : MonoBehaviour
 
     public void AttackSpeedUp_Passive()
     {
-        _playerStats.attackSpeed -= _playerStats.attackSpeed / 100f * 10f;
+        _playerStats.attackSpeedCoeff += 10;
 
         AttackSpeedUp_Level++;
     }
@@ -195,5 +199,21 @@ public class UpgradeController : MonoBehaviour
         ProjectileUp_Level++;
     }
     #endregion
-    
+
+    #region Guns Upgrades
+    public void DefaultGun_Gun()
+    {
+        if (DefaultGun_Level == 0)
+        {
+
+        }
+
+
+        float _newHp = _playerStats.maxHp / 100f * 10f;
+        _playerStats.maxHp += _newHp;
+        _playerStats.currentHp += _newHp;
+
+        MaxHpUp_Level++;
+    }
+    #endregion
 }

@@ -34,11 +34,6 @@ public class PopUpUpgrade : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ButOpen();
-        }
-
         if (GlobalStats.screwCount > 12)
         {
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
