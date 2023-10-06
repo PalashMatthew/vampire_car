@@ -41,6 +41,7 @@ public class RocketLauncherBullet : MonoBehaviour
     {
         GameObject _inst = Instantiate(boomObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
         _inst.GetComponent<BoomObj>()._gunController = _gunController;
+        _inst.transform.localScale = new Vector3(_gunController.areaValue, _gunController.areaValue, _gunController.areaValue);
         _inst.GetComponent<BoomObj>().Initialize();
 
         Destroy(gameObject);

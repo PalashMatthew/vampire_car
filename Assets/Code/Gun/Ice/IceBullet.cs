@@ -14,6 +14,9 @@ public class IceBullet : MonoBehaviour
 
     private void Update()
     {
+        if (target == null)
+            Attack();
+
         if (Vector3.Distance(transform.position, target.transform.position) > minDistanceToAttack)
         {
             Movement();
@@ -21,7 +24,7 @@ public class IceBullet : MonoBehaviour
         else
         {
             Attack();
-        }
+        }        
     }
 
     void Movement()

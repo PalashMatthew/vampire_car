@@ -37,16 +37,13 @@ public class DefaultGun : MonoBehaviour
     private void Update()
     {
         transform.eulerAngles = Vector3.zero;
-
-        _gunController.damage = _playerStats.damage;
-        //_gunController.shotSpeed = _playerStats.attackSpeedCoeff;
     }
 
     IEnumerator Shot()
     {
-        yield return new WaitForSeconds(_gunController.shotSpeed - _gunController.shotSpeed / 100 * _playerStats.attackSpeedCoeff);
+        yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        if (_playerStats.projectileCount == 1)
+        if (_gunController.projectileValue == 1)
         {
             GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint1.position, transform.rotation);
             _inst.GetComponent<DefaultGunBullet>()._gunController = _gunController;
@@ -56,7 +53,7 @@ public class DefaultGun : MonoBehaviour
             Destroy(_instMuzzle, 2);
         }
 
-        if (_playerStats.projectileCount == 2)
+        if (_gunController.projectileValue == 2)
         {
             //1
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
@@ -75,7 +72,7 @@ public class DefaultGun : MonoBehaviour
             Destroy(_instMuzzle2, 2);
         }
 
-        if (_playerStats.projectileCount == 3)
+        if (_gunController.projectileValue == 3)
         {
             //1
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
@@ -102,7 +99,7 @@ public class DefaultGun : MonoBehaviour
             Destroy(_instMuzzle3, 2);
         }
 
-        if (_playerStats.projectileCount == 4)
+        if (_gunController.projectileValue == 4)
         {
             //1
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
@@ -137,7 +134,7 @@ public class DefaultGun : MonoBehaviour
             Destroy(_instMuzzle4, 2);
         }
 
-        if (_playerStats.projectileCount == 5)
+        if (_gunController.projectileValue == 5)
         {
             //1
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);

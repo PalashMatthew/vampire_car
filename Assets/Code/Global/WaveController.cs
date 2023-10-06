@@ -42,6 +42,11 @@ public class WaveController : MonoBehaviour
 
     public void StartWave()
     {
+        if (currentWave != 0)
+        {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
+        }
+
         enemyDestroy = 0;
         currentWave++;
         gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);

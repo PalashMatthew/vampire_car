@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6523196557676037298}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 540, y: 960, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   waveList:
   - waveNum: 1
     waveTime: 59
+    enemySpawnTime: 1
     waveSpeedCoeff: 1
     enemyM1Weight: 10
     enemyM2Weight: 2
@@ -82,6 +83,7 @@ MonoBehaviour:
     patternsSpawnTime: 0000000000000000
   - waveNum: 2
     waveTime: 59
+    enemySpawnTime: 0
     waveSpeedCoeff: 2
     enemyM1Weight: 6
     enemyM2Weight: 6
@@ -97,6 +99,7 @@ MonoBehaviour:
     patternsSpawnTime: 
   - waveNum: 2
     waveTime: 59
+    enemySpawnTime: 0
     waveSpeedCoeff: 3
     enemyM1Weight: 6
     enemyM2Weight: 6
@@ -112,6 +115,7 @@ MonoBehaviour:
     patternsSpawnTime: 
   - waveNum: 2
     waveTime: 59
+    enemySpawnTime: 0
     waveSpeedCoeff: 0
     enemyM1Weight: 6
     enemyM2Weight: 6
@@ -127,6 +131,7 @@ MonoBehaviour:
     patternsSpawnTime: 
   - waveNum: 2
     waveTime: 0
+    enemySpawnTime: 0
     waveSpeedCoeff: 0
     enemyM1Weight: 6
     enemyM2Weight: 6
@@ -142,6 +147,7 @@ MonoBehaviour:
     patternsSpawnTime: 
   - waveNum: 2
     waveTime: 0
+    enemySpawnTime: 0
     waveSpeedCoeff: 0
     enemyM1Weight: 6
     enemyM2Weight: 6

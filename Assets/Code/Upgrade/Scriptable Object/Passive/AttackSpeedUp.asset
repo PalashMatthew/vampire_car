@@ -13,7 +13,20 @@ MonoBehaviour:
   m_Name: AttackSpeedUp
   m_EditorClassIdentifier: 
   cardName: Attack Speed
-  description: Speed Up
+  descriptionCommon: +10%
+  descriptionRare: +20%
+  descriptionLegendary: +30%
+  descriptionCommonLVL1: 
+  descriptionRareLVL1: 
+  descriptionLegendaryLVL1: 
+  descriptionCommonLVL2: 
+  descriptionRareLVL2: 
+  descriptionLegendaryLVL2: 
+  descriptionCommonLVL3: 
+  descriptionRareLVL3: 
+  descriptionLegendaryLVL3: 
   imageItem: {fileID: 0}
   upgradeType: 0
-  upgradePassiveType: 3
+  cardRarity: 0
+  upgradePassiveType: 4
+  upgradeGunType: 0

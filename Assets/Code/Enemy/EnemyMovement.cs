@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
 
     public bool localMove;  //Будет ли статичный враг двигаться вправо влево после того как выедет на экран?
     public bool isLazer;
-    private float moveSpeed;
+    public float moveSpeed;
     
 
     private void Start()

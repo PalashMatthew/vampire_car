@@ -20,6 +20,11 @@ public class LazerGun : MonoBehaviour
         Initialize();
     }
 
+    private void Update()
+    {
+        transform.localScale = new Vector3(_gunController.areaValue, _gunController.areaValue, _gunController.areaValue);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy")

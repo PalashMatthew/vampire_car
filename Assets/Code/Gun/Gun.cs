@@ -9,4 +9,6 @@ public class Gun : MonoBehaviour
     public float bulletMoveSpeed;
     public float timeOfAction;
     public float freezeTime;
+    public float projectileValue;
+    public float areaValue;
 }

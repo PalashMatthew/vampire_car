@@ -25,37 +25,18 @@ public class RocketLauncherController : MonoBehaviour
 
     IEnumerator Shot()
     {       
-        GameObject _target = null;
+        GameObject _target;
 
-        if (_gameplayController.activeEnemy != null)
+        if (_gameplayController.activeEnemy.Count > 0)
         {
-            bool _visibleCount = false;
-            foreach (GameObject gm in _gameplayController.activeEnemy)
+            for (int i = 1; i <= _gunController.projectileValue; i++)
             {
-                if (gm.GetComponent<EnemyController>().isVisible)
-                    _visibleCount = true;
+                _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+
+                GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
+                _inst.GetComponent<RocketLauncherBullet>().target = _target;
+                _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
             }
-
-            if (_visibleCount)
-            {
-                while (_target == null)
-                {
-                    _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
-
-                    if (!_target.GetComponent<EnemyController>().isVisible)
-                    {
-                        _target = null;
-                    }
-                }
-            } else
-            {
-                StartCoroutine(NotFind());
-                yield break;
-            }
-
-            GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
-            _inst.GetComponent<RocketLauncherBullet>().target = _target;
-            _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
         }                
 
         yield return new WaitForSeconds(_gunController.shotSpeed);

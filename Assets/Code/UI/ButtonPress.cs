@@ -12,7 +12,7 @@ public class ButtonPress : EventTrigger
 
     private void OnEnable()
     {
-        transform.DOScale(1f, 0f).SetUpdate(true);
+        //transform.DOScale(1f, 0f).SetUpdate(true);
     }
 
     public override void OnPointerDown(PointerEventData data)

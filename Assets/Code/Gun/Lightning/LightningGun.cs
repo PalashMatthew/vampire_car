@@ -30,11 +30,17 @@ public class LightningGun : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        foreach (GameObject gm in bulletObj)
+        for (int i = 1; i <= _gunController.projectileValue; i++)
         {
-            gm.SetActive(true);
-            gm.GetComponent<LightningBullet>()._gunController = _gunController;
+            bulletObj[i-1].SetActive(true);
+            bulletObj[i - 1].GetComponent<LightningBullet>()._gunController = _gunController;
         }
+
+        //foreach (GameObject gm in bulletObj)
+        //{
+        //    gm.SetActive(true);
+        //    gm.GetComponent<LightningBullet>()._gunController = _gunController;
+        //}
 
         yield return new WaitForSeconds(_gunController.timeOfAction);
 

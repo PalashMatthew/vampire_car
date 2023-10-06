@@ -38,6 +38,8 @@ public class EnemyController : MonoBehaviour
 
     public bool isTest;
 
+    bool _isFreeze;
+
 
     private void Start()
     {
@@ -113,7 +115,11 @@ public class EnemyController : MonoBehaviour
     #region Freeze
     public void Freeze(float _freezeTime)
     {
-        StartCoroutine(FreezeEnum(_freezeTime));
+        if (!_isFreeze)
+        {
+            StartCoroutine(FreezeEnum(_freezeTime));
+            _isFreeze = true;
+        }
     }
 
     IEnumerator FreezeEnum(float _freezeTime)
@@ -121,6 +127,7 @@ public class EnemyController : MonoBehaviour
         float _saveMoveSpeed = moveSpeed;
         moveSpeed = 0;
         yield return new WaitForSeconds(_freezeTime);
+        _isFreeze = false;
         moveSpeed = _saveMoveSpeed;
     }
     #endregion

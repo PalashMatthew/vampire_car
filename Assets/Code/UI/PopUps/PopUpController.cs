@@ -22,10 +22,10 @@ public class PopUpController
         imgFade.SetActive(true);
         objPopUp.SetActive(true);
 
-        imgFade.GetComponent<Image>().DOFade(0, 0).SetUpdate(true);
+        imgFade.GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
         imgFade.GetComponent<Image>().DOFade(0.5f, animTime).SetUpdate(true);
 
-        objPopUp.transform.DOScale(0, 0).SetUpdate(true);
+        objPopUp.transform.localScale = Vector3.zero;
         objPopUp.transform.DOScale(1, animTime).SetEase(Ease.OutBack).SetUpdate(true);
     }
 

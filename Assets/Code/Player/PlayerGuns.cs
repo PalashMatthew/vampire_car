@@ -34,15 +34,7 @@ public class PlayerGuns : MonoBehaviour
         GunActivate();
     }
 
-    public void GunDamageUpgrade(float _procent)
-    {
-        foreach (Gun gun in guns)
-        {
-            gun.damage = gun.damage / 100 * _procent;
-        }
-    }
-
-    void GunActivate()
+    public void GunActivate()
     {
         if (_isDefaultGun)
             DefaultGunObj.SetActive(true);

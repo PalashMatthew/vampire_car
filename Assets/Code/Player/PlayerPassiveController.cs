@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerPassiveController : MonoBehaviour
 {
     [Header("Passive")]
-    public bool isPassiveHealthRecovery;
+    
     public bool isPassiveRage;
+
+    [Header("Health Recovery")]
+    public bool isPassiveHealthRecovery;
+    public float healthRecoveryProcent;
 
     PlayerController _playerController;
     PlayerStats _playerStats;
@@ -25,7 +29,7 @@ public class PlayerPassiveController : MonoBehaviour
     {
         if (isPassiveHealthRecovery)
         {
-            PassiveHealthRecovery();
+            //PassiveHealthRecovery();
         }
 
         if (isPassiveRage)
@@ -45,11 +49,15 @@ public class PlayerPassiveController : MonoBehaviour
 
     public void PassiveRage()
     {
-        if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 30)
+        if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 50)
         {
             float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;
 
             _playerStats.rageValue = _procent;
+        } 
+        else
+        {
+            _playerStats.rageValue = 1;
         }
     }
 }

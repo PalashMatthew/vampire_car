@@ -22,6 +22,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public GameObject butRerollScrew;
 
+    public Image imgFAQ1, imgFAQ2, imgFAQ3;
+
     private void Start()
     {
         controller = new PopUpController();
@@ -42,11 +44,20 @@ public class PopUpUpgrade : MonoBehaviour
         {
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ButOpen();
+        }
     }
 
     void CardAnimation()
     {
-        tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(1, 0).SetUpdate(true);
+        tChoiceUpgrade.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+
+        imgFAQ1.GetComponent<RectTransform>().localScale = Vector3.zero;
+        imgFAQ2.GetComponent<RectTransform>().localScale = Vector3.zero;
+        imgFAQ3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
         card1.GetComponent<RectTransform>().DOAnchorPosX(-348, 0f).SetUpdate(true);
         card2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
@@ -54,13 +65,17 @@ public class PopUpUpgrade : MonoBehaviour
 
         Sequence cardAnim = DOTween.Sequence();
 
-        cardAnim.Append(card1.GetComponent<RectTransform>().DOScale(0, 0)).SetUpdate(true);
-        cardAnim.Join(card2.GetComponent<RectTransform>().DOScale(0, 0)).SetUpdate(true);
-        cardAnim.Join(card3.GetComponent<RectTransform>().DOScale(0, 0)).SetUpdate(true);
+        card1.GetComponent<RectTransform>().localScale = Vector3.zero;
+        card2.GetComponent<RectTransform>().localScale = Vector3.zero;
+        card3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
         cardAnim.Insert(0.3f, card1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardAnim.Insert(0.4f, card2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardAnim.Insert(0.5f, card3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
+        cardAnim.Insert(0.3f, imgFAQ1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardAnim.Insert(0.4f, imgFAQ2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardAnim.Insert(0.5f, imgFAQ3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
     }
 
     public void ChoiceCard(int _cardNum)
@@ -93,6 +108,10 @@ public class PopUpUpgrade : MonoBehaviour
             card1.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
             card2.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
         }
+
+        imgFAQ1.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
+        imgFAQ2.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
+        imgFAQ3.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
 
         StartCoroutine(EndUpgrade());
     }

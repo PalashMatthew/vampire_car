@@ -10,10 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
-  m_Name: DamageUp
+  m_Name: MaxHpUp
   m_EditorClassIdentifier: 
-  cardName: Damage Up
-  description: 
+  cardName: Max Hp Up
+  descriptionCommon: +10%
+  descriptionRare: +20%
+  descriptionLegendary: +30%
+  descriptionCommonLVL1: 
+  descriptionRareLVL1: 
+  descriptionLegendaryLVL1: 
+  descriptionCommonLVL2: 
+  descriptionRareLVL2: 
+  descriptionLegendaryLVL2: 
+  descriptionCommonLVL3: 
+  descriptionRareLVL3: 
+  descriptionLegendaryLVL3: 
   imageItem: {fileID: 0}
   upgradeType: 0
-  upgradePassiveType: 4
+  cardRarity: 0
+  upgradePassiveType: 1
+  upgradeGunType: 0

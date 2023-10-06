@@ -38,7 +38,7 @@ public class EnemyReversal : MonoBehaviour
         {
             if (!_isRevers)
             {
-                if (transform.position.z < _player.transform.position.z && _enemyController.isVisible)
+                if (transform.position.z < _player.transform.position.z && transform.position.z > -16f)
                 {
                     _isRevers = true;
                     StartCoroutine(Revers());

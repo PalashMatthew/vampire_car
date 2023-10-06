@@ -5,13 +5,9 @@ using DG.Tweening;
 
 public class PartnerGun : MonoBehaviour
 {
-    public GameObject bulletObj;
-    public GameObject muzzleObj;
-    public Transform bulletSpawnPoint;
+    public List<GameObject> partnerObj;
 
     Gun _gunController;
-
-    public GameObject mesh;
 
     void Initialize()
     {
@@ -21,28 +17,40 @@ public class PartnerGun : MonoBehaviour
     private void Start()
     {
         Initialize();
-
-        StartCoroutine(Shot());
     }
 
     private void Update()
     {
-        transform.eulerAngles = Vector3.zero;
+        if (_gunController.projectileValue == 1)
+        {
+            partnerObj[0].SetActive(true);
+            partnerObj[1].SetActive(false);
+            partnerObj[2].SetActive(false);
+            partnerObj[3].SetActive(false);
+        }
 
-        mesh.transform.DOMove(transform.position, 0.2f);
-    }
+        if (_gunController.projectileValue == 2)
+        {
+            partnerObj[0].SetActive(true);
+            partnerObj[1].SetActive(true);
+            partnerObj[2].SetActive(false);
+            partnerObj[3].SetActive(false);
+        }
 
-    IEnumerator Shot()
-    {
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        if (_gunController.projectileValue == 3)
+        {
+            partnerObj[0].SetActive(true);
+            partnerObj[1].SetActive(true);
+            partnerObj[2].SetActive(true);
+            partnerObj[3].SetActive(false);
+        }
 
-        GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
-        _inst.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-        GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint.position, transform.rotation);
-        _instMuzzle.transform.parent = bulletSpawnPoint;
-        Destroy(_instMuzzle, 2);
-
-        StartCoroutine(Shot());
+        if (_gunController.projectileValue == 4)
+        {
+            partnerObj[0].SetActive(true);
+            partnerObj[1].SetActive(true);
+            partnerObj[2].SetActive(true);
+            partnerObj[3].SetActive(true);
+        }
     }
 }

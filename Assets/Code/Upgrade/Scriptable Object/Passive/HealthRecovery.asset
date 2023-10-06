@@ -10,10 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
-  m_Name: Rage
+  m_Name: HealthRecovery
   m_EditorClassIdentifier: 
-  cardName: Rage
-  description: bla bla bla
+  cardName: Health Recovery
+  descriptionCommon: Recovery +1%
+  descriptionRare: Recovery +2%
+  descriptionLegendary: Recovery +3%
+  descriptionCommonLVL1: 
+  descriptionRareLVL1: 
+  descriptionLegendaryLVL1: 
+  descriptionCommonLVL2: 
+  descriptionRareLVL2: 
+  descriptionLegendaryLVL2: 
+  descriptionCommonLVL3: 
+  descriptionRareLVL3: 
+  descriptionLegendaryLVL3: 
   imageItem: {fileID: 0}
   upgradeType: 0
+  cardRarity: 2
   upgradePassiveType: 2
+  upgradeGunType: 0

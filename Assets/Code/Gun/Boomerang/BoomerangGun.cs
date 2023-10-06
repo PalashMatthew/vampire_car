@@ -24,39 +24,21 @@ public class BoomerangGun : MonoBehaviour
     }
 
     IEnumerator Shot()
-    {        
-        GameObject _target = null;
-
-        if (_gameplayController.activeEnemy != null)
+    {
+        if (_gameplayController.activeEnemy.Count > 0)
         {
-            bool _visibleCount = false;
-            foreach (GameObject gm in _gameplayController.activeEnemy)
+            for (int i = 1; i <= _gunController.projectileValue; i++)
             {
-                if (gm.GetComponent<EnemyController>().isVisible)
-                    _visibleCount = true;
+                GameObject _target;
+
+                int _rand = Random.Range(0, _gameplayController.activeEnemy.Count);
+                _target = _gameplayController.activeEnemy[_rand];
+
+                GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
+                _inst.transform.LookAt(_target.transform.position);
+                _inst.transform.eulerAngles = new Vector3(0, _inst.transform.eulerAngles.y, 0);
+                _inst.GetComponent<BoomerangBullet>()._gunController = _gunController;
             }
-
-            if (_visibleCount)
-            {
-                while (_target == null)
-                {
-                    _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
-
-                    if (!_target.GetComponent<EnemyController>().isVisible)
-                    {
-                        _target = null;
-                    }
-                }
-            } else
-            {
-                StartCoroutine(NotFind());
-                yield break;
-            }
-
-            GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
-            _inst.transform.LookAt(_target.transform.position);
-            _inst.transform.eulerAngles = new Vector3(0, _inst.transform.eulerAngles.y, 0);
-            _inst.GetComponent<BoomerangBullet>()._gunController = _gunController;
         }
         yield return new WaitForSeconds(_gunController.shotSpeed);
         StartCoroutine(Shot());
