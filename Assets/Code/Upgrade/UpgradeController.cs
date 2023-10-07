@@ -229,8 +229,8 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
 
-        _playerStats.maxHp += _playerStats.maxHp * _procent;
-        _playerStats.currentHp += _playerStats.currentHp * _procent;
+        _playerStats.maxHp *= _procent;
+        _playerStats.currentHp *= _procent;
     }
     
     //Восстановление здоровья
