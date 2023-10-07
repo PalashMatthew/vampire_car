@@ -17,5 +17,10 @@ public class DronBullet : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
         }
+
+        if (other.tag == "obstacle")
+        {
+            other.gameObject.GetComponent<Obstacle>().Hit(_gunController.CalculateDamage());
+        }
     }
 }

@@ -25,6 +25,11 @@ public class IceObj : MonoBehaviour
             other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
             other.gameObject.GetComponent<EnemyController>().Freeze(_gunController.freezeTime);
         }
+
+        if (other.tag == "obstacle")
+        {
+            other.gameObject.GetComponent<Obstacle>().Hit(_gunController.CalculateDamage());
+        }
     }
 
     IEnumerator OffCollider()
