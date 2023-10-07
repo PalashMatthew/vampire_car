@@ -11,7 +11,7 @@ public class OilGun : MonoBehaviour
     GameplayController _gameplayController;
     GameObject _player;
 
-    private List<GameObject> _activeEnemy; 
+    private List<GameObject> _activeEnemy = new List<GameObject>(); 
 
 
     void Initialize()

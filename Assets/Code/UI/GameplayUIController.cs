@@ -14,8 +14,6 @@ public class GameplayUIController : MonoBehaviour
     public TMP_Text tWaveTimer;
     public WaveController waveController;
     private int _currentWaveTime;
-    public TMP_Text tCurrentWave;
-    public TMP_Text tNextWave;
     public Image imgWaveFill;
     public Image imgWaveEndFill;
 
@@ -78,46 +76,52 @@ public class GameplayUIController : MonoBehaviour
 
         if (_currentWaveTime > 9)
         {
-            tWaveTimer.text = "00:" + _currentWaveTime;
+            tWaveTimer.text = "Wave " + _waveNum + " - 00:" + _currentWaveTime;
         }
         else
         {
-            tWaveTimer.text = "00:0" + _currentWaveTime;
+            tWaveTimer.text = "Wave " + _waveNum + " - 00:0" + _currentWaveTime;
         }
 
-        imgWaveFill.fillAmount = 0;
-        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 230f, 0);
+        imgWaveFill.fillAmount = 0;        
 
-        tCurrentWave.text = _waveNum.ToString();
-        tNextWave.text = _waveNum + 1 + "";
+        if (imgFillLevelBar.fillAmount > 0)
+        {
+            imgWaveEndFill.gameObject.SetActive(true);
+            imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
+        }
+        else
+        {
+            imgWaveEndFill.gameObject.SetActive(false);
+        }
 
-        StartCoroutine(WaveTimer(_waveTime));        
+        StartCoroutine(WaveTimer(_waveTime, _waveNum));        
     }
 
-    IEnumerator WaveTimer(int _saveWaveTime)
+    IEnumerator WaveTimer(int _saveWaveTime, int _waveNum)
     {
         yield return new WaitForSeconds(1);
         _currentWaveTime -= 1;
 
         imgWaveFill.fillAmount = (float)(_saveWaveTime - _currentWaveTime) / _saveWaveTime;
-        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 230f, 0);
+        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
 
         if (_currentWaveTime <= 0)
         {
-            tWaveTimer.text = "00:00";
+            tWaveTimer.text = "Wave " + _waveNum + " - 00:00";
             waveController.WaveEnd();
         } 
         else
         {
             if (_currentWaveTime > 9)
             {
-                tWaveTimer.text = "00:" + _currentWaveTime;
+                tWaveTimer.text = "Wave " + _waveNum + " - 00:" + _currentWaveTime;
             }
             else
             {
-                tWaveTimer.text = "00:0" + _currentWaveTime;
+                tWaveTimer.text = "Wave " + _waveNum + " - 00:0" + _currentWaveTime;
             }
-            StartCoroutine(WaveTimer(_saveWaveTime));
+            StartCoroutine(WaveTimer(_saveWaveTime, _waveNum));
         }
     }
     #endregion

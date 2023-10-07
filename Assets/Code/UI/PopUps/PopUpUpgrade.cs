@@ -24,6 +24,12 @@ public class PopUpUpgrade : MonoBehaviour
 
     public Image imgFAQ1, imgFAQ2, imgFAQ3;
 
+    public bool isWaveUpgrade = false;
+
+    [Header("Pricing")]
+    public GameObject panelButtonsBuy;
+    public TMP_Text tPriceCard1, tPriceCard2, tPriceCard3;
+
     private void Start()
     {
         controller = new PopUpController();
@@ -134,12 +140,27 @@ public class PopUpUpgrade : MonoBehaviour
         card3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         tScrewValue.text = GlobalStats.screwCount.ToString();
+
+        if (isWaveUpgrade)
+        {
+            CalculatePrice();
+        }
+        else
+        {
+            panelButtonsBuy.SetActive(false);
+        }
+    }
+
+    void CalculatePrice()
+    {
+        panelButtonsBuy.SetActive(true);
     }
 
     public void ButClosed()
     {
         Time.timeScale = 1;
         controller.ClosedPopUp();
+        isWaveUpgrade = false;
     }
 
     public void ButRerollAds()
