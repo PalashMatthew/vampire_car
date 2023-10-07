@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerPassiveController : MonoBehaviour
 {
     [Header("Passive")]
-    
+    public bool isVampirizm;
     public bool isPassiveRage;
 
     [Header("Health Recovery")]
@@ -58,6 +58,15 @@ public class PlayerPassiveController : MonoBehaviour
         else
         {
             _playerStats.rageValue = 1;
+        }
+    }
+
+    public void Vampirizm(float _damage)
+    {
+        if (isVampirizm)
+        {
+            float _procent = _damage / 100 * _playerStats.vampirizm;
+            _playerStats.currentHp += _procent;
         }
     }
 }

@@ -80,68 +80,6 @@ public class UpgradeController : MonoBehaviour
 
             if (!_createdCards.Contains(_card))
             {
-                //if (_card.upgradeType == UpgradeCard.UpgradeType.Passive)
-                //{
-                //    switch (_card.upgradePassiveType)
-                //    {
-                //        case UpgradeCard.UpgradePassiveType.MaxHpUp:
-                //            if (MaxHpUp_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = MaxHpUp_Level;
-                //            }
-                //            else goto newTry;                            
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.HealthRecovery:
-                //            if (HealthRecovery_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = HealthRecovery_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.Rage:
-                //            if (Rage_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = Rage_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
-                //            if (AttackSpeedUp_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = AttackSpeedUp_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.DamageUp:
-                //            if (DamageUp_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = DamageUp_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.KritDamageUp:
-                //            if (KritDamageUp_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = KritDamageUp_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-
-                //        case UpgradeCard.UpgradePassiveType.ProjectileUp:
-                //            if (ProjectileUp_Level < 3)
-                //            {
-                //                cardsController[i].levelNum = ProjectileUp_Level;
-                //            }
-                //            else goto newTry;
-                //            break;
-                //    }
-                //}
-
                 if (_card.upgradeType == UpgradeCard.UpgradeType.Gun)
                 {
                     switch (_card.upgradeGunType)
@@ -349,15 +287,15 @@ public class UpgradeController : MonoBehaviour
         switch (_rarity)
         {
             case "Common":
-                _procent = 1.1f;
+                _procent = 0.9f;
                 break;
 
             case "Rare":
-                _procent = 1.2f;
+                _procent = 0.8f;
                 break;
 
             case "Legendary":
-                _procent = 1.3f;
+                _procent = 0.7f;
                 break;
         }
 
@@ -419,6 +357,51 @@ public class UpgradeController : MonoBehaviour
     public void ProjectileUp_Passive(string _rarity)
     {
         _playerStats.projectileCount++;
+    }
+
+    public void KritChanceUp_Passive(string _rarity)
+    {
+        float _procent = 1;
+
+        switch (_rarity)
+        {
+            case "Common":
+                _procent = 1.05f;
+                break;
+
+            case "Rare":
+                _procent = 1.1f;
+                break;
+
+            case "Legendary":
+                _procent = 1.15f;
+                break;
+        }
+
+        _playerStats.kritChance *= _procent;
+    }
+
+    public void Vampirizm_Passive(string _rarity)
+    {
+        float _procent = 1;
+
+        switch (_rarity)
+        {
+            case "Common":
+                _procent = 1.05f;
+                break;
+
+            case "Rare":
+                _procent = 1.1f;
+                break;
+
+            case "Legendary":
+                _procent = 1.15f;
+                break;
+        }
+
+        _playerStats.vampirizm *= _procent;
+        _playerPassiveController.isVampirizm = true;
     }
     #endregion
 

@@ -55,7 +55,8 @@ public class UpgradeCard : ScriptableObject
         DamageUp,
         KritDamageUp,
         Vampirizm,
-        ProjectileUp
+        ProjectileUp,
+        KritChanceUp
     }
     public UpgradePassiveType upgradePassiveType;
 

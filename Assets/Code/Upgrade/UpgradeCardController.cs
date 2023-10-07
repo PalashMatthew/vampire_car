@@ -237,6 +237,14 @@ public class UpgradeCardController : MonoBehaviour
                 case UpgradeCard.UpgradePassiveType.ProjectileUp:
                     _upgradeController.ProjectileUp_Passive(cardRarity.ToString());
                     break;
+
+                case UpgradeCard.UpgradePassiveType.KritChanceUp:
+                    _upgradeController.KritChanceUp_Passive(cardRarity.ToString());
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Vampirizm:
+                    _upgradeController.Vampirizm_Passive(cardRarity.ToString());
+                    break;
             }
         }
 

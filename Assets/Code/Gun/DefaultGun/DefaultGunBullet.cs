@@ -23,19 +23,19 @@ public class DefaultGunBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.damage);
+            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
             Destroy(gameObject);
         }
 
         if (other.tag == "obstacle")
         {
-            other.gameObject.GetComponent<Obstacle>().Hit(_gunController.damage);
+            other.gameObject.GetComponent<Obstacle>().Hit(_gunController.CalculateDamage());
             Destroy(gameObject);
         }
 
         if (other.tag == "player" && isPlayerAttack)
         {
-            other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
+            other.gameObject.GetComponent<PlayerController>().Hit(_gunController.CalculateDamage());
             Destroy(gameObject);
         }
     }

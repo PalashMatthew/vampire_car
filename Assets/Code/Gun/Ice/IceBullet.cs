@@ -15,7 +15,10 @@ public class IceBullet : MonoBehaviour
     private void Update()
     {
         if (target == null)
+        {
             Attack();
+            return;
+        }
 
         if (Vector3.Distance(transform.position, target.transform.position) > minDistanceToAttack)
         {

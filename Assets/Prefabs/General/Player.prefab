@@ -380,10 +380,11 @@ MonoBehaviour:
   maxHp: 200
   damage: 10
   kritChance: 5
-  kritDamage: 1
+  kritDamage: 2
   projectileCount: 1
   rageValue: 0
   rageCoeff: 0
+  vampirizm: 2
 --- !u!114 &1433326453285278809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57a7af3ed5933445bc53b73457ccdf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isVampirizm: 0
   isPassiveRage: 0
   isPassiveHealthRecovery: 0
   healthRecoveryProcent: 0

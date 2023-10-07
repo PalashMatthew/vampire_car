@@ -13,15 +13,23 @@ public class PlayerStats : MonoBehaviour
     public float kritChance;
     public float kritDamage;
 
-    //public float attackSpeedCoeff;
-
     public float projectileCount;
 
     public float rageValue;
     public float rageCoeff;
 
+    public float vampirizm;
+
     private void Awake()
     {
         currentHp = maxHp;
+    }
+
+    private void Update()
+    {
+        if (currentHp > maxHp)
+        {
+            currentHp = maxHp;
+        }
     }
 }

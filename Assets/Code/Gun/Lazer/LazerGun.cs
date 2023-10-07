@@ -51,7 +51,7 @@ public class LazerGun : MonoBehaviour
     IEnumerator Attack(GameObject obj)
     {
         if (obj != null)
-            obj.GetComponent<EnemyController>().Hit(_gunController.damage);
+            obj.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
 
         yield return new WaitForSeconds(_gunController.timeOfAction);
 
