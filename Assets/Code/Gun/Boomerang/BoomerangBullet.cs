@@ -49,7 +49,8 @@ public class BoomerangBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            _gunController.DamageEnemy(other.gameObject);
+            //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
         }
 
         if (other.tag == "obstacle")

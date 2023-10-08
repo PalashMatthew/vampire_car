@@ -5,10 +5,20 @@ using UnityEngine;
 public class OilObj : MonoBehaviour
 {
     public Gun _gunController;
+    public List<ParticleSystem> vfx;
 
     public void Initialize()
     {
         StartCoroutine(EndAttack());
+
+        foreach(ParticleSystem _part  in vfx)
+        {
+            _part.Stop();
+
+            var main = _part.main;
+            main.duration = _gunController.timeOfAction - 0.6f;
+            _part.Play();
+        }
     }
 
     IEnumerator EndAttack()
@@ -21,7 +31,8 @@ public class OilObj : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            _gunController.DamageEnemy(other.gameObject);
         }
 
         if (other.tag == "obstacle")

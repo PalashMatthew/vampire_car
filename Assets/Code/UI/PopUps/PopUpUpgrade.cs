@@ -29,6 +29,7 @@ public class PopUpUpgrade : MonoBehaviour
     [Header("Pricing")]
     public GameObject panelButtonsBuy;
     public TMP_Text tPriceCard1, tPriceCard2, tPriceCard3;
+    public GameObject butPrice1, butPrice2, butPrice3;
 
     private void Start()
     {
@@ -86,6 +87,10 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ChoiceCard(int _cardNum)
     {
+        butPrice1.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
+        butPrice2.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
+        butPrice3.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
+
         tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
 
         if (_cardNum == 1)
@@ -144,6 +149,9 @@ public class PopUpUpgrade : MonoBehaviour
         if (isWaveUpgrade)
         {
             CalculatePrice();
+            butPrice1.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
+            butPrice2.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
+            butPrice3.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
         }
         else
         {

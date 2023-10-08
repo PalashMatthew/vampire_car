@@ -86,7 +86,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29789897974172342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 541785d18d0b0084193a27175db9fcc8, type: 3}
   m_Name: 
@@ -110,9 +110,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6635680137960681973}
-          m_TargetAssemblyTypeName: PopUpUpgrade, Assembly-CSharp
-          m_MethodName: ButRerollScrew
+        - m_Target: {fileID: 2440094046408182001}
+          m_TargetAssemblyTypeName: UpgradeCardController, Assembly-CSharp
+          m_MethodName: ChoiceCard
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -767,6 +767,11 @@ MonoBehaviour:
   imgCardType: {fileID: 7841322161597495449}
   sprCardTypePassive: {fileID: 21300000, guid: 6b2ee8b616dc32e489c9956e96793c87, type: 3}
   sprCardTypeGun: {fileID: 21300000, guid: 73be84c7366e75d4a95e13b6a4a84e25, type: 3}
+  tPrice: {fileID: 2402433986059578557}
+  price: 0
+  butPrice1: {fileID: 29789897974172342}
+  butPrice2: {fileID: 8038797396861992277}
+  butPrice3: {fileID: 4871856093522484134}
   cardRarity: 0
 --- !u!222 &4207822390818755682
 CanvasRenderer:
@@ -1131,6 +1136,9 @@ MonoBehaviour:
   tPriceCard1: {fileID: 2402433986059578557}
   tPriceCard2: {fileID: 988681532443406098}
   tPriceCard3: {fileID: 9036901321133789958}
+  butPrice1: {fileID: 29789897974172342}
+  butPrice2: {fileID: 8038797396861992277}
+  butPrice3: {fileID: 4871856093522484134}
 --- !u!1 &775084701081318500
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,6 +5572,11 @@ MonoBehaviour:
   imgCardType: {fileID: 7525533188887001111}
   sprCardTypePassive: {fileID: 21300000, guid: 6b2ee8b616dc32e489c9956e96793c87, type: 3}
   sprCardTypeGun: {fileID: 21300000, guid: 73be84c7366e75d4a95e13b6a4a84e25, type: 3}
+  tPrice: {fileID: 988681532443406098}
+  price: 0
+  butPrice1: {fileID: 29789897974172342}
+  butPrice2: {fileID: 8038797396861992277}
+  butPrice3: {fileID: 4871856093522484134}
   cardRarity: 0
 --- !u!222 &7882566924368094705
 CanvasRenderer:
@@ -6512,7 +6525,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4871856093522484134}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 541785d18d0b0084193a27175db9fcc8, type: 3}
   m_Name: 
@@ -6536,9 +6549,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6635680137960681973}
-          m_TargetAssemblyTypeName: PopUpUpgrade, Assembly-CSharp
-          m_MethodName: ButRerollScrew
+        - m_Target: {fileID: 6601590551041290758}
+          m_TargetAssemblyTypeName: UpgradeCardController, Assembly-CSharp
+          m_MethodName: ChoiceCard
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -7569,6 +7582,11 @@ MonoBehaviour:
   imgCardType: {fileID: 8161332204349696636}
   sprCardTypePassive: {fileID: 21300000, guid: 6b2ee8b616dc32e489c9956e96793c87, type: 3}
   sprCardTypeGun: {fileID: 21300000, guid: 73be84c7366e75d4a95e13b6a4a84e25, type: 3}
+  tPrice: {fileID: 9036901321133789958}
+  price: 30
+  butPrice1: {fileID: 29789897974172342}
+  butPrice2: {fileID: 8038797396861992277}
+  butPrice3: {fileID: 4871856093522484134}
   cardRarity: 0
 --- !u!222 &4029796543208729369
 CanvasRenderer:
@@ -10493,7 +10511,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8038797396861992277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 541785d18d0b0084193a27175db9fcc8, type: 3}
   m_Name: 
@@ -10517,9 +10535,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6635680137960681973}
-          m_TargetAssemblyTypeName: PopUpUpgrade, Assembly-CSharp
-          m_MethodName: ButRerollScrew
+        - m_Target: {fileID: 8157564277136883370}
+          m_TargetAssemblyTypeName: UpgradeCardController, Assembly-CSharp
+          m_MethodName: ChoiceCard
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

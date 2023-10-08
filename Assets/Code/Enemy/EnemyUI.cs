@@ -26,7 +26,7 @@ public class EnemyUI : MonoBehaviour
         transform.LookAt(Camera.main.transform.position);
     }
 
-    public void ViewDamage(int _damage)
+    public void ViewDamage(int _damage, bool _isKrit)
     {
         GameObject _text;
         _text = Instantiate(tHpObj, transform.position, Quaternion.identity);
@@ -41,6 +41,11 @@ public class EnemyUI : MonoBehaviour
         _text.GetComponent<TMP_Text>().text = _damage.ToString();
         _text.GetComponent<RectTransform>().DOLocalMoveY(tHpObj.GetComponent<RectTransform>().localPosition.y + 2, 1f);
         _text.GetComponent<TMP_Text>().DOFade(0, 1);
+
+        if (_isKrit)
+        {
+            _text.GetComponent<TMP_Text>().DOColor(new Color(1, 0.3819398f, 0.25f), 0);
+        }
 
         Destroy(_text, 2);
     }

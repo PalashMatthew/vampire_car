@@ -78,7 +78,7 @@ public class CameraController : MonoBehaviour
                 if (currentX < minCameraX) currentX = minCameraX;
                 if (currentX > maxCameraX) currentX = maxCameraX;
 
-                transform.DOMoveX(currentX, 0.1f);
+                transform.DOMoveX(currentX, 0.2f);
             }
         }
     }

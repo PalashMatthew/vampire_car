@@ -89,9 +89,11 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerAnimation()
     {
-        foreach (GameObject gm in wheelsObj)
+        if (Input.GetMouseButtonUp(0))
         {
-            gm.transform.Rotate(new Vector3(wheelRotateSpeed * Time.deltaTime, 0, 0));
+            mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
         }
     }
 

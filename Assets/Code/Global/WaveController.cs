@@ -44,6 +44,7 @@ public class WaveController : MonoBehaviour
     {
         if (currentWave != 0)
         {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
             GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
         }
 

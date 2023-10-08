@@ -80,10 +80,10 @@ public class EnemyController : MonoBehaviour
     }
 
     #region Hit
-    public void Hit(float _damage)
+    public void Hit(float _damage, bool _isKrit)
     {
         hp -= _damage;
-        GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage);
+        GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
         StartCoroutine(HitAnim());
 
         if (hp <= 0)

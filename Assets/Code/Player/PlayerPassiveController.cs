@@ -49,7 +49,7 @@ public class PlayerPassiveController : MonoBehaviour
 
     public void PassiveRage()
     {
-        if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 50)
+        if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 30)
         {
             float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;
 

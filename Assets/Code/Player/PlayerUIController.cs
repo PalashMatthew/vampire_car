@@ -33,6 +33,7 @@ public class PlayerUIController : MonoBehaviour
     public void UpdateHP()
     {
         imgFill.fillAmount = _playerStats.currentHp / _playerStats.maxHp;
-        tHp.text = _playerStats.currentHp.ToString();
+        int _hp = (int)_playerStats.currentHp;
+        tHp.text = _hp.ToString();
     }
 }

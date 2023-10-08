@@ -28,6 +28,11 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgCardType;
     public Sprite sprCardTypePassive, sprCardTypeGun;
 
+    public TMP_Text tPrice;
+    public float price;
+
+    public GameObject butPrice1, butPrice2, butPrice3;
+
     public enum CardRarity
     {
         Common,
@@ -193,6 +198,13 @@ public class UpgradeCardController : MonoBehaviour
                 break;
         }
         #endregion
+
+        if (_popUpUpgrade.isWaveUpgrade)
+        {
+            price = (int)Random.Range(GlobalStats.screwCount - GlobalStats.screwCount * 0.3f, GlobalStats.screwCount);
+            if (price < 0) price = 0;
+            tPrice.text = price.ToString();
+        }
     }
 
     IEnumerator StarAnimation(Image _imgStar)
@@ -206,6 +218,18 @@ public class UpgradeCardController : MonoBehaviour
 
     public void ChoiceCard()
     {
+        if (_popUpUpgrade.isWaveUpgrade)
+        {
+            if (GlobalStats.screwCount < price)
+            {
+                return;
+            }
+            else
+            {
+                GlobalStats.screwCount -= price;
+            }
+        }        
+
         if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
         {
             switch (card.upgradePassiveType)

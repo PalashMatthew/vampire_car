@@ -23,7 +23,8 @@ public class DefaultGunBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            _gunController.DamageEnemy(other.gameObject);
             Destroy(gameObject);
         }
 

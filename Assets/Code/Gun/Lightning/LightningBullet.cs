@@ -11,7 +11,8 @@ public class LightningBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
+            _gunController.DamageEnemy(other.gameObject);
         }
 
         if (other.tag == "obstacle")
