@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z < -20)
+        if (transform.position.z < -20 && !isBoss)
         {
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             Destroy(gameObject);

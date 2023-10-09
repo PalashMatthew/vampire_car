@@ -20,9 +20,9 @@ public class RoadController : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z <= -133.85f)
+        if (transform.position.z <= -114.5f)
         {
-            Instantiate(gameObject, new Vector3(transform.position.x, 0, 106.15f), transform.rotation);
+            Instantiate(gameObject, new Vector3(transform.position.x, 0, 242.5f), transform.rotation);
             Destroy(gameObject);
         }
     }
