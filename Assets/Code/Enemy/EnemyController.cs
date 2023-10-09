@@ -47,6 +47,15 @@ public class EnemyController : MonoBehaviour
         {
             Initialize();
         }
+
+        CoeffSettings();
+    }
+
+    void CoeffSettings()
+    {
+        int _currentWave = GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1;
+        float _coeff = GameObject.Find("Generate Controller").GetComponent<Generate>().enemyCoeffList[_currentWave].healthCoeff;
+        hp *= _coeff;
     }
 
     public void Initialize()

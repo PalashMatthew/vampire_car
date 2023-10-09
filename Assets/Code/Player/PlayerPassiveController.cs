@@ -42,8 +42,7 @@ public class PlayerPassiveController : MonoBehaviour
     {
         if (isPassiveHealthRecovery)
         {
-            int _rand = Random.Range(1, 4);
-            _playerStats.currentHp += _playerStats.maxHp / 100 * _rand;
+            _playerStats.currentHp += _playerStats.maxHp / 100 * healthRecoveryProcent;
         }
     }
 
@@ -51,9 +50,9 @@ public class PlayerPassiveController : MonoBehaviour
     {
         if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 30)
         {
-            float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;
+            //float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;            
 
-            _playerStats.rageValue = _procent;
+            _playerStats.rageValue = _playerStats.rageCoeff;
         } 
         else
         {

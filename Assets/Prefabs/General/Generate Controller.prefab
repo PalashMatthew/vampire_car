@@ -119,6 +119,17 @@ MonoBehaviour:
   minZSpawnPattern: 77
   maxZSpawnPattern: 77
   isSpawnAccess: 1
+  enemyCoeffList:
+  - damageCoeff: 2
+    healthCoeff: 2
+  - damageCoeff: 1
+    healthCoeff: 1
+  - damageCoeff: 1
+    healthCoeff: 1
+  - damageCoeff: 0
+    healthCoeff: 0
+  - damageCoeff: 0
+    healthCoeff: 0
 --- !u!114 &3742492922262604308
 MonoBehaviour:
   m_ObjectHideFlags: 0

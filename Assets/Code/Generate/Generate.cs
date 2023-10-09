@@ -24,6 +24,8 @@ public class Generate : MonoBehaviour
 
     public bool isSpawnAccess;
 
+    [SerializeField] public List<EnemyCoeff> enemyCoeffList;
+
     private void Start()
     {
         _player = GameObject.Find("Player");
@@ -67,4 +69,11 @@ public class Generate : MonoBehaviour
         float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
         Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, _randZ), transform.rotation);
     }
+}
+
+[System.Serializable]
+public class EnemyCoeff
+{
+    public float damageCoeff = 1;
+    public float healthCoeff = 1;
 }

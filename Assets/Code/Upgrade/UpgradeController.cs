@@ -241,15 +241,15 @@ public class UpgradeController : MonoBehaviour
         switch (_rarity)
         {
             case "Common":
-                _procent = 1.01f;
+                _procent = 1.005f;
                 break;
 
             case "Rare":
-                _procent = 1.02f;
+                _procent = 1.01f;
                 break;
 
             case "Legendary":
-                _procent = 1.03f;
+                _procent = 1.015f;
                 break;
         }
 
@@ -264,20 +264,26 @@ public class UpgradeController : MonoBehaviour
         switch (_rarity)
         {
             case "Common":
-                _procent = 2f;
+                _procent = 1.2f;
                 break;
 
             case "Rare":
-                _procent = 2.2f;
+                _procent = 1.3f;
                 break;
 
             case "Legendary":
-                _procent = 2.4f;
+                _procent = 1.4f;
                 break;
         }
 
-        _playerPassiveController.isPassiveRage = true;
-        _playerStats.rageCoeff = _procent;
+        if (!_playerPassiveController.isPassiveRage)
+        {
+            _playerPassiveController.isPassiveRage = true;
+            _playerStats.rageCoeff = _procent;
+        } else
+        {
+            _playerStats.rageCoeff *= _procent;
+        }
     }
 
     public void AttackSpeedUp_Passive(string _rarity)
@@ -388,15 +394,15 @@ public class UpgradeController : MonoBehaviour
         switch (_rarity)
         {
             case "Common":
-                _procent = 1.05f;
+                _procent = 1.01f;
                 break;
 
             case "Rare":
-                _procent = 1.1f;
+                _procent = 1.02f;
                 break;
 
             case "Legendary":
-                _procent = 1.15f;
+                _procent = 1.03f;
                 break;
         }
 
