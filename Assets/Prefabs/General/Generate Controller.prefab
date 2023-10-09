@@ -42,7 +42,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6229555590066330553}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7db17fc9437c47742adc9b56c8fc2797, type: 3}
   m_Name: 
@@ -121,8 +121,8 @@ MonoBehaviour:
   isSpawnAccess: 1
   bossObj: {fileID: 5338037640989000603, guid: 0fe055a87e93f214e964450e91874846, type: 3}
   enemyCoeffList:
-  - damageCoeff: 2
-    healthCoeff: 2
+  - damageCoeff: 0.5
+    healthCoeff: 0.5
   - damageCoeff: 1
     healthCoeff: 1
   - damageCoeff: 1
@@ -165,3 +165,4 @@ MonoBehaviour:
   spawnTime: 5
   minXSpawn: -18
   maxXSpawn: 18
+  isBossFight: 0

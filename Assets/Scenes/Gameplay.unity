@@ -13179,10 +13179,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2315124116551502312, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3723737417398808413, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.899468
@@ -13231,14 +13227,6 @@ PrefabInstance:
       propertyPath: waveController
       value: 
       objectReference: {fileID: 1390383696}
-    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
-      propertyPath: enemyCoeffList.Array.data[0].damageCoeff
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
-      propertyPath: enemyCoeffList.Array.data[0].healthCoeff
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6229555590066330553, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: m_Name
       value: Generate Controller
