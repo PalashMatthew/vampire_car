@@ -370,7 +370,7 @@ MonoBehaviour:
   carType: 0
   isCarStop: 0
   moveSpeed: 0
-  hp: 70
+  hp: 60
   brakeDamage: 20
   moveSpeedMin: 5
   moveSpeedMax: 8
@@ -395,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localMove: 0
   isLazer: 0
+  moveSpeed: 0
 --- !u!65 &2306049462092894556
 BoxCollider:
   m_ObjectHideFlags: 0
