@@ -24,5 +24,10 @@ public class EnemyDefaultBullet : MonoBehaviour
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
             Destroy(gameObject);
         }
+
+        if (other.tag == "obstacle")
+        {
+            Destroy(gameObject);
+        }
     }
 }

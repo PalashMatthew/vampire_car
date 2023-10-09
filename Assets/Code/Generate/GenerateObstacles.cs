@@ -13,6 +13,8 @@ public class GenerateObstacles : MonoBehaviour
     public float minXSpawn;
     public float maxXSpawn;
 
+    public bool isBossFight;
+
     private void Start()
     {
         StartCoroutine(ObstaclesGen());
@@ -26,6 +28,7 @@ public class GenerateObstacles : MonoBehaviour
 
         inst.GetComponent<Obstacle>().moveSpeed = obstaclesMoveSpeed;
 
-        StartCoroutine(ObstaclesGen());
+        if (!isBossFight)
+            StartCoroutine(ObstaclesGen());
     }
 }

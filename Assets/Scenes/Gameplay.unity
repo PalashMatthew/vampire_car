@@ -13108,7 +13108,7 @@ PrefabInstance:
       objectReference: {fileID: 1932149938}
     - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: waveList.Array.data[0].waveTime
-      value: 10
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: waveList.Array.data[0].patternSpawnTime
@@ -13231,6 +13231,14 @@ PrefabInstance:
       propertyPath: waveController
       value: 
       objectReference: {fileID: 1390383696}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: enemyCoeffList.Array.data[0].damageCoeff
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: enemyCoeffList.Array.data[0].healthCoeff
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6229555590066330553, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: m_Name
       value: Generate Controller

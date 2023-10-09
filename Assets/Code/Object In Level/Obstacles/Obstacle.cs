@@ -16,6 +16,8 @@ public class Obstacle : MonoBehaviour
     public bool isMove;
     public float moveSpeed;
 
+    public GameObject screwObj;
+
 
     private void Update()
     {
@@ -50,6 +52,7 @@ public class Obstacle : MonoBehaviour
 
     void Dead()
     {
+        Instantiate(screwObj, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 

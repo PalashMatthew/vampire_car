@@ -96,6 +96,7 @@ public class Generate : MonoBehaviour
             inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
             GameObject.Find("GameplayUI").GetComponent<GameplayUIController>()._isBossFight = true;
+            gameObject.GetComponent<GenerateObstacles>().isBossFight = true;
         }
     }
 }
