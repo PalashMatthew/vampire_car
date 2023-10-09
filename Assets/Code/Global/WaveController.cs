@@ -170,7 +170,7 @@ public class WaveController : MonoBehaviour
 
         _generate.SpawnPattern(_pattern, _pattern.GetComponent<Pattern>().patternX);
 
-        StartCoroutine(PatternPrioritySpawn(_pattern, _time));
+        //StartCoroutine(PatternPrioritySpawn(_pattern, _time));
     }
 }
 

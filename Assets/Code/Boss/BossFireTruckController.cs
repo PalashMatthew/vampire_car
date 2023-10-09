@@ -24,6 +24,12 @@ public class BossFireTruckController : MonoBehaviour
     bool _isFirstAppearance = true;
     GameObject _player;
 
+    public GameObject fireSprayObj;
+    public GameObject fireSprayMesh;
+    public Material mat1, mat2;
+
+    public float lookMove;
+
     private void Start()
     {
         _enemyController = GetComponent<EnemyController>();
@@ -46,6 +52,14 @@ public class BossFireTruckController : MonoBehaviour
         if (action == BossActions.FindPlayer)
         {
             FindPlayer();
+        }
+
+        if (action == BossActions.Pause)
+        {
+            fireSprayObj.SetActive(true);
+
+            fireSprayObj.transform.LookAt(_player.transform.position, Vector3.up);
+            //fireSprayObj.transform.eulerAngles = new Vector3(0, fireSprayObj.transform.eulerAngles.y, 0);
         }
     }
 
