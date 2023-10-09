@@ -35,11 +35,28 @@ public class LazerGun : MonoBehaviour
                 StartCoroutine(Attack(other.gameObject));
             }
         }
+
+        if (other.tag == "boss")
+        {
+            if (!_enemyInRadius.Contains(other.gameObject))
+            {
+                _enemyInRadius.Add(other.gameObject);
+                StartCoroutine(AttackBoss(other.gameObject));
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "enemy")
+        {
+            if (_enemyInRadius.Contains(other.gameObject))
+            {
+                _enemyInRadius.Remove(other.gameObject);
+            }
+        }
+
+        if (other.tag == "boss")
         {
             if (_enemyInRadius.Contains(other.gameObject))
             {
@@ -54,11 +71,23 @@ public class LazerGun : MonoBehaviour
         {
             _gunController.DamageEnemy(obj.gameObject);
         }
-            //obj.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
 
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
         if (_enemyInRadius.Contains(obj))
             StartCoroutine(Attack(obj));      
+    }
+
+    IEnumerator AttackBoss(GameObject obj)
+    {
+        if (obj != null)
+        {
+            _gunController.DamageBoss(obj.gameObject);
+        }
+
+        yield return new WaitForSeconds(_gunController.shotSpeed);
+
+        if (_enemyInRadius.Contains(obj))
+            StartCoroutine(Attack(obj));
     }
 }

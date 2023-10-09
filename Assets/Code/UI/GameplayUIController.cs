@@ -16,12 +16,24 @@ public class GameplayUIController : MonoBehaviour
     private int _currentWaveTime;
     public Image imgWaveFill;
     public Image imgWaveEndFill;
+    public GameObject wavePanel;
 
     [Header("Level")]
     public TMP_Text tCurrentLevel;
     public Image imgFillLevelBar;
     public PlayerLevelController playerLevelController;
     public Image imgLevelEndFill;
+
+    [Header("Boss")]
+    public TMP_Text tBossName;
+    public TMP_Text tBossHP;
+    public Image imgFillBossBar;
+    public Image imgBossEndFill;
+    public GameObject bossPanel;
+
+    public bool isShowPanelWave;
+    public bool _isBossFight;
+    public bool isWin;
 
 
     private void Start()
@@ -32,6 +44,33 @@ public class GameplayUIController : MonoBehaviour
     private void Update()
     {
         UpdateLevel();
+
+        if (!isWin)
+        {
+            if (isShowPanelWave)
+            {
+                wavePanel.SetActive(true);
+            } else
+            {
+                wavePanel.SetActive(false);
+            }
+
+            if (_isBossFight)
+            {
+                bossPanel.SetActive(true);
+
+                Boss();
+            } 
+            else
+            {
+                bossPanel.SetActive(false);
+            }
+        } 
+        else
+        {
+            bossPanel.SetActive(false);
+            wavePanel.SetActive(false);
+        }        
     }
 
     #region ScrewText
@@ -121,8 +160,26 @@ public class GameplayUIController : MonoBehaviour
             {
                 tWaveTimer.text = "Wave " + _waveNum + " - 00:0" + _currentWaveTime;
             }
-            StartCoroutine(WaveTimer(_saveWaveTime, _waveNum));
+
+            if (!_isBossFight)
+                StartCoroutine(WaveTimer(_saveWaveTime, _waveNum));
         }
+    }
+    #endregion
+
+    #region Boss
+    public void Boss()
+    {
+        tBossName.text = "BOSS - Fire Truck";
+
+        if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
+            tBossHP.text = GameObject.Find("BOSS").GetComponent<EnemyController>().hp.ToString();
+        else tBossHP.text = "0";
+
+        imgFillBossBar.fillAmount = (float)GameObject.Find("BOSS").GetComponent<EnemyController>().hp / GameObject.Find("BOSS").GetComponent<EnemyController>().maxHp;
+
+        imgWaveEndFill.gameObject.SetActive(true);
+        imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
     }
     #endregion
 }

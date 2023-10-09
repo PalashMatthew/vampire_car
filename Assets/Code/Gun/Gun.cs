@@ -51,4 +51,20 @@ public class Gun : MonoBehaviour
             _gm.gameObject.GetComponent<EnemyController>().Hit(damage * _playerStats.rageCoeff, false);
         }
     }
+
+    public void DamageBoss(GameObject _gm)
+    {
+        int _rand = Random.Range(1, 101);
+        if (_rand <= _playerStats.kritChance)
+        {
+            float _damage = (damage * _playerStats.rageCoeff) * _playerStats.kritDamage;
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
+            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(_damage, true);
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageCoeff);
+            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(damage * _playerStats.rageCoeff, false);
+        }
+    }
 }

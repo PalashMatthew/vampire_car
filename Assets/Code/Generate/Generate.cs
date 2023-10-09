@@ -24,6 +24,8 @@ public class Generate : MonoBehaviour
 
     public bool isSpawnAccess;
 
+    public GameObject bossObj;
+
     [SerializeField] public List<EnemyCoeff> enemyCoeffList;
 
     private void Start()
@@ -68,6 +70,33 @@ public class Generate : MonoBehaviour
     {
         float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
         Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, _randZ), transform.rotation);
+    }
+
+    public void BossFight()
+    {
+        StopAllCoroutines();
+        StartCoroutine(BossFightEnum());
+    }
+
+    IEnumerator BossFightEnum()
+    {
+        yield return new WaitForSeconds(1);
+
+        GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().isShowPanelWave = false;
+
+        if (_gameplayController.activeEnemy.Count > 0)
+        {
+            StartCoroutine(BossFightEnum());
+        } 
+        else
+        {
+            GameObject inst = Instantiate(bossObj, new Vector3(0, 0, 90f), transform.rotation);
+            _gameplayController.activeEnemy.Add(inst);
+
+            inst.transform.eulerAngles = new Vector3(0, 180, 0);
+
+            GameObject.Find("GameplayUI").GetComponent<GameplayUIController>()._isBossFight = true;
+        }
     }
 }
 

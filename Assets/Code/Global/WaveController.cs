@@ -11,6 +11,8 @@ public class WaveController : MonoBehaviour
     public int currentWave;
     public int enemyDestroy;
 
+    public int lastWave;
+
     public GameObject enemyM1Obj;
     public GameObject enemyM2Obj;
     public GameObject enemyM3Obj;
@@ -59,7 +61,16 @@ public class WaveController : MonoBehaviour
 
     public void WaveEnd()
     {
-        StartWave();
+        if (currentWave < lastWave)
+        {
+            StartWave();
+        } 
+        else
+        {
+            StopAllCoroutines();
+            
+            _generate.BossFight();
+        }        
     }
 
     public GameObject ChoiseEnemy()

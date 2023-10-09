@@ -27,4 +27,10 @@ public class GameplayController : MonoBehaviour
 
         currentWaveNum = 1;
     }
+
+    public void Win()
+    {
+        GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().isWin = true;
+        GameObject.Find("PopUp Win").GetComponent<PopUpWin>().ButOpen();
+    }
 }

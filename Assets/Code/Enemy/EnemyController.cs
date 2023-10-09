@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     [HideInInspector]
     public float moveSpeed;
     public float hp;
-    //public float damage;
+    public float maxHp;
     public float brakeDamage;
 
     public float moveSpeedMin;
@@ -39,6 +39,7 @@ public class EnemyController : MonoBehaviour
     public bool isTest;
 
     bool _isFreeze;
+    public bool isBoss;
 
 
     private void Start()
@@ -49,6 +50,11 @@ public class EnemyController : MonoBehaviour
         }
 
         CoeffSettings();
+
+        if (isBoss)
+        {
+            hp = maxHp;
+        }
     }
 
     void CoeffSettings()
@@ -71,7 +77,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z < -40)
+        if (transform.position.z < -20)
         {
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             Destroy(gameObject);
@@ -111,14 +117,17 @@ public class EnemyController : MonoBehaviour
 
     void Dead()
     {
-        GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
-        GameObject.Find("Player").GetComponent<PlayerPassiveController>().PassiveHealthRecovery();
+        if (!isBoss)
+        {
+            GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().PassiveHealthRecovery();
 
-        Instantiate(screwObj, transform.position, transform.rotation);
-        GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
-        GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
-        Destroy(_fx, 3);
-        Destroy(gameObject);
+            Instantiate(screwObj, transform.position, transform.rotation);
+            GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
+            GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
+            Destroy(_fx, 3);
+            Destroy(gameObject);
+        }
     }
 
     #region Freeze
