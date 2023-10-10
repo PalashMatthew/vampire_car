@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public float moveSpeedMax;
 
     public MeshRenderer meshRenderer;
+    public SkinnedMeshRenderer skinnedMeshRenderer;
 
     public GameObject screwObj;
 
@@ -119,9 +120,19 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator HitAnim()
     {
-        meshRenderer.material.EnableKeyword("_EMISSION");
+        if (meshRenderer != null)
+            meshRenderer.material.EnableKeyword("_EMISSION");
+
+        if (skinnedMeshRenderer != null)
+            skinnedMeshRenderer.material.EnableKeyword("_EMISSION");
+
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.material.DisableKeyword("_EMISSION");
+
+        if (meshRenderer != null)
+            meshRenderer.material.DisableKeyword("_EMISSION");
+
+        if (skinnedMeshRenderer != null)
+            skinnedMeshRenderer.material.DisableKeyword("_EMISSION");
     }
     #endregion
 

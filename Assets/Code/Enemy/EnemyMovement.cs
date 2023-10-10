@@ -10,6 +10,8 @@ public class EnemyMovement : MonoBehaviour
     public bool isLazer;
     public float moveSpeed;
 
+    private bool _isMoveAccess = true;
+
     [Header("Local Move")]
     public bool localMove;  //Будет ли статичный враг двигаться вправо влево после того как выедет на экран?
     private bool _isStartLocalMove;
@@ -35,47 +37,60 @@ public class EnemyMovement : MonoBehaviour
     public float _saveMoveSpeed;
     public bool _isRotate;
 
+    private float _zPosStop;
+
+    private bool _isJumping = false;
+
 
     private void Start()
     {
-        _enemyController = GetComponent<EnemyController>();        
+        _isMoveAccess = true;
+        _enemyController = GetComponent<EnemyController>();
+
+        if (_enemyController.carType == EnemyController.CarType.Static)
+        {
+            _zPosStop = Random.Range(39f, 56f);
+        }
     }
 
     private void Update()
     {
         moveSpeed = _enemyController.moveSpeed;
 
-        if (_enemyController.carType == EnemyController.CarType.Movement)
+        if (_isMoveAccess)
         {
-            BaseMovement();
-        }
-
-        if (_enemyController.carType == EnemyController.CarType.Static)
-        {
-            if (transform.position.z > 45)
+            if (_enemyController.carType == EnemyController.CarType.Movement)
+            {
                 BaseMovement();
-            else if (!_enemyController.isCarStop)
-                _enemyController.isCarStop = true;
-
-            if (_enemyController.isCarStop && localMove)
-            {
-                StartCoroutine(LocalMoveEnum());
-                localMove = false;
             }
 
-            if (_enemyController.isCarStop && isLazer)
+            if (_enemyController.carType == EnemyController.CarType.Static)
             {
-                gameObject.GetComponent<EnemyLazer>().StartCoroutine(gameObject.GetComponent<EnemyLazer>().AttackEnum());
-                isLazer = false;
-            }
+                if (transform.position.z > 45)
+                    BaseMovement();
+                else if (!_enemyController.isCarStop)
+                    _enemyController.isCarStop = true;
 
-            if (_isStartLocalMove)
-            {
-                LocalMove();
+                if (_enemyController.isCarStop && localMove)
+                {
+                    StartCoroutine(LocalMoveEnum());
+                    localMove = false;
+                }
+
+                if (_enemyController.isCarStop && isLazer)
+                {
+                    gameObject.GetComponent<EnemyLazer>().StartCoroutine(gameObject.GetComponent<EnemyLazer>().AttackEnum());
+                    isLazer = false;
+                }
+
+                if (_isStartLocalMove)
+                {
+                    LocalMove();
+                }
             }
         }
 
-        //NavMesh();
+        NavMesh();
     }
 
     void BaseMovement()
@@ -131,157 +146,89 @@ public class EnemyMovement : MonoBehaviour
         Debug.DrawRay(new Vector3(transform.position.x + 1.25f, transform.position.y + 1.2f, transform.position.z - 2.25f), -Vector3.forward * 7, Color.red);
         #endregion
 
-        //#region Right
-        //rayRight = new Ray(new Vector3(transform.position.x - 1.5f, transform.position.y + 1.2f, transform.position.z), Vector3.left);
-
-        //Physics.Raycast(rayRight, out hitRight, 7, layer);
-        //Debug.DrawRay(new Vector3(transform.position.x - 1.5f, transform.position.y + 1.2f, transform.position.z), Vector3.left * 7, Color.red);
-        //#endregion
-
-        //#region Left
-        //rayLeft = new Ray(new Vector3(transform.position.x + 1.25f, transform.position.y + 1.2f, transform.position.z), Vector3.right);
-
-        //Physics.Raycast(rayLeft, out hitLeft, 7, layer);
-        //Debug.DrawRay(new Vector3(transform.position.x + 1.25f, transform.position.y + 1.2f, transform.position.z), Vector3.right * 7, Color.red);
-        //#endregion
-
-        //#region ForwardLeft
-        //rayForwardLeft = new Ray(posRayForwardLeft.position, posRayForwardLeft.forward);
-
-        //Physics.Raycast(rayForwardLeft, out hitForwardLeft, 7, layer);
-        //Debug.DrawRay(posRayForwardLeft.position, posRayForwardLeft.forward * 7, Color.red);
-        //#endregion
-
-        //#region ForwardRight
-        //rayForwardRight = new Ray(posRayForwardRight.position, posRayForwardRight.forward);
-
-        //Physics.Raycast(rayForwardRight, out hitForwardRight, 7, layer);
-        //Debug.DrawRay(posRayForwardRight.position, posRayForwardRight.forward * 7, Color.red);
-        //#endregion
-
-        if (hitForward.collider != null || hitForward2.collider != null || hitForward3.collider != null && !_isRotate)
+        if (hitForward.collider != null || hitForward2.collider != null || hitForward3.collider != null)
         {
             if (hitForward.collider != null)
             {
                 if (hitForward.collider.gameObject.tag == "enemy")
                 {
-                    _enemyController.moveSpeed = hitForward.collider.gameObject.GetComponent<EnemyController>().moveSpeed;
+                    hitForward.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
-            } else if (hitForward2.collider != null)
+
+                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
+                //{
+                //    _isJumping = true;
+                //    StartCoroutine(JumpAnim());
+                //    return;
+                //}
+            } 
+            else if (hitForward2.collider != null)
             {
                 if (hitForward2.collider.gameObject.tag == "enemy")
                 {
-                    _enemyController.moveSpeed = hitForward2.collider.gameObject.GetComponent<EnemyController>().moveSpeed;
+                    hitForward2.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
+
+                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
+                //{
+                //    _isJumping = true;
+                //    StartCoroutine(JumpAnim());
+                //    return;
+                //}
             }
             else if (hitForward3.collider != null)
             {
                 if (hitForward3.collider.gameObject.tag == "enemy")
                 {
-                    _enemyController.moveSpeed = hitForward3.collider.gameObject.GetComponent<EnemyController>().moveSpeed;
+                    hitForward3.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
-            } else
-            {
-                _enemyController.moveSpeed = 1;
-            }
-            
-            _isRotate = true;
+
+                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
+                //{
+                //    _isJumping = true;
+                //    StartCoroutine(JumpAnim());
+                //    return;
+                //}
+            } 
         }
-
-        if (hitForward.collider == null && hitForward2.collider == null && hitForward3.collider == null && _isRotate)
-        {
-            _enemyController.moveSpeed = _saveMoveSpeed;
-            moveSpeed = _saveMoveSpeed;
-            _isRotate = false;
-        }
-
-        //if (hitForward.collider != null && !_isRotate)
-        //{
-        //    if (hitRight.collider == null)
-        //    {
-        //        transform.DORotate(new Vector3(0, 215f, 0), 0.3f);
-        //        _isRotate = true;
-        //        StartCoroutine(back(2));
-        //        return;
-        //    }
-
-        //    if (hitLeft.collider == null)
-        //    {
-        //        transform.DORotate(new Vector3(0, 145f, 0), 0.3f);
-        //        _isRotate = true;
-        //        StartCoroutine(back(1));
-        //        return;
-        //    }
-        //} else if (hitForward2.collider != null && !_isRotate)
-        //{
-        //    if (hitLeft.collider == null && hitForwardLeft.collider == null)
-        //    {
-        //        transform.DORotate(new Vector3(0, 145f, 0), 0.3f);
-        //        _isRotate = true;
-        //        StartCoroutine(back(1));
-        //        return;
-        //    }
-        //} else if (hitForward3.collider != null && !_isRotate)
-        //{
-        //    if (hitRight.collider == null && hitForwardRight.collider == null)
-        //    {
-        //        transform.DORotate(new Vector3(0, 215f, 0), 0.3f);
-        //        _isRotate = true;
-        //        StartCoroutine(back(2));
-        //        return;
-        //    }
-        //} else
-        //{
-        //    moveSpeed = 0;
-        //}
     }
 
-    IEnumerator back(int dir)
+    IEnumerator JumpAnim()
     {
+        transform.DOMoveZ(transform.position.z - 7.5f, 0.3f).SetEase(Ease.Linear);
+        transform.DORotate(new Vector3(-26f, 180, 0), 0.1f).SetEase(Ease.Linear);
+        transform.DOMoveY(2.88f, 0.3f).SetEase(Ease.Linear);
+
         yield return new WaitForSeconds(0.1f);
-        
-        //Left
-        if (dir == 1)
-        {
-            if (hitLeft.collider != null || hitForwardLeft.collider != null)
-            {
-                transform.DORotate(new Vector3(0, 180f, 0), 0.3f);
-                _isRotate = false;
-                yield break;
-            }
+        transform.DORotate(new Vector3(0f, 180, 0), 0.1f).SetEase(Ease.Linear);
 
-            if (hitForward2.collider != null || hitForward3.collider != null)
-            {
-                StartCoroutine(back(dir));
-            }
-            else
-            {
-                //yield return new WaitForSeconds(0.2f);
-                transform.DORotate(new Vector3(0, 180f, 0), 0.3f);
-                _isRotate = false;
-            }
-        } else
-        {
-            if (hitRight.collider != null || hitForwardRight.collider != null)
-            {
-                transform.DORotate(new Vector3(0, 180f, 0), 0.3f);
-                _isRotate = false;
-                yield break;
-            }
+        yield return new WaitForSeconds(0.2f);
+        transform.DOMoveZ(transform.position.z - 2, 0.2f).SetEase(Ease.Linear);        
 
-            if (hitForward2.collider != null || hitForward3.collider != null)
-            {
-                StartCoroutine(back(dir));
-            }
-            else
-            {
-                //yield return new WaitForSeconds(0.2f);
-                transform.DORotate(new Vector3(0, 180f, 0), 0.3f);
-                _isRotate = false;
-            }
+        yield return new WaitForSeconds(0.1f);
+
+        transform.DORotate(new Vector3(26f, 180, 0), 0.1f).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(0.1f);
+
+        transform.DOMoveZ(transform.position.z - 2, 0.4f).SetEase(Ease.Linear);
+        transform.DOMoveY(0f, 0.3f).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(0.3f);
+
+        transform.DORotate(new Vector3(0f, 180, 0), 0.3f).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(0.3f);
+        _isMoveAccess = true;
+        _isJumping = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 9 && !_isJumping)
+        {
+            _isMoveAccess = false;
+            StartCoroutine(JumpAnim());
         }
-        
-
-        
     }
 }

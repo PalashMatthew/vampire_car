@@ -970,6 +970,7 @@ MonoBehaviour:
   moveSpeedMin: 10
   moveSpeedMax: 15
   meshRenderer: {fileID: 752112693430756670}
+  skinnedMeshRenderer: {fileID: 0}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
   isPattern: 0
@@ -998,9 +999,11 @@ MonoBehaviour:
   minX: 0
   layer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   posRayForwardRight: {fileID: 8032419518473556979}
   posRayForwardLeft: {fileID: 4087370391135187275}
+  _saveMoveSpeed: 0
+  _isRotate: 0
 --- !u!114 &6051171882097659740
 MonoBehaviour:
   m_ObjectHideFlags: 0

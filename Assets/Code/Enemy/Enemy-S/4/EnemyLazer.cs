@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,22 +42,28 @@ public class EnemyLazer : MonoBehaviour
         objLazer.GetComponent<MeshRenderer>().material = matDefault;
         _enemyMovement.StopAllCoroutines();
         _isLookAt = true;
-        yield return new WaitForSeconds(2);
-        _isLookAt = false;
         yield return new WaitForSeconds(1);
+        _isLookAt = false;
+        yield return new WaitForSeconds(1.5f);
         objLazer.GetComponent<MeshRenderer>().material = matAttack;
         objLazer.GetComponent<BoxCollider>().enabled = true;
         yield return new WaitForSeconds(0.5f);
         objLazer.GetComponent<BoxCollider>().enabled = false;
         objLazer.SetActive(false);
         yield return new WaitForSeconds(_gunController.pauseTime - 0.5f);
+        transform.DORotate(new Vector3(0, 180, 0), 0.3f);
         _enemyMovement.StartCoroutine(_enemyMovement.LocalMoveEnum());
         StartCoroutine(AttackEnum());
     }
 
     void LookAt()
     {
-        transform.LookAt(_player.transform);
+        //transform.LookAt(_player.transform);
+        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+        Vector3 relativePos = _player.transform.position - transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 0.5f);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
     }
 

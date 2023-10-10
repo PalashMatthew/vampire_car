@@ -409,6 +409,7 @@ MonoBehaviour:
   moveSpeedMin: 2
   moveSpeedMax: 6
   meshRenderer: {fileID: 7650130823731114603}
+  skinnedMeshRenderer: {fileID: 0}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
   isPattern: 0
@@ -437,9 +438,11 @@ MonoBehaviour:
   minX: 0
   layer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   posRayForwardRight: {fileID: 4985982314878702752}
   posRayForwardLeft: {fileID: 3665125600628674442}
+  _saveMoveSpeed: 0
+  _isRotate: 0
 --- !u!65 &2306049462092894556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -455,7 +458,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
