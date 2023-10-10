@@ -68,6 +68,7 @@ public class PopUpDead : MonoBehaviour
     {
         if (isSkipAccess)
         {
+            Time.timeScale = 1;
             Application.LoadLevel(Application.loadedLevel);
         }
     }

@@ -16,6 +16,9 @@ public class PlaceGenerate : MonoBehaviour
 
     GameplayController _gameplayController;
 
+    public float minZ;
+    public float spawnZ;
+
     private void Start()
     {
         _player = GameObject.Find("Player");
@@ -24,7 +27,35 @@ public class PlaceGenerate : MonoBehaviour
 
     private void Update()
     {
-        GeneratePlace();
+        //GeneratePlace();
+
+        GameObject remove = null;
+        GameObject _inst = null;
+
+        foreach (GameObject place in _places)
+        {
+            if (place.transform.position.z <= minZ)
+            {
+                _inst = Instantiate(placeObj, new Vector3(0, 0, spawnZ), transform.rotation);               
+
+                remove = place;                
+            }
+        }        
+
+        if (remove != null)
+        {
+            _places.Remove(remove);
+            Destroy(remove);
+            remove = null;
+        }
+
+        if (_inst != null)
+        {
+            _places.Add(_inst);            
+            _inst.GetComponent<RoadController>().dist = spawnZ;
+            _inst.GetComponent<RoadController>().parent = _places[0];
+            _inst = null;
+        }
     }
 
     void GeneratePlace()

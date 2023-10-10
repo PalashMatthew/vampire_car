@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerStats.currentHp -= _damage;
 
+        StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+        
         StartCoroutine(HitAnim());
 
         if (_playerStats.currentHp <= 0 && !isDead)

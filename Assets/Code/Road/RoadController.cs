@@ -4,26 +4,19 @@ using UnityEngine;
 
 public class RoadController : MonoBehaviour
 {
-    //public float moveSpeed;
+    public GameObject parent;
+    public float dist;
 
-    //MeshRenderer meshRenderer;
-
-    //private void Start()
-    //{
-    //    meshRenderer = GetComponent<MeshRenderer>();
-    //}
-
-    //private void Update()
-    //{
-    //    meshRenderer.material.mainTextureOffset = new Vector2(0, meshRenderer.material.mainTextureOffset.y + moveSpeed * Time.deltaTime);
-    //}
-
-    private void Update()
+    private void Start()
     {
-        if (transform.position.z <= -114.5f)
+        if (parent != null)
         {
-            Instantiate(gameObject, new Vector3(transform.position.x, 0, 242.5f), transform.rotation);
-            Destroy(gameObject);
+            float _dist = transform.position.z - parent.transform.position.z;
+            if (_dist > 178.5f)
+            {
+                transform.position = new Vector3(0, 0, parent.transform.position.z + 178.5f);
+                Debug.Log("FIX PLACE");
+            }
         }
     }
 }

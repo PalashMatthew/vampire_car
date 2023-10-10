@@ -35,10 +35,13 @@ public class GameplayUIController : MonoBehaviour
     public bool _isBossFight;
     public bool isWin;
 
+    public Image imgPlayerHit;
+
 
     private void Start()
     {
-        UpdateScrewText();        
+        UpdateScrewText();
+        imgPlayerHit.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -182,4 +185,13 @@ public class GameplayUIController : MonoBehaviour
         imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
     }
     #endregion
+
+    public IEnumerator PlayerHit()
+    {
+        imgPlayerHit.gameObject.SetActive(true);
+        imgPlayerHit.DOFade(1, 0.05f);
+        yield return new WaitForSeconds(0.05f);
+        imgPlayerHit.DOFade(0, 0.05f);
+        imgPlayerHit.gameObject.SetActive(false);
+    }
 }
