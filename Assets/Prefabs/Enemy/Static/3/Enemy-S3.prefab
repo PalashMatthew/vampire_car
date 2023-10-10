@@ -1170,6 +1170,7 @@ MonoBehaviour:
   zInvisibleDestroy: 5
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
   isTest: 0
+  _isFreeze: 0
   isBoss: 0
 --- !u!114 &2713173453650896552
 MonoBehaviour:
@@ -1183,9 +1184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce636e90ca5ca349b7d3833233b478b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localMove: 1
   isLazer: 0
   moveSpeed: 0
+  localMove: 1
+  localMoveSpeed: 5
+  maxX: 17
+  minX: -17
 --- !u!114 &2464843600803863214
 MonoBehaviour:
   m_ObjectHideFlags: 0

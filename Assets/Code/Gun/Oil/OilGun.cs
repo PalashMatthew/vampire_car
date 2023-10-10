@@ -32,30 +32,40 @@ public class OilGun : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        List<GameObject> _usedEnemy = new List<GameObject>();
-        _activeEnemy.Clear();
-        _activeEnemy.AddRange(_gameplayController.activeEnemy);
-
-        for (int i = 1; i <= _gunController.projectileValue; i++)
+        if (_gameplayController.activeEnemy.Count > 0)
         {
-            GameObject _target = null;
-            float _minDistance = 9999;
+            List<GameObject> _usedEnemy = new List<GameObject>();
+            _activeEnemy.Clear();
+            _activeEnemy.AddRange(_gameplayController.activeEnemy);
 
-            foreach (GameObject gm in _gameplayController.activeEnemy)
+            for (int i = 1; i <= _gunController.projectileValue; i++)
             {
-                if (Vector3.Distance(_player.transform.position, gm.transform.position) < _minDistance && !_usedEnemy.Contains(gm))
+                GameObject _target = null;
+                float _minDistance = 9999;
+
+                foreach (GameObject gm in _gameplayController.activeEnemy)
                 {
-                    _target = gm;
-                    _minDistance = Vector3.Distance(_player.transform.position, gm.transform.position);
+                    if (Vector3.Distance(_player.transform.position, gm.transform.position) < _minDistance && !_usedEnemy.Contains(gm))
+                    {
+                        _target = gm;
+                        _minDistance = Vector3.Distance(_player.transform.position, gm.transform.position);
+                    }
                 }
+
+                _usedEnemy.Add(_target);
+
+                GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
+                _inst.GetComponent<OilBullet>().target = _target.transform.position;
+                _inst.GetComponent<OilBullet>()._gunController = _gunController;
             }
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            yield break;
+        }
 
-            _usedEnemy.Add(_target);
 
-            GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
-            _inst.GetComponent<OilBullet>().target = _target.transform.position;
-            _inst.GetComponent<OilBullet>()._gunController = _gunController;
-        }        
 
         StartCoroutine(Shot());
     }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &63978925378372029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2916163705626922320}
+  m_Layer: 0
+  m_Name: posRayForwardRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2916163705626922320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63978925378372029}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.17364816, z: -0, w: 0.9848078}
+  m_LocalPosition: {x: 1, y: 1.2, z: 2.244003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7508942440280302281}
+  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
 --- !u!1 &84736504194102875
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +312,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1689370961031945307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2854715883484657903}
+  m_Layer: 0
+  m_Name: posRayForwardLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2854715883484657903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689370961031945307}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.17364825, z: -0, w: 0.9848078}
+  m_LocalPosition: {x: -1, y: 1.2, z: 2.244003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7508942440280302281}
+  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
 --- !u!1 &1713845706196113743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,7 +1691,7 @@ GameObject:
   - component: {fileID: 683228587520261037}
   - component: {fileID: 6796178569439091109}
   - component: {fileID: 4311087201603268740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy-M2
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -1651,6 +1713,8 @@ Transform:
   m_Children:
   - {fileID: 1359518452249194080}
   - {fileID: 8039711105504496965}
+  - {fileID: 2854715883484657903}
+  - {fileID: 2916163705626922320}
   - {fileID: 7073318242005181332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1681,6 +1745,7 @@ MonoBehaviour:
   zInvisibleDestroy: 5
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
   isTest: 0
+  _isFreeze: 0
   isBoss: 0
 --- !u!114 &3841629383555449897
 MonoBehaviour:
@@ -1694,9 +1759,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce636e90ca5ca349b7d3833233b478b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localMove: 0
   isLazer: 0
   moveSpeed: 0
+  localMove: 0
+  localMoveSpeed: 0
+  maxX: 0
+  minX: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  posRayForwardRight: {fileID: 2916163705626922320}
+  posRayForwardLeft: {fileID: 2854715883484657903}
 --- !u!114 &1921862997649608286
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,12 +38,14 @@ public class EnemyController : MonoBehaviour
 
     public bool isTest;
 
-    bool _isFreeze;
+    public bool _isFreeze;
     public bool isBoss;
+
+    EnemyMovement _enemyMovement;
 
 
     private void Start()
-    {
+    {       
         if (isTest || isPattern)
         {
             Initialize();
@@ -54,7 +56,7 @@ public class EnemyController : MonoBehaviour
         if (isBoss)
         {
             hp = maxHp;
-        }
+        }        
     }
 
     void CoeffSettings()
@@ -66,7 +68,10 @@ public class EnemyController : MonoBehaviour
 
     public void Initialize()
     {
+        _enemyMovement = GetComponent<EnemyMovement>();
+
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
+        _enemyMovement._saveMoveSpeed = moveSpeed;
 
         if (isPattern)
         {
@@ -91,6 +96,11 @@ public class EnemyController : MonoBehaviour
         if (other.tag == "player")
         {
             other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
+        }
+
+        if (other.tag == "enemy" && transform.position.z > 75)
+        {
+            transform.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
         }
     }
 
@@ -143,10 +153,13 @@ public class EnemyController : MonoBehaviour
     IEnumerator FreezeEnum(float _freezeTime)
     {
         float _saveMoveSpeed = moveSpeed;
+        float _saveLocalMoveSpeed = _enemyMovement.localMoveSpeed;
         moveSpeed = 0;
+        _enemyMovement.localMoveSpeed = 0;
         yield return new WaitForSeconds(_freezeTime);
         _isFreeze = false;
         moveSpeed = _saveMoveSpeed;
+        _enemyMovement.localMoveSpeed = _saveLocalMoveSpeed;
     }
     #endregion
 

@@ -30,9 +30,13 @@ public class BoomerangBullet : MonoBehaviour
         if (isMoveForward)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * _gunController.bulletMoveSpeed);
-        } else
+        } 
+        else
         {
             transform.position = Vector3.MoveTowards(transform.position, GameObject.Find("Player").transform.position, _gunController.bulletMoveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, GameObject.Find("Player").transform.position) <= 5)
+                Destroy(gameObject);
         }
     }
 
@@ -41,8 +45,7 @@ public class BoomerangBullet : MonoBehaviour
         isMoveForward = true;
         yield return new WaitForSeconds(_gunController.timeOfAction / 2);
         isMoveForward = false;
-        yield return new WaitForSeconds(_gunController.timeOfAction / 2);
-        Destroy(gameObject);
+        
     }
 
     private void OnTriggerEnter(Collider other)

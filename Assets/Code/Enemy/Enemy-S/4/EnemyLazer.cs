@@ -50,7 +50,7 @@ public class EnemyLazer : MonoBehaviour
         objLazer.GetComponent<BoxCollider>().enabled = false;
         objLazer.SetActive(false);
         yield return new WaitForSeconds(_gunController.pauseTime - 0.5f);
-        _enemyMovement.StartCoroutine(_enemyMovement.LocalMove());
+        _enemyMovement.StartCoroutine(_enemyMovement.LocalMoveEnum());
         StartCoroutine(AttackEnum());
     }
 

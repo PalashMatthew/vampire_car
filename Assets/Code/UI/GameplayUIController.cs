@@ -95,7 +95,7 @@ public class GameplayUIController : MonoBehaviour
     #region Level
     void UpdateLevel()
     {
-        tCurrentLevel.text = "Level " + playerLevelController.currentLevel.ToString();
+        tCurrentLevel.text = "Уровень " + playerLevelController.currentLevel.ToString();
 
         imgFillLevelBar.fillAmount = (float)playerLevelController.enemyCountInThisLevel / playerLevelController.enemyCountFromNewLevel[playerLevelController.currentLevel - 1];
 
@@ -118,11 +118,11 @@ public class GameplayUIController : MonoBehaviour
 
         if (_currentWaveTime > 9)
         {
-            tWaveTimer.text = "Wave " + _waveNum + " - 00:" + _currentWaveTime;
+            tWaveTimer.text = "Волна " + _waveNum + " - 00:" + _currentWaveTime;
         }
         else
         {
-            tWaveTimer.text = "Wave " + _waveNum + " - 00:0" + _currentWaveTime;
+            tWaveTimer.text = "Волна " + _waveNum + " - 00:0" + _currentWaveTime;
         }
 
         imgWaveFill.fillAmount = 0;        
@@ -150,18 +150,18 @@ public class GameplayUIController : MonoBehaviour
 
         if (_currentWaveTime <= 0)
         {
-            tWaveTimer.text = "Wave " + _waveNum + " - 00:00";
+            tWaveTimer.text = "Волна " + _waveNum + " - 00:00";
             waveController.WaveEnd();
         } 
         else
         {
             if (_currentWaveTime > 9)
             {
-                tWaveTimer.text = "Wave " + _waveNum + " - 00:" + _currentWaveTime;
+                tWaveTimer.text = "Волна " + _waveNum + " - 00:" + _currentWaveTime;
             }
             else
             {
-                tWaveTimer.text = "Wave " + _waveNum + " - 00:0" + _currentWaveTime;
+                tWaveTimer.text = "Волна " + _waveNum + " - 00:0" + _currentWaveTime;
             }
 
             if (!_isBossFight)
@@ -173,7 +173,7 @@ public class GameplayUIController : MonoBehaviour
     #region Boss
     public void Boss()
     {
-        tBossName.text = "BOSS - Fire Truck";
+        tBossName.text = "БОСС - Fire Truck";
 
         if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
             tBossHP.text = GameObject.Find("BOSS").GetComponent<EnemyController>().hp.ToString();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class RocketLauncherController : MonoBehaviour
 {
@@ -24,29 +25,101 @@ public class RocketLauncherController : MonoBehaviour
     }
 
     IEnumerator Shot()
-    {       
+    {
+        yield return new WaitForSeconds(_gunController.shotSpeed);
+
         GameObject _target;
 
         if (_gameplayController.activeEnemy.Count > 0)
         {
-            for (int i = 1; i <= _gunController.projectileValue; i++)
+            _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+
+            int i = 10;
+
+            while (!_target.GetComponent<EnemyController>().isVisible)
             {
                 _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+                i--;
+
+                if (i <= 0)
+                {
+                    StartCoroutine(Shot());
+                    yield break;
+                }
+            }
+
+            GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
+            _inst.GetComponent<RocketLauncherBullet>().target = _target;
+            _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            yield break;
+        }
+
+        if (_gunController.projectileValue > 1)
+        {
+            StartCoroutine(AnotherShot());
+        }
+
+        StartCoroutine(Shot());
+    }
+
+    IEnumerator AnotherShot()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameObject _target;
+
+        if (_gameplayController.activeEnemy.Count > 0)
+        {
+            _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+
+            int i = 10;
+
+            while (!_target.GetComponent<EnemyController>().isVisible)
+            {
+                _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+                i--;
+
+                if (i <= 0)
+                {
+                    yield break;
+                }
+            }
+
+            GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
+            _inst.GetComponent<RocketLauncherBullet>().target = _target;
+            _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            yield break;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (_gunController.projectileValue == 3)
+        {
+            if (_gameplayController.activeEnemy.Count > 0)
+            {
+                _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+
+                while (_target.GetComponent<EnemyController>().isVisible)
+                {
+                    _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+                }
 
                 GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
                 _inst.GetComponent<RocketLauncherBullet>().target = _target;
                 _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
             }
-        }                
-
-        yield return new WaitForSeconds(_gunController.shotSpeed);
-
-        StartCoroutine(Shot());
-    }
-
-    IEnumerator NotFind()
-    {
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(Shot());
+            else
+            {
+                StartCoroutine(Shot());
+                yield break;
+            }
+        }
     }
 }

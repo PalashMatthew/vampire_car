@@ -318,6 +318,37 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &2579180418788218084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4985982314878702752}
+  m_Layer: 0
+  m_Name: posRayForwardRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4985982314878702752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579180418788218084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.17364816, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 1, y: 1.2, z: 2.2440033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5400060423337227841}
+  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
 --- !u!1 &2775943015700847028
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +362,7 @@ GameObject:
   - component: {fileID: 5761218374616895158}
   - component: {fileID: 2306049462092894556}
   - component: {fileID: 8150739119795178260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy-M1
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -353,6 +384,8 @@ Transform:
   m_Children:
   - {fileID: 2926462591270391711}
   - {fileID: 8340456003662605254}
+  - {fileID: 3665125600628674442}
+  - {fileID: 4985982314878702752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1270438384448133322
@@ -373,8 +406,8 @@ MonoBehaviour:
   hp: 60
   maxHp: 0
   brakeDamage: 20
-  moveSpeedMin: 5
-  moveSpeedMax: 8
+  moveSpeedMin: 2
+  moveSpeedMax: 6
   meshRenderer: {fileID: 7650130823731114603}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
@@ -382,6 +415,7 @@ MonoBehaviour:
   zInvisibleDestroy: 5
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
   isTest: 0
+  _isFreeze: 0
   isBoss: 0
 --- !u!114 &5761218374616895158
 MonoBehaviour:
@@ -395,9 +429,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce636e90ca5ca349b7d3833233b478b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localMove: 0
   isLazer: 0
   moveSpeed: 0
+  localMove: 0
+  localMoveSpeed: 0
+  maxX: 0
+  minX: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  posRayForwardRight: {fileID: 4985982314878702752}
+  posRayForwardLeft: {fileID: 3665125600628674442}
 --- !u!65 &2306049462092894556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -413,7 +455,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1354,6 +1396,37 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &7813638757544415648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3665125600628674442}
+  m_Layer: 0
+  m_Name: posRayForwardLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3665125600628674442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813638757544415648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.17364825, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: -1, y: 1.2, z: 2.2440033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5400060423337227841}
+  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
 --- !u!1 &7894848766819920884
 GameObject:
   m_ObjectHideFlags: 0
