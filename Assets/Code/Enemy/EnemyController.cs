@@ -142,7 +142,7 @@ public class EnemyController : MonoBehaviour
         {
             GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
 
-            Instantiate(screwObj, transform.position, transform.rotation);
+            Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
             Destroy(_fx, 3);

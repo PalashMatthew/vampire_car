@@ -10,12 +10,14 @@ public class EnemyShot : MonoBehaviour
 
     EnemyGun _gunController;
     EnemyMovement _enemyMovement;
+    EnemyController _enemyController;
 
     private int _enemyShotCount = 1;
 
     void Initialize()
     {
         _gunController = GetComponent<EnemyGun>();
+        _enemyController = GetComponent<EnemyController>();
         _enemyMovement = GetComponent<EnemyMovement>();
     }
 
@@ -37,14 +39,20 @@ public class EnemyShot : MonoBehaviour
         _instMuzzle.transform.parent = bulletSpawnPoint;
         Destroy(_instMuzzle, 2);
 
-        if (_enemyShotCount >= 3)
+        if (_enemyController.carType == EnemyController.CarType.Static)
         {
-            _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
-        }
-        else
+            if (_enemyShotCount >= 3)
+            {
+                _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
+            }
+            else
+            {
+                StartCoroutine(Shot());
+                _enemyShotCount++;
+            }
+        } else
         {
             StartCoroutine(Shot());
-            _enemyShotCount++;
         }
     }
 }
