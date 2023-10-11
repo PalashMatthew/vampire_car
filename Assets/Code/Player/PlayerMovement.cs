@@ -61,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 newPos;
 
+    RaycastHit _hit;
+    Ray ray;
+
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
@@ -99,8 +102,92 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        RaycastHit _hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            ray = cam.ScreenPointToRay(touch.position);
+
+            newPos = new Vector3(0, 0, 0);
+
+            if (Physics.Raycast(ray, out _hit, Mathf.Infinity, layer))
+            {
+                newPos = new Vector3(_hit.point.x, _hit.point.y, _hit.point.z);
+            }
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                float coeff = Screen.width / (boundX * 2);
+
+                Vector3 camPos;
+                camPos = touch.position;
+
+                float x = camPos.x / coeff - boundX;
+
+                startMousePosX = x;
+                startMousePosZ = newPos.z;
+
+                startPlayerX = transform.position.x;
+                startPlayerZ = transform.position.z;
+            }
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                float coeff = Screen.width / (boundX * 2);
+
+                Vector3 camPos;
+                camPos = touch.position;
+
+                float x = camPos.x / coeff - boundX;
+
+                float currentX = startPlayerX + (x - startMousePosX);
+                float currentZ = startPlayerZ + (newPos.z - startMousePosZ) * coeffZ;
+
+                #region Bounds
+                if (currentX < boundXMin) currentX = boundXMin;
+                if (currentZ < boundZMin) currentZ = boundZMin;
+                if (currentX > boundXMax) currentX = boundXMax;
+                if (currentZ > boundZMax) currentZ = boundZMax;
+                #endregion
+
+                #region Animations
+                if (currentX < transform.position.x - 0.1f)
+                {
+                    mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
+                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+                    //transform.eulerAngles = new Vector3(0, -10f, 0);
+                }
+                else if (currentX > transform.position.x + 0.1f)
+                {
+                    //transform.eulerAngles = new Vector3(0, 10f, 0);
+                    mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
+                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+                }
+                else
+                {
+                    //transform.eulerAngles = new Vector3(0, 0f, 0);
+                    mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                }
+                #endregion
+
+                transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true);
+            }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            }
+        }
+#endif
+#if UNITY_EDITOR
+        ray = cam.ScreenPointToRay(Input.mousePosition);
 
         newPos = new Vector3(0, 0, 0);
 
@@ -133,9 +220,6 @@ public class PlayerMovement : MonoBehaviour
             camPos = Input.mousePosition;
 
             float x = camPos.x / coeff - boundX;
-
-            //if (x < boundXMin) x = boundXMin;
-            //if (x > boundXMax) x = boundXMax;
 
             float currentX = startPlayerX + (x - startMousePosX);
             float currentZ = startPlayerZ + (newPos.z - startMousePosZ) * coeffZ;
@@ -171,14 +255,7 @@ public class PlayerMovement : MonoBehaviour
             }
             #endregion
 
-
-            //transform.position = new Vector3(currentX, 0, currentZ);
-
-
-
             transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true);
-
-            //transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -187,6 +264,7 @@ public class PlayerMovement : MonoBehaviour
             wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
             wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
         }
+#endif
     }
 
     //Лужа

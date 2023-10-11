@@ -11,6 +11,7 @@ public class Generate : MonoBehaviour
 
     private GameObject _player;
 
+    GenerateObstacles _obstacles;
     GameplayController _gameplayController;
     public WaveController waveController;
 
@@ -32,6 +33,7 @@ public class Generate : MonoBehaviour
     {
         _player = GameObject.Find("Player");
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+        _obstacles = GetComponent<GenerateObstacles>();
     }
 
     public void StartSpawn()
@@ -76,6 +78,7 @@ public class Generate : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(BossFightEnum());
+        _obstacles.isBossFight = true;
     }
 
     IEnumerator BossFightEnum()

@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Local Move")]
     public bool localMove;  //Будет ли статичный враг двигаться вправо влево после того как выедет на экран?
-    private bool _isStartLocalMove;
+    public bool _isStartLocalMove;
     public float localMoveSpeed;
     private Vector3 localMoveDirection;
     public float maxX, minX;
@@ -119,8 +119,16 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.Translate(localMoveDirection * Time.deltaTime * localMoveSpeed);
 
-        if (transform.position.x > maxX) transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
-        if (transform.position.x < minX) transform.position = new Vector3(minX, transform.position.y, transform.position.z);
+        if (transform.position.x > maxX)
+        {
+            transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
+            localMoveDirection = Vector3.right;
+        }
+        if (transform.position.x < minX)
+        {
+            transform.position = new Vector3(minX, transform.position.y, transform.position.z);
+            localMoveDirection = Vector3.left;
+        }
     }
 
     void NavMesh()
@@ -227,5 +235,12 @@ public class EnemyMovement : MonoBehaviour
                 StartCoroutine(JumpAnim());
             }
         }
+    }
+
+    public IEnumerator MoveInside()
+    {
+        transform.DOMoveY(46, 2);
+        yield return new WaitForSeconds(2);
+        _enemyController.Dead();
     }
 }

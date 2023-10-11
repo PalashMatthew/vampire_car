@@ -16,6 +16,7 @@ public class PopUpUpgrade : MonoBehaviour
 
     PopUpController controller;
     public UpgradeController upgradeController;
+    private WaveController _waveController;
 
     public TMP_Text tChoiceUpgrade;
     public TMP_Text tScrewValue;
@@ -29,8 +30,15 @@ public class PopUpUpgrade : MonoBehaviour
 
     public bool isDefferenUpgrade;
 
+    [Header("Reroll")]
+    public TMP_Text tRerollPrice;
+    float rerollPrice;
+
+
     private void Start()
     {
+        _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
+
         controller = new PopUpController();
         controller.imgFade = imgFade;
         controller.objPopUp = objPopUp;
@@ -141,6 +149,14 @@ public class PopUpUpgrade : MonoBehaviour
         card3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         tScrewValue.text = GlobalStats.screwCount.ToString();
+
+        RerollInitialize();
+    }
+
+    void RerollInitialize()
+    {
+        rerollPrice = upgradeController.rerollPrice[_waveController.currentWave - 1];
+        tRerollPrice.text = rerollPrice.ToString();
     }
 
     public void ButClosed()
@@ -165,10 +181,10 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollScrew()
     {
-        if (GlobalStats.screwCount > 20)
+        if (GlobalStats.screwCount > rerollPrice)
         {
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
-            GlobalStats.screwCount -= 20;
+            GlobalStats.screwCount -= rerollPrice;
             tScrewValue.text = GlobalStats.screwCount.ToString();
             StartCoroutine(Reroll());
         }        

@@ -961,6 +961,7 @@ GameObject:
   - component: {fileID: 6172056994096470475}
   - component: {fileID: 3950844211712589771}
   - component: {fileID: 2058121460833998516}
+  - component: {fileID: 5113794575604594774}
   m_Layer: 0
   m_Name: Enemy-S3
   m_TagString: enemy
@@ -1032,6 +1033,7 @@ MonoBehaviour:
   isLazer: 0
   moveSpeed: 0
   localMove: 1
+  _isStartLocalMove: 0
   localMoveSpeed: 5
   maxX: 17
   minX: -17
@@ -1121,6 +1123,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5113794575604594774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271080959004233775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59f6eb5027a6af4c8b2c52292b696ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 700
+  propellers:
+  - {fileID: 5331191248506773816}
+  - {fileID: 4452457011111146254}
+  - {fileID: 7316248805039033643}
+  - {fileID: 6828731385297251095}
 --- !u!1 &6586152326015334593
 GameObject:
   m_ObjectHideFlags: 0

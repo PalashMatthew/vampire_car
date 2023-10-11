@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 380629027515895104}
   - component: {fileID: 3863337661096986085}
   - component: {fileID: 8747489712057054636}
+  - component: {fileID: 5922112336954803827}
   - component: {fileID: 7723926290191958741}
   - component: {fileID: 1122856763527109486}
   m_Layer: 0
@@ -400,6 +401,7 @@ MonoBehaviour:
   isLazer: 0
   moveSpeed: 0
   localMove: 0
+  _isStartLocalMove: 0
   localMoveSpeed: 5
   maxX: 17
   minX: -17
@@ -441,6 +443,24 @@ MonoBehaviour:
   bulletObj: {fileID: 7310501389405702822, guid: 526c524b8cac4e84ab6bb7439ecdae28, type: 3}
   muzzleObj: {fileID: 4970849026858096871, guid: 3364aff89f5abe34e97f9130e162b976, type: 3}
   bulletSpawnPoint: {fileID: 1330633490660948372}
+--- !u!114 &5922112336954803827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143483176832582894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59f6eb5027a6af4c8b2c52292b696ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 700
+  propellers:
+  - {fileID: 8065505795847145119}
+  - {fileID: 1805812761940757540}
+  - {fileID: 1649552078548868170}
+  - {fileID: 2399419748868633600}
 --- !u!65 &7723926290191958741
 BoxCollider:
   m_ObjectHideFlags: 0

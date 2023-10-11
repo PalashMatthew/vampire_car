@@ -1504,6 +1504,7 @@ GameObject:
   - component: {fileID: 5449629808279428853}
   - component: {fileID: 5125351174689425412}
   - component: {fileID: 2561360013062647600}
+  - component: {fileID: 8349551279021799876}
   m_Layer: 0
   m_Name: Enemy-S4
   m_TagString: enemy
@@ -1576,6 +1577,7 @@ MonoBehaviour:
   isLazer: 1
   moveSpeed: 0
   localMove: 1
+  _isStartLocalMove: 0
   localMoveSpeed: 5
   maxX: 17
   minX: -17
@@ -1668,6 +1670,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8349551279021799876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8004459408459030513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59f6eb5027a6af4c8b2c52292b696ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 700
+  propellers:
+  - {fileID: 5263110738558778035}
+  - {fileID: 6067904594799786196}
+  - {fileID: 7425382895585850118}
+  - {fileID: 4508703946520386569}
 --- !u!1 &8387333415612080739
 GameObject:
   m_ObjectHideFlags: 0

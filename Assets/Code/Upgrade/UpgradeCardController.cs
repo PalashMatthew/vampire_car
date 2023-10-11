@@ -17,6 +17,8 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgStar1, imgStar2, imgStar3;
     public Sprite sprStarFull, sprStarEmpty;
 
+    public Image imgIcon;
+
     UpgradeController _upgradeController;
     PopUpUpgrade _popUpUpgrade;
 
@@ -28,7 +30,7 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgCardType;
     public Sprite sprCardTypePassive, sprCardTypeGun;
 
-    private IEnumerator coroutine;
+    public GameObject imgNew;
 
     public enum CardRarity
     {
@@ -207,6 +209,11 @@ public class UpgradeCardController : MonoBehaviour
                 break;
         }
         #endregion
+
+        imgIcon.sprite = card.imageItem;
+
+        if (levelNum == 0 && card.upgradeType == UpgradeCard.UpgradeType.Gun) imgNew.SetActive(true);
+        else imgNew.SetActive(false);
     }
 
     public void ChoiceCard()

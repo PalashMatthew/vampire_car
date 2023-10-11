@@ -56,7 +56,7 @@ public class Obstacle : MonoBehaviour
     }
     #endregion
 
-    void Dead()
+    public void Dead()
     {
         Instantiate(screwObj, transform.position, transform.rotation);
 

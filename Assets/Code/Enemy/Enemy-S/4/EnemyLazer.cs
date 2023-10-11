@@ -16,6 +16,7 @@ public class EnemyLazer : MonoBehaviour
     public Material matDefault, matAttack;
 
     EnemyMovement _enemyMovement;
+    private int _enemyShotCount = 1;
 
 
     private void Start()
@@ -42,6 +43,7 @@ public class EnemyLazer : MonoBehaviour
         objLazer.GetComponent<MeshRenderer>().material = matDefault;
         _enemyMovement.StopAllCoroutines();
         _isLookAt = true;
+        _enemyMovement._isStartLocalMove = false;
         yield return new WaitForSeconds(0.1f);
         _isLookAt = false;
         yield return new WaitForSeconds(1f);
@@ -53,7 +55,16 @@ public class EnemyLazer : MonoBehaviour
         yield return new WaitForSeconds(_gunController.pauseTime - 0.5f);
         transform.DORotate(new Vector3(0, 180, 0), 0.3f);
         _enemyMovement.StartCoroutine(_enemyMovement.LocalMoveEnum());
-        StartCoroutine(AttackEnum());
+
+        if (_enemyShotCount >= 3)
+        {
+            _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
+        }
+        else
+        {
+            StartCoroutine(AttackEnum());
+            _enemyShotCount++;
+        }        
     }
 
     void LookAt()

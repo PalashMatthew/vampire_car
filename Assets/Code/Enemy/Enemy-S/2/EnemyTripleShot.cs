@@ -10,13 +10,16 @@ public class EnemyTripleShot : MonoBehaviour
 
     EnemyGun _gunController;
     EnemyController _enemyController;
+    EnemyMovement _enemyMovement;
 
     private bool _startShot = false;
+    private int _enemyShotCount = 1;
 
     void Initialize()
     {
         _gunController = GetComponent<EnemyGun>();
         _enemyController = GetComponent<EnemyController>();
+        _enemyMovement = GetComponent<EnemyMovement>();
     }
 
     private void Start()
@@ -56,6 +59,14 @@ public class EnemyTripleShot : MonoBehaviour
 
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        StartCoroutine(Shot());
+        if (_enemyShotCount >= 3)
+        {
+            _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            _enemyShotCount++;
+        }
     }
 }

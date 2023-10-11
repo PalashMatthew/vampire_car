@@ -16,6 +16,7 @@ public class RockObstacleController : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             other.gameObject.GetComponent<PlayerController>().Hit(_controller.damage);
+            _controller.Dead();
         }
     }
 }

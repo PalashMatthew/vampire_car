@@ -480,6 +480,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1930633608}
+    - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: _isIce
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6816364944177119050, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -780,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1813224598300294, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
       propertyPath: m_LocalPosition.x

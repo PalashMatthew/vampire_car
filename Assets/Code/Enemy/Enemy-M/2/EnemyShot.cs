@@ -9,10 +9,14 @@ public class EnemyShot : MonoBehaviour
     public Transform bulletSpawnPoint;
 
     EnemyGun _gunController;
+    EnemyMovement _enemyMovement;
+
+    private int _enemyShotCount = 1;
 
     void Initialize()
     {
         _gunController = GetComponent<EnemyGun>();
+        _enemyMovement = GetComponent<EnemyMovement>();
     }
 
     private void Start()
@@ -33,6 +37,14 @@ public class EnemyShot : MonoBehaviour
         _instMuzzle.transform.parent = bulletSpawnPoint;
         Destroy(_instMuzzle, 2);
 
-        StartCoroutine(Shot());
+        if (_enemyShotCount >= 3)
+        {
+            _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            _enemyShotCount++;
+        }
     }
 }

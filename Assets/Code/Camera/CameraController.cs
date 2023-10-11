@@ -25,9 +25,6 @@ public class CameraController : MonoBehaviour
     float startMousePosX = 0;
     float startPlayerX = 0;
 
-    
-
-
     void Awake()
     {
         target = GameObject.Find("Player").transform;
@@ -48,6 +45,41 @@ public class CameraController : MonoBehaviour
     {        
         if (follow && !GameplayController.isPause)
         {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                float coeff = Screen.width / (maxXBound * 2);
+
+                Vector3 camPos;
+                camPos = touch.position;
+
+                float x = camPos.x / coeff - maxXBound;
+
+                startMousePosX = x;
+
+                startPlayerX = transform.position.x;
+            }
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                float coeff = Screen.width / (maxXBound * 2);
+
+                Vector3 camPos;
+                camPos = touch.position;
+
+                float x = camPos.x / coeff - maxXBound;
+
+                float currentX = startPlayerX + (x - startMousePosX);
+
+                if (currentX < minCameraX) currentX = minCameraX;
+                if (currentX > maxCameraX) currentX = maxCameraX;
+
+                transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
+            }
+#endif
+#if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
             {
                 float coeff = Screen.width / (maxXBound * 2);
@@ -71,8 +103,6 @@ public class CameraController : MonoBehaviour
 
                 float x = camPos.x / coeff - maxXBound;
 
-
-
                 float currentX = startPlayerX + (x - startMousePosX);
 
                 if (currentX < minCameraX) currentX = minCameraX;
@@ -80,6 +110,7 @@ public class CameraController : MonoBehaviour
 
                 transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
             }
+#endif
         }
     }
 

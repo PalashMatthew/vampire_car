@@ -25,10 +25,12 @@ public class WaveController : MonoBehaviour
 
     private Generate _generate;
     public GameplayUIController gameplayUIController;
+    GenerateObstacles _generateObstacles;
 
     private void Awake()
     {
         _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
+        _generateObstacles = GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>();
 
         StartWave();
         StartCoroutine(PatternSpawn());
@@ -64,6 +66,7 @@ public class WaveController : MonoBehaviour
         _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
 
         _generate.StartSpawn();
+        _generateObstacles.NewWave();
     }
 
     IEnumerator DefferedUpgrade()

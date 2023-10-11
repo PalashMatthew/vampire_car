@@ -31,6 +31,9 @@ public class UpgradeController : MonoBehaviour
     public int RocketLauncher_Level;
     public int DefaultGun_Level;
 
+    [Header("Reroll")]
+    public List<int> rerollPrice;
+
 
     private void Start()
     {
@@ -217,15 +220,15 @@ public class UpgradeController : MonoBehaviour
         switch (_rarity)
         {
             case "Common":
-                _procent = 1.1f;
+                _procent = 1.5f;
                 break;
 
             case "Rare":
-                _procent = 1.2f;
+                _procent = 1.75f;
                 break;
 
             case "Legendary":
-                _procent = 1.3f;
+                _procent = 2f;
                 break;
         }
 
@@ -253,8 +256,16 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
 
-        _playerPassiveController.isPassiveHealthRecovery = true;
-        _playerPassiveController.healthRecoveryProcent = _procent;
+        if (!_playerPassiveController.isPassiveHealthRecovery)
+        {
+            _playerPassiveController.healthRecoveryProcent = _procent;
+        }
+        else
+        {
+            _playerPassiveController.healthRecoveryProcent *= _procent;
+        }
+
+        _playerPassiveController.isPassiveHealthRecovery = true;        
     }
 
     public void Rage_Passive(string _rarity)

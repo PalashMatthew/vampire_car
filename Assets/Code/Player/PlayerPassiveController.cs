@@ -23,35 +23,37 @@ public class PlayerPassiveController : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _playerStats = GetComponent<PlayerStats>();
+
+        StartCoroutine(PassiveHP());
     }
 
     private void Update()
     {
-        if (isPassiveHealthRecovery)
-        {
-            //PassiveHealthRecovery();
-        }
-
         if (isPassiveRage)
         {
             PassiveRage();
         }
     }
 
-    public void PassiveHealthRecovery()
+    IEnumerator PassiveHP()
     {
+        yield return new WaitForSeconds(1);
         if (isPassiveHealthRecovery)
         {
-            _playerStats.currentHp += _playerStats.maxHp / 100 * healthRecoveryProcent;
+            if (_playerStats.currentHp < _playerStats.maxHp)
+                _playerStats.currentHp += _playerStats.maxHp / 100 * healthRecoveryProcent;
+
+            if (_playerStats.currentHp > _playerStats.maxHp)
+                _playerStats.currentHp = _playerStats.maxHp;
         }
+
+        StartCoroutine(PassiveHP());
     }
 
     public void PassiveRage()
     {
         if (isPassiveRage && _playerStats.currentHp <= _playerStats.maxHp / 100 * 30)
-        {
-            //float _procent = (_playerStats.maxHp - _playerStats.currentHp) / _playerStats.maxHp * _playerStats.rageCoeff;            
-
+        {     
             _playerStats.rageValue = _playerStats.rageCoeff;
         } 
         else
