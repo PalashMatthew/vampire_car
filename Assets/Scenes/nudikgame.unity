@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,42 @@ PrefabInstance:
       propertyPath: gameplayUIController
       value: 
       objectReference: {fileID: 727735949}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[5].enemyS3Weight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[6].enemyS3Weight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[6].enemyS4Weight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[7].enemySpawnTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[7].waveSpeedCoeff
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[5].patterns.Array.data[6]
+      value: 
+      objectReference: {fileID: 7228200684872752633, guid: 3f68099b20e13904b9dfa5d7292579c0, type: 3}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[6].patterns.Array.data[0]
+      value: 
+      objectReference: {fileID: 152428901792562543, guid: 8a9b7a0012fdfb844a53a76c0ee30d56, type: 3}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[7].patterns.Array.data[5]
+      value: 
+      objectReference: {fileID: 439471463890675988, guid: 8c238414db51f3243b5b7282f6b9663d, type: 3}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].patternsSpawnTime.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: _playerController
       value: 
