@@ -9,14 +9,13 @@ public class DefaultGunBullet : MonoBehaviour
 
     public bool isPlayerAttack = false;
 
-    private void Start()
-    {
-        Destroy(gameObject, 5);
-    }
 
     private void Update()
     {
         transform.Translate(Vector3.forward * _gunController.bulletMoveSpeed * Time.deltaTime);
+
+        if (transform.position.z > 80)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

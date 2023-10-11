@@ -50,19 +50,19 @@ public class IceGun : MonoBehaviour
             GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
             _inst.GetComponent<IceBullet>().target = _target;
             _inst.GetComponent<IceBullet>()._gunController = _gunController;
+
+            if (_gunController.projectileValue > 1)
+            {
+                StartCoroutine(AnotherShot());
+            }
+
+            StartCoroutine(Shot());
         }
         else
         {
             StartCoroutine(Shot());
             yield break;
-        }
-
-        if (_gunController.projectileValue > 1)
-        {
-            StartCoroutine(AnotherShot());
-        }
-
-        StartCoroutine(Shot());
+        }        
     }
 
     IEnumerator AnotherShot()
@@ -83,7 +83,6 @@ public class IceGun : MonoBehaviour
 
                 if (i <= 0)
                 {
-                    StartCoroutine(Shot());
                     yield break;
                 }
             }
@@ -94,7 +93,6 @@ public class IceGun : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Shot());
             yield break;
         }
 
@@ -115,7 +113,6 @@ public class IceGun : MonoBehaviour
 
                     if (i <= 0)
                     {
-                        StartCoroutine(Shot());
                         yield break;
                     }
                 }
@@ -126,7 +123,6 @@ public class IceGun : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Shot());
                 yield break;
             }
         }

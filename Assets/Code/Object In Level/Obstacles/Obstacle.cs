@@ -17,6 +17,7 @@ public class Obstacle : MonoBehaviour
     public float moveSpeed;
 
     public GameObject screwObj;
+    public GameObject fxExplosion;
 
 
     private void Update()
@@ -24,6 +25,11 @@ public class Obstacle : MonoBehaviour
         if (isMove)
         {
             Move();
+        }
+
+        if (transform.position.z < -20)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -53,6 +59,10 @@ public class Obstacle : MonoBehaviour
     void Dead()
     {
         Instantiate(screwObj, transform.position, transform.rotation);
+
+        GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
+        Destroy(_fx, 3);
+
         Destroy(gameObject);
     }
 

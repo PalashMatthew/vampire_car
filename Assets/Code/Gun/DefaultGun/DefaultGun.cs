@@ -9,7 +9,6 @@ public class DefaultGun : MonoBehaviour
 
     [Header("Bullet")]
     public GameObject bulletObj;
-    public GameObject muzzleObj;
 
     [Header("Bullet Spawn Positions")]
     public Transform bulletSpawnPoint1;
@@ -47,10 +46,6 @@ public class DefaultGun : MonoBehaviour
         {
             GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint1.position, transform.rotation);
             _inst.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint1.position, transform.rotation);
-            _instMuzzle.transform.parent = bulletSpawnPoint1;
-            Destroy(_instMuzzle, 2);
         }
 
         if (_gunController.projectileValue == 2)
@@ -59,17 +54,9 @@ public class DefaultGun : MonoBehaviour
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
             _inst1.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle1 = Instantiate(muzzleObj, bulletSpawnPoint2.position, transform.rotation);
-            _instMuzzle1.transform.parent = bulletSpawnPoint2;
-            Destroy(_instMuzzle1, 2);
-
             //2
             GameObject _inst2 = Instantiate(bulletObj, bulletSpawnPoint3.position, transform.rotation);
             _inst2.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle2 = Instantiate(muzzleObj, bulletSpawnPoint3.position, transform.rotation);
-            _instMuzzle2.transform.parent = bulletSpawnPoint2;
-            Destroy(_instMuzzle2, 2);
         }
 
         if (_gunController.projectileValue == 3)
@@ -78,25 +65,13 @@ public class DefaultGun : MonoBehaviour
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
             _inst1.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle1 = Instantiate(muzzleObj, bulletSpawnPoint2.position, transform.rotation);
-            _instMuzzle1.transform.parent = bulletSpawnPoint2;
-            Destroy(_instMuzzle1, 2);
-
             //2
             GameObject _inst2 = Instantiate(bulletObj, bulletSpawnPoint3.position, transform.rotation);
             _inst2.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle2 = Instantiate(muzzleObj, bulletSpawnPoint3.position, transform.rotation);
-            _instMuzzle2.transform.parent = bulletSpawnPoint3;
-            Destroy(_instMuzzle2, 2);
-
             //3
             GameObject _inst3 = Instantiate(bulletObj, bulletSpawnPoint1.position, transform.rotation);
             _inst3.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle3 = Instantiate(muzzleObj, bulletSpawnPoint1.position, transform.rotation);
-            _instMuzzle3.transform.parent = bulletSpawnPoint1;
-            Destroy(_instMuzzle3, 2);
         }
 
         if (_gunController.projectileValue == 4)
@@ -105,33 +80,17 @@ public class DefaultGun : MonoBehaviour
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
             _inst1.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle1 = Instantiate(muzzleObj, bulletSpawnPoint2.position, transform.rotation);
-            _instMuzzle1.transform.parent = bulletSpawnPoint2;
-            Destroy(_instMuzzle1, 2);
-
             //2
             GameObject _inst2 = Instantiate(bulletObj, bulletSpawnPoint3.position, transform.rotation);
             _inst2.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle2 = Instantiate(muzzleObj, bulletSpawnPoint3.position, transform.rotation);
-            _instMuzzle2.transform.parent = bulletSpawnPoint3;
-            Destroy(_instMuzzle2, 2);
 
             //3
             GameObject _inst3 = Instantiate(bulletObj, bulletSpawnPoint1.position, transform.rotation);
             _inst3.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle3 = Instantiate(muzzleObj, bulletSpawnPoint1.position, transform.rotation);
-            _instMuzzle3.transform.parent = bulletSpawnPoint1;
-            Destroy(_instMuzzle3, 2);
-
             //4
             GameObject _inst4 = Instantiate(bulletObj, bulletSpawnPoint4.position, transform.rotation);
             _inst4.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle4 = Instantiate(muzzleObj, bulletSpawnPoint4.position, transform.rotation);
-            _instMuzzle4.transform.parent = bulletSpawnPoint4;
-            Destroy(_instMuzzle4, 2);
         }
 
         if (_gunController.projectileValue == 5)
@@ -140,41 +99,21 @@ public class DefaultGun : MonoBehaviour
             GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint2.position, transform.rotation);
             _inst1.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle1 = Instantiate(muzzleObj, bulletSpawnPoint2.position, transform.rotation);
-            _instMuzzle1.transform.parent = bulletSpawnPoint2;
-            Destroy(_instMuzzle1, 2);
-
             //2
             GameObject _inst2 = Instantiate(bulletObj, bulletSpawnPoint3.position, transform.rotation);
             _inst2.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle2 = Instantiate(muzzleObj, bulletSpawnPoint3.position, transform.rotation);
-            _instMuzzle2.transform.parent = bulletSpawnPoint3;
-            Destroy(_instMuzzle2, 2);
 
             //3
             GameObject _inst3 = Instantiate(bulletObj, bulletSpawnPoint1.position, transform.rotation);
             _inst3.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle3 = Instantiate(muzzleObj, bulletSpawnPoint1.position, transform.rotation);
-            _instMuzzle3.transform.parent = bulletSpawnPoint1;
-            Destroy(_instMuzzle3, 2);
-
             //4
             GameObject _inst4 = Instantiate(bulletObj, bulletSpawnPoint4.position, transform.rotation);
             _inst4.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
-            GameObject _instMuzzle4 = Instantiate(muzzleObj, bulletSpawnPoint4.position, transform.rotation);
-            _instMuzzle4.transform.parent = bulletSpawnPoint4;
-            Destroy(_instMuzzle4, 2);
-
             //5
             GameObject _inst5 = Instantiate(bulletObj, bulletSpawnPoint5.position, transform.rotation);
             _inst5.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-            GameObject _instMuzzle5 = Instantiate(muzzleObj, bulletSpawnPoint5.position, transform.rotation);
-            _instMuzzle5.transform.parent = bulletSpawnPoint5;
-            Destroy(_instMuzzle5, 2);
         }
 
         StartCoroutine(Shot());

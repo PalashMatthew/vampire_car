@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!_playerController.isDead && isMoveAccess)
+        if (!_playerController.isDead && isMoveAccess && !GameplayController.isPause)
         {
             MouseInputSettings();
             PlayerAnimation();
@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-            transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed);
+            transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true);
 
             //transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }

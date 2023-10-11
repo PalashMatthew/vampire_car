@@ -7,14 +7,13 @@ public class EnemyDefaultBullet : MonoBehaviour
     [HideInInspector]
     public EnemyGun _gunController;
 
-    private void Start()
-    {
-        Destroy(gameObject, 9);
-    }
 
     private void Update()
     {
         transform.Translate(Vector3.forward * _gunController.bulletMoveSpeed * Time.deltaTime);
+
+        if (transform.position.z < -20f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

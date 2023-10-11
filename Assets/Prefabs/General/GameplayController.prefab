@@ -64,11 +64,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveList:
   - waveNum: 1
-    waveTime: 59
-    enemySpawnTime: 1
+    waveTime: 30
+    enemySpawnTime: 1.5
     waveSpeedCoeff: 1
     enemyM1Weight: 10
-    enemyM2Weight: 2
+    enemyM2Weight: 0
+    enemyM3Weight: 0
+    enemyM4Weight: 0
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 11
+    patterns:
+    - {fileID: 5404361266550080302, guid: e8be1259205d4e340807bed601148f14, type: 3}
+    - {fileID: 6767444583069472437, guid: e658da4815b649548bbf2228f349d0c1, type: 3}
+    - {fileID: 3043352496374170102, guid: 5a900f92340a8684996191065c11159f, type: 3}
+    - {fileID: 6705064860202717189, guid: 388187a7504446b47816ef8bf2f42bd3, type: 3}
+    - {fileID: 3753294545076116727, guid: c1c0b27a4fb3e4744990f3368ef1168f, type: 3}
+    patternsWeight: 0a0000000a0000000a0000000a0000000a000000
+    patternsSpawnTime: 0000000000000000000000000000000000000000
+  - waveNum: 2
+    waveTime: 40
+    enemySpawnTime: 1.4
+    waveSpeedCoeff: 1.1
+    enemyM1Weight: 6
+    enemyM2Weight: 6
     enemyM3Weight: 0
     enemyM4Weight: 0
     enemyS1Weight: 0
@@ -77,93 +98,149 @@ MonoBehaviour:
     enemyS4Weight: 0
     patternSpawnTime: 15
     patterns:
-    - {fileID: 1494692556306556636, guid: 50f957929dab58846b0a5ae91069fef0, type: 3}
-    - {fileID: 8470344085631690572, guid: a121e55501833ba43af9f324b9ba3972, type: 3}
-    patternsWeight: 000000000a000000
-    patternsSpawnTime: 0000000000000000
-  - waveNum: 2
-    waveTime: 59
-    enemySpawnTime: 0
-    waveSpeedCoeff: 2
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
+    - {fileID: 4965100208481621176, guid: e56a470b63409e54c852fc429cbc2e99, type: 3}
+    - {fileID: 52292095501740689, guid: 2cd21885391b6b849a5d3fcd51700355, type: 3}
+    - {fileID: 6795459549614411523, guid: bd2774f3730a09e43b4e67aca7a5b498, type: 3}
+    - {fileID: 2384277532470224165, guid: 469e8768e9a3a864faa36141fbc4ee12, type: 3}
+    patternsWeight: 01000000010000000100000001000000
+    patternsSpawnTime: 00000000000000000000000000000000
+  - waveNum: 3
+    waveTime: 50
+    enemySpawnTime: 1.4
+    waveSpeedCoeff: 1.1
+    enemyM1Weight: 5
+    enemyM2Weight: 5
+    enemyM3Weight: 0
     enemyM4Weight: 0
-    enemyS1Weight: 0
+    enemyS1Weight: 5
     enemyS2Weight: 0
     enemyS3Weight: 0
     enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsSpawnTime: 
-  - waveNum: 2
-    waveTime: 59
-    enemySpawnTime: 0
-    waveSpeedCoeff: 3
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
+    patternSpawnTime: 20
+    patterns:
+    - {fileID: 6795459549614411523, guid: bd2774f3730a09e43b4e67aca7a5b498, type: 3}
+    - {fileID: 7392877885227991833, guid: 0c4fa285ce84f5a459ca3c34cd0145dd, type: 3}
+    - {fileID: 4597488484081462769, guid: f00a72bf60e2197479cac3a9cf581a87, type: 3}
+    - {fileID: 4497745313885497302, guid: dd3cd23053550264e8b10e376fad4775, type: 3}
+    - {fileID: 5404361266550080302, guid: 0ad4d2ea6d381be469af5b78ff7df016, type: 3}
+    patternsWeight: 0100000001000000010000000100000001000000
+    patternsSpawnTime: 00000000000000000000000000000000
+  - waveNum: 4
+    waveTime: 50
+    enemySpawnTime: 1.2
+    waveSpeedCoeff: 1.3
+    enemyM1Weight: 0
+    enemyM2Weight: 0
+    enemyM3Weight: 0
     enemyM4Weight: 0
+    enemyS1Weight: 5
+    enemyS2Weight: 8
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 10
+    patterns:
+    - {fileID: 3753294545076116727, guid: c1c0b27a4fb3e4744990f3368ef1168f, type: 3}
+    - {fileID: 6705064860202717189, guid: 388187a7504446b47816ef8bf2f42bd3, type: 3}
+    - {fileID: 5404361266550080302, guid: e8be1259205d4e340807bed601148f14, type: 3}
+    - {fileID: 6767444583069472437, guid: e658da4815b649548bbf2228f349d0c1, type: 3}
+    - {fileID: 1216497105098911522, guid: c29001c0754c0d34cbab70afcb72eca7, type: 3}
+    - {fileID: 6113158349380497027, guid: b6e8b13434f2cbe47bea562f17fb99b8, type: 3}
+    patternsWeight: 010000000100000001000000010000000000000000000000
+    patternsSpawnTime: 000000000000000000000000000000000f0000000f000000
+  - waveNum: 5
+    waveTime: 60
+    enemySpawnTime: 1
+    waveSpeedCoeff: 1.3
+    enemyM1Weight: 1
+    enemyM2Weight: 0
+    enemyM3Weight: 0
+    enemyM4Weight: 10
+    enemyS1Weight: 1
+    enemyS2Weight: 1
+    enemyS3Weight: 0
+    enemyS4Weight: 0
+    patternSpawnTime: 10
+    patterns:
+    - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
+    - {fileID: 5706801302141635773, guid: 6e8dea471bfbb464ab5ca341bbf19226, type: 3}
+    - {fileID: 1330243383481950667, guid: 4adf99fd677b6624cbbb84b5b3307e79, type: 3}
+    - {fileID: 1638684765404722314, guid: 4105d91dd3aa13440b20955b4437cb6f, type: 3}
+    - {fileID: 7826704593695387349, guid: 437d3aefd8c60be4c83fa00bd6777b75, type: 3}
+    - {fileID: 1651569049093596881, guid: 20c0998bf6d28a947bd01e993f37170c, type: 3}
+    patternsWeight: 010000000100000001000000010000000000000000000000
+    patternsSpawnTime: 000000000000000000000000000000000f00000019000000
+  - waveNum: 6
+    waveTime: 60
+    enemySpawnTime: 0.9
+    waveSpeedCoeff: 1.5
+    enemyM1Weight: 2
+    enemyM2Weight: 2
+    enemyM3Weight: 2
+    enemyM4Weight: 2
+    enemyS1Weight: 0
+    enemyS2Weight: 0
+    enemyS3Weight: 8
+    enemyS4Weight: 0
+    patternSpawnTime: 9
+    patterns:
+    - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
+    - {fileID: 6113158349380497027, guid: b6e8b13434f2cbe47bea562f17fb99b8, type: 3}
+    - {fileID: 4497745313885497302, guid: dd3cd23053550264e8b10e376fad4775, type: 3}
+    - {fileID: 1638684765404722314, guid: 4105d91dd3aa13440b20955b4437cb6f, type: 3}
+    - {fileID: 5404361266550080302, guid: 0ad4d2ea6d381be469af5b78ff7df016, type: 3}
+    - {fileID: 1651569049093596881, guid: 20c0998bf6d28a947bd01e993f37170c, type: 3}
+    - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
+    patternsWeight: 01000000010000000100000001000000010000000000000000000000
+    patternsSpawnTime: 00000000000000000000000000000000000000000f00000019000000
+  - waveNum: 7
+    waveTime: 60
+    enemySpawnTime: 0.8
+    waveSpeedCoeff: 1.6
+    enemyM1Weight: 2
+    enemyM2Weight: 2
+    enemyM3Weight: 2
+    enemyM4Weight: 2
     enemyS1Weight: 0
     enemyS2Weight: 0
     enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsSpawnTime: 
-  - waveNum: 2
-    waveTime: 59
-    enemySpawnTime: 0
-    waveSpeedCoeff: 0
-    enemyM1Weight: 6
-    enemyM2Weight: 6
+    enemyS4Weight: 7
+    patternSpawnTime: 8
+    patterns:
+    - {fileID: 4989092357880236856, guid: e549288d7b8a29c4696b5369014e1a22, type: 3}
+    - {fileID: 4993925028037233908, guid: 14b7e8f890afcb84cae83fa579fd48d7, type: 3}
+    - {fileID: 7228200684872752633, guid: 3f68099b20e13904b9dfa5d7292579c0, type: 3}
+    - {fileID: 1638684765404722314, guid: 4105d91dd3aa13440b20955b4437cb6f, type: 3}
+    - {fileID: 4965100208481621176, guid: e56a470b63409e54c852fc429cbc2e99, type: 3}
+    - {fileID: 6113158349380497027, guid: b6e8b13434f2cbe47bea562f17fb99b8, type: 3}
+    - {fileID: 439471463890675988, guid: 8c238414db51f3243b5b7282f6b9663d, type: 3}
+    - {fileID: 4497745313885497302, guid: dd3cd23053550264e8b10e376fad4775, type: 3}
+    patternsWeight: 0100000001000000010000000100000001000000000000000000000000000000
+    patternsSpawnTime: 00000000000000000000000000000000000000000f0000001900000023000000
+  - waveNum: 8
+    waveTime: 60
+    enemySpawnTime: 0.6
+    waveSpeedCoeff: 1.8
+    enemyM1Weight: 2
+    enemyM2Weight: 2
     enemyM3Weight: 2
-    enemyM4Weight: 0
-    enemyS1Weight: 0
-    enemyS2Weight: 0
-    enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsSpawnTime: 
-  - waveNum: 2
-    waveTime: 0
-    enemySpawnTime: 0
-    waveSpeedCoeff: 0
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
-    enemyM4Weight: 0
-    enemyS1Weight: 0
-    enemyS2Weight: 0
-    enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsSpawnTime: 
-  - waveNum: 2
-    waveTime: 0
-    enemySpawnTime: 0
-    waveSpeedCoeff: 0
-    enemyM1Weight: 6
-    enemyM2Weight: 6
-    enemyM3Weight: 2
-    enemyM4Weight: 0
-    enemyS1Weight: 0
-    enemyS2Weight: 0
-    enemyS3Weight: 0
-    enemyS4Weight: 0
-    patternSpawnTime: 0
-    patterns: []
-    patternsWeight: 
-    patternsSpawnTime: 
+    enemyM4Weight: 2
+    enemyS1Weight: 2
+    enemyS2Weight: 2
+    enemyS3Weight: 2
+    enemyS4Weight: 2
+    patternSpawnTime: 5
+    patterns:
+    - {fileID: 7826704593695387349, guid: 437d3aefd8c60be4c83fa00bd6777b75, type: 3}
+    - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
+    - {fileID: 152428901792562543, guid: 8a9b7a0012fdfb844a53a76c0ee30d56, type: 3}
+    - {fileID: 4965100208481621176, guid: e56a470b63409e54c852fc429cbc2e99, type: 3}
+    - {fileID: 1330243383481950667, guid: 4adf99fd677b6624cbbb84b5b3307e79, type: 3}
+    - {fileID: 4440310246954874404, guid: 91a66f845a3a96841aed880136b82b3c, type: 3}
+    patternsWeight: 010000000100000001000000010000000100000001000000
+    patternsSpawnTime: 00000000000000000000000000000000000000000f000000
   currentWave: 0
   enemyDestroy: 0
-  lastWave: 9
+  lastWave: 8
   enemyM1Obj: {fileID: 2775943015700847028, guid: a5ef00e2b3a01624eb5a031d6fc1c84b, type: 3}
   enemyM2Obj: {fileID: 7281141318535844410, guid: 1ee5231cc3cade846b2e927692de48d7, type: 3}
   enemyM3Obj: {fileID: 5884661979407261822, guid: 82f93ca898591c54996096e04f5dc2c0, type: 3}
@@ -186,5 +263,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  enemyCountFromNewLevel: 050000000a0000000f0000001400000019000000
+  enemyCountFromNewLevel: 050000000a000000100000001a0000002d000000370000004600000053000000640000007c00000098000000af000000c8000000eb0000000e010000
   enemyCountInThisLevel: 0

@@ -25,11 +25,9 @@ public class PopUpUpgrade : MonoBehaviour
     public Image imgFAQ1, imgFAQ2, imgFAQ3;
 
     public bool isWaveUpgrade = false;
+    public bool isOpen;
 
-    [Header("Pricing")]
-    public GameObject panelButtonsBuy;
-    public TMP_Text tPriceCard1, tPriceCard2, tPriceCard3;
-    public GameObject butPrice1, butPrice2, butPrice3;
+    public bool isDefferenUpgrade;
 
     private void Start()
     {
@@ -87,10 +85,6 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ChoiceCard(int _cardNum)
     {
-        butPrice1.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
-        butPrice2.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
-        butPrice3.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true);
-
         tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
 
         if (_cardNum == 1)
@@ -135,6 +129,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButOpen()
     {
+        GameplayController.isPause = true;
+        isOpen = true;
         Time.timeScale = 0;
         CardAnimation();        
         upgradeController.GenerateUpgrades();
@@ -145,30 +141,21 @@ public class PopUpUpgrade : MonoBehaviour
         card3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         tScrewValue.text = GlobalStats.screwCount.ToString();
-
-        if (isWaveUpgrade)
-        {
-            CalculatePrice();
-            butPrice1.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
-            butPrice2.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
-            butPrice3.GetComponent<RectTransform>().DOScale(1, 0.3f).SetUpdate(true);
-        }
-        else
-        {
-            panelButtonsBuy.SetActive(false);
-        }
-    }
-
-    void CalculatePrice()
-    {
-        panelButtonsBuy.SetActive(true);
     }
 
     public void ButClosed()
     {
+        GameplayController.isPause = false;
+        isOpen = false;
         Time.timeScale = 1;
         controller.ClosedPopUp();
         isWaveUpgrade = false;
+
+        if (isDefferenUpgrade)
+        {
+            StartCoroutine(DefferedUpgrade());
+            isDefferenUpgrade = false;
+        }
     }
 
     public void ButRerollAds()
@@ -178,10 +165,10 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollScrew()
     {
-        if (GlobalStats.screwCount > 12)
+        if (GlobalStats.screwCount > 20)
         {
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
-            GlobalStats.screwCount -= 12;
+            GlobalStats.screwCount -= 20;
             tScrewValue.text = GlobalStats.screwCount.ToString();
             StartCoroutine(Reroll());
         }        
@@ -192,6 +179,10 @@ public class PopUpUpgrade : MonoBehaviour
         card1.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
         card2.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
         card3.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+
+        card1.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        card2.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        card3.gameObject.GetComponent<UpgradeCardController>().Reroll();
 
         yield return new WaitForSecondsRealtime(0.5f);
 
@@ -205,5 +196,11 @@ public class PopUpUpgrade : MonoBehaviour
         cardAnim.Insert(0f, card1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardAnim.Insert(0.1f, card2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardAnim.Insert(0.2f, card3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+    }    
+
+    IEnumerator DefferedUpgrade()
+    {
+        yield return new WaitForSeconds(1);
+        ButOpen();
     }
 }

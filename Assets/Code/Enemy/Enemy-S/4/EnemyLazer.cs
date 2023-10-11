@@ -42,9 +42,9 @@ public class EnemyLazer : MonoBehaviour
         objLazer.GetComponent<MeshRenderer>().material = matDefault;
         _enemyMovement.StopAllCoroutines();
         _isLookAt = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         _isLookAt = false;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         objLazer.GetComponent<MeshRenderer>().material = matAttack;
         objLazer.GetComponent<BoxCollider>().enabled = true;
         yield return new WaitForSeconds(0.5f);
@@ -63,7 +63,7 @@ public class EnemyLazer : MonoBehaviour
 
         Vector3 relativePos = _player.transform.position - transform.position;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
-        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 0.5f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 1f);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
     }
 

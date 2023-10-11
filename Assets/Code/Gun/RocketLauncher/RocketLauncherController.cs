@@ -51,19 +51,19 @@ public class RocketLauncherController : MonoBehaviour
             GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
             _inst.GetComponent<RocketLauncherBullet>().target = _target;
             _inst.GetComponent<RocketLauncherBullet>()._gunController = _gunController;
+
+            if (_gunController.projectileValue > 1)
+            {
+                StartCoroutine(AnotherShot());
+            }
+
+            StartCoroutine(Shot());
         }
         else
         {
             StartCoroutine(Shot());
             yield break;
-        }
-
-        if (_gunController.projectileValue > 1)
-        {
-            StartCoroutine(AnotherShot());
-        }
-
-        StartCoroutine(Shot());
+        }        
     }
 
     IEnumerator AnotherShot()
@@ -94,7 +94,6 @@ public class RocketLauncherController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Shot());
             yield break;
         }
 
@@ -106,9 +105,17 @@ public class RocketLauncherController : MonoBehaviour
             {
                 _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
 
-                while (_target.GetComponent<EnemyController>().isVisible)
+                int i = 10;
+
+                while (!_target.GetComponent<EnemyController>().isVisible)
                 {
                     _target = _gameplayController.activeEnemy[Random.Range(0, _gameplayController.activeEnemy.Count)];
+                    i--;
+
+                    if (i <= 0)
+                    {
+                        yield break;
+                    }
                 }
 
                 GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
@@ -117,7 +124,6 @@ public class RocketLauncherController : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Shot());
                 yield break;
             }
         }

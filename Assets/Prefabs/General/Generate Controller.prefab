@@ -118,19 +118,27 @@ MonoBehaviour:
   maxZSpawn: 77
   minZSpawnPattern: 77
   maxZSpawnPattern: 77
-  isSpawnAccess: 1
+  isSpawnAccess: 0
   bossObj: {fileID: 5338037640989000603, guid: 0fe055a87e93f214e964450e91874846, type: 3}
   enemyCoeffList:
   - damageCoeff: 0.5
     healthCoeff: 0.5
+  - damageCoeff: 0.7
+    healthCoeff: 0.7
   - damageCoeff: 1
     healthCoeff: 1
-  - damageCoeff: 1
-    healthCoeff: 1
-  - damageCoeff: 0
-    healthCoeff: 0
-  - damageCoeff: 0
-    healthCoeff: 0
+  - damageCoeff: 1.3
+    healthCoeff: 1.3
+  - damageCoeff: 1.7
+    healthCoeff: 1.7
+  - damageCoeff: 2.2
+    healthCoeff: 2.2
+  - damageCoeff: 2.7
+    healthCoeff: 2.7
+  - damageCoeff: 3.3
+    healthCoeff: 3.3
+  - damageCoeff: 3.7
+    healthCoeff: 3.7
 --- !u!114 &3742492922262604308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +155,8 @@ MonoBehaviour:
   _places:
   - {fileID: 0}
   placeWidth: 178.5
+  minZ: 0
+  spawnZ: 0
 --- !u!114 &5042626941310523742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,13 +164,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6229555590066330553}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb36b6f179e64e74995b33fd8ce1326e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesObj:
   - {fileID: 430157964049603943, guid: 46512b5cfbaad3f42917675b18356dd6, type: 3}
+  - {fileID: 6923021457352223942, guid: 2306e864afe49cf44bec37d3eff878b3, type: 3}
+  - {fileID: 1528892580175247718, guid: 5c2f4893fcee43a45bf48606defb9860, type: 3}
   obstaclesMoveSpeed: 3.5
   spawnTime: 5
   minXSpawn: -18

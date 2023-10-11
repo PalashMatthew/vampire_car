@@ -56,6 +56,7 @@ public class EnemyReversal : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        _enemyController.Hit(1000, false);
     }
 
     IEnumerator ReverseLeftRight()

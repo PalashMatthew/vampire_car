@@ -46,8 +46,15 @@ public class WaveController : MonoBehaviour
     {
         if (currentWave != 0)
         {
-            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
-            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
+            if (!GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen)
+            {
+                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
+                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
+            }
+            else
+            {
+                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isDefferenUpgrade = true;
+            }
         }
 
         enemyDestroy = 0;
@@ -57,6 +64,20 @@ public class WaveController : MonoBehaviour
         _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
 
         _generate.StartSpawn();
+    }
+
+    IEnumerator DefferedUpgrade()
+    {
+        yield return new WaitForSeconds(1);
+
+        if (!GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen)
+        {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
+        } else
+        {
+            StartCoroutine(DefferedUpgrade());
+        }
     }
 
     public void WaveEnd()

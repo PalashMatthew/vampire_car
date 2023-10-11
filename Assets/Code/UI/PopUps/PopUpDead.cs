@@ -43,6 +43,7 @@ public class PopUpDead : MonoBehaviour
 
     public void ButOpen()
     {
+        GameplayController.isPause = true;
         Time.timeScale = 0;
         controller.OpenPopUp();
         StartCoroutine(SkipTimer());
@@ -50,6 +51,7 @@ public class PopUpDead : MonoBehaviour
 
     public void ButClosed()
     {
+        GameplayController.isPause = false;
         Time.timeScale = 1;
         controller.ClosedPopUp();
     }

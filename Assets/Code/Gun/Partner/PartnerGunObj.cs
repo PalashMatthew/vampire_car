@@ -6,7 +6,6 @@ using UnityEngine;
 public class PartnerGunObj : MonoBehaviour
 {
     public GameObject bulletObj;
-    public GameObject muzzleObj;
     public Transform bulletSpawnPoint;
 
     Gun _gunController;
@@ -36,10 +35,6 @@ public class PartnerGunObj : MonoBehaviour
 
         GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst.GetComponent<DefaultGunBullet>()._gunController = _gunController;
-
-        GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint.position, transform.rotation);
-        _instMuzzle.transform.parent = bulletSpawnPoint;
-        Destroy(_instMuzzle, 2);
 
         StartCoroutine(Shot());
     }

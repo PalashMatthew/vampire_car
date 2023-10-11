@@ -28,10 +28,7 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgCardType;
     public Sprite sprCardTypePassive, sprCardTypeGun;
 
-    public TMP_Text tPrice;
-    public float price;
-
-    public GameObject butPrice1, butPrice2, butPrice3;
+    private IEnumerator coroutine;
 
     public enum CardRarity
     {
@@ -171,6 +168,18 @@ public class UpgradeCardController : MonoBehaviour
         #endregion
 
         #region Stars
+        //coroutine = StarAnim(imgStar1);
+
+        //StopCoroutine(coroutine);        
+
+        imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+
+        imgStar1.DOFade(1, 0).SetUpdate(true);
+        imgStar2.DOFade(1, 0).SetUpdate(true);
+        imgStar3.DOFade(1, 0).SetUpdate(true);
+
         switch (levelNum)
         {
             case 0:
@@ -178,7 +187,7 @@ public class UpgradeCardController : MonoBehaviour
                 imgStar2.sprite = sprStarEmpty;
                 imgStar3.sprite = sprStarEmpty;
 
-                StartCoroutine(StarAnimation(imgStar1));
+                StartCoroutine(StarAnim(imgStar1));
                 break;
 
             case 1:
@@ -186,7 +195,7 @@ public class UpgradeCardController : MonoBehaviour
                 imgStar2.sprite = sprStarFull;
                 imgStar3.sprite = sprStarEmpty;
 
-                StartCoroutine(StarAnimation(imgStar2));
+                StartCoroutine(StarAnim(imgStar2));
                 break;
 
             case 2:
@@ -194,42 +203,14 @@ public class UpgradeCardController : MonoBehaviour
                 imgStar2.sprite = sprStarFull;
                 imgStar3.sprite = sprStarFull;
 
-                StartCoroutine(StarAnimation(imgStar3));
+                StartCoroutine(StarAnim(imgStar3));
                 break;
         }
         #endregion
-
-        if (_popUpUpgrade.isWaveUpgrade)
-        {
-            price = (int)Random.Range(GlobalStats.screwCount - GlobalStats.screwCount * 0.3f, GlobalStats.screwCount);
-            if (price < 0) price = 0;
-            tPrice.text = price.ToString();
-        }
-    }
-
-    IEnumerator StarAnimation(Image _imgStar)
-    {
-        _imgStar.GetComponent<RectTransform>().DOScale(1.2f, 0.4f);
-        yield return new WaitForSeconds(0.4f);
-        _imgStar.GetComponent<RectTransform>().DOScale(1f, 0.4f);
-        yield return new WaitForSeconds(0.4f);
-        StartCoroutine(StarAnimation(_imgStar));
     }
 
     public void ChoiceCard()
-    {
-        if (_popUpUpgrade.isWaveUpgrade)
-        {
-            if (GlobalStats.screwCount < price)
-            {
-                return;
-            }
-            else
-            {
-                GlobalStats.screwCount -= price;
-            }
-        }        
-
+    {   
         if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
         {
             switch (card.upgradePassiveType)
@@ -315,5 +296,33 @@ public class UpgradeCardController : MonoBehaviour
         }
 
         _popUpUpgrade.ChoiceCard(cardNum);
+    }
+
+    IEnumerator StarAnim(Image _imgStar)
+    {
+        _imgStar.GetComponent<RectTransform>().DOScale(1.2f, 0.5f).SetUpdate(true);
+        _imgStar.DOFade(1, 0.5f).SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        _imgStar.GetComponent<RectTransform>().DOScale(0.5f, 0.5f).SetUpdate(true);
+        _imgStar.DOFade(0.5f, 0.5f).SetUpdate(true);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        StartCoroutine(StarAnim(_imgStar));
+    }
+
+    public void Reroll()
+    {
+        StopAllCoroutines();
+
+        imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+
+        imgStar1.DOFade(1, 0).SetUpdate(true);
+        imgStar2.DOFade(1, 0).SetUpdate(true);
+        imgStar3.DOFade(1, 0).SetUpdate(true);
     }
 }

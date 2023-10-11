@@ -176,7 +176,7 @@ public class GameplayUIController : MonoBehaviour
         tBossName.text = "аняя - Fire Truck";
 
         if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
-            tBossHP.text = GameObject.Find("BOSS").GetComponent<EnemyController>().hp.ToString();
+            tBossHP.text = (int)GameObject.Find("BOSS").GetComponent<EnemyController>().hp + "";
         else tBossHP.text = "0";
 
         imgFillBossBar.fillAmount = (float)GameObject.Find("BOSS").GetComponent<EnemyController>().hp / GameObject.Find("BOSS").GetComponent<EnemyController>().maxHp;

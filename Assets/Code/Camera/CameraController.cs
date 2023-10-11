@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
 
     public void Update()
     {        
-        if (follow)
+        if (follow && !GameplayController.isPause)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -78,7 +78,7 @@ public class CameraController : MonoBehaviour
                 if (currentX < minCameraX) currentX = minCameraX;
                 if (currentX > maxCameraX) currentX = maxCameraX;
 
-                transform.DOMoveX(currentX, 0.2f);
+                transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
             }
         }
     }

@@ -72,13 +72,14 @@ public class PlayerController : MonoBehaviour
 
         tLevelUp.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
 
-        yield return new WaitForSeconds(2);
+        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen = true;
 
-        tLevelUp.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
-
-        yield return new WaitForSeconds(0.3f);
-        tLevelUp.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(1.5f);
 
         GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
+        tLevelUp.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+        tLevelUp.gameObject.SetActive(false);        
     }
 }

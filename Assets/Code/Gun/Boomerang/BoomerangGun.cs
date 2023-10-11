@@ -51,19 +51,19 @@ public class BoomerangGun : MonoBehaviour
             _inst.transform.LookAt(_target.transform.position);
             _inst.transform.eulerAngles = new Vector3(0, _inst.transform.eulerAngles.y, 0);
             _inst.GetComponent<BoomerangBullet>()._gunController = _gunController;
+
+            if (_gunController.projectileValue > 1)
+            {
+                StartCoroutine(AnotherShot());
+            }
+
+            StartCoroutine(Shot());
         }
         else
         {
             StartCoroutine(Shot());
             yield break;
-        }
-
-        if (_gunController.projectileValue > 1)
-        {
-            StartCoroutine(AnotherShot());
-        }
-
-        StartCoroutine(Shot());
+        }        
     }
 
     IEnumerator AnotherShot()
@@ -84,7 +84,6 @@ public class BoomerangGun : MonoBehaviour
 
                 if (i <= 0)
                 {
-                    StartCoroutine(Shot());
                     yield break;
                 }
             }
@@ -96,7 +95,6 @@ public class BoomerangGun : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Shot());
             yield break;
         }
 
@@ -117,7 +115,6 @@ public class BoomerangGun : MonoBehaviour
 
                     if (i <= 0)
                     {
-                        StartCoroutine(Shot());
                         yield break;
                     }
                 }
@@ -129,7 +126,6 @@ public class BoomerangGun : MonoBehaviour
             }
             else
             {
-                StartCoroutine(Shot());
                 yield break;
             }
         }

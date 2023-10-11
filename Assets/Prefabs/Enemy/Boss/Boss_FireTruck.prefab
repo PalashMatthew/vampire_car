@@ -2189,18 +2189,20 @@ MonoBehaviour:
   carType: 0
   isCarStop: 0
   moveSpeed: 0
-  hp: 5000
-  maxHp: 5000
+  hp: 8000
+  maxHp: 8000
   brakeDamage: 0
   moveSpeedMin: 0
   moveSpeedMax: 0
   meshRenderer: {fileID: 5207652506704287399}
+  skinnedMeshRenderer: {fileID: 0}
   screwObj: {fileID: 85137761877924455, guid: 8413da044c111c344bc7255ab967c5b2, type: 3}
   isVisible: 0
   isPattern: 0
   zInvisibleDestroy: 0
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
   isTest: 0
+  _isFreeze: 0
   isBoss: 1
 --- !u!114 &7333603396466863982
 MonoBehaviour:

@@ -47,6 +47,11 @@ public class ScrewController : MonoBehaviour
                 DestroyAnim();
             }
         }
+
+        if (transform.position.z < -20)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Movement()

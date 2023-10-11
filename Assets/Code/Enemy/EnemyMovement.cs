@@ -66,7 +66,7 @@ public class EnemyMovement : MonoBehaviour
 
             if (_enemyController.carType == EnemyController.CarType.Static)
             {
-                if (transform.position.z > 45)
+                if (transform.position.z > _zPosStop)
                     BaseMovement();
                 else if (!_enemyController.isCarStop)
                     _enemyController.isCarStop = true;
@@ -155,12 +155,10 @@ public class EnemyMovement : MonoBehaviour
                     hitForward.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
 
-                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
-                //{
-                //    _isJumping = true;
-                //    StartCoroutine(JumpAnim());
-                //    return;
-                //}
+                if (hitForward.collider.gameObject.tag == "obstacle" && hitForward.collider.gameObject.layer == 8)
+                {
+                    hitForward.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                }
             } 
             else if (hitForward2.collider != null)
             {
@@ -169,12 +167,10 @@ public class EnemyMovement : MonoBehaviour
                     hitForward2.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
 
-                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
-                //{
-                //    _isJumping = true;
-                //    StartCoroutine(JumpAnim());
-                //    return;
-                //}
+                if (hitForward2.collider.gameObject.tag == "obstacle" && hitForward2.collider.gameObject.layer == 8)
+                {
+                    hitForward2.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                }
             }
             else if (hitForward3.collider != null)
             {
@@ -183,12 +179,10 @@ public class EnemyMovement : MonoBehaviour
                     hitForward3.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
                 }
 
-                //if (hitForward.collider.gameObject.tag == "obstacle" && !_isJumping)
-                //{
-                //    _isJumping = true;
-                //    StartCoroutine(JumpAnim());
-                //    return;
-                //}
+                if (hitForward3.collider.gameObject.tag == "obstacle" && hitForward3.collider.gameObject.layer == 8)
+                {
+                    hitForward3.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                }
             } 
         }
     }
@@ -225,10 +219,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 9 && !_isJumping)
+        if (_enemyController.carType == EnemyController.CarType.Movement)
         {
-            _isMoveAccess = false;
-            StartCoroutine(JumpAnim());
+            if (other.tag == "jump" && !_isJumping)
+            {
+                _isMoveAccess = false;
+                StartCoroutine(JumpAnim());
+            }
         }
     }
 }

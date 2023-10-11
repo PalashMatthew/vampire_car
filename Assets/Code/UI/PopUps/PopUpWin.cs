@@ -23,12 +23,14 @@ public class PopUpWin : MonoBehaviour
 
     public void ButOpen()
     {
+        GameplayController.isPause = true;
         Time.timeScale = 0;
         controller.OpenPopUp();
     }
 
     public void ButClosed()
     {
+        GameplayController.isPause = false;
         Time.timeScale = 1;
         controller.ClosedPopUp();
     }

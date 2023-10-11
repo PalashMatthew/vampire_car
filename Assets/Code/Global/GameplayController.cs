@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
+    public static bool isPause;
+
     [Header("Enemy")]
     public List<GameObject> activeEnemy;
 
