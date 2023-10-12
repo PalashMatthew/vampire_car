@@ -70,6 +70,7 @@ public class PopUpDead : MonoBehaviour
     {
         if (isSkipAccess)
         {
+            GameplayController.isPause = false;
             Time.timeScale = 1;
             Application.LoadLevel(Application.loadedLevel);
         }

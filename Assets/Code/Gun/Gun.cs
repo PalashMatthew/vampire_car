@@ -25,14 +25,14 @@ public class Gun : MonoBehaviour
         int _rand = Random.Range(1, 101);
         if (_rand <= _playerStats.kritChance)
         {
-            float _damage = (damage * _playerStats.rageCoeff) * _playerStats.kritDamage;
+            float _damage = (damage * _playerStats.rageValue) * _playerStats.kritDamage;
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
             return _damage;
         } 
         else
         {
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageCoeff);
-            return damage * _playerStats.rageCoeff;
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
+            return damage * _playerStats.rageValue;
         }
     }
 
@@ -41,14 +41,14 @@ public class Gun : MonoBehaviour
         int _rand = Random.Range(1, 101);
         if (_rand <= _playerStats.kritChance)
         {
-            float _damage = (damage * _playerStats.rageCoeff) * _playerStats.kritDamage;
+            float _damage = (damage * _playerStats.rageValue) * _playerStats.kritDamage;
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
             _gm.gameObject.GetComponent<EnemyController>().Hit(_damage, true);
         }
         else
         {
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageCoeff);
-            _gm.gameObject.GetComponent<EnemyController>().Hit(damage * _playerStats.rageCoeff, false);
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
+            _gm.gameObject.GetComponent<EnemyController>().Hit(damage * _playerStats.rageValue, false);
         }
     }
 
@@ -57,14 +57,14 @@ public class Gun : MonoBehaviour
         int _rand = Random.Range(1, 101);
         if (_rand <= _playerStats.kritChance)
         {
-            float _damage = (damage * _playerStats.rageCoeff) * _playerStats.kritDamage;
+            float _damage = (damage * _playerStats.rageValue) * _playerStats.kritDamage;
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
             _gm.gameObject.GetComponentInParent<EnemyController>().Hit(_damage, true);
         }
         else
         {
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageCoeff);
-            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(damage * _playerStats.rageCoeff, false);
+            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
+            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(damage * _playerStats.rageValue, false);
         }
     }
 }

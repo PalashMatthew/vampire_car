@@ -287,13 +287,15 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
 
+        if (_playerPassiveController.isPassiveRage)
+        {
+            _playerStats.rageCoeff *= _procent;
+        }
+
         if (!_playerPassiveController.isPassiveRage)
         {
             _playerPassiveController.isPassiveRage = true;
             _playerStats.rageCoeff = _procent;
-        } else
-        {
-            _playerStats.rageCoeff *= _procent;
         }
     }
 
