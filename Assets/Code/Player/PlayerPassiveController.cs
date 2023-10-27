@@ -7,6 +7,13 @@ public class PlayerPassiveController : MonoBehaviour
     [Header("Passive")]
     public bool isVampirizm;
     public bool isPassiveRage;
+    public bool isBackDamage;
+    public bool isDodge;
+    public bool isPunching;
+    public bool isHeadshot;
+    public bool isScrewValueUp;
+    public bool isDistanceDamage;
+    
 
     [Header("Health Recovery")]
     public bool isPassiveHealthRecovery;
@@ -14,9 +21,6 @@ public class PlayerPassiveController : MonoBehaviour
 
     PlayerController _playerController;
     PlayerStats _playerStats;
-
-    //Rage
-    private float _savePlayerDamage;
 
 
     private void Start()

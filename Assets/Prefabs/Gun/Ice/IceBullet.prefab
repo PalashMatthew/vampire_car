@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5726056638307009578}
   - component: {fileID: 3247279295796384747}
+  - component: {fileID: 5852722330446633867}
   m_Layer: 0
   m_Name: IceBullet
   m_TagString: player_bullet
@@ -50,6 +51,19 @@ MonoBehaviour:
   minDistanceToAttack: 1
   target: {fileID: 0}
   boomObj: {fileID: 5123278548794915843, guid: 9e142f3a51533b343ab8c30366ff6051, type: 3}
+--- !u!114 &5852722330446633867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275698799828685863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c25528756005243a660844b3d4580e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCoord: {x: 0, y: 0, z: 0}
 --- !u!1001 &775959967998582232
 PrefabInstance:
   m_ObjectHideFlags: 0

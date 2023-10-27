@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6745884337780719763}
   - component: {fileID: 8013041768323874653}
   - component: {fileID: 158213481643969264}
+  - component: {fileID: 5001378492478702396}
   m_Layer: 0
   m_Name: BoomObj
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.06, y: 0, z: 25.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6699298057102756029}
   m_Father: {fileID: 0}
@@ -94,8 +95,21 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5.21
+  m_Radius: 3.3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5001378492478702396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334534719011464418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c25528756005243a660844b3d4580e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCoord: {x: 0, y: 0, z: 0}
 --- !u!1 &4912227902850714108
 GameObject:
   m_ObjectHideFlags: 0

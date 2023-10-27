@@ -9,30 +9,25 @@ public class PopUpPause : MonoBehaviour
 
     public float animSpeed;
 
-    PopUpController controller;
+    private PopUpController _popUpController;
 
     private void Start()
     {
-        controller = new PopUpController();
-        controller.imgFade = imgFade;
-        controller.objPopUp = objPopUp;
-        controller.animTime = animSpeed;
-
-        controller.Initialize();
+        _popUpController = GetComponent<PopUpController>();
     }
 
     public void ButOpen()
     {
         GameplayController.isPause = true;
         Time.timeScale = 0;
-        controller.OpenPopUp();
+        _popUpController.OpenPopUp();
     }
 
     public void ButClosed()
     {
         GameplayController.isPause = false;
         Time.timeScale = 1;
-        controller.ClosedPopUp();
+        _popUpController.ClosedPopUp();
     }
 
     public void ButSettings()
@@ -42,6 +37,8 @@ public class PopUpPause : MonoBehaviour
 
     public void ButExit()
     {
-
+        GameplayController.isPause = false;
+        Time.timeScale = 1;
+        GameObject.Find("LoadingCanvas").GetComponent<ASyncLoader>().LoadLevel("Hub");
     }
 }

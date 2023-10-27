@@ -28,7 +28,7 @@ MonoBehaviour:
     m_Scale: 1
     m_UnitsPerEM: 1000
     m_LineHeight: 65.208
-    m_AscentLine: 52.492
+    m_AscentLine: 48.1
     m_CapLine: 36
     m_MeanLine: 26
     m_Baseline: 0
@@ -16885,7 +16885,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - UNDERLAY_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -16963,8 +16964,8 @@ Material:
     - _TextureHeight: 1024
     - _TextureWidth: 1024
     - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
+    - _UnderlayOffsetX: 0.77
+    - _UnderlayOffsetY: -0.56
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0

@@ -22,7 +22,7 @@ public class DronGun : MonoBehaviour
     {
         foreach (GameObject obj in projectileObj)
         {
-            obj.transform.Rotate(Vector3.up * Time.deltaTime * _gunController.bulletMoveSpeed);
+            obj.transform.Rotate(Vector3.up * Time.deltaTime * _gunController.rotateSpeed);
         }
 
         if (_gunController.projectileValue == 1)

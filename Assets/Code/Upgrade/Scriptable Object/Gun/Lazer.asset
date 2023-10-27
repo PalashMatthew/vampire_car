@@ -12,19 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
   m_Name: Lazer
   m_EditorClassIdentifier: 
-  cardName: "\u041B\u0430\u0437\u0435\u0440"
+  cardName: Lazer
   descriptionCommon: 
   descriptionRare: 
   descriptionLegendary: 
-  descriptionCommonLVL1: "\u0423\u0440\u043E\u043D +20%"
-  descriptionRareLVL1: "\u0423\u0440\u043E\u043D +40%"
-  descriptionLegendaryLVL1: "\u0423\u0440\u043E\u043D +60%"
-  descriptionCommonLVL2: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C +15%"
-  descriptionRareLVL2: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C +30%"
-  descriptionLegendaryLVL2: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C +45%"
-  descriptionCommonLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +20%"
-  descriptionRareLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +30%"
-  descriptionLegendaryLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +40%"
+  lv1UpgradeCommon1: 4
+  lv1UpgradeCommon2: 0
+  lv1UpgradeRare1: 4
+  lv1UpgradeRare2: 0
+  lv1UpgradeLegendary1: 4
+  lv1UpgradeLegendary2: 0
+  lv2UpgradeCommon1: 3
+  lv2UpgradeCommon2: 0
+  lv2UpgradeRare1: 3
+  lv2UpgradeRare2: 0
+  lv2UpgradeLegendary1: 3
+  lv2UpgradeLegendary2: 0
   imageItem: {fileID: 21300000, guid: 06c79ad197e7750449a82d5da861aa8c, type: 3}
   upgradeType: 1
   cardRarity: 0

@@ -10,30 +10,64 @@ public class PlayerController : MonoBehaviour
 
     PlayerUIController _playerUIController;
     PlayerStats _playerStats;
+    PlayerPassiveController _playerPassiveController;
 
     public bool isDead;
 
-    [Header("Level Up")]
-    public ParticleSystem fxLevelUp;
-    public TMP_Text tLevelUp;    
+    public List<GameObject> carsMesh;
 
 
     public void Initialize()
     {
         _playerUIController = GetComponentInChildren<PlayerUIController>();
         _playerStats = GetComponent<PlayerStats>();
+        _playerPassiveController = GetComponent<PlayerPassiveController>();
 
         isDead = false;
-        tLevelUp.gameObject.SetActive(false);
+
+        ChoiseCar();
+    }
+
+    void ChoiseCar()
+    {
+        foreach (GameObject gm in carsMesh)
+        {
+            if (gm.GetComponent<CarPlayerMesh>().carName == PlayerPrefs.GetString("selectedCarID"))
+            {
+                gm.GetComponent<CarPlayerMesh>().CarChoise();
+            } 
+            else
+            {
+                gm.GetComponent<CarPlayerMesh>().mesh.SetActive(false);
+            }
+        }
     }
 
     public void Hit(float _damage)
     {
-        _playerStats.currentHp -= _damage;
+        float _finalDamage;
+        _finalDamage = _damage - (_damage / 100 * _playerStats.armorProcent);
 
-        StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
-        
-        StartCoroutine(HitAnim());
+        if (_playerPassiveController.isDodge)
+        {
+            int rand = Random.Range(1, 101);
+            if (rand > _playerStats.dodgeProcent)
+            {
+                _playerStats.currentHp -= _finalDamage;
+
+                StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+
+                StartCoroutine(HitAnim());
+            }
+        } 
+        else
+        {
+            _playerStats.currentHp -= _finalDamage;
+
+            StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+
+            StartCoroutine(HitAnim());            
+        }
 
         if (_playerStats.currentHp <= 0 && !isDead)
         {
@@ -57,29 +91,4 @@ public class PlayerController : MonoBehaviour
             _mesh.material.DisableKeyword("_EMISSION");
         }
     }    
-
-    public void LevelUp()
-    {
-        fxLevelUp.Play();
-
-        StartCoroutine(LevelUpTextAnimation());
-    }    
-
-    IEnumerator LevelUpTextAnimation()
-    {
-        tLevelUp.gameObject.SetActive(true);
-        tLevelUp.transform.DOScale(0, 0);
-
-        tLevelUp.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
-
-        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen = true;
-
-        yield return new WaitForSecondsRealtime(1.5f);
-
-        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
-        tLevelUp.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
-
-        yield return new WaitForSecondsRealtime(0.3f);
-        tLevelUp.gameObject.SetActive(false);        
-    }
 }

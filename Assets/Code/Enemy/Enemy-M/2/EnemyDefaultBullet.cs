@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyDefaultBullet : MonoBehaviour
 {
-    [HideInInspector]
-    public EnemyGun _gunController;
+    [HideInInspector] public EnemyGun _gunController;
+    [HideInInspector] public EnemyController _controller;
 
 
     private void Update()
@@ -21,6 +21,8 @@ public class EnemyDefaultBullet : MonoBehaviour
         if (other.tag == "player")
         {
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
+            _controller.BackDamage(_gunController.damage);
+
             Destroy(gameObject);
         }
 

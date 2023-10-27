@@ -69,7 +69,7 @@ public class LazerGun : MonoBehaviour
     {
         if (obj != null)
         {
-            _gunController.DamageEnemy(obj.gameObject);
+            _gunController.DamageEnemy(obj.gameObject, gameObject);
         }
 
         yield return new WaitForSeconds(_gunController.shotSpeed);

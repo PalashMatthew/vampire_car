@@ -6,6 +6,15 @@ public class GameplayController : MonoBehaviour
 {
     public static bool isPause;
 
+    public enum InputSettings
+    {
+        Joy,
+        FingerTracking,
+        RelativeToTheFinger
+    }
+
+    public InputSettings inputSettings;
+
     [Header("Enemy")]
     public List<GameObject> activeEnemy;
 
@@ -18,8 +27,6 @@ public class GameplayController : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
-
         InitializeGame();
     }
 

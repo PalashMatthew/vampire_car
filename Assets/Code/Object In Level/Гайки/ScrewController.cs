@@ -23,6 +23,8 @@ public class ScrewController : MonoBehaviour
         _playerPos = GameObject.Find("Player").transform;
 
         transform.eulerAngles = new Vector3(0, 180, 0);
+
+        _destroyDistance = GameObject.Find("Player").GetComponent<PlayerStats>().screwPickUpDistance;
     }
 
     private void Update()
@@ -67,7 +69,18 @@ public class ScrewController : MonoBehaviour
 
     void DestroyAnim()
     {
-        GlobalStats.screwCount += screwCount;        
+        float _screwCount;
+
+        if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isScrewValueUp)
+        {
+            _screwCount = screwCount * GameObject.Find("Player").GetComponent<PlayerStats>().screwValueUp;
+            GlobalStats.screwCount += _screwCount;
+        } 
+        else
+        {
+            GlobalStats.screwCount += screwCount;
+        }
+            
         GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().UpdateScrewText();
         Destroy(gameObject);
     }

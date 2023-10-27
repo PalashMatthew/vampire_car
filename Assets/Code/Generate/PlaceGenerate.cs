@@ -14,15 +14,12 @@ public class PlaceGenerate : MonoBehaviour
 
     private GameObject _player;
 
-    GameplayController _gameplayController;
-
     public float minZ;
     public float spawnZ;
 
     private void Start()
     {
         _player = GameObject.Find("Player");
-        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
     }
 
     private void Update()
@@ -53,7 +50,7 @@ public class PlaceGenerate : MonoBehaviour
         {
             _places.Add(_inst);            
             _inst.GetComponent<RoadController>().dist = spawnZ;
-            _inst.GetComponent<RoadController>().parent = _places[0];
+            _inst.GetComponent<RoadController>().parent = _places[_places.Count-2];
             _inst = null;
         }
     }

@@ -7,7 +7,29 @@ public class DefaultGunBullet : MonoBehaviour
     [HideInInspector]
     public Gun _gunController;
 
+    private PlayerStats _playerStats;
+    private PlayerPassiveController _playerPassiveController;
+
+    private float _damage;
+
     public bool isPlayerAttack = false;
+
+    private float punchingCount;
+
+    
+
+
+    private void Start()
+    {
+        _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
+        _playerPassiveController = GameObject.Find("Player").GetComponent<PlayerPassiveController>();
+
+        _damage = _gunController.damage;
+
+        punchingCount = _playerStats.punchingCount;
+
+        
+    }
 
 
     private void Update()
@@ -22,14 +44,47 @@ public class DefaultGunBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            _gunController.DamageEnemy(other.gameObject);
-            Destroy(gameObject);
+            if (_playerPassiveController.isPunching)
+            {
+                if (punchingCount <= 0)
+                {
+                    _gunController.DamageEnemyPunching(other.gameObject, _damage);
+                    Destroy(gameObject);
+                } 
+                else
+                {
+                    _gunController.DamageEnemyPunching(other.gameObject, _damage);
+                    _damage -= _damage / 100 * _playerStats.punchingProcent;
+                    punchingCount--;
+                }
+            } else
+            {
+                _gunController.DamageEnemy(other.gameObject, gameObject);
+                Destroy(gameObject);
+            }
         }
 
         if (other.tag == "boss")
         {
-            _gunController.DamageBoss(other.gameObject);
-            Destroy(gameObject);
+            if (_playerPassiveController.isPunching)
+            {
+                if (punchingCount <= 0)
+                {
+                    _gunController.DamageBossPunching(other.gameObject, _damage);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    _gunController.DamageBossPunching(other.gameObject, _damage);
+                    _damage -= _damage / 100 * _playerStats.punchingProcent;
+                    punchingCount--;
+                }
+            }
+            else
+            {
+                _gunController.DamageBoss(other.gameObject);
+                Destroy(gameObject);
+            }
         }
 
         if (other.tag == "obstacle")

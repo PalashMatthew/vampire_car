@@ -5,12 +5,7 @@ using UnityEngine;
 
 public class PopUpDead : MonoBehaviour
 {
-    public GameObject imgFade;
-    public GameObject objPopUp;
-
-    public float animSpeed;
-
-    PopUpController controller;
+    private PopUpController _popUpController;
 
     public GameObject tSkip;
     private float skipTimer = 2;
@@ -18,14 +13,10 @@ public class PopUpDead : MonoBehaviour
 
     private void Start()
     {
-        controller = new PopUpController();
-        controller.imgFade = imgFade;
-        controller.objPopUp = objPopUp;
-        controller.animTime = animSpeed;
+        _popUpController = GetComponent<PopUpController>();
+
         tSkip.SetActive(false);
         isSkipAccess = false;
-
-        controller.Initialize();
     }
 
     private void Update()
@@ -45,7 +36,7 @@ public class PopUpDead : MonoBehaviour
     {
         GameplayController.isPause = true;
         Time.timeScale = 0;
-        controller.OpenPopUp();
+        _popUpController.OpenPopUp();
         StartCoroutine(SkipTimer());
     }
 
@@ -53,7 +44,7 @@ public class PopUpDead : MonoBehaviour
     {
         GameplayController.isPause = false;
         Time.timeScale = 1;
-        controller.ClosedPopUp();
+        _popUpController.ClosedPopUp();
     }
 
     public void ButContinueHard()

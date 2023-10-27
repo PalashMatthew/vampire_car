@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
     float startMousePosX = 0;
     float startPlayerX = 0;
 
+    GameplayController _gameplayController;
+
     void Awake()
     {
         target = GameObject.Find("Player").transform;
@@ -39,12 +41,33 @@ public class CameraController : MonoBehaviour
 
         player_active = true;
         follow = true;
+
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
     }
 
     public void Update()
-    {        
+    {
         if (follow && !GameplayController.isPause)
         {
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.RelativeToTheFinger)
+            {
+                RelativeToTheFinger();
+            }
+
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.FingerTracking)
+            {
+                FingerTracking();
+            }
+
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.Joy)
+            {
+                transform.position = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
+            }
+        }
+    }
+
+    void RelativeToTheFinger()
+    {
 #if UNITY_ANDROID && !UNITY_EDITOR
             Touch touch = Input.GetTouch(0);
 
@@ -80,37 +103,61 @@ public class CameraController : MonoBehaviour
             }
 #endif
 #if UNITY_EDITOR
-            if (Input.GetMouseButtonDown(0))
-            {
-                float coeff = Screen.width / (maxXBound * 2);
+        if (Input.GetMouseButtonDown(0))
+        {
+            float coeff = Screen.width / (maxXBound * 2);
 
-                Vector3 camPos;
-                camPos = Input.mousePosition;
+            Vector3 camPos;
+            camPos = Input.mousePosition;
 
-                float x = camPos.x / coeff - maxXBound;
+            float x = camPos.x / coeff - maxXBound;
 
-                startMousePosX = x;
+            startMousePosX = x;
 
-                startPlayerX = transform.position.x;
-            }
+            startPlayerX = transform.position.x;
+        }
 
-            if (Input.GetMouseButton(0))
-            {
-                float coeff = Screen.width / (maxXBound * 2);
+        if (Input.GetMouseButton(0))
+        {
+            float coeff = Screen.width / (maxXBound * 2);
 
-                Vector3 camPos;
-                camPos = Input.mousePosition;
+            Vector3 camPos;
+            camPos = Input.mousePosition;
 
-                float x = camPos.x / coeff - maxXBound;
+            float x = camPos.x / coeff - maxXBound;
 
-                float currentX = startPlayerX + (x - startMousePosX);
+            float currentX = startPlayerX + (x - startMousePosX);
 
-                if (currentX < minCameraX) currentX = minCameraX;
-                if (currentX > maxCameraX) currentX = maxCameraX;
+            if (currentX < minCameraX) currentX = minCameraX;
+            if (currentX > maxCameraX) currentX = maxCameraX;
 
-                transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
-            }
+            transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
+        }
 #endif
+    }
+
+    void FingerTracking()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            float coeff = Screen.width / (maxXBound * 2);
+
+            Vector3 camPos;
+            camPos = Input.mousePosition;
+
+            float x = camPos.x / coeff - maxXBound;
+
+            float currentX = x;
+
+            if (currentX < minCameraX) currentX = minCameraX;
+            if (currentX > maxCameraX) currentX = maxCameraX;
+
+            transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
         }
     }
 

@@ -33,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
     public float playerAnimRotateSpeed;
     private float playerStartMoveX;
     public List<GameObject> wheelsObj;
-    public float wheelRotateSpeed;
-    public GameObject wheelRightObj, wheelLeftObj;
 
     [Header("Objects")]
     public Camera cam;
@@ -45,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 mouseWorldPoint;
     Vector3 mouseScreenPoint;
-
-    public FloatingJoystick joy;
 
     float startMousePosX = 0;
     float startMousePosZ = 0;
@@ -64,10 +60,16 @@ public class PlayerMovement : MonoBehaviour
     RaycastHit _hit;
     Ray ray;
 
+    GameplayController _gameplayController;
+
+    public FloatingJoystick joystick;
+    public float joySpeed;
+
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
         isMoveAccess = true;
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
     }
 
     private void Update()
@@ -76,7 +78,21 @@ public class PlayerMovement : MonoBehaviour
         {
             MouseInputSettings();
             PlayerAnimation();
-            Move();
+
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.RelativeToTheFinger)
+            {
+                Move();
+            }
+
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.FingerTracking)
+            {
+                MoveToFinger();
+            }
+
+            if (_gameplayController.inputSettings == GameplayController.InputSettings.Joy)
+            {
+                transform.Translate(new Vector3(joystick.Horizontal * Time.deltaTime * joySpeed, 0, joystick.Vertical * Time.deltaTime * joySpeed));
+            }
         }
     }
 
@@ -95,8 +111,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            //wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            //wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
         }
     }
 
@@ -234,24 +250,18 @@ public class PlayerMovement : MonoBehaviour
             #region Animations
             if (currentX < transform.position.x - 0.1f)
             {
-                mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, -10, 0), playerAnimRotateSpeed);
                 //transform.eulerAngles = new Vector3(0, -10f, 0);
             }
             else if (currentX > transform.position.x + 0.1f)
             {
                 //transform.eulerAngles = new Vector3(0, 10f, 0);
-                mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, 10, 0), playerAnimRotateSpeed);
             }
             else
             {
                 //transform.eulerAngles = new Vector3(0, 0f, 0);
                 mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
             }
             #endregion
 
@@ -261,10 +271,55 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
         }
 #endif
+    }
+
+    void MoveToFinger()
+    {      
+        if (Input.GetMouseButton(0))
+        {
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+
+            newPos = new Vector3(0, 0, 0);
+
+            if (Physics.Raycast(ray, out _hit, Mathf.Infinity, layer))
+            {
+                newPos = new Vector3(_hit.point.x, _hit.point.y, _hit.point.z);
+            }
+
+            #region Bounds
+            if (newPos.x < boundXMin) newPos = new Vector3(boundXMin, newPos.y, newPos.z);
+            if (newPos.z < boundZMin) newPos = new Vector3(newPos.x, newPos.y, boundZMin);
+            if (newPos.x > boundXMax) newPos = new Vector3(boundXMax, newPos.y, newPos.z);
+            if (newPos.z > boundZMax) newPos = new Vector3(newPos.x, newPos.y, boundZMax);
+            #endregion
+
+            #region Animations
+            if (newPos.x < transform.position.x - 0.1f)
+            {
+                mesh.transform.DOLocalRotate(new Vector3(0, -10, 0), playerAnimRotateSpeed);
+                //transform.eulerAngles = new Vector3(0, -10f, 0);
+            }
+            else if (newPos.x > transform.position.x + 0.1f)
+            {
+                //transform.eulerAngles = new Vector3(0, 10f, 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, 10, 0), playerAnimRotateSpeed);
+            }
+            else
+            {
+                //transform.eulerAngles = new Vector3(0, 0f, 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            }
+            #endregion
+
+            transform.DOMove(new Vector3(newPos.x, 0, newPos.z + 5f), moveSpeed).SetUpdate(true);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+        }
     }
 
     //Лужа

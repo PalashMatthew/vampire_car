@@ -12,20 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
   m_Name: RocketLauncher
   m_EditorClassIdentifier: 
-  cardName: "\u0420\u0430\u043A\u0435\u0442\u043D\u0438\u0446\u0430"
+  cardName: RocketLauncher
   descriptionCommon: 
   descriptionRare: 
   descriptionLegendary: 
-  descriptionCommonLVL1: "\u0423\u0440\u043E\u043D +20%"
-  descriptionRareLVL1: "\u0423\u0440\u043E\u043D +40%"
-  descriptionLegendaryLVL1: "\u0423\u0440\u043E\u043D +60%"
-  descriptionCommonLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +1"
-  descriptionRareLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +2"
-  descriptionLegendaryLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +2; \u041E\u0431\u043B\u0430\u0441\u0442\u044C
-    + 10% "
-  descriptionCommonLVL3: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C + 10%"
-  descriptionRareLVL3: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C + 20%"
-  descriptionLegendaryLVL3: "\u041E\u0431\u043B\u0430\u0441\u0442\u044C + 30%"
+  lv1UpgradeCommon1: 2
+  lv1UpgradeCommon2: 0
+  lv1UpgradeRare1: 2
+  lv1UpgradeRare2: 3
+  lv1UpgradeLegendary1: 2
+  lv1UpgradeLegendary2: 0
+  lv2UpgradeCommon1: 4
+  lv2UpgradeCommon2: 0
+  lv2UpgradeRare1: 4
+  lv2UpgradeRare2: 0
+  lv2UpgradeLegendary1: 4
+  lv2UpgradeLegendary2: 0
   imageItem: {fileID: 21300000, guid: ab7b4572d6036994da98a91f836c2df5, type: 3}
   upgradeType: 1
   cardRarity: 0

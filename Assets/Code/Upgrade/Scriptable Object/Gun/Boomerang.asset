@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: 
-  cardName: "\u0411\u0443\u043C\u0435\u0440\u0430\u043D\u0433"
+  cardName: Boomerang
   descriptionCommon: 
   descriptionRare: 
   descriptionLegendary: 
-  descriptionCommonLVL1: "\u0423\u0440\u043E\u043D +20%"
-  descriptionRareLVL1: "\u0423\u0440\u043E\u043D +40%"
-  descriptionLegendaryLVL1: "\u0423\u0440\u043E\u043D +60%"
-  descriptionCommonLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +1"
-  descriptionRareLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +2"
-  descriptionLegendaryLVL2: "\u0421\u043D\u0430\u0440\u044F\u0434 +2; \u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C
-    +10%"
-  descriptionCommonLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +20%"
-  descriptionRareLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +30%"
-  descriptionLegendaryLVL3: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C +40%"
+  lv1UpgradeCommon1: 2
+  lv1UpgradeCommon2: 0
+  lv1UpgradeRare1: 2
+  lv1UpgradeRare2: 3
+  lv1UpgradeLegendary1: 2
+  lv1UpgradeLegendary2: 0
+  lv2UpgradeCommon1: 3
+  lv2UpgradeCommon2: 0
+  lv2UpgradeRare1: 3
+  lv2UpgradeRare2: 0
+  lv2UpgradeLegendary1: 3
+  lv2UpgradeLegendary2: 0
   imageItem: {fileID: 21300000, guid: 28afd8a81facc10478006785c2fc29cc, type: 3}
   upgradeType: 1
-  cardRarity: 2
+  cardRarity: 1
   upgradePassiveType: 0
-  upgradeGunType: 6
+  upgradeGunType: 5

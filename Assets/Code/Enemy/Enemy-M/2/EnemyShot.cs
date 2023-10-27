@@ -34,10 +34,8 @@ public class EnemyShot : MonoBehaviour
 
         GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;
+        _inst.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
-        GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint.position, transform.rotation);
-        _instMuzzle.transform.parent = bulletSpawnPoint;
-        Destroy(_instMuzzle, 2);
 
         if (_enemyController.carType == EnemyController.CarType.Static)
         {

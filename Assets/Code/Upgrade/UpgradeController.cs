@@ -1,11 +1,21 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour
 {
-    public List<UpgradeCard> cards;
-    public List<UpgradeCardController> cardsController;
+    public List<UpgradeCard> cardsGun;
+    public List<UpgradeCard> cardsPassive;
+    public List<UpgradeCardController> cardsGunController;
+    public List<UpgradeCardController> cardsPassiveController;
+
+    public UpgradeCardController cardGunAccept;  //Выбранная оружейная карта
+    public UpgradeCardController cardPassiveAccept;  //Выбранная пассивная карта
+
+    public List<UpgradeCardController> cardsChoose;
 
     PlayerController _playerController;
     PlayerPassiveController _playerPassiveController;
@@ -13,26 +23,43 @@ public class UpgradeController : MonoBehaviour
     PlayerGuns _playerGuns;
     WaveController _waveController;
 
+    [Header("Slots")]
+    public List<UpgradeCard> activeGunCard;
+    public List<Image> slotImage;
+    public List<TMP_Text> tSlotLevels;
+    private bool isSlotFull;
+
     [Header("Rarity Chance")]
     [SerializeField] public List<RarityChance> rarityList;
     public float commonChance;
     public float rareChance;
     public float legendaryChance;
+    public float luckyChance = 1;
 
     //Level Cards Gun
     [Header("Level Cards Guns")]
+    public int maxLevelGunUpgrade;
     public int Boomerang_Level;
     public int Dron_Level;
     public int Ice_Level;
     public int Lazer_Level;
     public int Lightning_Level;
-    public int Oil_Level;
     public int Partner_Level;
     public int RocketLauncher_Level;
     public int DefaultGun_Level;
+    public int GrowingShot_Level;
+    public int FanGun_Level;
+    public int Tornado_Level;
+    public int Mines_Level;
+    public int Grenade_Level;
+    public int GodGun_Level;
+    public int Ricochet_Level;
+    public int Bow_Level;
+    public int PinPong_Level;
 
     [Header("Reroll")]
-    public List<int> rerollPrice;
+    public float rerollBasePrice;
+    public List<float> rerollPrice;
 
 
     private void Start()
@@ -47,120 +74,606 @@ public class UpgradeController : MonoBehaviour
         _playerPassiveController = GameObject.Find("Player").GetComponent<PlayerPassiveController>();
         _playerGuns = GameObject.Find("Player").GetComponent<PlayerGuns>();
         _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
+
+        #region Добавляем оружие в слот если на старте его взяли
+        foreach (UpgradeCard _card in cardsGun)
+        {
+            switch (_card.upgradeGunType)
+            {
+                case UpgradeCard.UpgradeGunType.Boomerang:
+                    if (Boomerang_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Bow:
+                    if (Bow_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.DefaultGun:
+                    if (DefaultGun_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Dron:
+                    if (Dron_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.FanGun:
+                    if (FanGun_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.GodGun:
+                    if (GodGun_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Grenade:
+                    if (Grenade_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                    if (GrowingShot_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Ice:
+                    if (Ice_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Lazer:
+                    if (Lazer_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Mines:
+                    if (Mines_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Partner:
+                    if (Partner_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.PinPong:
+                    if (PinPong_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Ricochet:
+                    if (Ricochet_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.RocketLauncher:
+                    if (RocketLauncher_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+                case UpgradeCard.UpgradeGunType.Tornado:
+                    if (Tornado_Level > 0)
+                        AddCardToSlot(_card);
+                    break;
+            }            
+        }        
+        #endregion
+
+        UpdateTextLevels();
     }
 
-    public void GenerateUpgrades()
+    public void GenerateGunCards()
     {
         List<UpgradeCard> _createdCards = new List<UpgradeCard>();
-
-        int _generateGunNum = Random.Range(0, 3);
-        int _generatePassiveNum = 0;
-
-        while (_generatePassiveNum == _generateGunNum)
-        {
-            _generatePassiveNum = Random.Range(0, 3);
-        }
 
         for (int i = 0; i < 3; i++)
         {
             newTry:
             UpgradeCard _card;
-            _card = cards[Random.Range(0, cards.Count)];
-
-            //Проверяем, чтобы заспавнилось как минимум одно оружие
-            if (i == _generateGunNum)
-            {
-                if (_card.upgradeType != UpgradeCard.UpgradeType.Gun)
-                    goto newTry;
-            }
-
-            //Проверяем, чтобы заспавнилось как минимум одна пассивка
-            if (i == _generatePassiveNum)
-            {
-                if (_card.upgradeType != UpgradeCard.UpgradeType.Passive)
-                    goto newTry;
-            }
+            _card = cardsGun[Random.Range(0, cardsGun.Count)];
 
             if (!_createdCards.Contains(_card))
             {
-                if (_card.upgradeType == UpgradeCard.UpgradeType.Gun)
+                switch (_card.upgradeGunType)
                 {
-                    switch (_card.upgradeGunType)
-                    {
-                        case UpgradeCard.UpgradeGunType.Boomerang:
-                            if (Boomerang_Level < 3)
-                            {
-                                cardsController[i].levelNum = Boomerang_Level;
-                            }
-                            else goto newTry;
-                            break;
+                    case UpgradeCard.UpgradeGunType.Boomerang:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
 
-                        case UpgradeCard.UpgradeGunType.Dron:
-                            if (Dron_Level < 3)
+                            foreach (UpgradeCard card in activeGunCard)
                             {
-                                cardsController[i].levelNum = Dron_Level;
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Boomerang)
+                                {
+                                    isContains = true;
+                                }
                             }
-                            else goto newTry;
-                            break;
 
-                        case UpgradeCard.UpgradeGunType.Ice:
-                            if (Ice_Level < 3)
+                            if (!isContains)
                             {
-                                cardsController[i].levelNum = Ice_Level;
+                                goto newTry;
                             }
-                            else goto newTry;
-                            break;
+                        }
 
-                        case UpgradeCard.UpgradeGunType.Lazer:
-                            if (Lazer_Level < 3)
-                            {
-                                cardsController[i].levelNum = Lazer_Level;
-                            }
-                            else goto newTry;
-                            break;
+                        if (Boomerang_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Boomerang_Level;
+                        }
+                        else goto newTry;
+                        break;
 
-                        case UpgradeCard.UpgradeGunType.Lightning:
-                            if (Lightning_Level < 3)
-                            {
-                                cardsController[i].levelNum = Lightning_Level;
-                            }
-                            else goto newTry;
-                            break;
+                    case UpgradeCard.UpgradeGunType.Dron:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
 
-                        case UpgradeCard.UpgradeGunType.Oil:
-                            if (Oil_Level < 3)
+                            foreach (UpgradeCard card in activeGunCard)
                             {
-                                cardsController[i].levelNum = Oil_Level;
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Dron)
+                                {
+                                    isContains = true;
+                                }
                             }
-                            else goto newTry;
-                            break;
 
-                        case UpgradeCard.UpgradeGunType.Partner:
-                            if (Partner_Level < 3)
+                            if (!isContains)
                             {
-                                cardsController[i].levelNum = Partner_Level;
+                                goto newTry;
                             }
-                            else goto newTry;
-                            break;
+                        }
 
-                        case UpgradeCard.UpgradeGunType.RocketLauncher:
-                            if (RocketLauncher_Level < 3)
-                            {
-                                cardsController[i].levelNum = RocketLauncher_Level;
-                            }
-                            else goto newTry;
-                            break;
+                        if (Dron_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Dron_Level;
+                        }
+                        else goto newTry;
+                        break;
 
-                        case UpgradeCard.UpgradeGunType.DefaultGun:
-                            if (DefaultGun_Level < 3)
+                    case UpgradeCard.UpgradeGunType.Ice:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
                             {
-                                cardsController[i].levelNum = DefaultGun_Level;
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Ice)
+                                {
+                                    isContains = true;
+                                }
                             }
-                            else goto newTry;
-                            break;
-                    }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Ice_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Ice_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Lazer:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Lazer)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Lazer_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Lazer_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Lightning:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Lightning)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Lightning_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Lightning_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Partner:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Partner)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Partner_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Partner_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.RocketLauncher:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.RocketLauncher)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (RocketLauncher_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = RocketLauncher_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.DefaultGun:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.DefaultGun)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (DefaultGun_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = DefaultGun_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.GrowingShotGun)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (GrowingShot_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = GrowingShot_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.FanGun:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.FanGun)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (FanGun_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = FanGun_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Tornado:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Tornado)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Tornado_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Tornado_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Mines:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Mines)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Mines_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Mines_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Grenade:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Grenade)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Grenade_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Grenade_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.GodGun:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.GodGun)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (GodGun_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = GodGun_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Ricochet:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Ricochet)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Ricochet_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Ricochet_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Bow:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.Bow)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (Bow_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = Bow_Level;
+                        }
+                        else goto newTry;
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.PinPong:
+                        if (isSlotFull)
+                        {
+                            bool isContains = false;
+
+                            foreach (UpgradeCard card in activeGunCard)
+                            {
+                                if (card.upgradeGunType == UpgradeCard.UpgradeGunType.PinPong)
+                                {
+                                    isContains = true;
+                                }
+                            }
+
+                            if (!isContains)
+                            {
+                                goto newTry;
+                            }
+                        }
+
+                        if (PinPong_Level < maxLevelGunUpgrade)
+                        {
+                            cardsGunController[i].levelNum = PinPong_Level;
+                        }
+                        else goto newTry;
+                        break;
                 }
-            } else
+            }
+            else
+            {
+                goto newTry;
+            }
+
+            #region Выбираем редкость карты         
+            if (cardsGunController[i].levelNum == 0)
+            {
+                _card.cardRarity = UpgradeCard.CardRarity.Common;
+            }
+            else
+            {
+                List<string> _rarity = new List<string>();
+
+                for (int r = 0; r < rarityList[_waveController.currentWave - 1].commonChance; r++)
+                {
+                    _rarity.Add("common");
+                }
+
+                for (int r = 0; r < rarityList[_waveController.currentWave - 1].rareChance; r++)
+                {
+                    _rarity.Add("rare");
+                }
+
+                float _legendaryChance = rarityList[_waveController.currentWave - 1].legendaryChance * luckyChance;
+
+                for (int r = 0; r < _legendaryChance; r++)
+                {
+                    _rarity.Add("legendary");
+                }
+
+                int _rand = Random.Range(0, _rarity.Count);
+
+                switch (_rarity[_rand])
+                {
+                    case "common":
+                        _card.cardRarity = UpgradeCard.CardRarity.Common;
+                        break;
+
+                    case "rare":
+                        _card.cardRarity = UpgradeCard.CardRarity.Rare;
+                        break;
+
+                    case "legendary":
+                        _card.cardRarity = UpgradeCard.CardRarity.Legendary;
+                        break;
+                }
+            }
+            #endregion
+
+            _createdCards.Add(_card);
+            cardsGunController[i].card = _card;
+        }
+    }
+
+    public void GeneratePassiveCards()
+    {
+        List<UpgradeCard> _createdCards = new List<UpgradeCard>();
+
+        for (int i = 0; i < 3; i++)
+        {
+            newTry:
+            UpgradeCard _card;
+            _card = cardsPassive[Random.Range(0, cardsPassive.Count)];
+
+            if (_createdCards.Contains(_card))
             {
                 goto newTry;
             }
@@ -168,7 +681,7 @@ public class UpgradeController : MonoBehaviour
             #region Выбираем редкость карты            
             List<string> _rarity = new List<string>();
 
-            for (int r = 0; r < rarityList[_waveController.currentWave-1].commonChance; r++)
+            for (int r = 0; r < rarityList[_waveController.currentWave - 1].commonChance; r++)
             {
                 _rarity.Add("common");
             }
@@ -178,7 +691,9 @@ public class UpgradeController : MonoBehaviour
                 _rarity.Add("rare");
             }
 
-            for (int r = 0; r < rarityList[_waveController.currentWave - 1].legendaryChance; r++)
+            float _legendaryChance = rarityList[_waveController.currentWave - 1].legendaryChance * luckyChance;
+
+            for (int r = 0; r < _legendaryChance; r++)
             {
                 _rarity.Add("legendary");
             }
@@ -202,790 +717,886 @@ public class UpgradeController : MonoBehaviour
             #endregion
 
             _createdCards.Add(_card);
-            cardsController[i].card = _card;
+            cardsPassiveController[i].card = _card;
         }
     }
 
-    public void Reroll()
+    public void CardAccept(UpgradeCardController _card, string _cardType)  //Если нажати на карту, она становится выбранной
     {
-        GenerateUpgrades();
+        if (_cardType == "gun")
+        {
+            foreach (UpgradeCardController obj in cardsGunController)
+            {
+                if (obj != _card)
+                {
+                    obj.gameObject.transform.DOScale(0.95f, 0.2f).SetUpdate(true);
+                    obj.outline.gameObject.SetActive(false);
+                } 
+                else
+                {
+                    obj.gameObject.transform.DOScale(1.05f, 0.2f).SetUpdate(true);
+                    obj.outline.gameObject.SetActive(true);
+
+                    cardGunAccept = obj;
+                }
+            }
+        }
+
+        if (_cardType == "passive")
+        {
+            foreach (UpgradeCardController obj in cardsPassiveController)
+            {
+                if (obj != _card)
+                {
+                    obj.gameObject.transform.DOScale(0.95f, 0.2f).SetUpdate(true);
+                    obj.outline.gameObject.SetActive(false);
+                }
+                else
+                {
+                    obj.gameObject.transform.DOScale(1.05f, 0.2f).SetUpdate(true);
+                    obj.outline.gameObject.SetActive(true);
+
+                    cardPassiveAccept = obj;
+                }
+            }
+        }
     }
 
-    #region Passive Upgrades
-    // Увеличение максимального HP
-    public void MaxHpUp_Passive(string _rarity)
+    public void Reroll(string _type)
     {
-        float _procent = 1;        
+        //GenerateUpgrades();
 
-        switch (_rarity)
+        if (_type == "gun")
         {
-            case "Common":
-                _procent = 1.5f;
-                break;
-
-            case "Rare":
-                _procent = 1.75f;
-                break;
-
-            case "Legendary":
-                _procent = 2f;
-                break;
+            GenerateGunCards();
         }
 
-        _playerStats.maxHp *= _procent;
-        _playerStats.currentHp *= _procent;
+        if (_type == "passive")
+        {
+            GeneratePassiveCards();
+        }
     }
-    
-    //Восстановление здоровья
-    public void HealthRecovery_Passive(string _rarity)
+
+    #region Slots
+    public void SlotInitialize()
     {
-        float _procent = 1;
-
-        switch (_rarity)
+        for (int i = 0; i < slotImage.Count; i++)
         {
-            case "Common":
-                _procent = 1.005f;
+            slotImage[i].DOFade(0f, 0f).SetUpdate(true);
+        }
+
+        if (activeGunCard != null)
+        {
+            for (int i = 0; i < activeGunCard.Count; i++)
+            {
+                slotImage[i].sprite = activeGunCard[i].imageItem;
+                slotImage[i].DOFade(1f, 0f).SetUpdate(true);
+            }
+        }
+    }
+
+    public void AddCardToSlot(UpgradeCard _card)
+    {
+        activeGunCard.Add(_card);
+
+        for (int i = 0; i < activeGunCard.Count; i++)
+        {
+            slotImage[i].sprite = activeGunCard[i].imageItem;
+            slotImage[i].DOFade(1f, 0f).SetUpdate(true);
+        }
+
+        if (activeGunCard.Count >= 5)
+            isSlotFull = true;
+    }
+
+    public void UpdateTextLevels()
+    {
+        foreach (TMP_Text _t in tSlotLevels)
+        {
+            _t.text = "";
+        }
+
+        if (activeGunCard != null)
+        {
+            for (int i = 0; i < activeGunCard.Count; i++)
+            {
+                switch (activeGunCard[i].upgradeGunType)
+                {
+                    case UpgradeCard.UpgradeGunType.DefaultGun:
+                        if (DefaultGun_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = DefaultGun_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.RocketLauncher:
+                        if (RocketLauncher_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = RocketLauncher_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Lightning:
+                        if (Lightning_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Lightning_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Boomerang:
+                        if (Boomerang_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Boomerang_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Partner:
+                        if (Partner_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Partner_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Dron:
+                        if (Dron_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Dron_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Ice:
+                        if (Ice_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Ice_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Lazer:
+                        if (Lazer_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Lazer_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Bow:
+                        if (Bow_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Bow_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.FanGun:
+                        if (FanGun_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = FanGun_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.GodGun:
+                        if (GodGun_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = GodGun_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Grenade:
+                        if (Grenade_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Grenade_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                        if (GrowingShot_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = GrowingShot_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Mines:
+                        if (Mines_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Mines_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.PinPong:
+                        if (PinPong_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = PinPong_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Ricochet:
+                        if (Ricochet_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Ricochet_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+
+                    case UpgradeCard.UpgradeGunType.Tornado:
+                        if (Tornado_Level < maxLevelGunUpgrade)
+                            tSlotLevels[i].text = Tornado_Level + "/" + maxLevelGunUpgrade;
+                        else tSlotLevels[i].text = "MAX";
+                        break;
+                }
+            }
+        }
+    }
+    #endregion
+
+    public void Upgrade_Passive(string _rarity)
+    {
+        float _value;
+
+        _value = PlayerPrefs.GetFloat(cardPassiveAccept.card.cardName + "passiveUpgrade" + _rarity);
+
+        switch (cardPassiveAccept.card.upgradePassiveType)
+        {
+            case UpgradeCard.UpgradePassiveType.MaxHpUp:
+                _playerStats.maxHpCoeff += _value;
+                _playerStats.currentHp += _playerStats.maxHpBase * (_playerStats.maxHpBase / 100 * _playerStats.maxHpCoeff) / 100 * _value;
                 break;
 
-            case "Rare":
-                _procent = 1.01f;
+            case UpgradeCard.UpgradePassiveType.HealthRecovery:
+                _playerPassiveController.healthRecoveryProcent += _value;
+
+                _playerPassiveController.isPassiveHealthRecovery = true;
                 break;
 
-            case "Legendary":
-                _procent = 1.015f;
+            case UpgradeCard.UpgradePassiveType.Rage:       // Переделать!!!!!!!!!!!!!!!!    
+                if (_playerPassiveController.isPassiveRage)
+                {
+                    _playerStats.rageCoeff *= _value;
+                }
+
+                if (!_playerPassiveController.isPassiveRage)
+                {
+                    _playerPassiveController.isPassiveRage = true;
+                    _playerStats.rageCoeff = _value;
+                }
+                break;
+
+            case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
+                foreach (Gun _gun in _playerGuns.guns)
+                {
+                    _gun.shotSpeedCoeff += _value;
+                }
+                break;
+
+            case UpgradeCard.UpgradePassiveType.DamageUp:
+                foreach (Gun _gun in _playerGuns.guns)
+                {
+                    _gun.damageCoeff += _value;
+                }
+                break;
+
+            case UpgradeCard.UpgradePassiveType.KritDamageUp:
+                _playerStats.kritDamage += _value;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.KritChanceUp:
+                _playerStats.kritChance += _value;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Vampirizm:
+                _playerStats.vampirizm += _value;
+                _playerPassiveController.isVampirizm = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.BackDamage:
+                _playerStats.backDamageProcent += _value;
+                _playerPassiveController.isBackDamage = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Dodge:
+                _playerStats.dodgeProcent += _value;
+                _playerPassiveController.isDodge = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Armor:
+                _playerStats.armorProcent += _value;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Punching:  //Тут тоже переделать потом!1!!!!!!!!!!!!!!!!
+                _playerStats.punchingCount += _value;
+                _playerStats.punchingProcent += _value;
+                _playerPassiveController.isPunching = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Headshot:
+                _playerStats.headshotProcent += _value;
+                _playerPassiveController.isHeadshot = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.ScrewValueUp:
+                _playerStats.screwValueCoeff += _value;
+                _playerPassiveController.isScrewValueUp = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Magnet:
+                _playerStats.screwPickUpDistanceCoeff += _value;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.Lucky:
+                luckyChance += _value;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.DistanceDamage:  //Тут тоже переделать!!!!!!!!!!!!!!!
+                _playerStats.distanceDamageCoeff *= _value;
+                _playerPassiveController.isDistanceDamage = true;
+                break;
+
+            case UpgradeCard.UpgradePassiveType.MassEnemyDamage:
+
+                break;
+
+            case UpgradeCard.UpgradePassiveType.EffectsDuration:
+
                 break;
         }
 
-        if (!_playerPassiveController.isPassiveHealthRecovery)
+        foreach (Gun _gun in _playerGuns.guns)
         {
-            _playerPassiveController.healthRecoveryProcent = _procent;
+            _gun.CalculateStats();
         }
+    }
+
+    public void Upgrade_Gun(string _rarity)
+    {       
+        if (cardGunAccept.levelNum == 0)
+        {
+            switch (cardGunAccept.card.upgradeGunType)
+            {
+                case UpgradeCard.UpgradeGunType.Boomerang:
+                    _playerGuns._isBoomerang = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Bow:
+                    _playerGuns._isBow = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.DefaultGun:
+                    _playerGuns._isDefaultGun = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Dron:
+                    _playerGuns._isDron = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.FanGun:
+                    _playerGuns._isFanGun = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.GodGun:
+                    _playerGuns._isGodGun = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Grenade:
+                    _playerGuns._isGrenade = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                    _playerGuns._isGrowingShot = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Ice:
+                    _playerGuns._isIce = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Lazer:
+                    _playerGuns._isLazer = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Mines:
+                    _playerGuns._isMines = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Partner:
+                    _playerGuns._isPartner = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.PinPong:
+                    _playerGuns._isPinPong = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Ricochet:
+                    _playerGuns._isRicochet = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.RocketLauncher:
+                    _playerGuns._isRocketLauncher = true;
+                    break;
+                case UpgradeCard.UpgradeGunType.Tornado:
+                    _playerGuns._isTornado = true;
+                    break;
+            }
+
+            _playerGuns.GunActivate();
+        } 
         else
         {
-            _playerPassiveController.healthRecoveryProcent *= _procent;
+            if (_rarity == "Common") _rarity = "common";
+            if (_rarity == "Rare") _rarity = "rare";
+            if (_rarity == "Legendary") _rarity = "legendary";
+
+            string _type1 = "";
+            string _type2 = "";
+
+            Gun gunObj = null;
+
+            foreach (Gun gm in _playerGuns.guns)
+            {
+                if (gm.gameObject.name == cardGunAccept.card.cardName)
+                {
+                    gunObj = gm;
+                    Debug.Log(gunObj.name);
+                }
+            }
+
+            #region Определяем какие именно параметры улучшаем
+            if (cardGunAccept.levelNum == 1)
+            {
+                if (_rarity == "common")
+                {
+                    switch (cardGunAccept.card.lv1UpgradeCommon1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv1UpgradeCommon2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "rare")
+                {
+                    switch (cardGunAccept.card.lv1UpgradeRare1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv1UpgradeRare2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "legendary")
+                {
+                    switch (cardGunAccept.card.lv1UpgradeLegendary1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv1UpgradeLegendary2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+            }
+
+            if (cardGunAccept.levelNum == 2)
+            {
+                if (_rarity == "common")
+                {
+                    switch (cardGunAccept.card.lv2UpgradeCommon1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv2UpgradeCommon2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "rare")
+                {
+                    switch (cardGunAccept.card.lv2UpgradeRare1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv2UpgradeRare2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "legendary")
+                {
+                    switch (cardGunAccept.card.lv2UpgradeLegendary1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv2UpgradeLegendary2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+            }
+            #endregion
+
+            #region Type 1
+            if (_type1 == "Damage")
+            {
+                gunObj.damageCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "Projectile")
+            {
+                gunObj.projectileValue += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "ShotSpeed")
+            {
+                gunObj.shotSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "Area")
+            {
+                gunObj.areaCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "Ricochet")
+            {
+                gunObj.ricochetCount += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "TimeOfAction")
+            {
+                gunObj.timeOfActionCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+
+            if (_type1 == "RotateSpeed")
+            {
+                gunObj.rotateSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+            }
+            #endregion
+
+            #region Type 2
+            if (_type2 == "Damage")
+            {
+                gunObj.damageCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "Projectile")
+            {
+                gunObj.projectileValue += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "ShotSpeed")
+            {
+                gunObj.shotSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "Area")
+            {
+                gunObj.areaCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "Ricochet")
+            {
+                gunObj.ricochetCount += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "TimeOfAction")
+            {
+                gunObj.timeOfActionCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+
+            if (_type2 == "RotateSpeed")
+            {
+                gunObj.rotateSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+            }
+            #endregion
+
+            gunObj.CalculateStats();
         }
 
-        _playerPassiveController.isPassiveHealthRecovery = true;        
+        switch (cardGunAccept.card.upgradeGunType)
+        {
+            case UpgradeCard.UpgradeGunType.Boomerang:
+                Boomerang_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Bow:
+                Bow_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.DefaultGun:
+                DefaultGun_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Dron:
+                Dron_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.FanGun:
+                FanGun_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.GodGun:
+                GodGun_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Grenade:
+                Grenade_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                GrowingShot_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Ice:
+                Ice_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Lazer:
+                Lazer_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Mines:
+                Mines_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Partner:
+                Partner_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.PinPong:
+                PinPong_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Ricochet:
+                Ricochet_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.RocketLauncher:
+                RocketLauncher_Level++;
+                break;
+            case UpgradeCard.UpgradeGunType.Tornado:
+                Tornado_Level++;
+                break;
+        }
     }
-
-    public void Rage_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 1.2f;
-                break;
-
-            case "Rare":
-                _procent = 1.3f;
-                break;
-
-            case "Legendary":
-                _procent = 1.4f;
-                break;
-        }
-
-        if (_playerPassiveController.isPassiveRage)
-        {
-            _playerStats.rageCoeff *= _procent;
-        }
-
-        if (!_playerPassiveController.isPassiveRage)
-        {
-            _playerPassiveController.isPassiveRage = true;
-            _playerStats.rageCoeff = _procent;
-        }
-    }
-
-    public void AttackSpeedUp_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 0.9f;
-                break;
-
-            case "Rare":
-                _procent = 0.8f;
-                break;
-
-            case "Legendary":
-                _procent = 0.7f;
-                break;
-        }
-
-        foreach (Gun _gun in _playerGuns.guns)
-        {
-            _gun.shotSpeed *= _procent;
-        }
-    }
-
-    public void DamageUp_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 1.1f;
-                break;
-
-            case "Rare":
-                _procent = 1.2f;
-                break;
-
-            case "Legendary":
-                _procent = 1.3f;
-                break;
-        }
-
-        foreach (Gun _gun in _playerGuns.guns)
-        {
-            _gun.damage *= _procent;
-        }
-
-        _playerStats.damage *= _procent;
-    }
-
-    public void KritDamageUp_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 1.1f;
-                break;
-
-            case "Rare":
-                _procent = 1.2f;
-                break;
-
-            case "Legendary":
-                _procent = 1.3f;
-                break;
-        }
-
-        _playerStats.kritDamage *= _procent;
-    }
-
-    public void ProjectileUp_Passive(string _rarity)
-    {
-        _playerStats.projectileCount++;
-    }
-
-    public void KritChanceUp_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 1.05f;
-                break;
-
-            case "Rare":
-                _procent = 1.1f;
-                break;
-
-            case "Legendary":
-                _procent = 1.15f;
-                break;
-        }
-
-        _playerStats.kritChance *= _procent;
-    }
-
-    public void Vampirizm_Passive(string _rarity)
-    {
-        float _procent = 1;
-
-        switch (_rarity)
-        {
-            case "Common":
-                _procent = 1.01f;
-                break;
-
-            case "Rare":
-                _procent = 1.02f;
-                break;
-
-            case "Legendary":
-                _procent = 1.03f;
-                break;
-        }
-
-        _playerStats.vampirizm *= _procent;
-        _playerPassiveController.isVampirizm = true;
-    }
-    #endregion
-
-    #region Guns Upgrades
-    public void Boomerand_Gun(string _rarity)
-    {
-        if (Boomerang_Level == 0)
-        {
-            _playerGuns._isBoomerang = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }            
-        }
-
-        if (Boomerang_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().shotSpeed *= 1.1f;
-                    break;
-            }
-        }
-
-        if (Boomerang_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().shotSpeed *= 0.8f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().shotSpeed *= 0.7f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.BoomerangObj.GetComponent<Gun>().shotSpeed *= 0.6f;
-                    break;
-            }
-        }
-
-        Boomerang_Level++;
-    }
-
-    public void Dron_Gun(string _rarity)
-    {
-        if (Dron_Level == 0)
-        {
-            _playerGuns._isDron = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DronObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DronObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DronObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Dron_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DronObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DronObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DronObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.DronObj.GetComponent<Gun>().bulletMoveSpeed *= 1.1f;
-                    break;
-            }
-        }
-
-        if (Dron_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DronObj.GetComponent<Gun>().bulletMoveSpeed *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DronObj.GetComponent<Gun>().bulletMoveSpeed *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DronObj.GetComponent<Gun>().bulletMoveSpeed *= 1.4f;
-                    break;
-            }
-        }
-        Dron_Level++;
-    }
-
-    public void Ice_Gun(string _rarity)
-    {
-        if (Ice_Level == 0)
-        {
-            _playerGuns._isIce = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.IceObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.IceObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.IceObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Ice_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.IceObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.IceObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.IceObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.IceObj.GetComponent<Gun>().freezeTime *= 1.1f;
-                    break;
-            }
-        }
-
-        if (Ice_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.IceObj.GetComponent<Gun>().freezeTime *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.IceObj.GetComponent<Gun>().freezeTime *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.IceObj.GetComponent<Gun>().freezeTime *= 1.4f;
-                    break;
-            }
-        }
-        Ice_Level++;
-    }
-
-    public void Lazer_Gun(string _rarity)
-    {
-        if (Lazer_Level == 0)
-        {
-            _playerGuns._isLazer = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LazerObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LazerObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LazerObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Lazer_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LazerObj.GetComponent<Gun>().areaValue *= 1.15f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LazerObj.GetComponent<Gun>().areaValue *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LazerObj.GetComponent<Gun>().areaValue *= 1.45f;
-                    break;
-            }
-        }
-
-        if (Lazer_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LazerObj.GetComponent<Gun>().timeOfAction *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LazerObj.GetComponent<Gun>().timeOfAction *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LazerObj.GetComponent<Gun>().timeOfAction *= 1.4f;
-                    break;
-            }
-        }
-
-        Lazer_Level++;
-    }
-
-    public void Lightning_Gun(string _rarity)
-    {
-        if (Lightning_Level == 0)
-        {
-            _playerGuns._isLightning = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LightningObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LightningObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LightningObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Lightning_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LightningObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LightningObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LightningObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.LightningObj.GetComponent<Gun>().timeOfAction *= 1.1f;
-                    break;
-            }
-        }
-
-        if (Lightning_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.LightningObj.GetComponent<Gun>().timeOfAction *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.LightningObj.GetComponent<Gun>().timeOfAction *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.LightningObj.GetComponent<Gun>().timeOfAction *= 1.4f;
-                    break;
-            }
-        }
-
-        Lightning_Level++;
-    }
-
-    public void Oil_Gun(string _rarity)
-    {
-        if (Oil_Level == 0)
-        {
-            _playerGuns._isOil = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.OilObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.OilObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.OilObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Oil_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.OilObj.GetComponent<Gun>().projectileValue += 1f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.OilObj.GetComponent<Gun>().projectileValue += 2f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.OilObj.GetComponent<Gun>().projectileValue += 2f;
-                    _playerGuns.OilObj.GetComponent<Gun>().timeOfAction *= 1.1f;
-                    break;
-            }
-        }
-
-        if (Oil_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.OilObj.GetComponent<Gun>().timeOfAction *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.OilObj.GetComponent<Gun>().timeOfAction *= 1.3f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.OilObj.GetComponent<Gun>().timeOfAction *= 1.4f;
-                    break;
-            }
-        }
-
-        Oil_Level++;
-    }
-
-    public void Partner_Gun(string _rarity)
-    {
-        if (Partner_Level == 0)
-        {
-            _playerGuns._isPartner = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (Partner_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.PartnerObj.GetComponent<Gun>().shotSpeed *= 0.9f;
-                    break;
-            }
-        }
-
-        if (Partner_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().shotSpeed *= 0.8f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().shotSpeed *= 0.7f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.PartnerObj.GetComponent<Gun>().shotSpeed *= 0.6f;
-                    break;
-            }
-        }
-
-        Partner_Level++;
-    }
-
-    public void RocketLauncher(string _rarity)
-    {
-        if (RocketLauncher_Level == 0)
-        {
-            _playerGuns._isRocketLauncher = true;
-            _playerGuns.GunActivate();
-
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (RocketLauncher_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().areaValue *= 1.1f;
-                    break;
-            }
-        }
-
-        if (RocketLauncher_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().areaValue *= 1.1f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().areaValue *= 1.2f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.RocketLauncherObj.GetComponent<Gun>().areaValue *= 1.3f;
-                    break;
-            }
-        }
-
-        RocketLauncher_Level++;
-    }
-
-    public void DefaultGun_Gun(string _rarity)
-    {
-        if (DefaultGun_Level == 0)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().damage *= 1.2f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().damage *= 1.4f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().damage *= 1.6f;
-                    break;
-            }
-        }
-
-        if (DefaultGun_Level == 1)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().projectileValue += 1;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().projectileValue += 2;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().projectileValue += 2;
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().shotSpeed *= 0.8f;
-                    break;
-            }
-        }
-
-        if (DefaultGun_Level == 2)
-        {
-            switch (_rarity)
-            {
-                case "Common":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().shotSpeed *= 0.8f;
-                    break;
-
-                case "Rare":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().shotSpeed *= 0.7f;
-                    break;
-
-                case "Legendary":
-                    _playerGuns.DefaultGunObj.GetComponent<Gun>().shotSpeed *= 0.6f;
-                    break;
-            }
-        }
-
-        DefaultGun_Level++;
-    }
-    #endregion
 }
 
 [System.Serializable]

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyLazerObj : MonoBehaviour
 {
+    public EnemyController _controller;
     public EnemyGun _gunController;
 
 
@@ -12,6 +13,7 @@ public class EnemyLazerObj : MonoBehaviour
         if (other.tag == "player")
         {
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
+            _controller.BackDamage(_gunController.damage);
         }
     }
 }

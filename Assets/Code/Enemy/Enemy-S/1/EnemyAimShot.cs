@@ -45,10 +45,7 @@ public class EnemyAimShot : MonoBehaviour
         _inst.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;
         _inst.transform.LookAt(GameObject.Find("Player").transform);
         _inst.transform.eulerAngles = new Vector3(0, _inst.transform.eulerAngles.y, 0);
-
-        GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint.position, transform.rotation);
-        _instMuzzle.transform.parent = bulletSpawnPoint;
-        Destroy(_instMuzzle, 2);
+        _inst.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
         yield return new WaitForSeconds(_gunController.shotSpeed);
 

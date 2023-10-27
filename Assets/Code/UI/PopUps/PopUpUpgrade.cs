@@ -7,14 +7,10 @@ using TMPro;
 
 public class PopUpUpgrade : MonoBehaviour
 {
-    public Image card1, card2, card3;
+    public Image cardGun1, cardGun2, cardGun3;
+    public Image cardPassive1, cardPassive2, cardPassive3;
 
-    public GameObject imgFade;
-    public GameObject objPopUp;
-
-    public float animSpeed;
-
-    PopUpController controller;
+    private PopUpController _popUpController;
     public UpgradeController upgradeController;
     private WaveController _waveController;
 
@@ -22,8 +18,6 @@ public class PopUpUpgrade : MonoBehaviour
     public TMP_Text tScrewValue;
 
     public GameObject butRerollScrew;
-
-    public Image imgFAQ1, imgFAQ2, imgFAQ3;
 
     public bool isWaveUpgrade = false;
     public bool isOpen;
@@ -38,27 +32,21 @@ public class PopUpUpgrade : MonoBehaviour
     private void Start()
     {
         _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
-
-        controller = new PopUpController();
-        controller.imgFade = imgFade;
-        controller.objPopUp = objPopUp;
-        controller.animTime = animSpeed;
-
-        controller.Initialize();
+        _popUpController = GetComponent<PopUpController>();
     }
 
     private void Update()
     {
-        if (GlobalStats.screwCount > 12)
-        {
-            butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
-        }
-        else
-        {
-            butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = true;
-        }
+        //if (GlobalStats.screwCount > 12)
+        //{
+        //    butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
+        //}
+        //else
+        //{
+        //    butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = true;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             ButOpen();
         }
@@ -68,65 +56,76 @@ public class PopUpUpgrade : MonoBehaviour
     {
         tChoiceUpgrade.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
 
-        imgFAQ1.GetComponent<RectTransform>().localScale = Vector3.zero;
-        imgFAQ2.GetComponent<RectTransform>().localScale = Vector3.zero;
-        imgFAQ3.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardGun1.GetComponent<RectTransform>().DOAnchorPosX(-300, 0f).SetUpdate(true);
+        cardGun2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
+        cardGun3.GetComponent<RectTransform>().DOAnchorPosX(300, 0f).SetUpdate(true);
 
-        card1.GetComponent<RectTransform>().DOAnchorPosX(-348, 0f).SetUpdate(true);
-        card2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
-        card3.GetComponent<RectTransform>().DOAnchorPosX(348, 0f).SetUpdate(true);
+        cardPassive1.GetComponent<RectTransform>().DOAnchorPosX(-300, 0f).SetUpdate(true);
+        cardPassive2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
+        cardPassive3.GetComponent<RectTransform>().DOAnchorPosX(300, 0f).SetUpdate(true);
 
-        Sequence cardAnim = DOTween.Sequence();
+        Sequence cardGunAnim = DOTween.Sequence();
+        Sequence cardPassiveAnim = DOTween.Sequence();
 
-        card1.GetComponent<RectTransform>().localScale = Vector3.zero;
-        card2.GetComponent<RectTransform>().localScale = Vector3.zero;
-        card3.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardGun1.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardGun2.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardGun3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
-        cardAnim.Insert(0.3f, card1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.4f, card2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.5f, card3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassive1.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardPassive2.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardPassive3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
-        cardAnim.Insert(0.3f, imgFAQ1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.4f, imgFAQ2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.5f, imgFAQ3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardGunAnim.Insert(0.3f, cardGun1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardGunAnim.Insert(0.4f, cardGun2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardGunAnim.Insert(0.5f, cardGun3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
+        cardPassiveAnim.Insert(0.3f, cardPassive1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Insert(0.4f, cardPassive2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Insert(0.5f, cardPassive3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
     }
 
-    public void ChoiceCard(int _cardNum)
+    public void ChoiceCard()
     {
-        tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
-
-        if (_cardNum == 1)
+        if (upgradeController.cardGunAccept != null && upgradeController.cardPassiveAccept != null)
         {
-            card1.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
-            card1.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
+            tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
 
-            card2.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-            card3.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
+            foreach (UpgradeCardController _card in upgradeController.cardsGunController)
+            {
+                if (upgradeController.cardGunAccept == _card)
+                {
+                    _card.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
+                    //_card.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
+
+                    _card.ChoiceCard();
+                }
+                else
+                {
+                    _card.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
+                }
+            }
+
+            foreach (UpgradeCardController _card in upgradeController.cardsPassiveController)
+            {
+                if (upgradeController.cardPassiveAccept == _card)
+                {
+                    _card.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
+                    //_card.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
+
+                    _card.ChoiceCard();
+                }
+                else
+                {
+                    _card.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
+                }
+            }
+
+            StartCoroutine(EndUpgrade());
+            _waveController.StartWave();
+
+            upgradeController.cardGunAccept = null;
+            upgradeController.cardPassiveAccept = null;
         }
-
-        if (_cardNum == 2)
-        {
-            card2.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
-            card2.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
-
-            card1.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-            card3.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-        }
-
-        if (_cardNum == 3)
-        {
-            card3.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
-            card3.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
-
-            card1.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-            card2.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-        }
-
-        imgFAQ1.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-        imgFAQ2.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-        imgFAQ3.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-
-        StartCoroutine(EndUpgrade());
     }
 
     IEnumerator EndUpgrade()
@@ -140,17 +139,25 @@ public class PopUpUpgrade : MonoBehaviour
         GameplayController.isPause = true;
         isOpen = true;
         Time.timeScale = 0;
-        CardAnimation();        
-        upgradeController.GenerateUpgrades();
-        controller.OpenPopUp();
+        CardAnimation();
+        //upgradeController.GenerateUpgrades();
+        upgradeController.GenerateGunCards();
+        upgradeController.GeneratePassiveCards();
+        _popUpController.OpenPopUp();
 
-        card1.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        card2.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        card3.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun1.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun2.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun3.gameObject.GetComponent<UpgradeCardController>().Initialize();
+
+        cardPassive1.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardPassive2.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardPassive3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         tScrewValue.text = GlobalStats.screwCount.ToString();
 
-        RerollInitialize();
+        upgradeController.SlotInitialize();
+        upgradeController.UpdateTextLevels();
+        //RerollInitialize();
     }
 
     void RerollInitialize()
@@ -164,19 +171,21 @@ public class PopUpUpgrade : MonoBehaviour
         GameplayController.isPause = false;
         isOpen = false;
         Time.timeScale = 1;
-        controller.ClosedPopUp();
+        _popUpController.ClosedPopUp();
         isWaveUpgrade = false;
-
-        if (isDefferenUpgrade)
-        {
-            StartCoroutine(DefferedUpgrade());
-            isDefferenUpgrade = false;
-        }
     }
 
-    public void ButRerollAds()
+    public void ButRerollAds(string _type)
     {
-        StartCoroutine(Reroll());
+        if (_type == "gun")
+        {
+            StartCoroutine(RerollGun());
+        }
+
+        if (_type == "passive")
+        {
+            StartCoroutine(RerollPassive());
+        }        
     }
 
     public void ButRerollScrew()
@@ -186,37 +195,56 @@ public class PopUpUpgrade : MonoBehaviour
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
             GlobalStats.screwCount -= rerollPrice;
             tScrewValue.text = GlobalStats.screwCount.ToString();
-            StartCoroutine(Reroll());
+            StartCoroutine(RerollGun());
         }        
     }
 
-    IEnumerator Reroll()
+    IEnumerator RerollGun()
     {
-        card1.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
-        card2.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
-        card3.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+        cardGun1.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+        cardGun2.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+        cardGun3.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
 
-        card1.gameObject.GetComponent<UpgradeCardController>().Reroll();
-        card2.gameObject.GetComponent<UpgradeCardController>().Reroll();
-        card3.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        cardGun1.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        cardGun2.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        cardGun3.gameObject.GetComponent<UpgradeCardController>().Reroll();
 
         yield return new WaitForSecondsRealtime(0.5f);
 
-        upgradeController.GenerateUpgrades();
-        card1.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        card2.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        card3.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        upgradeController.GenerateGunCards();
+        cardGun1.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun2.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
-        Sequence cardAnim = DOTween.Sequence();
+        Sequence cardGunAnim = DOTween.Sequence();
 
-        cardAnim.Insert(0f, card1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.1f, card2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-        cardAnim.Insert(0.2f, card3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
-    }    
+        cardGunAnim.Insert(0f, cardGun1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardGunAnim.Insert(0.1f, cardGun2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardGunAnim.Insert(0.2f, cardGun3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+    }
 
-    IEnumerator DefferedUpgrade()
+    IEnumerator RerollPassive()
     {
-        yield return new WaitForSeconds(1);
-        ButOpen();
+        cardPassive1.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+        cardPassive2.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+        cardPassive3.GetComponent<RectTransform>().DOScale(0, 0.5f).SetEase(Ease.InBack).SetUpdate(true);
+
+        cardPassive1.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        cardPassive2.gameObject.GetComponent<UpgradeCardController>().Reroll();
+        cardPassive3.gameObject.GetComponent<UpgradeCardController>().Reroll();
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        upgradeController.GeneratePassiveCards();
+
+        cardPassive1.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardPassive2.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardPassive3.gameObject.GetComponent<UpgradeCardController>().Initialize();
+
+        Sequence cardPassiveAnim = DOTween.Sequence();
+
+        cardPassiveAnim.Insert(0f, cardPassive1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Insert(0.1f, cardPassive2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Insert(0.2f, cardPassive3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
     }
 }

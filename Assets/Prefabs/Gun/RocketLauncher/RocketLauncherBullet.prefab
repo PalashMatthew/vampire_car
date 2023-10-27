@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7026002902200668646}
   - component: {fileID: 5105837112665766922}
+  - component: {fileID: 3254331703760415260}
   m_Layer: 0
   m_Name: RocketLauncherBullet
   m_TagString: player_bullet
@@ -50,6 +51,19 @@ MonoBehaviour:
   minDistanceToAttack: 1
   target: {fileID: 0}
   boomObj: {fileID: 2334534719011464418, guid: 87b6521a8a78873478b3262e2aa59af9, type: 3}
+--- !u!114 &3254331703760415260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658280819482819636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c25528756005243a660844b3d4580e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCoord: {x: 0, y: 0, z: 0}
 --- !u!1001 &4328383615849666790
 PrefabInstance:
   m_ObjectHideFlags: 0

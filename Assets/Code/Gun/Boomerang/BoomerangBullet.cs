@@ -52,7 +52,7 @@ public class BoomerangBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            _gunController.DamageEnemy(other.gameObject);
+            _gunController.DamageEnemy(other.gameObject, gameObject);
             //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
         }
 

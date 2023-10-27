@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonPress : EventTrigger
+public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool NegativeAnimation;
 
@@ -15,7 +15,7 @@ public class ButtonPress : EventTrigger
         //transform.DOScale(1f, 0f).SetUpdate(true);
     }
 
-    public override void OnPointerDown(PointerEventData data)
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (!NegativeAnimation)
         {
@@ -44,7 +44,7 @@ public class ButtonPress : EventTrigger
         negativeAnimationPlayed = false;
     }
 
-    public override void OnPointerUp(PointerEventData data)
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (!NegativeAnimation)
         {

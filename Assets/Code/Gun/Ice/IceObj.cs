@@ -14,7 +14,7 @@ public class IceObj : MonoBehaviour
 
     IEnumerator EndAttack()
     {
-        yield return new WaitForSeconds(_gunController.timeOfAction);
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 
@@ -23,7 +23,7 @@ public class IceObj : MonoBehaviour
         if (other.tag == "enemy")
         {
             //other.gameObject.GetComponent<EnemyController>().Hit(_gunController.CalculateDamage());
-            _gunController.DamageEnemy(other.gameObject);
+            _gunController.DamageEnemy(other.gameObject, gameObject);
             other.gameObject.GetComponent<EnemyController>().Freeze(_gunController.freezeTime);
         }
 

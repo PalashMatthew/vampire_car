@@ -4,26 +4,36 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public class PopUpController
+public class PopUpController : MonoBehaviour 
 {
     public GameObject imgFade;
     public GameObject objPopUp;
 
-    public float animTime;
+    public float animTime = 0.3f;
 
     public void Initialize()
     {
-        imgFade.SetActive(false);
+        if (imgFade != null)
+            imgFade.SetActive(false);
+
         objPopUp.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        Initialize();
     }
 
     public void OpenPopUp()
     {
-        imgFade.SetActive(true);
-        objPopUp.SetActive(true);
+        if (imgFade != null)
+        {
+            imgFade.SetActive(true);
+            imgFade.GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
+            imgFade.GetComponent<Image>().DOFade(0.5f, animTime).SetUpdate(true);
+        }
 
-        imgFade.GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
-        imgFade.GetComponent<Image>().DOFade(0.5f, animTime).SetUpdate(true);
+        objPopUp.SetActive(true);        
 
         objPopUp.transform.localScale = Vector3.zero;
         objPopUp.transform.DOScale(1, animTime).SetEase(Ease.OutBack).SetUpdate(true);
@@ -31,14 +41,17 @@ public class PopUpController
 
     public void ClosedPopUp()
     {
-        imgFade.GetComponent<Image>().DOFade(0, animTime).SetUpdate(true);
+        if (imgFade != null)
+            imgFade.GetComponent<Image>().DOFade(0, animTime).SetUpdate(true);
 
         objPopUp.transform.DOScale(0, animTime).SetEase(Ease.InBack).OnComplete(PopUpComponentOff).SetUpdate(true);        
     }
 
     void PopUpComponentOff()
     {
-        imgFade.SetActive(false);
+        if (imgFade != null)
+            imgFade.SetActive(false);
+
         objPopUp.SetActive(false);
     }
 }

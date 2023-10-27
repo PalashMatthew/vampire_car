@@ -44,18 +44,17 @@ public class EnemyTripleShot : MonoBehaviour
         GameObject _inst1 = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst1.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;
         _inst1.transform.eulerAngles = new Vector3(0, 180, 0);
+        _inst1.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
         GameObject _inst2 = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst2.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;
         _inst2.transform.eulerAngles = new Vector3(0, 195, 0);
+        _inst2.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
         GameObject _inst3 = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst3.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;
         _inst3.transform.eulerAngles = new Vector3(0, 165, 0);
-
-        GameObject _instMuzzle = Instantiate(muzzleObj, bulletSpawnPoint.position, transform.rotation);
-        _instMuzzle.transform.parent = bulletSpawnPoint;
-        Destroy(_instMuzzle, 2);
+        _inst3.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
         yield return new WaitForSeconds(_gunController.shotSpeed);
 

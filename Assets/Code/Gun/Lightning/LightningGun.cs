@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class LightningGun : MonoBehaviour
 {
-    public List<GameObject> bulletObj;
+    public GameObject bulletObj;
+    public Transform bulletSpawnPoint;
 
     Gun _gunController;
+    GameplayController _gameplayController;
+    GameObject _player;
+
+    private List<GameObject> _activeEnemy = new List<GameObject>();
+
+    public LineRenderer _lineRenderer;
 
 
     void Initialize()
     {
         _gunController = GetComponent<Gun>();
-
-        foreach (GameObject gm in bulletObj)
-        {
-            gm.SetActive(false);
-        }        
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+        _player = GameObject.Find("Player");
     }
 
     private void Start()
@@ -30,24 +34,46 @@ public class LightningGun : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        for (int i = 1; i <= _gunController.projectileValue; i++)
+        if (_gameplayController.activeEnemy.Count > 0)
         {
-            bulletObj[i-1].SetActive(true);
-            bulletObj[i - 1].GetComponent<LightningBullet>()._gunController = _gunController;
+            List<GameObject> _usedEnemy = new List<GameObject>();
+            _activeEnemy.Clear();
+            _activeEnemy.AddRange(_gameplayController.activeEnemy);
+
+            GameObject _target = null;
+            float _minDistance = 9999;
+
+            foreach (GameObject gm in _gameplayController.activeEnemy)
+            {
+                if (Vector3.Distance(_player.transform.position, gm.transform.position) < _minDistance && !_usedEnemy.Contains(gm) && gm.transform.position.z > _player.transform.position.z)
+                {
+                    _target = gm;
+                    _minDistance = Vector3.Distance(_player.transform.position, gm.transform.position);
+                }
+            }
+
+            if (_target != null)
+            {
+                _usedEnemy.Add(_target);
+
+                _lineRenderer.enabled = true;
+                _lineRenderer.SetPosition(0, new Vector3(transform.position.x, 1, transform.position.z));
+                _lineRenderer.SetPosition(1, new Vector3(_target.transform.position.x, 1, _target.transform.position.z));
+                StartCoroutine(OffLine());
+            }
+        }
+        else
+        {
+            StartCoroutine(Shot());
+            yield break;
         }
 
-        //foreach (GameObject gm in bulletObj)
-        //{
-        //    gm.SetActive(true);
-        //    gm.GetComponent<LightningBullet>()._gunController = _gunController;
-        //}
-
-        yield return new WaitForSeconds(_gunController.timeOfAction);
-
-        foreach (GameObject gm in bulletObj)
-        {
-            gm.SetActive(false);
-        }
         StartCoroutine(Shot());
+    }
+
+    IEnumerator OffLine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _lineRenderer.enabled = false;
     }
 }

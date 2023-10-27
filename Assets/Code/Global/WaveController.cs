@@ -23,6 +23,7 @@ public class WaveController : MonoBehaviour
     public GameObject enemyS3Obj;
     public GameObject enemyS4Obj;
 
+    private GameplayController _gameplayController;
     private Generate _generate;
     public GameplayUIController gameplayUIController;
     GenerateObstacles _generateObstacles;
@@ -31,9 +32,18 @@ public class WaveController : MonoBehaviour
     {
         _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
         _generateObstacles = GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>();
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
 
-        StartWave();
-        StartCoroutine(PatternSpawn());
+        StartWave();        
+    }
+
+    public void StartWave()
+    {
+        enemyDestroy = 0;
+        currentWave++;
+        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
+        _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
+        _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
 
         for (int i = 0; i < waveList[currentWave - 1].patternsSpawnTime.Count; i++)
         {
@@ -42,59 +52,48 @@ public class WaveController : MonoBehaviour
                 StartCoroutine(PatternPrioritySpawn(waveList[currentWave - 1].patterns[i], waveList[currentWave - 1].patternsSpawnTime[i]));
             }
         }
-    }
 
-    public void StartWave()
-    {
-        if (currentWave != 0)
-        {
-            if (!GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen)
-            {
-                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
-                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
-            }
-            else
-            {
-                GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isDefferenUpgrade = true;
-            }
-        }
-
-        enemyDestroy = 0;
-        currentWave++;
-        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
-        _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
-        _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
+        StartCoroutine(PatternSpawn());
 
         _generate.StartSpawn();
         _generateObstacles.NewWave();
     }
 
-    IEnumerator DefferedUpgrade()
-    {
-        yield return new WaitForSeconds(1);
-
-        if (!GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isOpen)
-        {
-            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
-            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
-        } else
-        {
-            StartCoroutine(DefferedUpgrade());
-        }
-    }
-
     public void WaveEnd()
     {
-        if (currentWave < lastWave)
+        StopAllCoroutines();
+        _generate.StopAllCoroutines();
+
+        for (int i = 0; i < _gameplayController.activeEnemy.Count; i++)
         {
-            StartWave();
-        } 
-        else
-        {
-            StopAllCoroutines();
+            if (_gameplayController.activeEnemy[i] != null)
+            {
+                _gameplayController.activeEnemy[i].GetComponent<EnemyController>().DeleteEnemy();
+            }
+        }
+
+        _gameplayController.activeEnemy.Clear();
+        gameplayUIController.StartCoroutine(gameplayUIController.WaveCompliteAnim());
+
+        StartCoroutine(ShowUpgrade());
+
+        //if (currentWave < lastWave)
+        //{
+        //    StartWave();
+        //} 
+        //else
+        //{
+        //    StopAllCoroutines();
             
-            _generate.BossFight();
-        }        
+        //    _generate.BossFight();
+        //}        
+    }
+
+    IEnumerator ShowUpgrade()
+    {
+        yield return new WaitForSeconds(2.5f);
+        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().isWaveUpgrade = true;
+        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButOpen();
     }
 
     public GameObject ChoiseEnemy()

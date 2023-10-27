@@ -5,26 +5,47 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card", menuName = "UpgradeCard")]
 public class UpgradeCard : ScriptableObject
 {
+    public enum LvUpgrade
+    {
+        none,
+        Damage,
+        Projectile,
+        ShotSpeed,
+        Area,
+        Ricochet,
+        TimeOfAction,
+        RotateSpeed
+    }
+
     [Header("Base")]
     public string cardName;
     public string descriptionCommon;
     public string descriptionRare;
     public string descriptionLegendary;
 
-    [Header("Level 1 Description")]
-    public string descriptionCommonLVL1;
-    public string descriptionRareLVL1;
-    public string descriptionLegendaryLVL1;
+    [Header("Level 1 Common")]
+    public LvUpgrade lv1UpgradeCommon1;
+    public LvUpgrade lv1UpgradeCommon2;
 
-    [Header("Level 2 Description")]
-    public string descriptionCommonLVL2;
-    public string descriptionRareLVL2;
-    public string descriptionLegendaryLVL2;
+    [Header("Level 1 Rare")]
+    public LvUpgrade lv1UpgradeRare1;
+    public LvUpgrade lv1UpgradeRare2;
 
-    [Header("Level 3 Description")]
-    public string descriptionCommonLVL3;
-    public string descriptionRareLVL3;
-    public string descriptionLegendaryLVL3;
+    [Header("Level 1 Legendary")]
+    public LvUpgrade lv1UpgradeLegendary1;
+    public LvUpgrade lv1UpgradeLegendary2;
+
+    [Header("Level 2 Common")]
+    public LvUpgrade lv2UpgradeCommon1;
+    public LvUpgrade lv2UpgradeCommon2;
+
+    [Header("Level 2 Rare")]
+    public LvUpgrade lv2UpgradeRare1;
+    public LvUpgrade lv2UpgradeRare2;
+
+    [Header("Level 2 Legendary")]
+    public LvUpgrade lv2UpgradeLegendary1;
+    public LvUpgrade lv2UpgradeLegendary2;
 
     [Header("Settings")]
     public Sprite imageItem;
@@ -56,7 +77,18 @@ public class UpgradeCard : ScriptableObject
         KritDamageUp,
         Vampirizm,
         ProjectileUp,
-        KritChanceUp
+        KritChanceUp,
+        BackDamage,
+        DistanceDamage,
+        Dodge,
+        Armor,
+        Punching,
+        MassEnemyDamage,
+        Headshot,
+        ScrewValueUp,
+        Magnet,
+        Lucky,
+        EffectsDuration
     }
     public UpgradePassiveType upgradePassiveType;
 
@@ -67,11 +99,19 @@ public class UpgradeCard : ScriptableObject
         Partner,
         Lazer,
         Lightning,
-        Oil,
         Boomerang,
         Dron,
         Ice,
-        DefaultGun
+        DefaultGun,
+        GrowingShotGun,
+        FanGun,
+        Tornado,
+        Mines,
+        Grenade,
+        GodGun,
+        Ricochet,
+        Bow,
+        PinPong
     }
     public UpgradeGunType upgradeGunType;
 }

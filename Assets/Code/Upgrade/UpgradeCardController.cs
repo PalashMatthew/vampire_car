@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Newtonsoft.Json.Linq;
 
 public class UpgradeCardController : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgCardType;
     public Sprite sprCardTypePassive, sprCardTypeGun;
 
-    public GameObject imgNew;
+    public Image outline;
 
     public enum CardRarity
     {
@@ -41,23 +42,11 @@ public class UpgradeCardController : MonoBehaviour
     public CardRarity cardRarity;
 
     public void Initialize()
-    {
-        tName.text = card.cardName;        
-
+    {   
         _upgradeController = GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>();
         _popUpUpgrade = GetComponentInParent<PopUpUpgrade>();
 
-        if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
-        {
-            imgStarPanel.gameObject.SetActive(false);
-            imgCardType.sprite = sprCardTypePassive;
-        }
-
-        if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
-        {
-            imgStarPanel.gameObject.SetActive(true);
-            imgCardType.sprite = sprCardTypeGun;
-        }
+        outline.gameObject.SetActive(false);
 
         #region Rarity
         if (card.cardRarity == UpgradeCard.CardRarity.Common)
@@ -67,24 +56,6 @@ public class UpgradeCardController : MonoBehaviour
             if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
             {
                 tDescription.text = card.descriptionCommon;
-            }
-
-            if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
-            {
-                switch (levelNum)
-                {
-                    case 0:
-                        tDescription.text = card.descriptionCommonLVL1;
-                        break;
-
-                    case 1:
-                        tDescription.text = card.descriptionCommonLVL2;
-                        break;
-
-                    case 2:
-                        tDescription.text = card.descriptionCommonLVL3;
-                        break;
-                }                
             }
 
             imgCard.sprite = sprCommonCard;
@@ -105,24 +76,6 @@ public class UpgradeCardController : MonoBehaviour
                 tDescription.text = card.descriptionRare;
             }
 
-            if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
-            {
-                switch (levelNum)
-                {
-                    case 0:
-                        tDescription.text = card.descriptionRareLVL1;
-                        break;
-
-                    case 1:
-                        tDescription.text = card.descriptionRareLVL2;
-                        break;
-
-                    case 2:
-                        tDescription.text = card.descriptionRareLVL3;
-                        break;
-                }
-            }
-
             imgCard.sprite = sprRareCard;
 
             if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
@@ -139,24 +92,6 @@ public class UpgradeCardController : MonoBehaviour
             if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
             {
                 tDescription.text = card.descriptionLegendary;
-            }
-
-            if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
-            {
-                switch (levelNum)
-                {
-                    case 0:
-                        tDescription.text = card.descriptionLegendaryLVL1;
-                        break;
-
-                    case 1:
-                        tDescription.text = card.descriptionLegendaryLVL2;
-                        break;
-
-                    case 2:
-                        tDescription.text = card.descriptionLegendaryLVL3;
-                        break;
-                }
             }
 
             imgCard.sprite = sprLegendaryCard;
@@ -210,99 +145,32 @@ public class UpgradeCardController : MonoBehaviour
         }
         #endregion
 
-        imgIcon.sprite = card.imageItem;
+        CardSettings();
+    }
 
-        if (levelNum == 0 && card.upgradeType == UpgradeCard.UpgradeType.Gun) imgNew.SetActive(true);
-        else imgNew.SetActive(false);
+    public void ButAccept(string _type)
+    {
+        _upgradeController.CardAccept(gameObject.GetComponent<UpgradeCardController>(), _type);
     }
 
     public void ChoiceCard()
     {   
         if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
         {
-            switch (card.upgradePassiveType)
-            {
-                case UpgradeCard.UpgradePassiveType.MaxHpUp:
-                    _upgradeController.MaxHpUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.HealthRecovery:
-                    _upgradeController.HealthRecovery_Passive(cardRarity.ToString()); 
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.Rage:
-                    _upgradeController.Rage_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
-                    _upgradeController.AttackSpeedUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.DamageUp:
-                    _upgradeController.DamageUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.KritDamageUp:
-                    _upgradeController.KritDamageUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.ProjectileUp:
-                    _upgradeController.ProjectileUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.KritChanceUp:
-                    _upgradeController.KritChanceUp_Passive(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradePassiveType.Vampirizm:
-                    _upgradeController.Vampirizm_Passive(cardRarity.ToString());
-                    break;
-            }
+            _upgradeController.Upgrade_Passive(cardRarity.ToString());            
         }
 
         if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
         {
-            switch (card.upgradeGunType)
+            if (!_upgradeController.activeGunCard.Contains(card))
             {
-                case UpgradeCard.UpgradeGunType.Boomerang:
-                    _upgradeController.Boomerand_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Dron:
-                    _upgradeController.Dron_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Ice:
-                    _upgradeController.Ice_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Lazer:
-                    _upgradeController.Lazer_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Lightning:
-                    _upgradeController.Lightning_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Oil:
-                    _upgradeController.Oil_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.Partner:
-                    _upgradeController.Partner_Gun(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.RocketLauncher:
-                    _upgradeController.RocketLauncher(cardRarity.ToString());
-                    break;
-
-                case UpgradeCard.UpgradeGunType.DefaultGun:
-                    _upgradeController.DefaultGun_Gun(cardRarity.ToString());
-                    break;
+                _upgradeController.AddCardToSlot(card);
             }
+
+            _upgradeController.Upgrade_Gun(cardRarity.ToString());
         }
 
-        _popUpUpgrade.ChoiceCard(cardNum);
+        _upgradeController.UpdateTextLevels();
     }
 
     IEnumerator StarAnim(Image _imgStar)
@@ -331,5 +199,488 @@ public class UpgradeCardController : MonoBehaviour
         imgStar1.DOFade(1, 0).SetUpdate(true);
         imgStar2.DOFade(1, 0).SetUpdate(true);
         imgStar3.DOFade(1, 0).SetUpdate(true);
+    }
+
+    void CardSettings()
+    {
+        tName.text = card.cardName;
+        imgCardType.sprite = sprCardTypeGun;
+
+        if (card.imageItem != null)
+            imgIcon.sprite = card.imageItem;
+
+        if (card.upgradeType == UpgradeCard.UpgradeType.Passive)
+        {
+            imgStarPanel.gameObject.SetActive(false);
+
+            string _desk;
+            string _rarity = "";
+
+            switch (cardRarity)
+            {
+                case CardRarity.Common:
+                    _rarity = "Common";
+                    break;
+                case CardRarity.Rare:
+                    _rarity = "Rare";
+                    break;
+                case CardRarity.Legendary:
+                    _rarity = "Legendary";
+                    break;
+            }
+
+            float upgValue = PlayerPrefs.GetFloat(card.cardName + "passiveUpgrade" + _rarity);            
+
+            switch (card.upgradePassiveType)
+            {
+                case UpgradeCard.UpgradePassiveType.MaxHpUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.HealthRecovery:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Rage:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.DamageUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.KritDamageUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.KritChanceUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Vampirizm:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.BackDamage:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Dodge:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Armor:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Punching:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Headshot:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.ScrewValueUp:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Magnet:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.Lucky:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.DistanceDamage:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.MassEnemyDamage:
+                    tDescription.text = "+" + upgValue;
+                    break;
+
+                case UpgradeCard.UpgradePassiveType.EffectsDuration:
+                    tDescription.text = "+" + upgValue;
+                    break;
+            }
+        }
+
+        if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
+        {
+            imgStarPanel.gameObject.SetActive(true);
+
+            #region Card Settings
+            switch (card.upgradeGunType)
+            {
+                case UpgradeCard.UpgradeGunType.Boomerang:
+                    levelNum = _upgradeController.Boomerang_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Bow:
+                    levelNum = _upgradeController.Bow_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.DefaultGun:
+                    levelNum = _upgradeController.DefaultGun_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Dron:
+                    levelNum = _upgradeController.Dron_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.FanGun:
+                    levelNum = _upgradeController.FanGun_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.GodGun:
+                    levelNum = _upgradeController.GodGun_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Grenade:
+                    levelNum = _upgradeController.Grenade_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                    levelNum = _upgradeController.GrowingShot_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Ice:
+                    levelNum = _upgradeController.Ice_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Lazer:
+                    levelNum = _upgradeController.Lazer_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Mines:
+                    levelNum = _upgradeController.Mines_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Partner:
+                    levelNum = _upgradeController.Partner_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.PinPong:
+                    levelNum = _upgradeController.PinPong_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Ricochet:
+                    levelNum = _upgradeController.Ricochet_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.RocketLauncher:
+                    levelNum = _upgradeController.RocketLauncher_Level;
+                    break;
+                case UpgradeCard.UpgradeGunType.Tornado:
+                    levelNum = _upgradeController.Tornado_Level;
+                    break;
+            }
+
+            if (levelNum > 0)
+            {
+                string _desk;
+                string _rarity = "";
+
+                switch (cardRarity)
+                {
+                    case CardRarity.Common:
+                        _rarity = "common";
+                        break;
+                    case CardRarity.Rare:
+                        _rarity = "rare";
+                        break;
+                    case CardRarity.Legendary:
+                        _rarity = "legendary";
+                        break;
+                }
+
+                float upgValue1 = PlayerPrefs.GetFloat(card.cardName + "lv" + levelNum + "_1_" + _rarity);
+                float upgValue2 = PlayerPrefs.GetFloat(card.cardName + "lv" + levelNum + "_2_" + _rarity);
+
+                if (upgValue2 != 0)
+                {
+                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + CheckGunUpgradeType2(levelNum, _rarity) + upgValue2;
+                }
+                else
+                {
+                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1;
+                }
+
+                tDescription.text = _desk;
+            } 
+            else
+            {
+                tDescription.text = "New Gun";
+            }
+            #endregion
+        }
+    }
+
+    string CheckGunUpgradeType1(int currLevel, string _rarity)
+    {
+        if (currLevel == 1)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv1UpgradeCommon1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv1UpgradeRare1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv1UpgradeLegendary1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
+
+        if (currLevel == 2)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv2UpgradeCommon1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv2UpgradeRare1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv2UpgradeLegendary1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
+
+        return "";
+    }
+
+    string CheckGunUpgradeType2(int currLevel, string _rarity)
+    {
+        if (currLevel == 1)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv1UpgradeCommon2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv1UpgradeRare2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv1UpgradeLegendary2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
+
+        if (currLevel == 2)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv2UpgradeCommon2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv2UpgradeRare2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv2UpgradeLegendary2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
+
+        return "";
+
+        return "";
     }
 }

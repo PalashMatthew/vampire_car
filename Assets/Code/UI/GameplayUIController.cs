@@ -18,11 +18,16 @@ public class GameplayUIController : MonoBehaviour
     public Image imgWaveEndFill;
     public GameObject wavePanel;
 
-    [Header("Level")]
-    public TMP_Text tCurrentLevel;
-    public Image imgFillLevelBar;
+    [Header("HP")]
+    public TMP_Text tCurrentHP;
+    public Image imgFillHPBar;
     public PlayerLevelController playerLevelController;
-    public Image imgLevelEndFill;
+    public PlayerStats playerStats;
+    public Image imgHPEndFill;
+
+    [Header("WaveComplite")]
+    public GameObject waveCompliteObj;
+    public GameObject waveHeaderObj;
 
     [Header("Boss")]
     public TMP_Text tBossName;
@@ -46,7 +51,7 @@ public class GameplayUIController : MonoBehaviour
 
     private void Update()
     {
-        UpdateLevel();
+        UpdateHP();
 
         if (!isWin)
         {
@@ -92,21 +97,21 @@ public class GameplayUIController : MonoBehaviour
     }
     #endregion
 
-    #region Level
-    void UpdateLevel()
+    #region HP
+    void UpdateHP()
     {
-        tCurrentLevel.text = "Уровень " + playerLevelController.currentLevel.ToString();
+        tCurrentHP.text = "HP: " + (int)playerStats.currentHp + "/" + (int)playerStats.maxHp;
 
-        imgFillLevelBar.fillAmount = (float)playerLevelController.enemyCountInThisLevel / playerLevelController.enemyCountFromNewLevel[playerLevelController.currentLevel - 1];
+        imgFillHPBar.fillAmount = playerStats.currentHp / playerStats.maxHp;
 
-        if (imgFillLevelBar.fillAmount > 0)
+        if (imgFillHPBar.fillAmount > 0 && imgFillHPBar.fillAmount < 1)
         {
-            imgLevelEndFill.gameObject.SetActive(true);
-            imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 280f, 0);
+            imgHPEndFill.gameObject.SetActive(true);
+            imgHPEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillHPBar.fillAmount * 281f, 0);
         }
         else
         {
-            imgLevelEndFill.gameObject.SetActive(false);
+            imgHPEndFill.gameObject.SetActive(false);
         }
     }
     #endregion
@@ -125,17 +130,9 @@ public class GameplayUIController : MonoBehaviour
             tWaveTimer.text = "Волна " + _waveNum + " - 00:0" + _currentWaveTime;
         }
 
-        imgWaveFill.fillAmount = 0;        
+        imgWaveFill.fillAmount = 0;
 
-        if (imgFillLevelBar.fillAmount > 0)
-        {
-            imgWaveEndFill.gameObject.SetActive(true);
-            imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
-        }
-        else
-        {
-            imgWaveEndFill.gameObject.SetActive(false);
-        }
+        imgWaveEndFill.gameObject.SetActive(false);
 
         StartCoroutine(WaveTimer(_waveTime, _waveNum));        
     }
@@ -185,6 +182,21 @@ public class GameplayUIController : MonoBehaviour
         imgWaveEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgWaveFill.fillAmount * 1030f, 0);
     }
     #endregion
+
+    public IEnumerator WaveCompliteAnim()
+    {
+        waveCompliteObj.SetActive(true);
+        waveHeaderObj.transform.localScale = Vector3.zero;
+        waveHeaderObj.transform.DOScale(1, 0.3f);
+
+        yield return new WaitForSeconds(2f);
+
+        waveHeaderObj.transform.DOScale(0, 0.3f);
+
+        yield return new WaitForSeconds(0.3f);
+
+        waveCompliteObj.SetActive(false);
+    }
 
     public IEnumerator PlayerHit()
     {

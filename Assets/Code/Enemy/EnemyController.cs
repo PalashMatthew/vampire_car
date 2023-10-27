@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class EnemyController : MonoBehaviour
 
     EnemyMovement _enemyMovement;
 
+    public List<Material> materialsCar;
+
 
     private void Start()
     {       
@@ -57,7 +60,10 @@ public class EnemyController : MonoBehaviour
         if (isBoss)
         {
             hp = maxHp;
-        }        
+        }
+
+        if (materialsCar.Count > 0)
+            meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
     }
 
     void CoeffSettings()
@@ -97,11 +103,20 @@ public class EnemyController : MonoBehaviour
         if (other.tag == "player")
         {
             other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
+            BackDamage(brakeDamage);
         }
 
         if (other.tag == "enemy" && transform.position.z > 75)
         {
             transform.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+        }
+    }
+
+    public void BackDamage(float damage)
+    {
+        if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isBackDamage)
+        {
+            Hit(damage / 100 * GameObject.Find("Player").GetComponent<PlayerStats>().backDamageProcent, false);
         }
     }
 
@@ -111,6 +126,17 @@ public class EnemyController : MonoBehaviour
         hp -= _damage;
         GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
         StartCoroutine(HitAnim());
+
+        if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
+        {
+            int rand = Random.Range(1, 101);
+
+            if (rand <= GameObject.Find("Player").GetComponent<PlayerStats>().headshotProcent)
+            {
+                Dead();
+                return;
+            }
+        }
 
         if (hp <= 0)
         {
@@ -140,14 +166,19 @@ public class EnemyController : MonoBehaviour
     {
         if (!isBoss)
         {
-            GameObject.Find("GameplayController").GetComponent<PlayerLevelController>().enemyCountInThisLevel++;
-
             Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
             Destroy(_fx, 3);
             Destroy(gameObject);
         }
+    }
+
+    public void DeleteEnemy()
+    {
+        GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
+        Destroy(_fx, 3);
+        Destroy(gameObject);
     }
 
     #region Freeze

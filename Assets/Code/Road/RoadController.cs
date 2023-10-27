@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class RoadController : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject parent;
+    [HideInInspector]
     public float dist;
+
+    public bool isFixPlace = true;
+
+    public float distValue = 178.5f;
 
     private void Start()
     {
-        if (parent != null)
+        if (isFixPlace)
         {
-            float _dist = transform.position.z - parent.transform.position.z;
-            if (_dist > 178.5f)
+            if (parent != null)
             {
-                transform.position = new Vector3(0, 0, parent.transform.position.z + 178.5f);
-                Debug.Log("FIX PLACE");
+                float _dist = transform.position.z - parent.transform.position.z;
+                if (_dist > distValue)
+                {
+                    transform.position = new Vector3(0, 0, parent.transform.position.z + distValue);
+                }
             }
         }
     }

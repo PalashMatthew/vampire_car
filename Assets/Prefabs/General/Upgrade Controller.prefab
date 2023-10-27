@@ -44,24 +44,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56dc150965fa78d42bcc2722d78bfe04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards:
-  - {fileID: 11400000, guid: 9f861e1463916c1468738a17165d6619, type: 2}
-  - {fileID: 11400000, guid: 3fca7c1e7a29aff4093ae3c9992c63da, type: 2}
-  - {fileID: 11400000, guid: 9a0a81dffe0465d4ea5d1ff4df0a9e9e, type: 2}
-  - {fileID: 11400000, guid: 6ee53bf67f3f3914e95981b651e3b060, type: 2}
-  - {fileID: 11400000, guid: bb3a7a9357f911c41864078d6e1ae488, type: 2}
-  - {fileID: 11400000, guid: abde11cd158efba4faf82c33d68db6d6, type: 2}
-  - {fileID: 11400000, guid: b46c4f9b6247dad4d80ce5a28db27027, type: 2}
+  cardsGun:
   - {fileID: 11400000, guid: ebd46fc90dbb6fc40878a4a59373879f, type: 2}
+  - {fileID: 11400000, guid: 51061a8440b1a5846a1c923f2f5c1f74, type: 2}
   - {fileID: 11400000, guid: 4a5aef25e4449324585d114dbf1d4100, type: 2}
+  - {fileID: 11400000, guid: 33fe37503ed149649ad63f4056335d27, type: 2}
+  - {fileID: 11400000, guid: b2071a02169374646b8adaa814a01d61, type: 2}
   - {fileID: 11400000, guid: d8ad4e11a002cec4e86ad3ea20a16ea7, type: 2}
   - {fileID: 11400000, guid: ebea4b789c4c8c94984a54ff5f6c4f95, type: 2}
-  - {fileID: 11400000, guid: 3f529ac087db571448f00b962ce6c521, type: 2}
   - {fileID: 11400000, guid: 68c50ec640762e74795d4fe6fd8351bd, type: 2}
   - {fileID: 11400000, guid: 3a6f40f2971f95d41af65455a538147a, type: 2}
-  - {fileID: 11400000, guid: 51061a8440b1a5846a1c923f2f5c1f74, type: 2}
+  - {fileID: 11400000, guid: 903c2a32290ce9d46a8118782a1fb499, type: 2}
+  - {fileID: 11400000, guid: 09f913e9a1d700942a3f006a2ff3e14e, type: 2}
+  - {fileID: 11400000, guid: 549c5a803e8f4914e8beca57efe652ce, type: 2}
+  - {fileID: 11400000, guid: a1f11f5ea3ace6a4cbad6268dc6c82e9, type: 2}
+  - {fileID: 11400000, guid: dcd81a9539699a54782233c818e04948, type: 2}
+  - {fileID: 11400000, guid: 859b46feb6d6a2a4a8a2a42f3103eeda, type: 2}
+  - {fileID: 11400000, guid: 640b59ab1418824458d4c593aa9f6874, type: 2}
+  cardsPassive:
+  - {fileID: 11400000, guid: 9f861e1463916c1468738a17165d6619, type: 2}
+  - {fileID: 11400000, guid: bb3a7a9357f911c41864078d6e1ae488, type: 2}
+  - {fileID: 11400000, guid: 3fca7c1e7a29aff4093ae3c9992c63da, type: 2}
   - {fileID: 11400000, guid: 2151a845057792048888e74bd1fd09fe, type: 2}
-  cardsController:
+  - {fileID: 11400000, guid: abde11cd158efba4faf82c33d68db6d6, type: 2}
+  - {fileID: 11400000, guid: 9a0a81dffe0465d4ea5d1ff4df0a9e9e, type: 2}
+  - {fileID: 11400000, guid: 6ee53bf67f3f3914e95981b651e3b060, type: 2}
+  - {fileID: 11400000, guid: b46c4f9b6247dad4d80ce5a28db27027, type: 2}
+  - {fileID: 11400000, guid: fa662a7c987dbed4cacaeabe7c1e76a6, type: 2}
+  - {fileID: 11400000, guid: 8f0871ce7deed7e478eaef0d0e01c0b4, type: 2}
+  - {fileID: 11400000, guid: 00898fca3c5db4c4cb3df64f1cac2d85, type: 2}
+  - {fileID: 11400000, guid: 1f508e86eae0d3a4f9fd570c2d9fa5e3, type: 2}
+  - {fileID: 11400000, guid: ddcec74ad87f89546a17856989d45dff, type: 2}
+  - {fileID: 11400000, guid: 9f74f9abede05cb4d9b625ddb208ee95, type: 2}
+  - {fileID: 11400000, guid: 2dcff6b70d73e1844abd18cd664f75c2, type: 2}
+  - {fileID: 11400000, guid: a9e0061950f21fc41881cbb589f353f2, type: 2}
+  - {fileID: 11400000, guid: 27524ead44dd93d45bc3cbf9cf802b07, type: 2}
+  cardsGunController:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardsPassiveController:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardGunAccept: {fileID: 0}
+  cardPassiveAccept: {fileID: 0}
+  cardsChoose: []
+  activeGunCard: []
+  slotImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tSlotLevels:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -102,13 +140,34 @@ MonoBehaviour:
   commonChance: 87
   rareChance: 10
   legendaryChance: 3
+  luckyChance: 1
+  maxLevelGunUpgrade: 3
   Boomerang_Level: 0
   Dron_Level: 0
   Ice_Level: 0
   Lazer_Level: 0
   Lightning_Level: 0
-  Oil_Level: 0
   Partner_Level: 0
   RocketLauncher_Level: 0
-  DefaultGun_Level: 0
-  rerollPrice: 1400000014000000140000001400000014000000140000001400000014000000
+  DefaultGun_Level: 1
+  GrowingShot_Level: 0
+  FanGun_Level: 0
+  Tornado_Level: 0
+  Mines_Level: 0
+  Grenade_Level: 0
+  GodGun_Level: 0
+  Ricochet_Level: 0
+  Bow_Level: 0
+  PinPong_Level: 0
+  rerollBasePrice: 0
+  rerollPrice:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
+  - 2
+  - 2.2
+  - 2.4
+  - 2.6
+  - 2.8
