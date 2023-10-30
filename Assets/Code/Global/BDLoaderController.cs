@@ -47,6 +47,7 @@ public class BDLoaderController : MonoBehaviour
         {
             List<float> _carInfo = new List<float>();
             List<string> _carNameInfo = new List<string>();
+            List<string> _carUpgradeNameInfo = new List<string>();
 
             var itemo = JSON.Parse(_file["values"][a].ToString());
 
@@ -60,6 +61,8 @@ public class BDLoaderController : MonoBehaviour
             }
 
             string s1 = "";
+
+            int cellNum = 1;
 
             for (int i = 0; i < _info.Length; i++)
             {
@@ -87,14 +90,22 @@ public class BDLoaderController : MonoBehaviour
                         s2 += _info[u];
                     }
 
+                    
+
                     if (i == 1)
                     {
                         _carNameInfo.Add(s2);
+                    }
+                    else if (cellNum == 14 || cellNum == 16 || cellNum == 18 || cellNum == 20)
+                    {
+                        _carUpgradeNameInfo.Add(s2);
                     }
                     else
                     {
                         _carInfo.Add(float.Parse(s2, CultureInfo.InvariantCulture.NumberFormat));
                     }
+
+                    cellNum++;
                 }
             }
 
@@ -162,6 +173,31 @@ public class BDLoaderController : MonoBehaviour
                     _variableName = _carNameInfo[0] + "carDodgeStepUp";
                 }
 
+                if (i == 12)
+                {
+                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade10lvlId", _carUpgradeNameInfo[0]);
+                    _variableName = _carNameInfo[0] + "carUpgrade10lvl";
+                }
+
+                if (i == 13)
+                {
+                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade20lvlId", _carUpgradeNameInfo[1]);
+                    _variableName = _carNameInfo[0] + "carUpgrade20lvl";
+                }
+
+                if (i == 14)
+                {
+                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade30lvlId", _carUpgradeNameInfo[2]);
+                    _variableName = _carNameInfo[0] + "carUpgrade30lvl";
+                }
+
+                if (i == 15)
+                {
+                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade40lvlId", _carUpgradeNameInfo[3]);
+                    _variableName = _carNameInfo[0] + "carUpgrade40lvl";
+                }
+
+                //Debug.Log(_variableName + _carInfo[i]);
                 PlayerPrefs.SetFloat(_variableName, _carInfo[i]);
             }
         }

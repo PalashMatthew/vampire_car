@@ -63,6 +63,18 @@ public class ChangeCarController : MonoBehaviour
     public TMP_Text tPriceHard;
     public TMP_Text tPriceReal;
 
+    [Header("Talant")]
+    public TMP_Text tTalant;
+    public Image imgTalant;
+    public Sprite sprTalantDionysus;
+    public Sprite sprTalantTaiowa;
+    public Sprite sprTalantPRun;
+    public Sprite sprTalantLyssa;
+    public Sprite sprTalantAeolus;
+    public Sprite sprTalantHyas;
+    public Sprite sprTalantHemera;
+    public Sprite sprTalantEos;
+
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
@@ -172,6 +184,56 @@ public class ChangeCarController : MonoBehaviour
         {
             objTActive.gameObject.SetActive(false);
             objChoose.SetActive(false);
+        }
+        #endregion
+
+        #region Talant
+        if (_carName == "Dionysus")
+        {
+            tTalant.text = " огда хп меньше половины один раз за волну хилим на 20 хп";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Taiowa")
+        {
+            tTalant.text = "”рон от ћолоток и Ћазер +100%";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "P-Run")
+        {
+            tTalant.text = "”рон от ракет лаунчера и ледовой ракеты увеличен +70%";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Lyssa")
+        {
+            tTalant.text = "Ёффект огн€ -  3% что противник загораетс€";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Aeolus")
+        {
+            tTalant.text = "Ёффект €да - 5%";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Hyas")
+        {
+            tTalant.text = "Ёффект - Ўанс крита со старта 5% ";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Hemera")
+        {
+            tTalant.text = "Ёффект - ярость коэффициент +20%";
+            imgTalant.sprite = sprTalantDionysus;
+        }
+
+        if (_carName == "Eos")
+        {
+            tTalant.text = "Ёффект - ”величение всех монет на 20%";
+            imgTalant.sprite = sprTalantDionysus;
         }
         #endregion
     }

@@ -62,8 +62,10 @@ public class EnemyController : MonoBehaviour
             hp = maxHp;
         }
 
-        if (materialsCar.Count > 0)
-            meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
+        //if (materialsCar.Count > 0)
+        //meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
+
+        meshRenderer.material = materialsCar[0];
     }
 
     void CoeffSettings()

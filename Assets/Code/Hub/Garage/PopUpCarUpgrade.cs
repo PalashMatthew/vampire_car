@@ -48,6 +48,25 @@ public class PopUpCarUpgrade : MonoBehaviour
     [Header("Upgrade")]
     public float upgradePrice;
     public TMP_Text tPrice;
+    public GameObject butUpgrade;
+    public GameObject butUpgradeGray;
+
+    [Header("Open Characters")]
+    public TMP_Text tUpgradeLvl10;
+    public TMP_Text tUpgradeLvl20;
+    public TMP_Text tUpgradeLvl30;
+    public TMP_Text tUpgradeLvl40;
+    public Image imgUpgrade10Lvl;
+    public Image imgUpgrade20Lvl;
+    public Image imgUpgrade30Lvl;
+    public Image imgUpgrade40Lvl;
+    public Sprite sprUpgradeLvlUnlock;
+    public Sprite sprUpgradeLvlNotUnlock;
+    public Image imgLockUpgrade10Lvl;
+    public Image imgLockUpgrade20Lvl;
+    public Image imgLockUpgrade30Lvl;
+    public Image imgLockUpgrade40Lvl;
+
 
 
     private void Start()
@@ -146,16 +165,189 @@ public class PopUpCarUpgrade : MonoBehaviour
         fillEndCarLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt(_carName + "carLevel") / 40 * 233f, 0), 0.5f);
         #endregion
 
+        #region Open Characters
+        for (int i = 0; i < 4; i++)
+        {
+            string s = "";
+            int upgNum = 0;
+
+            if (i == 0)
+                upgNum = 10;
+            if (i == 1)
+                upgNum = 20;
+            if (i == 2)
+                upgNum = 30;
+            if (i == 3)
+                upgNum = 40;
+
+            switch (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId"))
+            {
+                case "health":
+                    s = "Здоровье";
+                    break;
+
+                case "shotSpeed":
+                    s = "Скорость стрельбы";
+                    break;
+
+                case "kritChance":
+                    s = "Шанс крита";
+                    break;
+
+                case "kritDamage":
+                    s = "Урон крита";
+                    break;
+
+                case "vampirizm":
+                    s = "Вампиризм";
+                    break;
+
+                case "backDamage":
+                    s = "Обратка";
+                    break;
+
+                case "distanceDamage":
+                    s = "Урон от расстояния";
+                    break;
+
+                case "dodge":
+                    s = "Уклонение";
+                    break;
+
+                case "armor":
+                    s = "Броня";
+                    break;
+
+                case "massEnemyDamage":
+                    s = "Ахуевание";
+                    break;
+
+                case "headshot":
+                    s = "Хэдшот";
+                    break;
+
+                case "screwValueUp":
+                    s = "Множитель гаек";
+                    break;
+
+                case "lucky":
+                    s = "Удача";
+                    break;
+
+                case "effectsDuration":
+                    s = "Длительность эффектов";
+                    break;
+            }
+
+            if (i == 0)
+            {
+                tUpgradeLvl10.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+            }
+
+            if (i == 1)
+            {
+                tUpgradeLvl20.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+            }
+
+            if (i == 2)
+            {
+                tUpgradeLvl30.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+            }
+
+            if (i == 3)
+            {
+                tUpgradeLvl40.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+            }
+        }
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") < 10)
+        {
+            imgUpgrade10Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade20Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade30Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade40Lvl.sprite = sprUpgradeLvlNotUnlock;
+
+            imgLockUpgrade10Lvl.gameObject.SetActive(true);
+            imgLockUpgrade20Lvl.gameObject.SetActive(true);
+            imgLockUpgrade30Lvl.gameObject.SetActive(true);
+            imgLockUpgrade40Lvl.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") < 20 && PlayerPrefs.GetInt(_carName + "carLevel") >= 10)
+        {
+            imgUpgrade10Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade20Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade30Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade40Lvl.sprite = sprUpgradeLvlNotUnlock;
+
+            imgLockUpgrade10Lvl.gameObject.SetActive(false);
+            imgLockUpgrade20Lvl.gameObject.SetActive(true);
+            imgLockUpgrade30Lvl.gameObject.SetActive(true);
+            imgLockUpgrade40Lvl.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") < 30 && PlayerPrefs.GetInt(_carName + "carLevel") >= 20)
+        {
+            imgUpgrade10Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade20Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade30Lvl.sprite = sprUpgradeLvlNotUnlock;
+            imgUpgrade40Lvl.sprite = sprUpgradeLvlNotUnlock;
+
+            imgLockUpgrade10Lvl.gameObject.SetActive(false);
+            imgLockUpgrade20Lvl.gameObject.SetActive(false);
+            imgLockUpgrade30Lvl.gameObject.SetActive(true);
+            imgLockUpgrade40Lvl.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") < 40 && PlayerPrefs.GetInt(_carName + "carLevel") >= 30)
+        {
+            imgUpgrade10Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade20Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade30Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade40Lvl.sprite = sprUpgradeLvlNotUnlock;
+
+            imgLockUpgrade10Lvl.gameObject.SetActive(false);
+            imgLockUpgrade20Lvl.gameObject.SetActive(false);
+            imgLockUpgrade30Lvl.gameObject.SetActive(false);
+            imgLockUpgrade40Lvl.gameObject.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") == 40)
+        {
+            imgUpgrade10Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade20Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade30Lvl.sprite = sprUpgradeLvlUnlock;
+            imgUpgrade40Lvl.sprite = sprUpgradeLvlUnlock;
+
+            imgLockUpgrade10Lvl.gameObject.SetActive(false);
+            imgLockUpgrade20Lvl.gameObject.SetActive(false);
+            imgLockUpgrade30Lvl.gameObject.SetActive(false);
+            imgLockUpgrade40Lvl.gameObject.SetActive(false);
+        }
+        #endregion
+
         tPrice.text = upgradePrice + "";
+
+        if (PlayerPrefs.GetInt(_carName + "carLevel") >= 40)
+        {
+            butUpgrade.SetActive(false);
+            butUpgradeGray.SetActive(true);
+        } 
+        else
+        {
+            butUpgrade.SetActive(true);
+            butUpgradeGray.SetActive(false);
+        }
     }
 
     public void ButUpgrade()
     {
-        if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice)
+        string _carName = carItem.carName;
+
+        if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt(_carName + "carLevel") < 40)
         {
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - (int)upgradePrice);
-
-            string _carName = carItem.carName;
+            
             PlayerPrefs.SetFloat(_carName + "carDamage", PlayerPrefs.GetFloat(_carName + "carDamage") + PlayerPrefs.GetFloat(_carName + "carDamageStepUp"));
             PlayerPrefs.SetFloat(_carName + "carHealth", PlayerPrefs.GetFloat(_carName + "carHealth") + PlayerPrefs.GetFloat(_carName + "carHealthStepUp"));
             PlayerPrefs.SetFloat(_carName + "carKritChance", PlayerPrefs.GetFloat(_carName + "carKritChance") + PlayerPrefs.GetFloat(_carName + "carKritChanceStepUp"));
