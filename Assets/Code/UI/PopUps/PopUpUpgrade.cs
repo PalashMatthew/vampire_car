@@ -190,7 +190,7 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollScrew()
     {
-        if (GlobalStats.screwCount > rerollPrice)
+        if (GlobalStats.screwCount >= rerollPrice)
         {
             butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
             GlobalStats.screwCount -= rerollPrice;

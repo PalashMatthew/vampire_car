@@ -89,6 +89,16 @@ public class Gun : MonoBehaviour
         multiplyDamageCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsMultiplyDamage");
 
         CalculateStats();
+
+        PlayerPrefs.SetFloat(gunName + "_Damage = ", 0);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log(gunName + " Damage = " + PlayerPrefs.GetFloat(gunName + "_Damage = "));
+        }
     }
 
     public void CalculateStats()
@@ -134,11 +144,14 @@ public class Gun : MonoBehaviour
         {
             float _damage = (damage * _playerStats.rageValue) * ((damage * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
+
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
             return _damage;
         } 
         else
         {
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + damage * _playerStats.rageValue);
             return damage * _playerStats.rageValue;
         }
     }
@@ -163,11 +176,13 @@ public class Gun : MonoBehaviour
             float _damage = (_dmg * _playerStats.rageValue) * ((_dmg * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
             _gm.gameObject.GetComponent<EnemyController>().Hit(_damage, true);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
         }
         else
         {
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_dmg * _playerStats.rageValue);
             _gm.gameObject.GetComponent<EnemyController>().Hit(damage * _playerStats.rageValue, false);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + damage * _playerStats.rageValue);
         }
     }
 
@@ -195,11 +210,13 @@ public class Gun : MonoBehaviour
             float _damage = (damage * _playerStats.rageValue) * ((damage * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
             _gm.gameObject.GetComponentInParent<EnemyController>().Hit(_damage, true);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
         }
         else
         {
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
             _gm.gameObject.GetComponentInParent<EnemyController>().Hit(damage * _playerStats.rageValue, false);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + damage * _playerStats.rageValue);
         }
     }
 

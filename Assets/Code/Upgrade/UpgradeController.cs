@@ -61,6 +61,9 @@ public class UpgradeController : MonoBehaviour
     public float rerollBasePrice;
     public List<float> rerollPrice;
 
+    [Header("New Upgrade System")]
+    public List<int> gunUpgradeChanceInwave;
+
 
     private void Start()
     {
@@ -157,9 +160,41 @@ public class UpgradeController : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
+            bool isGenerateUpgrade;
+            int findCardCount = 0;
+
+            if (MaxUpgradeGunCheck())
+            {
+                int _chance = Random.Range(0, 101);
+                if (_chance <= gunUpgradeChanceInwave[_waveController.currentWave - 1])
+                {
+                    isGenerateUpgrade = true;
+                    //Debug.Log("UPGRADE WIN");
+                } 
+                else
+                {
+                    isGenerateUpgrade = false;
+                }
+            } 
+            else
+            {
+                isGenerateUpgrade = false;
+            }
+
             newTry:
             UpgradeCard _card;
             _card = cardsGun[Random.Range(0, cardsGun.Count)];
+
+            if (isGenerateUpgrade && i != 2)
+            {
+                if (!activeGunCard.Contains(_card))
+                {
+                    findCardCount++;
+
+                    if (findCardCount < 20)
+                        goto newTry;
+                }
+            }
 
             if (!_createdCards.Contains(_card))
             {
@@ -774,6 +809,95 @@ public class UpgradeController : MonoBehaviour
         if (_type == "passive")
         {
             GeneratePassiveCards();
+        }
+    }
+
+    bool MaxUpgradeGunCheck()
+    {
+        int levelSum = 0;
+
+        foreach (UpgradeCard upgCard in activeGunCard)
+        {
+            switch (upgCard.upgradeGunType)
+            {
+                case UpgradeCard.UpgradeGunType.Boomerang:
+                    levelSum += Boomerang_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Dron:
+                    levelSum += Dron_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Ice:
+                    levelSum += Ice_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Lazer:
+                    levelSum += Lazer_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Lightning:
+                    levelSum += Lightning_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Partner:
+                    levelSum += Partner_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.RocketLauncher:
+                    levelSum += RocketLauncher_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.DefaultGun:
+                    levelSum += DefaultGun_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                    levelSum += GrowingShot_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.FanGun:
+                    levelSum += FanGun_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Tornado:
+                    levelSum += Tornado_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Mines:
+                    levelSum += Mines_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Grenade:
+                    levelSum += Grenade_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.GodGun:
+                    levelSum += GodGun_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Ricochet:
+                    levelSum += Ricochet_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.Bow:
+                    levelSum += Bow_Level;
+                    break;
+
+                case UpgradeCard.UpgradeGunType.PinPong:
+                    levelSum += PinPong_Level;
+                    break;
+            }
+        }
+
+        if (levelSum < maxLevelGunUpgrade * activeGunCard.Count)
+        {
+            //Debug.Log(levelSum + " - " + maxLevelGunUpgrade * activeGunCard.Count + " GOOD");
+            return true;
+        } 
+        else
+        {
+            return false;
         }
     }
 
