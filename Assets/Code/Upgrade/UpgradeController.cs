@@ -1062,7 +1062,7 @@ public class UpgradeController : MonoBehaviour
         switch (cardPassiveAccept.card.upgradePassiveType)
         {
             case UpgradeCard.UpgradePassiveType.MaxHpUp:
-                _playerStats.maxHpCoeff += _value;
+                _playerStats.maxHpCoeff += _playerStats.maxHpBase / 100 * _value;
                 _playerStats.currentHp += _playerStats.maxHpBase * (_playerStats.maxHpBase / 100 * _playerStats.maxHpCoeff) / 100 * _value;
                 break;
 
