@@ -14,6 +14,9 @@ public class EnemyDefaultBullet : MonoBehaviour
 
         if (transform.position.z < -20f)
             Destroy(gameObject);
+
+        if (WaveController.isWaveEnd)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

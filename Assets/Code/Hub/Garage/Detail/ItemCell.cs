@@ -6,10 +6,16 @@ using UnityEngine.UI;
 
 public class ItemCell : MonoBehaviour
 {
+    public DetailCard itemObj;
+
+    public GarageController garageController;
+    PopUpDetail _popUpDetail;
+
     public int itemID;
     public int slotNum;
     public string itemType;
     public string itemName;
+    public int itemNumInInventory;
 
     [Header("Icon")]
     public Image imgIcon;
@@ -29,12 +35,13 @@ public class ItemCell : MonoBehaviour
     public string itemRarity;
 
 
-    private void Start()
+    private void Awake()
     {
-        Initialize();
+        _popUpDetail = GameObject.Find("PopUp Detail Upgrade").GetComponent<PopUpDetail>();
+        //Initialize();
     }
 
-    void Initialize()
+    public void Initialize()
     {
         switch (itemRarity)
         {
@@ -55,10 +62,10 @@ public class ItemCell : MonoBehaviour
                 break;
         }
 
-        string itemSpriteName = "item_" + itemID;
-        sprIcon = Resources.Load<Sprite>("ItemSprite/" + itemSpriteName);
+        //string itemSpriteName = "item_" + itemID;
+        //sprIcon = Resources.Load<Sprite>("ItemSprite/" + itemSpriteName);
 
-        imgIcon.sprite = sprIcon;
+        imgIcon.sprite = itemObj.sprItem;
 
         //tLevel.text = "Lv. " + 
     }
@@ -66,6 +73,13 @@ public class ItemCell : MonoBehaviour
     public void ButOpen()
     {
         GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();
-        GameObject.Find("PopUp Detail Upgrade").GetComponent<PopUpDetail>().ButOpen();
+
+        _popUpDetail.sprRarity = imgCard.sprite;
+        _popUpDetail.itemIcon = sprIcon;
+        _popUpDetail.itemName = itemName;
+        _popUpDetail.itemRarity = itemRarity;
+        _popUpDetail.isSlotItem = false;
+
+        _popUpDetail.ButOpen();
     }
 }

@@ -28,6 +28,8 @@ public class WaveController : MonoBehaviour
     public GameplayUIController gameplayUIController;
     GenerateObstacles _generateObstacles;
 
+    public static bool isWaveEnd;
+
     private void Awake()
     {
         _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
@@ -39,6 +41,8 @@ public class WaveController : MonoBehaviour
 
     public void StartWave()
     {
+        isWaveEnd = false;
+
         enemyDestroy = 0;
         currentWave++;
         gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
@@ -61,6 +65,8 @@ public class WaveController : MonoBehaviour
 
     public void WaveEnd()
     {
+        isWaveEnd = true;
+
         StopAllCoroutines();
         _generate.StopAllCoroutines();
 

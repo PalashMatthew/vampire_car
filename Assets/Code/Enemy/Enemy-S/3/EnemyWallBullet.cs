@@ -20,4 +20,10 @@ public class EnemyWallBullet : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        if (WaveController.isWaveEnd)
+            Destroy(gameObject);
+    }
 }

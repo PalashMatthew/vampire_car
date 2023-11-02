@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Detail", menuName = "DetailCard")]
 public class DetailCard : ScriptableObject
 {
+    public int itemID;
+
     public enum ItemType
     {
         Gun,
@@ -15,4 +17,7 @@ public class DetailCard : ScriptableObject
         Transmission
     }
     public ItemType itemType;
+
+    public Sprite sprItem;
+    public string itemName;
 }

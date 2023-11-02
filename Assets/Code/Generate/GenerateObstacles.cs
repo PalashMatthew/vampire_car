@@ -21,7 +21,7 @@ public class GenerateObstacles : MonoBehaviour
 
     private void Start()
     {        
-        StartCoroutine(ObstaclesGen());
+        StartCoroutine(ObstaclesGen()); 
     }
 
     IEnumerator ObstaclesGen()

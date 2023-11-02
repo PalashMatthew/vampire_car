@@ -24,11 +24,13 @@ public class ScrewController : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, 180, 0);
 
-        _destroyDistance = GameObject.Find("Player").GetComponent<PlayerStats>().screwPickUpDistance;
+        
     }
 
     private void Update()
     {
+        _destroyDistance = GameObject.Find("Player").GetComponent<PlayerStats>().screwPickUpDistance;
+
         if (Vector3.Distance(_playerPos.position, transform.position) <= _collectionDistance)
         {
             _isFind = true;
@@ -54,6 +56,9 @@ public class ScrewController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (WaveController.isWaveEnd)
+            Destroy(gameObject);
     }
 
     void Movement()

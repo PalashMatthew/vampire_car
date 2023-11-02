@@ -147,6 +147,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void Headshot()
+    {
+        Debug.Log("HEADSHOT");
+        GetComponentInChildren<EnemyUI>().ViewHeadshot();
+        StartCoroutine(HitAnim());
+        Dead();
+    }
+
     IEnumerator HitAnim()
     {
         if (meshRenderer != null)

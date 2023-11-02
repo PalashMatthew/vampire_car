@@ -1142,7 +1142,7 @@ public class UpgradeController : MonoBehaviour
                 _playerPassiveController.isScrewValueUp = true;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.Magnet:
+            case UpgradeCard.UpgradePassiveType.Magnet:  
                 _playerStats.screwPickUpDistanceCoeff += _value;
                 break;
 

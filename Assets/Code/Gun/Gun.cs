@@ -143,14 +143,14 @@ public class Gun : MonoBehaviour
         if (_rand <= _playerStats.kritChance)
         {
             float _damage = (damage * _playerStats.rageValue) * ((damage * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
+            //GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
 
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
             return _damage;
         } 
         else
         {
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
+            //GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + damage * _playerStats.rageValue);
             return damage * _playerStats.rageValue;
         }
@@ -158,6 +158,14 @@ public class Gun : MonoBehaviour
 
     public void DamageEnemy(GameObject _gm, GameObject _bullet)
     {
+        int headshotRand = Random.Range(0, 101);
+
+        if (headshotRand <= _playerStats.headshotProcent)
+        {
+            _gm.gameObject.GetComponent<EnemyController>().Headshot();
+            return;
+        }
+
         int _rand = Random.Range(1, 101);
         float _dmg = damage;
 

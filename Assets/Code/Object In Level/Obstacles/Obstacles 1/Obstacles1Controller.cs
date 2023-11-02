@@ -18,6 +18,12 @@ public class Obstacles1Controller : MonoBehaviour
         _obstacle = GetComponent<Obstacle>();
     }
 
+    private void Update()
+    {
+        if (WaveController.isWaveEnd)
+            Destroy(gameObject);
+    }
+
     IEnumerator ShowShield()
     {
         yield return new WaitForSeconds(timeActive);
