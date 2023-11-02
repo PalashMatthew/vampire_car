@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class ItemCell : MonoBehaviour
 {
-    public DetailCard itemObj;
-
     public GarageController garageController;
     PopUpDetail _popUpDetail;
+
+    public DetailCard itemObj;    
 
     public int itemID;
     public int slotNum;
@@ -38,7 +38,6 @@ public class ItemCell : MonoBehaviour
     private void Awake()
     {
         _popUpDetail = GameObject.Find("PopUp Detail Upgrade").GetComponent<PopUpDetail>();
-        //Initialize();
     }
 
     public void Initialize()
@@ -66,6 +65,7 @@ public class ItemCell : MonoBehaviour
         //sprIcon = Resources.Load<Sprite>("ItemSprite/" + itemSpriteName);
 
         imgIcon.sprite = itemObj.sprItem;
+        sprIcon = itemObj.sprItem;
 
         //tLevel.text = "Lv. " + 
     }

@@ -33,8 +33,8 @@ public class PlaceGenerate : MonoBehaviour
         {
             if (place.transform.position.z <= minZ)
             {
-                _inst = Instantiate(placeObj, new Vector3(0, 0, spawnZ), transform.rotation);               
-
+                _inst = Instantiate(placeObj, new Vector3(0, 0, spawnZ), transform.rotation);
+                _inst.transform.parent = transform;
                 remove = place;                
             }
         }        

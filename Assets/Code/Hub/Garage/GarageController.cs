@@ -77,7 +77,8 @@ public class GarageController : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerPrefs.SetInt("itemCountGun", 4);
+        if (!PlayerPrefs.HasKey("itemCountGun"))
+            PlayerPrefs.SetInt("itemCountGun", 4);
 
         PlayerPrefs.SetInt("itemGunID0", 1001);
         PlayerPrefs.SetInt("itemGunID1", 1002);
