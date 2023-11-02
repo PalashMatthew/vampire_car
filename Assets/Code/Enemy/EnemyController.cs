@@ -65,7 +65,8 @@ public class EnemyController : MonoBehaviour
         //if (materialsCar.Count > 0)
         //meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
 
-        meshRenderer.material = materialsCar[0];
+        //if (materialsCar)
+        //meshRenderer.material = materialsCar[0];
     }
 
     void CoeffSettings()
