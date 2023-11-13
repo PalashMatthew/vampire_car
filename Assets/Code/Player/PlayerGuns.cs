@@ -46,7 +46,92 @@ public class PlayerGuns : MonoBehaviour
 
     private void Start()
     {
+        GunInitialize();
         GunActivate();
+    }
+
+    void GunInitialize()
+    {
+        if (PlayerPrefs.GetInt("GunIDSelect") != 0)
+        {
+            switch (PlayerPrefs.GetInt("GunIDSelect"))
+            {
+                case 1001:
+                    _isRocketLauncher = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().RocketLauncher_Level = 1;
+                    break;
+
+                case 1002:
+                    _isPartner = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Partner_Level = 1;
+                    break;
+
+                case 1003:
+                    _isLazer = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Lazer_Level = 1;
+                    break;
+
+                case 1004:
+                    _isBoomerang = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Boomerang_Level = 1;
+                    break;
+
+                case 1005:
+                    _isDron = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Dron_Level = 1;
+                    break;
+
+                case 1006:
+                    _isIce = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Ice_Level = 1;
+                    break;
+
+                case 1007:
+                    _isGrenade = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Grenade_Level = 1;
+                    break;
+
+                case 1008:
+                    _isRicochet = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Ricochet_Level = 1;
+                    break;
+
+                case 1009:
+                    _isGodGun = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().GodGun_Level = 1;
+                    break;
+
+                case 1010:
+                    _isPinPong = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().PinPong_Level = 1;
+                    break;
+
+                case 1011:
+                    _isMines = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Mines_Level = 1;
+                    break;
+
+                case 1012:
+                    _isBow = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Bow_Level = 1;
+                    break;
+
+                case 1013:
+                    _isTornado = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().Tornado_Level = 1;
+                    break;
+
+                case 1014:
+                    _isFanGun = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().FanGun_Level = 1;
+                    break;
+
+                case 1015:
+                    _isGrowingShot = true;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().GrowingShot_Level = 1;
+                    break;
+            }
+        }
     }
 
     public void GunActivate()

@@ -79,7 +79,8 @@ public class Gun : MonoBehaviour
         baseMultiplyDamage = PlayerPrefs.GetFloat(gunName + "gunBaseSettingsMultiplyDamage");
 
         //Заполняем значения коэффициентов
-        damageCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsDamage") + PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDamage");
+        //damageCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsDamage") + PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDamage");
+        damageCoeff = _playerStats.damageCoeff;
         shotSpeedCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsShotSpeed");
         bulletMoveSpeedCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsBulletMoveSpeed");
         timeOfActionCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsTimeOfAction");

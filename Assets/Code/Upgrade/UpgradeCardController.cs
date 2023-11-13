@@ -391,7 +391,7 @@ public class UpgradeCardController : MonoBehaviour
 
                 if (upgValue2 != 0)
                 {
-                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + CheckGunUpgradeType2(levelNum, _rarity) + upgValue2;
+                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + "; " + CheckGunUpgradeType2(levelNum, _rarity) + upgValue2;
                 }
                 else
                 {

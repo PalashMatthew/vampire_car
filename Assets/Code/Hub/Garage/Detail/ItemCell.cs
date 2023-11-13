@@ -11,6 +11,14 @@ public class ItemCell : MonoBehaviour
 
     public DetailCard itemObj;    
 
+    public enum CellType
+    {
+        Inventory,
+        Merge,
+        Repair
+    }
+    public CellType cellType;
+
     public int itemID;
     public int slotNum;
     public string itemType;
@@ -42,6 +50,35 @@ public class ItemCell : MonoBehaviour
 
     public void Initialize()
     {
+        itemType = itemObj.itemType.ToString();
+
+        switch (itemType)
+        {
+            case "Gun":
+                slotNum = 1;
+                break;
+
+            case "Engine":
+                slotNum = 2;
+                break;
+
+            case "Brakes":
+                slotNum = 3;
+                break;
+
+            case "FuelSystem":
+                slotNum = 4;
+                break;
+
+            case "Suspension":
+                slotNum = 5;
+                break;
+
+            case "Transmission":
+                slotNum = 6;
+                break;
+        }
+
         switch (itemRarity)
         {
             case "common":
@@ -67,7 +104,14 @@ public class ItemCell : MonoBehaviour
         imgIcon.sprite = itemObj.sprItem;
         sprIcon = itemObj.sprItem;
 
+        itemName = itemObj.itemName;
+
         //tLevel.text = "Lv. " + 
+    }
+
+    private void Update()
+    {
+        tLevel.text = "Lv. " + currentLevel;
     }
 
     public void ButOpen()

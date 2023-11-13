@@ -1244,7 +1244,6 @@ public class UpgradeController : MonoBehaviour
                 if (gm.gameObject.name == cardGunAccept.card.cardName)
                 {
                     gunObj = gm;
-                    Debug.Log(gunObj.name);
                 }
             }
 

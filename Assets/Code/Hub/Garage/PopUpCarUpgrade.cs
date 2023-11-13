@@ -11,6 +11,7 @@ public class PopUpCarUpgrade : MonoBehaviour
 
     public ChangeCarController changeCarController;
     private CarButtonController carItem;
+    public CalculateCharacteristics calculateCharacteristics;
 
     [Header("Stats")]
     public TMP_Text tDamage;
@@ -182,6 +183,10 @@ public class PopUpCarUpgrade : MonoBehaviour
 
             switch (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId"))
             {
+                case "damage":
+                    s = "Урон";
+                    break;
+
                 case "health":
                     s = "Здоровье";
                     break;
@@ -338,6 +343,8 @@ public class PopUpCarUpgrade : MonoBehaviour
             butUpgrade.SetActive(true);
             butUpgradeGray.SetActive(false);
         }
+
+        calculateCharacteristics.GlobalCarCharacteristics();
     }
 
     public void ButUpgrade()
