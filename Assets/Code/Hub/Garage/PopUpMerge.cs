@@ -17,6 +17,8 @@ public class PopUpMerge : MonoBehaviour
     PopUpController _popUpController;
     public GameObject panelMerge;
     public GameObject panelRepair;
+    public string panelActive;
+    PopUpRepair _popUpRepair;
 
     [Header("Merge Panel")]
     public Image imgSlot1;
@@ -98,6 +100,7 @@ public class PopUpMerge : MonoBehaviour
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
+        _popUpRepair = GetComponent<PopUpRepair>();
     }
 
     void Initialize()
@@ -520,6 +523,8 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButOpen()
     {
+        panelActive = "end";
+
         _popUpController.OpenPopUp();
         garageController.StartCoroutine(garageController.OffGarage());
 
@@ -528,6 +533,8 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButClosed()
     {
+        //if (panelMerge)
+
         StartCoroutine(EnumSaveItem());
         canvasGarage.SetActive(true);
 
@@ -542,6 +549,14 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButPanelMerge()
     {
+        panelActive = "merge";
+
+        if (panelActive != "end")
+        {
+            _popUpRepair.SaveItem();
+            Initialize();
+        }        
+
         panelMerge.SetActive(true);
         panelRepair.SetActive(false);
 
@@ -551,6 +566,11 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButPanelRepair()
     {
+        panelActive = "repair";
+
+        SaveItem();
+        _popUpRepair.Initialize();
+
         panelMerge.SetActive(false);
         panelRepair.SetActive(true);
 

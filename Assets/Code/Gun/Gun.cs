@@ -159,12 +159,15 @@ public class Gun : MonoBehaviour
 
     public void DamageEnemy(GameObject _gm, GameObject _bullet)
     {
-        int headshotRand = Random.Range(0, 101);
-
-        if (headshotRand <= _playerStats.headshotProcent)
+        if (_playerStats.headshotProcent > 0)
         {
-            _gm.gameObject.GetComponent<EnemyController>().Headshot();
-            return;
+            int headshotRand = Random.Range(0, 101);
+
+            if (headshotRand <= _playerStats.headshotProcent)
+            {
+                _gm.gameObject.GetComponent<EnemyController>().Headshot();
+                return;
+            }
         }
 
         int _rand = Random.Range(1, 101);
