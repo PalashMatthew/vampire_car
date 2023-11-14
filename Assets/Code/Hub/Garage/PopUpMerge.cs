@@ -1,14 +1,52 @@
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
+using static DetailCard;
+using static PanelCharacteristics;
+using static UnityEditor.Progress;
 
 public class PopUpMerge : MonoBehaviour
 {
+    public GarageController garageController;
+    public GameObject canvasGarage;
     PopUpController _popUpController;
     public GameObject panelMerge;
     public GameObject panelRepair;
+
+    [Header("Merge Panel")]
+    public Image imgSlot1;
+    public Image imgSlot2;
+    public Image imgSlot3;
+    public Image imgSlotFinal;
+
+    public Image iconSlot1;
+    public Image iconSlot2;
+    public Image iconSlot3;
+    public Image iconSlotFinal;
+
+    public bool isSlot1full;
+    public bool isSlot2full;
+    public bool isSlot3full;
+
+    public Sprite sprItemRare;
+    public Sprite sprItemEpic;
+    public Sprite sprItemLegendary;
+
+    public ItemCell itemCellGeneral;
+    public ItemCell itemCell1;
+    public ItemCell itemCell2;
+    public ItemCell itemCell3;
+
+    public TMP_Text tLevelCell1;
+    public TMP_Text tLevelCell2;
+    public TMP_Text tLevelCell3;
+    public TMP_Text tLevelCellFinal;
+    private int maxLevel;  //Содержит самый высокий уровень среди выбранных итемов
 
     [Header("Buttons Panel")]
     public Sprite sprActiveButton;
@@ -25,6 +63,7 @@ public class PopUpMerge : MonoBehaviour
     public List<GameObject> itemSuspensionInst;
     public List<GameObject> itemTransmissionInst;
     public List<GameObject> itemMass;
+    public List<GameObject> instItemMass;
 
     [Header("Cell")]
     public GameObject cellPrefab;
@@ -37,6 +76,24 @@ public class PopUpMerge : MonoBehaviour
     public List<DetailCard> suspensionItem;
     public List<DetailCard> transmissionItem;
 
+    [Header("Panel New Stats")]
+    public GameObject panelNewStats;
+    public TMP_Text tCurrentMaxLevel;
+    public TMP_Text tNextMaxLevel;
+    public TMP_Text tCurrentPanelValue1;
+    public TMP_Text tNextPanelValue1;
+    public TMP_Text tCurrentPanelValue2;
+    public TMP_Text tNextPanelValue2;
+
+    public GameObject objPanel1, objPanel2;
+    public Image imgIcon1, imgIcon2;
+    public Sprite sprIconDamage, sprIconHealth;
+
+    public GameObject butMerge;
+
+    [Header("PopUp Merge Final")]
+    public PopUpMergeFinal popUpMergeFinal;
+
 
     private void Start()
     {
@@ -48,6 +105,28 @@ public class PopUpMerge : MonoBehaviour
         ButPanelMerge();
 
         LoadItem();
+
+        imgSlot1.gameObject.SetActive(false);
+        imgSlot2.gameObject.SetActive(false);
+        imgSlot3.gameObject.SetActive(false);
+        imgSlotFinal.gameObject.SetActive(false);
+        panelNewStats.SetActive(false);
+        butMerge.SetActive(false);
+
+        tLevelCell1.text = "";
+        tLevelCell2.text = "";
+        tLevelCell3.text = "";
+        tLevelCellFinal.text = "";
+        maxLevel = 0;
+
+        itemCell1 = null;
+        itemCell2 = null;
+        itemCell3 = null;
+        itemCellGeneral = null;
+
+        isSlot1full = false;
+        isSlot2full = false;
+        isSlot3full = false;
     }
 
     void LoadItem()
@@ -72,6 +151,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemGunType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in gunItem)
             {
@@ -105,6 +185,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemEngineType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in engineItem)
             {
@@ -138,6 +219,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemBrakesType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in brakesItem)
             {
@@ -171,6 +253,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemFuelSystemType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in fuelSystemItem)
             {
@@ -205,6 +288,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemSuspensionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in suspensionItem)
             {
@@ -239,6 +323,7 @@ public class PopUpMerge : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemTransmissionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Merge;
 
             foreach (DetailCard _item in transmissionItem)
             {
@@ -255,6 +340,14 @@ public class PopUpMerge : MonoBehaviour
         }
         #endregion
 
+        foreach (GameObject gm in itemMass)
+        {
+            if (gm.GetComponent<ItemCell>().itemRarity == "legendary")
+            {
+                gm.SetActive(false);
+            }
+        }
+
         for (int i = 0; i < itemMass.Count; i++)
         {
             if (itemMass[i] != null)
@@ -262,26 +355,29 @@ public class PopUpMerge : MonoBehaviour
                 bool isFindPair = false;
 
                 GameObject _cell = itemMass[i];
-                List<GameObject> instItemMass = new List<GameObject>();
+                instItemMass.Clear();
 
                 for (int g = i; g < itemMass.Count; g++)
                 {
-                    GameObject _nextCell = itemMass[g];
-
-                    if (_nextCell.GetComponent<ItemCell>().itemID == _cell.GetComponent<ItemCell>().itemID &&
-                        _nextCell.GetComponent<ItemCell>().itemRarity == _cell.GetComponent<ItemCell>().itemRarity
-                        && _cell != _nextCell)
+                    if (itemMass[g] != null)
                     {
-                        instItemMass.Add(_nextCell);
-                        itemMass[g] = null;
+                        GameObject _nextCell = itemMass[g];
 
-                        isFindPair = true;
-
-                        if (!instItemMass.Contains(_cell))
+                        if (_nextCell.GetComponent<ItemCell>().itemID == _cell.GetComponent<ItemCell>().itemID &&
+                            _nextCell.GetComponent<ItemCell>().itemRarity == _cell.GetComponent<ItemCell>().itemRarity
+                            && _cell != _nextCell)
                         {
-                            instItemMass.Add(_cell);
+                            instItemMass.Add(_nextCell);
+                            itemMass[g] = null;
+
+                            isFindPair = true;
+
+                            if (!instItemMass.Contains(_cell))
+                            {
+                                instItemMass.Add(_cell);
+                            }
                         }
-                    }
+                    }                    
                 }
 
                 if (isFindPair)
@@ -302,55 +398,7 @@ public class PopUpMerge : MonoBehaviour
                 gm.transform.parent = globalContentPanel.transform;
                 gm.transform.localScale = Vector3.one;
             }            
-        }
-
-        ////Legendary
-        //for (int i = 0; i < itemMass.Count; i++)
-        //{
-        //    GameObject _cell = itemMass[i];
-
-        //    if (_cell.GetComponent<ItemCell>().itemRarity == "legendary")
-        //    {
-        //        _cell.transform.parent = globalContentPanel.transform;
-        //        _cell.transform.localScale = Vector3.one;
-        //    }
-        //}
-
-        ////Epic
-        //for (int i = 0; i < itemMass.Count; i++)
-        //{
-        //    GameObject _cell = itemMass[i];
-
-        //    if (_cell.GetComponent<ItemCell>().itemRarity == "epic")
-        //    {
-        //        _cell.transform.parent = globalContentPanel.transform;
-        //        _cell.transform.localScale = Vector3.one;
-        //    }
-        //}
-
-        ////Rare
-        //for (int i = 0; i < itemMass.Count; i++)
-        //{
-        //    GameObject _cell = itemMass[i];
-
-        //    if (_cell.GetComponent<ItemCell>().itemRarity == "rare")
-        //    {
-        //        _cell.transform.parent = globalContentPanel.transform;
-        //        _cell.transform.localScale = Vector3.one;
-        //    }
-        //}
-
-        ////Common
-        //for (int i = 0; i < itemMass.Count; i++)
-        //{
-        //    GameObject _cell = itemMass[i];
-
-        //    if (_cell.GetComponent<ItemCell>().itemRarity == "common")
-        //    {
-        //        _cell.transform.parent = globalContentPanel.transform;
-        //        _cell.transform.localScale = Vector3.one;
-        //    }
-        //}
+        }        
     }
 
     void SaveItem()
@@ -473,6 +521,7 @@ public class PopUpMerge : MonoBehaviour
     public void ButOpen()
     {
         _popUpController.OpenPopUp();
+        garageController.StartCoroutine(garageController.OffGarage());
 
         Initialize();
     }
@@ -480,6 +529,7 @@ public class PopUpMerge : MonoBehaviour
     public void ButClosed()
     {
         StartCoroutine(EnumSaveItem());
+        canvasGarage.SetActive(true);
 
         _popUpController.ClosedPopUp();
     }
@@ -506,5 +556,743 @@ public class PopUpMerge : MonoBehaviour
 
         imgButtonMerge.sprite = sprPassiveButton;
         imgButtonRepair.sprite = sprActiveButton;
+    }
+
+    public void ButChooseItem(ItemCell _itemCell)
+    {
+        if (!isSlot1full)
+        {
+            imgSlot1.gameObject.SetActive(true);
+            imgSlot2.gameObject.SetActive(true);
+            imgSlot3.gameObject.SetActive(true);
+            imgSlotFinal.gameObject.SetActive(true);
+
+            itemCell1 = _itemCell;
+
+            imgSlot1.sprite = _itemCell.imgCard.sprite;
+            iconSlot1.sprite = _itemCell.imgIcon.sprite;
+
+            imgSlot2.sprite = _itemCell.imgCard.sprite;
+            iconSlot2.sprite = _itemCell.imgIcon.sprite;
+            imgSlot2.color = new Color(0.65f, 0.65f, 0.65f, 1);
+            iconSlot2.color = new Color(0.65f, 0.65f, 0.65f, 1);
+
+            imgSlot3.sprite = _itemCell.imgCard.sprite;
+            iconSlot3.sprite = _itemCell.imgIcon.sprite;
+            imgSlot3.color = new Color(0.65f, 0.65f, 0.65f, 1);
+            iconSlot3.color = new Color(0.65f, 0.65f, 0.65f, 1);
+
+            if (_itemCell.itemRarity == "common")
+            {
+                imgSlotFinal.sprite = sprItemRare;
+            }
+
+            if (_itemCell.itemRarity == "rare")
+            {
+                imgSlotFinal.sprite = sprItemEpic;
+            }
+
+            if (_itemCell.itemRarity == "epic")
+            {
+                imgSlotFinal.sprite = sprItemLegendary;
+            }
+
+            iconSlotFinal.sprite = _itemCell.imgIcon.sprite;
+            isSlot1full = true;
+
+            panelNewStats.SetActive(true);
+
+            #region Deactivate Items
+            foreach (GameObject gm in itemGunInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            foreach (GameObject gm in itemEngineInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            foreach (GameObject gm in itemBrakesInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            foreach (GameObject gm in itemFuelSystemInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            foreach (GameObject gm in itemSuspensionInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            foreach (GameObject gm in itemTransmissionInst)
+            {
+                if (gm.GetComponent<ItemCell>().itemID != _itemCell.itemID ||
+                    gm.GetComponent<ItemCell>().itemRarity != _itemCell.itemRarity)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+            #endregion
+
+            itemCell1.MergeSelect();
+
+            tLevelCell1.text = "Lv " + _itemCell.currentLevel;
+            tLevelCellFinal.text = "Lv " + _itemCell.currentLevel;
+
+            maxLevel = _itemCell.currentLevel;
+            itemCellGeneral = _itemCell;
+
+            PanelNewStatsSettings();
+
+            return;
+        }
+
+        if (!isSlot2full)
+        {
+            itemCell2 = _itemCell;
+
+            imgSlot2.sprite = _itemCell.imgCard.sprite;
+            iconSlot2.sprite = _itemCell.imgIcon.sprite;
+            imgSlot2.color = new Color(1f, 1f, 1f, 1);
+            iconSlot2.color = new Color(1f, 1f, 1f, 1);
+
+            isSlot2full = true;
+
+            itemCell2.MergeSelect();
+
+            if (isSlot1full && isSlot2full && isSlot3full)
+            {
+                butMerge.SetActive(true);
+
+                foreach (GameObject gm in instItemMass)
+                {
+                    if (gm != itemCell1.gameObject && gm != itemCell2.gameObject && gm != itemCell3.gameObject)
+                    {
+                        gm.GetComponent<ItemCell>().MergeDeactivate();
+                    }
+                }
+            }
+
+            tLevelCell2.text = "Lv " + _itemCell.currentLevel;
+
+            if (_itemCell.currentLevel > maxLevel)
+            {
+                maxLevel = _itemCell.currentLevel;
+                tLevelCellFinal.text = "Lv " + maxLevel;
+                itemCellGeneral = _itemCell;
+            }
+
+            PanelNewStatsSettings();
+
+            return;
+        }
+
+        if (!isSlot3full)
+        {
+            itemCell3 = _itemCell;
+
+            imgSlot3.sprite = _itemCell.imgCard.sprite;
+            iconSlot3.sprite = _itemCell.imgIcon.sprite;
+            imgSlot3.color = new Color(1f, 1f, 1f, 1);
+            iconSlot3.color = new Color(1f, 1f, 1f, 1);
+
+            isSlot3full = true;
+
+            itemCell3.MergeSelect();
+
+            if (isSlot1full && isSlot2full && isSlot3full)
+            {
+                butMerge.SetActive(true);
+
+                foreach (GameObject gm in instItemMass)
+                {
+                    if (gm != itemCell1.gameObject && gm != itemCell2.gameObject && gm != itemCell3.gameObject)
+                    {
+                        gm.GetComponent<ItemCell>().MergeDeactivate();
+                    }
+                }
+            }
+
+            tLevelCell3.text = "Lv " + _itemCell.currentLevel;
+
+            if (_itemCell.currentLevel > maxLevel)
+            {
+                maxLevel = _itemCell.currentLevel;
+                tLevelCellFinal.text = "Lv " + maxLevel;
+                itemCellGeneral = _itemCell;
+            }
+
+            PanelNewStatsSettings();
+
+            return;
+        }        
+    }
+
+    public void ButItemUnselect(int slotID)
+    {
+        if (isSlot1full && isSlot2full && isSlot3full)
+        {
+            foreach (GameObject gm in instItemMass)
+            {
+                if (gm != itemCell1.gameObject && gm != itemCell2.gameObject && gm != itemCell3.gameObject)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+            }
+        }
+
+        if (slotID == 1)
+        {
+            if (itemCell1 != null)
+            {
+                imgSlot1.gameObject.SetActive(false);
+                imgSlot2.gameObject.SetActive(false);
+                imgSlot3.gameObject.SetActive(false);
+                imgSlotFinal.gameObject.SetActive(false);                
+
+                isSlot1full = false;
+                isSlot2full = false;
+                isSlot3full = false;
+
+                panelNewStats.SetActive(false);
+
+                #region Deactivate Items
+                foreach (GameObject gm in itemGunInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+
+                foreach (GameObject gm in itemEngineInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+
+                foreach (GameObject gm in itemBrakesInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+
+                foreach (GameObject gm in itemFuelSystemInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+
+                foreach (GameObject gm in itemSuspensionInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+
+                foreach (GameObject gm in itemTransmissionInst)
+                {
+                    gm.GetComponent<ItemCell>().MergeDefault();
+                }
+                #endregion
+
+                itemCell1 = null;
+                itemCell2 = null;
+                itemCell3 = null;
+
+                tLevelCell1.text = "";
+                tLevelCell2.text = "";
+                tLevelCell3.text = "";
+                tLevelCellFinal.text = "";
+                maxLevel = 0;
+                itemCellGeneral = null;
+            }
+        }
+
+        if (slotID == 2)
+        {
+            if (itemCell2 != null)
+            {
+                imgSlot2.color = new Color(0.65f, 0.65f, 0.65f, 1);
+                iconSlot2.color = new Color(0.65f, 0.65f, 0.65f, 1);
+
+                if (itemCellGeneral == itemCell2)
+                {
+                    if (itemCell3 != null)
+                    {
+                        if (itemCell1.currentLevel > itemCell3.currentLevel)
+                        {
+                            itemCellGeneral = itemCell1;
+                        }
+                        else
+                        {
+                            itemCellGeneral = itemCell3;
+                        }
+                    }
+                    else
+                    {
+                        itemCellGeneral = itemCell1;
+                    }
+                }
+
+                itemCell2.MergeDefault();
+
+                itemCell2 = null;
+
+                isSlot2full = false;                
+            }
+        }
+
+        if (slotID == 3)
+        {
+            if (itemCell3 != null)
+            {
+                imgSlot3.color = new Color(0.65f, 0.65f, 0.65f, 1);
+                iconSlot3.color = new Color(0.65f, 0.65f, 0.65f, 1);
+
+                if (itemCellGeneral == itemCell3)
+                {
+                    if (itemCell2 != null)
+                    {
+                        if (itemCell1.currentLevel > itemCell2.currentLevel)
+                        {
+                            itemCellGeneral = itemCell1;
+                        }
+                        else
+                        {
+                            itemCellGeneral = itemCell2;
+                        }
+                    }
+                    else
+                    {
+                        itemCellGeneral = itemCell1;
+                    }
+                }
+
+                itemCell3.MergeDefault();
+
+                itemCell3 = null;
+
+                isSlot3full = false;
+            }
+        }              
+
+        butMerge.SetActive(false);
+    }
+
+    void RemoveItemInInventory(int _itemNum, string _itemType, GameObject _gm)
+    {
+        int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);
+
+        if (itemCount > 1)
+        {
+            for (int i = _itemNum; i < itemCount - 1; i++)
+            {
+                PlayerPrefs.SetInt("item" + _itemType + "ID" + i, PlayerPrefs.GetInt("item" + _itemType + "ID" + (i + 1)));
+                PlayerPrefs.SetInt("item" + _itemType + "Level" + i, PlayerPrefs.GetInt("item" + _itemType + "Level" + (i + 1)));
+                PlayerPrefs.SetString("item" + _itemType + "Rarity" + i, PlayerPrefs.GetString("item" + _itemType + "Rarity" + (i + 1)));
+                PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
+
+                if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
+                {
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterRare1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterRare2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterEpic1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterEpic2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterLegendary1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterLegendary2Value" + (i + 1)));
+                }
+            }
+
+            #region Удаляем инфу про удаленный итем
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare1Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare2Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic1Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic2Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary1Value" + itemCount);
+            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary2Value" + itemCount);
+
+            itemCount -= 1;
+
+            PlayerPrefs.DeleteKey("item" + _itemType + "ID" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Level" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Rarity" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Type" + itemCount);
+
+            //PlayerPrefs.SetInt("item" + _itemType + "ID" + itemCount, 0);
+            //PlayerPrefs.SetInt("item" + _itemType + "Level" + itemCount, 1);
+            //PlayerPrefs.SetString("item" + _itemType + "Rarity" + itemCount, "");
+            //PlayerPrefs.SetString("item" + _itemType + "Type" + itemCount, "");
+
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary2Value" + itemCount);
+
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon1Value" + itemCount, 0);
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon2Value" + itemCount, 0);
+
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare1Value" + itemCount, 0);
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare2Value" + itemCount, 0);
+
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic1Value" + itemCount, 0);
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic2Value" + itemCount, 0);
+
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary1Value" + itemCount, 0);
+            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + itemCount, 0);
+            #endregion
+
+            PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) - 1);
+        } 
+        else
+        {
+            PlayerPrefs.SetInt("itemCount" + _itemType, 0);
+        }
+
+        if (_gm.GetComponent<ItemCell>().itemType == "Gun")
+            itemGunInst.Remove(_gm);
+
+        if (_gm.GetComponent<ItemCell>().itemType == "Engine")
+            itemEngineInst.Remove(_gm);
+
+        if (_gm.GetComponent<ItemCell>().itemType == "Brakes")
+            itemBrakesInst.Remove(_gm);
+
+        if (_gm.GetComponent<ItemCell>().itemType == "FuelSystem")
+            itemFuelSystemInst.Remove(_gm);
+
+        if (_gm.GetComponent<ItemCell>().itemType == "Suspension")
+            itemSuspensionInst.Remove(_gm);
+
+        if (_gm.GetComponent<ItemCell>().itemType == "Transmission")
+            itemTransmissionInst.Remove(_gm);
+    }
+
+    public void ButMerge()
+    {
+        RemoveItemInInventory(itemCell1.itemNumInInventory, itemCell1.itemType, itemCell1.gameObject);
+        RemoveItemInInventory(itemCell2.itemNumInInventory, itemCell2.itemType, itemCell2.gameObject);
+        RemoveItemInInventory(itemCell3.itemNumInInventory, itemCell3.itemType, itemCell3.gameObject);
+
+        #region AddNewItem
+        string _itemType;
+        string _itemRarity = "";
+
+        _itemType = itemCellGeneral.itemType;
+
+        PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) + 1);
+
+        int _cellCount = PlayerPrefs.GetInt("itemCount" + _itemType) - 1;
+
+        if (itemCellGeneral.itemRarity == "common")
+        {
+            _itemRarity = "rare";
+
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersRare1Value + itemCellGeneral.itemObj.baseItemCharactersRare1StepValue * (maxLevel - 1);
+            float _value2 = itemCellGeneral.itemObj.baseItemCharactersRare2Value + itemCellGeneral.itemObj.baseItemCharactersRare2StepValue * (maxLevel - 1);
+
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare1Value" + _cellCount, _value1);
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare2Value" + _cellCount, _value2);
+        }
+
+        if (itemCellGeneral.itemRarity == "rare")
+        {
+            _itemRarity = "epic";
+
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersEpic1Value + itemCellGeneral.itemObj.baseItemCharactersEpic1StepValue * (maxLevel - 1);
+            float _value2 = itemCellGeneral.itemObj.baseItemCharactersEpic2Value + itemCellGeneral.itemObj.baseItemCharactersEpic2StepValue * (maxLevel - 1);
+
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic1Value" + _cellCount, _value1);
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic2Value" + _cellCount, _value2);
+        }
+
+        if (itemCellGeneral.itemRarity == "epic")
+        {
+            _itemRarity = "legendary";
+
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersLegendary1Value + itemCellGeneral.itemObj.baseItemCharactersLegendary1StepValue * (maxLevel - 1);
+            float _value2 = itemCellGeneral.itemObj.baseItemCharactersLegendary2Value + itemCellGeneral.itemObj.baseItemCharactersLegendary2StepValue * (maxLevel - 1);
+
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary1Value" + _cellCount, _value1);
+            PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + _cellCount, _value2);
+        }        
+
+        PlayerPrefs.SetInt("item" + _itemType + "ID" + _cellCount, itemCellGeneral.itemID);
+        PlayerPrefs.SetInt("item" + _itemType + "Level" + _cellCount, maxLevel);
+        PlayerPrefs.SetString("item" + _itemType + "Rarity" + _cellCount, _itemRarity);
+        PlayerPrefs.SetString("item" + _itemType + "Type" + _cellCount, itemCellGeneral.itemType);
+        #endregion
+
+        popUpMergeFinal.card = itemCellGeneral.itemObj;
+        popUpMergeFinal.sprItemCell = imgSlotFinal.sprite;
+        popUpMergeFinal.sprItemIcon = iconSlotFinal.sprite;
+        popUpMergeFinal.itemName = itemCellGeneral.itemName;
+
+        if (itemCell1.currentLevel == maxLevel)
+        {
+            popUpMergeFinal.returnLevelValue1 = itemCell2.currentLevel;
+            popUpMergeFinal.returnLevelValue2 = itemCell3.currentLevel;
+        }
+
+        if (itemCell2.currentLevel == maxLevel)
+        {
+            popUpMergeFinal.returnLevelValue1 = itemCell1.currentLevel;
+            popUpMergeFinal.returnLevelValue2 = itemCell3.currentLevel;
+        }
+
+        if (itemCell3.currentLevel == maxLevel)
+        {
+            popUpMergeFinal.returnLevelValue1 = itemCell2.currentLevel;
+            popUpMergeFinal.returnLevelValue2 = itemCell1.currentLevel;
+        }
+
+        popUpMergeFinal.level = maxLevel;
+
+        imgSlot1.gameObject.SetActive(false);
+        imgSlot2.gameObject.SetActive(false);
+        imgSlot3.gameObject.SetActive(false);
+        imgSlotFinal.gameObject.SetActive(false);
+
+        isSlot1full = false;
+        isSlot2full = false;
+        isSlot3full = false;
+
+        panelNewStats.SetActive(false);
+
+        #region Deactivate Items
+        foreach (GameObject gm in itemGunInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        foreach (GameObject gm in itemEngineInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        foreach (GameObject gm in itemBrakesInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        foreach (GameObject gm in itemFuelSystemInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        foreach (GameObject gm in itemSuspensionInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        foreach (GameObject gm in itemTransmissionInst)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+        #endregion
+
+        Destroy(itemCell1.gameObject);
+        Destroy(itemCell2.gameObject);
+        Destroy(itemCell3.gameObject);
+
+        itemCell1 = null;
+        itemCell2 = null;
+        itemCell3 = null;
+
+        tLevelCell1.text = "";
+        tLevelCell2.text = "";
+        tLevelCell3.text = "";
+        tLevelCellFinal.text = "";
+        maxLevel = 0;
+
+        SaveItem();
+        LoadItem();
+
+        popUpMergeFinal.rarity = _itemRarity;        
+        popUpMergeFinal.ButOpen();
+    }
+
+    void PanelNewStatsSettings()
+    {
+        DetailCard _card = itemCellGeneral.itemObj;
+
+        if (itemCellGeneral.itemRarity == "common")
+        {
+            tCurrentMaxLevel.text = "10";
+            tNextMaxLevel.text = "20";
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.HpUp)
+            {
+                imgIcon1.sprite = sprIconHealth;
+            }
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.DamageUp)
+            {
+                imgIcon1.sprite = sprIconDamage;
+            }
+
+            tCurrentPanelValue1.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterCommon1Value" + itemCellGeneral.itemNumInInventory) + "%";
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersRare1Value + itemCellGeneral.itemObj.baseItemCharactersRare1StepValue * (maxLevel - 1);
+            tNextPanelValue1.text = _value1 + "";
+
+            popUpMergeFinal.currentPanelValue1 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterCommon1Value" + itemCellGeneral.itemNumInInventory);
+            popUpMergeFinal.nextPanelValue1 = _value1;
+
+            if (_card.baseItemCharactersCommon2 != DetailCard.ItemCharacters.none)
+            {
+                tCurrentPanelValue2.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterCommon2Value" + itemCellGeneral.itemNumInInventory) + "%";
+
+                float _value2 = itemCellGeneral.itemObj.baseItemCharactersRare2Value + itemCellGeneral.itemObj.baseItemCharactersRare2StepValue * (maxLevel - 1);
+                tNextPanelValue2.text = _value2 + "";
+
+                popUpMergeFinal.currentPanelValue2 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterCommon2Value" + itemCellGeneral.itemNumInInventory);
+                popUpMergeFinal.nextPanelValue2 = _value2;
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.HpUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconHealth;
+                }
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconDamage;
+                }
+            } 
+            else
+            {
+                objPanel2.SetActive(false);
+            }
+        }
+
+        if (itemCellGeneral.itemRarity == "rare")
+        {
+            tCurrentMaxLevel.text = "20";
+            tNextMaxLevel.text = "30";
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.HpUp)
+            {
+                imgIcon1.sprite = sprIconHealth;
+            }
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.DamageUp)
+            {
+                imgIcon1.sprite = sprIconDamage;
+            }
+
+            tCurrentPanelValue1.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterRare1Value" + itemCellGeneral.itemNumInInventory) + "%";
+
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersEpic1Value + itemCellGeneral.itemObj.baseItemCharactersEpic1StepValue * (maxLevel - 1);
+            tNextPanelValue1.text = _value1 + "";
+
+            popUpMergeFinal.currentPanelValue1 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterRare1Value" + itemCellGeneral.itemNumInInventory);
+            popUpMergeFinal.nextPanelValue1 = _value1;
+
+            if (_card.baseItemCharactersCommon2 != DetailCard.ItemCharacters.none)
+            {
+                tCurrentPanelValue2.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterRare2Value" + itemCellGeneral.itemNumInInventory) + "%";
+
+                float _value2 = itemCellGeneral.itemObj.baseItemCharactersEpic2Value + itemCellGeneral.itemObj.baseItemCharactersEpic2StepValue * (maxLevel - 1);
+                tNextPanelValue2.text = _value2 + "";
+
+                popUpMergeFinal.currentPanelValue2 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterRare2Value" + itemCellGeneral.itemNumInInventory);
+                popUpMergeFinal.nextPanelValue2 = _value2;
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.HpUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconHealth;
+                }
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconDamage;
+                }
+            }
+            else
+            {
+                objPanel2.SetActive(false);
+            }
+        }
+
+        if (itemCellGeneral.itemRarity == "epic")
+        {
+            tCurrentMaxLevel.text = "30";
+            tNextMaxLevel.text = "40";
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.HpUp)
+            {
+                imgIcon1.sprite = sprIconHealth;
+            }
+
+            if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.DamageUp)
+            {
+                imgIcon1.sprite = sprIconDamage;
+            }
+
+            tCurrentPanelValue1.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterEpic1Value" + itemCellGeneral.itemNumInInventory) + "%";
+
+            float _value1 = itemCellGeneral.itemObj.baseItemCharactersLegendary1Value + itemCellGeneral.itemObj.baseItemCharactersLegendary1StepValue * (maxLevel - 1);
+            tNextPanelValue1.text = _value1 + "";
+
+            popUpMergeFinal.currentPanelValue1 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterEpic1Value" + itemCellGeneral.itemNumInInventory);
+            popUpMergeFinal.nextPanelValue1 = _value1;
+
+            if (_card.baseItemCharactersCommon2 != DetailCard.ItemCharacters.none)
+            {
+                tCurrentPanelValue2.text = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterEpic2Value" + itemCellGeneral.itemNumInInventory) + "%";
+
+                float _value2 = itemCellGeneral.itemObj.baseItemCharactersLegendary2Value + itemCellGeneral.itemObj.baseItemCharactersLegendary2StepValue * (maxLevel - 1);
+                tNextPanelValue2.text = _value2 + "";
+
+                popUpMergeFinal.currentPanelValue2 = PlayerPrefs.GetFloat("item" + itemCellGeneral.itemType + "baseCharacterEpic2Value" + itemCellGeneral.itemNumInInventory);
+                popUpMergeFinal.nextPanelValue2 = _value2;
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.HpUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconHealth;
+                }
+
+                if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    objPanel2.SetActive(true);
+                    imgIcon2.sprite = sprIconDamage;
+                }
+            }
+            else
+            {
+                objPanel2.SetActive(false);
+            }
+        }
     }
 }

@@ -813,6 +813,24 @@ public class PopUpDetail : MonoBehaviour
         fillEndLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) / maxLevel * 233f, 0), 0.5f);
     }
 
+    public void CreateStatsSave(DetailCard _card, ItemCell _itemCell)  //Создаем сохранение характеристик итема
+    {
+        if (!PlayerPrefs.HasKey("item" + _card.itemType.ToString() + "baseCharacterCommon1Value" + _itemCell.itemNumInInventory))
+        {
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterCommon1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersCommon1Value);
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterCommon2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersCommon2Value);
+
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterRare1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersRare1Value);
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterRare2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersRare2Value);
+
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterEpic1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersEpic1Value);
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterEpic2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersEpic2Value);
+
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterLegendary1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersLegendary1Value);
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterLegendary2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersLegendary2Value);
+        }
+    }
+
     public void ButOpen()
     {
         _popUpController.OpenPopUp();
@@ -1023,6 +1041,13 @@ public class PopUpDetail : MonoBehaviour
             CreateCharactersPanel();
             CalculateUpgradePrice();
             LevelUpdate();
+
+            if (garageController.slot1Card == garageController.activeItem ||
+                garageController.slot2Card == garageController.activeItem ||
+                garageController.slot3Card == garageController.activeItem ||
+                garageController.slot4Card == garageController.activeItem ||
+                garageController.slot5Card == garageController.activeItem ||
+                garageController.slot6Card == garageController.activeItem)
             garageController.CalculateViewStats();
         }
     }

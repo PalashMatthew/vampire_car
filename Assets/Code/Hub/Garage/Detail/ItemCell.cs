@@ -8,6 +8,7 @@ public class ItemCell : MonoBehaviour
 {
     public GarageController garageController;
     PopUpDetail _popUpDetail;
+    PopUpMerge _popUpMerge;
 
     public DetailCard itemObj;    
 
@@ -36,6 +37,11 @@ public class ItemCell : MonoBehaviour
     public Sprite sprEpicCard;
     public Sprite sprLegendaryCard;
 
+    [Header("Merge")]
+    public GameObject mergeSelect;
+    public GameObject mergeDeactivate;
+    public bool isMergeBlock;
+
     [Header("Level")]
     public int currentLevel;
     public TMP_Text tLevel;
@@ -46,6 +52,8 @@ public class ItemCell : MonoBehaviour
     private void Awake()
     {
         _popUpDetail = GameObject.Find("PopUp Detail Upgrade").GetComponent<PopUpDetail>();
+
+        _popUpMerge = GameObject.Find("PopUp Merge").GetComponent<PopUpMerge>();
     }
 
     public void Initialize()
@@ -116,14 +124,43 @@ public class ItemCell : MonoBehaviour
 
     public void ButOpen()
     {
-        GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();
+        if (cellType == CellType.Inventory)
+        {
+            GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();
 
-        _popUpDetail.sprRarity = imgCard.sprite;
-        _popUpDetail.itemIcon = sprIcon;
-        _popUpDetail.itemName = itemName;
-        _popUpDetail.itemRarity = itemRarity;
-        _popUpDetail.isSlotItem = false;
+            _popUpDetail.sprRarity = imgCard.sprite;
+            _popUpDetail.itemIcon = sprIcon;
+            _popUpDetail.itemName = itemName;
+            _popUpDetail.itemRarity = itemRarity;
+            _popUpDetail.isSlotItem = false;
 
-        _popUpDetail.ButOpen();
+            _popUpDetail.ButOpen();
+        }
+
+        if (cellType == CellType.Merge && !isMergeBlock)
+        {
+            //GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();
+
+            _popUpMerge.ButChooseItem(gameObject.GetComponent<ItemCell>());
+        }
+    }
+
+    public void MergeSelect()
+    {
+        mergeSelect.SetActive(true);
+        isMergeBlock = true;
+    }
+
+    public void MergeDeactivate()
+    {
+        mergeDeactivate.SetActive(true);
+        isMergeBlock = true;
+    }
+
+    public void MergeDefault()
+    {
+        mergeSelect.SetActive(false);
+        mergeDeactivate.SetActive(false);
+        isMergeBlock = false;
     }
 }

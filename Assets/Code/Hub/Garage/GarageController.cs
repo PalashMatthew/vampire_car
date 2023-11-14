@@ -191,6 +191,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemGunType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in gunItem)
             {
@@ -201,6 +202,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemGunInst.Add(_cell);
             itemMass.Add(_cell);
@@ -224,6 +227,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemEngineType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in engineItem)
             {
@@ -234,6 +238,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemEngineInst.Add(_cell);
             itemMass.Add(_cell);
@@ -257,6 +263,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemBrakesType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in brakesItem)
             {
@@ -267,6 +274,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemBrakesInst.Add(_cell);
             itemMass.Add(_cell);
@@ -290,6 +299,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemFuelSystemType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in fuelSystemItem)
             {
@@ -300,6 +310,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemFuelSystemInst.Add(_cell);
             itemMass.Add(_cell);
@@ -324,6 +336,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemSuspensionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in suspensionItem)
             {
@@ -334,6 +347,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemSuspensionInst.Add(_cell);
             itemMass.Add(_cell);
@@ -358,6 +373,7 @@ public class GarageController : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemTransmissionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
 
             foreach (DetailCard _item in transmissionItem)
             {
@@ -368,6 +384,8 @@ public class GarageController : MonoBehaviour
             }
 
             _cell.GetComponent<ItemCell>().Initialize();
+
+            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
             itemTransmissionInst.Add(_cell);
             itemMass.Add(_cell);
@@ -664,7 +682,7 @@ public class GarageController : MonoBehaviour
         StartCoroutine(OffGarage());
     }
 
-    IEnumerator OffGarage()
+    public IEnumerator OffGarage()
     {
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
