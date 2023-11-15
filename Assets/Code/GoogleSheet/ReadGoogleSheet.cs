@@ -14,6 +14,7 @@ public class ReadGoogleSheet : MonoBehaviour
     public string urlGunUpgrade;
     public string urlPassiveUpgrade;
     public string urlGunBaseSettings;
+    public string urlTalents;
 
 
     private void Start()
@@ -29,6 +30,8 @@ public class ReadGoogleSheet : MonoBehaviour
         StartCoroutine(ObtainSheetData(urlPassiveUpgrade, "passiveUpgrade"));
         
         StartCoroutine(ObtainSheetData(urlGunBaseSettings, "gunBaseSettings"));
+
+        StartCoroutine(ObtainSheetData(urlTalents, "talents"));
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)
@@ -54,6 +57,9 @@ public class ReadGoogleSheet : MonoBehaviour
 
             if (_bdName == "gunBaseSettings")
                 GetComponent<BDLoaderController>().LoadGunBaseSettingsInfo(json);
+
+            if (_bdName == "talents")
+                GetComponent<BDLoaderController>().LoadTalentsInfo(json);
         }
     }
 }

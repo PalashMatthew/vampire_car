@@ -570,4 +570,85 @@ public class BDLoaderController : MonoBehaviour
             }
         }
     }
+
+    public void LoadTalentsInfo(string _json)
+    {
+        var _file = JSON.Parse(_json);
+
+        for (int a = 1; a < _file["values"].Count; a++)
+        {
+            List<int> _talentsValue = new List<int>();
+            string _talentsName = "";
+
+            var itemo = JSON.Parse(_file["values"][a].ToString());
+
+            string s = itemo.ToString();
+
+            char[] _info = new char[s.Length];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                _info[i] = s[i];
+            }
+
+            string s1 = "";
+
+            for (int i = 0; i < _info.Length; i++)
+            {
+                s1 += _info[i];
+
+                if (_info[i] == '"' && _info[i + 1] != ',' && _info[i + 1] != ']')
+                {
+                    int cellStart = i + 1;
+                    int cellEnd = 0;
+
+                    for (int r = cellStart; r < _info.Length; r++)
+                    {
+                        if (_info[r] == '"')
+                        {
+                            cellEnd = r;
+                            goto l1;
+                        }
+                    }
+                    l1:
+
+                    string s2 = "";
+
+                    for (int u = cellStart; u < cellEnd; u++)
+                    {
+                        s2 += _info[u];
+                    }
+
+                    if (s2 == "")
+                    {
+                        s2 = "0";
+                    }
+
+                    if (i == 1)
+                    {
+                        _talentsName = s2;
+                    } 
+                    else
+                    {
+                        _talentsValue.Add(Int32.Parse(s2));
+                    }
+                }
+            }
+
+            PlayerPrefs.SetString("talent" + a + "name", _talentsName);
+
+            for (int i = 0; i < _talentsValue.Count; i++)
+            {
+                if (i == 0)
+                {
+                    PlayerPrefs.SetInt("talent" + a + "price", _talentsValue[0]);
+                }
+
+                if (i == 1)
+                {
+                    PlayerPrefs.SetInt("talent" + a + "value", _talentsValue[1]);
+                }
+            }
+        }
+    }
 }

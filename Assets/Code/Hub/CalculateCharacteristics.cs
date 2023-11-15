@@ -57,9 +57,4 @@ public class CalculateCharacteristics : MonoBehaviour
             }            
         }
     }
-
-    public void ItemCharacteristics()
-    {
-        
-    }
 }

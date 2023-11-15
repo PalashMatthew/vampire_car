@@ -122,6 +122,7 @@ public class PopUpMerge : MonoBehaviour
         imgSlotFinal.gameObject.SetActive(false);
         panelNewStats.SetActive(false);
         butMerge.SetActive(false);
+        butRepair.SetActive(false);
 
         tLevelCell1.text = "";
         tLevelCell2.text = "";

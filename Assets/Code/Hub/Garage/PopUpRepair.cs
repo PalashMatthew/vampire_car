@@ -638,6 +638,8 @@ public class PopUpRepair : MonoBehaviour
 
         isSlot1full = false;
 
+        Destroy(itemCellGeneral.gameObject);
+
         tLevelCell1.text = "";
         itemCellGeneral = null;
 
@@ -703,22 +705,22 @@ public class PopUpRepair : MonoBehaviour
             PlayerPrefs.SetInt("itemCount" + _itemType, 0);
         }
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "Gun")
-        //    itemGunInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "Gun")
+            itemGunInst.Remove(_gm);
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "Engine")
-        //    itemEngineInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "Engine")
+            itemEngineInst.Remove(_gm);
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "Brakes")
-        //    itemBrakesInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "Brakes")
+            itemBrakesInst.Remove(_gm);
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "FuelSystem")
-        //    itemFuelSystemInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "FuelSystem")
+            itemFuelSystemInst.Remove(_gm);
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "Suspension")
-        //    itemSuspensionInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "Suspension")
+            itemSuspensionInst.Remove(_gm);
 
-        //if (_gm.GetComponent<ItemCell>().itemType == "Transmission")
-        //    itemTransmissionInst.Remove(_gm);
+        if (_gm.GetComponent<ItemCell>().itemType == "Transmission")
+            itemTransmissionInst.Remove(_gm);
     }
 }

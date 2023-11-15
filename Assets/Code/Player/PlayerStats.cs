@@ -61,6 +61,10 @@ public class PlayerStats : MonoBehaviour
 
     public float effectDuration;
 
+    public float block;
+
+    public float iron;
+
 
     private void Awake()
     {
@@ -69,36 +73,41 @@ public class PlayerStats : MonoBehaviour
 
     void StatsInitialize()
     {
+        #region Health
         maxHpBase = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carHealth");
-        kritChance = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carKritChance");
-        dodgeProcent = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDodge");
-        damageCoeff = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDamage");
+        maxHpBase += maxHpBase / 100 * PlayerPrefs.GetInt("talentCarImprovementCurrentValue");
 
-        maxHpCoeff = PlayerPrefs.GetFloat("GunSelectHealth")
+        float hpDetailSum = PlayerPrefs.GetFloat("GunSelectHealth")
                      + PlayerPrefs.GetFloat("EngineSelectHealth")
                      + PlayerPrefs.GetFloat("BrakesSelectHealth")
                      + PlayerPrefs.GetFloat("FuelSystemSelectHealth")
                      + PlayerPrefs.GetFloat("SuspensionSelectHealth")
-                     + PlayerPrefs.GetFloat("TransmissionSelectHealth")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffhealth");
+                     + PlayerPrefs.GetFloat("TransmissionSelectHealth");
+
+        maxHpCoeff = hpDetailSum + (hpDetailSum / 100 * PlayerPrefs.GetInt("talentEquipmentImprovementCurrentValue"));
+        maxHpCoeff += PlayerPrefs.GetFloat("carGlobalCoeffhealth");
+        maxHpCoeff += PlayerPrefs.GetInt("talentHealthCurrentValue");
 
         maxHp = maxHpBase + maxHpCoeff;
         currentHp = maxHp;
+        #endregion
 
-        damageCoeff += PlayerPrefs.GetFloat("GunSelectDamage")
-                     + PlayerPrefs.GetFloat("EngineSelectDamage")
-                     + PlayerPrefs.GetFloat("BrakesSelectDamage")
-                     + PlayerPrefs.GetFloat("FuelSystemSelectDamage")
-                     + PlayerPrefs.GetFloat("SuspensionSelectDamage")
-                     + PlayerPrefs.GetFloat("TransmissionSelectDamage")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffdamage");
+        #region KritChance
+        kritChance = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carKritChance");
+        kritChance += kritChance / 100 * PlayerPrefs.GetInt("talentCarImprovementCurrentValue");
 
-        recoveryHpInFirstAidKit = PlayerPrefs.GetFloat("GunSelectRecoveryHpInFirstAidKit")
-                     + PlayerPrefs.GetFloat("EngineSelectRecoveryHpInFirstAidKit")
-                     + PlayerPrefs.GetFloat("BrakesSelectRecoveryHpInFirstAidKit")
-                     + PlayerPrefs.GetFloat("FuelSystemSelectRecoveryHpInFirstAidKit")
-                     + PlayerPrefs.GetFloat("SuspensionSelectRecoveryHpInFirstAidKit")
-                     + PlayerPrefs.GetFloat("TransmissionSelectRecoveryHpInFirstAidKit");
+        kritChance += PlayerPrefs.GetFloat("GunSelectKritChance")
+                     + PlayerPrefs.GetFloat("EngineSelectKritChance")
+                     + PlayerPrefs.GetFloat("BrakesSelectKritChance")
+                     + PlayerPrefs.GetFloat("FuelSystemSelectKritChance")
+                     + PlayerPrefs.GetFloat("SuspensionSelectKritChance")
+                     + PlayerPrefs.GetFloat("TransmissionSelectKritChance")
+                     + PlayerPrefs.GetFloat("carGlobalCoeffkritChance");
+        #endregion
+
+        #region Dodge
+        dodgeProcent = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDodge");
+        dodgeProcent += dodgeProcent / 100 * PlayerPrefs.GetInt("talentCarImprovementCurrentValue");
 
         dodgeProcent += PlayerPrefs.GetFloat("GunSelectDodge")
                      + PlayerPrefs.GetFloat("EngineSelectDodge")
@@ -107,6 +116,38 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("SuspensionSelectDodge")
                      + PlayerPrefs.GetFloat("TransmissionSelectDodge")
                      + PlayerPrefs.GetFloat("carGlobalCoeffdodge");
+        #endregion
+
+        #region Damage
+        damageCoeff = PlayerPrefs.GetFloat(PlayerPrefs.GetString("selectedCarID") + "carDamage");
+        damageCoeff += damageCoeff / 100 * PlayerPrefs.GetInt("talentCarImprovementCurrentValue");
+
+        float damageDetailSum = PlayerPrefs.GetFloat("GunSelectDamage")
+                     + PlayerPrefs.GetFloat("EngineSelectDamage")
+                     + PlayerPrefs.GetFloat("BrakesSelectDamage")
+                     + PlayerPrefs.GetFloat("FuelSystemSelectDamage")
+                     + PlayerPrefs.GetFloat("SuspensionSelectDamage")
+                     + PlayerPrefs.GetFloat("TransmissionSelectDamage");
+
+        damageCoeff += PlayerPrefs.GetFloat("carGlobalCoeffdamage");
+        damageCoeff += PlayerPrefs.GetInt("talentDamageCurrentValue");
+
+        damageCoeff += damageDetailSum + (damageDetailSum / 100 * PlayerPrefs.GetInt("talentEquipmentImprovementCurrentValue"));
+        #endregion
+
+        #region RecoveryHpInFirstAidKit
+        recoveryHpInFirstAidKit = PlayerPrefs.GetFloat("GunSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetFloat("EngineSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetFloat("BrakesSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetFloat("FuelSystemSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetFloat("SuspensionSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetFloat("TransmissionSelectRecoveryHpInFirstAidKit")
+                     + PlayerPrefs.GetInt("talentRecoveryHpInFirstAidKitCurrentValue");
+        #endregion
+
+        block = PlayerPrefs.GetInt("talentBlockCurrentValue");
+
+        iron = PlayerPrefs.GetInt("talentIronCurrentValue");
 
         dronDamage = PlayerPrefs.GetFloat("GunSelectDronDamage")
                      + PlayerPrefs.GetFloat("EngineSelectDronDamage")
@@ -121,7 +162,8 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("FuelSystemSelectShotSpeed")
                      + PlayerPrefs.GetFloat("SuspensionSelectShotSpeed")
                      + PlayerPrefs.GetFloat("TransmissionSelectShotSpeed")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffshotSpeed");
+                     + PlayerPrefs.GetFloat("carGlobalCoeffshotSpeed")
+                     + PlayerPrefs.GetInt("talentShotSpeedCurrentValue");
 
         kritDamage = PlayerPrefs.GetFloat("GunSelectKritDamage")
                      + PlayerPrefs.GetFloat("EngineSelectKritDamage")
@@ -129,15 +171,7 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("FuelSystemSelectKritDamage")
                      + PlayerPrefs.GetFloat("SuspensionSelectKritDamage")
                      + PlayerPrefs.GetFloat("TransmissionSelectKritDamage")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffkritDamage");
-
-        kritChance += PlayerPrefs.GetFloat("GunSelectKritChance")
-                     + PlayerPrefs.GetFloat("EngineSelectKritChance")
-                     + PlayerPrefs.GetFloat("BrakesSelectKritChance")
-                     + PlayerPrefs.GetFloat("FuelSystemSelectKritChance")
-                     + PlayerPrefs.GetFloat("SuspensionSelectKritChance")
-                     + PlayerPrefs.GetFloat("TransmissionSelectKritChance")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffkritChance");
+                     + PlayerPrefs.GetFloat("carGlobalCoeffkritDamage");        
 
         backDamageProcent = PlayerPrefs.GetFloat("GunSelectBackDamage")
                      + PlayerPrefs.GetFloat("EngineSelectBackDamage")
