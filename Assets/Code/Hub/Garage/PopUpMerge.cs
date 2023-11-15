@@ -546,7 +546,10 @@ public class PopUpMerge : MonoBehaviour
         if (panelActive == "repair")
         {
             _popUpRepair.StartCoroutine(_popUpRepair.EnumSaveItem());
-        }    
+        }
+
+        butMerge.SetActive(false);
+        butRepair.SetActive(false);
         
         canvasGarage.SetActive(true);
 
@@ -1144,6 +1147,8 @@ public class PopUpMerge : MonoBehaviour
         tLevelCell3.text = "";
         tLevelCellFinal.text = "";
         maxLevel = 0;
+
+        butMerge.SetActive(false);
 
         SaveItem();
         LoadItem();
