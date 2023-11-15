@@ -50,6 +50,19 @@ public class PopUpRepair : MonoBehaviour
     public List<GameObject> itemSuspensionInst;
     public List<GameObject> itemTransmissionInst;
 
+    [Header("Return Consumables")]
+    public int returnLevelValue;
+
+    public int returnMoneyValue;
+    public int returnDrawingValue;
+
+    public TMP_Text tMoneyCount;
+    public TMP_Text tDrawingCount;
+
+    [Header("PopUp Repair Final")]
+    public PopUpRepairFinal popUpRepairFinal;
+
+
     public void Initialize()
     {
         LoadItem();
@@ -88,7 +101,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemGunType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in gunItem)
             {
@@ -124,7 +137,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemEngineType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in engineItem)
             {
@@ -160,7 +173,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemBrakesType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in brakesItem)
             {
@@ -196,7 +209,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemFuelSystemType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in fuelSystemItem)
             {
@@ -233,7 +246,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemSuspensionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in suspensionItem)
             {
@@ -270,7 +283,7 @@ public class PopUpRepair : MonoBehaviour
             _cell.GetComponent<ItemCell>().itemType = PlayerPrefs.GetString("itemTransmissionType" + i);
             _cell.GetComponent<ItemCell>().garageController = gameObject.GetComponent<GarageController>();
             _cell.GetComponent<ItemCell>().itemNumInInventory = i;
-            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Inventory;
+            _cell.GetComponent<ItemCell>().cellType = ItemCell.CellType.Repair;
 
             foreach (DetailCard _item in transmissionItem)
             {
@@ -459,5 +472,253 @@ public class PopUpRepair : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         SaveItem();
+    }
+
+    public void ButChooseItem(ItemCell _itemCell)
+    {
+        if (!isSlot1full)
+        {
+            #region Choose Item
+            imgSlot1.gameObject.SetActive(true);
+            imgSlot2.gameObject.SetActive(true);
+            imgSlot3.gameObject.SetActive(true);
+
+            itemCellGeneral = _itemCell;
+
+            imgSlot1.sprite = _itemCell.imgCard.sprite;
+            iconSlot1.sprite = _itemCell.imgIcon.sprite;
+
+            if (_itemCell.itemRarity == "common")
+            {
+                imgSlot1.sprite = sprItemCommon;
+            }
+
+            if (_itemCell.itemRarity == "rare")
+            {
+                imgSlot1.sprite = sprItemRare;
+            }
+
+            if (_itemCell.itemRarity == "epic")
+            {
+                imgSlot1.sprite = sprItemEpic;
+            }
+
+            if (_itemCell.itemRarity == "legendary")
+            {
+                imgSlot1.sprite = sprItemLegendary;
+            }
+
+            isSlot1full = true;
+
+            itemCellGeneral = _itemCell;
+
+            foreach (GameObject gm in itemMass)
+            {
+                if (gm != itemCellGeneral.gameObject)
+                {
+                    gm.GetComponent<ItemCell>().MergeDeactivate();
+                }
+            }
+
+            itemCellGeneral.MergeSelect();
+
+            tLevelCell1.text = "Lv " + _itemCell.currentLevel;
+            #endregion
+
+            #region Return Level 1
+            returnMoneyValue = 0;
+            returnDrawingValue = 0;
+
+            returnLevelValue = _itemCell.currentLevel;
+
+            if (returnLevelValue > 0)
+            {
+                for (int i = 1; i < returnLevelValue; i++)
+                {
+                    returnMoneyValue += popUpDetail.upgradePrice[i];
+                    returnDrawingValue += popUpDetail.drawingCount[i];
+                }
+            }
+
+            switch (_itemCell.itemRarity)
+            {
+                case "common":
+                    returnMoneyValue += 500;
+                    returnDrawingValue += 2;
+                    break;
+
+                case "rare":
+                    returnMoneyValue += 1500;
+                    returnDrawingValue += 6;
+                    break;
+
+                case "epic":
+                    returnMoneyValue += 4500;
+                    returnDrawingValue += 18;
+                    break;
+
+                case "legendary":
+                    returnMoneyValue += 13500;
+                    returnDrawingValue += 54;
+                    break;
+            }
+
+            tMoneyCount.text = "x" + returnMoneyValue;
+            tDrawingCount.text = "x" + returnDrawingValue;
+            #endregion
+
+            butRepair.SetActive(true);
+        }
+    }
+
+    public void ButItemUnselect()
+    {
+        foreach (GameObject gm in itemMass)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        imgSlot1.gameObject.SetActive(false);
+        imgSlot2.gameObject.SetActive(false);
+        imgSlot3.gameObject.SetActive(false);
+
+        isSlot1full = false;        
+
+        tLevelCell1.text = "";
+        itemCellGeneral = null;
+
+        butRepair.SetActive(false);
+    }
+
+    public void ButRepair()
+    {       
+        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + returnMoneyValue);
+
+        popUpRepairFinal.moneyCount = returnMoneyValue;
+
+        switch (itemCellGeneral.itemObj.itemType)
+        {
+            case DetailCard.ItemType.Gun:
+                PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + returnDrawingValue);
+                break;
+
+            case DetailCard.ItemType.Engine:
+                PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + returnDrawingValue);
+                break;
+
+            case DetailCard.ItemType.Brakes:
+                PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + returnDrawingValue);
+                break;
+
+            case DetailCard.ItemType.FuelSystem:
+                PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + returnDrawingValue);
+                break;
+
+            case DetailCard.ItemType.Suspension:
+                PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + returnDrawingValue);
+                break;
+
+            case DetailCard.ItemType.Transmission:
+                PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + returnDrawingValue);
+                break;
+        }
+
+        popUpRepairFinal.drawingCount = returnDrawingValue;
+
+        foreach (GameObject gm in itemMass)
+        {
+            gm.GetComponent<ItemCell>().MergeDefault();
+        }
+
+        RemoveItemInInventory(itemCellGeneral.itemNumInInventory, itemCellGeneral.itemType, itemCellGeneral.gameObject);
+
+        imgSlot1.gameObject.SetActive(false);
+        imgSlot2.gameObject.SetActive(false);
+        imgSlot3.gameObject.SetActive(false);
+
+        isSlot1full = false;
+
+        tLevelCell1.text = "";
+        itemCellGeneral = null;
+
+        butRepair.SetActive(false);
+
+        SaveItem();
+        LoadItem();
+
+        popUpRepairFinal.Open();
+    }
+
+    void RemoveItemInInventory(int _itemNum, string _itemType, GameObject _gm)
+    {
+        int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);
+
+        if (itemCount > 1)
+        {
+            for (int i = _itemNum; i < itemCount - 1; i++)
+            {
+                PlayerPrefs.SetInt("item" + _itemType + "ID" + i, PlayerPrefs.GetInt("item" + _itemType + "ID" + (i + 1)));
+                PlayerPrefs.SetInt("item" + _itemType + "Level" + i, PlayerPrefs.GetInt("item" + _itemType + "Level" + (i + 1)));
+                PlayerPrefs.SetString("item" + _itemType + "Rarity" + i, PlayerPrefs.GetString("item" + _itemType + "Rarity" + (i + 1)));
+                PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
+
+                if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
+                {
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterRare1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterRare2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterEpic1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterEpic2Value" + (i + 1)));
+
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterLegendary1Value" + (i + 1)));
+                    PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterLegendary2Value" + (i + 1)));
+                }
+            }
+
+            #region Удаляем инфу про удаленный итем
+            itemCount -= 1;
+
+            PlayerPrefs.DeleteKey("item" + _itemType + "ID" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Level" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Rarity" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "Type" + itemCount);
+
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic2Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary1Value" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary2Value" + itemCount);
+            #endregion
+
+            PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) - 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("itemCount" + _itemType, 0);
+        }
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "Gun")
+        //    itemGunInst.Remove(_gm);
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "Engine")
+        //    itemEngineInst.Remove(_gm);
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "Brakes")
+        //    itemBrakesInst.Remove(_gm);
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "FuelSystem")
+        //    itemFuelSystemInst.Remove(_gm);
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "Suspension")
+        //    itemSuspensionInst.Remove(_gm);
+
+        //if (_gm.GetComponent<ItemCell>().itemType == "Transmission")
+        //    itemTransmissionInst.Remove(_gm);
     }
 }

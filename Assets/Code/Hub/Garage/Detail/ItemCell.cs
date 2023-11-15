@@ -9,6 +9,7 @@ public class ItemCell : MonoBehaviour
     public GarageController garageController;
     PopUpDetail _popUpDetail;
     PopUpMerge _popUpMerge;
+    PopUpRepair _popUpRepair;
 
     public DetailCard itemObj;    
 
@@ -54,6 +55,7 @@ public class ItemCell : MonoBehaviour
         _popUpDetail = GameObject.Find("PopUp Detail Upgrade").GetComponent<PopUpDetail>();
 
         _popUpMerge = GameObject.Find("PopUp Merge").GetComponent<PopUpMerge>();
+        _popUpRepair = GameObject.Find("PopUp Merge").GetComponent<PopUpRepair>();
     }
 
     public void Initialize()
@@ -137,10 +139,13 @@ public class ItemCell : MonoBehaviour
             _popUpDetail.ButOpen();
         }
 
+        if (cellType == CellType.Repair)
+        {
+            _popUpRepair.ButChooseItem(gameObject.GetComponent<ItemCell>());
+        }
+
         if (cellType == CellType.Merge && !isMergeBlock)
         {
-            //GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();
-
             _popUpMerge.ButChooseItem(gameObject.GetComponent<ItemCell>());
         }
     }

@@ -92,6 +92,7 @@ public class PopUpMerge : MonoBehaviour
     public Sprite sprIconDamage, sprIconHealth;
 
     public GameObject butMerge;
+    public GameObject butRepair;
 
     [Header("PopUp Merge Final")]
     public PopUpMergeFinal popUpMergeFinal;
@@ -105,7 +106,13 @@ public class PopUpMerge : MonoBehaviour
 
     void Initialize()
     {
-        ButPanelMerge();
+        panelMerge.SetActive(true);
+        panelRepair.SetActive(false);
+
+        imgButtonMerge.sprite = sprActiveButton;
+        imgButtonRepair.sprite = sprPassiveButton;
+
+        panelActive = "merge";
 
         LoadItem();
 
@@ -523,8 +530,6 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButOpen()
     {
-        panelActive = "end";
-
         _popUpController.OpenPopUp();
         garageController.StartCoroutine(garageController.OffGarage());
 
@@ -533,9 +538,16 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButClosed()
     {
-        //if (panelMerge)
+        if (panelActive == "merge")
+        {
+            StartCoroutine(EnumSaveItem());
+        }
 
-        StartCoroutine(EnumSaveItem());
+        if (panelActive == "repair")
+        {
+            _popUpRepair.StartCoroutine(_popUpRepair.EnumSaveItem());
+        }    
+        
         canvasGarage.SetActive(true);
 
         _popUpController.ClosedPopUp();
@@ -549,33 +561,40 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButPanelMerge()
     {
-        panelActive = "merge";
+        if (panelActive != "merge")
+        { 
+            panelActive = "merge";
 
-        if (panelActive != "end")
-        {
             _popUpRepair.SaveItem();
             Initialize();
-        }        
 
-        panelMerge.SetActive(true);
-        panelRepair.SetActive(false);
+            panelMerge.SetActive(true);
+            panelRepair.SetActive(false);
 
-        imgButtonMerge.sprite = sprActiveButton;
-        imgButtonRepair.sprite = sprPassiveButton;
+            imgButtonMerge.sprite = sprActiveButton;
+            imgButtonRepair.sprite = sprPassiveButton;
+
+            butRepair.SetActive(false);
+        }
     }
 
     public void ButPanelRepair()
     {
-        panelActive = "repair";
+        if (panelActive != "repair")
+        {
+            panelActive = "repair";
 
-        SaveItem();
-        _popUpRepair.Initialize();
+            SaveItem();
+            _popUpRepair.Initialize();
 
-        panelMerge.SetActive(false);
-        panelRepair.SetActive(true);
+            panelMerge.SetActive(false);
+            panelRepair.SetActive(true);
 
-        imgButtonMerge.sprite = sprPassiveButton;
-        imgButtonRepair.sprite = sprActiveButton;
+            imgButtonMerge.sprite = sprPassiveButton;
+            imgButtonRepair.sprite = sprActiveButton;
+
+            butMerge.SetActive(false);
+        }
     }
 
     public void ButChooseItem(ItemCell _itemCell)
@@ -946,26 +965,12 @@ public class PopUpMerge : MonoBehaviour
             }
 
             #region Удаляем инфу про удаленный итем
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare1Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterRare2Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic1Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic2Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary1Value" + itemCount);
-            //PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary2Value" + itemCount);
-
             itemCount -= 1;
 
             PlayerPrefs.DeleteKey("item" + _itemType + "ID" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Level" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Rarity" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Type" + itemCount);
-
-            //PlayerPrefs.SetInt("item" + _itemType + "ID" + itemCount, 0);
-            //PlayerPrefs.SetInt("item" + _itemType + "Level" + itemCount, 1);
-            //PlayerPrefs.SetString("item" + _itemType + "Rarity" + itemCount, "");
-            //PlayerPrefs.SetString("item" + _itemType + "Type" + itemCount, "");
 
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
@@ -975,18 +980,6 @@ public class PopUpMerge : MonoBehaviour
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterEpic2Value" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary1Value" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterLegendary2Value" + itemCount);
-
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon1Value" + itemCount, 0);
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon2Value" + itemCount, 0);
-
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare1Value" + itemCount, 0);
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterRare2Value" + itemCount, 0);
-
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic1Value" + itemCount, 0);
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterEpic2Value" + itemCount, 0);
-
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary1Value" + itemCount, 0);
-            //PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + itemCount, 0);
             #endregion
 
             PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) - 1);
