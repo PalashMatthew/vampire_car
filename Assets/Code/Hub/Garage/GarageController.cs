@@ -1085,6 +1085,7 @@ public class GarageController : MonoBehaviour
                         + PlayerPrefs.GetFloat("FuelSystemSelectDamage") 
                         + PlayerPrefs.GetFloat("SuspensionSelectDamage")
                         + PlayerPrefs.GetFloat("TransmissionSelectDamage");
+
         float _health = PlayerPrefs.GetFloat(activeCarObj.carName + "carHealth") 
                         + PlayerPrefs.GetFloat("carGlobalCoeffhealth")
                         + PlayerPrefs.GetFloat("GunSelectHealth")

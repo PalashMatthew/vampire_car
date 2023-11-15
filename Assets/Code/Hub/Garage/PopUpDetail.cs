@@ -818,14 +818,23 @@ public class PopUpDetail : MonoBehaviour
         if (!PlayerPrefs.HasKey("item" + _card.itemType.ToString() + "baseCharacterCommon1Value" + _itemCell.itemNumInInventory))
         {
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterCommon1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersCommon1Value);
-            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterCommon2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersCommon2Value);
+            PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterCommon2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersCommon2Value);            
+        }
 
+        if (!PlayerPrefs.HasKey("item" + _card.itemType.ToString() + "baseCharacterRare1Value" + _itemCell.itemNumInInventory))
+        {
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterRare1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersRare1Value);
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterRare2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersRare2Value);
+        }
 
+        if (!PlayerPrefs.HasKey("item" + _card.itemType.ToString() + "baseCharacterEpic1Value" + _itemCell.itemNumInInventory))
+        {
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterEpic1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersEpic1Value);
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterEpic2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersEpic2Value);
+        }
 
+        if (!PlayerPrefs.HasKey("item" + _card.itemType.ToString() + "baseCharacterLegendary1Value" + _itemCell.itemNumInInventory))
+        {
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterLegendary1Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersLegendary1Value);
             PlayerPrefs.SetFloat("item" + _card.itemType.ToString() + "baseCharacterLegendary2Value" + _itemCell.itemNumInInventory, _card.baseItemCharactersLegendary2Value);
         }
@@ -1055,6 +1064,27 @@ public class PopUpDetail : MonoBehaviour
     void SaveDetailStats(string _type)
     {
         DetailCard _card = garageController.activeItem.itemObj;
+
+        //ClearSave
+        string s = _type;
+
+        PlayerPrefs.SetFloat(s + "SelectHealth", 0);
+        PlayerPrefs.SetFloat(s + "SelectDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectRecoveryHpInFirstAidKit", 0);
+        PlayerPrefs.SetFloat(s + "SelectDodge", 0);
+        PlayerPrefs.SetFloat(s + "SelectDronDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectShotSpeed", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritChance", 0);
+        PlayerPrefs.SetFloat(s + "SelectBackDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectVampirizm", 0);
+        PlayerPrefs.SetFloat(s + "SelectArmor", 0);
+        PlayerPrefs.SetFloat(s + "SelectHealthRecovery", 0);
+        PlayerPrefs.SetFloat(s + "SelectRage", 0);
+        PlayerPrefs.SetFloat(s + "SelectDistanceDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectLucky", 0);
+        PlayerPrefs.SetFloat(s + "SelectMagnet", 0);
+        PlayerPrefs.SetFloat(s + "SelectCarDamage", 0);
 
         #region Base Stats
         switch (itemRarity)
