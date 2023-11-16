@@ -82,17 +82,30 @@ public class WaveController : MonoBehaviour
         gameplayUIController.StartCoroutine(gameplayUIController.WaveCompliteAnim());
 
         StartCoroutine(ShowUpgrade());
+    }
 
-        //if (currentWave < lastWave)
-        //{
-        //    StartWave();
-        //} 
-        //else
-        //{
-        //    StopAllCoroutines();
-            
-        //    _generate.BossFight();
-        //}        
+    public void StopGame()
+    {
+        isWaveEnd = true;
+
+        StopAllCoroutines();
+        _generate.StopAllCoroutines();
+        _generateObstacles.StopAllCoroutines();
+        GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().StopAllCoroutines();
+
+        for (int i = 0; i < _gameplayController.activeEnemy.Count; i++)
+        {
+            if (_gameplayController.activeEnemy[i] != null)
+            {
+                _gameplayController.activeEnemy[i].GetComponent<EnemyController>().DeleteEnemy();
+            }
+        }
+
+        _gameplayController.activeEnemy.Clear();
+
+        GameObject.Find("Enviroments").GetComponent<PlaceGenerate>().StopGame();
+        //Destroy(GameObject.Find("Player"));
+        Camera.main.GetComponent<CameraController>().follow = false;      
     }
 
     IEnumerator ShowUpgrade()

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
+    public int locationNum;
+
     public static bool isPause;
 
     public enum InputSettings

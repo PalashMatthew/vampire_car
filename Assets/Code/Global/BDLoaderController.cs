@@ -651,4 +651,101 @@ public class BDLoaderController : MonoBehaviour
             }
         }
     }
+
+    public void LoadDropSystemInfo(string _json)
+    {
+        var _file = JSON.Parse(_json);
+
+        for (int a = 1; a < _file["values"].Count; a++)
+        {
+            List<float> _dropSystemInfo = new List<float>();
+
+            var itemo = JSON.Parse(_file["values"][a].ToString());
+
+            string s = itemo.ToString();
+
+            char[] _info = new char[s.Length];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                _info[i] = s[i];
+            }
+
+            string s1 = "";
+
+            for (int i = 0; i < _info.Length; i++)
+            {
+                s1 += _info[i];
+
+                if (_info[i] == '"' && _info[i + 1] != ',' && _info[i + 1] != ']')
+                {
+                    int cellStart = i + 1;
+                    int cellEnd = 0;
+
+                    for (int r = cellStart; r < _info.Length; r++)
+                    {
+                        if (_info[r] == '"')
+                        {
+                            cellEnd = r;
+                            goto l1;
+                        }
+                    }
+                    l1:
+
+                    string s2 = "";
+
+                    for (int u = cellStart; u < cellEnd; u++)
+                    {
+                        s2 += _info[u];
+                    }
+
+                    _dropSystemInfo.Add(float.Parse(s2, CultureInfo.InvariantCulture.NumberFormat));
+                }
+            }
+
+            for (int i = 0; i < _dropSystemInfo.Count; i++)
+            {
+                Debug.Log(_dropSystemInfo[i]);
+                if (i == 0)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemMoneyMin", _dropSystemInfo[i]);
+                }
+
+                if (i == 1)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemMoneyMax", _dropSystemInfo[i]);
+                }
+
+                if (i == 2)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemExpMin", _dropSystemInfo[i]);
+                }
+
+                if (i == 3)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemExpMax", _dropSystemInfo[i]);
+                }
+
+                if (i == 4)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemDrawingMin", _dropSystemInfo[i]);
+                }
+
+                if (i == 5)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemDrawingMax", _dropSystemInfo[i]);
+                }
+
+                if (i == 6)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemTitanMin", _dropSystemInfo[i]);
+                }
+
+                if (i == 7)
+                {
+                    PlayerPrefs.SetFloat(a + "dropSystemTitanMax", _dropSystemInfo[i]);
+                }
+            }
+        }
+    }
 }

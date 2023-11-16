@@ -29,6 +29,9 @@ public class ScrewController : MonoBehaviour
 
     private void Update()
     {
+        if (WaveController.isWaveEnd)
+            Destroy(gameObject);
+
         _destroyDistance = GameObject.Find("Player").GetComponent<PlayerStats>().screwPickUpDistance;
 
         if (Vector3.Distance(_playerPos.position, transform.position) <= _collectionDistance)
@@ -55,10 +58,7 @@ public class ScrewController : MonoBehaviour
         if (transform.position.z < -20)
         {
             Destroy(gameObject);
-        }
-
-        if (WaveController.isWaveEnd)
-            Destroy(gameObject);
+        }        
     }
 
     void Movement()

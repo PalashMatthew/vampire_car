@@ -105,6 +105,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.tag == "player")
         {
+            other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
             other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
             BackDamage(brakeDamage);
         }

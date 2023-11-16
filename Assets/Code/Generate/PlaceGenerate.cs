@@ -55,6 +55,14 @@ public class PlaceGenerate : MonoBehaviour
         }
     }
 
+    public void StopGame()
+    {
+        foreach (GameObject gm in _places)
+        {
+            gm.GetComponent<InstObjectMove>().moveSpeed = 0;
+        }
+    }
+
     void GeneratePlace()
     {
         float _distPlayerToPlace;

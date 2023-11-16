@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,14 +9,16 @@ public class PopUpRecovery : MonoBehaviour
     public int timerValue;
     public TMP_Text tTimer;
 
-    public GameObject imgFade;
-    public GameObject objPopUp;
     private PopUpController _popUpController;
+
+    public bool isRecovery;
 
 
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
+
+        isRecovery = false;
     }
 
     private void Update()
@@ -41,6 +44,10 @@ public class PopUpRecovery : MonoBehaviour
 
     IEnumerator Timer()
     {
+        Sequence anim = DOTween.Sequence();
+        anim.Append(tTimer.rectTransform.DOScale(1.2f, 0.2f).SetUpdate(true)).SetUpdate(true);
+        anim.Append(tTimer.rectTransform.DOScale(1f, 0.2f).SetUpdate(true)).SetUpdate(true);
+
         yield return new WaitForSecondsRealtime(1f);
 
         timerValue--;
@@ -53,24 +60,50 @@ public class PopUpRecovery : MonoBehaviour
         } 
         else
         {
-            ButClosed();
+            EndGame();          
         }        
+    }
+
+    public void EndGame()
+    {
+        StopAllCoroutines();
+
+        GameplayController.isPause = false;
+        Time.timeScale = 1;
+
+        GameObject.Find("GameplayController").GetComponent<WaveController>().StopGame();
+
+        GameObject.Find("PopUp Win").GetComponent<PopUpWin>().ButOpen();
+
+        _popUpController.ClosedPopUp();
     }
 
     public void ButClosed()
     {
         GameplayController.isPause = false;
         Time.timeScale = 1;
+
         _popUpController.ClosedPopUp();
     }
 
     public void ButContinueAds()
     {
+        GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
+        GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
+        ButClosed();
     }
 
     public void ButContinueHard()
     {
+        if (PlayerPrefs.GetInt("playerHard") >= 30)
+        {
+            GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
+            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 30);
+
+            ButClosed();
+        }        
     }
 }
