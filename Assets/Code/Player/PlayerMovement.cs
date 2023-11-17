@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using static UnityEngine.GraphicsBuffer;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,15 +11,15 @@ public class PlayerMovement : MonoBehaviour
     public bool isMoveAccess;
 
     public float moveSpeed;
-    public float moveXSpeed;
-    public float moveZSpeed;
+    //public float moveXSpeed;
+    //public float moveZSpeed;
 
-    public float screenProcentToRotate;  //Процент экрана, в котором начинается поворот
-    public float playerRotateCoeffPlusWidth;
+    //public float screenProcentToRotate;  //Процент экрана, в котором начинается поворот
+    //public float playerRotateCoeffPlusWidth;
 
     public float cameraRotateSpeedCoeff;
 
-    public float coeffX;
+    //public float coeffX;
     public float coeffZ;    
 
     [Header("Bounds")]
@@ -65,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
     public FloatingJoystick joystick;
     public float joySpeed;
 
+    Vector3 velocity = Vector3.zero;
+
+
     private void Start()
     {
         _playerController = GetComponent<PlayerController>();
@@ -94,6 +99,19 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(new Vector3(joystick.Horizontal * Time.deltaTime * joySpeed, 0, joystick.Vertical * Time.deltaTime * joySpeed));
             }
         }
+    }
+
+    IEnumerator SetRegeneration()
+    {
+        yield return new WaitForSeconds(1);
+
+        if (gameObject.GetComponent<PlayerStats>().currentHp < gameObject.GetComponent<PlayerStats>().maxHp)
+            gameObject.GetComponent<PlayerStats>().currentHp += gameObject.GetComponent<PlayerStats>().maxHp / 100 * PlayerPrefs.GetFloat("setValue");
+
+        if (gameObject.GetComponent<PlayerStats>().currentHp > gameObject.GetComponent<PlayerStats>().maxHp)
+            gameObject.GetComponent<PlayerStats>().currentHp = gameObject.GetComponent<PlayerStats>().maxHp;
+
+        StartCoroutine(SetRegeneration());
     }
 
     void MouseInputSettings()
@@ -146,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
 
                 startPlayerX = transform.position.x;
                 startPlayerZ = transform.position.z;
+
+                StopAllCoroutines();
             }
 
             if (touch.phase == TouchPhase.Moved)
@@ -170,35 +190,35 @@ public class PlayerMovement : MonoBehaviour
                 #region Animations
                 if (currentX < transform.position.x - 0.1f)
                 {
-                    mesh.transform.DOLocalRotate(new Vector3(0, -20, 0), playerAnimRotateSpeed);
-                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, -25, 0), 0);
-                    //transform.eulerAngles = new Vector3(0, -10f, 0);
+                    mesh.transform.DOLocalRotate(new Vector3(0, -4, 0), playerAnimRotateSpeed);
                 }
                 else if (currentX > transform.position.x + 0.1f)
                 {
-                    //transform.eulerAngles = new Vector3(0, 10f, 0);
-                    mesh.transform.DOLocalRotate(new Vector3(0, 20, 0), playerAnimRotateSpeed);
-                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
-                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 25, 0), 0);
+                    mesh.transform.DOLocalRotate(new Vector3(0, 4, 0), playerAnimRotateSpeed);
                 }
                 else
                 {
-                    //transform.eulerAngles = new Vector3(0, 0f, 0);
                     mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                    wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                    wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
                 }
                 #endregion
 
-                transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true);
+                //transform.position = Vector3.SmoothDamp(transform.position, new Vector3(currentX, 0, currentZ), ref velocity, moveSpeed * Time.deltaTime);
+
+                //Vector3 targetPos = new Vector3(currentX, 0, currentZ);
+                //Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, moveSpeed);
+                //transform.position = smoothedPos;
+
+                //Vector3 targetPos = new Vector3(currentX, 0, currentZ);
+                //transform.position = targetPos;
+
+                transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true).SetEase(Ease.Linear);
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-                wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+
+                StartCoroutine(SetRegeneration());
             }
         }
 #endif
@@ -226,6 +246,8 @@ public class PlayerMovement : MonoBehaviour
 
             startPlayerX = transform.position.x;
             startPlayerZ = transform.position.z;
+
+            StopAllCoroutines();
         }
 
         if (Input.GetMouseButton(0))
@@ -250,13 +272,11 @@ public class PlayerMovement : MonoBehaviour
             #region Animations
             if (currentX < transform.position.x - 0.1f)
             {
-                mesh.transform.DOLocalRotate(new Vector3(0, -10, 0), playerAnimRotateSpeed);
-                //transform.eulerAngles = new Vector3(0, -10f, 0);
+                mesh.transform.DOLocalRotate(new Vector3(0, -4, 0), playerAnimRotateSpeed);
             }
             else if (currentX > transform.position.x + 0.1f)
             {
-                //transform.eulerAngles = new Vector3(0, 10f, 0);
-                mesh.transform.DOLocalRotate(new Vector3(0, 10, 0), playerAnimRotateSpeed);
+                mesh.transform.DOLocalRotate(new Vector3(0, 4, 0), playerAnimRotateSpeed);
             }
             else
             {
@@ -265,12 +285,25 @@ public class PlayerMovement : MonoBehaviour
             }
             #endregion
 
-            transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true);
+
+            //transform.position = Vector3.Lerp(transform.position, new Vector3(currentX, 0, currentZ), moveSpeed);
+
+            //transform.position = Vector3.SmoothDamp(transform.position, new Vector3(currentX, 0, currentZ), ref velocity, moveSpeed * Time.deltaTime);
+
+            //Vector3 targetPos = new Vector3(currentX, 0, currentZ);
+            //Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, moveSpeed);
+            //transform.position = smoothedPos;
+
+            Vector3 targetPos = new Vector3(currentX, 0, currentZ);
+            transform.position = targetPos;
+
+            //transform.DOMove(new Vector3(currentX, 0, currentZ), moveSpeed).SetUpdate(true).SetEase(Ease.Linear);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
+            StartCoroutine(SetRegeneration());
         }
 #endif
     }

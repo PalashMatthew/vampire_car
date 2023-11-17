@@ -15,6 +15,8 @@ public class ResourcesCell : MonoBehaviour
 
     public void Initialize()
     {
+        transform.localScale = Vector3.one;
+
         tValue.text = "x" + value;
         imgIcon.sprite = sprIcon;
     }

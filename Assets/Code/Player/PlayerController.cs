@@ -18,9 +18,18 @@ public class PlayerController : MonoBehaviour
 
     public bool isBrakeDamage;
 
+    public ParticleSystem vfxShield;
+    bool isShield = false;
+
+    bool isAvenger = false;
+    float avengerTimerCurrent;
+    float avengerTimerMax = 3;
+
 
     public void Initialize()
     {
+        isShield = false;
+
         _playerUIController = GetComponentInChildren<PlayerUIController>();
         _playerStats = GetComponent<PlayerStats>();
         _playerPassiveController = GetComponent<PlayerPassiveController>();
@@ -28,6 +37,19 @@ public class PlayerController : MonoBehaviour
         isDead = false;
 
         ChoiseCar();
+    }
+
+    private void Update()
+    {
+        if (isAvenger)
+        {
+            avengerTimerCurrent -= Time.deltaTime;
+
+            if (avengerTimerCurrent <= 0)
+            {
+                isAvenger = false;
+            }
+        }
     }
 
     void ChoiseCar()
@@ -43,6 +65,13 @@ public class PlayerController : MonoBehaviour
                 gm.GetComponent<CarPlayerMesh>().mesh.SetActive(false);
             }
         }
+    }
+
+    IEnumerator ShieldTimer()
+    {
+        yield return new WaitForSeconds(PlayerPrefs.GetFloat("setValue"));
+        isShield = true;
+        vfxShield.Play();
     }
 
     public void Hit(float _damage)
@@ -64,20 +93,49 @@ public class PlayerController : MonoBehaviour
             int rand = Random.Range(1, 101);
             if (rand > _playerStats.dodgeProcent)
             {
-                _playerStats.currentHp -= _finalDamage;
+                if (!isShield)
+                {
+                    _playerStats.currentHp -= _finalDamage;
 
-                StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+                    StopAllCoroutines();
 
-                StartCoroutine(HitAnim());
+                    StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+
+                    StartCoroutine(HitAnim());
+                    StartCoroutine(ShieldTimer());
+
+                    isAvenger = true;
+                    avengerTimerCurrent = avengerTimerMax;
+                } 
+                else
+                {
+                    isShield = false;
+                    vfxShield.Stop();
+                }
+                
             }
         } 
         else
         {
-            _playerStats.currentHp -= _finalDamage;
+            if (!isShield)
+            {
+                _playerStats.currentHp -= _finalDamage;
 
-            StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+                StopAllCoroutines();
 
-            StartCoroutine(HitAnim());            
+                StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+
+                StartCoroutine(HitAnim());
+                StartCoroutine(ShieldTimer());
+
+                isAvenger = true;
+                avengerTimerCurrent = avengerTimerMax;
+            } 
+            else
+            {
+                isShield = false;
+                vfxShield.Stop();
+            }                
         }
 
         if (_playerStats.currentHp < 0) _playerStats.currentHp = 0;

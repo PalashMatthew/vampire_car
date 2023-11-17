@@ -7,6 +7,7 @@ public class DetailCard : ScriptableObject
 {
     [Header("Base")]
     public int itemID;
+    public string setID;
 
     public enum ItemType
     {

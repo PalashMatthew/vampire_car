@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
 using Unity.VisualScripting;
-using static UnityEditor.Progress;
 using System;
 
 public class ReadGoogleSheet : MonoBehaviour

@@ -705,7 +705,6 @@ public class BDLoaderController : MonoBehaviour
 
             for (int i = 0; i < _dropSystemInfo.Count; i++)
             {
-                Debug.Log(_dropSystemInfo[i]);
                 if (i == 0)
                 {
                     PlayerPrefs.SetFloat(a + "dropSystemMoneyMin", _dropSystemInfo[i]);

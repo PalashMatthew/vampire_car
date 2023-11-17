@@ -27,6 +27,12 @@ public class AddItemToInventory : MonoBehaviour
         }
     }
 
+    public void ClearSave()
+    {
+        PlayerPrefs.DeleteAll();
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
     public void OpenPopUp()
     {
         popUp.SetActive(true);

@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUpWin : MonoBehaviour
 {
@@ -240,6 +239,7 @@ public class PopUpWin : MonoBehaviour
                 if (rand <= waveDropItemProcent[i-1])
                 {
                     itemValue++;
+                    Debug.Log("Item Spawn");
                 }
             }
 
@@ -259,6 +259,16 @@ public class PopUpWin : MonoBehaviour
                 instCell.GetComponent<ItemDropCell>().rarity = rarity;
                 instCell.GetComponent<ItemDropCell>().sprIcon = _card.sprItem;
                 instCell.GetComponent<ItemDropCell>().Initialize();
+
+                #region Add Item
+                string _itemType = _card.itemType.ToString();
+
+                PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) + 1);
+
+                PlayerPrefs.SetInt("item" + _itemType + "ID" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), _card.itemID);
+
+                PlayerPrefs.SetString("item" + _itemType + "Rarity" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), rarity);
+                #endregion
             }
             #endregion
         }

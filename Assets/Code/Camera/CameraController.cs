@@ -99,7 +99,13 @@ public class CameraController : MonoBehaviour
                 if (currentX < minCameraX) currentX = minCameraX;
                 if (currentX > maxCameraX) currentX = maxCameraX;
 
-                transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
+                transform.DOMoveX(currentX, 0.1f).SetUpdate(true);
+
+                //transform.position = new Vector3(currentX, transform.position.y, transform.position.z);
+
+                //Vector3 targetPos = new Vector3(currentX, transform.position.y, transform.position.z);
+            //Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, 0.1f);
+            //transform.position = smoothedPos;
             }
 #endif
 #if UNITY_EDITOR
@@ -131,7 +137,11 @@ public class CameraController : MonoBehaviour
             if (currentX < minCameraX) currentX = minCameraX;
             if (currentX > maxCameraX) currentX = maxCameraX;
 
-            transform.DOMoveX(currentX, 0.2f).SetUpdate(true);
+            transform.DOMoveX(currentX, 0.1f).SetUpdate(true);
+
+            Vector3 targetPos = new Vector3(currentX, transform.position.y, transform.position.z);
+            Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, 0.1f);
+            transform.position = smoothedPos;
         }
 #endif
     }

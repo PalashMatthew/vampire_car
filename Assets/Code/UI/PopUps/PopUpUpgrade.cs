@@ -14,7 +14,6 @@ public class PopUpUpgrade : MonoBehaviour
     public UpgradeController upgradeController;
     private WaveController _waveController;
 
-    public TMP_Text tChoiceUpgrade;
     public TMP_Text tScrewValue;
 
     public GameObject butRerollScrew;
@@ -54,8 +53,6 @@ public class PopUpUpgrade : MonoBehaviour
 
     void CardAnimation()
     {
-        tChoiceUpgrade.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
-
         cardGun1.GetComponent<RectTransform>().DOAnchorPosX(-300, 0f).SetUpdate(true);
         cardGun2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
         cardGun3.GetComponent<RectTransform>().DOAnchorPosX(300, 0f).SetUpdate(true);
@@ -88,8 +85,6 @@ public class PopUpUpgrade : MonoBehaviour
     {
         if (upgradeController.cardGunAccept != null && upgradeController.cardPassiveAccept != null)
         {
-            tChoiceUpgrade.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetEase(Ease.InBack).SetUpdate(true);
-
             foreach (UpgradeCardController _card in upgradeController.cardsGunController)
             {
                 if (upgradeController.cardGunAccept == _card)

@@ -88,6 +88,11 @@ public class PlayerStats : MonoBehaviour
         maxHpCoeff += PlayerPrefs.GetFloat("carGlobalCoeffhealth");
         maxHpCoeff += PlayerPrefs.GetInt("talentHealthCurrentValue");
 
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s10")  //Если у нас сет Таран активен
+        {
+            maxHpCoeff += PlayerPrefs.GetFloat("setValue");
+        }
+
         maxHp = maxHpBase + maxHpCoeff;
         currentHp = maxHp;
         #endregion

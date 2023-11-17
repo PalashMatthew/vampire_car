@@ -947,6 +947,9 @@ public class PopUpDetail : MonoBehaviour
 
         garageController.activeItem.gameObject.SetActive(false);
 
+        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
+        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
+
         ButClosed();
     }
 
@@ -1422,5 +1425,11 @@ public class PopUpDetail : MonoBehaviour
             }
         }
         #endregion
+    }
+
+    public void ButOpenSet()
+    {
+        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
+        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().OpenPopUp();
     }
 }

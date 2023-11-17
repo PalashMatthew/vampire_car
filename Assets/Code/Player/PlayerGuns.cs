@@ -43,6 +43,8 @@ public class PlayerGuns : MonoBehaviour
     public GameObject BowObj;
     public GameObject PinPongObj;
 
+    public static int gunCount;
+
 
     private void Start()
     {
@@ -136,52 +138,102 @@ public class PlayerGuns : MonoBehaviour
 
     public void GunActivate()
     {
+        gunCount = 0;
+
         if (_isDefaultGun)
+        {
             DefaultGunObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isRocketLauncher)
+        {
             RocketLauncherObj.SetActive(true);
+            gunCount++;
+        }   
 
         if (_isBoomerang)
+        {
             BoomerangObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isPartner)
+        {
             PartnerObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isDron)
+        {
             DronObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isIce)
+        {
             IceObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isLazer)
+        {
             LazerObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isGrowingShot)
+        {
             GrowingShotObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isFanGun)
+        {
             FanGunObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isTornado)
+        {
             TornadoObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isMines)
+        {
             MinesObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isGrenade)
+        {
             GrenadeObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isGodGun)
+        {
             GodGunObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isRicochet)
+        {
             RicochetGunObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isBow)
+        {
             BowObj.SetActive(true);
+            gunCount++;
+        }            
 
         if (_isPinPong)
+        {
             PinPongObj.SetActive(true);
+            gunCount++;
+        }            
     }
 }

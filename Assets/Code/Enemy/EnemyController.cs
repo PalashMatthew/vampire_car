@@ -47,6 +47,8 @@ public class EnemyController : MonoBehaviour
 
     public List<Material> materialsCar;
 
+    bool isWeakening;
+
 
     private void Start()
     {       
@@ -61,6 +63,8 @@ public class EnemyController : MonoBehaviour
         {
             hp = maxHp;
         }
+
+        isWeakening = false;
 
         //if (materialsCar.Count > 0)
         //meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
@@ -105,9 +109,27 @@ public class EnemyController : MonoBehaviour
     {
         if (other.tag == "player")
         {
-            other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
-            other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
-            BackDamage(brakeDamage);
+            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s01")  //Если у нас сет Таран активен
+            {
+                int rand = Random.Range(1, 101);
+
+                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                {
+                    return;
+                } 
+                else
+                {
+                    other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
+                    other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
+                    BackDamage(brakeDamage);
+                }
+            } 
+            else
+            {
+                other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
+                other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
+                BackDamage(brakeDamage);
+            }
         }
 
         if (other.tag == "enemy" && transform.position.z > 75)
@@ -127,9 +149,25 @@ public class EnemyController : MonoBehaviour
     #region Hit
     public void Hit(float _damage, bool _isKrit)
     {
+        if (isWeakening)
+        {
+            _damage *= 2;
+            isWeakening = false;
+        }
+
         hp -= _damage;
         GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
         StartCoroutine(HitAnim());
+
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s09")  //Если у нас сет Таран активен
+        {
+            int rand = Random.Range(1, 101);
+
+            if (rand <= PlayerPrefs.GetFloat("setValue"))
+            {
+                isWeakening = true;
+            }
+        }
 
         if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
         {
@@ -140,7 +178,7 @@ public class EnemyController : MonoBehaviour
                 Dead();
                 return;
             }
-        }
+        }        
 
         if (hp <= 0)
         {
@@ -177,7 +215,22 @@ public class EnemyController : MonoBehaviour
     {
         if (!isBoss)
         {
-            Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+            #region Screw
+            int procent = 20;
+
+            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s04")  //Если у нас сет Огня активен
+            {
+                procent += (int)PlayerPrefs.GetFloat("setValue");
+            }
+
+            int rand = Random.Range(1, 101);
+
+            if (rand <= procent)
+            {
+                Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+            }            
+            #endregion
+
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
             Destroy(_fx, 3);

@@ -2094,6 +2094,7 @@ MonoBehaviour:
   - {fileID: 1332352498514605324}
   - {fileID: 7442339016505287207}
   - {fileID: 2390163402773990783}
+  isBrakeDamage: 0
 --- !u!114 &7084839444521993868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,21 +2108,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoveAccess: 0
-  moveSpeed: 0.1
-  moveXSpeed: 0.1
-  moveZSpeed: 0.1
-  screenProcentToRotate: 15
-  playerRotateCoeffPlusWidth: 30
+  moveSpeed: 0.05
   cameraRotateSpeedCoeff: 750
-  coeffX: 1
   coeffZ: 1
-  boundX: 27
+  boundX: 31
   boundZMin: -9
   boundZMax: 55
   boundXMin: -18
   boundXMax: 18
   mesh: {fileID: 217641821145924018}
-  playerAnimRotateSpeed: 0.2
+  playerAnimRotateSpeed: 0.1
   wheelsObj:
   - {fileID: 0}
   - {fileID: 0}
@@ -2235,6 +2231,17 @@ MonoBehaviour:
   baseScrewPickUpDistance: 0
   screwPickUpDistanceCoeff: 0
   distanceDamageCoeff: 0.5
+  recoveryHpInFirstAidKit: 0
+  dronDamage: 0
+  carDamage: 0
+  shotSpeed: 0
+  healthRecovery: 0
+  lucky: 0
+  magnet: 0
+  massEnemyDamage: 0
+  effectDuration: 0
+  block: 0
+  iron: 0
 --- !u!114 &1433326453285278809
 MonoBehaviour:
   m_ObjectHideFlags: 0

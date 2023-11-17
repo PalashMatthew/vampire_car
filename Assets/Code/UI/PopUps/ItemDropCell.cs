@@ -17,6 +17,8 @@ public class ItemDropCell : MonoBehaviour
 
     public void Initialize()
     {
+        transform.localScale = Vector3.one;
+
         imgIcon.sprite = sprIcon;
 
         if (rarity == "common")
