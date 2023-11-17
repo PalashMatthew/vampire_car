@@ -61,6 +61,9 @@ public class PopUpDetail : MonoBehaviour
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
+
+        float a = 6.9f;
+        Debug.Log((int)a);
     }
 
     void Initialize()

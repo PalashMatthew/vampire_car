@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
         isDead = false;
 
         ChoiseCar();
+
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+        {
+            StartCoroutine(ShieldTimer());
+        }
     }
 
     private void Update()
@@ -71,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(PlayerPrefs.GetFloat("setValue"));
         isShield = true;
+        vfxShield.gameObject.SetActive(true);
         vfxShield.Play();
     }
 
@@ -102,15 +108,26 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
 
                     StartCoroutine(HitAnim());
-                    StartCoroutine(ShieldTimer());
 
-                    isAvenger = true;
-                    avengerTimerCurrent = avengerTimerMax;
+                    if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+                    {
+                        isShield = false;
+                        vfxShield.Stop();
+                        vfxShield.gameObject.SetActive(false);
+                        StartCoroutine(ShieldTimer());
+                    }
+
+                    if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
+                    {
+                        isAvenger = true;
+                        avengerTimerCurrent = avengerTimerMax;
+                    }                   
                 } 
                 else
                 {
                     isShield = false;
                     vfxShield.Stop();
+                    vfxShield.gameObject.SetActive(false);
                 }
                 
             }
@@ -126,15 +143,26 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
 
                 StartCoroutine(HitAnim());
-                StartCoroutine(ShieldTimer());
 
-                isAvenger = true;
-                avengerTimerCurrent = avengerTimerMax;
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+                {
+                    isShield = false;
+                    vfxShield.Stop();
+                    vfxShield.gameObject.SetActive(false);
+                    StartCoroutine(ShieldTimer());
+                }
+
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
+                {
+                    isAvenger = true;
+                    avengerTimerCurrent = avengerTimerMax;
+                }
             } 
             else
             {
                 isShield = false;
                 vfxShield.Stop();
+                vfxShield.gameObject.SetActive(false);
             }                
         }
 
