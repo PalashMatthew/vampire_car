@@ -969,6 +969,38 @@ PrefabInstance:
       propertyPath: gameplayUIController
       value: 
       objectReference: {fileID: 1652040128}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[0].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[1].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[3].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[4].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[5].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[6].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[7].waveSpeedCoeff
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: _playerController
       value: 
@@ -1093,6 +1125,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1515862444}
+    - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: _isGodGun
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: _isRocketLauncher
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6816364944177119050, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1109,6 +1149,10 @@ PrefabInstance:
       propertyPath: cameraCenter
       value: 
       objectReference: {fileID: 1515862443}
+    - target: {fileID: 8742491010087201326, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: shotSpeed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2257,6 +2301,14 @@ PrefabInstance:
     - target: {fileID: 3723737417398808413, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042626941310523742, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: spawnTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042626941310523742, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: obstaclesMoveSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: isSpawnAccess

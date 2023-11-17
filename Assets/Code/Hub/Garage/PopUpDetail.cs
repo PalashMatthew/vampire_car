@@ -947,8 +947,11 @@ public class PopUpDetail : MonoBehaviour
 
         garageController.activeItem.gameObject.SetActive(false);
 
-        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
-        GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
+        if (garageController.activeItem.slotNum != 1)
+        {
+            GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
+            GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
+        }        
 
         ButClosed();
     }
