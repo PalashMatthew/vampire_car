@@ -65,8 +65,8 @@ public class Generate : MonoBehaviour
 
             inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
-            inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
-            inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+            //inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
+            //inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
             inst.GetComponent<EnemyController>().Initialize();
         }
         else

@@ -15,6 +15,8 @@ public class EnemyAimShot : MonoBehaviour
     private bool _startShot = false;
     private int _enemyShotCount = 1;
 
+    public bool shotAlways = false;
+
     void Initialize()
     {
         _gunController = GetComponent<EnemyGun>();
@@ -31,11 +33,20 @@ public class EnemyAimShot : MonoBehaviour
     {
         if (!_startShot)
         {
-            if (_enemyController.isCarStop)
+            if (!shotAlways)
+            {
+                if (_enemyController.isCarStop)
+                {
+                    StartCoroutine(Shot());
+                    _startShot = true;
+                }
+            } 
+            else
             {
                 StartCoroutine(Shot());
                 _startShot = true;
             }
+            
         }
     }
 

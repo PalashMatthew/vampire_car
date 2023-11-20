@@ -85,6 +85,7 @@ public class EnemyController : MonoBehaviour
         _enemyMovement = GetComponent<EnemyMovement>();
 
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
+        moveSpeed *= GameObject.Find("Generate Controller").GetComponent<Generate>().moveSpeedCoeff;
         _enemyMovement._saveMoveSpeed = moveSpeed;
 
         if (isPattern)

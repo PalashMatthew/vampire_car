@@ -67,11 +67,15 @@ MonoBehaviour:
   - waveNum: 1
     waveTime: 30
     enemySpawnTime: 1.5
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1
     enemyM1Weight: 10
     enemyM2Weight: 0
     enemyM3Weight: 0
     enemyM4Weight: 0
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 0
     enemyS2Weight: 0
     enemyS3Weight: 0
@@ -88,11 +92,15 @@ MonoBehaviour:
   - waveNum: 2
     waveTime: 40
     enemySpawnTime: 1.4
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.1
     enemyM1Weight: 6
     enemyM2Weight: 6
     enemyM3Weight: 0
     enemyM4Weight: 0
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 0
     enemyS2Weight: 0
     enemyS3Weight: 0
@@ -108,11 +116,15 @@ MonoBehaviour:
   - waveNum: 3
     waveTime: 50
     enemySpawnTime: 1.3
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.1
     enemyM1Weight: 5
     enemyM2Weight: 5
     enemyM3Weight: 0
     enemyM4Weight: 0
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 5
     enemyS2Weight: 0
     enemyS3Weight: 0
@@ -129,11 +141,15 @@ MonoBehaviour:
   - waveNum: 4
     waveTime: 50
     enemySpawnTime: 1.2
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.2
     enemyM1Weight: 2
     enemyM2Weight: 1
     enemyM3Weight: 0
     enemyM4Weight: 0
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 5
     enemyS2Weight: 7
     enemyS3Weight: 0
@@ -151,11 +167,15 @@ MonoBehaviour:
   - waveNum: 5
     waveTime: 60
     enemySpawnTime: 1.1
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.3
     enemyM1Weight: 2
     enemyM2Weight: 0
     enemyM3Weight: 0
     enemyM4Weight: 10
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 1
     enemyS2Weight: 1
     enemyS3Weight: 0
@@ -173,11 +193,15 @@ MonoBehaviour:
   - waveNum: 6
     waveTime: 60
     enemySpawnTime: 0.9
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.4
     enemyM1Weight: 2
     enemyM2Weight: 2
     enemyM3Weight: 2
     enemyM4Weight: 2
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 0
     enemyS2Weight: 0
     enemyS3Weight: 4
@@ -196,11 +220,15 @@ MonoBehaviour:
   - waveNum: 7
     waveTime: 60
     enemySpawnTime: 0.8
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.5
     enemyM1Weight: 2
     enemyM2Weight: 3
     enemyM3Weight: 3
     enemyM4Weight: 3
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 0
     enemyS2Weight: 0
     enemyS3Weight: 3
@@ -220,11 +248,15 @@ MonoBehaviour:
   - waveNum: 8
     waveTime: 60
     enemySpawnTime: 0.75
+    expCoeff: 0
+    expMinus: 0
     waveSpeedCoeff: 1.6
     enemyM1Weight: 2
     enemyM2Weight: 2
     enemyM3Weight: 2
     enemyM4Weight: 2
+    enemyM5Weight: 0
+    enemyM6Weight: 0
     enemyS1Weight: 2
     enemyS2Weight: 2
     enemyS3Weight: 2
@@ -246,6 +278,8 @@ MonoBehaviour:
   enemyM2Obj: {fileID: 7281141318535844410, guid: 1ee5231cc3cade846b2e927692de48d7, type: 3}
   enemyM3Obj: {fileID: 5884661979407261822, guid: 82f93ca898591c54996096e04f5dc2c0, type: 3}
   enemyM4Obj: {fileID: 2448940335617535150, guid: 4ddb69f93e989a34ba3e001d29557914, type: 3}
+  enemyM5Obj: {fileID: 7637579308135447567, guid: 9933934c17f6f3e49877d4d225dced01, type: 3}
+  enemyM6Obj: {fileID: 1990601998683985981, guid: 6e84fc2971276704b87ccea0314a4857, type: 3}
   enemyS1Obj: {fileID: 1143483176832582894, guid: 25aea17adc8f8c14fac0734b298574e4, type: 3}
   enemyS2Obj: {fileID: 6411367347841345111, guid: 1dfebe358d8abdc45b761da1fcc081ee, type: 3}
   enemyS3Obj: {fileID: 6271080959004233775, guid: a7f5d0215a7b437438c0b9fe1c61125e, type: 3}

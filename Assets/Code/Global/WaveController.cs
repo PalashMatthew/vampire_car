@@ -18,6 +18,7 @@ public class WaveController : MonoBehaviour
     public GameObject enemyM3Obj;
     public GameObject enemyM4Obj;
     public GameObject enemyM5Obj;
+    public GameObject enemyM6Obj;
 
     public GameObject enemyS1Obj;
     public GameObject enemyS2Obj;
@@ -169,6 +170,14 @@ public class WaveController : MonoBehaviour
             }
         }
 
+        if (waveList[currentWave - 1].enemyM6Weight > 0)
+        {
+            for (int i = 0; i < waveList[currentWave - 1].enemyM6Weight; i++)
+            {
+                _potencialEnemy.Add(enemyM6Obj);
+            }
+        }
+
         if (waveList[currentWave - 1].enemyS1Weight > 0)
         {
             for (int i = 0; i < waveList[currentWave - 1].enemyS1Weight; i++)
@@ -268,6 +277,8 @@ public class Wave
     public int enemyM4Weight;
     [Range(0, 10)]
     public int enemyM5Weight;
+    [Range(0, 10)]
+    public int enemyM6Weight;
     [Range(0, 10)]
     public int enemyS1Weight;
     [Range(0, 10)]
