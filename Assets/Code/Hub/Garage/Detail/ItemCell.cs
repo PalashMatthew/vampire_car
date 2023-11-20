@@ -30,6 +30,14 @@ public class ItemCell : MonoBehaviour
     [Header("Icon")]
     public Image imgIcon;
     public Sprite sprIcon;
+    public Image imgIconTypeBack;
+    public Image imgIconType;
+    public Sprite sprIconGun;
+    public Sprite sprIconEngine;
+    public Sprite sprIconBrakes;
+    public Sprite sprIconFuelSystem;
+    public Sprite sprIconSuspension;
+    public Sprite sprIconTransmission;
 
     [Header("Image Card")]
     public Image imgCard;
@@ -66,26 +74,32 @@ public class ItemCell : MonoBehaviour
         {
             case "Gun":
                 slotNum = 1;
+                imgIconType.sprite = sprIconGun;
                 break;
 
             case "Engine":
                 slotNum = 2;
+                imgIconType.sprite = sprIconEngine;
                 break;
 
             case "Brakes":
                 slotNum = 3;
+                imgIconType.sprite = sprIconBrakes;
                 break;
 
             case "FuelSystem":
                 slotNum = 4;
+                imgIconType.sprite = sprIconFuelSystem;
                 break;
 
             case "Suspension":
                 slotNum = 5;
+                imgIconType.sprite = sprIconSuspension;
                 break;
 
             case "Transmission":
                 slotNum = 6;
+                imgIconType.sprite = sprIconTransmission;
                 break;
         }
 
@@ -93,18 +107,22 @@ public class ItemCell : MonoBehaviour
         {
             case "common":
                 imgCard.sprite = sprCommonCard;
+                imgIconTypeBack.color = new Color(0.509804f, 0.509804f, 0.509804f, 1);
                 break;
 
             case "rare":
                 imgCard.sprite = sprRareCard;
+                imgIconTypeBack.color = new Color(0f, 0.5764706f, 0.7686275f, 1);
                 break;
 
             case "epic":
                 imgCard.sprite = sprEpicCard;
+                imgIconTypeBack.color = new Color(0.654902f, 0f, 0.9137256f, 1);
                 break;
 
             case "legendary":
                 imgCard.sprite = sprLegendaryCard;
+                imgIconTypeBack.color = new Color(0.7215686f, 0.6313726f, 0f, 1);
                 break;
         }
 

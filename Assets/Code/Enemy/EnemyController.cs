@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -49,6 +49,9 @@ public class EnemyController : MonoBehaviour
 
     bool isWeakening;
 
+    [Header("HP Progress Bar")]
+    public Image imgHpProgressBar;
+
 
     private void Start()
     {       
@@ -62,6 +65,9 @@ public class EnemyController : MonoBehaviour
         if (isBoss)
         {
             hp = maxHp;
+        } else
+        {
+            maxHp = hp;
         }
 
         isWeakening = false;
@@ -101,6 +107,16 @@ public class EnemyController : MonoBehaviour
         {
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             Destroy(gameObject);
+        }
+
+        if (hp == maxHp)
+        {
+            imgHpProgressBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            imgHpProgressBar.gameObject.SetActive(true);
+            imgHpProgressBar.fillAmount = hp / maxHp;
         }
 
         CheckVisible();
@@ -220,19 +236,19 @@ public class EnemyController : MonoBehaviour
         if (!isBoss)
         {
             #region Screw
-            int procent = 20;
+            //int procent = 20;
 
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s04")  //Если у нас сет Огня активен
-            {
-                procent += (int)PlayerPrefs.GetFloat("setValue");
-            }
+            //if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s04")  //Если у нас сет Огня активен
+            //{
+            //    procent += (int)PlayerPrefs.GetFloat("setValue");
+            //}
 
-            int rand = Random.Range(1, 101);
+            //int rand = Random.Range(1, 101);
 
-            if (rand <= procent)
-            {
-                Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
-            }
+            //if (rand <= procent)
+            //{
+            //    Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
+            //}
             #endregion
 
             float exp = 1 * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expCoeff;

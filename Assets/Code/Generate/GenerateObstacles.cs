@@ -7,6 +7,8 @@ public class GenerateObstacles : MonoBehaviour
     [SerializeField] public List<ObstacleWaveController> obstaclesInWave;
     public List<GameObject> obstaclesObj;
 
+    public List<GameObject> instObstacles;
+
     public float obstaclesMoveSpeed;
 
     public float spawnTime;
@@ -31,7 +33,7 @@ public class GenerateObstacles : MonoBehaviour
         if (isSpawn)
         {
             GameObject inst = Instantiate(obstaclesObj[Random.RandomRange(0, obstaclesObj.Count)], new Vector3(Random.Range(minXSpawn, maxXSpawn), 0, 75f), transform.rotation);
-
+            instObstacles.Add(inst);
             inst.GetComponent<Obstacle>().moveSpeed = obstaclesMoveSpeed;
         }
 

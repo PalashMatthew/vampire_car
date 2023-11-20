@@ -88,6 +88,14 @@ public class WaveController : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < _generateObstacles.instObstacles.Count; i++)
+        {
+            if (_generateObstacles.instObstacles[i] != null)
+            {
+                Destroy(_generateObstacles.instObstacles[i]);
+            }
+        }
+
         _gameplayController.activeEnemy.Clear();
         gameplayUIController.StartCoroutine(gameplayUIController.WaveCompliteAnim());
 

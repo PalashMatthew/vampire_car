@@ -1083,7 +1083,8 @@ public class GarageController : MonoBehaviour
                         + PlayerPrefs.GetFloat("BrakesSelectDamage")
                         + PlayerPrefs.GetFloat("FuelSystemSelectDamage") 
                         + PlayerPrefs.GetFloat("SuspensionSelectDamage")
-                        + PlayerPrefs.GetFloat("TransmissionSelectDamage");
+                        + PlayerPrefs.GetFloat("TransmissionSelectDamage")
+                        + PlayerPrefs.GetInt("talentDamageCurrentValue");
 
         float _health = PlayerPrefs.GetFloat(activeCarObj.carName + "carHealth") 
                         + PlayerPrefs.GetFloat("carGlobalCoeffhealth")
@@ -1092,7 +1093,8 @@ public class GarageController : MonoBehaviour
                         + PlayerPrefs.GetFloat("BrakesSelectHealth")
                         + PlayerPrefs.GetFloat("FuelSystemSelectHealth")
                         + PlayerPrefs.GetFloat("SuspensionSelectHealth")
-                        + PlayerPrefs.GetFloat("TransmissionSelectHealth");
+                        + PlayerPrefs.GetFloat("TransmissionSelectHealth")
+                        + PlayerPrefs.GetInt("talentHealthCurrentValue");
 
         tDamage.text = "+" + _damage + "%";
         tHealth.text = _health + "";

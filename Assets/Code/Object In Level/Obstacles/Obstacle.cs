@@ -58,7 +58,9 @@ public class Obstacle : MonoBehaviour
 
     public void Dead()
     {
-        Instantiate(screwObj, transform.position, transform.rotation);
+        GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>().instObstacles.Remove(gameObject);
+
+        //Instantiate(screwObj, transform.position, transform.rotation);
 
         GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
         Destroy(_fx, 3);
