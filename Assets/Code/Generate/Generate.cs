@@ -29,13 +29,15 @@ public class Generate : MonoBehaviour
 
     [SerializeField] public List<EnemyCoeff> enemyCoeffList;
 
-    private void Awake()
-    {
-        
-    }
+    GameObject pattern;
+    float xSpawn;
+
+    private bool _isSpawnPattern;
 
     public void StartSpawn()
     {
+        _isSpawnPattern = false;
+
         _player = GameObject.Find("Player");
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
         _obstacles = GetComponent<GenerateObstacles>();
@@ -49,21 +51,31 @@ public class Generate : MonoBehaviour
 
     IEnumerator EnemyGen()
     {
-        float _randX = Random.Range(minXSpawn, maxXSpawn);
-        float _x = _randX / step;
-        _x = (int)_x;
-        _x *= step;
+        if (!_isSpawnPattern)
+        {
+            float _randX = Random.Range(minXSpawn, maxXSpawn);
+            float _x = _randX / step;
+            _x = (int)_x;
+            _x *= step;
 
-        float _randZ = Random.Range(minZSpawn, maxZSpawn);
+            float _randZ = Random.Range(minZSpawn, maxZSpawn);
 
-        GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
-        _gameplayController.activeEnemy.Add(inst);
+            GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
+            _gameplayController.activeEnemy.Add(inst);
 
-        inst.transform.eulerAngles = new Vector3(0, 180, 0);
+            inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
-        inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
-        inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
-        inst.GetComponent<EnemyController>().Initialize();
+            inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
+            inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+            inst.GetComponent<EnemyController>().Initialize();
+        }
+        else
+        {
+            float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
+            Instantiate(pattern, new Vector3(Random.Range(-xSpawn, xSpawn), 0, _randZ), transform.rotation);
+
+            _isSpawnPattern = false;
+        }
 
         yield return new WaitForSeconds(spawnTime);        
 
@@ -72,8 +84,10 @@ public class Generate : MonoBehaviour
 
     public void SpawnPattern(GameObject _pattern, float _xSpawn)
     {
-        float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
-        Instantiate(_pattern, new Vector3(Random.Range(-_xSpawn, _xSpawn), 0, _randZ), transform.rotation);
+        pattern = _pattern;
+        xSpawn = _xSpawn;
+
+        _isSpawnPattern = true;
     }
 
     public void BossFight()
