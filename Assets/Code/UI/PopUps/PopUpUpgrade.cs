@@ -152,6 +152,7 @@ public class PopUpUpgrade : MonoBehaviour
         } 
         else
         {
+            _waveController.StartWave();
             ButClosed();
             //StartCoroutine(EndUpgrade());
         }        
@@ -168,6 +169,10 @@ public class PopUpUpgrade : MonoBehaviour
         GameplayController.isPause = true;
         isOpen = true;
         Time.timeScale = 0;
+
+        panelPassiveUpgrade.SetActive(true);
+        panelGunUpgrade.SetActive(false);
+
         //CardAnimation();
         CardPassiveAnim();
         //upgradeController.GenerateUpgrades();

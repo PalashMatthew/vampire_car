@@ -61,13 +61,15 @@ public class EnemyReversal : MonoBehaviour
 
     IEnumerator ReverseLeftRight()
     {
-        yield return new WaitForSeconds(reverseSpeed);
         if (!_enemyController._isFreeze)
             transform.DORotate(new Vector3(0, 200, 0), 0.3f);
 
         yield return new WaitForSeconds(reverseSpeed);
+
         if (!_enemyController._isFreeze)
             transform.DORotate(new Vector3(0, 160, 0), 0.3f);
+
+        yield return new WaitForSeconds(reverseSpeed);        
 
         StartCoroutine(ReverseLeftRight());
     }

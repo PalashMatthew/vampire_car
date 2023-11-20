@@ -101,7 +101,25 @@ public class GameplayUIController : MonoBehaviour
     {
         tCurrentLevel.text = "Level: " + playerStats.currentLevel;
 
-        imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
+        //imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
+        imgFillLevelBar.fillAmount = playerStats.currentExp / 20f;
+
+        if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
+        {
+            playerStats.currentExp -= Time.deltaTime;
+            GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+        }
+
+        if (playerStats.currentExp > 20)
+        {
+            playerStats.currentExp = 20;
+        }
+
+        if (playerStats.currentExp < 5) playerStats.currentLevel = 0;
+
+        if (playerStats.currentExp >= 5 && playerStats.currentExp < 15) playerStats.currentLevel = 1;
+
+        if (playerStats.currentExp >= 15) playerStats.currentLevel = 2;
 
         if (imgFillLevelBar.fillAmount > 0 && imgFillLevelBar.fillAmount < 1)
         {
@@ -112,6 +130,8 @@ public class GameplayUIController : MonoBehaviour
         {
             imgLevelEndFill.gameObject.SetActive(false);
         }
+
+        
     }
     #endregion
 

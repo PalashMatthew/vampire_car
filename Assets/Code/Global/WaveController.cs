@@ -17,6 +17,7 @@ public class WaveController : MonoBehaviour
     public GameObject enemyM2Obj;
     public GameObject enemyM3Obj;
     public GameObject enemyM4Obj;
+    public GameObject enemyM5Obj;
 
     public GameObject enemyS1Obj;
     public GameObject enemyS2Obj;
@@ -42,6 +43,7 @@ public class WaveController : MonoBehaviour
     public void StartWave()
     {
         isWaveEnd = false;
+        GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
 
         if (currentWave < lastWave)
         {
@@ -159,6 +161,14 @@ public class WaveController : MonoBehaviour
             }
         }
 
+        if (waveList[currentWave - 1].enemyM5Weight > 0)
+        {
+            for (int i = 0; i < waveList[currentWave - 1].enemyM5Weight; i++)
+            {
+                _potencialEnemy.Add(enemyM5Obj);
+            }
+        }
+
         if (waveList[currentWave - 1].enemyS1Weight > 0)
         {
             for (int i = 0; i < waveList[currentWave - 1].enemyS1Weight; i++)
@@ -241,6 +251,7 @@ public class Wave
     public int waveNum;
     public int waveTime;  //Сколько нужно убить для конца волны
     public float enemySpawnTime;
+    public float expCoeff;
 
     [Header("Enemy Settings")]
     public float waveSpeedCoeff;  //Скорость объектов на этой волне
@@ -252,6 +263,8 @@ public class Wave
     public int enemyM3Weight;
     [Range(0, 10)]
     public int enemyM4Weight;
+    [Range(0, 10)]
+    public int enemyM5Weight;
     [Range(0, 10)]
     public int enemyS1Weight;
     [Range(0, 10)]

@@ -41,7 +41,9 @@ public class UpgradeCardController : MonoBehaviour
     public CardRarity cardRarity;
 
     public void Initialize()
-    {   
+    {
+        StopAllCoroutines();
+
         _upgradeController = GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>();
         _popUpUpgrade = GetComponentInParent<PopUpUpgrade>();
 

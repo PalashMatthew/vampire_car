@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
 
     private bool _isMoveAccess = true;
 
+    public bool isStartRotate;
+
     [Header("Local Move")]
     public bool localMove;  //Будет ли статичный враг двигаться вправо влево после того как выедет на экран?
     public bool _isStartLocalMove;
@@ -50,6 +52,18 @@ public class EnemyMovement : MonoBehaviour
         if (_enemyController.carType == EnemyController.CarType.Static)
         {
             _zPosStop = Random.Range(39f, 56f);
+        }
+
+        if (isStartRotate)
+        {
+            if (transform.position.x >= 0)
+            {
+                transform.eulerAngles = new Vector3(0, Random.Range(183f, 190f), 0);
+            } 
+            else
+            {
+                transform.eulerAngles = new Vector3(0, Random.Range(170f, 177f), 0);
+            }
         }
     }
 

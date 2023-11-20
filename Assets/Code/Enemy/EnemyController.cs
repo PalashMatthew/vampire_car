@@ -234,7 +234,8 @@ public class EnemyController : MonoBehaviour
             }
             #endregion
 
-            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp += 1;
+            float exp = 1 * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expCoeff;
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp += exp;
             GameObject.Find("Player").GetComponent<PlayerStats>().CheckLevel();
 
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
