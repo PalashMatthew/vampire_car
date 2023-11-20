@@ -106,7 +106,7 @@ public class GameplayUIController : MonoBehaviour
 
         if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
         {
-            playerStats.currentExp -= Time.deltaTime;
+            playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave -1].expMinus;
             GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
         }
 

@@ -251,7 +251,10 @@ public class Wave
     public int waveNum;
     public int waveTime;  //Сколько нужно убить для конца волны
     public float enemySpawnTime;
+
+    [Header("Exp")]
     public float expCoeff;
+    public float expMinus;
 
     [Header("Enemy Settings")]
     public float waveSpeedCoeff;  //Скорость объектов на этой волне
