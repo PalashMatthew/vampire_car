@@ -15,6 +15,7 @@ public class ReadGoogleSheet : MonoBehaviour
     public string urlGunBaseSettings;
     public string urlTalents;
     public string urlDropSystem;
+    public string urlLocalization;
 
 
     private void Start()
@@ -23,17 +24,21 @@ public class ReadGoogleSheet : MonoBehaviour
         {
             StartCoroutine(ObtainSheetData(urlCar, "car"));
             PlayerPrefs.SetInt("loadCar", 1);
+
+            StartCoroutine(ObtainSheetData(urlGunUpgrade, "gunUpgrade"));
+
+            StartCoroutine(ObtainSheetData(urlPassiveUpgrade, "passiveUpgrade"));
+
+            StartCoroutine(ObtainSheetData(urlGunBaseSettings, "gunBaseSettings"));
+
+            StartCoroutine(ObtainSheetData(urlTalents, "talents"));
+
+            StartCoroutine(ObtainSheetData(urlDropSystem, "dropSystem"));
+
+            StartCoroutine(ObtainSheetData(urlLocalization, "localization"));
         }
 
-        StartCoroutine(ObtainSheetData(urlGunUpgrade, "gunUpgrade"));
-
-        StartCoroutine(ObtainSheetData(urlPassiveUpgrade, "passiveUpgrade"));
         
-        StartCoroutine(ObtainSheetData(urlGunBaseSettings, "gunBaseSettings"));
-
-        StartCoroutine(ObtainSheetData(urlTalents, "talents"));
-
-        StartCoroutine(ObtainSheetData(urlDropSystem, "dropSystem"));
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)
@@ -65,6 +70,9 @@ public class ReadGoogleSheet : MonoBehaviour
 
             if (_bdName == "dropSystem")
                 GetComponent<BDLoaderController>().LoadDropSystemInfo(json);
+
+            if (_bdName == "localization")
+                GetComponent<BDLoaderController>().LoadLocalization(json);
         }
     }
 }

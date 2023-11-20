@@ -29,15 +29,17 @@ public class Generate : MonoBehaviour
 
     [SerializeField] public List<EnemyCoeff> enemyCoeffList;
 
-    private void Start()
+    private void Awake()
     {
-        _player = GameObject.Find("Player");
-        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
-        _obstacles = GetComponent<GenerateObstacles>();
+        
     }
 
     public void StartSpawn()
     {
+        _player = GameObject.Find("Player");
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+        _obstacles = GetComponent<GenerateObstacles>();
+
         if (isSpawnAccess)
         {
             StopAllCoroutines();
@@ -47,8 +49,6 @@ public class Generate : MonoBehaviour
 
     IEnumerator EnemyGen()
     {
-        yield return new WaitForSeconds(spawnTime);
-
         float _randX = Random.Range(minXSpawn, maxXSpawn);
         float _x = _randX / step;
         _x = (int)_x;
@@ -64,6 +64,8 @@ public class Generate : MonoBehaviour
         inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
         inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
         inst.GetComponent<EnemyController>().Initialize();
+
+        yield return new WaitForSeconds(spawnTime);        
 
         StartCoroutine(EnemyGen());
     }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public int currentLevel;
+    public int currentExp;
+    public List<int> levelExpNeed;
+    PlayerController playerController;
+
     [HideInInspector]
     public float currentHp;
     public float maxHp;
@@ -68,6 +73,9 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
+        currentLevel = 1;
+        playerController = GetComponent<PlayerController>();
+
         StatsInitialize();
     }
 
@@ -265,6 +273,17 @@ public class PlayerStats : MonoBehaviour
         if (currentHp > maxHp)
         {
             currentHp = maxHp;
+        }
+    }
+
+    public void CheckLevel()
+    {
+        if (currentExp >= levelExpNeed[currentLevel - 1])
+        {
+            currentLevel++;
+            currentExp = 0;
+            playerController.StartCoroutine(playerController.NewLevel());
+            GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount++;
         }
     }
 }

@@ -61,41 +61,38 @@ public class PopUpDetail : MonoBehaviour
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
-
-        float a = 6.9f;
-        Debug.Log((int)a);
     }
 
     void Initialize()
     {
-        tName.text = itemName;
+        tName.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_" + garageController.activeItem.itemID + "Name");
 
         switch (itemRarity)
         {
             case "common":
                 imgBackIcon.sprite = sprCommonCard;
-                tRarity.text = "<color=#808B96>Обычная</color>";
+                tRarity.text = "<color=#808B96>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_common") + "</color>";
 
                 maxLevel = 10;
                 break;
 
             case "rare":
                 imgBackIcon.sprite = sprRareCard;
-                tRarity.text = "<color=#3498DB>Редкая</color>";
+                tRarity.text = "<color=#3498DB>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rare") + "</color>";
 
                 maxLevel = 20;
                 break;
 
             case "epic":
                 imgBackIcon.sprite = sprEpicCard;
-                tRarity.text = "<color=#CE33FF>Эпическая</color>";
+                tRarity.text = "<color=#CE33FF>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_epic") + "</color>";
 
                 maxLevel = 30;
                 break;
 
             case "legendary":
                 imgBackIcon.sprite = sprLegendaryCard;
-                tRarity.text = "<color=yellow>Легендарная</color>";
+                tRarity.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_legendary") + "</color>";
 
                 maxLevel = 40;
                 break;
@@ -735,22 +732,22 @@ public class PopUpDetail : MonoBehaviour
             switch (garageController.activeItem.itemObj.itemType)
             {
                 case DetailCard.ItemType.Gun:
-                    tDrawing.text = "Чертеж оружия: " + PlayerPrefs.GetInt("drawingGunCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingGun") + ": " + PlayerPrefs.GetInt("drawingGunCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
                 case DetailCard.ItemType.Engine:
-                    tDrawing.text = "Чертеж двигателя: " + PlayerPrefs.GetInt("drawingEngineCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingEngine") + ": " + PlayerPrefs.GetInt("drawingEngineCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
                 case DetailCard.ItemType.Brakes:
-                    tDrawing.text = "Чертеж тормозов: " + PlayerPrefs.GetInt("drawingBrakesCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingBrakes") + ": " + PlayerPrefs.GetInt("drawingBrakesCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
                 case DetailCard.ItemType.FuelSystem:
-                    tDrawing.text = "Чертеж топливной системы: " + PlayerPrefs.GetInt("drawingFuelSystemCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingFuelSystem") + ": " + PlayerPrefs.GetInt("drawingFuelSystemCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
                 case DetailCard.ItemType.Suspension:
-                    tDrawing.text = "Чертеж подвески: " + PlayerPrefs.GetInt("drawingSuspensionCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingSuspension") + ": " + PlayerPrefs.GetInt("drawingSuspensionCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
                 case DetailCard.ItemType.Transmission:
-                    tDrawing.text = "Чертеж трансмиссии: " + PlayerPrefs.GetInt("drawingTransmissionCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingTransmission") + ": " + PlayerPrefs.GetInt("drawingTransmissionCount") + "/" + drawingCount[garageController.activeItem.currentLevel];
                     break;
             }
 
@@ -764,22 +761,22 @@ public class PopUpDetail : MonoBehaviour
             switch (garageController.activeItem.itemObj.itemType)
             {
                 case DetailCard.ItemType.Gun:
-                    tDrawing.text = "Чертеж оружия: " + PlayerPrefs.GetInt("drawingGunCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingGun") + ": " + PlayerPrefs.GetInt("drawingGunCount") + "/MAX";
                     break;
                 case DetailCard.ItemType.Engine:
-                    tDrawing.text = "Чертеж двигателя: " + PlayerPrefs.GetInt("drawingEngineCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingEngine") + ": " + PlayerPrefs.GetInt("drawingEngineCount") + "/MAX";
                     break;
                 case DetailCard.ItemType.Brakes:
-                    tDrawing.text = "Чертеж тормозов: " + PlayerPrefs.GetInt("drawingBrakesCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingBrakes") + ": " + PlayerPrefs.GetInt("drawingBrakesCount") + "/MAX";
                     break;
                 case DetailCard.ItemType.FuelSystem:
-                    tDrawing.text = "Чертеж топливной системы: " + PlayerPrefs.GetInt("drawingFuelSystemCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingFuelSystem") + ": " + PlayerPrefs.GetInt("drawingFuelSystemCount") + "/MAX";
                     break;
                 case DetailCard.ItemType.Suspension:
-                    tDrawing.text = "Чертеж подвески: " + PlayerPrefs.GetInt("drawingSuspensionCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingSuspension") + ": " + PlayerPrefs.GetInt("drawingSuspensionCount") + "/MAX";
                     break;
                 case DetailCard.ItemType.Transmission:
-                    tDrawing.text = "Чертеж трансмиссии: " + PlayerPrefs.GetInt("drawingTransmissionCount") + "/MAX";
+                    tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingTransmission") + ": " + PlayerPrefs.GetInt("drawingTransmissionCount") + "/MAX";
                     break;
             }
         }        

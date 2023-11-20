@@ -43,24 +43,31 @@ public class WaveController : MonoBehaviour
     {
         isWaveEnd = false;
 
-        enemyDestroy = 0;
-        currentWave++;
-        gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
-        _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
-        _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
-
-        for (int i = 0; i < waveList[currentWave - 1].patternsSpawnTime.Count; i++)
+        if (currentWave < lastWave)
         {
-            if (waveList[currentWave - 1].patternsSpawnTime[i] > 0)
+            enemyDestroy = 0;
+            currentWave++;
+            gameplayUIController.StartWave(waveList[currentWave - 1].waveTime, currentWave);
+            _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
+            _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
+
+            for (int i = 0; i < waveList[currentWave - 1].patternsSpawnTime.Count; i++)
             {
-                StartCoroutine(PatternPrioritySpawn(waveList[currentWave - 1].patterns[i], waveList[currentWave - 1].patternsSpawnTime[i]));
+                if (waveList[currentWave - 1].patternsSpawnTime[i] > 0)
+                {
+                    StartCoroutine(PatternPrioritySpawn(waveList[currentWave - 1].patterns[i], waveList[currentWave - 1].patternsSpawnTime[i]));
+                }
             }
+
+            StartCoroutine(PatternSpawn());
+
+            _generate.StartSpawn();
+            _generateObstacles.NewWave();
         }
-
-        StartCoroutine(PatternSpawn());
-
-        _generate.StartSpawn();
-        _generateObstacles.NewWave();
+        else
+        {
+            _generate.BossFight();
+        }        
     }
 
     public void WaveEnd()

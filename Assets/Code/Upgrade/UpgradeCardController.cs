@@ -31,7 +31,6 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgCardType;
     public Sprite sprCardTypePassive, sprCardTypeGun;
 
-    public Image outline;
 
     public enum CardRarity
     {
@@ -45,8 +44,6 @@ public class UpgradeCardController : MonoBehaviour
     {   
         _upgradeController = GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>();
         _popUpUpgrade = GetComponentInParent<PopUpUpgrade>();
-
-        outline.gameObject.SetActive(false);
 
         #region Rarity
         if (card.cardRarity == UpgradeCard.CardRarity.Common)
@@ -151,6 +148,16 @@ public class UpgradeCardController : MonoBehaviour
     public void ButAccept(string _type)
     {
         _upgradeController.CardAccept(gameObject.GetComponent<UpgradeCardController>(), _type);
+
+        if (_type == "passive")
+        {
+            _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoicePassiveCard());
+        }            
+
+        if (_type == "gun")
+        {
+            _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoiceGunCard());
+        }
     }
 
     public void ChoiceCard()

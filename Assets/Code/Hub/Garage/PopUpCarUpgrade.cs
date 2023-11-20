@@ -47,6 +47,7 @@ public class PopUpCarUpgrade : MonoBehaviour
     public TMP_Text tCarName;
 
     [Header("Upgrade")]
+    public TMP_Text tTitan;
     public float upgradePrice;
     public TMP_Text tPrice;
     public GameObject butUpgrade;
@@ -184,84 +185,113 @@ public class PopUpCarUpgrade : MonoBehaviour
             switch (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId"))
             {
                 case "damage":
-                    s = "Урон";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage");
                     break;
 
                 case "health":
-                    s = "Здоровье";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_health");
                     break;
 
                 case "shotSpeed":
-                    s = "Скорость стрельбы";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_shotSpeed");
                     break;
 
                 case "kritChance":
-                    s = "Шанс крита";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_kritChance");
                     break;
 
                 case "kritDamage":
-                    s = "Урон крита";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_kritDamage");
                     break;
 
                 case "vampirizm":
-                    s = "Вампиризм";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_vampirizm");
                     break;
 
                 case "backDamage":
-                    s = "Обратка";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_backDamage");
                     break;
 
                 case "distanceDamage":
-                    s = "Урон от расстояния";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_distanceDamage");
                     break;
 
                 case "dodge":
-                    s = "Уклонение";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_dodge");
                     break;
 
                 case "armor":
-                    s = "Броня";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_armor");
                     break;
 
                 case "massEnemyDamage":
-                    s = "Ахуевание";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_massEnemyDamage");
                     break;
 
                 case "headshot":
-                    s = "Хэдшот";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_headshot");
                     break;
 
                 case "screwValueUp":
-                    s = "Множитель гаек";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_screwValueUp");
                     break;
 
                 case "lucky":
-                    s = "Удача";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_lucky");
                     break;
 
                 case "effectsDuration":
-                    s = "Длительность эффектов";
+                    s = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_effectsDuration");
                     break;
             }
 
             if (i == 0)
             {
-                tUpgradeLvl10.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                if (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId") == "health")
+                {
+                    tUpgradeLvl10.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                } 
+                else
+                {
+                    tUpgradeLvl10.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl") + "%";
+                }
+                
             }
 
             if (i == 1)
             {
-                tUpgradeLvl20.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                if (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId") == "health")
+                {
+                    tUpgradeLvl20.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                }
+                else
+                {
+                    tUpgradeLvl20.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl") + "%";
+                }                    
             }
 
             if (i == 2)
             {
-                tUpgradeLvl30.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                if (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId") == "health")
+                {
+                    tUpgradeLvl30.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                }
+                else
+                {
+                    tUpgradeLvl30.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl") + "%";
+                }                    
             }
 
             if (i == 3)
             {
-                tUpgradeLvl40.text = "<color=yellow>ВСЕ МАШИНЫ</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                if (PlayerPrefs.GetString(_carName + "carUpgrade" + upgNum + "lvlId") == "health")
+                {
+                    tUpgradeLvl40.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl");
+                }
+                else
+                {
+                    tUpgradeLvl40.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_allCars") + "</color> " + s + " +" + PlayerPrefs.GetFloat(_carName + "carUpgrade" + upgNum + "lvl") + "%";
+                }                    
             }
         }
 
@@ -343,6 +373,8 @@ public class PopUpCarUpgrade : MonoBehaviour
             butUpgrade.SetActive(true);
             butUpgradeGray.SetActive(false);
         }
+
+        tTitan.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_titan") + ": 31/30";
 
         calculateCharacteristics.GlobalCarCharacteristics();
     }

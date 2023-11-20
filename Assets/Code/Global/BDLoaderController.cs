@@ -4,6 +4,7 @@ using UnityEngine;
 using SimpleJSON;
 using System;
 using System.Globalization;
+using System.Numerics;
 
 public class BDLoaderController : MonoBehaviour
 {
@@ -746,5 +747,63 @@ public class BDLoaderController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void LoadLocalization(string _json)
+    {
+        var _file = JSON.Parse(_json);
+
+        for (int a = 1; a < _file["values"].Count; a++)
+        {
+            List<string> _locInfo = new List<string>();
+
+            var itemo = JSON.Parse(_file["values"][a].ToString());
+
+            string s = itemo.ToString();
+
+            char[] _info = new char[s.Length];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                _info[i] = s[i];
+            }
+
+            string s1 = "";
+
+            for (int i = 0; i < _info.Length; i++)
+            {
+                s1 += _info[i];
+
+                if (_info[i] == '"' && _info[i + 1] != ',' && _info[i + 1] != ']')
+                {
+                    int cellStart = i + 1;
+                    int cellEnd = 0;
+
+                    for (int r = cellStart; r < _info.Length; r++)
+                    {
+                        if (_info[r] == '"')
+                        {
+                            cellEnd = r;
+                            goto l1;
+                        }
+                    }
+                    l1:
+
+                    string s2 = "";
+
+                    for (int u = cellStart; u < cellEnd; u++)
+                    {
+                        s2 += _info[u];
+                    }
+
+                    _locInfo.Add(s2);
+                }
+            }
+
+            PlayerPrefs.SetString("ru" + _locInfo[0], _locInfo[1]);
+            PlayerPrefs.SetString("en" + _locInfo[0], _locInfo[2]);
+        }
+
+        PlayerPrefs.SetString("activeLang", "ru");
     }
 }

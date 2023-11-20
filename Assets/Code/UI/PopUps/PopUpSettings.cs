@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PopUpSettings : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PopUpSettings : MonoBehaviour
     public GameObject imgMusicToggleOn;
     public GameObject imgMusicToggleOff;
     private bool _isMusicOn = true;
+
+    //[Header("Localization")]
+    public static Action onLocalization;
 
 
     private void Start()
@@ -110,5 +114,11 @@ public class PopUpSettings : MonoBehaviour
             PlayerPrefs.SetInt("musicSettings", 2);
 
         _popUpController.ClosedPopUp();
+    }
+
+    public void ButLocalization(string _lang)
+    {
+        PlayerPrefs.SetString("activeLang", _lang);
+        onLocalization?.Invoke();
     }
 }

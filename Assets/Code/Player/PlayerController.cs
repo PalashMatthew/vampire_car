@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     float avengerTimerCurrent;
     float avengerTimerMax = 3;
 
+    [Header("New Level")]
+    public ParticleSystem vfxNewLevel;
+    public GameObject canvasNewLevel;
+
 
     public void Initialize()
     {
@@ -201,4 +205,14 @@ public class PlayerController : MonoBehaviour
             _mesh.material.DisableKeyword("_EMISSION");
         }
     }    
+
+    public IEnumerator NewLevel()
+    {
+        vfxNewLevel.Play();
+        canvasNewLevel.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+
+        canvasNewLevel.SetActive(false);
+    }
 }

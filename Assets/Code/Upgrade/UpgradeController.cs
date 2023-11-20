@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour
 {
+    public int upgradeLevelCount;
+
     public List<UpgradeCard> cardsGun;
     public List<UpgradeCard> cardsPassive;
     public List<UpgradeCardController> cardsGunController;
@@ -764,13 +766,12 @@ public class UpgradeController : MonoBehaviour
             {
                 if (obj != _card)
                 {
-                    obj.gameObject.transform.DOScale(0.95f, 0.2f).SetUpdate(true);
-                    obj.outline.gameObject.SetActive(false);
+                    obj.gameObject.transform.DOScale(0f, 0.2f).SetUpdate(true);
                 } 
                 else
                 {
                     obj.gameObject.transform.DOScale(1.05f, 0.2f).SetUpdate(true);
-                    obj.outline.gameObject.SetActive(true);
+                    obj.gameObject.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f).SetUpdate(true);
 
                     cardGunAccept = obj;
                 }
@@ -783,13 +784,12 @@ public class UpgradeController : MonoBehaviour
             {
                 if (obj != _card)
                 {
-                    obj.gameObject.transform.DOScale(0.95f, 0.2f).SetUpdate(true);
-                    obj.outline.gameObject.SetActive(false);
+                    obj.gameObject.transform.DOScale(0f, 0.2f).SetUpdate(true);
                 }
                 else
                 {
                     obj.gameObject.transform.DOScale(1.05f, 0.2f).SetUpdate(true);
-                    obj.outline.gameObject.SetActive(true);
+                    obj.gameObject.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f).SetUpdate(true);
 
                     cardPassiveAccept = obj;
                 }
@@ -929,7 +929,7 @@ public class UpgradeController : MonoBehaviour
             slotImage[i].DOFade(1f, 0f).SetUpdate(true);
         }
 
-        if (activeGunCard.Count >= 5)
+        if (activeGunCard.Count >= 6)
             isSlotFull = true;
     }
 

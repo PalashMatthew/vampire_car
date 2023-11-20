@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
         if (follow && !GameplayController.isPause)
         {
             if (_gameplayController.inputSettings == GameplayController.InputSettings.RelativeToTheFinger)
-            {
+            {                
                 RelativeToTheFinger();
             }
 
@@ -69,6 +69,9 @@ public class CameraController : MonoBehaviour
     void RelativeToTheFinger()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
+
+            if (Input.touchCount > 0)
+            {
             Touch touch = Input.GetTouch(0);
 
             if (touch.phase == TouchPhase.Began)
@@ -106,6 +109,7 @@ public class CameraController : MonoBehaviour
                 //Vector3 targetPos = new Vector3(currentX, transform.position.y, transform.position.z);
             //Vector3 smoothedPos = Vector3.Lerp(transform.position, targetPos, 0.1f);
             //transform.position = smoothedPos;
+            }
             }
 #endif
 #if UNITY_EDITOR

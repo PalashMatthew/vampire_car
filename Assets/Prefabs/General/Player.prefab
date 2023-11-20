@@ -7004,6 +7004,8 @@ MonoBehaviour:
   - {fileID: 2390163402773990783}
   isBrakeDamage: 0
   vfxShield: {fileID: 8730917401640295258}
+  vfxNewLevel: {fileID: 3484046841960350036}
+  canvasNewLevel: {fileID: 5679804659600779144}
 --- !u!114 &7084839444521993868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7116,6 +7118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f462fcb8895076448432b01eb18f115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 1
+  currentExp: 0
+  levelExpNeed: 050000000a0000000f00000014000000190000001e00000023000000280000002d00000032000000370000003c00000041000000460000004b00000050000000550000005a0000005f00000064000000
   currentHp: 0
   maxHp: 0
   maxHpBase: 100
@@ -15241,7 +15246,7 @@ RectTransform:
   m_GameObject: {fileID: 5272779166396321604}
   m_LocalRotation: {x: 0.46630946, y: 0, z: 0, w: 0.8846217}
   m_LocalPosition: {x: 0, y: 0, z: -2.953}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3797072055105206053}

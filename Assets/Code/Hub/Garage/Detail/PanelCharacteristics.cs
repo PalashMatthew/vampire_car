@@ -54,79 +54,95 @@ public class PanelCharacteristics : MonoBehaviour
         switch (itemCharacteristic)
         {
             case ItemCharacters.HpUp:
-                _stats = "Здоровье";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_health");
                 break;
 
             case ItemCharacters.RecoveryHpInFirstAidKit:
-                _stats = "Здоровье в аптечке";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_recoveryHpInFirstAidKit");
                 break;
 
             case ItemCharacters.Dodge:
-                _stats = "Уклонение";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_dodge");
                 break;
 
             case ItemCharacters.DronDamage:
-                _stats = "Урон по дронам";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_dronDamage");
                 break;
 
             case ItemCharacters.ShotSpeed:
-                _stats = "Скорость стрельбы";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_shotSpeed");
                 break;
 
             case ItemCharacters.KritDamage:
-                _stats = "Крит. урон";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_kritDamage");
                 break;
 
             case ItemCharacters.KritChance:
-                _stats = "Крит. шанс";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_kritChance");
                 break;
 
             case ItemCharacters.BackDamage:
-                _stats = "Обратный урон";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_backDamage");
                 break;
 
             case ItemCharacters.Vampirizm:
-                _stats = "Вампиризм";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_vampirizm");
                 break;
 
             case ItemCharacters.Armor:
-                _stats = "Броня";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_armor");
                 break;
 
             case ItemCharacters.HealthRecovery:
-                _stats = "Восстановление здоровья";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_recoveryHP");
                 break;
 
             case ItemCharacters.Rage:
-                _stats = "Ярость";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rage");
                 break;
 
             case ItemCharacters.DistanceDamage:
-                _stats = "Урон от расстояния";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_distanceDamage");
                 break;
 
             case ItemCharacters.Lucky:
-                _stats = "Удача";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_lucky");
                 break;
 
             case ItemCharacters.Magnet:
-                _stats = "Магнит";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_magnet");
                 break;
 
             case ItemCharacters.Damage:
-                _stats = "Урон";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage");
                 break;
 
             case ItemCharacters.CarDamage:
-                _stats = "Урон по машинам";
+                _stats = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carDamage");
                 break;
         }
 
-        _stats += ": " + itemCharacteristicValue;
+        if (itemCharacteristic == ItemCharacters.HpUp)
+        {
+            _stats += ": " + itemCharacteristicValue;
+        }
+        else
+        {
+            _stats += ": " + itemCharacteristicValue + "%";
+        }
+            
 
         if (itemCharacteristicStepValue != 0)
         {
-            _stats += " (<color=green>+" + itemCharacteristicStepValue + "</color>)";
+            if (itemCharacteristic == ItemCharacters.HpUp)
+            {
+                _stats += " (<color=green>+" + itemCharacteristicStepValue + "</color>)";
+            } 
+            else
+            {
+                _stats += " (<color=green>+" + itemCharacteristicStepValue + "%</color>)";
+            }
+            
         }
 
         tStats.text = _stats;
@@ -135,16 +151,16 @@ public class PanelCharacteristics : MonoBehaviour
         switch (itemRarity)
         {
             case ItemRarity.Common:
-                _rarity = "(<color=#808B96>Обычное</color>)";
+                _rarity = "(<color=#808B96>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_common") + "</color>)";
                 break;
             case ItemRarity.Rare:
-                _rarity = "(<color=#3498DB>Редкое</color>)";
+                _rarity = "(<color=#3498DB>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rare")  + "</color>)";
                 break;
             case ItemRarity.Epic:
-                _rarity = "(<color=#CE33FF>Эпическое</color>)";
+                _rarity = "(<color=#CE33FF>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_epic") + "</color>)";
                 break;
             case ItemRarity.Legendary:
-                _rarity = "(<color=yellow>Легендарное</color>)";
+                _rarity = "(<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_legendary") + "</color>)";
                 break;
         }
         tRarity.text = _rarity;

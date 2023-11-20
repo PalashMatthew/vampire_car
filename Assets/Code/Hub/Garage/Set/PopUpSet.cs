@@ -63,7 +63,10 @@ public class PopUpSet : MonoBehaviour
         colorInactive = new Color(0.5f, 0.5f, 0.5f, 1);
 
         setDetailCount = 0;
-        
+
+        tName.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_set" + setID + "Name");
+
+
         foreach (SetCard _card in setCards)
         {
             if (_card.setID == setID)

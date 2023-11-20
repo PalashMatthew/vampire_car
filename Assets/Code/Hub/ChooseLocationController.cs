@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ public class ChooseLocationController : MonoBehaviour
     public List<string> levelName;
 
     public ASyncLoader loader;
+
+    public TMP_Text tChapter;
+
 
     private void Start()
     {
@@ -38,6 +42,11 @@ public class ChooseLocationController : MonoBehaviour
             butNext.SetActive(false);
             butPrev.SetActive(true);
         }
+    }
+
+    private void Update()
+    {
+        tChapter.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_chapter") + " " + currentLocNum;
     }
 
     void ChangeLocation()

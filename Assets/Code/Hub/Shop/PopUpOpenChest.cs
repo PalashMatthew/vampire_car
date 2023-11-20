@@ -59,7 +59,7 @@ public class PopUpOpenChest : MonoBehaviour
                 break;
         }
 
-        tName.text = card.itemName;
+        tName.text = "<rainb>" + card.itemName;
 
         imgIcon.sprite = card.sprItem;
 

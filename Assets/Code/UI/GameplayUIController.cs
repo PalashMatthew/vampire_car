@@ -18,12 +18,11 @@ public class GameplayUIController : MonoBehaviour
     public Image imgWaveEndFill;
     public GameObject wavePanel;
 
-    [Header("HP")]
-    public TMP_Text tCurrentHP;
-    public Image imgFillHPBar;
-    public PlayerLevelController playerLevelController;
+    [Header("Level")]
+    public TMP_Text tCurrentLevel;
+    public Image imgFillLevelBar;
     public PlayerStats playerStats;
-    public Image imgHPEndFill;
+    public Image imgLevelEndFill;
 
     [Header("WaveComplite")]
     public GameObject waveCompliteObj;
@@ -51,7 +50,7 @@ public class GameplayUIController : MonoBehaviour
 
     private void Update()
     {
-        UpdateHP();
+        UpdateLevel();
 
         if (!isWin)
         {
@@ -98,20 +97,20 @@ public class GameplayUIController : MonoBehaviour
     #endregion
 
     #region HP
-    void UpdateHP()
+    void UpdateLevel()
     {
-        tCurrentHP.text = "HP: " + (int)playerStats.currentHp + "/" + (int)playerStats.maxHp;
+        tCurrentLevel.text = "Level: " + playerStats.currentLevel;
 
-        imgFillHPBar.fillAmount = playerStats.currentHp / playerStats.maxHp;
+        imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
 
-        if (imgFillHPBar.fillAmount > 0 && imgFillHPBar.fillAmount < 1)
+        if (imgFillLevelBar.fillAmount > 0 && imgFillLevelBar.fillAmount < 1)
         {
-            imgHPEndFill.gameObject.SetActive(true);
-            imgHPEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillHPBar.fillAmount * 281f, 0);
+            imgLevelEndFill.gameObject.SetActive(true);
+            imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 281f, 0);
         }
         else
         {
-            imgHPEndFill.gameObject.SetActive(false);
+            imgLevelEndFill.gameObject.SetActive(false);
         }
     }
     #endregion

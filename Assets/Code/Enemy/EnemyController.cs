@@ -149,40 +149,43 @@ public class EnemyController : MonoBehaviour
     #region Hit
     public void Hit(float _damage, bool _isKrit)
     {
-        if (isWeakening)
+        if (isVisible)
         {
-            _damage *= 2;
-            isWeakening = false;
-        }
-
-        hp -= _damage;
-        GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
-        StartCoroutine(HitAnim());
-
-        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s09")  //Если у нас сет Таран активен
-        {
-            int rand = Random.Range(1, 101);
-
-            if (rand <= PlayerPrefs.GetFloat("setValue"))
+            if (isWeakening)
             {
-                isWeakening = true;
+                _damage *= 2;
+                isWeakening = false;
             }
-        }
 
-        if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
-        {
-            int rand = Random.Range(1, 101);
+            hp -= _damage;
+            GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
+            StartCoroutine(HitAnim());
 
-            if (rand <= GameObject.Find("Player").GetComponent<PlayerStats>().headshotProcent)
+            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s09")  //Если у нас сет Таран активен
+            {
+                int rand = Random.Range(1, 101);
+
+                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                {
+                    isWeakening = true;
+                }
+            }
+
+            if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
+            {
+                int rand = Random.Range(1, 101);
+
+                if (rand <= GameObject.Find("Player").GetComponent<PlayerStats>().headshotProcent)
+                {
+                    Dead();
+                    return;
+                }
+            }
+
+            if (hp <= 0)
             {
                 Dead();
-                return;
             }
-        }        
-
-        if (hp <= 0)
-        {
-            Dead();
         }
     }
 
@@ -228,8 +231,11 @@ public class EnemyController : MonoBehaviour
             if (rand <= procent)
             {
                 Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
-            }            
+            }
             #endregion
+
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp += 1;
+            GameObject.Find("Player").GetComponent<PlayerStats>().CheckLevel();
 
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Remove(gameObject);
             GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);

@@ -27,11 +27,17 @@ public class PopUpUpgrade : MonoBehaviour
     public TMP_Text tRerollPrice;
     float rerollPrice;
 
+    public GameObject panelPassiveUpgrade;
+    public GameObject panelGunUpgrade;
+
 
     private void Start()
     {
         _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
         _popUpController = GetComponent<PopUpController>();
+
+        panelPassiveUpgrade.SetActive(true);
+        panelGunUpgrade.SetActive(false);
     }
 
     private void Update()
@@ -51,76 +57,104 @@ public class PopUpUpgrade : MonoBehaviour
         }
     }
 
-    void CardAnimation()
+    void CardGunAnimation()
     {
-        cardGun1.GetComponent<RectTransform>().DOAnchorPosX(-300, 0f).SetUpdate(true);
+        cardGun1.GetComponent<RectTransform>().DOAnchorPosX(-350, 0f).SetUpdate(true);
         cardGun2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
-        cardGun3.GetComponent<RectTransform>().DOAnchorPosX(300, 0f).SetUpdate(true);
-
-        cardPassive1.GetComponent<RectTransform>().DOAnchorPosX(-300, 0f).SetUpdate(true);
-        cardPassive2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
-        cardPassive3.GetComponent<RectTransform>().DOAnchorPosX(300, 0f).SetUpdate(true);
+        cardGun3.GetComponent<RectTransform>().DOAnchorPosX(350, 0f).SetUpdate(true);
 
         Sequence cardGunAnim = DOTween.Sequence();
-        Sequence cardPassiveAnim = DOTween.Sequence();
 
         cardGun1.GetComponent<RectTransform>().localScale = Vector3.zero;
         cardGun2.GetComponent<RectTransform>().localScale = Vector3.zero;
         cardGun3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
-        cardPassive1.GetComponent<RectTransform>().localScale = Vector3.zero;
-        cardPassive2.GetComponent<RectTransform>().localScale = Vector3.zero;
-        cardPassive3.GetComponent<RectTransform>().localScale = Vector3.zero;
-
         cardGunAnim.Insert(0.3f, cardGun1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardGunAnim.Insert(0.4f, cardGun2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardGunAnim.Insert(0.5f, cardGun3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+    }
+
+    public void CardPassiveAnim()
+    {
+        cardPassive1.GetComponent<RectTransform>().DOAnchorPosX(-350, 0f).SetUpdate(true);
+        cardPassive2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
+        cardPassive3.GetComponent<RectTransform>().DOAnchorPosX(350, 0f).SetUpdate(true);
+
+        Sequence cardPassiveAnim = DOTween.Sequence();
+
+        cardPassive1.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardPassive2.GetComponent<RectTransform>().localScale = Vector3.zero;
+        cardPassive3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
         cardPassiveAnim.Insert(0.3f, cardPassive1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardPassiveAnim.Insert(0.4f, cardPassive2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardPassiveAnim.Insert(0.5f, cardPassive3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
     }
 
-    public void ChoiceCard()
+    public IEnumerator ChoiceGunCard()
     {
-        if (upgradeController.cardGunAccept != null && upgradeController.cardPassiveAccept != null)
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        if (upgradeController.cardGunAccept != null)
         {
             foreach (UpgradeCardController _card in upgradeController.cardsGunController)
             {
                 if (upgradeController.cardGunAccept == _card)
                 {
-                    _card.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
-                    //_card.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
+                    _card.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true).SetEase(Ease.InBack);
 
                     _card.ChoiceCard();
                 }
-                else
-                {
-                    _card.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-                }
             }
-
-            foreach (UpgradeCardController _card in upgradeController.cardsPassiveController)
-            {
-                if (upgradeController.cardPassiveAccept == _card)
-                {
-                    _card.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f).SetUpdate(true);
-                    //_card.GetComponent<RectTransform>().DOScale(1.3f, 0.4f).SetUpdate(true);
-
-                    _card.ChoiceCard();
-                }
-                else
-                {
-                    _card.GetComponent<RectTransform>().DOScale(0, 0.2f).SetUpdate(true);
-                }
-            }
-
-            StartCoroutine(EndUpgrade());
-            _waveController.StartWave();
-
-            upgradeController.cardGunAccept = null;
-            upgradeController.cardPassiveAccept = null;
         }
+
+        upgradeController.cardGunAccept = null;
+
+        //CardGunAnimation();
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        if (upgradeController.upgradeLevelCount > 0)
+        {
+            InitializeGunUpgrade();
+        }
+        else
+        {
+            //StartCoroutine(EndUpgrade());
+            ButClosed();
+            _waveController.StartWave();
+        }
+    }
+
+    public IEnumerator ChoicePassiveCard()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        foreach (UpgradeCardController _card in upgradeController.cardsPassiveController)
+        {
+            if (upgradeController.cardPassiveAccept == _card)
+            {
+                _card.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true).SetEase(Ease.InBack);
+
+                _card.ChoiceCard();
+            }
+        }
+
+        upgradeController.cardPassiveAccept = null;
+        
+        yield return new WaitForSecondsRealtime(0.3f);        
+
+        if (upgradeController.upgradeLevelCount > 0)
+        {
+            panelPassiveUpgrade.SetActive(false);
+            panelGunUpgrade.SetActive(true);
+            InitializeGunUpgrade();
+        } 
+        else
+        {
+            ButClosed();
+            //StartCoroutine(EndUpgrade());
+        }        
     }
 
     IEnumerator EndUpgrade()
@@ -134,24 +168,47 @@ public class PopUpUpgrade : MonoBehaviour
         GameplayController.isPause = true;
         isOpen = true;
         Time.timeScale = 0;
-        CardAnimation();
+        //CardAnimation();
+        CardPassiveAnim();
         //upgradeController.GenerateUpgrades();
-        upgradeController.GenerateGunCards();
+
+        InitializePassiveUpgrade();
+    }
+
+    void InitializePassiveUpgrade()
+    {
+        //CardAnimation();
+        //CardPassiveAnim();
+
         upgradeController.GeneratePassiveCards();
         _popUpController.OpenPopUp();
-
-        cardGun1.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        cardGun2.gameObject.GetComponent<UpgradeCardController>().Initialize();
-        cardGun3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         cardPassive1.gameObject.GetComponent<UpgradeCardController>().Initialize();
         cardPassive2.gameObject.GetComponent<UpgradeCardController>().Initialize();
         cardPassive3.gameObject.GetComponent<UpgradeCardController>().Initialize();
 
         tScrewValue.text = GlobalStats.screwCount.ToString();
+    }
+
+    void InitializeGunUpgrade()
+    {
+        CardGunAnimation();
+
+        upgradeController.GenerateGunCards();
+
+        //_popUpController.OpenPopUp();
+
+        cardGun1.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun2.gameObject.GetComponent<UpgradeCardController>().Initialize();
+        cardGun3.gameObject.GetComponent<UpgradeCardController>().Initialize();
+
+        tScrewValue.text = GlobalStats.screwCount.ToString();
 
         upgradeController.SlotInitialize();
         upgradeController.UpdateTextLevels();
+
+        upgradeController.upgradeLevelCount--;
+
         //RerollInitialize();
     }
 
