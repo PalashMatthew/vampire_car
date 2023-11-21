@@ -23,6 +23,7 @@ public class GameplayUIController : MonoBehaviour
     public Image imgFillLevelBar;
     public PlayerStats playerStats;
     public Image imgLevelEndFill;
+    public GameObject imgComplite1, imgComplite2;
 
     [Header("WaveComplite")]
     public GameObject waveCompliteObj;
@@ -99,7 +100,7 @@ public class GameplayUIController : MonoBehaviour
     #region HP
     void UpdateLevel()
     {
-        tCurrentLevel.text = "Level: " + playerStats.currentLevel;
+        //tCurrentLevel.text = "Level: " + playerStats.currentLevel;
 
         //imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
         imgFillLevelBar.fillAmount = playerStats.currentExp / 20f;
@@ -115,21 +116,36 @@ public class GameplayUIController : MonoBehaviour
             playerStats.currentExp = 20;
         }
 
-        if (playerStats.currentExp < 5) playerStats.currentLevel = 0;
-
-        if (playerStats.currentExp >= 5 && playerStats.currentExp < 15) playerStats.currentLevel = 1;
-
-        if (playerStats.currentExp >= 15) playerStats.currentLevel = 2;
-
-        if (imgFillLevelBar.fillAmount > 0 && imgFillLevelBar.fillAmount < 1)
+        if (playerStats.currentExp < 5)
         {
-            imgLevelEndFill.gameObject.SetActive(true);
-            imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 281f, 0);
+            imgComplite1.SetActive(false);
+            imgComplite2.SetActive(false);
+            playerStats.currentLevel = 0;
         }
-        else
+
+        if (playerStats.currentExp >= 5 && playerStats.currentExp < 15)
         {
-            imgLevelEndFill.gameObject.SetActive(false);
+            imgComplite1.SetActive(true);
+            imgComplite2.SetActive(false);
+            playerStats.currentLevel = 1;
         }
+
+        if (playerStats.currentExp >= 15)
+        {
+            imgComplite1.SetActive(true);
+            imgComplite2.SetActive(true);
+            playerStats.currentLevel = 2;
+        }
+
+        //if (imgFillLevelBar.fillAmount > 0 && imgFillLevelBar.fillAmount < 1)
+        //{
+        //    imgLevelEndFill.gameObject.SetActive(true);
+        //    imgLevelEndFill.GetComponent<RectTransform>().anchoredPosition = new Vector2(imgFillLevelBar.fillAmount * 281f, 0);
+        //}
+        //else
+        //{
+        //    imgLevelEndFill.gameObject.SetActive(false);
+        //}
 
         
     }
