@@ -11,11 +11,15 @@ public class Obstacles1Controller : MonoBehaviour
 
     private bool _isJumping = false;
 
+    Animator anim;
+
     private void Start()
     {
         shieldObj.SetActive(false);
         StartCoroutine(ShowShield());
         _obstacle = GetComponent<Obstacle>();
+
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -27,8 +31,10 @@ public class Obstacles1Controller : MonoBehaviour
     IEnumerator ShowShield()
     {
         yield return new WaitForSeconds(timeActive);
+        anim.SetTrigger("change");
         shieldObj.SetActive(true);
         yield return new WaitForSeconds(timeActive);
+        anim.SetTrigger("change");
         shieldObj.SetActive(false);
         StartCoroutine(ShowShield());
     }
