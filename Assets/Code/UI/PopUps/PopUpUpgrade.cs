@@ -30,6 +30,8 @@ public class PopUpUpgrade : MonoBehaviour
     public GameObject panelPassiveUpgrade;
     public GameObject panelGunUpgrade;
 
+    public TMP_Text tHeader;
+
 
     private void Start()
     {
@@ -42,15 +44,6 @@ public class PopUpUpgrade : MonoBehaviour
 
     private void Update()
     {
-        //if (GlobalStats.screwCount > 12)
-        //{
-        //    butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
-        //}
-        //else
-        //{
-        //    butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = true;
-        //}
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             ButOpen();
@@ -59,6 +52,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     void CardGunAnimation()
     {
+        tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_gunUpgrade") + " " + upgradeController.upgradeLevelCount + "/" + 1;
+
         cardGun1.GetComponent<RectTransform>().DOAnchorPosX(-350, 0f).SetUpdate(true);
         cardGun2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
         cardGun3.GetComponent<RectTransform>().DOAnchorPosX(350, 0f).SetUpdate(true);
@@ -76,6 +71,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void CardPassiveAnim()
     {
+        tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_passiveUpgrade");
+
         cardPassive1.GetComponent<RectTransform>().DOAnchorPosX(-350, 0f).SetUpdate(true);
         cardPassive2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
         cardPassive3.GetComponent<RectTransform>().DOAnchorPosX(350, 0f).SetUpdate(true);
