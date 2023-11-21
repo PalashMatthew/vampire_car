@@ -212,7 +212,9 @@ public class UpgradeCardController : MonoBehaviour
 
     void CardSettings()
     {
-        tName.text = card.cardName;
+        string _name = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_upgCardName" + card.cardName);        
+
+        tName.text = _name;
         imgCardType.sprite = sprCardTypeGun;
 
         if (card.imageItem != null)
@@ -411,7 +413,7 @@ public class UpgradeCardController : MonoBehaviour
             } 
             else
             {
-                tDescription.text = "New Gun";
+                tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_newGun");
             }
             #endregion
         }
