@@ -426,19 +426,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeCommon1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -447,19 +447,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeRare1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + "  +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -468,19 +468,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeLegendary1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + "  +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }
@@ -492,19 +492,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeCommon1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + "  +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -513,19 +513,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeRare1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -534,19 +534,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeLegendary1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + "  +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }
@@ -558,19 +558,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeCommon1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -579,19 +579,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeRare1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + "  +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -600,19 +600,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeLegendary1)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }
@@ -629,19 +629,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeCommon2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -650,19 +650,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeRare2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -671,19 +671,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv1UpgradeLegendary2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }
@@ -695,19 +695,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeCommon2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -716,19 +716,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeRare2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -737,19 +737,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv2UpgradeLegendary2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }
@@ -761,19 +761,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeCommon2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -782,19 +782,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeRare2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
 
@@ -803,19 +803,19 @@ public class UpgradeCardController : MonoBehaviour
                 switch (card.lv3UpgradeLegendary2)
                 {
                     case UpgradeCard.LvUpgrade.Damage:
-                        return "Урон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_damage") + " +";
                     case UpgradeCard.LvUpgrade.Projectile:
-                        return "Патрон +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_projectile") + " +";
                     case UpgradeCard.LvUpgrade.ShotSpeed:
-                        return "Скорость +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_speed") + " +";
                     case UpgradeCard.LvUpgrade.Area:
-                        return "Область +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_area") + " +";
                     case UpgradeCard.LvUpgrade.Ricochet:
-                        return "Рикошет +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_ricochet") + "  +";
                     case UpgradeCard.LvUpgrade.TimeOfAction:
-                        return "Время действия +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_duration") + " +";
                     case UpgradeCard.LvUpgrade.RotateSpeed:
-                        return "Скорость вращения +";
+                        return PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rotateSpeed") + " +";
                 }
             }
         }

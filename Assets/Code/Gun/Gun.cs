@@ -91,13 +91,23 @@ public class Gun : MonoBehaviour
         rotateSpeedCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsRotateSpeed");
         multiplyDamageCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsMultiplyDamage");
 
-        if (damageCoeff == 0)
-            damage = baseDamage;
-        else damage = baseDamage + (baseDamage / 100 * damageCoeff);
+        if (damageCoeff != 0)
+            baseDamage = baseDamage + (baseDamage / 100 * damageCoeff);
 
-        if (shotSpeedCoeff == 0)
-            shotSpeed = baseShotSpeed;
-        else shotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeff);
+        damage = baseDamage;
+
+        //if (damageCoeff == 0)
+        //    damage = baseDamage;
+        //else damage = baseDamage + (baseDamage / 100 * damageCoeff);
+
+        if (shotSpeedCoeff != 0)
+            baseShotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeff);
+
+        shotSpeed = baseShotSpeed;
+
+        //if (shotSpeedCoeff == 0)
+        //    shotSpeed = baseShotSpeed;
+        //else shotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeff);
 
         CalculateStats();
 
@@ -116,7 +126,7 @@ public class Gun : MonoBehaviour
     {       
         if (damageCoeffPassive != 0)
         {
-            damage = damage + (damage / 100 * damageCoeffPassive);
+            damage = baseDamage + (baseDamage / 100 * damageCoeffPassive);
             damageCoeffPassive = 0;
         }
 
