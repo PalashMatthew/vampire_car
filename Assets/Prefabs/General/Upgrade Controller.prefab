@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56dc150965fa78d42bcc2722d78bfe04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradeLevelCount: 0
   cardsGun:
   - {fileID: 11400000, guid: ebd46fc90dbb6fc40878a4a59373879f, type: 2}
   - {fileID: 11400000, guid: 51061a8440b1a5846a1c923f2f5c1f74, type: 2}
@@ -141,7 +142,7 @@ MonoBehaviour:
   rareChance: 10
   legendaryChance: 3
   luckyChance: 1
-  maxLevelGunUpgrade: 3
+  maxLevelGunUpgrade: 4
   Boomerang_Level: 0
   Dron_Level: 0
   Ice_Level: 0
@@ -171,3 +172,4 @@ MonoBehaviour:
   - 2.4
   - 2.6
   - 2.8
+  gunUpgradeChanceInwave: 

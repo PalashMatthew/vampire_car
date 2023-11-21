@@ -9,6 +9,15 @@ public class ShopController : MonoBehaviour
 
     public List<DetailCard> items;
 
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
+    void Initialize()
+    {
+
+    }
 
     public void ButBuyMoney(int _value)
     {
@@ -38,6 +47,8 @@ public class ShopController : MonoBehaviour
             popUpOpenChest.card = card;
 
             popUpOpenChest.Open();
+
+            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 60);
         }
     }
 
@@ -63,6 +74,8 @@ public class ShopController : MonoBehaviour
             popUpOpenChest.card = card;
 
             popUpOpenChest.Open();
+
+            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 300);
         }
     }
 }

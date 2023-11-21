@@ -265,7 +265,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        maxHp = maxHpBase + maxHpCoeff;
+        //maxHp = maxHpBase + maxHpCoeff;
 
         screwValueUp = baseScrewValue + (baseScrewValue / 100 * screwValueCoeff);
         screwPickUpDistance = baseScrewPickUpDistance + (baseScrewPickUpDistance / 100 * screwPickUpDistanceCoeff);

@@ -10,11 +10,13 @@ public class Gun : MonoBehaviour
     public float damage;
     public float baseDamage;
     public float damageCoeff;
+    public float damageCoeffPassive;
 
     [Header("ShotSpeed")]
     public float shotSpeed;
     public float baseShotSpeed;
     public float shotSpeedCoeff;
+    public float shotSpeedCoeffPassive;
 
     [Header("BulletMoveSpeed")]
     public float bulletMoveSpeed;
@@ -89,6 +91,14 @@ public class Gun : MonoBehaviour
         rotateSpeedCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsRotateSpeed");
         multiplyDamageCoeff = PlayerPrefs.GetFloat(gunName + "gunCoeffSettingsMultiplyDamage");
 
+        if (damageCoeff == 0)
+            damage = baseDamage;
+        else damage = baseDamage + (baseDamage / 100 * damageCoeff);
+
+        if (shotSpeedCoeff == 0)
+            shotSpeed = baseShotSpeed;
+        else shotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeff);
+
         CalculateStats();
 
         PlayerPrefs.SetFloat(gunName + "_Damage = ", 0);
@@ -103,14 +113,18 @@ public class Gun : MonoBehaviour
     }
 
     public void CalculateStats()
-    {
-        if (damageCoeff == 0)
-            damage = baseDamage;
-        else damage = baseDamage + (baseDamage / 100 * damageCoeff);
+    {       
+        if (damageCoeffPassive != 0)
+        {
+            damage = damage + (damage / 100 * damageCoeffPassive);
+            damageCoeffPassive = 0;
+        }
 
-        if (shotSpeedCoeff == 0)
-            shotSpeed = baseShotSpeed;
-        else shotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeff);
+        if (shotSpeedCoeffPassive != 0)
+        {
+            shotSpeed = shotSpeed + (shotSpeed / 100 * shotSpeedCoeffPassive);
+            shotSpeedCoeffPassive = 0;
+        }
 
         if (bulletMoveSpeedCoeff == 0)
             bulletMoveSpeed = baseBulletMoveSpeed;

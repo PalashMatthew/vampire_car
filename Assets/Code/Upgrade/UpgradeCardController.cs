@@ -551,6 +551,72 @@ public class UpgradeCardController : MonoBehaviour
             }
         }
 
+        if (currLevel == 3)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv3UpgradeCommon1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv3UpgradeRare1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv3UpgradeLegendary1)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
+
         return "";
     }
 
@@ -688,7 +754,71 @@ public class UpgradeCardController : MonoBehaviour
             }
         }
 
-        return "";
+        if (currLevel == 3)
+        {
+            if (_rarity == "common")
+            {
+                switch (card.lv3UpgradeCommon2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "rare")
+            {
+                switch (card.lv3UpgradeRare2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+
+            if (_rarity == "legendary")
+            {
+                switch (card.lv3UpgradeLegendary2)
+                {
+                    case UpgradeCard.LvUpgrade.Damage:
+                        return "Урон +";
+                    case UpgradeCard.LvUpgrade.Projectile:
+                        return "Патрон +";
+                    case UpgradeCard.LvUpgrade.ShotSpeed:
+                        return "Скорость +";
+                    case UpgradeCard.LvUpgrade.Area:
+                        return "Область +";
+                    case UpgradeCard.LvUpgrade.Ricochet:
+                        return "Рикошет +";
+                    case UpgradeCard.LvUpgrade.TimeOfAction:
+                        return "Время действия +";
+                    case UpgradeCard.LvUpgrade.RotateSpeed:
+                        return "Скорость вращения +";
+                }
+            }
+        }
 
         return "";
     }

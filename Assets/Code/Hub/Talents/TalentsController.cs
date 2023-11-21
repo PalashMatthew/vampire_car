@@ -106,6 +106,8 @@ public class TalentsController : MonoBehaviour
         SaveCheck();
 
         #region Health
+        healthLevel = PlayerPrefs.GetInt("talentHealthLevel");
+
         if (healthLevel == 0)
         {
             cell1block.SetActive(true);
@@ -128,12 +130,14 @@ public class TalentsController : MonoBehaviour
             } 
             else
             {
-                tCell1Level.text = "Lv" + healthLevel;
+                tCell1Level.text = "Lv " + healthLevel;
             }            
         }
         #endregion
 
         #region Damage
+        damageLevel = PlayerPrefs.GetInt("talentDamageLevel");
+
         if (damageLevel == 0)
         {
             cell2block.SetActive(true);
@@ -156,12 +160,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell2Level.text = "Lv" + damageLevel;
+                tCell2Level.text = "Lv " + damageLevel;
             }            
         }
         #endregion
 
         #region RecoveryHpInFirstAidKit
+        recoveryHpInFirstAidKitLevel = PlayerPrefs.GetInt("talentRecoveryHpInFirstAidKitLevel");
+
         if (recoveryHpInFirstAidKitLevel == 0)
         {
             cell3block.SetActive(true);
@@ -184,12 +190,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell3Level.text = "Lv" + recoveryHpInFirstAidKitLevel;
+                tCell3Level.text = "Lv " + recoveryHpInFirstAidKitLevel;
             }
         }
         #endregion
 
         #region Block
+        blockLevel = PlayerPrefs.GetInt("talentBlockLevel");
+
         if (blockLevel == 0)
         {
             cell4block.SetActive(true);
@@ -212,12 +220,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell4Level.text = "Lv" + blockLevel;
+                tCell4Level.text = "Lv " + blockLevel;
             }
         }
         #endregion
 
         #region Iron
+        ironLevel = PlayerPrefs.GetInt("talentIronLevel");
+
         if (ironLevel == 0)
         {
             cell5block.SetActive(true);
@@ -240,12 +250,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell5Level.text = "Lv" + ironLevel;
+                tCell5Level.text = "Lv " + ironLevel;
             }
         }
         #endregion
 
         #region ShotSpeed
+        shotSpeedLevel = PlayerPrefs.GetInt("talentShotSpeedLevel");
+
         if (shotSpeedLevel == 0)
         {
             cell6block.SetActive(true);
@@ -268,12 +280,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell6Level.text = "Lv" + shotSpeedLevel;
+                tCell6Level.text = "Lv " + shotSpeedLevel;
             }
         }
         #endregion
 
         #region GunSlot
+        gunSlotLevel = PlayerPrefs.GetInt("talentGunSlotLevel");
+
         if (gunSlotLevel == 0)
         {
             cell7block.SetActive(true);
@@ -296,12 +310,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell7Level.text = "Lv" + gunSlotLevel;
+                tCell7Level.text = "Lv " + gunSlotLevel;
             }
         }
         #endregion
 
         #region EquipmentImprovement
+        equipmentImprovementLevel = PlayerPrefs.GetInt("talentEquipmentImprovementLevel");
+
         if (equipmentImprovementLevel == 0)
         {
             cell8block.SetActive(true);
@@ -324,12 +340,14 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell8Level.text = "Lv" + equipmentImprovementLevel;
+                tCell8Level.text = "Lv " + equipmentImprovementLevel;
             }
         }
         #endregion
 
         #region CarImprovement
+        carImprovementLevel = PlayerPrefs.GetInt("talentCarImprovementLevel");
+
         if (carImprovementLevel == 0)
         {
             cell9block.SetActive(true);
@@ -352,7 +370,7 @@ public class TalentsController : MonoBehaviour
             }
             else
             {
-                tCell9Level.text = "Lv" + carImprovementLevel;
+                tCell9Level.text = "Lv " + carImprovementLevel;
             }
         }
         #endregion
@@ -371,7 +389,7 @@ public class TalentsController : MonoBehaviour
                                PlayerPrefs.GetInt("talent" + PlayerPrefs.GetInt("talentGlobalLevel") + "value"));
 
             PlayerPrefs.SetInt("talent" + talantName + "Level", 
-                               PlayerPrefs.GetInt("talent" + name + "Level") + 1);
+                               PlayerPrefs.GetInt("talent" + talantName + "Level") + 1);
 
             PlayerPrefs.SetInt("talentGlobalLevel", PlayerPrefs.GetInt("talentGlobalLevel") + 1);
 

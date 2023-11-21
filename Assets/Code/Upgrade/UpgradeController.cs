@@ -1062,8 +1062,9 @@ public class UpgradeController : MonoBehaviour
         switch (cardPassiveAccept.card.upgradePassiveType)
         {
             case UpgradeCard.UpgradePassiveType.MaxHpUp:
-                _playerStats.maxHpCoeff += _playerStats.maxHpBase / 100 * _value;
-                _playerStats.currentHp += _playerStats.maxHpBase * (_playerStats.maxHpBase / 100 * _playerStats.maxHpCoeff) / 100 * _value;
+                float regen = _playerStats.maxHp / 100 * _value;
+                _playerStats.maxHp += regen;
+                _playerStats.currentHp += regen;
                 break;
 
             case UpgradeCard.UpgradePassiveType.HealthRecovery:
@@ -1088,14 +1089,14 @@ public class UpgradeController : MonoBehaviour
             case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
                 foreach (Gun _gun in _playerGuns.guns)
                 {
-                    _gun.shotSpeedCoeff += _value;
+                    _gun.shotSpeedCoeffPassive = _value;
                 }
                 break;
 
             case UpgradeCard.UpgradePassiveType.DamageUp:
                 foreach (Gun _gun in _playerGuns.guns)
                 {
-                    _gun.damageCoeff += _value;
+                    _gun.damageCoeffPassive = _value;
                 }
                 break;
 
@@ -1589,12 +1590,183 @@ public class UpgradeController : MonoBehaviour
                     }
                 }
             }
+
+            if (cardGunAccept.levelNum == 3)
+            {
+                if (_rarity == "common")
+                {
+                    switch (cardGunAccept.card.lv3UpgradeCommon1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv3UpgradeCommon2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "rare")
+                {
+                    switch (cardGunAccept.card.lv3UpgradeRare1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv3UpgradeRare2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+
+                if (_rarity == "legendary")
+                {
+                    switch (cardGunAccept.card.lv3UpgradeLegendary1)
+                    {
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type1 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type1 = "Projectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type1 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type1 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type1 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type1 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type1 = "RotateSpeed";
+                            break;
+                    }
+
+                    switch (cardGunAccept.card.lv3UpgradeLegendary2)
+                    {
+                        case UpgradeCard.LvUpgrade.none:
+                            _type2 = "none";
+                            break;
+                        case UpgradeCard.LvUpgrade.Damage:
+                            _type2 = "Damage";
+                            break;
+                        case UpgradeCard.LvUpgrade.Projectile:
+                            _type2 = "ProjectileProjectile";
+                            break;
+                        case UpgradeCard.LvUpgrade.ShotSpeed:
+                            _type2 = "ShotSpeed";
+                            break;
+                        case UpgradeCard.LvUpgrade.Area:
+                            _type2 = "Area";
+                            break;
+                        case UpgradeCard.LvUpgrade.Ricochet:
+                            _type2 = "Ricochet";
+                            break;
+                        case UpgradeCard.LvUpgrade.TimeOfAction:
+                            _type2 = "TimeOfAction";
+                            break;
+                        case UpgradeCard.LvUpgrade.RotateSpeed:
+                            _type2 = "RotateSpeed";
+                            break;
+                    }
+                }
+            }
             #endregion
 
             #region Type 1
             if (_type1 == "Damage")
             {
-                gunObj.damageCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+                gunObj.damageCoeffPassive = PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
             }
 
             if (_type1 == "Projectile")
@@ -1604,7 +1776,7 @@ public class UpgradeController : MonoBehaviour
 
             if (_type1 == "ShotSpeed")
             {
-                gunObj.shotSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+                gunObj.shotSpeedCoeffPassive = PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
             }
 
             if (_type1 == "Area")

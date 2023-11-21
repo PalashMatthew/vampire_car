@@ -47,6 +47,18 @@ public class UpgradeCard : ScriptableObject
     public LvUpgrade lv2UpgradeLegendary1;
     public LvUpgrade lv2UpgradeLegendary2;
 
+    [Header("Level 3 Common")]
+    public LvUpgrade lv3UpgradeCommon1;
+    public LvUpgrade lv3UpgradeCommon2;
+
+    [Header("Level 3 Rare")]
+    public LvUpgrade lv3UpgradeRare1;
+    public LvUpgrade lv3UpgradeRare2;
+
+    [Header("Level 3 Legendary")]
+    public LvUpgrade lv3UpgradeLegendary1;
+    public LvUpgrade lv3UpgradeLegendary2;
+
     [Header("Settings")]
     public Sprite imageItem;
 

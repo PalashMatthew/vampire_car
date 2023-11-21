@@ -61,6 +61,8 @@ public class PopUpRepair : MonoBehaviour
     [Header("PopUp Repair Final")]
     public PopUpRepairFinal popUpRepairFinal;
 
+    public GarageController garageController;
+
 
     public void Initialize()
     {
@@ -595,6 +597,10 @@ public class PopUpRepair : MonoBehaviour
 
         popUpRepairFinal.moneyCount = returnMoneyValue;
 
+        garageController.gameObject.SetActive(true);
+        garageController.activeItem = itemCellGeneral;
+        garageController.ItemUnselect();
+
         switch (itemCellGeneral.itemObj.itemType)
         {
             case DetailCard.ItemType.Gun:
@@ -647,6 +653,7 @@ public class PopUpRepair : MonoBehaviour
         SaveItem();
         LoadItem();
 
+        garageController.gameObject.SetActive(false);
         popUpRepairFinal.Open();
     }
 
