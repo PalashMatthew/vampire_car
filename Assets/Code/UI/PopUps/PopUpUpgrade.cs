@@ -126,6 +126,30 @@ public class PopUpUpgrade : MonoBehaviour
         }
     }
 
+    public void ActivateCardObj(int _count)
+    {
+        if (_count == 3)
+        {
+            cardGun1.gameObject.SetActive(true);
+            cardGun2.gameObject.SetActive(true);
+            cardGun3.gameObject.SetActive(true);
+        }
+
+        if (_count == 2)
+        {
+            cardGun1.gameObject.SetActive(true);
+            cardGun2.gameObject.SetActive(true);
+            cardGun3.gameObject.SetActive(false);
+        }
+
+        if (_count == 1)
+        {
+            cardGun1.gameObject.SetActive(true);
+            cardGun2.gameObject.SetActive(false);
+            cardGun3.gameObject.SetActive(false);
+        }
+    }
+
     public IEnumerator ChoicePassiveCard()
     {
         yield return new WaitForSecondsRealtime(0.5f);

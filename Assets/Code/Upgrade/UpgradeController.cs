@@ -59,6 +59,8 @@ public class UpgradeController : MonoBehaviour
     public int Bow_Level;
     public int PinPong_Level;
 
+    private int generalMaxGunUpgradeCount;  //Сколько оружий прокачено на максимум
+
     [Header("Reroll")]
     public float rerollBasePrice;
     public List<float> rerollPrice;
@@ -153,6 +155,8 @@ public class UpgradeController : MonoBehaviour
         }        
         #endregion
 
+        generalMaxGunUpgradeCount = 0;
+
         UpdateTextLevels();
     }
 
@@ -160,7 +164,24 @@ public class UpgradeController : MonoBehaviour
     {
         List<UpgradeCard> _createdCards = new List<UpgradeCard>();
 
-        for (int i = 0; i < 3; i++)
+        int cardCount = 3;
+
+        if (generalMaxGunUpgradeCount == 4)
+            cardCount = 2;
+
+        if (generalMaxGunUpgradeCount == 5)
+            cardCount = 1;
+
+        if (generalMaxGunUpgradeCount == 6)
+        {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ButClosed();
+            _waveController.StartWave();
+            return;
+        }
+
+        GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().ActivateCardObj(cardCount);
+
+        for (int i = 0; i < cardCount; i++)
         {
             bool isGenerateUpgrade;
             int findCardCount = 0;
@@ -171,7 +192,6 @@ public class UpgradeController : MonoBehaviour
                 if (_chance <= gunUpgradeChanceInwave[_waveController.currentWave - 1])
                 {
                     isGenerateUpgrade = true;
-                    //Debug.Log("UPGRADE WIN");
                 } 
                 else
                 {
@@ -1845,51 +1865,99 @@ public class UpgradeController : MonoBehaviour
         {
             case UpgradeCard.UpgradeGunType.Boomerang:
                 Boomerang_Level++;
+
+                if (Boomerang_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Bow:
                 Bow_Level++;
+
+                if (Bow_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.DefaultGun:
                 DefaultGun_Level++;
+
+                if (DefaultGun_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Dron:
                 Dron_Level++;
+
+                if (Dron_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.FanGun:
                 FanGun_Level++;
+
+                if (FanGun_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.GodGun:
                 GodGun_Level++;
+
+                if (GodGun_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Grenade:
                 Grenade_Level++;
+
+                if (Grenade_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.GrowingShotGun:
                 GrowingShot_Level++;
+
+                if (GrowingShot_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Ice:
                 Ice_Level++;
+
+                if (Ice_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Lazer:
                 Lazer_Level++;
+
+                if (Lazer_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Mines:
                 Mines_Level++;
+
+                if (Mines_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Partner:
                 Partner_Level++;
+
+                if (Partner_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.PinPong:
                 PinPong_Level++;
+
+                if (PinPong_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Ricochet:
                 Ricochet_Level++;
+
+                if (Ricochet_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.RocketLauncher:
                 RocketLauncher_Level++;
+
+                if (RocketLauncher_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
             case UpgradeCard.UpgradeGunType.Tornado:
                 Tornado_Level++;
+
+                if (Tornado_Level == maxLevelGunUpgrade)
+                    generalMaxGunUpgradeCount++;
                 break;
         }
     }
