@@ -57,6 +57,19 @@ public class PopUpDetail : MonoBehaviour
     public TMP_Text tCurrentLevel;
     int maxLevel;
 
+    [Header("Set")]
+    public TMP_Text tSetName;
+    public Image imgSetIcon1;
+    public Image imgSetIcon2;
+    public Image imgSetIcon3;
+    public Image imgSetIcon4;
+    public Image imgSetIcon5;
+    public Image imgSetImageCell1;
+    public Image imgSetImageCell2;
+    public Image imgSetImageCell3;
+    public Image imgSetImageCell4;
+    public Image imgSetImageCell5;
+
 
     private void Start()
     {
@@ -122,6 +135,7 @@ public class PopUpDetail : MonoBehaviour
             panelSet.SetActive(true);
         }
 
+        SetSettings();
         CreateCharactersPanel();
         CalculateUpgradePrice();
         LevelUpdate();
@@ -1434,5 +1448,213 @@ public class PopUpDetail : MonoBehaviour
     {
         GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
         GameObject.Find("PopUp Set").GetComponent<PopUpSet>().OpenPopUp();
+    }
+
+    void SetSettings()
+    {
+        PopUpSet popUpSet = GameObject.Find("PopUp Set").GetComponent<PopUpSet>();
+        tSetName.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_set" + garageController.activeItem.itemObj.setID + "Name");
+
+        Color colorActive = new Color(1, 1, 1, 1);
+        Color colorInactive = new Color(0.5f, 0.5f, 0.5f, 1);
+
+        #region Выставляем иконки
+        int engineID = 0;
+        int brakesID = 0;
+        int fuelSystemID = 0;
+        int suspensionID = 0;
+        int transmissionID = 0;
+
+        switch (garageController.activeItem.itemObj.setID)
+        {
+            case "s01":
+                engineID = 2001;
+                brakesID = 3001;
+                fuelSystemID = 4001;
+                suspensionID = 5001;
+                transmissionID = 6001;
+                break;
+            case "s02":
+                engineID = 2002;
+                brakesID = 3002;
+                fuelSystemID = 4002;
+                suspensionID = 5002;
+                transmissionID = 6002;
+                break;
+            case "s03":
+                engineID = 2003;
+                brakesID = 3003;
+                fuelSystemID = 4003;
+                suspensionID = 5003;
+                transmissionID = 6003;
+                break;
+            case "s04":
+                engineID = 2004;
+                brakesID = 3004;
+                fuelSystemID = 4004;
+                suspensionID = 5004;
+                transmissionID = 6004;
+                break;
+            case "s05":
+                engineID = 2005;
+                brakesID = 3005;
+                fuelSystemID = 4005;
+                suspensionID = 5005;
+                transmissionID = 6005;
+                break;
+            case "s06":
+                engineID = 2006;
+                brakesID = 3006;
+                fuelSystemID = 4006;
+                suspensionID = 5006;
+                transmissionID = 6006;
+                break;
+            case "s07":
+                engineID = 2007;
+                brakesID = 3007;
+                fuelSystemID = 4007;
+                suspensionID = 5007;
+                transmissionID = 6007;
+                break;
+            case "s08":
+                engineID = 2008;
+                brakesID = 3008;
+                fuelSystemID = 4008;
+                suspensionID = 5008;
+                transmissionID = 6008;
+                break;
+            case "s09":
+                engineID = 2009;
+                brakesID = 3009;
+                fuelSystemID = 4009;
+                suspensionID = 5009;
+                transmissionID = 6009;
+                break;
+            case "s10":
+                engineID = 2010;
+                brakesID = 3010;
+                fuelSystemID = 4010;
+                suspensionID = 5010;
+                transmissionID = 6010;
+                break;
+        }
+
+        foreach (DetailCard _card in popUpSet.engineCards)
+        {
+            if (_card.itemID == engineID)
+            {
+                imgSetIcon1.sprite = _card.sprItem;
+            }
+        }
+
+        foreach (DetailCard _card in popUpSet.brakesCards)
+        {
+            if (_card.itemID == brakesID)
+            {
+                imgSetIcon2.sprite = _card.sprItem;
+            }
+        }
+
+        foreach (DetailCard _card in popUpSet.fuelSystemCards)
+        {
+            if (_card.itemID == fuelSystemID)
+            {
+                imgSetIcon3.sprite = _card.sprItem;
+            }
+        }
+
+        foreach (DetailCard _card in popUpSet.suspensionCards)
+        {
+            if (_card.itemID == suspensionID)
+            {
+                imgSetIcon4.sprite = _card.sprItem;
+            }
+        }
+
+        foreach (DetailCard _card in popUpSet.transmissionCards)
+        {
+            if (_card.itemID == transmissionID)
+            {
+                imgSetIcon5.sprite = _card.sprItem;
+            }
+        }
+        #endregion
+
+        #region Настраиваем отображение
+        if (PlayerPrefs.GetInt("slot2_itemID") == engineID)
+        {
+            imgSetImageCell1.color = colorActive;
+            imgSetIcon1.color = colorActive;
+
+            imgSetImageCell1.sprite = popUpSet.imgGarageCell1.sprite;
+        }
+        else
+        {
+            imgSetImageCell1.color = colorInactive;
+            imgSetIcon1.color = colorInactive;
+
+            imgSetImageCell1.sprite = popUpSet.sprCellCommon;
+        }
+
+        if (PlayerPrefs.GetInt("slot3_itemID") == brakesID)
+        {
+            imgSetImageCell2.color = colorActive;
+            imgSetIcon2.color = colorActive;
+
+            imgSetImageCell2.sprite = popUpSet.imgGarageCell2.sprite;
+        }
+        else
+        {
+            imgSetImageCell2.color = colorInactive;
+            imgSetIcon2.color = colorInactive;
+
+            imgSetImageCell2.sprite = popUpSet.sprCellCommon;
+        }
+
+        if (PlayerPrefs.GetInt("slot4_itemID") == fuelSystemID)
+        {
+            imgSetImageCell3.color = colorActive;
+            imgSetIcon3.color = colorActive;
+
+            imgSetImageCell3.sprite = popUpSet.imgGarageCell3.sprite;
+        }
+        else
+        {
+            imgSetImageCell3.color = colorInactive;
+            imgSetIcon3.color = colorInactive;
+
+            imgSetImageCell3.sprite = popUpSet.sprCellCommon;
+        }
+
+        if (PlayerPrefs.GetInt("slot5_itemID") == suspensionID)
+        {
+            imgSetImageCell4.color = colorActive;
+            imgSetIcon4.color = colorActive;
+
+            imgSetImageCell4.sprite = popUpSet.imgGarageCell4.sprite;
+        }
+        else
+        {
+            imgSetImageCell4.color = colorInactive;
+            imgSetIcon4.color = colorInactive;
+
+            imgSetImageCell4.sprite = popUpSet.sprCellCommon;
+        }
+
+        if (PlayerPrefs.GetInt("slot6_itemID") == transmissionID)
+        {
+            imgSetImageCell5.color = colorActive;
+            imgSetIcon5.color = colorActive;
+
+            imgSetImageCell5.sprite = popUpSet.imgGarageCell5.sprite;
+        }
+        else
+        {
+            imgSetImageCell5.color = colorInactive;
+            imgSetIcon5.color = colorInactive;
+
+            imgSetImageCell5.sprite = popUpSet.sprCellCommon;
+        }
+        #endregion
     }
 }

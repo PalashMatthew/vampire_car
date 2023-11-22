@@ -174,36 +174,60 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (hitForward.collider.gameObject.tag == "enemy")
                 {
-                    hitForward.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward.collider.gameObject.GetComponent<EnemyController>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward.collider.gameObject.GetComponent<EnemyController>().isSpeedUp = true;
+                        hitForward.collider.gameObject.GetComponent<EnemyController>().newSpeed = _enemyController.moveSpeed;
+                    }                    
                 }
 
                 if (hitForward.collider.gameObject.tag == "obstacle" && hitForward.collider.gameObject.layer == 8)
                 {
-                    hitForward.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                        hitForward.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                    }                    
                 }
             } 
             else if (hitForward2.collider != null)
             {
                 if (hitForward2.collider.gameObject.tag == "enemy")
                 {
-                    hitForward2.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward2.collider.gameObject.GetComponent<EnemyController>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward2.collider.gameObject.GetComponent<EnemyController>().isSpeedUp = true;
+                        hitForward2.collider.gameObject.GetComponent<EnemyController>().newSpeed = _enemyController.moveSpeed;
+                    }
                 }
 
                 if (hitForward2.collider.gameObject.tag == "obstacle" && hitForward2.collider.gameObject.layer == 8)
                 {
-                    hitForward2.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward2.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward2.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                        hitForward2.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                    }
                 }
             }
             else if (hitForward3.collider != null)
             {
                 if (hitForward3.collider.gameObject.tag == "enemy")
                 {
-                    hitForward3.collider.gameObject.GetComponent<EnemyController>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward3.collider.gameObject.GetComponent<EnemyController>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward3.collider.gameObject.GetComponent<EnemyController>().isSpeedUp = true;
+                        hitForward3.collider.gameObject.GetComponent<EnemyController>().newSpeed = _enemyController.moveSpeed;
+                    }
                 }
 
                 if (hitForward3.collider.gameObject.tag == "obstacle" && hitForward3.collider.gameObject.layer == 8)
                 {
-                    hitForward3.collider.gameObject.GetComponent<Obstacle>().moveSpeed = _enemyController.moveSpeed;
+                    if (hitForward3.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                    {
+                        hitForward3.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                        hitForward3.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                    }
                 }
             } 
         }

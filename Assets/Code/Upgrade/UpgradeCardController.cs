@@ -15,7 +15,7 @@ public class UpgradeCardController : MonoBehaviour
     public TMP_Text tDescription;
 
     public int levelNum;
-    public Image imgStar1, imgStar2, imgStar3;
+    public Image imgStar1, imgStar2, imgStar3, imgStar4;
     public Sprite sprStarFull, sprStarEmpty;
 
     public Image imgIcon;
@@ -108,40 +108,68 @@ public class UpgradeCardController : MonoBehaviour
 
         //StopCoroutine(coroutine);        
 
-        imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-        imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-        imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-
-        imgStar1.DOFade(1, 0).SetUpdate(true);
-        imgStar2.DOFade(1, 0).SetUpdate(true);
-        imgStar3.DOFade(1, 0).SetUpdate(true);
-
-        switch (levelNum)
+        if (card.upgradeType == UpgradeCard.UpgradeType.Gun)
         {
-            case 0:
-                imgStar1.sprite = sprStarFull;
-                imgStar2.sprite = sprStarEmpty;
-                imgStar3.sprite = sprStarEmpty;
+            imgStar1.GetComponent<RectTransform>().DOKill();
+            imgStar2.GetComponent<RectTransform>().DOKill();
+            imgStar3.GetComponent<RectTransform>().DOKill();
+            imgStar4.GetComponent<RectTransform>().DOKill();
 
-                StartCoroutine(StarAnim(imgStar1));
-                break;
+            imgStar1.DOKill();
+            imgStar2.DOKill();
+            imgStar3.DOKill();
+            imgStar4.DOKill();
 
-            case 1:
-                imgStar1.sprite = sprStarFull;
-                imgStar2.sprite = sprStarFull;
-                imgStar3.sprite = sprStarEmpty;
+            imgStar1.GetComponent<RectTransform>().DOScale(1f, 0.1f).SetUpdate(true);
+            imgStar2.GetComponent<RectTransform>().DOScale(1f, 0.1f).SetUpdate(true);
+            imgStar3.GetComponent<RectTransform>().DOScale(1f, 0.1f).SetUpdate(true);
+            imgStar4.GetComponent<RectTransform>().DOScale(1f, 0.1f).SetUpdate(true);
 
-                StartCoroutine(StarAnim(imgStar2));
-                break;
+            imgStar1.DOFade(1, 0).SetUpdate(true);
+            imgStar2.DOFade(1, 0).SetUpdate(true);
+            imgStar3.DOFade(1, 0).SetUpdate(true);
+            imgStar4.DOFade(1, 0).SetUpdate(true);
 
-            case 2:
-                imgStar1.sprite = sprStarFull;
-                imgStar2.sprite = sprStarFull;
-                imgStar3.sprite = sprStarFull;
+            switch (levelNum)
+            {
+                case 0:
+                    imgStar1.sprite = sprStarFull;
+                    imgStar2.sprite = sprStarEmpty;
+                    imgStar3.sprite = sprStarEmpty;
+                    imgStar4.sprite = sprStarEmpty;
 
-                StartCoroutine(StarAnim(imgStar3));
-                break;
+                    StartCoroutine(StarAnim(imgStar1));
+                    break;
+
+                case 1:
+                    imgStar1.sprite = sprStarFull;
+                    imgStar2.sprite = sprStarFull;
+                    imgStar3.sprite = sprStarEmpty;
+                    imgStar4.sprite = sprStarEmpty;
+
+                    StartCoroutine(StarAnim(imgStar2));
+                    break;
+
+                case 2:
+                    imgStar1.sprite = sprStarFull;
+                    imgStar2.sprite = sprStarFull;
+                    imgStar3.sprite = sprStarFull;
+                    imgStar4.sprite = sprStarEmpty;
+
+                    StartCoroutine(StarAnim(imgStar3));
+                    break;
+
+                case 3:
+                    imgStar1.sprite = sprStarFull;
+                    imgStar2.sprite = sprStarFull;
+                    imgStar3.sprite = sprStarFull;
+                    imgStar4.sprite = sprStarFull;
+
+                    StartCoroutine(StarAnim(imgStar4));
+                    break;
+            }
         }
+        
         #endregion
 
         CardSettings();
@@ -204,10 +232,12 @@ public class UpgradeCardController : MonoBehaviour
         imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
         imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
         imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        imgStar4.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
 
         imgStar1.DOFade(1, 0).SetUpdate(true);
         imgStar2.DOFade(1, 0).SetUpdate(true);
         imgStar3.DOFade(1, 0).SetUpdate(true);
+        imgStar4.DOFade(1, 0).SetUpdate(true);
     }
 
     void CardSettings()
@@ -245,79 +275,79 @@ public class UpgradeCardController : MonoBehaviour
             switch (card.upgradePassiveType)
             {
                 case UpgradeCard.UpgradePassiveType.MaxHpUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.HealthRecovery:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Rage:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.DamageUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.KritDamageUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.KritChanceUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Vampirizm:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.BackDamage:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Dodge:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Armor:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Punching:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Headshot:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.ScrewValueUp:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Magnet:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.Lucky:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.DistanceDamage:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.MassEnemyDamage:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
 
                 case UpgradeCard.UpgradePassiveType.EffectsDuration:
-                    tDescription.text = "+" + upgValue;
+                    tDescription.text = "+" + upgValue + "%";
                     break;
             }
         }
@@ -400,13 +430,279 @@ public class UpgradeCardController : MonoBehaviour
                 float upgValue1 = PlayerPrefs.GetFloat(card.cardName + "lv" + levelNum + "_1_" + _rarity);
                 float upgValue2 = PlayerPrefs.GetFloat(card.cardName + "lv" + levelNum + "_2_" + _rarity);
 
+                string sProcent = "";
+
+                #region Check Procent
+                if (levelNum == 1)
+                {
+                    if (_rarity == "common")
+                    {
+                        switch (card.lv1UpgradeCommon1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "rare")
+                    {
+                        switch (card.lv1UpgradeRare1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "legendary")
+                    {
+                        switch (card.lv1UpgradeLegendary1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+                }
+
+                if (levelNum == 2)
+                {
+                    if (_rarity == "common")
+                    {
+                        switch (card.lv2UpgradeCommon1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "rare")
+                    {
+                        switch (card.lv2UpgradeRare1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "legendary")
+                    {
+                        switch (card.lv2UpgradeLegendary1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+                }
+
+                if (levelNum == 3)
+                {
+                    if (_rarity == "common")
+                    {
+                        switch (card.lv3UpgradeCommon1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "rare")
+                    {
+                        switch (card.lv3UpgradeRare1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+
+                    if (_rarity == "legendary")
+                    {
+                        switch (card.lv3UpgradeLegendary1)
+                        {
+                            case UpgradeCard.LvUpgrade.Damage:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Projectile:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.ShotSpeed:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Area:
+                                sProcent = "%";
+                                break;
+                            case UpgradeCard.LvUpgrade.Ricochet:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.TimeOfAction:
+                                sProcent = "";
+                                break;
+                            case UpgradeCard.LvUpgrade.RotateSpeed:
+                                sProcent = "%";
+                                break;
+                        }
+                    }
+                }
+                #endregion
+
+
                 if (upgValue2 != 0)
                 {
-                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + "; " + CheckGunUpgradeType2(levelNum, _rarity) + upgValue2;
+                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + sProcent + "; " + CheckGunUpgradeType2(levelNum, _rarity) + upgValue2 + sProcent;
                 }
                 else
                 {
-                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1;
+                    _desk = CheckGunUpgradeType1(levelNum, _rarity) + upgValue1 + sProcent;
                 }
 
                 tDescription.text = _desk;

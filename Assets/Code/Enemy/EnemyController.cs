@@ -52,6 +52,9 @@ public class EnemyController : MonoBehaviour
     [Header("HP Progress Bar")]
     public Image imgHpProgressBar;
 
+    public bool isSpeedUp;
+    public float newSpeed;
+
 
     private void Start()
     {       
@@ -117,6 +120,20 @@ public class EnemyController : MonoBehaviour
         {
             imgHpProgressBar.gameObject.SetActive(true);
             imgHpProgressBar.fillAmount = hp / maxHp;
+        }
+
+        if (isSpeedUp)
+        {
+            if (moveSpeed < newSpeed)
+            {
+                moveSpeed += Time.deltaTime * 2;
+            }
+
+            if (moveSpeed > newSpeed)
+            {
+                moveSpeed = newSpeed;
+                isSpeedUp = false;
+            }
         }
 
         CheckVisible();

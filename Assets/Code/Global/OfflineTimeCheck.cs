@@ -22,7 +22,7 @@ public class OfflineTimeCheck : MonoBehaviour
         if (PlayerPrefs.HasKey("LastSession"))
         {
             ts = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("LastSession"));
-            Debug.Log(string.Format("¬ы отсутствовали - {0} дней, {1} часов, {2} минут, {3} секунд", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
+            //Debug.Log(string.Format("¬ы отсутствовали - {0} дней, {1} часов, {2} минут, {3} секунд", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
         }
             
 

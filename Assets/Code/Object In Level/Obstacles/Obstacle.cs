@@ -19,6 +19,9 @@ public class Obstacle : MonoBehaviour
     public GameObject screwObj;
     public GameObject fxExplosion;
 
+    public bool isSpeedUp;
+    public float newSpeed;
+
 
     private void Update()
     {
@@ -30,6 +33,20 @@ public class Obstacle : MonoBehaviour
         if (transform.position.z < -20)
         {
             Destroy(gameObject);
+        }
+
+        if (isSpeedUp)
+        {
+            if (moveSpeed < newSpeed)
+            {
+                moveSpeed += Time.deltaTime * 2;
+            }
+
+            if (moveSpeed > newSpeed)
+            {
+                moveSpeed = newSpeed;
+                isSpeedUp = false;
+            }
         }
     }
 
@@ -71,5 +88,5 @@ public class Obstacle : MonoBehaviour
     private void Move()
     {
         transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
-    }
+    }    
 }
