@@ -94,6 +94,22 @@ public class Gun : MonoBehaviour
         if (damageCoeff != 0)
             baseDamage = baseDamage + (baseDamage / 100 * damageCoeff);
 
+        if (PlayerPrefs.GetString("activeCarID") == "Taiowa")
+        {
+            if (gunName == "Dron"|| gunName == "Lazer")
+            {
+                baseDamage *= 2;
+            }
+        }
+
+        if (PlayerPrefs.GetString("activeCarID") == "P-Run")
+        {
+            if (gunName == "RocketLauncher" || gunName == "Ice")
+            {
+                baseDamage = baseDamage + (baseDamage / 100 * 70);
+            }
+        }
+
         damage = baseDamage;
 
         //if (damageCoeff == 0)
@@ -197,19 +213,64 @@ public class Gun : MonoBehaviour
         int _rand = Random.Range(1, 101);
         float _dmg = damage;
 
-        if (_passiveController.isDistanceDamage)
+        if (_playerStats.distanceDamageCoeff > 0)
         {
             float _dist = Vector3.Distance(_bullet.GetComponent<GunDistanceAttack>().startCoord, _bullet.transform.position);
             float _damageCoeff = _dist / 80;
             _damageCoeff = 1 - _damageCoeff;
-            _damageCoeff *= _playerStats.distanceDamageCoeff;
+            _damageCoeff = _playerStats.distanceDamageCoeff * _damageCoeff;
 
             _dmg = _dmg * _damageCoeff;
         }
 
-        if (_rand <= _playerStats.kritChance)
+        if (_playerStats.massEnemyDamage > 0)
         {
-            float _damage = (_dmg * _playerStats.rageValue) * ((_dmg * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
+            float value = 0;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count < 7)
+                value = 0;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count >= 7 &&
+                GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count < 14)
+                value = 1;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count >= 14 &&
+                GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count < 21)
+                value = 2;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count >= 21 &&
+                GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count < 28)
+                value = 3;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count >= 28 &&
+                GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count < 35)
+                value = 4;
+
+            if (GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Count >= 35)
+                value = 5;
+
+            value = value * _playerStats.massEnemyDamage;
+
+            _dmg = _dmg + (_dmg / 100 * value);
+        }
+
+        if (_rand <= _playerStats.kritChance && _playerStats.kritChance > 0)
+        {
+            float _damage = _dmg;
+
+            if (_playerStats.currentHp < _playerStats.maxHp / 100 * 50)
+            {
+                float _maxHP = _playerStats.maxHp / 100 * 50;
+
+                float r = _playerStats.currentHp / _maxHP;
+                r = 1 - r;
+
+                r *= _playerStats.rageValue;
+
+                _damage += _damage / 100 * r;
+            }                
+
+            _damage += damage / 100 * _playerStats.kritDamage;
 
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
             {
@@ -226,21 +287,43 @@ public class Gun : MonoBehaviour
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
 
             #region Effects
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")  //Если у нас сет Огня активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("activeCarID") == "Lyssa")  //Если у нас сет Огня активен
             {
                 int rand = Random.Range(1, 101);
 
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                float value = 0;
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")
+                {
+                    value += PlayerPrefs.GetFloat("setValue");
+                }
+
+                if (PlayerPrefs.GetString("activeCarID") == "Lyssa")
+                {
+                    value += 3;
+                }
+
+                if (rand <= value)
                 {
                     _gm.GetComponent<EnemyEffects>().FireEffect(_damage);
                 }
             }
 
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")  //Если у нас сет Яда активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("activeCarID") == "Aeolus")  //Если у нас сет Яда активен
             {
                 int rand = Random.Range(1, 101);
 
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                float value = 0;
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")
+                {
+                    value += PlayerPrefs.GetFloat("setValue");
+                }
+
+                if (PlayerPrefs.GetString("activeCarID") == "Aeolus")
+                {
+                    value += 5;
+                }
+
+                if (rand <= value)
                 {
                     _gm.GetComponent<EnemyEffects>().PoisonEffect(_damage);
                 }
@@ -251,50 +334,8 @@ public class Gun : MonoBehaviour
         {
             float _damage = _dmg;
 
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
-            {
-                _damage = _damage + (_damage / 100 * PlayerPrefs.GetFloat("setValue"));
-            }
-
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s08")  //Если у нас сет Таран активен
-            {
-                _damage = _damage + (_damage / 100 * (PlayerPrefs.GetFloat("setValue") * PlayerGuns.gunCount));
-            }
-
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage * _playerStats.rageValue);
-            _gm.gameObject.GetComponent<EnemyController>().Hit(_damage * _playerStats.rageValue, false);
-            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage * _playerStats.rageValue);
-
-            #region Effects
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")  //Если у нас сет Огня активен
-            {
-                int rand = Random.Range(1, 101);
-
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
-                {
-                    _gm.GetComponent<EnemyEffects>().FireEffect(damage * _playerStats.rageValue);
-                }
-            }
-
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")  //Если у нас сет Яда активен
-            {
-                int rand = Random.Range(1, 101);
-
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
-                {
-                    _gm.GetComponent<EnemyEffects>().PoisonEffect(damage * _playerStats.rageValue);
-                }
-            }
-            #endregion
-        }
-    }
-
-    public void DamageEnemyPunching(GameObject _gm, float dmg)
-    {
-        int _rand = Random.Range(1, 101);
-        if (_rand <= _playerStats.kritChance)
-        {
-            float _damage = (dmg * _playerStats.rageValue) * ((dmg * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
+            if (_playerStats.currentHp < _playerStats.maxHp / 100 * 50)
+                _damage += _damage / 100 * _playerStats.rageValue;
 
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
             {
@@ -307,70 +348,54 @@ public class Gun : MonoBehaviour
             }
 
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
-            _gm.gameObject.GetComponent<EnemyController>().Hit(_damage, true);
+            _gm.gameObject.GetComponent<EnemyController>().Hit(_damage, false);
+            PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
 
             #region Effects
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")  //Если у нас сет Огня активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("activeCarID") == "Lyssa")  //Если у нас сет Огня активен
             {
                 int rand = Random.Range(1, 101);
 
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                float value = 0;
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")
                 {
-                    _gm.GetComponent<EnemyEffects>().FireEffect(_damage);
+                    value += PlayerPrefs.GetFloat("setValue");
+                }
+
+                if (PlayerPrefs.GetString("activeCarID") == "Lyssa")
+                {
+                    value += 3;
+                }
+
+                if (rand <= value)
+                {
+                    _gm.GetComponent<EnemyEffects>().FireEffect(damage * _playerStats.rageValue);
                 }
             }
 
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")  //Если у нас сет Яда активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("activeCarID") == "Aeolus")  //Если у нас сет Яда активен
             {
                 int rand = Random.Range(1, 101);
 
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
+                float value = 0;
+                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")
                 {
-                    _gm.GetComponent<EnemyEffects>().PoisonEffect(_damage);
+                    value += PlayerPrefs.GetFloat("setValue");
+                }
+
+                if (PlayerPrefs.GetString("activeCarID") == "Aeolus")
+                {
+                    value += 5;
+                }
+
+                if (rand <= value)
+                {
+                    _gm.GetComponent<EnemyEffects>().PoisonEffect(damage * _playerStats.rageValue);
                 }
             }
             #endregion
         }
-        else
-        {
-            float _damage = dmg;
-
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
-            {
-                _damage = _damage + (_damage / 100 * PlayerPrefs.GetFloat("setValue"));
-            }
-
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s08")  //Если у нас сет Таран активен
-            {
-                _damage = _damage + (_damage / 100 * (PlayerPrefs.GetFloat("setValue") * PlayerGuns.gunCount));
-            }
-
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage * _playerStats.rageValue);
-            _gm.gameObject.GetComponent<EnemyController>().Hit(_damage * _playerStats.rageValue, false);
-
-            #region Effects
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02")  //Если у нас сет Огня активен
-            {
-                int rand = Random.Range(1, 101);
-
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
-                {
-                    _gm.GetComponent<EnemyEffects>().FireEffect(dmg * _playerStats.rageValue);
-                }
-            }
-
-            if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03")  //Если у нас сет Яда активен
-            {
-                int rand = Random.Range(1, 101);
-
-                if (rand <= PlayerPrefs.GetFloat("setValue"))
-                {
-                    _gm.GetComponent<EnemyEffects>().PoisonEffect(dmg * _playerStats.rageValue);
-                }
-            }
-            #endregion
-        }
-    }
+    }        
 
     public void DamageBoss(GameObject _gm)
     {
@@ -387,22 +412,6 @@ public class Gun : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(damage * _playerStats.rageValue);
             _gm.gameObject.GetComponentInParent<EnemyController>().Hit(damage * _playerStats.rageValue, false);
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + damage * _playerStats.rageValue);
-        }
-    }
-
-    public void DamageBossPunching(GameObject _gm, float dmg)
-    {
-        int _rand = Random.Range(1, 101);
-        if (_rand <= _playerStats.kritChance)
-        {
-            float _damage = (dmg * _playerStats.rageValue) * ((dmg * _playerStats.rageValue) / 100 * _playerStats.kritDamage);
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);
-            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(_damage, true);
-        }
-        else
-        {
-            GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(dmg * _playerStats.rageValue);
-            _gm.gameObject.GetComponentInParent<EnemyController>().Hit(dmg * _playerStats.rageValue, false);
         }
     }
     #endregion

@@ -190,49 +190,49 @@ public class ChangeCarController : MonoBehaviour
         #region Talant
         if (_carName == "Dionysus")
         {
-            tTalant.text = " огда хп меньше половины один раз за волну хилим на 20 хп";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillDionisus");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Taiowa")
         {
-            tTalant.text = "”рон от ћолоток и Ћазер +100%";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillTaiowa");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "P-Run")
         {
-            tTalant.text = "”рон от ракет лаунчера и ледовой ракеты увеличен +70%";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillP-Run");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Lyssa")
         {
-            tTalant.text = "Ёффект огн€ -  3% что противник загораетс€";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillLyssa");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Aeolus")
         {
-            tTalant.text = "Ёффект €да - 5%";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillAeolus");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Hyas")
         {
-            tTalant.text = "Ёффект - Ўанс крита со старта 5% ";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillHyas");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Hemera")
         {
-            tTalant.text = "Ёффект - ярость коэффициент +20%";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillHemera");
             imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Eos")
         {
-            tTalant.text = "Ёффект - ”величение всех монет на 20%";
+            tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillEos");
             imgTalant.sprite = sprTalantDionysus;
         }
         #endregion

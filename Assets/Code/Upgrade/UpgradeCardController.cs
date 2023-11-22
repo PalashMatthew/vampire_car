@@ -229,15 +229,15 @@ public class UpgradeCardController : MonoBehaviour
     {
         StopAllCoroutines();
 
-        imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-        imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-        imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
-        imgStar4.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        //imgStar1.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        //imgStar2.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        //imgStar3.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
+        //imgStar4.GetComponent<RectTransform>().DOScale(1f, 0f).SetUpdate(true);
 
-        imgStar1.DOFade(1, 0).SetUpdate(true);
-        imgStar2.DOFade(1, 0).SetUpdate(true);
-        imgStar3.DOFade(1, 0).SetUpdate(true);
-        imgStar4.DOFade(1, 0).SetUpdate(true);
+        //imgStar1.DOFade(1, 0).SetUpdate(true);
+        //imgStar2.DOFade(1, 0).SetUpdate(true);
+        //imgStar3.DOFade(1, 0).SetUpdate(true);
+        //imgStar4.DOFade(1, 0).SetUpdate(true);
     }
 
     void CardSettings()

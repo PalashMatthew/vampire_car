@@ -44,47 +44,14 @@ public class DefaultGunBullet : MonoBehaviour
     {
         if (other.tag == "enemy")
         {
-            if (_playerPassiveController.isPunching)
-            {
-                if (punchingCount <= 0)
-                {
-                    _gunController.DamageEnemyPunching(other.gameObject, _damage);
-                    Destroy(gameObject);
-                } 
-                else
-                {
-                    _gunController.DamageEnemyPunching(other.gameObject, _damage);
-                    _damage -= _damage / 100 * _playerStats.punchingProcent;
-                    punchingCount--;
-                }
-            } else
-            {
-                _gunController.DamageEnemy(other.gameObject, gameObject);
-                Destroy(gameObject);
-            }
+            _gunController.DamageEnemy(other.gameObject, gameObject);
+            Destroy(gameObject);
         }
 
         if (other.tag == "boss")
         {
-            if (_playerPassiveController.isPunching)
-            {
-                if (punchingCount <= 0)
-                {
-                    _gunController.DamageBossPunching(other.gameObject, _damage);
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    _gunController.DamageBossPunching(other.gameObject, _damage);
-                    _damage -= _damage / 100 * _playerStats.punchingProcent;
-                    punchingCount--;
-                }
-            }
-            else
-            {
-                _gunController.DamageBoss(other.gameObject);
-                Destroy(gameObject);
-            }
+            _gunController.DamageBoss(other.gameObject);
+            Destroy(gameObject);
         }
 
         if (other.tag == "obstacle")

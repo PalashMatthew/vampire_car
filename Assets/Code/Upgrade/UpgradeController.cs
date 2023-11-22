@@ -1094,16 +1094,21 @@ public class UpgradeController : MonoBehaviour
                 _playerPassiveController.isPassiveHealthRecovery = true;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.Rage:       // Переделать!!!!!!!!!!!!!!!!    
+            case UpgradeCard.UpgradePassiveType.Rage:    
                 if (_playerPassiveController.isPassiveRage)
                 {
-                    _playerStats.rageCoeff *= _value;
+                    _playerStats.rageCoeff += _value;
+
+                    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
                 }
 
                 if (!_playerPassiveController.isPassiveRage)
                 {
                     _playerPassiveController.isPassiveRage = true;
-                    _playerStats.rageCoeff = _value;
+
+                    _playerStats.rageCoeff += _value;
+
+                    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
                 }
                 break;
 
@@ -1148,41 +1153,26 @@ public class UpgradeController : MonoBehaviour
                 _playerStats.armorProcent += _value;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.Punching:  //Тут тоже переделать потом!1!!!!!!!!!!!!!!!!
-                _playerStats.punchingCount += _value;
-                _playerStats.punchingProcent += _value;
-                _playerPassiveController.isPunching = true;
-                break;
-
             case UpgradeCard.UpgradePassiveType.Headshot:
                 _playerStats.headshotProcent += _value;
                 _playerPassiveController.isHeadshot = true;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.ScrewValueUp:
-                _playerStats.screwValueCoeff += _value;
-                _playerPassiveController.isScrewValueUp = true;
-                break;
-
-            case UpgradeCard.UpgradePassiveType.Magnet:  
-                _playerStats.screwPickUpDistanceCoeff += _value;
-                break;
-
             case UpgradeCard.UpgradePassiveType.Lucky:
-                luckyChance += _value;
+                luckyChance *= luckyChance / 100 * _value;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.DistanceDamage:  //Тут тоже переделать!!!!!!!!!!!!!!!
-                _playerStats.distanceDamageCoeff *= _value;
+            case UpgradeCard.UpgradePassiveType.DistanceDamage:
+                _playerStats.distanceDamageCoeff += _value;
                 _playerPassiveController.isDistanceDamage = true;
                 break;
 
             case UpgradeCard.UpgradePassiveType.MassEnemyDamage:
-
+                _playerStats.massEnemyDamage += _value;
                 break;
 
             case UpgradeCard.UpgradePassiveType.EffectsDuration:
-
+                _playerStats.effectDuration += _value;
                 break;
         }
 

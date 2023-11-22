@@ -49,7 +49,7 @@ public class PlayerGuns : MonoBehaviour
     private void Start()
     {
         GunInitialize();
-        GunActivate();
+        GunActivate();        
     }
 
     void GunInitialize()

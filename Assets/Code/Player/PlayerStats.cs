@@ -38,14 +38,6 @@ public class PlayerStats : MonoBehaviour
 
     public float headshotProcent;
 
-    public float screwValueUp;
-    public float baseScrewValue;
-    public float screwValueCoeff;
-
-    public float screwPickUpDistance;
-    public float baseScrewPickUpDistance;
-    public float screwPickUpDistanceCoeff;
-
     public float distanceDamageCoeff;
 
     public float recoveryHpInFirstAidKit;
@@ -60,8 +52,6 @@ public class PlayerStats : MonoBehaviour
 
     public float lucky;
 
-    public float magnet;
-
     public float massEnemyDamage;
 
     public float effectDuration;
@@ -70,11 +60,15 @@ public class PlayerStats : MonoBehaviour
 
     public float iron;
 
+    private bool isRecoveryHpDionisusCarTalant;
+
 
     private void Awake()
     {
         currentLevel = 1;
         playerController = GetComponent<PlayerController>();
+
+        isRecoveryHpDionisusCarTalant = false;
 
         StatsInitialize();
     }
@@ -116,6 +110,13 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("SuspensionSelectKritChance")
                      + PlayerPrefs.GetFloat("TransmissionSelectKritChance")
                      + PlayerPrefs.GetFloat("carGlobalCoeffkritChance");
+
+        if (PlayerPrefs.GetString("activeCarID") == "Hyas")
+        {
+            kritChance += 5;
+        }
+
+        kritChance += 2;
         #endregion
 
         #region Dodge
@@ -184,7 +185,9 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("FuelSystemSelectKritDamage")
                      + PlayerPrefs.GetFloat("SuspensionSelectKritDamage")
                      + PlayerPrefs.GetFloat("TransmissionSelectKritDamage")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffkritDamage");        
+                     + PlayerPrefs.GetFloat("carGlobalCoeffkritDamage");
+
+        kritDamage += 50;
 
         backDamageProcent = PlayerPrefs.GetFloat("GunSelectBackDamage")
                      + PlayerPrefs.GetFloat("EngineSelectBackDamage")
@@ -218,12 +221,19 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("TransmissionSelectHealthRecovery");
 
         rageValue = 1;
-        rageValue += PlayerPrefs.GetFloat("GunSelectRage")
+        rageCoeff += PlayerPrefs.GetFloat("GunSelectRage")
                      + PlayerPrefs.GetFloat("EngineSelectRage")
                      + PlayerPrefs.GetFloat("BrakesSelectRage")
                      + PlayerPrefs.GetFloat("FuelSystemSelectRage")
                      + PlayerPrefs.GetFloat("SuspensionSelectRage")
                      + PlayerPrefs.GetFloat("TransmissionSelectRage");
+
+        if (PlayerPrefs.GetString("activeCarID") == "Hemera")
+        {
+            rageCoeff += 20;
+        }
+
+        rageValue = rageValue + (rageValue / 100 * rageCoeff);
 
         distanceDamageCoeff = PlayerPrefs.GetFloat("GunSelectDistanceDamage")
                      + PlayerPrefs.GetFloat("EngineSelectDistanceDamage")
@@ -241,14 +251,6 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("TransmissionSelectLucky")
                      + PlayerPrefs.GetFloat("carGlobalCoefflucky");
 
-        screwPickUpDistanceCoeff = PlayerPrefs.GetFloat("GunSelectMagnet")
-                     + PlayerPrefs.GetFloat("EngineSelectMagnet")
-                     + PlayerPrefs.GetFloat("BrakesSelectMagnet")
-                     + PlayerPrefs.GetFloat("FuelSystemSelectMagnet")
-                     + PlayerPrefs.GetFloat("SuspensionSelectMagnet")
-                     + PlayerPrefs.GetFloat("TransmissionSelectMagnet")
-                     + PlayerPrefs.GetFloat("carGlobalCoeffscrewValueUp");
-
         carDamage = PlayerPrefs.GetFloat("GunSelectCarDamage")
                      + PlayerPrefs.GetFloat("EngineSelectCarDamage")
                      + PlayerPrefs.GetFloat("BrakesSelectCarDamage")
@@ -265,14 +267,18 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        //maxHp = maxHpBase + maxHpCoeff;
-
-        screwValueUp = baseScrewValue + (baseScrewValue / 100 * screwValueCoeff);
-        screwPickUpDistance = baseScrewPickUpDistance + (baseScrewPickUpDistance / 100 * screwPickUpDistanceCoeff);
-
         if (currentHp > maxHp)
         {
             currentHp = maxHp;
+        }
+
+        if (PlayerPrefs.GetString("activeCarID") == "Dionysus")
+        {
+            if (currentHp < (maxHp / 100 * 50) && !isRecoveryHpDionisusCarTalant)
+            {
+                currentHp += (maxHpBase + maxHpCoeff) / 100 * 20;
+                isRecoveryHpDionisusCarTalant = true;
+            }
         }
     }
 

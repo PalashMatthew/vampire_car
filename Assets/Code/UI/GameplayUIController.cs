@@ -24,6 +24,7 @@ public class GameplayUIController : MonoBehaviour
     public PlayerStats playerStats;
     public Image imgLevelEndFill;
     public GameObject imgComplite1, imgComplite2;
+    public Image imgCard1, imgCard2;
 
     [Header("WaveComplite")]
     public GameObject waveCompliteObj;
@@ -121,6 +122,9 @@ public class GameplayUIController : MonoBehaviour
             imgComplite1.SetActive(false);
             imgComplite2.SetActive(false);
             playerStats.currentLevel = 0;
+
+            imgCard1.color = new Color(1, 1, 1, 0.2f);
+            imgCard2.color = new Color(1, 1, 1, 0.2f);
         }
 
         if (playerStats.currentExp >= 5 && playerStats.currentExp < 15)
@@ -128,6 +132,9 @@ public class GameplayUIController : MonoBehaviour
             imgComplite1.SetActive(true);
             imgComplite2.SetActive(false);
             playerStats.currentLevel = 1;
+
+            imgCard1.color = new Color(1, 1, 1, 1f);
+            imgCard2.color = new Color(1, 1, 1, 0.2f);
         }
 
         if (playerStats.currentExp >= 15)
@@ -135,6 +142,9 @@ public class GameplayUIController : MonoBehaviour
             imgComplite1.SetActive(true);
             imgComplite2.SetActive(true);
             playerStats.currentLevel = 2;
+
+            imgCard1.color = new Color(1, 1, 1, 1f);
+            imgCard2.color = new Color(1, 1, 1, 1f);
         }
 
         //if (imgFillLevelBar.fillAmount > 0 && imgFillLevelBar.fillAmount < 1)

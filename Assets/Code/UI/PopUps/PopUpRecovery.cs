@@ -21,14 +21,6 @@ public class PopUpRecovery : MonoBehaviour
         isRecovery = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ButOpen();
-        }
-    }
-
     public void ButOpen()
     {
         GameplayController.isPause = true;
@@ -88,6 +80,8 @@ public class PopUpRecovery : MonoBehaviour
 
     public void ButContinueAds()
     {
+        StopAllCoroutines();
+
         GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
@@ -98,6 +92,8 @@ public class PopUpRecovery : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("playerHard") >= 30)
         {
+            StopAllCoroutines();
+
             GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
             GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 

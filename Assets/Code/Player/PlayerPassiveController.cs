@@ -35,7 +35,7 @@ public class PlayerPassiveController : MonoBehaviour
     {
         if (isPassiveRage)
         {
-            PassiveRage();
+            //PassiveRage();
         }
     }
 

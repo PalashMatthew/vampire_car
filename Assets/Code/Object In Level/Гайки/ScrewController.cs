@@ -32,8 +32,6 @@ public class ScrewController : MonoBehaviour
         if (WaveController.isWaveEnd)
             Destroy(gameObject);
 
-        _destroyDistance = GameObject.Find("Player").GetComponent<PlayerStats>().screwPickUpDistance;
-
         if (Vector3.Distance(_playerPos.position, transform.position) <= _collectionDistance)
         {
             _isFind = true;
@@ -73,20 +71,7 @@ public class ScrewController : MonoBehaviour
     }
 
     void DestroyAnim()
-    {
-        float _screwCount;
-
-        if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isScrewValueUp)
-        {
-            _screwCount = screwCount * GameObject.Find("Player").GetComponent<PlayerStats>().screwValueUp;
-            GlobalStats.screwCount += _screwCount;
-        } 
-        else
-        {
-            GlobalStats.screwCount += screwCount;
-        }
-            
-        GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().UpdateScrewText();
+    {            
         Destroy(gameObject);
     }
 }

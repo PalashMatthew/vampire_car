@@ -29,12 +29,13 @@ public class EnemyEffects : MonoBehaviour
         if (!isFire)
         {
             vfxFire.Play();
-            StartCoroutine(Fire(damage / 100 * 30, 3));
+            float value = 3 + (3 / 100 * GameObject.Find("Player").GetComponent<PlayerStats>().effectDuration);
+            StartCoroutine(Fire(damage / 100 * 30, value));
             isFire = true;
         }        
     }
 
-    IEnumerator Fire(float damage, int effectCount)
+    IEnumerator Fire(float damage, float effectCount)
     {
         yield return new WaitForSeconds(1);
 
@@ -59,12 +60,13 @@ public class EnemyEffects : MonoBehaviour
         if (!isPoison)
         {
             vfxPoison.Play();
-            StartCoroutine(Poison(damage, 3));
+            float value = 3 + (3 / 100 * GameObject.Find("Player").GetComponent<PlayerStats>().effectDuration);
+            StartCoroutine(Poison(damage, value));
             isPoison = true;
         }
     }
 
-    IEnumerator Poison(float damage, int effectCount)
+    IEnumerator Poison(float damage, float effectCount)
     {
         damage = damage - (damage / 100 * 25);
 

@@ -67,7 +67,10 @@ public class PopUpWin : MonoBehaviour
                 moneyValue += moneyRand / 100 * waveDropProcent[i - 1];
             }
 
-            Debug.Log("money " + moneyValue);
+            if (PlayerPrefs.GetString("activeCarID") == "Eos")
+            {
+                moneyValue = moneyValue + (moneyValue / 100 * 20);
+            }
 
             GameObject instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
             instCell.transform.parent = scrollObj;
