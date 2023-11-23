@@ -96,6 +96,9 @@ public class TalentsController : MonoBehaviour
     public TMP_Text tPrice;
     private int price;
 
+    public TMP_Text tTalentsLevel;
+
+
     private void OnEnable()
     {
         Initialize();
@@ -377,6 +380,8 @@ public class TalentsController : MonoBehaviour
 
         price = PlayerPrefs.GetInt("talent" + PlayerPrefs.GetInt("talentGlobalLevel") + "price");
         tPrice.text = price + "";
+
+        tTalentsLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsGlobalLevel") + " - " + (PlayerPrefs.GetInt("talentGlobalLevel") - 1);
     }
 
     public void ButUpgrade()
