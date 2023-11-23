@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -40,6 +42,13 @@ public class PopUpWin : MonoBehaviour
 
     int moneyGiveValue;
 
+    [Header("Objects")]
+    public GameObject objHeader1;
+    public GameObject objHeader2;
+    public GameObject objWaveCount;
+    public GameObject objRewardScroll;
+    public GameObject objButContinue;
+
 
     private void Start()
     {
@@ -47,9 +56,7 @@ public class PopUpWin : MonoBehaviour
     }
 
     void Initialize()
-    {
-        objButAds.SetActive(true);
-
+    {       
         tWave.text = (waveController.currentWave - 1) + "";
 
         tLeader.text = "Вы справились лучше чем " + Random.Range(70, 86) + "% игроков";
@@ -80,7 +87,8 @@ public class PopUpWin : MonoBehaviour
 
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (int)moneyValue);
 
-            tAdsReward.text = "+" + moneyValue;
+            objButAds.SetActive(true);
+            tAdsReward.text = "+" + (int)moneyValue;
             moneyGiveValue = (int)moneyValue;
             #endregion
 
@@ -284,6 +292,8 @@ public class PopUpWin : MonoBehaviour
         Initialize();
 
         _popUpController.OpenPopUp();
+
+        StartCoroutine(Animation());
     }
 
     public void ButClosed()
@@ -298,5 +308,55 @@ public class PopUpWin : MonoBehaviour
     {
         PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + moneyGiveValue);
         objButAds.SetActive(false);
+    }
+
+    IEnumerator Animation()
+    {
+        objWaveCount.SetActive(false);
+        tLeader.gameObject.SetActive(false);
+        objHeader2.SetActive(false);
+        objRewardScroll.SetActive(false);
+        objButContinue.SetActive(false);
+        objButAds.SetActive(false);
+
+        objWaveCount.transform.DOScale(0, 0);
+        tLeader.transform.DOScale(0, 0);
+        objHeader2.transform.DOScale(0, 0);
+        objRewardScroll.transform.DOScale(0, 0);
+        objButContinue.transform.DOScale(0, 0);
+        objButAds.transform.DOScale(0, 0);
+
+        objHeader1.SetActive(true);
+        objHeader1.transform.DOScale(0, 0);
+
+        objHeader1.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        objWaveCount.SetActive(true);
+        objWaveCount.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        tLeader.gameObject.SetActive(true);
+        tLeader.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        objHeader2.SetActive(true);
+        objHeader2.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        objRewardScroll.SetActive(true);
+        objRewardScroll.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        objButAds.SetActive(true);
+        objButAds.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        objButContinue.SetActive(true);
+        objButContinue.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
     }
 }
