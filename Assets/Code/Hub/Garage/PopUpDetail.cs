@@ -980,104 +980,140 @@ public class PopUpDetail : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel])
         {
-            PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - upgradePrice[garageController.activeItem.currentLevel]);
-
-            string _type = "";
+            int currentDrawing = 0;
+            string s = "";
 
             switch (garageController.activeItem.itemObj.itemType)
             {
                 case DetailCard.ItemType.Gun:
-                    _type = "Gun";
+                    currentDrawing = PlayerPrefs.GetInt("drawingGunCount");
+                    s = "drawingGunCount";
                     break;
                 case DetailCard.ItemType.Engine:
-                    _type = "Engine";
+                    currentDrawing = PlayerPrefs.GetInt("drawingEngineCount");
+                    s = "drawingEngineCount";
                     break;
                 case DetailCard.ItemType.Brakes:
-                    _type = "Brakes";
+                    currentDrawing = PlayerPrefs.GetInt("drawingBrakesCount");
+                    s = "drawingBrakesCount";
                     break;
                 case DetailCard.ItemType.FuelSystem:
-                    _type = "FuelSystem";
+                    currentDrawing = PlayerPrefs.GetInt("drawingFuelSystemCount");
+                    s = "drawingFuelSystemCount";
                     break;
                 case DetailCard.ItemType.Suspension:
-                    _type = "Suspension";
+                    currentDrawing = PlayerPrefs.GetInt("drawingSuspensionCount");
+                    s = "drawingSuspensionCount";
                     break;
                 case DetailCard.ItemType.Transmission:
-                    _type = "Transmission";
+                    currentDrawing = PlayerPrefs.GetInt("drawingTransmissionCount");
+                    s = "drawingTransmissionCount";
                     break;
             }
 
-            PlayerPrefs.SetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory, 
-                               PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) + 1);
-
-            garageController.activeItem.currentLevel += 1;
-
-            if (itemRarity == "common")
+            if (currentDrawing >= drawingCount[garageController.activeItem.currentLevel])
             {
-                PlayerPrefs.SetFloat("item" + _type + "baseCharacterCommon1Value" + garageController.activeItem.itemNumInInventory,
-                                 PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - upgradePrice[garageController.activeItem.currentLevel]);
 
-                if (itemCharacters2StepValue != 0)
+                string _type = "";
+
+                switch (garageController.activeItem.itemObj.itemType)
                 {
-                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterCommon2Value" + garageController.activeItem.itemNumInInventory,
-                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    case DetailCard.ItemType.Gun:
+                        _type = "Gun";
+                        break;
+                    case DetailCard.ItemType.Engine:
+                        _type = "Engine";
+                        break;
+                    case DetailCard.ItemType.Brakes:
+                        _type = "Brakes";
+                        break;
+                    case DetailCard.ItemType.FuelSystem:
+                        _type = "FuelSystem";
+                        break;
+                    case DetailCard.ItemType.Suspension:
+                        _type = "Suspension";
+                        break;
+                    case DetailCard.ItemType.Transmission:
+                        _type = "Transmission";
+                        break;
                 }
-            }
 
-            if (itemRarity == "rare")
-            {
-                PlayerPrefs.SetFloat("item" + _type + "baseCharacterRare1Value" + garageController.activeItem.itemNumInInventory,
-                                 PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
+                PlayerPrefs.SetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory,
+                                   PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) + 1);
 
-                if (itemCharacters2StepValue != 0)
+                garageController.activeItem.currentLevel += 1;
+
+                if (itemRarity == "common")
                 {
-                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterRare2Value" + garageController.activeItem.itemNumInInventory,
-                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterCommon1Value" + garageController.activeItem.itemNumInInventory,
+                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
+
+                    if (itemCharacters2StepValue != 0)
+                    {
+                        PlayerPrefs.SetFloat("item" + _type + "baseCharacterCommon2Value" + garageController.activeItem.itemNumInInventory,
+                                         PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    }
                 }
-            }
 
-            if (itemRarity == "epic")
-            {
-                PlayerPrefs.SetFloat("item" + _type + "baseCharacterEpic1Value" + garageController.activeItem.itemNumInInventory,
-                                 PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
-
-                if (itemCharacters2StepValue != 0)
+                if (itemRarity == "rare")
                 {
-                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterEpic2Value" + garageController.activeItem.itemNumInInventory,
-                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterRare1Value" + garageController.activeItem.itemNumInInventory,
+                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
+
+                    if (itemCharacters2StepValue != 0)
+                    {
+                        PlayerPrefs.SetFloat("item" + _type + "baseCharacterRare2Value" + garageController.activeItem.itemNumInInventory,
+                                         PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    }
                 }
-            }
 
-            if (itemRarity == "legendary")
-            {
-                PlayerPrefs.SetFloat("item" + _type + "baseCharacterLegendary1Value" + garageController.activeItem.itemNumInInventory,
-                                 PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
-
-                if (itemCharacters2StepValue != 0)
+                if (itemRarity == "epic")
                 {
-                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterLegendary2Value" + garageController.activeItem.itemNumInInventory,
-                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterEpic1Value" + garageController.activeItem.itemNumInInventory,
+                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
+
+                    if (itemCharacters2StepValue != 0)
+                    {
+                        PlayerPrefs.SetFloat("item" + _type + "baseCharacterEpic2Value" + garageController.activeItem.itemNumInInventory,
+                                         PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    }
                 }
-            }
 
-            #region SaveSelectItem
-            PlayerPrefs.SetInt(_type + "IDSelect", garageController.activeItem.itemID);
-            PlayerPrefs.SetString(_type + "RaritySelect", garageController.activeItem.itemRarity);
-            PlayerPrefs.SetInt(_type + "LevelSelect", garageController.activeItem.currentLevel);
-            #endregion
+                if (itemRarity == "legendary")
+                {
+                    PlayerPrefs.SetFloat("item" + _type + "baseCharacterLegendary1Value" + garageController.activeItem.itemNumInInventory,
+                                     PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + garageController.activeItem.itemNumInInventory) + itemCharacters1StepValue);
 
-            SaveDetailStats(_type);
+                    if (itemCharacters2StepValue != 0)
+                    {
+                        PlayerPrefs.SetFloat("item" + _type + "baseCharacterLegendary2Value" + garageController.activeItem.itemNumInInventory,
+                                         PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + garageController.activeItem.itemNumInInventory) + itemCharacters2StepValue);
+                    }
+                }
 
-            CreateCharactersPanel();
-            CalculateUpgradePrice();
-            LevelUpdate();
+                #region SaveSelectItem
+                PlayerPrefs.SetInt(_type + "IDSelect", garageController.activeItem.itemID);
+                PlayerPrefs.SetString(_type + "RaritySelect", garageController.activeItem.itemRarity);
+                PlayerPrefs.SetInt(_type + "LevelSelect", garageController.activeItem.currentLevel);
+                #endregion
 
-            if (garageController.slot1Card == garageController.activeItem ||
-                garageController.slot2Card == garageController.activeItem ||
-                garageController.slot3Card == garageController.activeItem ||
-                garageController.slot4Card == garageController.activeItem ||
-                garageController.slot5Card == garageController.activeItem ||
-                garageController.slot6Card == garageController.activeItem)
-            garageController.CalculateViewStats();
+                SaveDetailStats(_type);
+
+                CreateCharactersPanel();
+                CalculateUpgradePrice();
+                LevelUpdate();
+
+                if (garageController.slot1Card == garageController.activeItem ||
+                    garageController.slot2Card == garageController.activeItem ||
+                    garageController.slot3Card == garageController.activeItem ||
+                    garageController.slot4Card == garageController.activeItem ||
+                    garageController.slot5Card == garageController.activeItem ||
+                    garageController.slot6Card == garageController.activeItem)
+                    garageController.CalculateViewStats();
+
+                PlayerPrefs.SetInt(s, PlayerPrefs.GetInt(s) - drawingCount[garageController.activeItem.currentLevel]);
+            }            
         }
     }
 

@@ -56,7 +56,7 @@ public class EnemyTripleShot : MonoBehaviour
         _inst3.transform.eulerAngles = new Vector3(0, 165, 0);
         _inst3.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
 
         if (_enemyShotCount >= 3)
         {

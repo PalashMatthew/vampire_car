@@ -10,7 +10,7 @@ public class EnemyDefaultBullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _gunController.bulletMoveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * (_gunController.bulletMoveSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].shotSpeedCoeff) * Time.deltaTime);
 
         if (transform.position.z < -20f)
             Destroy(gameObject);

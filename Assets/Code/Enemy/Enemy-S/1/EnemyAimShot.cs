@@ -58,7 +58,7 @@ public class EnemyAimShot : MonoBehaviour
         _inst.transform.eulerAngles = new Vector3(0, _inst.transform.eulerAngles.y, 0);
         _inst.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
 
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
 
         if (_enemyShotCount >= 3)
         {
@@ -68,7 +68,6 @@ public class EnemyAimShot : MonoBehaviour
         {
             StartCoroutine(Shot());
             _enemyShotCount++;
-        }
-        
+        }        
     }
 }

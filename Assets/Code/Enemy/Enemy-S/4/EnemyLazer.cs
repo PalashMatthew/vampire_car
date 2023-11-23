@@ -38,7 +38,7 @@ public class EnemyLazer : MonoBehaviour
 
     public IEnumerator AttackEnum()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2 * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
         objLazer.SetActive(true);
         objLazer.GetComponent<MeshRenderer>().material = matDefault;
         _enemyMovement.StopAllCoroutines();

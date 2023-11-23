@@ -30,7 +30,7 @@ public class EnemyShot : MonoBehaviour
 
     IEnumerator Shot()
     {
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
 
         GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
         _inst.GetComponent<EnemyDefaultBullet>()._gunController = _gunController;

@@ -877,8 +877,11 @@ public class GarageController : MonoBehaviour
         switch (activeItem.slotNum)
         {
             case 1:
-                slot1Card.gameObject.SetActive(true);
-                slot1Card = null;
+                if (slot1Card != null)
+                {
+                    slot1Card.gameObject.SetActive(true);
+                    slot1Card = null;
+                }                
 
                 PlayerPrefs.SetInt("slot1_itemNumInInventory", -1);
 
@@ -911,8 +914,11 @@ public class GarageController : MonoBehaviour
                 break;
 
             case 2:
-                slot2Card.gameObject.SetActive(true);
-                slot2Card = null;
+                if (slot2Card != null)
+                {
+                    slot2Card.gameObject.SetActive(true);
+                    slot2Card = null;
+                }                    
 
                 PlayerPrefs.SetInt("slot2_itemNumInInventory", -1);
 
@@ -943,8 +949,11 @@ public class GarageController : MonoBehaviour
                 break;
 
             case 3:
-                slot3Card.gameObject.SetActive(true);
-                slot3Card = null;
+                if (slot3Card != null)
+                {
+                    slot3Card.gameObject.SetActive(true);
+                    slot3Card = null;
+                }                    
 
                 PlayerPrefs.SetInt("slot3_itemNumInInventory", -1);
 
@@ -975,8 +984,11 @@ public class GarageController : MonoBehaviour
                 break;
 
             case 4:
-                slot4Card.gameObject.SetActive(true);
-                slot4Card = null;
+                if (slot4Card != null)
+                {
+                    slot4Card.gameObject.SetActive(true);
+                    slot4Card = null;
+                }                    
 
                 PlayerPrefs.SetInt("slot4_itemNumInInventory", -1);
 
@@ -1007,8 +1019,11 @@ public class GarageController : MonoBehaviour
                 break;
 
             case 5:
-                slot5Card.gameObject.SetActive(true);
-                slot5Card = null;
+                if (slot5Card != null)
+                {
+                    slot5Card.gameObject.SetActive(true);
+                    slot5Card = null;
+                }                    
 
                 PlayerPrefs.SetInt("slot5_itemNumInInventory", -1);
 
@@ -1039,8 +1054,11 @@ public class GarageController : MonoBehaviour
                 break;
 
             case 6:
-                slot6Card.gameObject.SetActive(true);
-                slot6Card = null;
+                if (slot6Card != null)
+                {
+                    slot6Card.gameObject.SetActive(true);
+                    slot6Card = null;
+                }                    
 
                 PlayerPrefs.SetInt("slot6_itemNumInInventory", -1);
 

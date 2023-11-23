@@ -275,6 +275,9 @@ public class Wave
 
     [Header("Enemy Settings")]
     public float waveSpeedCoeff;  //Скорость объектов на этой волне
+    public float attackSpeedCoeff;
+    public float shotSpeedCoeff;
+
     [Range (0, 10)]
     public int enemyM1Weight;
     [Range(0, 10)]

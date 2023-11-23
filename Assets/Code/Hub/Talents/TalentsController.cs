@@ -113,7 +113,7 @@ public class TalentsController : MonoBehaviour
             cell1block.SetActive(true);
             tCell1LevelObj.SetActive(false);
             cell1Icon.SetActive(false);
-            tCell1Name.text = "Не изучено";
+            tCell1Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell1Value.text = "";
         } 
         else
@@ -121,7 +121,7 @@ public class TalentsController : MonoBehaviour
             cell1block.SetActive(false);
             tCell1LevelObj.SetActive(true);
             cell1Icon.SetActive(true);
-            tCell1Name.text = "Здоровье";
+            tCell1Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
             tCell1Value.text = PlayerPrefs.GetInt("talentHealthCurrentValue") + "%";
 
             if (healthLevel >= healthLevelMax)
@@ -143,7 +143,7 @@ public class TalentsController : MonoBehaviour
             cell2block.SetActive(true);
             tCell2LevelObj.SetActive(false);
             cell2Icon.SetActive(false);
-            tCell2Name.text = "Не изучено";
+            tCell2Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell2Value.text = "";
         }
         else
@@ -151,7 +151,7 @@ public class TalentsController : MonoBehaviour
             cell2block.SetActive(false);
             tCell2LevelObj.SetActive(true);
             cell2Icon.SetActive(true);
-            tCell2Name.text = "Урон";
+            tCell2Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
             tCell2Value.text = PlayerPrefs.GetInt("talentDamageCurrentValue") + "%";
 
             if (damageLevel >= damageLevelMax)
@@ -173,7 +173,7 @@ public class TalentsController : MonoBehaviour
             cell3block.SetActive(true);
             tCell3LevelObj.SetActive(false);
             cell3Icon.SetActive(false);
-            tCell3Name.text = "Не изучено";
+            tCell3Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell3Value.text = "";
         }
         else
@@ -181,7 +181,7 @@ public class TalentsController : MonoBehaviour
             cell3block.SetActive(false);
             tCell3LevelObj.SetActive(true);
             cell3Icon.SetActive(true);
-            tCell3Name.text = "Аптечка";
+            tCell3Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameFirstAidKit");
             tCell3Value.text = PlayerPrefs.GetInt("talentRecoveryHpInFirstAidKitCurrentValue") + "%";
 
             if (recoveryHpInFirstAidKitLevel >= recoveryHpInFirstAidKitLevelMax)
@@ -203,7 +203,7 @@ public class TalentsController : MonoBehaviour
             cell4block.SetActive(true);
             tCell4LevelObj.SetActive(false);
             cell4Icon.SetActive(false);
-            tCell4Name.text = "Не изучено";
+            tCell4Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell4Value.text = "";
         }
         else
@@ -211,7 +211,7 @@ public class TalentsController : MonoBehaviour
             cell4block.SetActive(false);
             tCell4LevelObj.SetActive(true);
             cell4Icon.SetActive(true);
-            tCell4Name.text = "Блок";
+            tCell4Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameBlock");
             tCell4Value.text = PlayerPrefs.GetInt("talentBlockCurrentValue") + "";
 
             if (blockLevel >= blockLevelMax)
@@ -233,7 +233,7 @@ public class TalentsController : MonoBehaviour
             cell5block.SetActive(true);
             tCell5LevelObj.SetActive(false);
             cell5Icon.SetActive(false);
-            tCell5Name.text = "Не изучено";
+            tCell5Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell5Value.text = "";
         }
         else
@@ -241,7 +241,7 @@ public class TalentsController : MonoBehaviour
             cell5block.SetActive(false);
             tCell5LevelObj.SetActive(true);
             cell5Icon.SetActive(true);
-            tCell5Name.text = "Железный";
+            tCell5Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameIron");
             tCell5Value.text = PlayerPrefs.GetInt("talentIronCurrentValue") + "";
 
             if (ironLevel >= ironLevelMax)
@@ -263,7 +263,7 @@ public class TalentsController : MonoBehaviour
             cell6block.SetActive(true);
             tCell6LevelObj.SetActive(false);
             cell6Icon.SetActive(false);
-            tCell6Name.text = "Не изучено";
+            tCell6Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell6Value.text = "";
         }
         else
@@ -271,7 +271,7 @@ public class TalentsController : MonoBehaviour
             cell6block.SetActive(false);
             tCell6LevelObj.SetActive(true);
             cell6Icon.SetActive(true);
-            tCell6Name.text = "Скорость атаки";
+            tCell6Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameShotSpeed");
             tCell6Value.text = PlayerPrefs.GetInt("talentShotSpeedCurrentValue") + "";
 
             if (shotSpeedLevel >= shotSpeedLevelMax)
@@ -293,7 +293,7 @@ public class TalentsController : MonoBehaviour
             cell7block.SetActive(true);
             tCell7LevelObj.SetActive(false);
             cell7Icon.SetActive(false);
-            tCell7Name.text = "Не изучено";
+            tCell7Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell7Value.text = "";
         }
         else
@@ -301,7 +301,7 @@ public class TalentsController : MonoBehaviour
             cell7block.SetActive(false);
             tCell7LevelObj.SetActive(true);
             cell7Icon.SetActive(true);
-            tCell7Name.text = "Второе оружие";
+            tCell7Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameGunSlot");
             tCell7Value.text = PlayerPrefs.GetInt("talentGunSlotCurrentValue") + "";
 
             if (gunSlotLevel >= gunSlotLevelMax)
@@ -323,7 +323,7 @@ public class TalentsController : MonoBehaviour
             cell8block.SetActive(true);
             tCell8LevelObj.SetActive(false);
             cell8Icon.SetActive(false);
-            tCell8Name.text = "Не изучено";
+            tCell8Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_notStudied");
             tCell8Value.text = "";
         }
         else
@@ -331,7 +331,7 @@ public class TalentsController : MonoBehaviour
             cell8block.SetActive(false);
             tCell8LevelObj.SetActive(true);
             cell8Icon.SetActive(true);
-            tCell8Name.text = "Улучшение экипировки";
+            tCell8Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameEquipments");
             tCell8Value.text = PlayerPrefs.GetInt("talentEquipmentImprovementCurrentValue") + "";
 
             if (equipmentImprovementLevel >= equipmentImprovementLevelMax)
@@ -361,7 +361,7 @@ public class TalentsController : MonoBehaviour
             cell9block.SetActive(false);
             tCell9LevelObj.SetActive(true);
             cell9Icon.SetActive(true);
-            tCell9Name.text = "Улучшение машины";
+            tCell9Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameCar");
             tCell9Value.text = PlayerPrefs.GetInt("talentCarImprovementCurrentValue") + "";
 
             if (carImprovementLevel >= carImprovementLevelMax)

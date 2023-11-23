@@ -52,6 +52,7 @@ public class PopUpCarUpgrade : MonoBehaviour
     public TMP_Text tPrice;
     public GameObject butUpgrade;
     public GameObject butUpgradeGray;
+    public List<int> titanCount;
 
     [Header("Open Characters")]
     public TMP_Text tUpgradeLvl10;
@@ -374,7 +375,7 @@ public class PopUpCarUpgrade : MonoBehaviour
             butUpgradeGray.SetActive(false);
         }
 
-        tTitan.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_titan") + ": 31/30";
+        tTitan.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_titan") + ": " + PlayerPrefs.GetInt("playerTitan") + "/" + titanCount[PlayerPrefs.GetInt(_carName + "carLevel")];
 
         calculateCharacteristics.GlobalCarCharacteristics();
     }
@@ -385,18 +386,23 @@ public class PopUpCarUpgrade : MonoBehaviour
 
         if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt(_carName + "carLevel") < 40)
         {
-            PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - (int)upgradePrice);
-            
-            PlayerPrefs.SetFloat(_carName + "carDamage", PlayerPrefs.GetFloat(_carName + "carDamage") + PlayerPrefs.GetFloat(_carName + "carDamageStepUp"));
-            PlayerPrefs.SetFloat(_carName + "carHealth", PlayerPrefs.GetFloat(_carName + "carHealth") + PlayerPrefs.GetFloat(_carName + "carHealthStepUp"));
-            PlayerPrefs.SetFloat(_carName + "carKritChance", PlayerPrefs.GetFloat(_carName + "carKritChance") + PlayerPrefs.GetFloat(_carName + "carKritChanceStepUp"));
-            PlayerPrefs.SetFloat(_carName + "carDodge", PlayerPrefs.GetFloat(_carName + "carDodge") + PlayerPrefs.GetFloat(_carName + "carDodgeStepUp"));
+            if (PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")])
+            {
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - (int)upgradePrice);
 
-            PlayerPrefs.SetInt(_carName + "carLevel", PlayerPrefs.GetInt(_carName + "carLevel") + 1);
+                PlayerPrefs.SetFloat(_carName + "carDamage", PlayerPrefs.GetFloat(_carName + "carDamage") + PlayerPrefs.GetFloat(_carName + "carDamageStepUp"));
+                PlayerPrefs.SetFloat(_carName + "carHealth", PlayerPrefs.GetFloat(_carName + "carHealth") + PlayerPrefs.GetFloat(_carName + "carHealthStepUp"));
+                PlayerPrefs.SetFloat(_carName + "carKritChance", PlayerPrefs.GetFloat(_carName + "carKritChance") + PlayerPrefs.GetFloat(_carName + "carKritChanceStepUp"));
+                PlayerPrefs.SetFloat(_carName + "carDodge", PlayerPrefs.GetFloat(_carName + "carDodge") + PlayerPrefs.GetFloat(_carName + "carDodgeStepUp"));
 
-            changeCarController.UpdateProgressBar();
+                PlayerPrefs.SetInt(_carName + "carLevel", PlayerPrefs.GetInt(_carName + "carLevel") + 1);
 
-            Initialize();
+                changeCarController.UpdateProgressBar();
+
+                PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") - titanCount[PlayerPrefs.GetInt(_carName + "carLevel")]);
+
+                Initialize();
+            }            
         }
     }
 }

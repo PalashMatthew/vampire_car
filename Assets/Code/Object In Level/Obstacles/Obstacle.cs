@@ -22,6 +22,9 @@ public class Obstacle : MonoBehaviour
     public bool isSpeedUp;
     public float newSpeed;
 
+    bool isVisible;
+
+
 
     private void Update()
     {
@@ -48,6 +51,8 @@ public class Obstacle : MonoBehaviour
                 isSpeedUp = false;
             }
         }
+
+        CheckVisible();
     }
 
     #region Hit
@@ -88,5 +93,32 @@ public class Obstacle : MonoBehaviour
     private void Move()
     {
         transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
-    }    
+    }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (!isDestroyedObj)
+    //    {
+    //        if (other.gameObject.tag == "enemy" && isVisible)
+    //        {
+    //            Dead();
+    //        }
+    //    }        
+    //}
+
+    void CheckVisible()
+    {
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        if (viewPos.x >= 0 && viewPos.x <= 1 && viewPos.y >= 0 && viewPos.y <= 1 && viewPos.z > 0)
+        {
+            isVisible = true;
+        }
+        else
+        {
+            if (isVisible)
+            {
+                isVisible = false;
+            }
+        }
+    }
 }

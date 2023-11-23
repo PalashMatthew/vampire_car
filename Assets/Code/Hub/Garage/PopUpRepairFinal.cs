@@ -1,3 +1,5 @@
+using AssetKits.ParticleImage;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +15,13 @@ public class PopUpRepairFinal : MonoBehaviour
     public int moneyCount;
     public int drawingCount;
 
+    public TMP_Text tName;
+
+    public GameObject objCell1, objCell2;
+    public GameObject butOk;
+
+    public GameObject particleImage1, particleImage2;
+
 
     private void Start()
     {
@@ -23,12 +32,54 @@ public class PopUpRepairFinal : MonoBehaviour
     {
         _popUpController.OpenPopUp();
 
+        tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_received");
         tMoneyCount.text = "x" + moneyCount;
         tDrawingCount.text = "x" + drawingCount;
+
+        StartCoroutine(Animation());
     }
 
     public void ButContinue()
     {
         _popUpController.ClosedPopUp();
+    }
+
+    IEnumerator Animation()
+    {
+        tName.gameObject.SetActive(false);
+        objCell1.SetActive(false);
+        objCell2.SetActive(false);
+        butOk.SetActive(false);
+        particleImage1.SetActive(false);
+        particleImage2.SetActive(false);
+
+        tName.transform.DOScale(0, 0);
+        objCell1.transform.DOScale(0, 0);
+        objCell2.transform.DOScale(0, 0);
+        butOk.transform.DOScale(0, 0);
+        particleImage1.transform.DOScale(0, 0);
+        particleImage2.transform.DOScale(0, 0);
+
+        yield return new WaitForSeconds(0.5f);
+
+        tName.gameObject.SetActive(true);
+        objCell1.SetActive(true);
+        objCell2.SetActive(true);
+
+        particleImage1.SetActive(true);
+        particleImage2.SetActive(true);
+
+        tName.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        objCell1.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        objCell2.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        particleImage1.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        particleImage2.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSeconds(0.5f);
+
+        butOk.SetActive(true);
+
+        butOk.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
     }
 }

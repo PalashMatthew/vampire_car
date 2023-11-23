@@ -1,3 +1,5 @@
+using AssetKits.ParticleImage;
+using DG.Tweening;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +27,8 @@ public class PopUpMergeFinal : MonoBehaviour
     public Sprite sprItemIcon;
     public Sprite sprItemCell;
 
+    public GameObject paricleImage;
+
     [Header("Background")]
     public Image imgBackground;
     public Sprite sprBackgroundRare;
@@ -32,7 +36,10 @@ public class PopUpMergeFinal : MonoBehaviour
     public Sprite sprBackgroundLegendary;
 
     [Header("Panel New Stats")]
+    public GameObject objPanel0;
+    public GameObject objPanel1;
     public GameObject objPanel2;
+    private bool objPanel2Open;
 
     public Sprite sprHealth, sprDamage;
     public Image imgIconPanel1;
@@ -63,6 +70,8 @@ public class PopUpMergeFinal : MonoBehaviour
     public GameObject objReturnDrawing;
     public TMP_Text tMoneyCount;
     public TMP_Text tDrawingCount;
+
+    public GameObject butOk;
 
 
     private void Start()
@@ -100,7 +109,8 @@ public class PopUpMergeFinal : MonoBehaviour
 
                 if (card.baseItemCharactersRare2 != DetailCard.ItemCharacters.none)
                 {
-                    objPanel2.SetActive(true);
+                    //objPanel2.SetActive(true);
+                    objPanel2Open = true;
 
                     if (card.baseItemCharactersRare2 == DetailCard.ItemCharacters.HpUp)
                     {
@@ -120,7 +130,8 @@ public class PopUpMergeFinal : MonoBehaviour
                     tNextPanelValue2.text = nextPanelValue2 + "";
                 } else
                 {
-                    objPanel2.SetActive(false);
+                    //objPanel2.SetActive(false);
+                    objPanel2Open = false;
                 }
                 break;
 
@@ -150,7 +161,8 @@ public class PopUpMergeFinal : MonoBehaviour
 
                 if (card.baseItemCharactersEpic2 != DetailCard.ItemCharacters.none)
                 {
-                    objPanel2.SetActive(true);
+                    //objPanel2.SetActive(true);
+                    objPanel2Open = true;
 
                     if (card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.HpUp)
                     {
@@ -171,7 +183,8 @@ public class PopUpMergeFinal : MonoBehaviour
                 }
                 else
                 {
-                    objPanel2.SetActive(false);
+                    //objPanel2.SetActive(false);
+                    objPanel2Open = false;
                 }
                 break;
 
@@ -201,7 +214,8 @@ public class PopUpMergeFinal : MonoBehaviour
 
                 if (card.baseItemCharactersLegendary2 != DetailCard.ItemCharacters.none)
                 {
-                    objPanel2.SetActive(true);
+                    //objPanel2.SetActive(true);
+                    objPanel2Open = true;
 
                     if (card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.HpUp)
                     {
@@ -222,12 +236,13 @@ public class PopUpMergeFinal : MonoBehaviour
                 }
                 else
                 {
-                    objPanel2.SetActive(false);
+                    //objPanel2.SetActive(false);
+                    objPanel2Open = false;
                 }
                 break;
         }
 
-        tName.text = itemName;
+        tName.text = "<wave>" + itemName;
         imgIcon.sprite = sprItemIcon;
         imgCell.sprite = sprItemCell;
         tLevel.text = "Lv " + level;
@@ -303,10 +318,95 @@ public class PopUpMergeFinal : MonoBehaviour
         _popUpController.OpenPopUp();
 
         Initialize();
+        StartCoroutine(Animation());
     }
 
     public void ButClosed()
     {
         _popUpController.ClosedPopUp();
+    }
+
+    IEnumerator Animation()
+    {
+        tName.transform.DOScale(0, 0);
+        imgCell.transform.DOScale(0, 0);
+        paricleImage.transform.DOScale(0, 0);
+        objPanel0.transform.DOScale(0, 0);
+        objPanel1.transform.DOScale(0, 0);
+        objPanel2.transform.DOScale(0, 0);
+        objReturnMoney.transform.DOScale(0, 0);
+        objReturnDrawing.transform.DOScale(0, 0);
+        butOk.transform.DOScale(0, 0);
+
+        tName.gameObject.SetActive(false);
+        imgCell.gameObject.SetActive(false);
+        paricleImage.SetActive(false);
+        objPanel0.SetActive(false);
+        objPanel1.SetActive(false);
+        objPanel2.SetActive(false);
+        objReturnMoney.SetActive(false);
+        objReturnDrawing.SetActive(false);
+        butOk.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        tName.gameObject.SetActive(true);
+        tName.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        imgCell.gameObject.SetActive(true);
+        imgCell.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        paricleImage.SetActive(true);
+        paricleImage.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSeconds(0.5f);
+
+        objPanel0.SetActive(true);
+        objPanel0.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSeconds(0.5f);
+
+        objPanel1.SetActive(true);
+        objPanel1.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (objPanel2Open)
+        {
+            objPanel2.SetActive(true);
+            objPanel2.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        } 
+        else
+        {
+            objReturnMoney.SetActive(true);
+            objReturnDrawing.SetActive(true);
+
+            objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+            objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (objPanel2Open)
+        {
+            objReturnMoney.SetActive(true);
+            objReturnDrawing.SetActive(true);
+
+            objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+            objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        } 
+        else
+        {
+            butOk.SetActive(true);
+            butOk.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (objPanel2Open)
+        {
+            butOk.SetActive(true);
+            butOk.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        }
     }
 }

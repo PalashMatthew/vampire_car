@@ -181,14 +181,14 @@ public class EnemyMovement : MonoBehaviour
                     }                    
                 }
 
-                if (hitForward.collider.gameObject.tag == "obstacle" && hitForward.collider.gameObject.layer == 8)
-                {
-                    if (hitForward.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
-                    {
-                        hitForward.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
-                        hitForward.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
-                    }                    
-                }
+                //if (hitForward.collider.gameObject.tag == "obstacle" && hitForward.collider.gameObject.layer == 8)
+                //{
+                //    if (hitForward.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                //    {
+                //        hitForward.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                //        hitForward.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                //    }                    
+                //}
             } 
             else if (hitForward2.collider != null)
             {
@@ -201,14 +201,14 @@ public class EnemyMovement : MonoBehaviour
                     }
                 }
 
-                if (hitForward2.collider.gameObject.tag == "obstacle" && hitForward2.collider.gameObject.layer == 8)
-                {
-                    if (hitForward2.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
-                    {
-                        hitForward2.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
-                        hitForward2.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
-                    }
-                }
+                //if (hitForward2.collider.gameObject.tag == "obstacle" && hitForward2.collider.gameObject.layer == 8)
+                //{
+                //    if (hitForward2.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                //    {
+                //        hitForward2.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                //        hitForward2.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                //    }
+                //}
             }
             else if (hitForward3.collider != null)
             {
@@ -221,14 +221,14 @@ public class EnemyMovement : MonoBehaviour
                     }
                 }
 
-                if (hitForward3.collider.gameObject.tag == "obstacle" && hitForward3.collider.gameObject.layer == 8)
-                {
-                    if (hitForward3.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
-                    {
-                        hitForward3.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
-                        hitForward3.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
-                    }
-                }
+                //if (hitForward3.collider.gameObject.tag == "obstacle" && hitForward3.collider.gameObject.layer == 8)
+                //{
+                //    if (hitForward3.collider.gameObject.GetComponent<Obstacle>().moveSpeed != _enemyController.moveSpeed)
+                //    {
+                //        hitForward3.collider.gameObject.GetComponent<Obstacle>().isSpeedUp = true;
+                //        hitForward3.collider.gameObject.GetComponent<Obstacle>().newSpeed = _enemyController.moveSpeed;
+                //    }
+                //}
             } 
         }
     }
@@ -243,7 +243,7 @@ public class EnemyMovement : MonoBehaviour
         transform.DORotate(new Vector3(0f, 180, 0), 0.1f).SetEase(Ease.Linear);
 
         yield return new WaitForSeconds(0.2f);
-        transform.DOMoveZ(transform.position.z - 2, 0.2f).SetEase(Ease.Linear);        
+        transform.DOMoveZ(transform.position.z - 3, 0.2f).SetEase(Ease.Linear);        
 
         yield return new WaitForSeconds(0.1f);
 
@@ -251,15 +251,16 @@ public class EnemyMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        transform.DOMoveZ(transform.position.z - 2, 0.4f).SetEase(Ease.Linear);
-        transform.DOMoveY(0f, 0.3f).SetEase(Ease.Linear);
+        transform.DOMoveZ(transform.position.z - 4, 0.4f).SetEase(Ease.Linear);
+        transform.DOMoveY(0.1f, 0.3f).SetEase(Ease.Linear);
 
         yield return new WaitForSeconds(0.3f);
 
-        transform.DORotate(new Vector3(0f, 180, 0), 0.3f).SetEase(Ease.Linear);
+        transform.DORotate(new Vector3(0f, 180, 0), 0.3f).SetEase(Ease.Linear);        
 
         yield return new WaitForSeconds(0.3f);
-        _isMoveAccess = true;
+        //_isMoveAccess = true;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         _isJumping = false;
     }
 
@@ -269,7 +270,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (other.tag == "jump" && !_isJumping)
             {
-                _isMoveAccess = false;
+                //_isMoveAccess = false;
                 StartCoroutine(JumpAnim());
             }
         }
