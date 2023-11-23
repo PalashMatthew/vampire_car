@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
 
     public bool isCarStop;
 
+    public string enemyKind;
+
     [HideInInspector]
     public float moveSpeed;
     public float hp;

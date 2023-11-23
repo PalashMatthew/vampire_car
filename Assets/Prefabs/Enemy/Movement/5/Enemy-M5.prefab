@@ -1656,6 +1656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carType: 0
   isCarStop: 0
+  enemyKind: car
   moveSpeed: 0
   hp: 35
   maxHp: 0
@@ -1679,6 +1680,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ca867e7691940e545bd953dbdb41dca6, type: 2}
   - {fileID: 2100000, guid: fe2f9f2ef464e704f9ba11acdca2882a, type: 2}
   imgHpProgressBar: {fileID: 6406030164670805158}
+  isSpeedUp: 0
+  newSpeed: 0
 --- !u!114 &237002470737636750
 MonoBehaviour:
   m_ObjectHideFlags: 0

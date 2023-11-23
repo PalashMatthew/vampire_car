@@ -270,7 +270,17 @@ public class Gun : MonoBehaviour
                 _damage += _damage / 100 * r;
             }                
 
-            _damage += damage / 100 * _playerStats.kritDamage;
+            if (_gm.GetComponent<EnemyController>().enemyKind == "car")
+            {
+                _damage += _damage / 100 * _playerStats.carDamage;
+            }
+
+            if (_gm.GetComponent<EnemyController>().enemyKind == "dron")
+            {
+                _damage += _damage / 100 * _playerStats.dronDamage;
+            }
+
+            _damage += _damage / 100 * _playerStats.kritDamage;
 
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
             {
@@ -345,6 +355,16 @@ public class Gun : MonoBehaviour
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s08")  //Если у нас сет Таран активен
             {
                 _damage = _damage + (_damage / 100 * (PlayerPrefs.GetFloat("setValue") * PlayerGuns.gunCount));
+            }
+
+            if (_gm.GetComponent<EnemyController>().enemyKind == "car")
+            {
+                _damage += _damage / 100 * _playerStats.carDamage;
+            }
+
+            if (_gm.GetComponent<EnemyController>().enemyKind == "dron")
+            {
+                _damage += _damage / 100 * _playerStats.dronDamage;
             }
 
             GameObject.Find("Player").GetComponent<PlayerPassiveController>().Vampirizm(_damage);

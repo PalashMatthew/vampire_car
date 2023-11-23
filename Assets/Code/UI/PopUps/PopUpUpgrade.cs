@@ -238,12 +238,6 @@ public class PopUpUpgrade : MonoBehaviour
         //RerollInitialize();
     }
 
-    void RerollInitialize()
-    {
-        rerollPrice = upgradeController.rerollPrice[_waveController.currentWave - 1];
-        tRerollPrice.text = rerollPrice.ToString();
-    }
-
     public void ButClosed()
     {
         GameplayController.isPause = false;
@@ -255,25 +249,16 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollAds(string _type)
     {
-        if (_type == "gun")
+        if (_type == "gun" && PlayerPrefs.GetInt("playerHard") >= 10)
         {
+            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
             StartCoroutine(RerollGun());
         }
 
-        if (_type == "passive")
+        if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
         {
+            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
             StartCoroutine(RerollPassive());
-        }        
-    }
-
-    public void ButRerollScrew()
-    {
-        if (GlobalStats.screwCount >= rerollPrice)
-        {
-            butRerollScrew.GetComponent<ButtonPress>().NegativeAnimation = false;
-            GlobalStats.screwCount -= rerollPrice;
-            tScrewValue.text = GlobalStats.screwCount.ToString();
-            StartCoroutine(RerollGun());
         }        
     }
 

@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carType: 1
   isCarStop: 0
+  enemyKind: dron
   moveSpeed: 0
   hp: 15
   maxHp: 0
@@ -151,6 +152,8 @@ MonoBehaviour:
   isBoss: 0
   materialsCar: []
   imgHpProgressBar: {fileID: 3173389784650680892}
+  isSpeedUp: 0
+  newSpeed: 0
 --- !u!114 &380629027515895104
 MonoBehaviour:
   m_ObjectHideFlags: 0
