@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private bool _isMoveAccess = true;
 
     public bool isStartRotate;
+    public float rotateVectorY;
 
     [Header("Local Move")]
     public bool localMove;  //Будет ли статичный враг двигаться вправо влево после того как выедет на экран?
@@ -56,14 +57,21 @@ public class EnemyMovement : MonoBehaviour
 
         if (isStartRotate)
         {
-            if (transform.position.x >= 0)
+            if (_enemyController.isPattern)
             {
-                transform.eulerAngles = new Vector3(0, Random.Range(183f, 190f), 0);
-            } 
+                transform.eulerAngles = new Vector3(0, rotateVectorY, 0);
+            }
             else
             {
-                transform.eulerAngles = new Vector3(0, Random.Range(170f, 177f), 0);
-            }
+                if (transform.position.x >= 0)
+                {
+                    transform.eulerAngles = new Vector3(0, Random.Range(183f, 190f), 0);
+                }
+                else
+                {
+                    transform.eulerAngles = new Vector3(0, Random.Range(170f, 177f), 0);
+                }
+            }            
         }
     }
 
