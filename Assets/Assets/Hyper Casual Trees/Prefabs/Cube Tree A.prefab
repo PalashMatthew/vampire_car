@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4230874297322790237}
   - component: {fileID: 5932950476561164826}
   - component: {fileID: 2502838701025305478}
-  - component: {fileID: 7612133771620634199}
   m_Layer: 0
   m_Name: Cube Tree A
   m_TagString: Untagged
@@ -168,25 +167,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7612133771620634199
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9070414768617782611}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2947155252473040984, guid: 57bb84cb633d498b8122a70454b5ee6a, type: 3}

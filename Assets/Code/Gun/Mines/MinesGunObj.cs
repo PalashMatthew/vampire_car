@@ -70,18 +70,21 @@ public class MinesGunObj : MonoBehaviour
 
     IEnumerator Attack()
     {
-        objBomb.transform.DOMoveY(0, 0.3f).SetEase(Ease.Linear);
+        objBomb.transform.DOMoveY(-1, 0.3f).SetEase(Ease.Linear);
+        objBomb.transform.parent = null;
 
         yield return new WaitForSeconds(0.3f);
 
-        Destroy(objBomb);
+        
 
         yield return new WaitForSeconds(0.1f);
 
-        GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
+        GameObject _boomObj = Instantiate(boomObj, objBomb.transform.position, Quaternion.identity);
         _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
         _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue, _boomObj.transform.localScale.y * _gunController.areaValue, _boomObj.transform.localScale.z * _gunController.areaValue);
         _boomObj.GetComponent<BoomObj>().Initialize();
+
+        Destroy(objBomb);
 
         //partVfx.gameObject.transform.DOScale(0, 0.3f);
 

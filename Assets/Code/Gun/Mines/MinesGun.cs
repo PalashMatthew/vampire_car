@@ -30,24 +30,24 @@ public class MinesGun : MonoBehaviour
         
         GameObject _bullet = Instantiate(objBullet, bulletPos.position, transform.rotation);
         _bullet.GetComponent<MinesGunObj>()._gunController = _gunController;
-        _bullet.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 10);
+        _bullet.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 25);
 
         if (_gunController.projectileValue == 2)
         {
             GameObject _bullet2 = Instantiate(objBullet, bulletPos.position, transform.rotation);
             _bullet2.GetComponent<MinesGunObj>()._gunController = _gunController;
-            _bullet2.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z + 7);
+            _bullet2.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z + 20);
         }
 
         if (_gunController.projectileValue == 3)
         {
             GameObject _bullet2 = Instantiate(objBullet, bulletPos.position, transform.rotation);
             _bullet2.GetComponent<MinesGunObj>()._gunController = _gunController;
-            _bullet2.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z + 7);
+            _bullet2.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x + 4, transform.position.y, transform.position.z + 20);
 
             GameObject _bullet3 = Instantiate(objBullet, bulletPos.position, transform.rotation);
             _bullet3.GetComponent<MinesGunObj>()._gunController = _gunController;
-            _bullet3.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z + 7);
+            _bullet3.GetComponent<MinesGunObj>().movePos = new Vector3(transform.position.x - 4, transform.position.y, transform.position.z + 20);
         }
 
         StartCoroutine(Attack());

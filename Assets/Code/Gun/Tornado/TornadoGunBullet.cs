@@ -17,7 +17,7 @@ public class TornadoGunBullet : MonoBehaviour
         if (_gunController.projectileValue == 1)
         {
             objProjectiles[0].SetActive(true);
-            objProjectiles[1].SetActive(false);
+            objProjectiles[1].SetActive(true);
             objProjectiles[2].SetActive(false);
             objProjectiles[3].SetActive(false);
         }
@@ -26,19 +26,11 @@ public class TornadoGunBullet : MonoBehaviour
         {
             objProjectiles[0].SetActive(true);
             objProjectiles[1].SetActive(true);
-            objProjectiles[2].SetActive(false);
-            objProjectiles[3].SetActive(false);
-        }
-
-        if (_gunController.projectileValue == 3)
-        {
-            objProjectiles[0].SetActive(true);
-            objProjectiles[1].SetActive(true);
             objProjectiles[2].SetActive(true);
             objProjectiles[3].SetActive(false);
         }
 
-        if (_gunController.projectileValue == 4)
+        if (_gunController.projectileValue == 3)
         {
             objProjectiles[0].SetActive(true);
             objProjectiles[1].SetActive(true);

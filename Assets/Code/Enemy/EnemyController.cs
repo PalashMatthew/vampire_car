@@ -99,7 +99,7 @@ public class EnemyController : MonoBehaviour
         moveSpeed *= GameObject.Find("Generate Controller").GetComponent<Generate>().moveSpeedCoeff;
         _enemyMovement._saveMoveSpeed = moveSpeed;
 
-        if (isPattern)
+        if (isPattern && !_enemyMovement.isStartRotate)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
             GameObject.Find("GameplayController").GetComponent<GameplayController>().activeEnemy.Add(gameObject);

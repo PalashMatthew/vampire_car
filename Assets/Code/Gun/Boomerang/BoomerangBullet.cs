@@ -7,8 +7,6 @@ public class BoomerangBullet : MonoBehaviour
     [HideInInspector]
     public Gun _gunController;
 
-    public GameObject mesh;
-
     public float rotateSpeed;
 
     bool isMoveForward;
@@ -21,8 +19,6 @@ public class BoomerangBullet : MonoBehaviour
     private void Update()
     {
         Movement();
-
-        mesh.transform.Rotate(Vector3.up * Time.deltaTime * rotateSpeed);
     }
 
     void Movement()

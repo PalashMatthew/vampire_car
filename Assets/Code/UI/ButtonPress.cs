@@ -10,6 +10,10 @@ public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private bool negativeAnimationPlayed;
 
+    [Header("Audio")]
+    public AudioClip clip;
+
+
     private void OnEnable()
     {
         //transform.DOScale(1f, 0f).SetUpdate(true);
@@ -17,6 +21,8 @@ public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        GameObject.Find("SoundsController").GetComponent<SoundController>().PlaySound(clip);
+
         if (!NegativeAnimation)
         {
             transform.DOScale(0.93f, 0.15f).SetUpdate(true);
