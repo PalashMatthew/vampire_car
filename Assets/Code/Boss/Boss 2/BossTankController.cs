@@ -33,9 +33,12 @@ public class BossTankController : MonoBehaviour
 
     private int attack2CurrentCount;
 
+    EnemyController _enemyController;
+
 
     private void Start()
     {
+        _enemyController = GetComponent<EnemyController>();
         player = GameObject.Find("Player");
 
         attack1CurrentCount = 0;
@@ -63,6 +66,17 @@ public class BossTankController : MonoBehaviour
 
         cabinObj.transform.LookAt(player.transform.position);
         cabinObj.transform.localEulerAngles = new Vector3(0, cabinObj.transform.localEulerAngles.y, 0);
+
+        CheckKillBoss();
+    }
+
+    void CheckKillBoss()
+    {
+        if (_enemyController.hp <= 0)
+        {
+            GameObject.Find("GameplayController").GetComponent<GameplayController>().Win();
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator Shield()
