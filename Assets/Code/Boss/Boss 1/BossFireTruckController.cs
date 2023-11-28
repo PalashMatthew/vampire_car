@@ -38,13 +38,16 @@ public class BossFireTruckController : MonoBehaviour
     public GameObject fxBoom;
     public GameObject mesh;
     public GameObject meshPanel;
-    public GameObject mesh1, mesh2, mesh3, mesh4, mesh5, mesh6;
 
     public GameObject objFireball;
     public float meshMoveSpeed;
 
-    private bool _isKillMesh1, _isKillMesh2, _isKillMesh3, _isKillMesh4, _isKillMesh5, _isKillMesh6;
-    public bool mesh1Destroy, mesh2Destroy, mesh3Destroy, mesh4Destroy, mesh5Destroy, mesh6Destroy;
+    [Header("Ricochet")]
+    public Transform spawnRicochetPos;
+    public GameObject objRicochetBullet;
+    public float shotRicochetTimePause;
+    public int shotRicochetCount;
+
 
     private void Start()
     {
@@ -61,8 +64,9 @@ public class BossFireTruckController : MonoBehaviour
                 BaseMovement();
             else
             {
-                action = BossActions.FindPlayer;
-                StartCoroutine(FindPlayerTimer());
+                //action = BossActions.FindPlayer;
+                action = BossActions.ShotRicochet;
+                StartCoroutine(ShotRicochet());
             }
         }
 
@@ -76,54 +80,13 @@ public class BossFireTruckController : MonoBehaviour
             fxPrewarmShot.Play();
         }
 
-        if (currentPhase == 2)
-        {
-            FindPlayer();
-        }
+        //if (currentPhase == 2)
+        //{
+        //    FindPlayer();
+        //}
         #endregion
 
         #region Phase 2
-        if (currentPhase == 2)
-        {
-            fxPrewarmShot.Stop();
-
-            if (_enemyController.hp <= _enemyController.maxHp / 2 / 100 * (16.5f * 5) && !_isKillMesh1)
-            {
-                _isKillMesh1 = true;
-                mesh1.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-
-            if (_enemyController.hp <= _enemyController.maxHp / 2 / 100 * (16.5f * 4) && !_isKillMesh2)
-            {
-                _isKillMesh2 = true;
-                mesh2.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-
-            if (_enemyController.hp <= _enemyController.maxHp / 2 / 100 * (16.5f * 3) && !_isKillMesh3)
-            {
-                _isKillMesh3 = true;
-                mesh3.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-
-            if (_enemyController.hp <= _enemyController.maxHp / 2 / 100 * (16.5f * 2) && !_isKillMesh4)
-            {
-                _isKillMesh4 = true;
-                mesh4.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-
-            if (_enemyController.hp <= _enemyController.maxHp / 2 / 100 * 16.5f && !_isKillMesh5)
-            {
-                _isKillMesh5 = true;
-                mesh5.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-
-            if (_enemyController.hp <= 0 && !_isKillMesh6)
-            {
-                _isKillMesh6 = true;
-                mesh6.GetComponent<BossFireTruckMeshMove>().isMove = true;
-            }
-        }
-
         CheckKillBoss();
         #endregion
     }
@@ -135,9 +98,28 @@ public class BossFireTruckController : MonoBehaviour
         transform.DOMoveX(_player.transform.position.x, moveSpeedFindPlayer);
     }
 
-    void ShotRicochet()
+    IEnumerator ShotRicochet()
     {
+        for (int i = 0; i < shotRicochetCount; i++)
+        {
+            GameObject gm = Instantiate(objRicochetBullet, spawnRicochetPos.position, transform.rotation);
+            gm.transform.localEulerAngles = new Vector3(0, Random.Range(130f, 230f), 0);
+            gm.GetComponent<BossFireTruckRicochetBullet>().damage = damage;
+        }
 
+        yield return new WaitForSeconds(shotRicochetTimePause);
+
+        if (_enemyController.hp >= _enemyController.maxHp / 2)
+        {
+            StartCoroutine(ShotRicochet());
+        } 
+        else
+        {
+            currentPhase = 2;
+            currentAttack = 1;
+            action = BossActions.FindPlayer;
+            StartCoroutine(Pause());
+        }
     }
 
     IEnumerator FindPlayerTimer()
@@ -152,12 +134,12 @@ public class BossFireTruckController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        if (_enemyController.hp <= _enemyController.maxHp / 2 && currentPhase == 1)
-        {
-            currentPhase = 2;
-            StartCoroutine(StartPhase2());
-            yield break;
-        }
+        //if (_enemyController.hp <= _enemyController.maxHp / 2 && currentPhase == 1)
+        //{
+        //    currentPhase = 2;
+        //    StartCoroutine(StartPhase2());
+        //    yield break;
+        //}
 
         if (currentAttack == 1)
         {
@@ -194,15 +176,8 @@ public class BossFireTruckController : MonoBehaviour
 
         currentAttack = 2;
 
-        if (_enemyController.hp <= _enemyController.maxHp / 2 && currentPhase == 1)
-        {
-            currentPhase = 2;
-            StartCoroutine(StartPhase2());
-        } else
-        {
-            action = BossActions.FindPlayer;
-            StartCoroutine(FindPlayerTimer());
-        }        
+        action = BossActions.FindPlayer;
+        StartCoroutine(FindPlayerTimer());
     }
 
     IEnumerator FireAttack2()
@@ -249,15 +224,8 @@ public class BossFireTruckController : MonoBehaviour
 
         currentAttack = 1;
 
-        if (_enemyController.hp <= _enemyController.maxHp / 2 && currentPhase == 1)
-        {
-            currentPhase = 2;
-            StartCoroutine(StartPhase2());
-        } else
-        {
-            action = BossActions.FindPlayer;
-            StartCoroutine(FindPlayerTimer());
-        }        
+        action = BossActions.FindPlayer;
+        StartCoroutine(FindPlayerTimer());
     }
 
     void BaseMovement()
@@ -296,7 +264,7 @@ public class BossFireTruckController : MonoBehaviour
 
     void CheckKillBoss()
     {
-        if (mesh1Destroy && mesh2Destroy && mesh3Destroy && mesh4Destroy && mesh5Destroy && mesh6Destroy)
+        if (_enemyController.hp <= 0)
         {
             GameObject.Find("GameplayController").GetComponent<GameplayController>().Win();
             Destroy(gameObject);
