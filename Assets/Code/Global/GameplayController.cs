@@ -19,6 +19,7 @@ public class GameplayController : MonoBehaviour
 
     [Header("Enemy")]
     public List<GameObject> activeEnemy;
+    public static bool isBossActive;
 
     [Header("Initialize")]
     public PlayerUIController _playerUIController;
@@ -30,6 +31,7 @@ public class GameplayController : MonoBehaviour
     private void Start()
     {
         InitializeGame();
+        isBossActive = false;
     }
 
     void InitializeGame()

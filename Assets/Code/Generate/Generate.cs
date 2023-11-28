@@ -126,7 +126,7 @@ public class Generate : MonoBehaviour
         {
             GameObject inst = Instantiate(bossObj, new Vector3(0, 0, 90f), transform.rotation);
             _gameplayController.activeEnemy.Add(inst);
-            inst.name = "BOSS";
+            inst.name = "BOSS";            
 
             inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
