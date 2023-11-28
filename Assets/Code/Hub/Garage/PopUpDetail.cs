@@ -50,6 +50,7 @@ public class PopUpDetail : MonoBehaviour
     public List<int> drawingCount;
     public GameObject butUpgrade;
     public GameObject butUpgradeGray;
+    public GameObject butUpgradeGrayNotValue;
 
     [Header("Level")]
     public Image fillLevel;
@@ -742,6 +743,7 @@ public class PopUpDetail : MonoBehaviour
         {
             butUpgrade.SetActive(true);
             butUpgradeGray.SetActive(false);
+            butUpgradeGrayNotValue.SetActive(false);
 
             switch (garageController.activeItem.itemObj.itemType)
             {
@@ -771,6 +773,7 @@ public class PopUpDetail : MonoBehaviour
         {
             butUpgrade.SetActive(false);
             butUpgradeGray.SetActive(true);
+            butUpgradeGrayNotValue.SetActive(false);
 
             switch (garageController.activeItem.itemObj.itemType)
             {
@@ -793,7 +796,48 @@ public class PopUpDetail : MonoBehaviour
                     tDrawing.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_drawingTransmission") + ": " + PlayerPrefs.GetInt("drawingTransmissionCount") + "/MAX";
                     break;
             }
-        }        
+        }
+
+        #region Button Check
+        if (!butUpgradeGray.activeSelf)
+        {
+            int currentDrawing = 0;
+
+            switch (garageController.activeItem.itemObj.itemType)
+            {
+                case DetailCard.ItemType.Gun:
+                    currentDrawing = PlayerPrefs.GetInt("drawingGunCount");
+                    break;
+                case DetailCard.ItemType.Engine:
+                    currentDrawing = PlayerPrefs.GetInt("drawingEngineCount");
+                    break;
+                case DetailCard.ItemType.Brakes:
+                    currentDrawing = PlayerPrefs.GetInt("drawingBrakesCount");
+                    break;
+                case DetailCard.ItemType.FuelSystem:
+                    currentDrawing = PlayerPrefs.GetInt("drawingFuelSystemCount");
+                    break;
+                case DetailCard.ItemType.Suspension:
+                    currentDrawing = PlayerPrefs.GetInt("drawingSuspensionCount");
+                    break;
+                case DetailCard.ItemType.Transmission:
+                    currentDrawing = PlayerPrefs.GetInt("drawingTransmissionCount");
+                    break;
+            }
+
+            if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel] &&
+                currentDrawing >= drawingCount[garageController.activeItem.currentLevel])
+            {
+                butUpgradeGrayNotValue.SetActive(false);
+                butUpgrade.SetActive(true);
+            }
+            else
+            {
+                butUpgradeGrayNotValue.SetActive(true);
+                butUpgrade.SetActive(false);
+            }
+        }
+        #endregion
     }
 
     void LevelUpdate()
@@ -1040,9 +1084,7 @@ public class PopUpDetail : MonoBehaviour
                 }
 
                 PlayerPrefs.SetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory,
-                                   PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) + 1);
-
-                garageController.activeItem.currentLevel += 1;
+                                   PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) + 1);                
 
                 if (itemRarity == "common")
                 {
@@ -1113,6 +1155,10 @@ public class PopUpDetail : MonoBehaviour
                     garageController.CalculateViewStats();
 
                 PlayerPrefs.SetInt(s, PlayerPrefs.GetInt(s) - drawingCount[garageController.activeItem.currentLevel]);
+
+                garageController.activeItem.currentLevel += 1;
+
+                CalculateUpgradePrice();
             }            
         }
     }
