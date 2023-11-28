@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class PopUpPause : MonoBehaviour
@@ -20,10 +21,14 @@ public class PopUpPause : MonoBehaviour
     public Sprite sprButInputInactive;
     public Image imgButInput1, imgButInput2;
 
+    public UpgradeController upgController;
+    public List<Image> slotImage;
+
 
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
+        GunSlotInitialize();
     }
 
     public void ButOpen()
@@ -99,5 +104,31 @@ public class PopUpPause : MonoBehaviour
 
         gm.transform.parent = passivePanel;
         gm.transform.localScale = Vector3.one;
+    }
+
+    void GunSlotInitialize()
+    {
+        for (int i = 0; i < slotImage.Count; i++)
+        {
+            slotImage[i].DOFade(0f, 0f).SetUpdate(true);
+        }
+
+        if (upgController.activeGunCard != null)
+        {
+            for (int i = 0; i < upgController.activeGunCard.Count; i++)
+            {
+                slotImage[i].sprite = upgController.activeGunCard[i].imageItem;
+                slotImage[i].DOFade(1f, 0f).SetUpdate(true);
+            }
+        }
+    }
+
+    public void AddCardToSlot()
+    {
+        for (int i = 0; i < upgController.activeGunCard.Count; i++)
+        {
+            slotImage[i].sprite = upgController.activeGunCard[i].imageItem;
+            slotImage[i].DOFade(1f, 0f).SetUpdate(true);
+        }
     }
 }

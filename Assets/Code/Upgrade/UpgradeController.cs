@@ -951,6 +951,8 @@ public class UpgradeController : MonoBehaviour
 
         if (activeGunCard.Count >= 6)
             isSlotFull = true;
+
+        GameObject.Find("PopUp Pause").GetComponent<PopUpPause>().AddCardToSlot();
     }
 
     public void UpdateTextLevels()
