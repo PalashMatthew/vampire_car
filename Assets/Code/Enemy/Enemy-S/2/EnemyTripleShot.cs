@@ -58,7 +58,7 @@ public class EnemyTripleShot : MonoBehaviour
 
         yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
 
-        if (_enemyShotCount >= 3)
+        if (_enemyShotCount >= 3 && _enemyController.carType == EnemyController.CarType.Static)
         {
             _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
         }

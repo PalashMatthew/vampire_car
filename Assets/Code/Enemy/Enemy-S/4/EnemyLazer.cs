@@ -16,6 +16,7 @@ public class EnemyLazer : MonoBehaviour
     public Material matDefault, matAttack;
 
     EnemyMovement _enemyMovement;
+    EnemyController _enemyController;
     private int _enemyShotCount = 1;
 
 
@@ -24,6 +25,7 @@ public class EnemyLazer : MonoBehaviour
         _gunController = GetComponent<EnemyGun>();
         _player = GameObject.Find("Player");
         _enemyMovement = GetComponent<EnemyMovement>();
+        _enemyController = GetComponent<EnemyController>();
 
         objLazer.SetActive(false);
     }
@@ -56,7 +58,7 @@ public class EnemyLazer : MonoBehaviour
         transform.DORotate(new Vector3(0, 180, 0), 0.3f);
         _enemyMovement.StartCoroutine(_enemyMovement.LocalMoveEnum());
 
-        if (_enemyShotCount >= 3)
+        if (_enemyShotCount >= 3 && _enemyController.carType == EnemyController.CarType.Static)
         {
             _enemyMovement.StartCoroutine(_enemyMovement.MoveInside());
         }

@@ -65,6 +65,12 @@ public class ChooseLocationController : MonoBehaviour
             butPrev.SetActive(false);
         }
 
+        if (currentLocNum > 1 && currentLocNum < maxLocNum)
+        {
+            butNext.SetActive(true);
+            butPrev.SetActive(true);
+        }
+
         if (currentLocNum == maxLocNum)
         {
             butNext.SetActive(false);
