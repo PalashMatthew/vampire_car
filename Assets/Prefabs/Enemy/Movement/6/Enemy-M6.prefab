@@ -322,6 +322,7 @@ MonoBehaviour:
   isLazer: 0
   moveSpeed: 0
   isStartRotate: 0
+  rotateVectorY: 0
   localMove: 0
   _isStartLocalMove: 0
   localMoveSpeed: 0
@@ -348,7 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   shotSpeed: 3
-  bulletMoveSpeed: 40
+  bulletMoveSpeed: 25
   pauseTime: 0
 --- !u!65 &8162041530657365112
 BoxCollider:

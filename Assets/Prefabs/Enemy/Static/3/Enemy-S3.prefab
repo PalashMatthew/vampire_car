@@ -344,6 +344,7 @@ MonoBehaviour:
   isLazer: 0
   moveSpeed: 0
   isStartRotate: 0
+  rotateVectorY: 0
   localMove: 1
   _isStartLocalMove: 0
   localMoveSpeed: 5
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   shotSpeed: 5
-  bulletMoveSpeed: 20
+  bulletMoveSpeed: 15
   pauseTime: 0
 --- !u!114 &6172056994096470475
 MonoBehaviour:
