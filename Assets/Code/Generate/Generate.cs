@@ -63,10 +63,11 @@ public class Generate : MonoBehaviour
                 _x = (int)_x;
                 _x *= step;
 
-                if (_spawnPosMass.Contains(_x))
+                if (!_spawnPosMass.Contains(_x))
                 {
                     _spawnPosMass.Add(_x);
-                } else
+                } 
+                else
                 {
                     goto l1;
                 }                               

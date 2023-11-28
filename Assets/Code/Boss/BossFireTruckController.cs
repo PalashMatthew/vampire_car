@@ -16,7 +16,8 @@ public class BossFireTruckController : MonoBehaviour
         FindPlayer,
         Pause,
         FireAttack1,
-        FireAttack2
+        FireAttack2,
+        ShotRicochet
     }
     public BossActions action;
 
@@ -132,6 +133,11 @@ public class BossFireTruckController : MonoBehaviour
     void FindPlayer()
     {
         transform.DOMoveX(_player.transform.position.x, moveSpeedFindPlayer);
+    }
+
+    void ShotRicochet()
+    {
+
     }
 
     IEnumerator FindPlayerTimer()
