@@ -26,9 +26,7 @@ public class DefaultGunBullet : MonoBehaviour
 
         _damage = _gunController.damage;
 
-        punchingCount = _playerStats.punchingCount;
-
-        
+        punchingCount = _playerStats.punchingCount;        
     }
 
 
@@ -63,6 +61,11 @@ public class DefaultGunBullet : MonoBehaviour
         if (other.tag == "player" && isPlayerAttack)
         {
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.CalculateDamage());
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "destroy_bullet")
+        {
             Destroy(gameObject);
         }
     }

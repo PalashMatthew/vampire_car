@@ -220,7 +220,7 @@ public class Gun : MonoBehaviour
             _damageCoeff = 1 - _damageCoeff;
             _damageCoeff = _playerStats.distanceDamageCoeff * _damageCoeff;
 
-            _dmg = _dmg * _damageCoeff;
+            _dmg = _dmg + (_dmg / 100 * _damageCoeff);
         }
 
         if (_playerStats.massEnemyDamage > 0)
