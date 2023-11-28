@@ -53,12 +53,23 @@ public class Generate : MonoBehaviour
     {
         if (!_isSpawnPattern)
         {
+            List<float> _spawnPosMass = new List<float>();
+
             for (int i = 0; i < waveController.waveList[waveController.currentWave - 1].enemySpawnCount; i++)
             {
+                l1:
                 float _randX = Random.Range(minXSpawn, maxXSpawn);
                 float _x = _randX / step;
                 _x = (int)_x;
                 _x *= step;
+
+                if (_spawnPosMass.Contains(_x))
+                {
+                    _spawnPosMass.Add(_x);
+                } else
+                {
+                    goto l1;
+                }                               
 
                 float _randZ = Random.Range(minZSpawn, maxZSpawn);
 

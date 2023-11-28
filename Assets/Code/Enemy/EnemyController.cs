@@ -92,12 +92,15 @@ public class EnemyController : MonoBehaviour
     }
 
     public void Initialize()
-    {
-        _enemyMovement = GetComponent<EnemyMovement>();
-
+    {        
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
         moveSpeed *= GameObject.Find("Generate Controller").GetComponent<Generate>().moveSpeedCoeff;
-        _enemyMovement._saveMoveSpeed = moveSpeed;
+
+        if (!isBoss)
+        {
+            _enemyMovement = GetComponent<EnemyMovement>();
+            _enemyMovement._saveMoveSpeed = moveSpeed;
+        }        
 
         if (isPattern && !_enemyMovement.isStartRotate)
         {
@@ -114,14 +117,17 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (hp == maxHp)
+        if (!isBoss)
         {
-            imgHpProgressBar.gameObject.SetActive(false);
-        }
-        else
-        {
-            imgHpProgressBar.gameObject.SetActive(true);
-            imgHpProgressBar.fillAmount = hp / maxHp;
+            if (hp == maxHp)
+            {
+                imgHpProgressBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                imgHpProgressBar.gameObject.SetActive(true);
+                imgHpProgressBar.fillAmount = hp / maxHp;
+            }
         }
 
         if (isSpeedUp)
