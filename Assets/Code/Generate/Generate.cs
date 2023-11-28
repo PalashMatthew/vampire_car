@@ -53,21 +53,24 @@ public class Generate : MonoBehaviour
     {
         if (!_isSpawnPattern)
         {
-            float _randX = Random.Range(minXSpawn, maxXSpawn);
-            float _x = _randX / step;
-            _x = (int)_x;
-            _x *= step;
+            for (int i = 0; i < waveController.waveList[waveController.currentWave - 1].enemySpawnCount; i++)
+            {
+                float _randX = Random.Range(minXSpawn, maxXSpawn);
+                float _x = _randX / step;
+                _x = (int)_x;
+                _x *= step;
 
-            float _randZ = Random.Range(minZSpawn, maxZSpawn);
+                float _randZ = Random.Range(minZSpawn, maxZSpawn);
 
-            GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
-            _gameplayController.activeEnemy.Add(inst);
+                GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
+                _gameplayController.activeEnemy.Add(inst);
 
-            inst.transform.eulerAngles = new Vector3(0, 180, 0);
+                inst.transform.eulerAngles = new Vector3(0, 180, 0);
 
-            //inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
-            //inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
-            inst.GetComponent<EnemyController>().Initialize();
+                //inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
+                //inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+                inst.GetComponent<EnemyController>().Initialize();
+            }
         }
         else
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUpPause : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class PopUpPause : MonoBehaviour
     public float animSpeed;
 
     private PopUpController _popUpController;
+
+    public Transform passivePanel;
+    public GameObject pauseCell;
+
+    [Header("Input Settings")]
+    public Sprite sprButInputActive;
+    public Sprite sprButInputInactive;
+    public Image imgButInput1, imgButInput2;
+
 
     private void Start()
     {
@@ -21,6 +31,29 @@ public class PopUpPause : MonoBehaviour
         GameplayController.isPause = true;
         Time.timeScale = 0;
         _popUpController.OpenPopUp();
+
+        GameInputCheck();
+    }
+
+    void GameInputCheck()
+    {
+        if (!PlayerPrefs.HasKey("GameInput"))
+        {
+            ButInput1();
+            return;
+        }
+
+        if (PlayerPrefs.GetInt("GameInput") == 1)
+        {
+            ButInput1();
+            return;
+        }
+
+        if (PlayerPrefs.GetInt("GameInput") == 2)
+        {
+            ButInput2();
+            return;
+        }
     }
 
     public void ButClosed()
@@ -30,9 +63,24 @@ public class PopUpPause : MonoBehaviour
         _popUpController.ClosedPopUp();
     }
 
-    public void ButSettings()
+    public void ButInput1()
     {
+        imgButInput2.sprite = sprButInputActive;
+        imgButInput1.sprite = sprButInputInactive;
 
+        PlayerPrefs.SetInt("GameInput", 1);
+
+        GameObject.Find("GameplayController").GetComponent<GameplayController>().inputSettings = GameplayController.InputSettings.RelativeToTheFinger;
+    }
+
+    public void ButInput2()
+    {
+        imgButInput1.sprite = sprButInputActive;
+        imgButInput2.sprite = sprButInputInactive;
+
+        PlayerPrefs.SetInt("GameInput", 2);
+
+        GameObject.Find("GameplayController").GetComponent<GameplayController>().inputSettings = GameplayController.InputSettings.FingerTracking;
     }
 
     public void ButExit()
@@ -40,5 +88,16 @@ public class PopUpPause : MonoBehaviour
         GameplayController.isPause = false;
         Time.timeScale = 1;
         GameObject.Find("LoadingCanvas").GetComponent<ASyncLoader>().LoadLevel("Hub");
+    }
+
+    public void InstPassive(Sprite _spr)
+    {
+        GameObject gm = Instantiate(pauseCell, transform.position, transform.rotation);
+        
+        gm.GetComponent<PauseCell>().spr = _spr;
+        gm.GetComponent<PauseCell>().Initialize();
+
+        gm.transform.parent = passivePanel;
+        gm.transform.localScale = Vector3.one;
     }
 }

@@ -21,11 +21,13 @@ public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        GameObject.Find("SoundsController").GetComponent<SoundController>().PlaySound(clip);
+        //GameObject.Find("SoundsController").GetComponent<SoundController>().PlaySound(clip);
 
         if (!NegativeAnimation)
         {
-            transform.DOScale(0.93f, 0.15f).SetUpdate(true);
+            Sequence buttomPress = DOTween.Sequence();
+
+            buttomPress.Append(transform.DOScale(0.93f, 0.15f).SetUpdate(true)).SetUpdate(true);
         } 
         else
         {

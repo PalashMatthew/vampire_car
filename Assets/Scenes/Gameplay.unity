@@ -1625,10 +1625,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1532467040574734192, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7b6784236c476c845a418ecaed86fcfa, type: 3}
     - target: {fileID: 1987879168440604111, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1709,69 +1705,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3044327105894615259, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121296220755136793, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 967
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121296220755136793, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 144
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121296220755136793, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00097656
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121296220755136793, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -72.003
-      objectReference: {fileID: 0}
     - target: {fileID: 4090922547596407256, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: waveController
       value: 
       objectReference: {fileID: 1288134776}
-    - target: {fileID: 5780742442262159169, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_text
-      value: "\u041F\u0430\u0443\u0437\u0430"
-      objectReference: {fileID: 0}
-    - target: {fileID: 5780742442262159169, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_fontSize
-      value: 88.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 5780742442262159169, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_margin.w
-      value: 25.176514
-      objectReference: {fileID: 0}
-    - target: {fileID: 5780742442262159169, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_fontStyle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5780742442262159169, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 88.02
-      objectReference: {fileID: 0}
     - target: {fileID: 6635680137960681973, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: upgradeController
       value: 
       objectReference: {fileID: 980984889}
-    - target: {fileID: 7048187427516361354, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7683400570497708902, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: m_Name
       value: GameplayUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136197507649401381, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 967
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136197507649401381, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 144
       objectReference: {fileID: 0}
     - target: {fileID: 8870594785133719995, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: playerStats

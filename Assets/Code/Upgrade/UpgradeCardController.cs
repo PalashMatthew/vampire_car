@@ -182,6 +182,7 @@ public class UpgradeCardController : MonoBehaviour
         if (_type == "passive")
         {
             _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoicePassiveCard());
+            GameObject.Find("PopUp Pause").GetComponent<PopUpPause>().InstPassive(imgIcon.sprite);
         }            
 
         if (_type == "gun")
