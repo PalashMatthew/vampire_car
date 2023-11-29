@@ -1328,11 +1328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734565322496162554, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
       propertyPath: minZ
-      value: -37.5
+      value: -37.4
       objectReference: {fileID: 0}
     - target: {fileID: 4734565322496162554, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
       propertyPath: spawnZ
-      value: 112.5
+      value: 112.2
       objectReference: {fileID: 0}
     - target: {fileID: 4734565322496162554, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
       propertyPath: placeObj
@@ -1407,7 +1407,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2501459279440677551, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
+    - {fileID: 7457904989482409404, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6246494811335565897, guid: 4e5990dfa32dbbf448b8093d2a46878d, type: 3}
       insertIndex: -1
@@ -1747,7 +1749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 75
+      value: 74.8
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1808,10 +1810,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 325315241}
     m_Modifications:
-    - target: {fileID: 349785986824056989, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
-      propertyPath: isFixPlace
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2112,7 +2110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.5
+      value: 37.4
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3157,7 +3155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 112.5
+      value: 112.2
       objectReference: {fileID: 0}
     - target: {fileID: 3055423259544161825, guid: f3aac843cc0fc084680c7b876def0cdb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3529,6 +3527,10 @@ PrefabInstance:
     - target: {fileID: 5944416013669709902, guid: 5fde5d18e7070894cab91afb25e40b20, type: 3}
       propertyPath: m_Name
       value: Boss_Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944416013669709902, guid: 5fde5d18e7070894cab91afb25e40b20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

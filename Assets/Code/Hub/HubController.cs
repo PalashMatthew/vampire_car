@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using System;
 
 public class HubController : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class HubController : MonoBehaviour
     public Image imgHeader;
     public TMP_Text tFuelValue;
     public TMP_Text tMoneyValue;
-    public TMP_Text tHardValue;    
+    public TMP_Text tHardValue;
+    public TMP_Text tFuelTimer;
 
 
     private void Start()
@@ -59,14 +61,84 @@ public class HubController : MonoBehaviour
         {
             PlayerPrefs.SetInt("playerMoney", 1000);
             PlayerPrefs.SetInt("playerHard", 20);
-            PlayerPrefs.SetInt("playerFuelCurrent", 30);
-            PlayerPrefs.SetInt("playerFuelMax", 30);
+            PlayerPrefs.SetInt("playerFuelCurrent", 20);
+            PlayerPrefs.SetInt("playerFuelMax", 20);
+            tFuelTimer.text = "";
         }
-    }
 
-    public void ButPlay()
-    {
-        Application.LoadLevel(1);
+        #region Fuel Check
+        if (PlayerPrefs.GetInt("playerFuelCurrent") == PlayerPrefs.GetInt("playerFuelMax"))
+        {
+            tFuelTimer.text = "";
+        }
+        else
+        {
+            if (PlayerPrefs.HasKey("OfflineTimeLast"))
+            {
+                int seconds = 0;
+
+                DateTime ts;
+                ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
+
+                if (ts.Hour > 0)
+                {
+                    seconds += ts.Hour * 60 * 60;
+                }
+
+                if (ts.Minute > 0)
+                {
+                    seconds += ts.Minute * 60;
+                }
+
+                if (ts.Second > 0)
+                {
+                    seconds += ts.Second;
+                }
+
+                if (seconds > 0)
+                {
+                    int fuelCountPlus;
+                    int ostatok;
+
+                    if (PlayerPrefs.GetInt("FuelTimerSaveTime") > 0)
+                    {
+                        int i = 600 - PlayerPrefs.GetInt("FuelTimerSaveTime");
+                        seconds += i; 
+                        PlayerPrefs.SetInt("FuelTimerSaveTime", 0);
+                    }
+
+                    if (seconds > 600)
+                    {
+                        fuelCountPlus = seconds / 600;
+                        ostatok = 600 - seconds % 600;
+                    } 
+                    else
+                    {
+                        fuelCountPlus = 0;
+                        ostatok = 600 - seconds;
+                    }
+
+                    int needFuel = PlayerPrefs.GetInt("playerFuelMax") - PlayerPrefs.GetInt("playerFuelCurrent");
+
+                    Debug.Log("Прошло секунд = " + seconds + " Остаток = " + ostatok);
+
+                    needFuel += fuelCountPlus;
+                    if (needFuel >= PlayerPrefs.GetInt("playerFuelMax"))
+                    {
+                        PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelMax"));
+                        tFuelTimer.text = "";
+                    }
+                    else
+                    {
+                        PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + fuelCountPlus);
+                        StartCoroutine(FuelTimer(ostatok));
+                    }
+
+                    tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
+                }
+            }
+        }
+        #endregion
     }
 
     #region Selection Menu
@@ -410,6 +482,56 @@ public class HubController : MonoBehaviour
     {
         tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
         tMoneyValue.text = PlayerPrefs.GetInt("playerMoney").ToString();
-        tHardValue.text = PlayerPrefs.GetInt("playerHard").ToString();
+        tHardValue.text = PlayerPrefs.GetInt("playerHard").ToString();        
     }    
+
+    IEnumerator FuelTimer(int _seconds)
+    {
+        yield return new WaitForSeconds(1);
+        _seconds -= 1;
+
+        PlayerPrefs.SetInt("FuelTimerSaveTime", _seconds);
+
+        int _minutes = _seconds / 60;
+        string s;
+        string m;
+
+        if (_minutes > 9) 
+        {
+            m = _minutes.ToString();
+        } else
+        {
+            m = "0" + _minutes.ToString();
+        }
+
+        if (_seconds % 60 > 9)
+        {
+            s = _seconds % 60 + "";
+        } else
+        {
+            s = "0" + _seconds % 60;
+        }
+
+        tFuelTimer.text = m + ":" + s;
+
+        if (_seconds <= 0)
+        {
+            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 1);
+            tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
+            PlayerPrefs.SetInt("FuelTimerSaveTime", 0);
+
+            if (PlayerPrefs.GetInt("playerFuelCurrent") == PlayerPrefs.GetInt("playerFuelMax"))
+            {
+                tFuelTimer.text = "";
+            } 
+            else
+            {
+                StartCoroutine(FuelTimer(600));
+            }
+        } 
+        else
+        {
+            StartCoroutine(FuelTimer(_seconds));
+        }
+    }
 }

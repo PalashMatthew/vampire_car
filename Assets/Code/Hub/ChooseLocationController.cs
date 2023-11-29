@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -109,6 +110,11 @@ public class ChooseLocationController : MonoBehaviour
 
     public void ButPlay()
     {
-        loader.LoadLevel(levelName[currentLocNum-1]);
+        if (PlayerPrefs.GetInt("playerFuelCurrent") >= 5)
+        {
+            PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
+            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") - 5);
+            loader.LoadLevel(levelName[currentLocNum - 1]);
+        }        
     }
 }
