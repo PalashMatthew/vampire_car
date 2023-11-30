@@ -8,7 +8,8 @@ using System;
 
 public class ReadGoogleSheet : MonoBehaviour
 {
-    public string url;
+    public bool isDownloadData;
+
     public string urlCar;
     public string urlGunUpgrade;
     public string urlPassiveUpgrade;
@@ -20,10 +21,9 @@ public class ReadGoogleSheet : MonoBehaviour
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("loadCar"))
+        if (isDownloadData)
         {
             StartCoroutine(ObtainSheetData(urlCar, "car"));
-            PlayerPrefs.SetInt("loadCar", 1);
 
             StartCoroutine(ObtainSheetData(urlGunUpgrade, "gunUpgrade"));
 
@@ -36,11 +36,13 @@ public class ReadGoogleSheet : MonoBehaviour
             StartCoroutine(ObtainSheetData(urlDropSystem, "dropSystem"));
 
             StartCoroutine(ObtainSheetData(urlLocalization, "localization"));
-        }        
+        }
         else
         {
-            GameObject.Find("InitController").GetComponent<InitScene>().Play();
+            ReadDataFile();
         }
+
+        GameObject.Find("InitController").GetComponent<InitScene>().Play();
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)
@@ -76,5 +78,53 @@ public class ReadGoogleSheet : MonoBehaviour
             if (_bdName == "localization")
                 GetComponent<BDLoaderController>().LoadLocalization(json);
         }
+    }
+
+    void ReadDataFile()
+    {
+        TextAsset csv;
+        string json;
+
+        //CarInfo
+        csv = Resources.Load<TextAsset>("DataAssets/CarInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadCarInfo(json);
+
+        //GunUpgradeInfo
+        csv = Resources.Load<TextAsset>("DataAssets/GunUpgradeInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadGunUpgradeInfo(json);
+
+        //PassiveUpgradeInfo
+        csv = Resources.Load<TextAsset>("DataAssets/PassiveUpgradeInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadPassiveUpgradeInfo(json);
+
+        //GunBaseSettingsInfo
+        csv = Resources.Load<TextAsset>("DataAssets/GunBaseSettingsInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadGunBaseSettingsInfo(json);
+
+        //TalentsInfo
+        csv = Resources.Load<TextAsset>("DataAssets/TalentsInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadTalentsInfo(json);
+
+        //DropSystemInfo
+        csv = Resources.Load<TextAsset>("DataAssets/DropSystemInfo");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadDropSystemInfo(json);
+
+        //Localization
+        csv = Resources.Load<TextAsset>("DataAssets/Localization");
+
+        json = csv.text;
+        GetComponent<BDLoaderController>().LoadLocalization(json);
     }
 }

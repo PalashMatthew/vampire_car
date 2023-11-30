@@ -805,7 +805,5 @@ public class BDLoaderController : MonoBehaviour
         }
 
         PlayerPrefs.SetString("activeLang", "ru");
-
-        GameObject.Find("InitController").GetComponent<InitScene>().Play();
     }
 }
