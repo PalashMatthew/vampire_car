@@ -16,7 +16,7 @@ public class AuthManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
 
-        tUserID.text = "UserID - 0";
+        tUserID.text = "";
 
         SignIn();
     }
@@ -34,7 +34,8 @@ public class AuthManager : MonoBehaviour
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
             print("Sign in Success! UserID - " + AuthenticationService.Instance.PlayerId);
-            tUserID.text = "UserID - " + AuthenticationService.Instance.PlayerId;
+            //tUserID.text = "UserID - " + AuthenticationService.Instance.PlayerId;
+            PlayerPrefs.SetString("userID", AuthenticationService.Instance.PlayerId);
         }
         catch (AuthenticationException ex)
         {

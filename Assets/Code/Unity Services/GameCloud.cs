@@ -224,7 +224,7 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("playerMoney", player.playerMoney);
             PlayerPrefs.SetInt("playerHard", player.playerHard);
             PlayerPrefs.SetInt("playerExp", player.playerExp);
-            PlayerPrefs.SetInt("playerFuelCurrent", player.playerExp);
+            PlayerPrefs.SetInt("playerFuelCurrent", player.playerFuelCurrent);
 
             PlayerPrefs.SetInt("drawingEngineCount", player.drawingEngineCount);
             PlayerPrefs.SetInt("drawingBrakesCount", player.drawingBrakesCount);
@@ -326,10 +326,22 @@ public class GameCloud : MonoBehaviour
 
     private void OnApplicationPause()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
         if (UnityServices.State == ServicesInitializationState.Initializing)
         {
             SaveData();
-        }        
+        }             
+#endif
+    }
+
+    private void OnApplicationQuit()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (UnityServices.State == ServicesInitializationState.Initializing)
+        {
+            SaveData();
+        }             
+#endif
     }
 
     private void Update()
