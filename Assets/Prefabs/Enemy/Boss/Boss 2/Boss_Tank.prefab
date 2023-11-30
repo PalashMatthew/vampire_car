@@ -6068,7 +6068,8 @@ MonoBehaviour:
   imgHpProgressBar: {fileID: 0}
   isSpeedUp: 0
   newSpeed: 0
-  clip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  clipHit: {fileID: 0}
+  clipDeath: {fileID: 0}
 --- !u!114 &3892853768636224902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6086,11 +6087,11 @@ MonoBehaviour:
   collider: {fileID: 2707866780869027743}
   vfxShield: {fileID: 5364332611934730245}
   shieldObj: {fileID: 8301775060316293872}
-  attack1BulletCount: 60
+  attack1BulletCount: 5
   objBullet1: {fileID: 4112033847457325656, guid: a2afb86d4fdb1f549873e54c93fbabfb, type: 3}
   attack1ShotInterval: 0.1
   attack1ShotPause: 3
-  attack2BulletCount: 60
+  attack2BulletCount: 5
   objBullet2: {fileID: 5004266161883398684, guid: 06a4731fbf31bfb4499086aa60f5e3c5, type: 3}
   attack2ShotInterval: 1
   attack2ShotPause: 3
