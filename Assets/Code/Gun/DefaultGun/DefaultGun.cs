@@ -40,7 +40,7 @@ public class DefaultGun : MonoBehaviour
 
     IEnumerator Shot()
     {
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed);        
 
         if (_gunController.projectileValue == 1)
         {

@@ -36,9 +36,11 @@ public class ReadGoogleSheet : MonoBehaviour
             StartCoroutine(ObtainSheetData(urlDropSystem, "dropSystem"));
 
             StartCoroutine(ObtainSheetData(urlLocalization, "localization"));
+        }        
+        else
+        {
+            GameObject.Find("InitController").GetComponent<InitScene>().Play();
         }
-
-        
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)

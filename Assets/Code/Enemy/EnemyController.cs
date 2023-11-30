@@ -57,6 +57,9 @@ public class EnemyController : MonoBehaviour
     public bool isSpeedUp;
     public float newSpeed;
 
+    [Header("Audio")]
+    public AudioClip clip;
+
 
     private void Start()
     {       
@@ -193,6 +196,13 @@ public class EnemyController : MonoBehaviour
     {
         if (isVisible)
         {
+            SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+            if (_soundController != null)
+            {
+                _soundController.PlaySound(clip);
+            }
+
             if (isWeakening)
             {
                 _damage *= 2;
