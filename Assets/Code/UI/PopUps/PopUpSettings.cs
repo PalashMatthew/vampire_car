@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
+using Unity.Services.Core;
+using Unity.Services.Authentication;
+using System.Threading.Tasks;
 
 public class PopUpSettings : MonoBehaviour
 {
@@ -25,10 +29,13 @@ public class PopUpSettings : MonoBehaviour
     //[Header("Localization")]
     public static Action onLocalization;
 
+    public TMP_Text tUserID;
+
 
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
+        tUserID.text = "UserID - " + PlayerPrefs.GetString("userID");
     }
 
     #region Sound and Music
@@ -128,5 +135,16 @@ public class PopUpSettings : MonoBehaviour
     {
         PlayerPrefs.SetString("activeLang", _lang);
         onLocalization?.Invoke();
+    }
+
+    public async void ButDeleteAccount()
+    {
+        await UnityServices.InitializeAsync();
+
+        await AuthenticationService.Instance.DeleteAccountAsync();
+
+        PlayerPrefs.DeleteAll();
+
+        Application.LoadLevel("InitScene");
     }
 }

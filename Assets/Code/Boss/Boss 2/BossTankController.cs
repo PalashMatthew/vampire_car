@@ -35,6 +35,8 @@ public class BossTankController : MonoBehaviour
 
     EnemyController _enemyController;
 
+    public float damage;
+
 
     private void Start()
     {
@@ -104,7 +106,7 @@ public class BossTankController : MonoBehaviour
         for (int i = 0; i < attack1BulletCount; i++)
         {
             GameObject gm = Instantiate(objBullet1, bulletSpawnPos.position, cabinObj.transform.rotation);
-            gm.GetComponent<BossTankBullet1>().damage = 10;
+            gm.GetComponent<BossTankBullet1>().damage = damage;
             gm.GetComponent<BossTankBullet1>()._controller = GetComponent<EnemyController>();
 
             yield return new WaitForSeconds(attack1ShotInterval);
@@ -130,7 +132,7 @@ public class BossTankController : MonoBehaviour
         for (int i = 0; i < attack2BulletCount; i++)
         {
             GameObject gm = Instantiate(objBullet2, bulletSpawnPos.position, cabinObj.transform.rotation);
-            gm.GetComponent<BossTankBullet2>().damage = 10;
+            gm.GetComponent<BossTankBullet2>().damage = damage;
             gm.GetComponent<BossTankBullet2>()._controller = GetComponent<EnemyController>();
             gm.GetComponent<BossTankBullet2>().target = player.transform.position;
 
