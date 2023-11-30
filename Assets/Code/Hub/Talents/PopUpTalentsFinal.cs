@@ -24,6 +24,9 @@ public class PopUpTalentsFinal : MonoBehaviour
     public GameObject butOk;
     public GameObject particleImage;
 
+    [Header("Sounds")]
+    public AudioClip clipNewItem;
+
 
     private void Start()
     {
@@ -35,6 +38,13 @@ public class PopUpTalentsFinal : MonoBehaviour
         _popUpController.OpenPopUp();
 
         tValue.text = "+" + value;
+
+        SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+        if (_soundController != null)
+        {
+            _soundController.PlaySound(clipNewItem);
+        }
 
         switch (talentName)
         {

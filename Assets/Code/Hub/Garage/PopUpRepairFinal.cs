@@ -22,6 +22,9 @@ public class PopUpRepairFinal : MonoBehaviour
 
     public GameObject particleImage1, particleImage2;
 
+    [Header("Sounds")]
+    public AudioClip clipNewItem;
+
 
     private void Start()
     {
@@ -37,6 +40,13 @@ public class PopUpRepairFinal : MonoBehaviour
         tDrawingCount.text = "x" + drawingCount;
 
         StartCoroutine(Animation());
+
+        SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+        if (_soundController != null)
+        {
+            _soundController.PlaySound(clipNewItem);
+        }
     }
 
     public void ButContinue()

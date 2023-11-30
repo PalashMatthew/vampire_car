@@ -232,6 +232,94 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("drawingGunCount", player.drawingGunCount);
             PlayerPrefs.SetInt("drawingSuspensionCount", player.drawingSuspensionCount);
             PlayerPrefs.SetInt("drawingTransmissionCount", player.drawingTransmissionCount);
+
+            PlayerPrefs.SetInt("DionysuscarPurchased", player.dionysusCarPurchased);
+            PlayerPrefs.SetInt("TaiowacarPurchased", player.taiowaCarPurchased);
+            PlayerPrefs.SetInt("P-RuncarPurchased", player.prunCarPurchased);
+            PlayerPrefs.SetInt("LyssacarPurchased", player.lyssaCarPurchased);
+            PlayerPrefs.SetInt("AeoluscarPurchased", player.aeolusCarPurchased);
+            PlayerPrefs.SetInt("HyascarPurchased", player.hyasCarPurchased);
+            PlayerPrefs.SetInt("HemeracarPurchased", player.hemeraCarPurchased);
+            PlayerPrefs.SetInt("EoscarPurchased", player.eosCarPurchased);
+
+            PlayerPrefs.SetString("activeCarID", player.activeCarID);
+
+            PlayerPrefs.SetInt("DionysuscarLevel", player.dionysusCarLevel);
+            PlayerPrefs.SetInt("TaiowacarLevel", player.taiowaCarLevel);
+            PlayerPrefs.SetInt("P-RuncarLevel", player.prunCarLevel);
+            PlayerPrefs.SetInt("LyssacarLevel", player.lyssaCarLevel);
+            PlayerPrefs.SetInt("AeoluscarLevel", player.aeolusCarLevel);
+            PlayerPrefs.SetInt("HyascarLevel", player.hyasCarLevel);
+            PlayerPrefs.SetInt("HemeracarLevel", player.hemeraCarLevel);
+            PlayerPrefs.SetInt("EoscarLevel", player.eosCarLevel);
+
+            PlayerPrefs.SetString("selectedCarID", player.selectedCarId);
+
+            PlayerPrefs.SetInt("itemCountGun", player.itemCountGun);
+            PlayerPrefs.SetInt("itemCountEngine", player.itemCountEngine);
+            PlayerPrefs.SetInt("itemCountBrakes", player.itemCountBrakes);
+            PlayerPrefs.SetInt("itemCountFuelSystem", player.itemCountFuelSystem);
+            PlayerPrefs.SetInt("itemCountSuspension", player.itemCountSuspension);
+            PlayerPrefs.SetInt("itemCountTransmission", player.itemCountTransmission);
+
+            for (int i = 0; i < player.itemCountGun; i++)
+            {
+                PlayerPrefs.SetInt("itemGunID" + i, player.itemGunID[i]);
+                PlayerPrefs.SetInt("itemGunLevel" + i, player.itemGunLevel[i]);
+                PlayerPrefs.SetString("itemGunRarity" + i, player.itemGunRarity[i]);
+                PlayerPrefs.SetString("itemGunType" + i, player.itemGunType[i]);
+            }
+
+            for (int i = 0; i < player.itemCountEngine; i++)
+            {
+                PlayerPrefs.SetInt("itemEngineID" + i, player.itemEngineID[i]);
+                PlayerPrefs.SetInt("itemEngineLevel" + i, player.itemEngineLevel[i]);
+                PlayerPrefs.SetString("itemEngineRarity" + i, player.itemEngineRarity[i]);
+                PlayerPrefs.SetString("itemEngineType" + i, player.itemEngineType[i]);
+            }
+
+            for (int i = 0; i < player.itemCountBrakes; i++)
+            {
+                PlayerPrefs.SetInt("itemBrakesID" + i, player.itemBrakesID[i]);
+                PlayerPrefs.SetInt("itemBrakesLevel" + i, player.itemBrakesLevel[i]);
+                PlayerPrefs.SetString("itemBrakesRarity" + i, player.itemBrakesRarity[i]);
+                PlayerPrefs.SetString("itemBrakesType" + i, player.itemBrakesType[i]);
+            }
+
+            for (int i = 0; i < player.itemCountFuelSystem; i++)
+            {
+                PlayerPrefs.SetInt("itemFuelSystemID" + i, player.itemFuelSystemID[i]);
+                PlayerPrefs.SetInt("itemFuelSystemLevel" + i, player.itemFuelSystemLevel[i]);
+                PlayerPrefs.SetString("itemFuelSystemRarity" + i, player.itemFuelSystemRarity[i]);
+                PlayerPrefs.SetString("itemFuelSystemType" + i, player.itemFuelSystemType[i]);
+            }
+
+            for (int i = 0; i < player.itemCountSuspension; i++)
+            {
+                PlayerPrefs.SetInt("itemSuspensionID" + i, player.itemSuspensionID[i]);
+                PlayerPrefs.SetInt("itemSuspensionLevel" + i, player.itemSuspensionLevel[i]);
+                PlayerPrefs.SetString("itemSuspensionRarity" + i, player.itemSuspensionRarity[i]);
+                PlayerPrefs.SetString("itemSuspensionType" + i, player.itemSuspensionType[i]);
+            }
+
+            for (int i = 0; i < player.itemCountTransmission; i++)
+            {
+                PlayerPrefs.SetInt("itemTransmissionID" + i, player.itemTransmissionID[i]);
+                PlayerPrefs.SetInt("itemTransmissionLevel" + i, player.itemTransmissionLevel[i]);
+                PlayerPrefs.SetString("itemTransmissionRarity" + i, player.itemTransmissionRarity[i]);
+                PlayerPrefs.SetString("itemTransmissionType" + i, player.itemTransmissionType[i]);
+            }
+
+            PlayerPrefs.SetInt("talentGlobalLevel", player.talentGlobalLevel);
+            PlayerPrefs.SetInt("talentDamageLevel", player.talentDamageLevel);
+            PlayerPrefs.SetInt("talentHealthLevel", player.talentHealthLevel);
+            PlayerPrefs.SetInt("talentIronLevel", player.talentIronLevel);
+            PlayerPrefs.SetInt("talentRecoveryHpInFirstAidKitLevel", player.talentRecoveryHpInFirstAidKitLevel);
+            PlayerPrefs.SetInt("talentShotSpeedLevel", player.talentShotSpeedLevel);
+            PlayerPrefs.SetInt("talentBlockLevel", player.talentBlockLevel);
+            PlayerPrefs.SetInt("talentEquipmentImprovementLevel", player.talentEquipmentImprovementLevel);
+            PlayerPrefs.SetInt("talentCarImprovementLevel", player.talentCarImprovementLevel);
+            PlayerPrefs.SetInt("talentGunSlotLevel", player.talentGunSlotLevel);
             #endregion
         }
     }

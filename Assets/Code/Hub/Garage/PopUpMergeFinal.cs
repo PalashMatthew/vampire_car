@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GUI;
 
 public class PopUpMergeFinal : MonoBehaviour
 {
@@ -73,6 +74,9 @@ public class PopUpMergeFinal : MonoBehaviour
 
     public GameObject butOk;
 
+    [Header("Sounds")]
+    public AudioClip clipNewItem;
+
 
     private void Start()
     {
@@ -81,6 +85,13 @@ public class PopUpMergeFinal : MonoBehaviour
 
     void Initialize()
     {
+        SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+        if (_soundController != null)
+        {
+            _soundController.PlaySound(clipNewItem);
+        }
+
         switch (rarity)
         {
             case "rare":

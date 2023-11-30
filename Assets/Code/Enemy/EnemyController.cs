@@ -58,7 +58,8 @@ public class EnemyController : MonoBehaviour
     public float newSpeed;
 
     [Header("Audio")]
-    public AudioClip clip;
+    public AudioClip clipHit;
+    public AudioClip clipDeath;
 
 
     private void Start()
@@ -200,7 +201,7 @@ public class EnemyController : MonoBehaviour
 
             if (_soundController != null)
             {
-                _soundController.PlaySound(clip);
+                _soundController.PlaySound(clipHit);
             }
 
             if (isWeakening)
@@ -294,6 +295,13 @@ public class EnemyController : MonoBehaviour
             GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
             Destroy(_fx, 3);
             Destroy(gameObject);
+
+            SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+            if (_soundController != null)
+            {
+                _soundController.PlaySound(clipDeath);
+            }
         }
     }
 

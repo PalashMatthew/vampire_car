@@ -31,6 +31,9 @@ public class HubController : MonoBehaviour
     public TMP_Text tHardValue;
     public TMP_Text tFuelTimer;
 
+    [Header("Sounds")]
+    public AudioClip clipSwipe;
+
 
     private void Start()
     {
@@ -452,6 +455,13 @@ public class HubController : MonoBehaviour
             }
         }
         #endregion
+
+        SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+
+        if (_soundController != null)
+        {
+            _soundController.PlaySound(clipSwipe);
+        }
 
         yield return new WaitForSeconds(0.2f);
 

@@ -43,6 +43,8 @@ public class PopUpSettings : MonoBehaviour
 
             imgSoundToggleOn.SetActive(true);
             imgSoundToggleOff.SetActive(false);
+
+            PlayerPrefs.SetInt("soundSettings", 1);
         } 
         else
         {
@@ -51,6 +53,8 @@ public class PopUpSettings : MonoBehaviour
 
             imgSoundToggleOn.SetActive(false);
             imgSoundToggleOff.SetActive(true);
+
+            PlayerPrefs.SetInt("soundSettings", 0);
         }
     }
 
@@ -65,6 +69,8 @@ public class PopUpSettings : MonoBehaviour
 
             imgMusicToggleOn.SetActive(true);
             imgMusicToggleOff.SetActive(false);
+
+            PlayerPrefs.SetInt("musicSettings", 1);
         }
         else
         {
@@ -73,6 +79,8 @@ public class PopUpSettings : MonoBehaviour
 
             imgMusicToggleOn.SetActive(false);
             imgMusicToggleOff.SetActive(true);
+
+            PlayerPrefs.SetInt("musicSettings", 0);
         }
     }
     #endregion
