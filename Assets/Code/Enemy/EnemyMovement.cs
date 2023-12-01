@@ -259,16 +259,20 @@ public class EnemyMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
+        _isMoveAccess = false;
         transform.DOMoveZ(transform.position.z - 4, 0.4f).SetEase(Ease.Linear);
-        transform.DOMoveY(0.1f, 0.3f).SetEase(Ease.Linear);
+        transform.DOMoveY(0.5f, 0.3f).SetEase(Ease.Linear);
+        transform.DORotate(new Vector3(0f, 180, 0), 0.5f).SetEase(Ease.Linear);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
+        transform.DOMoveY(0f, 0.1f).SetEase(Ease.Linear);
+        //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        yield return new WaitForSeconds(0.1f);
 
-        transform.DORotate(new Vector3(0f, 180, 0), 0.3f).SetEase(Ease.Linear);        
 
-        yield return new WaitForSeconds(0.3f);
-        //_isMoveAccess = true;
-        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        // yield return new WaitForSeconds(0.3f);
+        _isMoveAccess = true;
+        
         _isJumping = false;
     }
 

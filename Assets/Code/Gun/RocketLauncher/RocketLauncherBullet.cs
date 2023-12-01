@@ -11,7 +11,9 @@ public class RocketLauncherBullet : MonoBehaviour
     public GameObject target;
 
     public GameObject boomObj;
- 
+
+    Vector3 targetPos;
+
 
     private void Update()
     {
@@ -19,15 +21,25 @@ public class RocketLauncherBullet : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target.transform.position) > minDistanceToAttack)
             {
+                targetPos = target.transform.position;
                 Movement();
             }
             else
             {
                 Attack();
             }
-        } else
+        } 
+        else
         {
-            Destroy(gameObject);
+            if (Vector3.Distance(transform.position, targetPos) > minDistanceToAttack)
+            {
+                transform.LookAt(targetPos);
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, _gunController.bulletMoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                Attack();
+            }
         }
     }
 

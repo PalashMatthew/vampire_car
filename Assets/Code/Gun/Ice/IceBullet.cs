@@ -11,17 +11,27 @@ public class IceBullet : MonoBehaviour
 
     public GameObject boomObj;
 
+    Vector3 targetPos;
+
 
     private void Update()
     {
         if (target == null)
         {
-            Attack();
-            return;
+            if (Vector3.Distance(transform.position, targetPos) > minDistanceToAttack)
+            {
+                transform.LookAt(targetPos);
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, _gunController.bulletMoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                Attack();
+            }
         }
 
         if (Vector3.Distance(transform.position, target.transform.position) > minDistanceToAttack)
         {
+            targetPos = target.transform.position;
             Movement();
         }
         else
