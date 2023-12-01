@@ -31,10 +31,11 @@ public class ChooseLocationController : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("maxLocation"))
         {
-            PlayerPrefs.SetInt("maxLocation", 1);
+            PlayerPrefs.SetInt("maxLocation", maxLocNum);
         }
 
-        currentLocNum = PlayerPrefs.GetInt("maxLocation");
+        //currentLocNum = PlayerPrefs.GetInt("maxLocation");
+        currentLocNum = 1;
 
         butPlay.SetActive(true);
         tOpenPrevLoc.SetActive(false);
