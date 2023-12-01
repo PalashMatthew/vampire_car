@@ -21,9 +21,25 @@ public class ChooseLocationController : MonoBehaviour
 
     public TMP_Text tChapter;
 
+    [Header("UI")]
+    public GameObject butPlay;
+    public GameObject tOpenPrevLoc;
+    public GameObject imgLock;
+
 
     private void Start()
     {
+        if (!PlayerPrefs.HasKey("maxLocation"))
+        {
+            PlayerPrefs.SetInt("maxLocation", 1);
+        }
+
+        currentLocNum = PlayerPrefs.GetInt("maxLocation");
+
+        butPlay.SetActive(true);
+        tOpenPrevLoc.SetActive(false);
+        imgLock.SetActive(false);
+
         for (int i = 1; i <= maxLocNum; i++)
         {
             if (currentLocNum == i)
@@ -43,6 +59,23 @@ public class ChooseLocationController : MonoBehaviour
             butNext.SetActive(false);
             butPrev.SetActive(true);
         }
+
+        #region Camera Color Settings
+        if (currentLocNum == 1)
+        {
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+        }
+
+        if (currentLocNum == 2)
+        {
+            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+        }
+
+        if (currentLocNum == 3)
+        {
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+        }
+        #endregion
     }
 
     private void Update()
@@ -76,6 +109,19 @@ public class ChooseLocationController : MonoBehaviour
         {
             butNext.SetActive(false);
             butPrev.SetActive(true);
+        }
+
+        if (PlayerPrefs.GetInt("maxLocation") < currentLocNum)
+        {
+            butPlay.SetActive(false);
+            tOpenPrevLoc.SetActive(true);
+            imgLock.SetActive(true);
+        } 
+        else
+        {
+            butPlay.SetActive(true);
+            tOpenPrevLoc.SetActive(false);
+            imgLock.SetActive(false);
         }
 
         #region Camera Color Settings

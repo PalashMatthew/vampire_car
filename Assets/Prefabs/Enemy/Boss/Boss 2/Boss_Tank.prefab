@@ -6051,7 +6051,7 @@ MonoBehaviour:
   moveSpeed: 0
   hp: 8000
   maxHp: 8000
-  brakeDamage: 0
+  brakeDamage: 30
   moveSpeedMin: 0
   moveSpeedMax: 0
   meshRenderer: {fileID: 0}
@@ -6061,7 +6061,7 @@ MonoBehaviour:
   isPattern: 0
   zInvisibleDestroy: 0
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
-  isTest: 1
+  isTest: 0
   _isFreeze: 0
   isBoss: 1
   materialsCar: []
@@ -6095,6 +6095,7 @@ MonoBehaviour:
   objBullet2: {fileID: 5004266161883398684, guid: 06a4731fbf31bfb4499086aa60f5e3c5, type: 3}
   attack2ShotInterval: 1
   attack2ShotPause: 3
+  damage: 45
 --- !u!1 &6144431566227378759
 GameObject:
   m_ObjectHideFlags: 0

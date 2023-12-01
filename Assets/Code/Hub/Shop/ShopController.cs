@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Globalization;
+using UnityEngine.Purchasing;
 
-public class ShopController : MonoBehaviour
+public class ShopController : MonoBehaviour, IStoreListener
 {
     [Header("Chest")]
-    int chest1SecondPassed;
-
     public PopUpOpenChest popUpOpenChest;
     public GameObject butBuyChest1;
     public GameObject butAdsChest1;
     public GameObject butKeyChest1;
 
     public List<DetailCard> items;
+    [SerializeField] public List<ConsumableItem> consumableItems;
+
+    IStoreController m_StoreController;
+
 
     private void Awake()
     {
         Initialize();
+        SetupBuilder();
     }
 
     public void Initialize()
@@ -68,6 +72,21 @@ public class ShopController : MonoBehaviour
     public void ButBuyHard(int _value)
     {
         PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + _value);
+    }
+
+    public void AddHard(int value)
+    {
+        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + value);
+    }
+
+    public void AddMoney(int value)
+    {
+        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + value);
+    }
+
+    public void ButBuyConsumable(int id)
+    {
+        m_StoreController.InitiatePurchase(consumableItems[id].Id);
     }
 
     public void ButChest1()
@@ -120,34 +139,84 @@ public class ShopController : MonoBehaviour
         }
     }
 
-    void SetDateTime(string key, DateTime value)
+    void SetupBuilder()
     {
-        string convertedToString = value.ToString("u", CultureInfo.InvariantCulture);
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-        PlayerPrefs.SetString(key, convertedToString);
-    }
-
-    DateTime GetDateTime(string key, DateTime defaultValue)
-    {
-        if (PlayerPrefs.HasKey(key))
+        foreach (ConsumableItem cItem in consumableItems)
         {
-            string stored = PlayerPrefs.GetString(key);
-            DateTime result = DateTime.ParseExact(stored, "u", CultureInfo.InvariantCulture);
-            return result;
+            builder.AddProduct(cItem.Id, ProductType.Consumable);
         }
-        else
+
+        UnityPurchasing.Initialize(this, builder);
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error)
+    {
+        print("Initialize IAP Error!" + error);
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        print("Initialize IAP Error!" + error + message);
+    }
+
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
+    {
+        var product = purchaseEvent.purchasedProduct;
+
+        print("Purchase Complite " + product.definition.id);
+
+        if (product.definition.id == consumableItems[0].Id)
         {
-            return defaultValue;
+            AddHard(80);
         }
+
+        if (product.definition.id == consumableItems[1].Id)
+        {
+            AddHard(500);
+        }
+
+        if (product.definition.id == consumableItems[2].Id)
+        {
+            AddHard(1200);
+        }
+
+        if (product.definition.id == consumableItems[3].Id)
+        {
+            AddHard(2500);
+        }
+
+        if (product.definition.id == consumableItems[4].Id)
+        {
+            AddHard(6500);
+        }
+
+        if (product.definition.id == consumableItems[5].Id)
+        {
+            AddHard(14000);
+        }
+
+        return PurchaseProcessingResult.Complete;
     }
 
-    void CheckOffline()
+    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-
+        print("Purchased Failed!");
     }
 
-    private void OnApplicationPause()
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        
+        print("IAP Initialized");
+        m_StoreController = controller;
     }
+}
+
+[System.Serializable]
+public class ConsumableItem
+{
+    public string Name;
+    public string Id;
+    public string desk;
+    public string price;
 }

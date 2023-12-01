@@ -125529,7 +125529,7 @@ MonoBehaviour:
   moveSpeed: 0
   hp: 4000
   maxHp: 4000
-  brakeDamage: 0
+  brakeDamage: 20
   moveSpeedMin: 0
   moveSpeedMax: 0
   meshRenderer: {fileID: 0}
@@ -125539,14 +125539,15 @@ MonoBehaviour:
   isPattern: 0
   zInvisibleDestroy: 0
   fxExplosion: {fileID: 8099774324858062756, guid: 7f383490edb26ff4c9fb26e6f1e41143, type: 3}
-  isTest: 1
+  isTest: 0
   _isFreeze: 0
   isBoss: 1
   materialsCar: []
   imgHpProgressBar: {fileID: 0}
   isSpeedUp: 0
   newSpeed: 0
-  clip: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
+  clipHit: {fileID: 0}
+  clipDeath: {fileID: 0}
 --- !u!114 &5066891576864312976
 MonoBehaviour:
   m_ObjectHideFlags: 0

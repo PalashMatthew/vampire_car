@@ -121,7 +121,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (!isBoss)
+        if (!isBoss && imgHpProgressBar != null)
         {
             if (hp == maxHp)
             {
