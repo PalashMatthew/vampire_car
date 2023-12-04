@@ -13,6 +13,11 @@ public class FirstAidKitController : MonoBehaviour
     public GameObject icon;
 
 
+    private void Start()
+    {
+        Destroy(gameObject, 20);
+    }
+
     private void Update()
     {
         transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);

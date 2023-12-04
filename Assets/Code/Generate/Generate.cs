@@ -90,7 +90,7 @@ public class Generate : MonoBehaviour
         else
         {
             float _randZ = Random.Range(minZSpawnPattern, maxZSpawnPattern);
-            Instantiate(pattern, new Vector3(Random.Range(-xSpawn, xSpawn), 0, _randZ), transform.rotation);
+            Instantiate(pattern, new Vector3(Random.Range(-xSpawn, xSpawn), 1, _randZ), transform.rotation);
 
             _isSpawnPattern = false;
         }
