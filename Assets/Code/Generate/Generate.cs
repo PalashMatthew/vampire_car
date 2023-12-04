@@ -103,7 +103,7 @@ public class Generate : MonoBehaviour
     public void FirstAidKit(float value)
     {
         float _randX = Random.Range(minXSpawn, maxXSpawn);
-        GameObject _inst = Instantiate(objFirstAidKit, new Vector3(_randX, 0, minZSpawn), transform.rotation);
+        GameObject _inst = Instantiate(objFirstAidKit, new Vector3(_randX, 1, minZSpawn), transform.rotation);
         _inst.GetComponent<FirstAidKitController>().value = value;
     }
 
