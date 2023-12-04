@@ -9,11 +9,13 @@ public class BossTankBullet2 : MonoBehaviour
 
     public GameObject bulletObj;
     public Vector3 target;
+    public float bulletMoveSpeed;
+    public float bulletMiniMoveSpeed;
 
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * 30 * Time.deltaTime);
+        transform.Translate(Vector3.forward * bulletMoveSpeed * Time.deltaTime);
 
         if (transform.position.z < -20f)
             Destroy(gameObject);
@@ -32,6 +34,11 @@ public class BossTankBullet2 : MonoBehaviour
             gm2.transform.eulerAngles = new Vector3(0, 90, 0);
             gm3.transform.eulerAngles = new Vector3(0, 180, 0);
             gm4.transform.eulerAngles = new Vector3(0, -90, 0);
+
+            gm1.GetComponent<BossTankBullet1>().bulletMoveSpeed = bulletMiniMoveSpeed;
+            gm2.GetComponent<BossTankBullet1>().bulletMoveSpeed = bulletMiniMoveSpeed;
+            gm3.GetComponent<BossTankBullet1>().bulletMoveSpeed = bulletMiniMoveSpeed;
+            gm4.GetComponent<BossTankBullet1>().bulletMoveSpeed = bulletMiniMoveSpeed;
 
             gm1.GetComponent<BossTankBullet1>().damage = 10;
             gm1.GetComponent<BossTankBullet1>()._controller = _controller;
