@@ -16,7 +16,10 @@ public class EnemyBallBulletCollider : MonoBehaviour
             other.gameObject.GetComponent<PlayerController>().Hit(_gunController.damage);
             _controller.BackDamage(_gunController.damage);
 
-            Destroy(brain);
+            if (brain != null)
+            {
+                Destroy(brain);
+            }            
         }
     }
 }
