@@ -115,6 +115,7 @@ public class GameCloud : MonoBehaviour
             playerMoney = PlayerPrefs.GetInt("playerMoney"),
             playerHard = PlayerPrefs.GetInt("playerHard"),
             playerExp = PlayerPrefs.GetInt("playerExp"),
+            playerLevel = PlayerPrefs.GetInt("playerLevel"),
             playerFuelCurrent = PlayerPrefs.GetInt("playerFuelCurrent"),
 
             drawingGunCount = PlayerPrefs.GetInt("drawingEngineCount"),
@@ -224,6 +225,7 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("playerMoney", player.playerMoney);
             PlayerPrefs.SetInt("playerHard", player.playerHard);
             PlayerPrefs.SetInt("playerExp", player.playerExp);
+            PlayerPrefs.SetInt("playerLevel", player.playerLevel);
             PlayerPrefs.SetInt("playerFuelCurrent", player.playerFuelCurrent);
 
             PlayerPrefs.SetInt("drawingEngineCount", player.drawingEngineCount);
@@ -359,6 +361,7 @@ public class PlayerData
     public int playerMoney;
     public int playerHard;
     public int playerExp;
+    public int playerLevel;
     public int playerFuelCurrent;
     public int drawingGunCount;
     public int drawingBrakesCount;

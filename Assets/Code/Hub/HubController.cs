@@ -31,6 +31,14 @@ public class HubController : MonoBehaviour
     public TMP_Text tHardValue;
     public TMP_Text tFuelTimer;
 
+    [Header("User Level")]
+    public TMP_Text tUserLevel;
+    public TMP_Text tUserExp;
+    public Image imgExpFill;
+    public Image imgExpFillEnd;
+    public List<int> playerExpNeed;
+    public int maxUserLevel;
+
     [Header("Sounds")]
     public AudioClip clipSwipe;
 
@@ -66,6 +74,7 @@ public class HubController : MonoBehaviour
             PlayerPrefs.SetInt("playerHard", 20);
             PlayerPrefs.SetInt("playerFuelCurrent", 20);
             PlayerPrefs.SetInt("playerFuelMax", 20);
+            PlayerPrefs.SetInt("playerLevel", 1);
             tFuelTimer.text = "";
         }
 
@@ -492,7 +501,19 @@ public class HubController : MonoBehaviour
     {
         tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
         tMoneyValue.text = PlayerPrefs.GetInt("playerMoney").ToString();
-        tHardValue.text = PlayerPrefs.GetInt("playerHard").ToString();        
+        tHardValue.text = PlayerPrefs.GetInt("playerHard").ToString();
+
+        tUserLevel.text = PlayerPrefs.GetInt("playerLevel").ToString();
+
+        if (PlayerPrefs.GetInt("playerLevel") < maxUserLevel)
+        {
+            tUserExp.text = PlayerPrefs.GetInt("playerLevel") + "/" + playerExpNeed[PlayerPrefs.GetInt("playerLevel") - 1];
+        }
+        else
+        {
+            tUserExp.text = "max";
+        }
+        
     }    
 
     IEnumerator FuelTimer(int _seconds)
