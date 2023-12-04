@@ -66,6 +66,12 @@ public class WaveController : MonoBehaviour
 
             _generate.StartSpawn();
             _generateObstacles.NewWave();
+
+            //FirstAidKit
+            if (waveList[currentWave - 1].isSpawnFirstAidKit)
+            {
+                _generate.FirstAidKit(waveList[currentWave - 1].firstAidKitValue);
+            }
         }
         else
         {
@@ -308,4 +314,8 @@ public class Wave
     public List<int> patternsWeight;
 
     public List<int> patternsSpawnTime;  //Если 0 то похуй
+
+    [Header("FirstAidKit")]
+    public bool isSpawnFirstAidKit;
+    public float firstAidKitValue;
 }

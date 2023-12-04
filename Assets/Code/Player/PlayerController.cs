@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem vfxNewLevel;
     public GameObject canvasNewLevel;
 
+    [Header("First Aid Kit")]
+    public ParticleSystem vfxHealing;
+
 
     public void Initialize()
     {
@@ -214,5 +217,22 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         canvasNewLevel.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "firstAidKit")
+        {
+            FirstAidKit(other.gameObject.GetComponent<FirstAidKitController>().value);
+            Destroy(other.gameObject);
+        }
+    }
+
+    void FirstAidKit(float value)
+    {
+        float regen = _playerStats.maxHpBase / 100 * value;
+        _playerStats.currentHp += regen;
+
+        vfxHealing.Play();
     }
 }

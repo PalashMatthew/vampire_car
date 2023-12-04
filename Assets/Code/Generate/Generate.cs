@@ -34,6 +34,9 @@ public class Generate : MonoBehaviour
 
     private bool _isSpawnPattern;
 
+    public GameObject objFirstAidKit;
+
+
     public void StartSpawn()
     {
         _isSpawnPattern = false;
@@ -95,6 +98,13 @@ public class Generate : MonoBehaviour
         yield return new WaitForSeconds(spawnTime);        
 
         StartCoroutine(EnemyGen());
+    }
+
+    public void FirstAidKit(float value)
+    {
+        float _randX = Random.Range(minXSpawn, maxXSpawn);
+        GameObject _inst = Instantiate(objFirstAidKit, new Vector3(_randX, 0, minZSpawn), transform.rotation);
+        _inst.GetComponent<FirstAidKitController>().value = value;
     }
 
     public void SpawnPattern(GameObject _pattern, float _xSpawn)

@@ -76,6 +76,7 @@ MonoBehaviour:
     healthCoeff: 2.8
   - damageCoeff: 3.1
     healthCoeff: 3.1
+  objFirstAidKit: {fileID: 8427655177106913292, guid: 50c4b24ddb7c352429c73ec38f0f940a, type: 3}
 --- !u!114 &5042626941310523742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,7 @@ MonoBehaviour:
   - {fileID: 6923021457352223942, guid: 2306e864afe49cf44bec37d3eff878b3, type: 3}
   - {fileID: 1528892580175247718, guid: 5c2f4893fcee43a45bf48606defb9860, type: 3}
   - {fileID: 2013889992931818407, guid: f61ff0e280cdb14409b437005195a966, type: 3}
+  instObstacles: []
   obstaclesMoveSpeed: 3.5
   spawnTime: 5
   isSpawn: 1
