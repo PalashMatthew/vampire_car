@@ -499,19 +499,21 @@ public class HubController : MonoBehaviour
 
     void ShowResouces()
     {
-        tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
+        tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + 20;
         tMoneyValue.text = PlayerPrefs.GetInt("playerMoney").ToString();
         tHardValue.text = PlayerPrefs.GetInt("playerHard").ToString();
 
-        tUserLevel.text = PlayerPrefs.GetInt("playerLevel").ToString();
+        tUserLevel.text = "Lv " + PlayerPrefs.GetInt("playerLevel").ToString();
 
         if (PlayerPrefs.GetInt("playerLevel") < maxUserLevel)
         {
-            tUserExp.text = PlayerPrefs.GetInt("playerLevel") + "/" + playerExpNeed[PlayerPrefs.GetInt("playerLevel") - 1];
+            tUserExp.text = PlayerPrefs.GetInt("playerExp") + "/" + playerExpNeed[PlayerPrefs.GetInt("playerLevel") - 1];
+            imgExpFill.fillAmount = (float)PlayerPrefs.GetInt("playerExp") / playerExpNeed[PlayerPrefs.GetInt("playerLevel") - 1];
         }
         else
         {
             tUserExp.text = "max";
+            imgExpFill.fillAmount = 1;
         }
         
     }    
@@ -548,10 +550,10 @@ public class HubController : MonoBehaviour
         if (_seconds <= 0)
         {
             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 1);
-            tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
+            tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + 20;
             PlayerPrefs.SetInt("FuelTimerSaveTime", 0);
 
-            if (PlayerPrefs.GetInt("playerFuelCurrent") == PlayerPrefs.GetInt("playerFuelMax"))
+            if (PlayerPrefs.GetInt("playerFuelCurrent") == 20)
             {
                 tFuelTimer.text = "";
             } 
