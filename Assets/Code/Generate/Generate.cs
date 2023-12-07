@@ -36,10 +36,13 @@ public class Generate : MonoBehaviour
 
     public GameObject objFirstAidKit;
 
+    public int dronCountInScreen = 0;
+
 
     public void StartSpawn()
     {
         _isSpawnPattern = false;
+        dronCountInScreen = 0;
 
         _player = GameObject.Find("Player");
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
@@ -76,6 +79,21 @@ public class Generate : MonoBehaviour
                 }                               
 
                 float _randZ = Random.Range(minZSpawn, maxZSpawn);
+
+                spawn:
+                GameObject _en = waveController.ChoiseEnemy();
+
+                if (_en.GetComponent<EnemyController>().carType == EnemyController.CarType.Static)
+                {
+                    if (dronCountInScreen >= waveController.waveList[waveController.currentWave - 1].maxDronCount)
+                    {
+                        goto spawn;
+                    } 
+                    else
+                    {
+                        dronCountInScreen++;
+                    }
+                }
 
                 GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
                 _gameplayController.activeEnemy.Add(inst);

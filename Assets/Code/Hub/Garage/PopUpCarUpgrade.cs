@@ -81,6 +81,8 @@ public class PopUpCarUpgrade : MonoBehaviour
     {
         _popUpController.OpenPopUp();
 
+        PlayerPrefs.SetInt("playerTitan", 100);
+
         Initialize();
     }
 
@@ -386,7 +388,7 @@ public class PopUpCarUpgrade : MonoBehaviour
 
         if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt(_carName + "carLevel") < 40)
         {
-            if (PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")])
+            if (PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") < PlayerPrefs.GetInt("playerLevel"))
             {
                 PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - (int)upgradePrice);
 
@@ -400,6 +402,46 @@ public class PopUpCarUpgrade : MonoBehaviour
                 changeCarController.UpdateProgressBar();
 
                 PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") - titanCount[PlayerPrefs.GetInt(_carName + "carLevel")]);
+
+                //Тут сделать изменение переменной upgradePrice
+
+                #region Events
+                string resBalans = "";
+                string resType = "";
+
+                if (PlayerPrefs.GetInt("playerMoney") < upgradePrice || PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] || PlayerPrefs.GetInt(_carName + "carLevel") < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    resBalans = "EmptyRes";
+                } 
+                else
+                {
+                    resBalans = "NotEmptyRes";
+                }
+
+                if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") >= PlayerPrefs.GetInt("playerLevel"))
+                {
+                    resType = "none";
+                }
+                else
+                {
+                    if (PlayerPrefs.GetInt("playerMoney") < upgradePrice)
+                    {
+                        resType += "_Money_";
+                    }
+
+                    if (PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")])
+                    {
+                        resType += "_Titan_";
+                    }
+
+                    if (PlayerPrefs.GetInt("playerLevel") < PlayerPrefs.GetInt(_carName + "carLevel"))
+                    {
+                        resType += "_PlayerLevel_";
+                    }
+                }               
+
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_CarUpgrade(PlayerPrefs.GetInt(_carName + "carLevel"), _carName, resBalans, resType);
+                #endregion
 
                 Initialize();
             }            

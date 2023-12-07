@@ -67,9 +67,12 @@ MonoBehaviour:
   - waveNum: 1
     waveTime: 30
     enemySpawnTime: 1.5
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 10
     enemyM2Weight: 0
     enemyM3Weight: 0
@@ -80,6 +83,9 @@ MonoBehaviour:
     enemyS2Weight: 0
     enemyS3Weight: 0
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 11
     patterns:
     - {fileID: 5404361266550080302, guid: e8be1259205d4e340807bed601148f14, type: 3}
@@ -89,12 +95,17 @@ MonoBehaviour:
     - {fileID: 3753294545076116727, guid: c1c0b27a4fb3e4744990f3368ef1168f, type: 3}
     patternsWeight: 0a0000000a0000000a0000000a0000000a000000
     patternsSpawnTime: 0000000000000000000000000000000000000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 2
     waveTime: 40
     enemySpawnTime: 1.4
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.1
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 6
     enemyM2Weight: 6
     enemyM3Weight: 0
@@ -105,6 +116,9 @@ MonoBehaviour:
     enemyS2Weight: 0
     enemyS3Weight: 0
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 15
     patterns:
     - {fileID: 4965100208481621176, guid: e56a470b63409e54c852fc429cbc2e99, type: 3}
@@ -113,12 +127,17 @@ MonoBehaviour:
     - {fileID: 2384277532470224165, guid: 469e8768e9a3a864faa36141fbc4ee12, type: 3}
     patternsWeight: 01000000010000000100000001000000
     patternsSpawnTime: 00000000000000000000000000000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 3
     waveTime: 50
     enemySpawnTime: 1.3
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.1
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 5
     enemyM2Weight: 5
     enemyM3Weight: 0
@@ -129,6 +148,9 @@ MonoBehaviour:
     enemyS2Weight: 0
     enemyS3Weight: 0
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 20
     patterns:
     - {fileID: 6795459549614411523, guid: bd2774f3730a09e43b4e67aca7a5b498, type: 3}
@@ -138,12 +160,17 @@ MonoBehaviour:
     - {fileID: 5404361266550080302, guid: 0ad4d2ea6d381be469af5b78ff7df016, type: 3}
     patternsWeight: 0100000001000000010000000100000001000000
     patternsSpawnTime: 0000000000000000000000000000000000000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 4
     waveTime: 50
     enemySpawnTime: 1.2
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.2
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 2
     enemyM2Weight: 1
     enemyM3Weight: 0
@@ -154,6 +181,9 @@ MonoBehaviour:
     enemyS2Weight: 7
     enemyS3Weight: 0
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 15
     patterns:
     - {fileID: 3753294545076116727, guid: c1c0b27a4fb3e4744990f3368ef1168f, type: 3}
@@ -164,12 +194,17 @@ MonoBehaviour:
     - {fileID: 6113158349380497027, guid: b6e8b13434f2cbe47bea562f17fb99b8, type: 3}
     patternsWeight: 010000000100000001000000010000000000000000000000
     patternsSpawnTime: 000000000000000000000000000000000f00000019000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 5
     waveTime: 60
     enemySpawnTime: 1.1
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.3
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 2
     enemyM2Weight: 0
     enemyM3Weight: 0
@@ -180,6 +215,9 @@ MonoBehaviour:
     enemyS2Weight: 1
     enemyS3Weight: 0
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 18
     patterns:
     - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
@@ -190,12 +228,17 @@ MonoBehaviour:
     - {fileID: 1651569049093596881, guid: 20c0998bf6d28a947bd01e993f37170c, type: 3}
     patternsWeight: 010000000100000001000000010000000000000000000000
     patternsSpawnTime: 000000000000000000000000000000000f00000019000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 6
     waveTime: 60
     enemySpawnTime: 0.9
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.4
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 2
     enemyM2Weight: 2
     enemyM3Weight: 2
@@ -206,6 +249,9 @@ MonoBehaviour:
     enemyS2Weight: 0
     enemyS3Weight: 4
     enemyS4Weight: 0
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 9
     patterns:
     - {fileID: 4327229607924202263, guid: f4a29cb746b79db48b514b411937d75d, type: 3}
@@ -217,12 +263,17 @@ MonoBehaviour:
     - {fileID: 7228200684872752633, guid: 3f68099b20e13904b9dfa5d7292579c0, type: 3}
     patternsWeight: 01000000010000000100000001000000010000000000000000000000
     patternsSpawnTime: 00000000000000000000000000000000000000000f00000019000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 7
     waveTime: 60
     enemySpawnTime: 0.8
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.5
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 2
     enemyM2Weight: 3
     enemyM3Weight: 3
@@ -233,6 +284,9 @@ MonoBehaviour:
     enemyS2Weight: 0
     enemyS3Weight: 3
     enemyS4Weight: 3
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 8
     patterns:
     - {fileID: 152428901792562543, guid: 8a9b7a0012fdfb844a53a76c0ee30d56, type: 3}
@@ -245,12 +299,17 @@ MonoBehaviour:
     - {fileID: 4497745313885497302, guid: dd3cd23053550264e8b10e376fad4775, type: 3}
     patternsWeight: 0100000001000000010000000100000001000000000000000000000000000000
     patternsSpawnTime: 00000000000000000000000000000000000000000f0000001900000023000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   - waveNum: 8
     waveTime: 60
     enemySpawnTime: 0.75
+    enemySpawnCount: 1
     expCoeff: 0
     expMinus: 0
     waveSpeedCoeff: 1.6
+    attackSpeedCoeff: 0
+    shotSpeedCoeff: 0
     enemyM1Weight: 2
     enemyM2Weight: 2
     enemyM3Weight: 2
@@ -261,6 +320,9 @@ MonoBehaviour:
     enemyS2Weight: 2
     enemyS3Weight: 2
     enemyS4Weight: 2
+    enemyS5Weight: 0
+    enemyS6Weight: 0
+    enemyS7Weight: 0
     patternSpawnTime: 6
     patterns:
     - {fileID: 7826704593695387349, guid: 437d3aefd8c60be4c83fa00bd6777b75, type: 3}
@@ -271,6 +333,8 @@ MonoBehaviour:
     - {fileID: 439471463890675988, guid: 8c238414db51f3243b5b7282f6b9663d, type: 3}
     patternsWeight: 010000000100000001000000010000000100000000000000
     patternsSpawnTime: 00000000000000000000000000000000000000000f000000
+    isSpawnFirstAidKit: 0
+    firstAidKitValue: 0
   currentWave: 0
   enemyDestroy: 0
   lastWave: 8
@@ -284,4 +348,7 @@ MonoBehaviour:
   enemyS2Obj: {fileID: 6411367347841345111, guid: 1dfebe358d8abdc45b761da1fcc081ee, type: 3}
   enemyS3Obj: {fileID: 6271080959004233775, guid: a7f5d0215a7b437438c0b9fe1c61125e, type: 3}
   enemyS4Obj: {fileID: 8004459408459030513, guid: b496a625a2ca9ab4f825b8e221489b5a, type: 3}
+  enemyS5Obj: {fileID: 5539652847106099054, guid: 21dc805f8e64b5544a8cc90412f2f886, type: 3}
+  enemyS6Obj: {fileID: 2631545717291502434, guid: b2d63447ea6cc574da04fbc5fbbe6400, type: 3}
+  enemyS7Obj: {fileID: 5029373449933775653, guid: 1326c615292064343b9a7bcaf00c67fd, type: 3}
   gameplayUIController: {fileID: 0}

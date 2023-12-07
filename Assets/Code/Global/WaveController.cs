@@ -24,6 +24,9 @@ public class WaveController : MonoBehaviour
     public GameObject enemyS2Obj;
     public GameObject enemyS3Obj;
     public GameObject enemyS4Obj;
+    public GameObject enemyS5Obj;
+    public GameObject enemyS6Obj;
+    public GameObject enemyS7Obj;
 
     private GameplayController _gameplayController;
     private Generate _generate;
@@ -224,6 +227,30 @@ public class WaveController : MonoBehaviour
                 _potencialEnemy.Add(enemyS4Obj);
             }
         }
+
+        if (waveList[currentWave - 1].enemyS5Weight > 0)
+        {
+            for (int i = 0; i < waveList[currentWave - 1].enemyS5Weight; i++)
+            {
+                _potencialEnemy.Add(enemyS5Obj);
+            }
+        }
+
+        if (waveList[currentWave - 1].enemyS6Weight > 0)
+        {
+            for (int i = 0; i < waveList[currentWave - 1].enemyS6Weight; i++)
+            {
+                _potencialEnemy.Add(enemyS6Obj);
+            }
+        }
+
+        if (waveList[currentWave - 1].enemyS7Weight > 0)
+        {
+            for (int i = 0; i < waveList[currentWave - 1].enemyS7Weight; i++)
+            {
+                _potencialEnemy.Add(enemyS7Obj);
+            }
+        }
         #endregion
 
         GameObject _newEnemy = _potencialEnemy[UnityEngine.Random.Range(0, _potencialEnemy.Count)];
@@ -285,6 +312,7 @@ public class Wave
     public float waveSpeedCoeff;  //Скорость объектов на этой волне
     public float attackSpeedCoeff;
     public float shotSpeedCoeff;
+    public int maxDronCount;
 
     [Range (0, 10)]
     public int enemyM1Weight;
@@ -306,6 +334,12 @@ public class Wave
     public int enemyS3Weight;
     [Range(0, 10)]
     public int enemyS4Weight;
+    [Range(0, 10)]
+    public int enemyS5Weight;
+    [Range(0, 10)]
+    public int enemyS6Weight;
+    [Range(0, 10)]
+    public int enemyS7Weight;
 
     [Header("Pattern Settings")]
     public float patternSpawnTime;

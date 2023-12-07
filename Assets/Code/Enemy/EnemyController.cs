@@ -271,21 +271,10 @@ public class EnemyController : MonoBehaviour
     {
         if (!isBoss)
         {
-            #region Screw
-            //int procent = 20;
-
-            //if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s04")  //Если у нас сет Огня активен
-            //{
-            //    procent += (int)PlayerPrefs.GetFloat("setValue");
-            //}
-
-            //int rand = Random.Range(1, 101);
-
-            //if (rand <= procent)
-            //{
-            //    Instantiate(screwObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
-            //}
-            #endregion
+            if (carType == CarType.Static)
+            {
+                GameObject.Find("Generate Controller").GetComponent<Generate>().dronCountInScreen--;
+            }
 
             float exp = 1 * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expCoeff;
             GameObject.Find("Player").GetComponent<PlayerStats>().currentExp += exp;

@@ -7,6 +7,7 @@ using TMPro;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using System.Threading.Tasks;
+using Firebase.Analytics;
 
 public class PopUpSettings : MonoBehaviour
 {
@@ -134,6 +135,7 @@ public class PopUpSettings : MonoBehaviour
     public void ButLocalization(string _lang)
     {
         PlayerPrefs.SetString("activeLang", _lang);
+        FirebaseAnalytics.SetUserProperty("language", PlayerPrefs.GetString("activeLang"));
         onLocalization?.Invoke();
     }
 

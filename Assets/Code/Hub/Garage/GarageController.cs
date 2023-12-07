@@ -689,6 +689,11 @@ public class GarageController : MonoBehaviour
 
     public void ItemSelect()
     {
+        string _detailType = "";
+        int _detailID = activeItem.itemID;
+        int _detailLevel = activeItem.currentLevel;
+        string _detailRare = activeItem.itemRarity;
+
         switch (activeItem.slotNum)
         {
             case 1:
@@ -699,6 +704,8 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("GunIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("GunRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("GunLevelSelect", activeItem.currentLevel);
+
+                _detailType = "Gun";
                 break;
 
             case 2:
@@ -709,6 +716,8 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("EngineIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("EngineRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("EngineLevelSelect", activeItem.currentLevel);
+
+                _detailType = "Engine";
                 break;
 
             case 3:
@@ -719,6 +728,8 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("BrakesIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("BrakesRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("BrakesLevelSelect", activeItem.currentLevel);
+
+                _detailType = "Brakes";
                 break;
 
             case 4:
@@ -729,6 +740,8 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("FuelSystemIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("FuelSystemRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("FuelSystemLevelSelect", activeItem.currentLevel);
+
+                _detailType = "FuelSystem";
                 break;
 
             case 5:
@@ -739,6 +752,8 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("SuspensionIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("SuspensionRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("SuspensionLevelSelect", activeItem.currentLevel);
+
+                _detailType = "Suspension";
                 break;
 
             case 6:
@@ -749,8 +764,12 @@ public class GarageController : MonoBehaviour
                 PlayerPrefs.SetInt("TransmissionIDSelect", activeItem.itemID);
                 PlayerPrefs.SetString("TransmissionRaritySelect", activeItem.itemRarity);
                 PlayerPrefs.SetInt("TransmissionLevelSelect", activeItem.currentLevel);
+
+                _detailType = "Transmission";
                 break;
         }
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailApply(_detailType, _detailID, _detailLevel, _detailRare);
     }
 
     public void ButItemSlotOpen(int slotNum)
@@ -872,6 +891,11 @@ public class GarageController : MonoBehaviour
 
     public void ItemUnselect()
     {
+        string _detailType = "";
+        int _detailID = activeItem.itemID;
+        int _detailLevel = activeItem.currentLevel;
+        string _detailRare = activeItem.itemRarity;
+
         string s = "";
 
         switch (activeItem.slotNum)
@@ -889,6 +913,8 @@ public class GarageController : MonoBehaviour
 
                 imgSlot1.sprite = sprSlotDefault;
                 imgIconSlot1.gameObject.SetActive(false);
+
+                _detailType = "Gun";
 
                 #region ClearSave
                 s = "Gun";
@@ -925,6 +951,8 @@ public class GarageController : MonoBehaviour
                 imgSlot2.sprite = sprSlotDefault;
                 imgIconSlot2.gameObject.SetActive(false);
 
+                _detailType = "Engine";
+
                 #region ClearSave
                 s = "Engine";
 
@@ -959,6 +987,8 @@ public class GarageController : MonoBehaviour
 
                 imgSlot3.sprite = sprSlotDefault;
                 imgIconSlot3.gameObject.SetActive(false);
+
+                _detailType = "Brakes";
 
                 #region ClearSave
                 s = "Brakes";
@@ -995,6 +1025,8 @@ public class GarageController : MonoBehaviour
                 imgSlot4.sprite = sprSlotDefault;
                 imgIconSlot4.gameObject.SetActive(false);
 
+                _detailType = "FuelSystem";
+
                 #region ClearSave
                 s = "FuelSystem";
 
@@ -1029,6 +1061,8 @@ public class GarageController : MonoBehaviour
 
                 imgSlot5.sprite = sprSlotDefault;
                 imgIconSlot5.gameObject.SetActive(false);
+
+                _detailType = "Suspension";
 
                 #region ClearSave
                 s = "Suspension";
@@ -1065,6 +1099,8 @@ public class GarageController : MonoBehaviour
                 imgSlot6.sprite = sprSlotDefault;
                 imgIconSlot6.gameObject.SetActive(false);
 
+                _detailType = "Transmission";
+
                 #region ClearSave
                 s = "Transmission";
 
@@ -1088,6 +1124,8 @@ public class GarageController : MonoBehaviour
                 #endregion
                 break;
         }
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailTakeOff(_detailType, _detailID, _detailLevel, _detailRare);
 
         CalculateViewStats();
     }
