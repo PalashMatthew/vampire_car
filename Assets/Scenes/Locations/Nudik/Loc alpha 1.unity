@@ -2169,6 +2169,22 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].patternsSpawnTime.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].patternsSpawnTime.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].patternsSpawnTime.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveList.Array.data[2].patternsSpawnTime.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722207198381743359, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: waveList.Array.data[3].patternsSpawnTime.Array.data[4]
       value: 0
       objectReference: {fileID: 0}
@@ -2377,11 +2393,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: _isPartner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: _isPinPong
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: _isBoomerang
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: _isDefaultGun
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
