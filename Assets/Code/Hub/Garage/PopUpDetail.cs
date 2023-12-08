@@ -826,7 +826,7 @@ public class PopUpDetail : MonoBehaviour
             }
 
             if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel] &&
-                currentDrawing >= drawingCount[garageController.activeItem.currentLevel])
+                currentDrawing >= drawingCount[garageController.activeItem.currentLevel] && PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
             {
                 butUpgradeGrayNotValue.SetActive(false);
                 butUpgrade.SetActive(true);
@@ -1021,37 +1021,93 @@ public class PopUpDetail : MonoBehaviour
     }
 
     public void ButUpgrade()  //Добавить сюда счетчик чертежей
-    {
+    {      
         if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel])
         {
             int currentDrawing = 0;
             string s = "";
+
+            string _invType = "";
 
             switch (garageController.activeItem.itemObj.itemType)
             {
                 case DetailCard.ItemType.Gun:
                     currentDrawing = PlayerPrefs.GetInt("drawingGunCount");
                     s = "drawingGunCount";
+
+                    if (PlayerPrefs.GetInt("GunIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    } 
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
                 case DetailCard.ItemType.Engine:
                     currentDrawing = PlayerPrefs.GetInt("drawingEngineCount");
                     s = "drawingEngineCount";
+
+                    if (PlayerPrefs.GetInt("EngineIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    }
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
                 case DetailCard.ItemType.Brakes:
                     currentDrawing = PlayerPrefs.GetInt("drawingBrakesCount");
                     s = "drawingBrakesCount";
+
+                    if (PlayerPrefs.GetInt("BrakesIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    }
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
                 case DetailCard.ItemType.FuelSystem:
                     currentDrawing = PlayerPrefs.GetInt("drawingFuelSystemCount");
                     s = "drawingFuelSystemCount";
+
+                    if (PlayerPrefs.GetInt("FuelSystemIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    }
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
                 case DetailCard.ItemType.Suspension:
                     currentDrawing = PlayerPrefs.GetInt("drawingSuspensionCount");
                     s = "drawingSuspensionCount";
+
+                    if (PlayerPrefs.GetInt("SuspensionIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    }
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
                 case DetailCard.ItemType.Transmission:
                     currentDrawing = PlayerPrefs.GetInt("drawingTransmissionCount");
                     s = "drawingTransmissionCount";
+
+                    if (PlayerPrefs.GetInt("TransmissionIDSelect") == garageController.activeItem.itemID)
+                    {
+                        _invType = "Apply";
+                    }
+                    else
+                    {
+                        _invType = "TakeOff";
+                    }
                     break;
             }
 
@@ -1139,6 +1195,40 @@ public class PopUpDetail : MonoBehaviour
                 PlayerPrefs.SetString(_type + "RaritySelect", garageController.activeItem.itemRarity);
                 PlayerPrefs.SetInt(_type + "LevelSelect", garageController.activeItem.currentLevel);
                 #endregion
+
+                #region Event
+                string _resBalance;
+                string _resType = "";
+
+                if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel + 1] &&
+                currentDrawing >= drawingCount[garageController.activeItem.currentLevel + 1] && PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    _resBalance = "NotEmptyRes";
+                    _resType = "none";
+                }
+                else
+                {
+                    _resBalance = "EmptyRes";
+
+                    if (PlayerPrefs.GetInt("playerMoney") < upgradePrice[garageController.activeItem.currentLevel + 1])
+                    {
+                        _resType += "_Money";
+                    }
+
+                    if (currentDrawing >= drawingCount[garageController.activeItem.currentLevel + 1])
+                    {
+                        _resType += "_Drawing";
+                    }
+
+                    if (PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) >= PlayerPrefs.GetInt("playerLevel"))
+                    {
+                        _resType += "_PlayerLevel";
+                    }
+                }
+
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailUpgrade(_invType, _type, garageController.activeItem.itemID, garageController.activeItem.currentLevel + 1, garageController.activeItem.itemRarity, _resBalance, _resType);
+                #endregion
+
 
                 SaveDetailStats(_type);
 

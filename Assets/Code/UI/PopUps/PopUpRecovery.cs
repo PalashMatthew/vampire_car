@@ -31,6 +31,8 @@ public class PopUpRecovery : MonoBehaviour
 
         tTimer.text = timerValue.ToString();
 
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave -1, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, 1);
+
         StartCoroutine(Timer());
     }
 
@@ -84,6 +86,8 @@ public class PopUpRecovery : MonoBehaviour
 
         GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Recovery(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName);
 
         ButClosed();
     }

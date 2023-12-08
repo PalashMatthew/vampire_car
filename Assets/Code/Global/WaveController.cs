@@ -35,6 +35,9 @@ public class WaveController : MonoBehaviour
 
     public static bool isWaveEnd;
 
+    public float secondsPass = 0;
+
+
     private void Awake()
     {
         _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
@@ -44,8 +47,14 @@ public class WaveController : MonoBehaviour
         StartWave();        
     }
 
+    private void Update()
+    {
+        secondsPass += Time.deltaTime;
+    }
+
     public void StartWave()
     {
+        secondsPass = 0;
         isWaveEnd = false;
         GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
 
@@ -105,6 +114,8 @@ public class WaveController : MonoBehaviour
         //        Destroy(_generateObstacles.instObstacles[i]);
         //    }
         //}
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveClear(currentWave - 1, Application.loadedLevelName, GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().activeGunCard.Count);
 
         _gameplayController.activeEnemy.Clear();
         gameplayUIController.StartCoroutine(gameplayUIController.WaveCompliteAnim());

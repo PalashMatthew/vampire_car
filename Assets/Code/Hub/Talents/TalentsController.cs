@@ -98,6 +98,8 @@ public class TalentsController : MonoBehaviour
 
     public TMP_Text tTalentsLevel;
 
+    private int currentMaxTalantLevel;
+
 
     private void OnEnable()
     {
@@ -107,6 +109,31 @@ public class TalentsController : MonoBehaviour
     public void Initialize()
     {
         SaveCheck();
+
+        if (PlayerPrefs.GetInt("playerLevel") < 3)
+        {
+            currentMaxTalantLevel = 4;
+        }
+
+        if (PlayerPrefs.GetInt("playerLevel") >= 3 && PlayerPrefs.GetInt("playerLevel") < 5)
+        {
+            currentMaxTalantLevel = 7;
+        }
+
+        if (PlayerPrefs.GetInt("playerLevel") >= 5 && PlayerPrefs.GetInt("playerLevel") < 8)
+        {
+            currentMaxTalantLevel = 12;
+        }
+
+        if (PlayerPrefs.GetInt("playerLevel") >= 8 && PlayerPrefs.GetInt("playerLevel") < 10)
+        {
+            currentMaxTalantLevel = 18;
+        }
+
+        if (PlayerPrefs.GetInt("playerLevel") >= 10)
+        {
+            currentMaxTalantLevel = 150;
+        }
 
         #region Health
         healthLevel = PlayerPrefs.GetInt("talentHealthLevel");
@@ -386,7 +413,7 @@ public class TalentsController : MonoBehaviour
 
     public void ButUpgrade()
     {
-        if (PlayerPrefs.GetInt("playerMoney") >= price)
+        if (PlayerPrefs.GetInt("playerMoney") >= price && PlayerPrefs.GetInt("talentGlobalLevel") <= currentMaxTalantLevel)
         {
             string talantName = PlayerPrefs.GetString("talent" + PlayerPrefs.GetInt("talentGlobalLevel") + "name");
 
@@ -398,14 +425,41 @@ public class TalentsController : MonoBehaviour
 
             PlayerPrefs.SetInt("talentGlobalLevel", PlayerPrefs.GetInt("talentGlobalLevel") + 1);
 
-            Initialize();
-
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - price);
+
+            Initialize();            
             
             popUpTalentFinal.value = PlayerPrefs.GetInt("talent" + talantName + "CurrentValue");
             popUpTalentFinal.talentName = talantName;
             popUpTalentFinal.Open();
-        }        
+
+            #region Event
+            string _resBalanceType;
+            string _resType = "";
+
+            if (PlayerPrefs.GetInt("playerMoney") >= price && PlayerPrefs.GetInt("talentGlobalLevel") <= currentMaxTalantLevel)
+            {
+                _resBalanceType = "NotEmptyRes";
+                _resType = "none";
+            }
+            else
+            {
+                _resBalanceType = "EmptyRes";
+
+                if (PlayerPrefs.GetInt("playerMoney") < price)
+                {
+                    _resType = "_Money";
+                }
+
+                if (PlayerPrefs.GetInt("talentGlobalLevel") > currentMaxTalantLevel)
+                {
+                    _resType = "_PlayerLevel";
+                }
+            }
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TalentUpgrade(PlayerPrefs.GetInt("talentGlobalLevel"), _resBalanceType, _resType);
+            #endregion
+        }
     }
 
     void SaveCheck()

@@ -163,6 +163,8 @@ public class ChooseLocationController : MonoBehaviour
         //    PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") - 5);
         //    loader.LoadLevel(levelName[currentLocNum - 1]);
         //}
+                
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"));
 
         loader.LoadLevel(levelName[currentLocNum - 1]);
     }

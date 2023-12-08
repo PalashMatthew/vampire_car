@@ -15,7 +15,7 @@ public class FirstAidKitController : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 20);
+        StartCoroutine(Dead());
     }
 
     private void Update()
@@ -23,5 +23,26 @@ public class FirstAidKitController : MonoBehaviour
         transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
 
         icon.transform.Rotate(new Vector3(0, rotateSpeed, 0));
+    }
+
+    IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(20);
+
+        PlayerStats _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
+        string _hp;
+
+        if (_playerStats.currentHp < _playerStats.maxHp)
+        {
+            _hp = "NotFullHP";
+        }
+        else
+        {
+            _hp = "FullHP";
+        }
+        
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_FirstAidKitDestroy(_hp);
+
+        Destroy(gameObject);
     }
 }

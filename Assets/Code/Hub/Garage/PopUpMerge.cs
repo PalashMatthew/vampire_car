@@ -1090,6 +1090,10 @@ public class PopUpMerge : MonoBehaviour
 
         popUpMergeFinal.level = maxLevel;
 
+        #region Event
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Merge(_itemType, itemCellGeneral.itemID, maxLevel, _itemRarity);
+        #endregion
+
         imgSlot1.gameObject.SetActive(false);
         imgSlot2.gameObject.SetActive(false);
         imgSlot3.gameObject.SetActive(false);
@@ -1153,7 +1157,7 @@ public class PopUpMerge : MonoBehaviour
         LoadItem();
 
         popUpMergeFinal.rarity = _itemRarity;        
-        popUpMergeFinal.ButOpen();
+        popUpMergeFinal.ButOpen();        
     }
 
     void PanelNewStatsSettings()

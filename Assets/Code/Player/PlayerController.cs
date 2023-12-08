@@ -222,8 +222,22 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "firstAidKit")
-        {
+        {            
             FirstAidKit(other.gameObject.GetComponent<FirstAidKitController>().value);
+
+            string _hp = "";
+
+            if (_playerStats.currentHp < _playerStats.maxHp)
+            {
+                _hp = "NotFullHP";
+            } 
+            else
+            {
+                _hp = "FullHP";
+            }
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeFirstAidKit(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, _hp);
+
             Destroy(other.gameObject);
         }
     }

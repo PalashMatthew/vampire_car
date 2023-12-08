@@ -63,6 +63,14 @@ public class PopUpWin : MonoBehaviour
 
         locationNum = GameObject.Find("GameplayController").GetComponent<GameplayController>().locationNum;
 
+        int _moneyReward = 0;
+        int _expReward = 0;
+        int _drawingGunReward = 0;
+        int _drawingDetailReward = 0;
+        int _titanReward = 0;
+        int _itemRewardCount = 0;
+        string _itemRewardID = "";
+
         if (waveController.currentWave >= 2)
         {
             #region Money Drop
@@ -90,6 +98,8 @@ public class PopUpWin : MonoBehaviour
             objButAds.SetActive(true);
             tAdsReward.text = "+" + (int)moneyValue;
             moneyGiveValue = (int)moneyValue;
+
+            _moneyReward = (int)moneyValue;
             #endregion
 
             #region Exp Drop
@@ -108,6 +118,8 @@ public class PopUpWin : MonoBehaviour
             instCell.GetComponent<ResourcesCell>().Initialize();
 
             PlayerPrefs.SetInt("playerExp", PlayerPrefs.GetInt("playerExp") + (int)expValue);
+
+            _expReward = (int)expValue;
             #endregion
 
             #region Drawing Drop
@@ -173,8 +185,10 @@ public class PopUpWin : MonoBehaviour
                 instCell.transform.parent = scrollObj;
                 instCell.GetComponent<ResourcesCell>().value = drawingGunCount;
                 instCell.GetComponent<ResourcesCell>().sprIcon = sprIconDrawingGun;
-                instCell.GetComponent<ResourcesCell>().Initialize();
+                instCell.GetComponent<ResourcesCell>().Initialize();                
             }
+
+            _drawingGunReward = drawingGunCount;
 
             if (drawingEngineCount > 0)
             {
@@ -220,6 +234,8 @@ public class PopUpWin : MonoBehaviour
                 instCell.GetComponent<ResourcesCell>().sprIcon = sprIconDrawingTransmission;
                 instCell.GetComponent<ResourcesCell>().Initialize();
             }
+
+            _drawingDetailReward = drawingEngineCount + drawingBrakesCount + drawingFuelSystemCount + drawingSuspensionCount + drawingTransmissionCount;
             #endregion
 
             #region Titan Drop
@@ -238,19 +254,33 @@ public class PopUpWin : MonoBehaviour
             instCell.GetComponent<ResourcesCell>().Initialize();
 
             PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + (int)titanValue);
+
+            _titanReward = (int)titanValue;
             #endregion
 
             #region ItemDrop
             int itemValue = 0;
+            int plusChance = 0;
 
             for (int i = 1; i <= waveController.currentWave; i++)
             {
                 int rand = Random.Range(1, 101);
 
-                if (rand <= waveDropItemProcent[i-1])
+                if (rand <= waveDropItemProcent[i-1] + plusChance)
                 {
                     itemValue++;
                     Debug.Log("Item Spawn");
+                } 
+                else
+                {
+                    if (itemValue > 0)
+                    {
+                        plusChance = 0;
+                    } 
+                    else
+                    {
+                        plusChance += 3;
+                    }
                 }
             }
 
@@ -271,6 +301,9 @@ public class PopUpWin : MonoBehaviour
                 instCell.GetComponent<ItemDropCell>().sprIcon = _card.sprItem;
                 instCell.GetComponent<ItemDropCell>().Initialize();
 
+                _itemRewardCount++;
+                _itemRewardID += "_" + _card.itemID;
+
                 #region Add Item
                 string _itemType = _card.itemType.ToString();
 
@@ -283,6 +316,21 @@ public class PopUpWin : MonoBehaviour
             }
             #endregion
         }
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward(waveController.currentWave - 1, locationNum, _moneyReward, _expReward, _drawingGunReward, _drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
+
+        int _dieCount = 0;
+
+        if (GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
+        {
+            _dieCount = 2;
+        } 
+        else
+        {
+            _dieCount = 1;
+        }
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
     }
 
     public void ButOpen()

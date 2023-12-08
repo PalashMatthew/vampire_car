@@ -37,6 +37,8 @@ public class PopUpPause : MonoBehaviour
         Time.timeScale = 0;
         _popUpController.OpenPopUp();
 
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Pause();
+
         GameInputCheck();
     }
 
@@ -63,6 +65,8 @@ public class PopUpPause : MonoBehaviour
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Continue();
+
         GameplayController.isPause = false;
         Time.timeScale = 1;
         _popUpController.ClosedPopUp();
@@ -90,6 +94,8 @@ public class PopUpPause : MonoBehaviour
 
     public void ButExit()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_GoToHub();
+
         GameplayController.isPause = false;
         Time.timeScale = 1;
         GameObject.Find("LoadingCanvas").GetComponent<ASyncLoader>().LoadLevel("Hub");
