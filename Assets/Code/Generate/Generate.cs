@@ -95,7 +95,7 @@ public class Generate : MonoBehaviour
                     }
                 }
 
-                GameObject inst = Instantiate(waveController.ChoiseEnemy(), new Vector3(_x, 0, _randZ), transform.rotation);
+                GameObject inst = Instantiate(_en, new Vector3(_x, 0, _randZ), transform.rotation);
                 _gameplayController.activeEnemy.Add(inst);
 
                 inst.transform.eulerAngles = new Vector3(0, 180, 0);

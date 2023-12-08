@@ -2,8 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static BossFireTruckController;
-using static UnityEditor.PlayerSettings;
 
 public class BossCentaurController : MonoBehaviour
 {
