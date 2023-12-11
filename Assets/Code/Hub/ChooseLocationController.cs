@@ -133,12 +133,22 @@ public class ChooseLocationController : MonoBehaviour
 
         if (currentLocNum == 2)
         {
-            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
         }
 
         if (currentLocNum == 3)
         {
+            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+        }
+
+        if (currentLocNum == 4)
+        {
             mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+        }
+
+        if (currentLocNum == 5)
+        {
+            mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);
         }
         #endregion
     }
