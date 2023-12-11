@@ -20,6 +20,7 @@ public class BossCentaurController : MonoBehaviour
     public int attack2BulletCount;
     public float attack2ShotInterval;
     public float attack2ShotPause;
+    public int lazerCount;
 
     public Transform shot2Pos1, shot2Pos2;
 
@@ -150,19 +151,31 @@ public class BossCentaurController : MonoBehaviour
 
     IEnumerator Shot2()
     {
-        shot2Pos1.transform.eulerAngles = new Vector3(0, Random.Range(140f, 220f), 0);
-        shot2Pos2.transform.eulerAngles = new Vector3(0, Random.Range(140f, 220f), 0);
+        List<float> rotYPos = new List<float>();
+
+        for (int i = 0; i < lazerCount; i++)
+        {
+            float rand = Random.Range(140f, 220f);
+
+            rotYPos.Add(rand);
+        }        
 
         for (int i = 0; i < attack2BulletCount; i++)
         {           
-            GameObject gm1 = Instantiate(objBullet1, shot2Pos1.transform.position, shot2Pos1.transform.rotation);
-            GameObject gm2 = Instantiate(objBullet1, shot2Pos2.transform.position, shot2Pos2.transform.rotation);
+            for (int t = 0; t < lazerCount; t++)
+            {
+                shot2Pos1.transform.eulerAngles = new Vector3(0, rotYPos[t], 0);
+                shot2Pos2.transform.eulerAngles = new Vector3(0, -rotYPos[t], 0);
 
-            gm1.GetComponent<BossTankBullet1>().damage = damage;
-            gm1.GetComponent<BossTankBullet1>()._controller = GetComponent<EnemyController>();
+                GameObject gm1 = Instantiate(objBullet1, shot2Pos1.transform.position, shot2Pos1.transform.rotation);
+                GameObject gm2 = Instantiate(objBullet1, shot2Pos2.transform.position, shot2Pos2.transform.rotation);
 
-            gm2.GetComponent<BossTankBullet1>().damage = damage;
-            gm2.GetComponent<BossTankBullet1>()._controller = GetComponent<EnemyController>();
+                gm1.GetComponent<BossTankBullet1>().damage = damage;
+                gm1.GetComponent<BossTankBullet1>()._controller = GetComponent<EnemyController>();
+
+                gm2.GetComponent<BossTankBullet1>().damage = damage;
+                gm2.GetComponent<BossTankBullet1>()._controller = GetComponent<EnemyController>();
+            }            
 
             yield return new WaitForSeconds(attack2ShotInterval);
         }

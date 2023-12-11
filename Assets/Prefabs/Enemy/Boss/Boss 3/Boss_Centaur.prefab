@@ -1526,8 +1526,8 @@ MonoBehaviour:
   isCarStop: 0
   enemyKind: 
   moveSpeed: 0
-  hp: 12000
-  maxHp: 12000
+  hp: 500
+  maxHp: 500
   brakeDamage: 30
   moveSpeedMin: 0
   moveSpeedMax: 0
@@ -1573,12 +1573,13 @@ MonoBehaviour:
   objBullet1: {fileID: 2290857860438269718, guid: d53df2129a665894b86d911283f41461, type: 3}
   attack1ShotInterval: 0.3
   attack1ShotPause: 3
-  attack2BulletCount: 12
-  attack2ShotInterval: 0.3
+  attack2BulletCount: 5
+  attack2ShotInterval: 0.2
   attack2ShotPause: 3
+  lazerCount: 6
   shot2Pos1: {fileID: 8950498275896982480}
   shot2Pos2: {fileID: 8162942801352452639}
-  damage: 0
+  damage: 60
   maxX: 10.9
   minX: -10.9
   localMoveSpeed: 6
