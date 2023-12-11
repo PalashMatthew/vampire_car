@@ -184,7 +184,8 @@ public class UpgradeCardController : MonoBehaviour
             _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoicePassiveCard());
             GameObject.Find("PopUp Pause").GetComponent<PopUpPause>().InstPassive(imgIcon.sprite);
 
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakePassiveCard(card.cardName, cardRarity.ToString());
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakePassiveCard(card.cardName, cardRarity.ToString());
         }            
 
         if (_type == "gun")
@@ -193,12 +194,14 @@ public class UpgradeCardController : MonoBehaviour
 
             if (_upgradeController.upgradeLevelCount == 2)
             {
-                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard2(card.cardName, cardRarity.ToString());
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard2(card.cardName, cardRarity.ToString());
             }
 
             if (_upgradeController.upgradeLevelCount == 1)
             {
-                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard1(card.cardName, cardRarity.ToString());
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard1(card.cardName, cardRarity.ToString());
             }
         }
     }
