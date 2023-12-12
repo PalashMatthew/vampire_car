@@ -244,7 +244,14 @@ public class PlayerController : MonoBehaviour
 
     void FirstAidKit(float value)
     {
-        float regen = _playerStats.maxHpBase / 100 * value;
+        float _value = value + PlayerPrefs.GetInt("talentRecoveryHpInFirstAidKitCurrentValue") +
+                               PlayerPrefs.GetFloat("GunSelectRecoveryHpInFirstAidKit") +
+                               PlayerPrefs.GetFloat("EngineSelectRecoveryHpInFirstAidKit") +
+                               PlayerPrefs.GetFloat("BrakesSelectRecoveryHpInFirstAidKit") +
+                               PlayerPrefs.GetFloat("FuelSystemSelectRecoveryHpInFirstAidKit") +
+                               PlayerPrefs.GetFloat("SuspensionSelectRecoveryHpInFirstAidKit") +
+                               PlayerPrefs.GetFloat("TransmissionSelectRecoveryHpInFirstAidKit");
+        float regen = _playerStats.maxHpBase / 100 * _value;
         _playerStats.currentHp += regen;
 
         vfxHealing.Play();

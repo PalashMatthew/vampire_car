@@ -909,7 +909,7 @@ public class GarageController : MonoBehaviour
 
                 PlayerPrefs.SetInt("slot1_itemNumInInventory", -1);
 
-                PlayerPrefs.SetInt("gunIDSelect", 0);
+                PlayerPrefs.SetInt("GunIDSelect", 0);
 
                 imgSlot1.sprite = sprSlotDefault;
                 imgIconSlot1.gameObject.SetActive(false);

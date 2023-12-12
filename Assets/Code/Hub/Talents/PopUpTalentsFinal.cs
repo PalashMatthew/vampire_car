@@ -37,7 +37,7 @@ public class PopUpTalentsFinal : MonoBehaviour
     {
         _popUpController.OpenPopUp();
 
-        tValue.text = "+" + value;
+        string procent = "";
 
         SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
 
@@ -61,6 +61,7 @@ public class PopUpTalentsFinal : MonoBehaviour
             case "Damage":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskDamage");
+                procent = "%";
                 break;
 
             case "Iron":
@@ -71,28 +72,35 @@ public class PopUpTalentsFinal : MonoBehaviour
             case "RecoveryHpInFirstAidKit":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameFirstAidKit");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskFirstAidKit");
+                procent = "%";
                 break;
 
             case "ShotSpeed":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameShotSpeed");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskShotSpeed");
+                procent = "%";
                 break;
 
             case "Block":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameBlock");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskBlock");
+                procent = "%";
                 break;
 
             case "EquipmentImprovement":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameEquipments");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskEquipments");
+                procent = "%";
                 break;
 
             case "CarImprovement":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameCar");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskCar");
+                procent = "%";
                 break;
         }
+
+        tValue.text = "+" + value + procent;
 
         StartCoroutine(Animation());
     }

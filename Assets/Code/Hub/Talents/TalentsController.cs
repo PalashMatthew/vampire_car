@@ -100,6 +100,8 @@ public class TalentsController : MonoBehaviour
 
     private int currentMaxTalantLevel;
 
+    public GameObject butUpgrade, butBlock, butMaxLevel;
+
 
     private void OnEnable()
     {
@@ -409,6 +411,31 @@ public class TalentsController : MonoBehaviour
         tPrice.text = price + "";
 
         tTalentsLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsGlobalLevel") + " - " + (PlayerPrefs.GetInt("talentGlobalLevel") - 1);
+
+        #region Buttons
+        if (PlayerPrefs.GetInt("playerMoney") >= price && PlayerPrefs.GetInt("talentGlobalLevel") <= currentMaxTalantLevel && PlayerPrefs.GetInt("talentGlobalLevel") < 100)
+        {
+            butUpgrade.SetActive(true);
+            butMaxLevel.SetActive(false);
+            butBlock.SetActive(false);
+        }
+        else
+        {
+            butUpgrade.SetActive(false);
+
+            if (PlayerPrefs.GetInt("playerMoney") < price || PlayerPrefs.GetInt("talentGlobalLevel") > currentMaxTalantLevel)
+            {
+                butMaxLevel.SetActive(false);
+                butBlock.SetActive(true);
+            }
+
+            if (PlayerPrefs.GetInt("talentGlobalLevel") >= 100)
+            {
+                butMaxLevel.SetActive(true);
+                butBlock.SetActive(false);
+            }
+        }
+        #endregion
     }
 
     public void ButUpgrade()

@@ -9,6 +9,9 @@ public class PopUpNewLevel : MonoBehaviour
     private PopUpController _popUpController;
 
     public TMP_Text tLevel;
+    public TMP_Text tReward;
+
+    public List<int> reward;
 
 
     private void Start()
@@ -30,6 +33,7 @@ public class PopUpNewLevel : MonoBehaviour
     void Initialize()
     {
         tLevel.text = PlayerPrefs.GetInt("playerLevel").ToString();
+        tReward.text = reward[PlayerPrefs.GetInt("playerLevel")].ToString();
     }
 
     public void CheckPlayerExp()
@@ -53,6 +57,7 @@ public class PopUpNewLevel : MonoBehaviour
 
     public void ButClosed()
     {
+        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + reward[PlayerPrefs.GetInt("playerLevel")]);
         _popUpController.ClosedPopUp();
     }
 }

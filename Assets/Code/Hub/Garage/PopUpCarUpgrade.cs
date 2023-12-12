@@ -48,11 +48,12 @@ public class PopUpCarUpgrade : MonoBehaviour
 
     [Header("Upgrade")]
     public TMP_Text tTitan;
-    public float upgradePrice;
     public TMP_Text tPrice;
     public GameObject butUpgrade;
     public GameObject butUpgradeGray;
+    public GameObject butUpgradeBlock;
     public List<int> titanCount;
+    public List<int> upgradePrice;
 
     [Header("Open Characters")]
     public TMP_Text tUpgradeLvl10;
@@ -364,17 +365,31 @@ public class PopUpCarUpgrade : MonoBehaviour
         }
         #endregion
 
-        tPrice.text = upgradePrice + "";
+        tPrice.text = upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")] + "";
 
-        if (PlayerPrefs.GetInt(_carName + "carLevel") >= 40)
+        if (PlayerPrefs.GetInt(_carName + "carLevel") >= 40 || 
+            PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] ||
+            PlayerPrefs.GetInt("playerLevel") == PlayerPrefs.GetInt(_carName + "carLevel") ||
+            PlayerPrefs.GetInt("playerMoney") < upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")])
         {
             butUpgrade.SetActive(false);
-            butUpgradeGray.SetActive(true);
+
+            if (PlayerPrefs.GetInt(_carName + "carLevel") < 40)
+            {                
+                butUpgradeGray.SetActive(false);
+                butUpgradeBlock.SetActive(true);
+            }
+            else
+            {
+                butUpgradeGray.SetActive(true);
+                butUpgradeBlock.SetActive(false);
+            }            
         } 
         else
         {
             butUpgrade.SetActive(true);
             butUpgradeGray.SetActive(false);
+            butUpgradeBlock.SetActive(false);
         }
 
         tTitan.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_titan") + ": " + PlayerPrefs.GetInt("playerTitan") + "/" + titanCount[PlayerPrefs.GetInt(_carName + "carLevel")];
@@ -386,11 +401,11 @@ public class PopUpCarUpgrade : MonoBehaviour
     {
         string _carName = carItem.carName;
 
-        if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt(_carName + "carLevel") < 40)
+        if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") < 40)
         {
             if (PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") < PlayerPrefs.GetInt("playerLevel"))
             {
-                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - (int)upgradePrice);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") - upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")]);
 
                 PlayerPrefs.SetFloat(_carName + "carDamage", PlayerPrefs.GetFloat(_carName + "carDamage") + PlayerPrefs.GetFloat(_carName + "carDamageStepUp"));
                 PlayerPrefs.SetFloat(_carName + "carHealth", PlayerPrefs.GetFloat(_carName + "carHealth") + PlayerPrefs.GetFloat(_carName + "carHealthStepUp"));
@@ -409,7 +424,7 @@ public class PopUpCarUpgrade : MonoBehaviour
                 string resBalans = "";
                 string resType = "";
 
-                if (PlayerPrefs.GetInt("playerMoney") < upgradePrice || PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] || PlayerPrefs.GetInt(_carName + "carLevel") < PlayerPrefs.GetInt("playerLevel"))
+                if (PlayerPrefs.GetInt("playerMoney") < upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")] || PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] || PlayerPrefs.GetInt(_carName + "carLevel") < PlayerPrefs.GetInt("playerLevel"))
                 {
                     resBalans = "EmptyRes";
                 } 
@@ -418,13 +433,13 @@ public class PopUpCarUpgrade : MonoBehaviour
                     resBalans = "NotEmptyRes";
                 }
 
-                if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice && PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") >= PlayerPrefs.GetInt("playerLevel"))
+                if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt("playerTitan") >= titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] && PlayerPrefs.GetInt(_carName + "carLevel") >= PlayerPrefs.GetInt("playerLevel"))
                 {
                     resType = "none";
                 }
                 else
                 {
-                    if (PlayerPrefs.GetInt("playerMoney") < upgradePrice)
+                    if (PlayerPrefs.GetInt("playerMoney") < upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")])
                     {
                         resType += "_Money_";
                     }

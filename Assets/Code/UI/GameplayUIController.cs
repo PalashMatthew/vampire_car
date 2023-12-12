@@ -36,6 +36,7 @@ public class GameplayUIController : MonoBehaviour
     public Image imgFillBossBar;
     public Image imgBossEndFill;
     public GameObject bossPanel;
+    public int bossNum;
 
     public bool isShowPanelWave;
     public bool _isBossFight;
@@ -215,7 +216,7 @@ public class GameplayUIController : MonoBehaviour
     #region Boss
     public void Boss()
     {
-        tBossName.text = "аняя - Fire Truck";
+        tBossName.text = PlayerPrefs.GetString("LOC_bossName" + bossNum);
 
         if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
             tBossHP.text = (int)GameObject.Find("BOSS").GetComponent<EnemyController>().hp + "";

@@ -167,15 +167,14 @@ public class ChooseLocationController : MonoBehaviour
 
     public void ButPlay()
     {
-        //if (PlayerPrefs.GetInt("playerFuelCurrent") >= 5)
-        //{
-        //    PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
-        //    PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") - 5);
-        //    loader.LoadLevel(levelName[currentLocNum - 1]);
-        //}
-                
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"));
+        if (PlayerPrefs.GetInt("playerFuelCurrent") >= 5)
+        {
+            PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
+            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") - 5);
 
-        loader.LoadLevel(levelName[currentLocNum - 1]);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"));
+
+            loader.LoadLevel(levelName[currentLocNum - 1]);
+        }
     }
 }

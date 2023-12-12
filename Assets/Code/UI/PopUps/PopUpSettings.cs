@@ -27,7 +27,10 @@ public class PopUpSettings : MonoBehaviour
     public GameObject imgMusicToggleOff;
     private bool _isMusicOn = true;
 
-    //[Header("Localization")]
+    [Header("Localization")]
+    public GameObject toggleRu;
+    public GameObject toggleEn;
+
     public static Action onLocalization;
 
     public TMP_Text tUserID;
@@ -108,6 +111,17 @@ public class PopUpSettings : MonoBehaviour
         if (PlayerPrefs.GetInt("musicSettings") == 1)
             _isMusicOn = true;
         else _isMusicOn = false;
+
+        if (PlayerPrefs.GetString("activeLang") == "en")
+        {
+            toggleEn.SetActive(true);
+            toggleRu.SetActive(false);
+        } 
+        else
+        {
+            toggleEn.SetActive(false);
+            toggleRu.SetActive(true);
+        }
     }
 
     public void ButOpen()
@@ -137,6 +151,17 @@ public class PopUpSettings : MonoBehaviour
         PlayerPrefs.SetString("activeLang", _lang);
         FirebaseAnalytics.SetUserProperty("language", PlayerPrefs.GetString("activeLang"));
         onLocalization?.Invoke();
+
+        if (PlayerPrefs.GetString("activeLang") == "en")
+        {
+            toggleEn.SetActive(true);
+            toggleRu.SetActive(false);
+        }
+        else
+        {
+            toggleEn.SetActive(false);
+            toggleRu.SetActive(true);
+        }
     }
 
     public async void ButDeleteAccount()
