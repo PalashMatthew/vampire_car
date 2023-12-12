@@ -122,9 +122,9 @@ MonoBehaviour:
   isCarStop: 0
   enemyKind: 
   moveSpeed: 0
-  hp: 500
-  maxHp: 500
-  brakeDamage: 30
+  hp: 15000
+  maxHp: 15000
+  brakeDamage: 100
   moveSpeedMin: 0
   moveSpeedMax: 0
   meshRenderer: {fileID: 0}
@@ -159,25 +159,12 @@ MonoBehaviour:
   rocketObj: {fileID: 808685252804301324, guid: 70a89b3ab681b3d43a816c3178fc6b4a, type: 3}
   spawnRocketPos: {fileID: 8281616861721706530}
   truckObj: {fileID: 0}
-  spawnPos: {fileID: 0}
-  spawnPosObj: []
-  attack1BulletCount: 0
-  objBullet1: {fileID: 0}
-  attack1ShotInterval: 0
   attack1ShotPause: 0
-  attack2BulletCount: 0
-  attack2ShotInterval: 0
   attack2ShotPause: 0
-  lazerCount: 0
-  shot2Pos1: {fileID: 0}
-  shot2Pos2: {fileID: 0}
   damage: 100
   maxX: 14
   minX: -14
   localMoveSpeed: 6
-  mesh1: {fileID: 0}
-  mesh2: {fileID: 0}
-  mesh3: {fileID: 0}
 --- !u!1 &1101557482686059313
 GameObject:
   m_ObjectHideFlags: 0
