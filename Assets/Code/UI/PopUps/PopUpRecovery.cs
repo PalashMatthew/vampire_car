@@ -82,6 +82,11 @@ public class PopUpRecovery : MonoBehaviour
 
     public void ButContinueAds()
     {
+        GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("recovery");        
+    }
+
+    public void ContinueAds_Reward()
+    {
         StopAllCoroutines();
 
         isRecovery = true;

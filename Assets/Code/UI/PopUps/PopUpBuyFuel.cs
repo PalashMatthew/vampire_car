@@ -22,8 +22,7 @@ public class PopUpBuyFuel : MonoBehaviour
 
     public void ButBuyAds()
     {
-        //Запустить рекламу
-        PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+        GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("fuel_5");
     }
 
     public void ButOpen()

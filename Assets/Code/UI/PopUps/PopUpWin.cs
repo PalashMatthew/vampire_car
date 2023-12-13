@@ -354,6 +354,11 @@ public class PopUpWin : MonoBehaviour
 
     public void ButAds()
     {
+        GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("moneyX2");
+    }
+
+    public void Ads_Reward()
+    {
         PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + moneyGiveValue);
         objButAds.SetActive(false);
     }

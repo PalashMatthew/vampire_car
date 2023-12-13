@@ -79,7 +79,7 @@ public class HubController : MonoBehaviour
         }
 
         #region Fuel Check
-        if (PlayerPrefs.GetInt("playerFuelCurrent") == PlayerPrefs.GetInt("playerFuelMax"))
+        if (PlayerPrefs.GetInt("playerFuelCurrent") >= PlayerPrefs.GetInt("playerFuelMax"))
         {
             tFuelTimer.text = "";
         }

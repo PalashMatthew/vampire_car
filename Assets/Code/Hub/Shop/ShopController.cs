@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 using System.Globalization;
 using UnityEngine.Purchasing;
+using TMPro;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ShopController : MonoBehaviour, IStoreListener
 {
@@ -14,19 +16,22 @@ public class ShopController : MonoBehaviour, IStoreListener
     public GameObject butKeyChest1;
 
     public List<DetailCard> items;
-    [SerializeField] public List<ConsumableItem> consumableItems;
 
     IStoreController m_StoreController;
+
+    public List<ConsumableItem> cItems;
+    public List<TMP_Text> tPrices;
 
 
     private void Awake()
     {
         Initialize();
-        SetupBuilder();
     }
 
     public void Initialize()
     {
+        SetupBuilder();
+
         //#region Chest 1       
         //TimeSpan timePassed = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("LastSession"));
         //int secondsPassed = (int)timePassed.TotalSeconds;
@@ -54,7 +59,7 @@ public class ShopController : MonoBehaviour, IStoreListener
         //}
 
         //StartCoroutine(CheckTimeChest1());
-        //#endregion
+        //#endregion        
     }
 
     IEnumerator CheckTimeChest1()
@@ -64,29 +69,39 @@ public class ShopController : MonoBehaviour, IStoreListener
         StartCoroutine(CheckTimeChest1());
     }
 
-    public void ButBuyMoney(int _value)
+    public void ButBuyMoney(int num)
     {
-        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + _value);
+        if (num == 1)
+        {
+            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("freeMoney");
+        } 
+        else if (num == 2)
+        {
+            if (PlayerPrefs.GetInt("playerHard") >= 80)
+            {
+                PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 80);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 5760);
+            }
+            
+        }
+        else if (num == 3)
+        {
+            if (PlayerPrefs.GetInt("playerHard") >= 200)
+            {
+                PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 200);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 17280);
+            }
+        }        
     }
 
-    public void ButBuyHard(int _value)
+    public void ButBuyHard(int itemNum)
     {
-        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + _value);
+        m_StoreController.InitiatePurchase(cItems[itemNum].Id);
     }
 
     public void AddHard(int value)
     {
         PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + value);
-    }
-
-    public void AddMoney(int value)
-    {
-        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + value);
-    }
-
-    public void ButBuyConsumable(int id)
-    {
-        m_StoreController.InitiatePurchase(consumableItems[id].Id);
     }
 
     public void ButChest1()
@@ -143,9 +158,9 @@ public class ShopController : MonoBehaviour, IStoreListener
     {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-        foreach (ConsumableItem cItem in consumableItems)
+        for (int i = 0; i < cItems.Count; i++)
         {
-            builder.AddProduct(cItem.Id, ProductType.Consumable);
+            builder.AddProduct(cItems[i].Id, ProductType.Consumable);
         }
 
         UnityPurchasing.Initialize(this, builder);
@@ -153,46 +168,41 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        print("Initialize IAP Error!" + error);
+        print("initialize iap failed" + error);
     }
 
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
-        print("Initialize IAP Error!" + error + message);
+        print("initialize iap failed" + error);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
     {
         var product = purchaseEvent.purchasedProduct;
 
-        print("Purchase Complite " + product.definition.id);
+        print("Purchase Complite" + product.definition.id);
 
-        if (product.definition.id == consumableItems[0].Id)
+        if (product.definition.id == cItems[0].Id)
         {
             AddHard(80);
-        }
-
-        if (product.definition.id == consumableItems[1].Id)
+        } 
+        else if (product.definition.id == cItems[1].Id)
         {
             AddHard(500);
         }
-
-        if (product.definition.id == consumableItems[2].Id)
+        else if (product.definition.id == cItems[2].Id)
         {
             AddHard(1200);
         }
-
-        if (product.definition.id == consumableItems[3].Id)
+        else if (product.definition.id == cItems[3].Id)
         {
             AddHard(2500);
         }
-
-        if (product.definition.id == consumableItems[4].Id)
+        else if (product.definition.id == cItems[4].Id)
         {
             AddHard(6500);
         }
-
-        if (product.definition.id == consumableItems[5].Id)
+        else if (product.definition.id == cItems[5].Id)
         {
             AddHard(14000);
         }
@@ -202,21 +212,27 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        print("Purchased Failed!");
+        print("purchase iap failed");
     }
 
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        print("IAP Initialized");
+        print("Success IAP Initialize");
         m_StoreController = controller;
+
+        for (int i = 0; i < m_StoreController.products.all.Length; i++)
+        {
+            var product = m_StoreController.products.all[i];
+
+            tPrices[i].text = product.metadata.localizedPriceString;
+        }
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class ConsumableItem
 {
     public string Name;
     public string Id;
-    public string desk;
-    public string price;
+    public float price;
 }

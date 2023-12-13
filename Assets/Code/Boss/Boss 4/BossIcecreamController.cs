@@ -165,30 +165,30 @@ public class BossIcecreamController : MonoBehaviour
 
     IEnumerator Shot2()
     {
-        GameObject gm1 = Instantiate(truckObj, new Vector3(-13.3f, 0, 77), transform.rotation);
+        //GameObject gm1 = Instantiate(truckObj, new Vector3(-13.3f, 0, 77), transform.rotation);
         GameObject gm2 = Instantiate(truckObj, new Vector3(-7, 0, 77), transform.rotation);
         GameObject gm3 = Instantiate(truckObj, new Vector3(7, 0, 77), transform.rotation);
-        GameObject gm4 = Instantiate(truckObj, new Vector3(13.3f, 0, 77), transform.rotation);
+        //GameObject gm4 = Instantiate(truckObj, new Vector3(13.3f, 0, 77), transform.rotation);
 
-        gm1.GetComponent<Boss4Truck>().isTruckUpDown = true;
+        //gm1.GetComponent<Boss4Truck>().isTruckUpDown = true;
         gm2.GetComponent<Boss4Truck>().isTruckUpDown = true;
         gm3.GetComponent<Boss4Truck>().isTruckUpDown = true;
-        gm4.GetComponent<Boss4Truck>().isTruckUpDown = true;
+        //gm4.GetComponent<Boss4Truck>().isTruckUpDown = true;
 
-        gm1.transform.eulerAngles = new Vector3(0, 180, 0);
+        //gm1.transform.eulerAngles = new Vector3(0, 180, 0);
         gm2.transform.eulerAngles = new Vector3(0, 180, 0);
         gm3.transform.eulerAngles = new Vector3(0, 180, 0);
-        gm4.transform.eulerAngles = new Vector3(0, 180, 0);
-
-        gm1.GetComponent<Boss4Truck>().damage = damage;
+        //gm4.transform.eulerAngles = new Vector3(0, 180, 0);
+        //
+        //gm1.GetComponent<Boss4Truck>().damage = damage;
         gm2.GetComponent<Boss4Truck>().damage = damage;
         gm3.GetComponent<Boss4Truck>().damage = damage;
-        gm4.GetComponent<Boss4Truck>().damage = damage;
+        //gm4.GetComponent<Boss4Truck>().damage = damage;
 
-        gm1.GetComponent<Boss4Truck>()._controller = _enemyController;
+        //gm1.GetComponent<Boss4Truck>()._controller = _enemyController;
         gm2.GetComponent<Boss4Truck>()._controller = _enemyController;
         gm3.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm4.GetComponent<Boss4Truck>()._controller = _enemyController;
+        //gm4.GetComponent<Boss4Truck>()._controller = _enemyController;
 
         yield return new WaitForSeconds(attack2ShotPause);
 
