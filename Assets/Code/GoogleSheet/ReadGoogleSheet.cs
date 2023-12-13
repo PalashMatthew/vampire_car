@@ -36,13 +36,13 @@ public class ReadGoogleSheet : MonoBehaviour
             StartCoroutine(ObtainSheetData(urlDropSystem, "dropSystem"));
 
             StartCoroutine(ObtainSheetData(urlLocalization, "localization"));
+
+            GameObject.Find("InitController").GetComponent<InitScene>().Play();
         }
         else
         {
             ReadDataFile();
-        }
-
-        GameObject.Find("InitController").GetComponent<InitScene>().Play();
+        }        
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)
@@ -86,37 +86,37 @@ public class ReadGoogleSheet : MonoBehaviour
         string json;
 
         //CarInfo
-        csv = Resources.Load<TextAsset>("DataAssets/CarInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/CarSettings");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadCarInfo(json);
 
         //GunUpgradeInfo
-        csv = Resources.Load<TextAsset>("DataAssets/GunUpgradeInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/GunUpgrade");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadGunUpgradeInfo(json);
 
         //PassiveUpgradeInfo
-        csv = Resources.Load<TextAsset>("DataAssets/PassiveUpgradeInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/PassiveUpgrade");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadPassiveUpgradeInfo(json);
 
         //GunBaseSettingsInfo
-        csv = Resources.Load<TextAsset>("DataAssets/GunBaseSettingsInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/GunBaseSettings");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadGunBaseSettingsInfo(json);
 
         //TalentsInfo
-        csv = Resources.Load<TextAsset>("DataAssets/TalentsInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/Talents");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadTalentsInfo(json);
 
         //DropSystemInfo
-        csv = Resources.Load<TextAsset>("DataAssets/DropSystemInfo");
+        csv = Resources.Load<TextAsset>("DataAssets/DropSystem");
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadDropSystemInfo(json);
@@ -126,5 +126,7 @@ public class ReadGoogleSheet : MonoBehaviour
 
         json = csv.text;
         GetComponent<BDLoaderController>().LoadLocalization(json);
+
+        GameObject.Find("InitController").GetComponent<InitScene>().Play();
     }
 }

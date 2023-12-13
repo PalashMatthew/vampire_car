@@ -44,9 +44,9 @@ public class GameCloud : MonoBehaviour
         for (int i = 0; i < PlayerPrefs.GetInt("itemCountEngine"); i++)
         {
             _itemEngineLevel.Add(PlayerPrefs.GetInt("itemEngineLevel" + i));
-            _itemGunRarity.Add(PlayerPrefs.GetString("itemEngineRarity" + i));
-            _itemGunType.Add(PlayerPrefs.GetString("itemEngineType" + i));
-            _itemGunID.Add(PlayerPrefs.GetInt("itemEngineID" + i));
+            _itemEngineRarity.Add(PlayerPrefs.GetString("itemEngineRarity" + i));
+            _itemEngineType.Add(PlayerPrefs.GetString("itemEngineType" + i));
+            _itemEngineID.Add(PlayerPrefs.GetInt("itemEngineID" + i));
         }
         #endregion
 
@@ -59,9 +59,9 @@ public class GameCloud : MonoBehaviour
         for (int i = 0; i < PlayerPrefs.GetInt("itemCountBrakes"); i++)
         {
             _itemBrakesLevel.Add(PlayerPrefs.GetInt("itemBrakesLevel" + i));
-            _itemGunRarity.Add(PlayerPrefs.GetString("itemBrakesRarity" + i));
-            _itemGunType.Add(PlayerPrefs.GetString("itemBrakesType" + i));
-            _itemGunID.Add(PlayerPrefs.GetInt("itemBrakesID" + i));
+            _itemBrakesRarity.Add(PlayerPrefs.GetString("itemBrakesRarity" + i));
+            _itemBrakesType.Add(PlayerPrefs.GetString("itemBrakesType" + i));
+            _itemBrakesID.Add(PlayerPrefs.GetInt("itemBrakesID" + i));
         }
         #endregion
 
@@ -74,9 +74,9 @@ public class GameCloud : MonoBehaviour
         for (int i = 0; i < PlayerPrefs.GetInt("itemCountFuelSystem"); i++)
         {
             _itemFuelSystemLevel.Add(PlayerPrefs.GetInt("itemFuelSystemLevel" + i));
-            _itemGunRarity.Add(PlayerPrefs.GetString("itemFuelSystemRarity" + i));
-            _itemGunType.Add(PlayerPrefs.GetString("itemFuelSystemType" + i));
-            _itemGunID.Add(PlayerPrefs.GetInt("itemFuelSystemID" + i));
+            _itemFuelSystemRarity.Add(PlayerPrefs.GetString("itemFuelSystemRarity" + i));
+            _itemFuelSystemType.Add(PlayerPrefs.GetString("itemFuelSystemType" + i));
+            _itemFuelSystemID.Add(PlayerPrefs.GetInt("itemFuelSystemID" + i));
         }
         #endregion
 
@@ -89,9 +89,9 @@ public class GameCloud : MonoBehaviour
         for (int i = 0; i < PlayerPrefs.GetInt("itemCountSuspension"); i++)
         {
             _itemSuspensionLevel.Add(PlayerPrefs.GetInt("itemSuspensionLevel" + i));
-            _itemGunRarity.Add(PlayerPrefs.GetString("itemSuspensionRarity" + i));
-            _itemGunType.Add(PlayerPrefs.GetString("itemSuspensionType" + i));
-            _itemGunID.Add(PlayerPrefs.GetInt("itemSuspensionID" + i));
+            _itemSuspensionRarity.Add(PlayerPrefs.GetString("itemSuspensionRarity" + i));
+            _itemSuspensionType.Add(PlayerPrefs.GetString("itemSuspensionType" + i));
+            _itemSuspensionID.Add(PlayerPrefs.GetInt("itemSuspensionID" + i));
         }
         #endregion
 
@@ -104,9 +104,9 @@ public class GameCloud : MonoBehaviour
         for (int i = 0; i < PlayerPrefs.GetInt("itemCountTransmission"); i++)
         {
             _itemTransmissionLevel.Add(PlayerPrefs.GetInt("itemTransmissionLevel" + i));
-            _itemGunRarity.Add(PlayerPrefs.GetString("itemTransmissionRarity" + i));
-            _itemGunType.Add(PlayerPrefs.GetString("itemTransmissionType" + i));
-            _itemGunID.Add(PlayerPrefs.GetInt("itemTransmissionID" + i));
+            _itemTransmissionRarity.Add(PlayerPrefs.GetString("itemTransmissionRarity" + i));
+            _itemTransmissionType.Add(PlayerPrefs.GetString("itemTransmissionType" + i));
+            _itemTransmissionID.Add(PlayerPrefs.GetInt("itemTransmissionID" + i));
         }
         #endregion
 
@@ -260,9 +260,12 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("itemCountGun", player.itemCountGun);
             PlayerPrefs.SetInt("itemCountEngine", player.itemCountEngine);
             PlayerPrefs.SetInt("itemCountBrakes", player.itemCountBrakes);
-            PlayerPrefs.SetInt("itemCountFuelSystem", player.itemCountFuelSystem);
+            PlayerPrefs.SetInt("itemCountFuelSystem", player.itemCountFuelSystem);            
             PlayerPrefs.SetInt("itemCountSuspension", player.itemCountSuspension);
             PlayerPrefs.SetInt("itemCountTransmission", player.itemCountTransmission);
+
+            Debug.Log(player.itemCountGun);
+            Debug.Log(player.itemGunID.Count);
 
             for (int i = 0; i < player.itemCountGun; i++)
             {
@@ -294,7 +297,7 @@ public class GameCloud : MonoBehaviour
                 PlayerPrefs.SetInt("itemFuelSystemLevel" + i, player.itemFuelSystemLevel[i]);
                 PlayerPrefs.SetString("itemFuelSystemRarity" + i, player.itemFuelSystemRarity[i]);
                 PlayerPrefs.SetString("itemFuelSystemType" + i, player.itemFuelSystemType[i]);
-            }
+            }            
 
             for (int i = 0; i < player.itemCountSuspension; i++)
             {
@@ -324,10 +327,13 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("talentGunSlotLevel", player.talentGunSlotLevel);
             #endregion
         }
+
+        Debug.Log("Data Load");
     }
 
     private void OnApplicationPause()
     {
+        Debug.Log("ApplicationPause");
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (UnityServices.State == ServicesInitializationState.Initializing)
         {
@@ -338,6 +344,7 @@ public class GameCloud : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        Debug.Log("ApplicationQuit");
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (UnityServices.State == ServicesInitializationState.Initializing)
         {

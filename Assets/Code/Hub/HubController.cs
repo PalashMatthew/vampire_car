@@ -514,8 +514,7 @@ public class HubController : MonoBehaviour
         {
             tUserExp.text = "max";
             imgExpFill.fillAmount = 1;
-        }
-        
+        }       
     }    
 
     IEnumerator FuelTimer(int _seconds)
