@@ -17,6 +17,8 @@ public class PinPongBullet : MonoBehaviour
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
         _ricochetCount = 0;
+
+        Destroy(gameObject, 20);
     }
 
     private void Update()

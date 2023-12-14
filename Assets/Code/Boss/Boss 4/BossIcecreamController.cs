@@ -62,6 +62,7 @@ public class BossIcecreamController : MonoBehaviour
     {
         if (_enemyController.hp <= 0)
         {
+            GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave++;
             GameObject.Find("GameplayController").GetComponent<GameplayController>().Win();
             Destroy(gameObject);
         }

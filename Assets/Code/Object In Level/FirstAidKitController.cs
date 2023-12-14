@@ -41,7 +41,8 @@ public class FirstAidKitController : MonoBehaviour
             _hp = "FullHP";
         }
         
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_FirstAidKitDestroy(_hp);
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_FirstAidKitDestroy(_hp);
 
         Destroy(gameObject);
     }

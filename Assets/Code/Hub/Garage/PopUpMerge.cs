@@ -1012,6 +1012,7 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButMerge()
     {
+        Debug.Log("itemCell1.itemID = " + itemCell1.itemID);
         RemoveItemInInventory(itemCell1.itemNumInInventory, itemCell1.itemType, itemCell1.gameObject);
         RemoveItemInInventory(itemCell2.itemNumInInventory, itemCell2.itemType, itemCell2.gameObject);
         RemoveItemInInventory(itemCell3.itemNumInInventory, itemCell3.itemType, itemCell3.gameObject);
@@ -1021,6 +1022,7 @@ public class PopUpMerge : MonoBehaviour
         string _itemRarity = "";
 
         _itemType = itemCellGeneral.itemType;
+        Debug.Log("itemCellGeneral.itemID = " + itemCellGeneral.itemID);
 
         PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) + 1);
 
@@ -1068,7 +1070,8 @@ public class PopUpMerge : MonoBehaviour
         popUpMergeFinal.card = itemCellGeneral.itemObj;
         popUpMergeFinal.sprItemCell = imgSlotFinal.sprite;
         popUpMergeFinal.sprItemIcon = iconSlotFinal.sprite;
-        popUpMergeFinal.itemName = itemCellGeneral.itemName;
+        //popUpMergeFinal.itemName = itemCellGeneral.itemName;
+        popUpMergeFinal.itemName = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_" + itemCellGeneral.itemID + "Name");
 
         if (itemCell1.currentLevel == maxLevel)
         {
@@ -1091,7 +1094,10 @@ public class PopUpMerge : MonoBehaviour
         popUpMergeFinal.level = maxLevel;
 
         #region Event
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Merge(_itemType, itemCellGeneral.itemID, maxLevel, _itemRarity);
+        if (GameObject.Find("Firebase") != null)
+        {
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Merge(_itemType, itemCellGeneral.itemID, maxLevel, _itemRarity);
+        }        
         #endregion
 
         imgSlot1.gameObject.SetActive(false);

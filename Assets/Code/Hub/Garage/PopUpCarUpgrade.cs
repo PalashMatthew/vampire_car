@@ -82,8 +82,6 @@ public class PopUpCarUpgrade : MonoBehaviour
     {
         _popUpController.OpenPopUp();
 
-        PlayerPrefs.SetInt("playerTitan", 100);
-
         Initialize();
     }
 

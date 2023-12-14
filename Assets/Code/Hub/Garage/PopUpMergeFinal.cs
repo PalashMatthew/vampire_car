@@ -280,7 +280,8 @@ public class PopUpMergeFinal : MonoBehaviour
             }
         }
 
-        if (returnMoneyValue != 0)
+        Debug.Log(returnMoneyValue);
+        if (returnMoneyValue > 0)
         {
             objReturnMoney.SetActive(true);
             objReturnDrawing.SetActive(true);
@@ -389,22 +390,28 @@ public class PopUpMergeFinal : MonoBehaviour
         } 
         else
         {
-            objReturnMoney.SetActive(true);
-            objReturnDrawing.SetActive(true);
+            if (returnMoneyValue > 0)
+            {
+                objReturnMoney.SetActive(true);
+                objReturnDrawing.SetActive(true);
 
-            objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
-            objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+                objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+                objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+            }
         }
 
         yield return new WaitForSeconds(0.5f);
 
         if (objPanel2Open)
         {
-            objReturnMoney.SetActive(true);
-            objReturnDrawing.SetActive(true);
+            if (returnMoneyValue > 0)
+            {
+                objReturnMoney.SetActive(true);
+                objReturnDrawing.SetActive(true);
 
-            objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
-            objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+                objReturnMoney.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+                objReturnDrawing.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+            }
         } 
         else
         {

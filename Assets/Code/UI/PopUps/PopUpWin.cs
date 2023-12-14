@@ -77,7 +77,7 @@ public class PopUpWin : MonoBehaviour
             float moneyRand = Random.Range(PlayerPrefs.GetFloat(locationNum + "dropSystemMoneyMin"), PlayerPrefs.GetFloat(locationNum + "dropSystemMoneyMax"));
             float moneyValue = 0;
 
-            for (int i = 1; i <= waveController.currentWave; i++)
+            for (int i = 1; i < waveController.currentWave; i++)
             {
                 moneyValue += moneyRand / 100 * waveDropProcent[i - 1];
             }
@@ -106,7 +106,7 @@ public class PopUpWin : MonoBehaviour
             float expRand = Random.Range(PlayerPrefs.GetFloat(locationNum + "dropSystemExpMin"), PlayerPrefs.GetFloat(locationNum + "dropSystemExpMax"));
             float expValue = 0;
 
-            for (int i = 1; i <= waveController.currentWave; i++)
+            for (int i = 1; i < waveController.currentWave; i++)
             {
                 expValue += expRand / 100 * waveDropProcent[i - 1];
             }
@@ -126,7 +126,7 @@ public class PopUpWin : MonoBehaviour
             float drawingRand = Random.Range(PlayerPrefs.GetFloat(locationNum + "dropSystemDrawingMin"), PlayerPrefs.GetFloat(locationNum + "dropSystemDrawingMax"));
             float drawingValue = 0;
 
-            for (int i = 1; i <= waveController.currentWave; i++)
+            for (int i = 1; i < waveController.currentWave; i++)
             {
                 drawingValue += drawingRand / 100 * waveDropProcent[i - 1];
             }
@@ -242,7 +242,7 @@ public class PopUpWin : MonoBehaviour
             float titanRand = Random.Range(PlayerPrefs.GetFloat(locationNum + "dropSystemTitanMin"), PlayerPrefs.GetFloat(locationNum + "dropSystemTitanMax"));
             float titanValue = 0;
 
-            for (int i = 1; i <= waveController.currentWave; i++)
+            for (int i = 1; i < waveController.currentWave; i++)
             {
                 titanValue += titanRand / 100 * waveDropProcent[i - 1];
             }
@@ -262,7 +262,7 @@ public class PopUpWin : MonoBehaviour
             int itemValue = 0;
             int plusChance = 0;
 
-            for (int i = 1; i <= waveController.currentWave; i++)
+            for (int i = 1; i < waveController.currentWave; i++)
             {
                 int rand = Random.Range(1, 101);
 
@@ -317,7 +317,8 @@ public class PopUpWin : MonoBehaviour
             #endregion
         }
 
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward(waveController.currentWave - 1, locationNum, _moneyReward, _expReward, _drawingGunReward, _drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward(waveController.currentWave - 1, locationNum, _moneyReward, _expReward, _drawingGunReward, _drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
 
         int _dieCount = 0;
 
@@ -330,7 +331,8 @@ public class PopUpWin : MonoBehaviour
             _dieCount = 1;
         }
 
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
     }
 
     public void ButOpen()

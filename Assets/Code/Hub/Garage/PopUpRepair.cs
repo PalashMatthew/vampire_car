@@ -635,6 +635,8 @@ public class PopUpRepair : MonoBehaviour
             gm.GetComponent<ItemCell>().MergeDefault();
         }
 
+        garageController.gameObject.SetActive(false);
+
         RemoveItemInInventory(itemCellGeneral.itemNumInInventory, itemCellGeneral.itemType, itemCellGeneral.gameObject);
 
         imgSlot1.gameObject.SetActive(false);
@@ -653,7 +655,7 @@ public class PopUpRepair : MonoBehaviour
         SaveItem();
         LoadItem();
 
-        garageController.gameObject.SetActive(false);
+        
         popUpRepairFinal.Open();
     }
 

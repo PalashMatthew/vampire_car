@@ -87,6 +87,7 @@ public class WaveController : MonoBehaviour
         }
         else
         {
+            currentWave++;
             _gameplayController.activeEnemy.Clear();
             _generate.BossFight();
         }        

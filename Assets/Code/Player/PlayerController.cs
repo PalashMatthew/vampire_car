@@ -236,7 +236,8 @@ public class PlayerController : MonoBehaviour
                 _hp = "FullHP";
             }
 
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeFirstAidKit(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, _hp);
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeFirstAidKit(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, _hp);
 
             Destroy(other.gameObject);
         }
