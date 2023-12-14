@@ -264,9 +264,6 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("itemCountSuspension", player.itemCountSuspension);
             PlayerPrefs.SetInt("itemCountTransmission", player.itemCountTransmission);
 
-            Debug.Log(player.itemCountGun);
-            Debug.Log(player.itemGunID.Count);
-
             for (int i = 0; i < player.itemCountGun; i++)
             {
                 PlayerPrefs.SetInt("itemGunID" + i, player.itemGunID[i]);

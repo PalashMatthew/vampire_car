@@ -8,19 +8,12 @@ public class BossIcecreamController : MonoBehaviour
     bool isStop;
 
     GameObject player;
-
-    [Header("Attack Rocket")]
-    public float attackRocketTime;
-    public GameObject rocketObj;
-    public Transform spawnRocketPos;
-
-    [Header("Attack 1")]
-    public GameObject truckObj;
+    public GameObject bulletObj;
+    public Transform spawnPos;
 
     public float attack1ShotPause;
-
-    [Header("Attack 2")]
     public float attack2ShotPause;
+    public float attack3ShotPause;
 
     EnemyController _enemyController;
 
@@ -52,7 +45,7 @@ public class BossIcecreamController : MonoBehaviour
             else
             {
                 isStop = true;
-                StartCoroutine(ShotRocket());
+                isLocalMove = true;
                 StartCoroutine(Shot1());
             }
         }
@@ -95,68 +88,33 @@ public class BossIcecreamController : MonoBehaviour
         }
     }
 
-    IEnumerator ShotRocket()
-    {
-        yield return new WaitForSeconds(attackRocketTime);
-
-        GameObject gm = Instantiate(rocketObj, spawnRocketPos.position, transform.rotation);
-
-        gm.transform.LookAt(player.transform.position);
-        gm.transform.eulerAngles = new Vector3(0, gm.transform.eulerAngles.y, 0);
-
-        gm.GetComponent<Boss4Rocket>()._controller = _enemyController;
-        gm.GetComponent<Boss4Rocket>().damage = damage;
-        gm.GetComponent<Boss4Rocket>().target = player.transform.position;
-
-        StartCoroutine(ShotRocket());
-    }
-
     IEnumerator Shot1()
     {
-        GameObject gm1 = Instantiate(truckObj, new Vector3(-26.5f, 0, 38), transform.rotation);
-        GameObject gm2 = Instantiate(truckObj, new Vector3(-26.5f, 0, 20), transform.rotation);
-        //GameObject gm3 = Instantiate(truckObj, new Vector3(-26.5f, 0, 2), transform.rotation);
+        isLocalMove = false;
+        transform.DOLookAt(player.transform.position, 0.5f);
 
-        GameObject gm4 = Instantiate(truckObj, new Vector3(26.5f, 0, 28.8f), transform.rotation);
-        GameObject gm5 = Instantiate(truckObj, new Vector3(26.5f, 0, 10.8f), transform.rotation);
-        //GameObject gm6 = Instantiate(truckObj, new Vector3(26.5f, 0, -7.1f), transform.rotation);
+        yield return new WaitForSeconds(1f);
 
-        gm1.GetComponent<Boss4Truck>().isTruckUpDown = false;
-        gm2.GetComponent<Boss4Truck>().isTruckUpDown = false;
-        //gm3.GetComponent<Boss4Truck>().isTruckUpDown = false;
-        gm4.GetComponent<Boss4Truck>().isTruckUpDown = false;
-        gm5.GetComponent<Boss4Truck>().isTruckUpDown = false;
-        //gm6.GetComponent<Boss4Truck>().isTruckUpDown = false;
+        GameObject gm1 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm2 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm3 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
 
-        gm1.GetComponent<Boss4Truck>().isMoveRight = true;
-        gm2.GetComponent<Boss4Truck>().isMoveRight = true;
-        //gm3.GetComponent<Boss4Truck>().isMoveRight = true;
+        gm2.transform.eulerAngles = new Vector3(0, gm2.transform.eulerAngles.y - 30, 0);
+        gm3.transform.eulerAngles = new Vector3(0, gm3.transform.eulerAngles.y + 30, 0);
 
-        gm4.GetComponent<Boss4Truck>().isMoveRight = false;
-        gm5.GetComponent<Boss4Truck>().isMoveRight = false;
-        //gm6.GetComponent<Boss4Truck>().isMoveRight = false;
+        gm1.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm2.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm3.GetComponent<Boss4Bullet>()._controller = _enemyController;
 
-        gm1.transform.eulerAngles = new Vector3(0, 90, 0);
-        gm2.transform.eulerAngles = new Vector3(0, 90, 0);
-        //gm3.transform.eulerAngles = new Vector3(0, 90, 0);
+        gm1.GetComponent<Boss4Bullet>().damage = damage;
+        gm2.GetComponent<Boss4Bullet>().damage = damage;
+        gm3.GetComponent<Boss4Bullet>().damage = damage;
 
-        gm4.transform.eulerAngles = new Vector3(0, -90, 0);
-        gm5.transform.eulerAngles = new Vector3(0, -90, 0);
-        //gm6.transform.eulerAngles = new Vector3(0, -90, 0);
+        yield return new WaitForSeconds(0.5f);
+        transform.DORotate(new Vector3(0, 180, 0), 0.5f);
 
-        gm1.GetComponent<Boss4Truck>().damage = damage;
-        gm2.GetComponent<Boss4Truck>().damage = damage;
-        //gm3.GetComponent<Boss4Truck>().damage = damage;
-        gm4.GetComponent<Boss4Truck>().damage = damage;
-        gm5.GetComponent<Boss4Truck>().damage = damage;
-        //gm6.GetComponent<Boss4Truck>().damage = damage;
-
-        gm1.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm2.GetComponent<Boss4Truck>()._controller = _enemyController;
-        //gm3.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm4.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm5.GetComponent<Boss4Truck>()._controller = _enemyController;
-        //gm6.GetComponent<Boss4Truck>()._controller = _enemyController;
+        yield return new WaitForSeconds(0.5f);
+        isLocalMove = true;
 
         yield return new WaitForSeconds(attack1ShotPause);
 
@@ -165,32 +123,70 @@ public class BossIcecreamController : MonoBehaviour
 
     IEnumerator Shot2()
     {
-        //GameObject gm1 = Instantiate(truckObj, new Vector3(-13.3f, 0, 77), transform.rotation);
-        GameObject gm2 = Instantiate(truckObj, new Vector3(-7, 0, 77), transform.rotation);
-        GameObject gm3 = Instantiate(truckObj, new Vector3(7, 0, 77), transform.rotation);
-        //GameObject gm4 = Instantiate(truckObj, new Vector3(13.3f, 0, 77), transform.rotation);
+        isLocalMove = false;
+        transform.DOLookAt(player.transform.position, 0.5f);
 
-        //gm1.GetComponent<Boss4Truck>().isTruckUpDown = true;
-        gm2.GetComponent<Boss4Truck>().isTruckUpDown = true;
-        gm3.GetComponent<Boss4Truck>().isTruckUpDown = true;
-        //gm4.GetComponent<Boss4Truck>().isTruckUpDown = true;
+        yield return new WaitForSeconds(1f);
 
-        //gm1.transform.eulerAngles = new Vector3(0, 180, 0);
-        gm2.transform.eulerAngles = new Vector3(0, 180, 0);
-        gm3.transform.eulerAngles = new Vector3(0, 180, 0);
-        //gm4.transform.eulerAngles = new Vector3(0, 180, 0);
-        //
-        //gm1.GetComponent<Boss4Truck>().damage = damage;
-        gm2.GetComponent<Boss4Truck>().damage = damage;
-        gm3.GetComponent<Boss4Truck>().damage = damage;
-        //gm4.GetComponent<Boss4Truck>().damage = damage;
+        GameObject gm1 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm2 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm3 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm4 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+        GameObject gm5 = Instantiate(bulletObj, spawnPos.position, transform.rotation);
 
-        //gm1.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm2.GetComponent<Boss4Truck>()._controller = _enemyController;
-        gm3.GetComponent<Boss4Truck>()._controller = _enemyController;
-        //gm4.GetComponent<Boss4Truck>()._controller = _enemyController;
+        gm2.transform.eulerAngles = new Vector3(0, gm2.transform.eulerAngles.y - 30, 0);
+        gm3.transform.eulerAngles = new Vector3(0, gm3.transform.eulerAngles.y + 30, 0);
+        gm4.transform.eulerAngles = new Vector3(0, gm2.transform.eulerAngles.y - 50, 0);
+        gm5.transform.eulerAngles = new Vector3(0, gm3.transform.eulerAngles.y + 50, 0);
+
+        gm1.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm2.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm3.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm4.GetComponent<Boss4Bullet>()._controller = _enemyController;
+        gm5.GetComponent<Boss4Bullet>()._controller = _enemyController;
+
+        gm1.GetComponent<Boss4Bullet>().damage = damage;
+        gm2.GetComponent<Boss4Bullet>().damage = damage;
+        gm3.GetComponent<Boss4Bullet>().damage = damage;
+        gm4.GetComponent<Boss4Bullet>().damage = damage;
+        gm5.GetComponent<Boss4Bullet>().damage = damage;
+
+        yield return new WaitForSeconds(0.5f);
+        transform.DORotate(new Vector3(0, 180, 0), 0.5f);
+
+        yield return new WaitForSeconds(0.5f);
+        isLocalMove = true;
 
         yield return new WaitForSeconds(attack2ShotPause);
+
+        StartCoroutine(Shot3());
+    }
+
+    IEnumerator Shot3()
+    {
+        isLocalMove = false;
+        transform.DOLookAt(player.transform.position, 0.5f);
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject gm = Instantiate(bulletObj, spawnPos.position, transform.rotation);
+
+            gm.GetComponent<Boss4Bullet>()._controller = _enemyController;
+            gm.GetComponent<Boss4Bullet>().damage = damage;
+
+            transform.DOLookAt(player.transform.position, 0.3f);
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        transform.DORotate(new Vector3(0, 180, 0), 0.5f);
+
+        yield return new WaitForSeconds(0.5f);
+        isLocalMove = true;
+
+        yield return new WaitForSeconds(attack3ShotPause);
 
         StartCoroutine(Shot1());
     }
