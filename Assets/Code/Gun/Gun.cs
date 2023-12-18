@@ -148,7 +148,7 @@ public class Gun : MonoBehaviour
 
         if (shotSpeedCoeffPassive != 0)
         {
-            shotSpeed = shotSpeed + (shotSpeed / 100 * shotSpeedCoeffPassive);
+            shotSpeed = shotSpeed - (shotSpeed / 100 * shotSpeedCoeffPassive);
             shotSpeedCoeffPassive = 0;
         }
 
