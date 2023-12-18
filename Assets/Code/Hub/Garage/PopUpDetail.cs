@@ -129,6 +129,7 @@ public class PopUpDetail : MonoBehaviour
         {
             panelDescription.SetActive(true);
             panelSet.SetActive(false);
+            tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_" + garageController.activeItem.itemObj.itemID + "Desk");
         } 
         else
         {

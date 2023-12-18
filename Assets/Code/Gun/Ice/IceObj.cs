@@ -10,6 +10,8 @@ public class IceObj : MonoBehaviour
     {
         StartCoroutine(EndAttack());
         StartCoroutine(OffCollider());
+
+        transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     IEnumerator EndAttack()

@@ -11,11 +11,10 @@ public class FirebaseSetup : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        FirebaseInit();        
+        DontDestroyOnLoad(gameObject);     
     }
 
-    void FirebaseInit()
+    public void FirebaseInit()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
@@ -36,6 +35,8 @@ public class FirebaseSetup : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
+        InitScene.initCount++;
     }
 
     #region Аналитика прогресса игрока
@@ -301,7 +302,7 @@ public class FirebaseSetup : MonoBehaviour
         Debug.Log("Event Send!\n" + s);
     }
 
-    public void Event_BuyCar(string _name, string _priceType, int _price)
+    public void Event_BuyCar(string _name, string _priceType, float _price)
     {
         string s = "BuyCar_" + _name + "_" + _priceType + "_Price_" + _price;
 

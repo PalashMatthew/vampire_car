@@ -9,12 +9,10 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-
-        Initialize();
     }
 
-    void Initialize()
-    {
+    public void Initialize()
+    {        
         Appodeal.setTesting(true);
         Appodeal.disableLocationPermissionCheck();
         Appodeal.muteVideosIfCallsMuted(true);
@@ -26,6 +24,8 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         Appodeal.setRewardedVideoCallbacks(this);
 
         Appodeal.cache(Appodeal.REWARDED_VIDEO);
+
+        InitScene.initCount++;
     }
 
     public void onInitializationFinished(List<string> errors)
@@ -103,6 +103,13 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         else if (placementName == "freeMoney")
         {
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 1200);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(1200, "-", PlayerPrefs.GetInt("playerMoney"));
+        }
+        else if (placementName == "adsChest")
+        {
+            ShopController shopController = GameObject.Find("HubController").GetComponent<ShopController>();
+
+            shopController.GiveAdsChest();
         }
 
         Appodeal.cache(Appodeal.REWARDED_VIDEO);

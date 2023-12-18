@@ -890,7 +890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1370763795877845008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3889,7 +3889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &578619432282071635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4136,7 +4136,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -242.66, y: 612}
+  m_AnchoredPosition: {x: -242.66, y: 278}
   m_SizeDelta: {x: 461, y: 148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3549244107495124887
@@ -6090,7 +6090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1293794712152153460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10291,7 +10291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2761791527505744403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14503,7 +14503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8775796884985674411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14657,7 +14657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 268, y: 612}
+  m_AnchoredPosition: {x: 268, y: 278}
   m_SizeDelta: {x: 461, y: 148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4446504743504544931
@@ -17784,6 +17784,7 @@ MonoBehaviour:
   imgFillBossBar: {fileID: 4283149423356396966}
   imgBossEndFill: {fileID: 7763988371723961314}
   bossPanel: {fileID: 1572915305277755470}
+  bossNum: 0
   isShowPanelWave: 1
   _isBossFight: 0
   isWin: 0

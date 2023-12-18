@@ -11,11 +11,16 @@ public class GameCloud : MonoBehaviour
 {
     private const string PLAYER_CLOUD_KEY = "PLAYER_DATA";
 
-    private async void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
 
+    public async void CloudSaveInitialize()
+    {
         await UnityServices.InitializeAsync();
+
+        InitScene.initCount++;
     }
 
     public async void SaveData()
@@ -330,9 +335,8 @@ public class GameCloud : MonoBehaviour
 
     private void OnApplicationPause()
     {
-        Debug.Log("ApplicationPause");
 #if UNITY_ANDROID && !UNITY_EDITOR
-        if (UnityServices.State == ServicesInitializationState.Initializing)
+        if (UnityServices.State == ServicesInitializationState.Initializing && AuthenticationService.Instance.IsAuthorized)
         {
             SaveData();
         }             
@@ -341,9 +345,8 @@ public class GameCloud : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log("ApplicationQuit");
 #if UNITY_ANDROID && !UNITY_EDITOR
-        if (UnityServices.State == ServicesInitializationState.Initializing)
+        if (UnityServices.State == ServicesInitializationState.Initializing && AuthenticationService.Instance.IsAuthorized)
         {
             SaveData();
         }             

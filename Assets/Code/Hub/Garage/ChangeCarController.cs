@@ -155,7 +155,8 @@ public class ChangeCarController : MonoBehaviour
                 objButPurchaseHard.SetActive(false);
                 objButPurchaseReal.SetActive(true);
 
-                tPriceReal.text = _carItem.GetComponent<CarButtonController>().price + "ð";
+                //tPriceReal.text = _carItem.GetComponent<CarButtonController>().price + "ð";
+                tPriceReal.text = GameObject.Find("HubController").GetComponent<ShopController>().prices[_carItem.GetComponent<CarButtonController>().carShopID];
             }
         }
         #endregion
@@ -284,6 +285,8 @@ public class ChangeCarController : MonoBehaviour
                 PlayerPrefs.SetInt(_activeCarObj.carName + "carPurchased", 1);
                 _activeCarObj.Initialize();
 
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyCar(_activeCarObj.carName, "Money", _activeCarObj.price);
+
                 _isPurchaseSuccess = true;
             }
         }
@@ -296,16 +299,15 @@ public class ChangeCarController : MonoBehaviour
                 PlayerPrefs.SetInt(_activeCarObj.carName + "carPurchased", 1);
                 _activeCarObj.Initialize();
 
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyCar(_activeCarObj.carName, "Hard", _activeCarObj.price);
+
                 _isPurchaseSuccess = true;
             }
         }
 
         if (_activeCarObj.priceType == CarButtonController.PriceType.Real)
         {
-            PlayerPrefs.SetInt(_activeCarObj.carName + "carPurchased", 1);
-            _activeCarObj.Initialize();
-
-            _isPurchaseSuccess = true;
+            GameObject.Find("HubController").GetComponent<ShopController>().ButBuyCar(_activeCarObj.carShopID);            
         }
 
         if (_isPurchaseSuccess)
@@ -340,6 +342,44 @@ public class ChangeCarController : MonoBehaviour
 
             UpdateProgressBar();
         }
+    }
+
+    public void BuyCarCallBack()
+    {
+        PlayerPrefs.SetInt(_activeCarObj.carName + "carPurchased", 1);
+        _activeCarObj.Initialize();
+
+        PlayerPrefs.SetString("selectedCarID", _activeCarObj.carName);
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyCar(_activeCarObj.carName, "Real", 0);
+
+        #region Selection Menu
+        if (PlayerPrefs.GetInt(_activeCarObj.carName + "carPurchased") == 1)
+        {
+            if (PlayerPrefs.GetString("selectedCarID") == _activeCarObj.carName)
+            {
+                objTActive.gameObject.SetActive(true);
+                objChoose.SetActive(false);
+            }
+            else
+            {
+                objTActive.gameObject.SetActive(false);
+                objChoose.SetActive(true);
+            }
+        }
+        else
+        {
+            objTActive.gameObject.SetActive(false);
+            objChoose.SetActive(false);
+        }
+        #endregion
+
+        butPurchase.SetActive(false);
+        butUpgrade.SetActive(true);
+
+        playerHubVisual.ChangeCar();
+
+        UpdateProgressBar();
     }
 
     public void UpdateProgressBar()

@@ -216,7 +216,7 @@ public class GameplayUIController : MonoBehaviour
     #region Boss
     public void Boss()
     {
-        tBossName.text = PlayerPrefs.GetString("LOC_bossName" + bossNum);
+        tBossName.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_bossName" + bossNum);
 
         if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
             tBossHP.text = (int)GameObject.Find("BOSS").GetComponent<EnemyController>().hp + "";

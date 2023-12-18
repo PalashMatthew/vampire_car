@@ -27,6 +27,8 @@ public class CameraController : MonoBehaviour
 
     GameplayController _gameplayController;
 
+    public float constZPos;
+
     void Awake()
     {
         target = GameObject.Find("Player").transform;
@@ -63,6 +65,8 @@ public class CameraController : MonoBehaviour
             {
                 transform.position = new Vector3(target.transform.position.x, transform.position.y, transform.position.z);
             }
+
+            transform.position = new Vector3(transform.position.x, transform.position.y, constZPos);
         }
     }
 

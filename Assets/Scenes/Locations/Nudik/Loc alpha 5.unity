@@ -597,6 +597,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5944416013669709902, guid: 5fde5d18e7070894cab91afb25e40b20, type: 3}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: maxZSpawn
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: minZSpawn
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: isSpawnAccess
       value: 1
       objectReference: {fileID: 0}
@@ -604,6 +612,14 @@ PrefabInstance:
       propertyPath: waveController
       value: 
       objectReference: {fileID: 1913713110}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: maxZSpawnPattern
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
+      propertyPath: minZSpawnPattern
+      value: 83
+      objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.size
       value: 10
@@ -807,6 +823,7 @@ MonoBehaviour:
   follow: 0
   speed_back: 0
   maxXBound: 17
+  constZPos: -24.6
   minCameraX: -9
   maxCameraX: 9
 --- !u!81 &952689767
@@ -826,7 +843,7 @@ Transform:
   m_GameObject: {fileID: 952689765}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4441039, y: -0, z: -0, w: 0.89597535}
-  m_LocalPosition: {x: 0, y: 67.84999, z: -33.8}
+  m_LocalPosition: {x: 0, y: 67.84999, z: -24.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1348,7 +1365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165270448532258119, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: 25.95
       objectReference: {fileID: 0}
     - target: {fileID: 2165270448532258119, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: m_LocalRotation.w

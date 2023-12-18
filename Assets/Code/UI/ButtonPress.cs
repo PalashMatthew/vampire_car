@@ -21,7 +21,12 @@ public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+        SoundController _soundController = null;
+
+        if (clip != null)
+        {
+            _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
+        }        
 
         if (_soundController != null)
         {

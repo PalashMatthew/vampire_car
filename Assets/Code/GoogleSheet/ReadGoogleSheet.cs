@@ -19,7 +19,7 @@ public class ReadGoogleSheet : MonoBehaviour
     public string urlLocalization;
 
 
-    private void Start()
+    public void ReadDataInitialize()
     {
         if (isDownloadData)
         {
@@ -37,12 +37,12 @@ public class ReadGoogleSheet : MonoBehaviour
 
             StartCoroutine(ObtainSheetData(urlLocalization, "localization"));
 
-            GameObject.Find("InitController").GetComponent<InitScene>().Play();
+            InitScene.initCount++;
         }
         else
         {
             ReadDataFile();
-        }        
+        }
     }
 
     IEnumerator ObtainSheetData(string _url, string _bdName)
@@ -127,6 +127,6 @@ public class ReadGoogleSheet : MonoBehaviour
         json = csv.text;
         GetComponent<BDLoaderController>().LoadLocalization(json);
 
-        GameObject.Find("InitController").GetComponent<InitScene>().Play();
+        InitScene.initCount++;
     }
 }

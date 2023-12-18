@@ -48,6 +48,8 @@ public class CarButtonController : MonoBehaviour
 
     public ChangeCarController changeCarController;
 
+    public int carShopID;
+
 
     public void Initialize()
     {
@@ -98,7 +100,7 @@ public class CarButtonController : MonoBehaviour
                 objHard.SetActive(false);
                 objReal.SetActive(true);
 
-                tCarPriceReal.text = price + "ð";
+                tCarPriceReal.text = GameObject.Find("HubController").GetComponent<ShopController>().prices[carShopID];
             }
         }        
     }

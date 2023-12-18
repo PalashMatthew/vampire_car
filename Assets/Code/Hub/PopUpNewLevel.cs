@@ -59,5 +59,13 @@ public class PopUpNewLevel : MonoBehaviour
     {
         PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + reward[PlayerPrefs.GetInt("playerLevel")]);
         _popUpController.ClosedPopUp();
+
+        StartCoroutine(CheckAnother());
+    }
+
+    IEnumerator CheckAnother()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CheckPlayerExp();
     }
 }

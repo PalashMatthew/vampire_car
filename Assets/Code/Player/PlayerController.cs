@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [Header("First Aid Kit")]
     public ParticleSystem vfxHealing;
 
+    public bool isInvulnerability;
+
 
     public void Initialize()
     {
@@ -89,22 +91,59 @@ public class PlayerController : MonoBehaviour
 
     public void Hit(float _damage)
     {
-        float _finalDamage;
-        _finalDamage = _damage - (_damage / 100 * _playerStats.armorProcent);
+        if (!isInvulnerability)
+        {
+            float _finalDamage;
+            _finalDamage = _damage - (_damage / 100 * _playerStats.armorProcent);
 
-        if (!isBrakeDamage)
-        {
-            _finalDamage = _finalDamage - _playerStats.block;
-        } 
-        else
-        {
-            _finalDamage = _finalDamage - _playerStats.iron;
-        }        
+            if (!isBrakeDamage)
+            {
+                _finalDamage = _finalDamage - _playerStats.block;
+            }
+            else
+            {
+                _finalDamage = _finalDamage - _playerStats.iron;
+            }
 
-        if (_playerPassiveController.isDodge)
-        {
-            int rand = Random.Range(1, 101);
-            if (rand > _playerStats.dodgeProcent)
+            if (_playerPassiveController.isDodge)
+            {
+                int rand = Random.Range(1, 101);
+                if (rand > _playerStats.dodgeProcent)
+                {
+                    if (!isShield)
+                    {
+                        _playerStats.currentHp -= _finalDamage;
+
+                        StopAllCoroutines();
+
+                        StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
+
+                        StartCoroutine(HitAnim());
+
+                        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+                        {
+                            isShield = false;
+                            vfxShield.Stop();
+                            vfxShield.gameObject.SetActive(false);
+                            StartCoroutine(ShieldTimer());
+                        }
+
+                        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
+                        {
+                            isAvenger = true;
+                            avengerTimerCurrent = avengerTimerMax;
+                        }
+                    }
+                    else
+                    {
+                        isShield = false;
+                        vfxShield.Stop();
+                        vfxShield.gameObject.SetActive(false);
+                    }
+
+                }
+            }
+            else
             {
                 if (!isShield)
                 {
@@ -128,69 +167,35 @@ public class PlayerController : MonoBehaviour
                     {
                         isAvenger = true;
                         avengerTimerCurrent = avengerTimerMax;
-                    }                   
-                } 
+                    }
+                }
                 else
                 {
                     isShield = false;
                     vfxShield.Stop();
                     vfxShield.gameObject.SetActive(false);
                 }
-                
-            }
-        } 
-        else
-        {
-            if (!isShield)
-            {
-                _playerStats.currentHp -= _finalDamage;
-
-                StopAllCoroutines();
-
-                StartCoroutine(GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().PlayerHit());
-
-                StartCoroutine(HitAnim());
-
-                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
-                {
-                    isShield = false;
-                    vfxShield.Stop();
-                    vfxShield.gameObject.SetActive(false);
-                    StartCoroutine(ShieldTimer());
-                }
-
-                if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
-                {
-                    isAvenger = true;
-                    avengerTimerCurrent = avengerTimerMax;
-                }
-            } 
-            else
-            {
-                isShield = false;
-                vfxShield.Stop();
-                vfxShield.gameObject.SetActive(false);
-            }                
-        }
-
-        if (_playerStats.currentHp < 0) _playerStats.currentHp = 0;
-
-        isBrakeDamage = false;
-
-        if (_playerStats.currentHp <= 0 && !isDead)
-        {
-            //Смерть
-            if (!GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
-            {
-                GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().ButOpen();
-            }                
-            else
-            {
-                GameObject.Find("GameplayController").GetComponent<WaveController>().StopGame();
-                GameObject.Find("PopUp Win").GetComponent<PopUpWin>().ButOpen();
             }
 
-            isDead = true;
+            if (_playerStats.currentHp < 0) _playerStats.currentHp = 0;
+
+            isBrakeDamage = false;
+
+            if (_playerStats.currentHp <= 0 && !isDead)
+            {
+                //Смерть
+                if (!GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
+                {
+                    GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().ButOpen();
+                }
+                else
+                {
+                    GameObject.Find("GameplayController").GetComponent<WaveController>().StopGame();
+                    GameObject.Find("PopUp Win").GetComponent<PopUpWin>().ButOpen();
+                }
+
+                isDead = true;
+            }
         }
     }
 
@@ -208,6 +213,13 @@ public class PlayerController : MonoBehaviour
             _mesh.material.DisableKeyword("_EMISSION");
         }
     }    
+
+    public IEnumerator Invulnerability(float _time)
+    {
+        isInvulnerability = true;
+        yield return new WaitForSeconds(_time);
+        isInvulnerability = false;
+    }
 
     public IEnumerator NewLevel()
     {

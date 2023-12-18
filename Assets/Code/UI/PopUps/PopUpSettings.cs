@@ -174,4 +174,14 @@ public class PopUpSettings : MonoBehaviour
 
         Application.LoadLevel("InitScene");
     }
+
+    public void TermOfUse()
+    {
+        Application.OpenURL("https://docs.google.com/document/d/1hIP0K0tIf-ZTM3jAEeXYW5ttRWKtSZ8hAlRqvSr_vlU/edit?usp=sharing");
+    }
+
+    public void PrivacyPolicy()
+    {
+        Application.OpenURL("https://docs.google.com/document/d/1laNGSxcNIK3RrWfe8c7DAWKFUGrqSjK6LH7QQh9SJsQ/edit?usp=sharing");
+    }
 }

@@ -91,6 +91,7 @@ public class PopUpRecovery : MonoBehaviour
 
         isRecovery = true;
 
+        GameObject.Find("Player").GetComponent<PlayerController>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerController>().Invulnerability(2));
         GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
@@ -107,6 +108,7 @@ public class PopUpRecovery : MonoBehaviour
 
             isRecovery = true;
 
+            GameObject.Find("Player").GetComponent<PlayerController>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerController>().Invulnerability(2));
             GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
             GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 

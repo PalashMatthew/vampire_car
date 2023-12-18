@@ -22,6 +22,10 @@ public class PopUpOpenChest : MonoBehaviour
     public Sprite sprCardEpic;
     public Sprite sprCardLegendary;
 
+    public GameObject chest1Obj, chest2obj;
+
+    public int chestType;
+
 
     private void Start()
     {
@@ -59,7 +63,7 @@ public class PopUpOpenChest : MonoBehaviour
                 break;
         }
 
-        tName.text = "<rainb>" + card.itemName;
+        tName.text = "<wave>" + card.itemName;
 
         imgIcon.sprite = card.sprItem;
 
@@ -118,5 +122,22 @@ public class PopUpOpenChest : MonoBehaviour
     public void ButContinue()
     {
         _popUpController.ClosedPopUp();
+    }
+
+    IEnumerator Animation()
+    {
+        if (chestType == 1)
+        {
+            chest1Obj.SetActive(true);
+            chest2obj.SetActive(false);
+        }
+
+        if (chestType == 2)
+        {
+            chest1Obj.SetActive(false);
+            chest2obj.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(1.55f);
     }
 }

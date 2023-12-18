@@ -12,13 +12,16 @@ public class AuthManager : MonoBehaviour
     public TMP_Text tUserID;
     public GameCloud gameCloudManaer;
 
-    async void Start()
+
+    public async void AuthInitialize()
     {
         await UnityServices.InitializeAsync();
 
         tUserID.text = "";
 
         SignIn();
+
+        InitScene.initCount++;
     }
 
     async void SignIn()

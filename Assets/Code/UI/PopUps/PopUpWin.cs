@@ -71,6 +71,8 @@ public class PopUpWin : MonoBehaviour
         int _itemRewardCount = 0;
         string _itemRewardID = "";
 
+        objButAds.SetActive(false);
+
         if (waveController.currentWave >= 2)
         {
             #region Money Drop

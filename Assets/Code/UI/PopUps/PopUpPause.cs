@@ -137,4 +137,14 @@ public class PopUpPause : MonoBehaviour
             slotImage[i].DOFade(1f, 0f).SetUpdate(true);
         }
     }
+
+    private void OnApplicationPause()
+    {
+        ButOpen();
+    }
+
+    private void OnApplicationQuit()
+    {
+        ButOpen();
+    }
 }
