@@ -134,6 +134,11 @@ public class PlayerGuns : MonoBehaviour
                     break;
             }
         }
+
+        foreach (Gun _gun in guns)
+        {
+            _gun.Initialize();
+        }
     }
 
     public void GunActivate()

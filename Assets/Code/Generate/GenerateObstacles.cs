@@ -22,11 +22,14 @@ public class GenerateObstacles : MonoBehaviour
     WaveController _waveController;
 
     private void Start()
-    {        
-        StartCoroutine(ObstaclesGen()); 
+    {
+        //if (PlayerPrefs.GetString("tutorialComplite") == "true")
+        //{
+        //    StartCoroutine(ObstaclesGen());
+        //}                
     }
 
-    IEnumerator ObstaclesGen()
+    public IEnumerator ObstaclesGen()
     {
         yield return new WaitForSeconds(spawnTime);
 
@@ -46,6 +49,9 @@ public class GenerateObstacles : MonoBehaviour
         _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
         isSpawn = obstaclesInWave[_waveController.currentWave - 1].isSpawn;
         spawnTime = obstaclesInWave[_waveController.currentWave - 1].spawnTime;
+
+        StopAllCoroutines();
+        StartCoroutine(ObstaclesGen());
     }
 }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Net;
+using System;
+using UnityEngine.Networking;
 
 public class ConnectionManager : MonoBehaviour
 {
@@ -28,27 +30,55 @@ public class ConnectionManager : MonoBehaviour
 
         PlayerPrefs.SetInt("internet_access", 0);
 
-        StartCoroutine(CheckConnect());
+        //StartCoroutine(CheckConnect());
+        StartCoroutine(checkInternetConnection());
     }
 
     IEnumerator CheckConnect()
     {
         yield return new WaitForSecondsRealtime(1);
 
-        if (CheckInternet() != ConnectionStatus.Connected)
+        if (Application.loadedLevelName == "InitScene" || Application.loadedLevelName == "Hub")
         {
+            if (CheckInternet() != ConnectionStatus.Connected)
+            {
+                PlayerPrefs.SetInt("internet_access", 0);
+                Debug.LogError("Not Connections");
+                OpenPopUp();
+            }
+            else
+            {
+                PlayerPrefs.SetInt("internet_access", 1);
+            }
+        }
+
+        yield return new WaitForSecondsRealtime(4);
+
+        //StartCoroutine(CheckConnect());
+    }
+
+    IEnumerator checkInternetConnection()
+    {
+        yield return new WaitForSecondsRealtime(1);
+
+        UnityWebRequest request = new UnityWebRequest("https://google.com");
+        yield return request.SendWebRequest();
+        if (request.error != null)
+        {
+            //action(false);
             PlayerPrefs.SetInt("internet_access", 0);
             Debug.LogError("Not Connections");
-            OpenPopUp();        
+            OpenPopUp();
         }
         else
         {
+            //action(true);
             PlayerPrefs.SetInt("internet_access", 1);
         }
 
         yield return new WaitForSecondsRealtime(4);
 
-        StartCoroutine(CheckConnect());
+        StartCoroutine(checkInternetConnection());
     }
 
     public void ButReconnect()
@@ -73,7 +103,8 @@ public class ConnectionManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _popUpController.ClosedPopUp();
-        StartCoroutine(CheckConnect());
+        //StartCoroutine(CheckConnect());
+        StartCoroutine(checkInternetConnection());
     }
 
     IEnumerator RotateCircle()

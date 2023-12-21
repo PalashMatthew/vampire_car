@@ -12,6 +12,8 @@ public class FirstAidKitController : MonoBehaviour
 
     public GameObject icon;
 
+    public bool isStopMove;
+
 
     private void Start()
     {
@@ -20,7 +22,8 @@ public class FirstAidKitController : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
+        if (!isStopMove)
+            transform.Translate(-transform.forward * moveSpeed * Time.deltaTime);
 
         icon.transform.Rotate(new Vector3(0, rotateSpeed, 0));
     }
@@ -29,21 +32,24 @@ public class FirstAidKitController : MonoBehaviour
     {
         yield return new WaitForSeconds(20);
 
-        PlayerStats _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-        string _hp;
-
-        if (_playerStats.currentHp < _playerStats.maxHp)
+        if (!isStopMove)
         {
-            _hp = "NotFullHP";
-        }
-        else
-        {
-            _hp = "FullHP";
-        }
-        
-        if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_FirstAidKitDestroy(_hp);
+            PlayerStats _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
+            string _hp;
 
-        Destroy(gameObject);
+            if (_playerStats.currentHp < _playerStats.maxHp)
+            {
+                _hp = "NotFullHP";
+            }
+            else
+            {
+                _hp = "FullHP";
+            }
+
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_FirstAidKitDestroy(_hp);
+
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,12 +1,16 @@
+using AssetKits.ParticleImage;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PopUpOpenChest : MonoBehaviour
 {
     PopUpController _popUpController;
+    public GameObject hubController;
 
     public string rarity;
     public DetailCard card;
@@ -26,6 +30,13 @@ public class PopUpOpenChest : MonoBehaviour
 
     public int chestType;
 
+    public GameObject butOk;
+
+    public ParticleImage vfxConfetti;
+    public GameObject vfxCircles;
+
+    public GameObject shopCanvas;
+
 
     private void Start()
     {
@@ -34,6 +45,9 @@ public class PopUpOpenChest : MonoBehaviour
 
     public void Open()
     {
+        StartCoroutine(OffShopCanvas());
+        StartCoroutine(Animation());
+
         _popUpController.OpenPopUp();
 
         switch (rarity)
@@ -119,8 +133,17 @@ public class PopUpOpenChest : MonoBehaviour
         #endregion
     }
 
+    IEnumerator OffShopCanvas()
+    {
+        yield return new WaitForSeconds(0.3f);
+        shopCanvas.SetActive(false);
+    }
+
     public void ButContinue()
     {
+        shopCanvas.SetActive(true);
+        hubController.GetComponent<ShopController>().Initialize();
+
         _popUpController.ClosedPopUp();
     }
 
@@ -138,6 +161,39 @@ public class PopUpOpenChest : MonoBehaviour
             chest2obj.SetActive(true);
         }
 
-        yield return new WaitForSeconds(1.55f);
+        vfxCircles.transform.DOScale(0, 0);
+        tName.transform.DOScale(0, 0);
+        tRarity.transform.DOScale(0, 0);
+        imgCard.transform.DOScale(0, 0);
+        butOk.transform.DOScale(0, 0);
+
+        vfxCircles.gameObject.SetActive(false);
+        tName.gameObject.SetActive(false);
+        tRarity.gameObject.SetActive(false);
+        imgCard.gameObject.SetActive(false);
+        butOk.SetActive(false);
+
+        yield return new WaitForSeconds(1.9f);
+
+        vfxConfetti.Play();
+
+        vfxCircles.gameObject.SetActive(true);
+        tName.gameObject.SetActive(true);
+        tRarity.gameObject.SetActive(true);
+        imgCard.gameObject.SetActive(true);
+
+        vfxCircles.transform.DOScale(1, 0.3f);
+        tName.transform.DOScale(1, 0.3f);
+        tRarity.transform.DOScale(1, 0.3f);
+        imgCard.transform.DOScale(1, 0.3f);
+
+        imgCard.GetComponent<RectTransform>().DOAnchorPosY(-1256, 0);
+        imgCard.GetComponent<RectTransform>().DOAnchorPosY(-670, 0.3f);
+
+        yield return new WaitForSeconds(2f);
+
+        butOk.gameObject.SetActive(true);
+
+        butOk.transform.DOScale(1, 0.3f);
     }
 }

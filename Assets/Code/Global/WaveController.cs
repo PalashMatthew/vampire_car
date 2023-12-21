@@ -37,14 +37,21 @@ public class WaveController : MonoBehaviour
 
     public float secondsPass = 0;
 
+    public static bool isTutorialActive;
+
 
     private void Awake()
     {
+        isTutorialActive = false;
+
         _generate = GameObject.Find("Generate Controller").GetComponent<Generate>();
         _generateObstacles = GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>();
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
 
-        StartWave();        
+        if (PlayerPrefs.GetString("tutorialLoc1Complite") == "true")
+        {
+            StartWave();
+        }              
     }
 
     private void Update()
@@ -56,7 +63,12 @@ public class WaveController : MonoBehaviour
     {
         secondsPass = 0;
         isWaveEnd = false;
-        GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
+
+        if (PlayerPrefs.GetString("tutorialComplite") != "false")
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
+            gameplayUIController.isMinExpDone = false;
+        }
 
         if (currentWave < lastWave)
         {
@@ -91,6 +103,17 @@ public class WaveController : MonoBehaviour
             _gameplayController.activeEnemy.Clear();
             _generate.BossFight();
         }        
+    }
+
+    public void StartTutorialWave()
+    {
+        isWaveEnd = false;
+        GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
+
+        enemyDestroy = 0;
+        currentWave++;
+        _generate.moveSpeedCoeff = waveList[currentWave - 1].waveSpeedCoeff;
+        _generate.spawnTime = waveList[currentWave - 1].enemySpawnTime;
     }
 
     public void WaveEnd()

@@ -44,43 +44,54 @@ public class GameplayUIController : MonoBehaviour
 
     public Image imgPlayerHit;
 
+    public bool isTutorialActive;
+
+    public bool isMinExpDone;  //Минимальное количество экспы достигнуто
+
 
     private void Start()
     {
-        UpdateScrewText();
+        //if (PlayerPrefs.GetString("tutorialComplite") == "false")
+        //    UpdateScrewText();
+
         imgPlayerHit.gameObject.SetActive(false);
+        isMinExpDone = false;
     }
 
     private void Update()
     {
-        UpdateLevel();
-
-        if (!isWin)
+        if (!isTutorialActive)
         {
-            if (isShowPanelWave)
+            UpdateLevel();
+
+            if (!isWin)
             {
-                wavePanel.SetActive(true);
-            } else
-            {
-                wavePanel.SetActive(false);
+                if (isShowPanelWave)
+                {
+                    wavePanel.SetActive(true);
+                }
+                else
+                {
+                    wavePanel.SetActive(false);
+                }
+
+                if (_isBossFight)
+                {
+                    bossPanel.SetActive(true);
+
+                    Boss();
+                }
+                else
+                {
+                    bossPanel.SetActive(false);
+                }
             }
-
-            if (_isBossFight)
-            {
-                bossPanel.SetActive(true);
-
-                Boss();
-            } 
             else
             {
                 bossPanel.SetActive(false);
+                wavePanel.SetActive(false);
             }
-        } 
-        else
-        {
-            bossPanel.SetActive(false);
-            wavePanel.SetActive(false);
-        }        
+        }            
     }
 
     #region ScrewText
@@ -107,10 +118,21 @@ public class GameplayUIController : MonoBehaviour
         //imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
         imgFillLevelBar.fillAmount = playerStats.currentExp / 20f;
 
-        if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
+        if (!isMinExpDone)
         {
-            playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave -1].expMinus;
-            GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+            if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
+            {
+                playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
+                GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+            }
+        } 
+        else
+        {
+            if (playerStats.currentExp > 5 && !WaveController.isWaveEnd)
+            {
+                playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
+                GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+            }
         }
 
         if (playerStats.currentExp > 20)
@@ -126,16 +148,30 @@ public class GameplayUIController : MonoBehaviour
 
             imgCard1.color = new Color(1, 1, 1, 0.2f);
             imgCard2.color = new Color(1, 1, 1, 0.2f);
+
+            if (isMinExpDone)
+            {
+                playerStats.currentExp = 5;
+                GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+            }
         }
 
         if (playerStats.currentExp >= 5 && playerStats.currentExp < 15)
         {
+            isMinExpDone = true;
+
             imgComplite1.SetActive(true);
             imgComplite2.SetActive(false);
             playerStats.currentLevel = 1;
 
             imgCard1.color = new Color(1, 1, 1, 1f);
             imgCard2.color = new Color(1, 1, 1, 0.2f);
+
+            if (PlayerPrefs.GetString("tutorialCards") == "false")
+            {
+                GameObject.Find("TutorialController").GetComponent<TutorialController>().Message5Start();
+                PlayerPrefs.SetString("tutorialCards", "true");
+            }
         }
 
         if (playerStats.currentExp >= 15)

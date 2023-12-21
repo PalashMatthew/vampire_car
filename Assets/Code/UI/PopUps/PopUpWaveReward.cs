@@ -7,255 +7,223 @@ using UnityEngine.UI;
 public class PopUpWaveReward : MonoBehaviour
 {
     private PopUpController _popUpController;
-
-    bool isRewardReady;
+    public ChooseLocationController locationController;
 
     public GameObject toggle1, toggle2, toggle3, toggle4, toggle5;
     public GameObject shadow1, shadow2, shadow3, shadow4, shadow5;
     public Image imgPanel1, imgPanel2, imgPanel3, imgPanel4, imgPanel5;
     public Sprite sprPanelDefault, sprPanelActive;
 
+    public GameObject panel2KeyReward;
+
 
     private void Start()
     {
-        _popUpController = GetComponent<PopUpController>();
-
-        Initialize();
+        _popUpController = GetComponent<PopUpController>();        
     }
 
     void Initialize()
     {
-        if (!PlayerPrefs.HasKey("DailyRewardCurrentDay"))
+        int currentLoc = locationController.currentLocNum;
+
+        if (currentLoc == 1)
         {
-            PlayerPrefs.SetInt("DailyRewardCurrentDay", 1);
+            panel2KeyReward.SetActive(false);
+        } 
+        else
+        {
+            panel2KeyReward.SetActive(true);
         }
 
-        switch (PlayerPrefs.GetInt("DailyRewardCurrentDay"))
+        //Reward 1
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + 1 + "Take") == 0)
         {
-            case 1:
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= 2)
+            {
                 toggle1.SetActive(false);
-                toggle2.SetActive(false);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-
                 shadow1.SetActive(false);
-                shadow2.SetActive(false);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-
                 imgPanel1.sprite = sprPanelActive;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                break;
-
-            case 2:
-                toggle1.SetActive(true);
-                toggle2.SetActive(false);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(false);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelActive;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                break;
-
-            case 3:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelActive;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                break;
-
-            case 4:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelActive;
-                imgPanel5.sprite = sprPanelDefault;
-                break;
-
-            case 5:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(true);
-                toggle5.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(true);
-                shadow5.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelActive;
-                break;
-        }
-
-        if (PlayerPrefs.HasKey("OfflineTimeLast"))
-        {
-            int seconds = 0;
-
-            DateTime ts;
-            ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
-
-            if (ts.Hour > 0)
-            {
-                seconds += ts.Hour * 60 * 60;
-            }
-
-            if (ts.Minute > 0)
-            {
-                seconds += ts.Minute * 60;
-            }
-
-            if (ts.Second > 0)
-            {
-                seconds += ts.Second;
-            }
-
-            PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + seconds);
-
-            if (PlayerPrefs.GetInt("DailyRewardTimerSaveTime") > 86400)
-            {
-                isRewardReady = true;
-                ButOpen();
             }
             else
             {
-                StartCoroutine(DailyRewardTimer());
+                toggle1.SetActive(false);
+                shadow1.SetActive(false);
+                imgPanel1.sprite = sprPanelDefault;
             }
         }
-    }
-
-    IEnumerator DailyRewardTimer()
-    {
-        yield return new WaitForSeconds(1);
-        PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + 1);
-
-        if (PlayerPrefs.GetInt("DailyRewardTimerSaveTime") < 86400)
+        else
         {
-            StartCoroutine(DailyRewardTimer());
+            toggle1.SetActive(true);
+            shadow1.SetActive(true);
+            imgPanel1.sprite = sprPanelDefault;
+        }
+
+        //Reward 2
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + 2 + "Take") == 0)
+        {
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= 4)
+            {
+                toggle2.SetActive(false);
+                shadow2.SetActive(false);
+                imgPanel2.sprite = sprPanelActive;
+            }
+            else
+            {
+                toggle2.SetActive(false);
+                shadow2.SetActive(false);
+                imgPanel2.sprite = sprPanelDefault;
+            }
+        }
+        else
+        {
+            toggle2.SetActive(true);
+            shadow2.SetActive(true);
+            imgPanel2.sprite = sprPanelDefault;
+        }
+
+        //Reward 3
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + 3 + "Take") == 0)
+        {
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= 6)
+            {
+                toggle3.SetActive(false);
+                shadow3.SetActive(false);
+                imgPanel3.sprite = sprPanelActive;
+            }
+            else
+            {
+                toggle3.SetActive(false);
+                shadow3.SetActive(false);
+                imgPanel3.sprite = sprPanelDefault;
+            }
+        }
+        else
+        {
+            toggle3.SetActive(true);
+            shadow3.SetActive(true);
+            imgPanel3.sprite = sprPanelDefault;
+        }
+
+        //Reward 4
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + 4 + "Take") == 0)
+        {
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= 8)
+            {
+                toggle4.SetActive(false);
+                shadow4.SetActive(false);
+                imgPanel4.sprite = sprPanelActive;
+            }
+            else
+            {
+                toggle4.SetActive(false);
+                shadow4.SetActive(false);
+                imgPanel4.sprite = sprPanelDefault;
+            }
+        }
+        else
+        {
+            toggle4.SetActive(true);
+            shadow4.SetActive(true);
+            imgPanel4.sprite = sprPanelDefault;
+        }
+
+        //Reward 5
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + 5 + "Take") == 0)
+        {
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= 10)
+            {
+                toggle5.SetActive(false);
+                shadow5.SetActive(false);
+                imgPanel5.sprite = sprPanelActive;
+            }
+            else
+            {
+                toggle5.SetActive(false);
+                shadow5.SetActive(false);
+                imgPanel5.sprite = sprPanelDefault;
+            }
+        }
+        else
+        {
+            toggle5.SetActive(true);
+            shadow5.SetActive(true);
+            imgPanel5.sprite = sprPanelDefault;
         }
     }
 
-    public void But_Reward(int buttonNum)
+    public void But_Reward(int rewardNum)
     {
-        if (isRewardReady)
+        if (PlayerPrefs.GetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take") == 0)
         {
-            int day = PlayerPrefs.GetInt("DailyRewardCurrentDay");
-
-            if (buttonNum == day)
+            if (PlayerPrefs.GetInt("loc_" + locationController.currentLocNum + "_maxWave") >= rewardNum * 2)
             {
-                if (day == 1)
+                if (locationController.currentLocNum == 1)
                 {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
-                    PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 10);
+                    switch (rewardNum)
+                    {
+                        case 1:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+
+                        case 2:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+
+                        case 3:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+
+                        case 4:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
+                            break;
+
+                        case 5:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+                    }
                 }
 
-                if (day == 2)
+                if (locationController.currentLocNum == 2)
                 {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 100);
-                    PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);
-                    PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 5);
-                    PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                    switch (rewardNum)
+                    {
+                        case 1:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+
+                        case 2:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);
+                            break;
+
+                        case 3:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+
+                        case 4:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
+                            break;
+
+                        case 5:
+                            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+                            break;
+                    }
                 }
 
-                if (day == 3)
-                {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
-                    PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 5);
-                    PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + 5);
-                    PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + 10);
-                }
-
-                if (day == 4)
-                {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 50);
-                    PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
-                    PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + 5);
-                    PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + 5);
-                }
-
-                if (day == 5)
-                {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
-                    PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + 5);
-                    PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + 5);
-                }
-
-                if (day == 6)
-                {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 50);
-                    PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
-                    PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 5);
-                    PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + 10);
-                }
-
-                if (day == 7)
-                {
-                    PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 100);
-                    PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);
-                    PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
-                    PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 5);
-                    PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + 5);
-                    PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + 5);
-                    PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + 5);
-                    PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + 5);
-                    PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + 5);
-                }
-
-                isRewardReady = false;
-                PlayerPrefs.SetInt("DailyRewardTimerSaveTime", 0);
-                PlayerPrefs.SetInt("DailyRewardCurrentDay", PlayerPrefs.GetInt("DailyRewardCurrentDay") + 1);
-
-                if (PlayerPrefs.GetInt("DailyRewardCurrentDay") > 7)
-                {
-                    PlayerPrefs.SetInt("DailyRewardCurrentDay", 1);
-                }
-
-                ButClosed();
+                PlayerPrefs.SetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take", 1);
+                Initialize();
             }
         }
     }
@@ -263,6 +231,8 @@ public class PopUpWaveReward : MonoBehaviour
     public void ButOpen()
     {
         _popUpController.OpenPopUp();
+
+        Initialize();
     }
 
     public void ButClosed()

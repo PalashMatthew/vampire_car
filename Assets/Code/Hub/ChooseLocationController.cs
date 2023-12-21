@@ -26,6 +26,11 @@ public class ChooseLocationController : MonoBehaviour
     public GameObject tOpenPrevLoc;
     public GameObject imgLock;
 
+    public TMP_Text tLocName;
+    public TMP_Text tWaveClearCount;
+
+    public TMP_Text tRewards;
+
 
     private void Start()
     {
@@ -61,6 +66,8 @@ public class ChooseLocationController : MonoBehaviour
             butPrev.SetActive(true);
         }
 
+        ChangeLocation();
+
         #region Camera Color Settings
         if (currentLocNum == 1)
         {
@@ -81,7 +88,7 @@ public class ChooseLocationController : MonoBehaviour
 
     private void Update()
     {
-        tChapter.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_chapter") + " " + currentLocNum;
+        tChapter.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_play");
     }
 
     void ChangeLocation()
@@ -124,6 +131,11 @@ public class ChooseLocationController : MonoBehaviour
             tOpenPrevLoc.SetActive(false);
             imgLock.SetActive(false);
         }
+
+        tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
+
+        tLocName.text = currentLocNum + ". " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_location" + currentLocNum + "Name");
+        tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
 
         #region Camera Color Settings
         if (currentLocNum == 1)

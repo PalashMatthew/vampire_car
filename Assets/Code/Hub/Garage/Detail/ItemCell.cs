@@ -166,6 +166,11 @@ public class ItemCell : MonoBehaviour
         {
             _popUpMerge.ButChooseItem(gameObject.GetComponent<ItemCell>());
         }
+
+        if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
+        {
+            GameObject.Find("TutorialController").GetComponent<TutorialControllerHub>().StartMessage7();
+        }
     }
 
     public void MergeSelect()

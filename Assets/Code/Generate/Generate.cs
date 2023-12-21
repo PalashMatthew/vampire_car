@@ -118,6 +118,59 @@ public class Generate : MonoBehaviour
         StartCoroutine(EnemyGen());
     }
 
+    public IEnumerator TutorialEnemyGen(int enemyNum)
+    {
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+
+        float _x = 0;
+
+        switch (enemyNum)
+        {
+            case 1:
+                _x = 0;
+                break;
+            case 2:
+                _x = -3.7f;
+                break;
+            case 3:
+                _x = 3.7f;
+                break;
+            case 4:
+                _x = -7.4f;
+                break;
+            case 5:
+                _x = 7.4f;
+                break;
+            case 6:
+                _x = -11.1f;
+                break;
+            case 7:
+                _x = 11.1f;
+                break;
+        }
+
+        GameObject inst = Instantiate(waveController.enemyM1Obj, new Vector3(_x, 0, minZSpawnPattern), transform.rotation);
+
+        _gameplayController.activeEnemy.Add(inst);
+
+        inst.transform.eulerAngles = new Vector3(0, 180, 0);
+
+        //inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
+        //inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+        inst.GetComponent<EnemyController>().Initialize();
+
+        yield return new WaitForSeconds(1.3f);
+
+        enemyNum++;
+
+        if (enemyNum > 7)
+        {
+            enemyNum = 1;
+        }
+
+        StartCoroutine(TutorialEnemyGen(enemyNum));
+    }
+
     public void FirstAidKit(float value)
     {
         float _randX = Random.Range(minXSpawn, maxXSpawn);

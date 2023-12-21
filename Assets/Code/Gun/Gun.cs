@@ -60,11 +60,13 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        //Initialize();
     }
 
-    void Initialize()
+    public void Initialize()
     {
+        Debug.Log("Gun Initialize");
+
         _playerStats = GetComponentInParent<PlayerStats>();
         _passiveController = GetComponentInParent<PlayerPassiveController>();
 

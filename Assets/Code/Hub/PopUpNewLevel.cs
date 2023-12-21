@@ -25,7 +25,7 @@ public class PopUpNewLevel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            PlayerPrefs.SetInt("playerExp", PlayerPrefs.GetInt("playerExp") + 40);
+            PlayerPrefs.SetInt("playerExp", PlayerPrefs.GetInt("playerExp") + 250);
             CheckPlayerExp();
         }
     }

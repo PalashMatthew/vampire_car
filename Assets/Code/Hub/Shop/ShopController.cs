@@ -8,7 +8,7 @@ using TMPro;
 using static UnityEngine.Rendering.DebugUI;
 
 public class ShopController : MonoBehaviour, IStoreListener
-{
+{   
     [Header("Chest")]
     public PopUpOpenChest popUpOpenChest;
     public GameObject butBuyChest1, butBuyChest2;
@@ -179,7 +179,26 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     public void ButChest1()
     {
-        if (PlayerPrefs.GetInt("playerKey1") > 0)
+        if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
+        {
+            DetailCard card = items[0];
+
+            string rarity;
+
+            rarity = "common";
+
+            popUpOpenChest.rarity = rarity;
+            popUpOpenChest.card = card;
+            popUpOpenChest.chestType = 1;
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Key", rarity, card.itemType.ToString());
+
+            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") - 1);
+            ChestSettings();
+
+            popUpOpenChest.Open();
+        }
+        else if (PlayerPrefs.GetInt("playerKey1") > 0)
         {
             DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
 
@@ -193,6 +212,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             popUpOpenChest.rarity = rarity;
             popUpOpenChest.card = card;
+            popUpOpenChest.chestType = 1;
 
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Key", rarity, card.itemType.ToString());
 
@@ -221,6 +241,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
                 popUpOpenChest.rarity = rarity;
                 popUpOpenChest.card = card;
+                popUpOpenChest.chestType = 1;
 
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Hard", rarity, card.itemType.ToString());
 
@@ -246,6 +267,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
         popUpOpenChest.rarity = rarity;
         popUpOpenChest.card = card;
+        popUpOpenChest.chestType = 1;
 
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Ads", rarity, card.itemType.ToString());
 
@@ -276,6 +298,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             popUpOpenChest.rarity = rarity;
             popUpOpenChest.card = card;
+            popUpOpenChest.chestType = 2;
 
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase2("Key", rarity, card.itemType.ToString());
 
@@ -304,6 +327,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
                 popUpOpenChest.rarity = rarity;
                 popUpOpenChest.card = card;
+                popUpOpenChest.chestType = 2;
 
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase2("Hard", rarity, card.itemType.ToString());
 

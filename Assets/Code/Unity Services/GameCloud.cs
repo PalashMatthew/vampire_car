@@ -207,6 +207,15 @@ public class GameCloud : MonoBehaviour
 
     public async void LoadData()
     {
+        if (!PlayerPrefs.HasKey("playerMoney"))
+        {
+            PlayerPrefs.SetInt("playerMoney", 1000);
+            PlayerPrefs.SetInt("playerHard", 20);
+            PlayerPrefs.SetInt("playerFuelCurrent", 20);
+            PlayerPrefs.SetInt("playerFuelMax", 20);
+            PlayerPrefs.SetInt("playerLevel", 1);
+        }
+
         Dictionary<string, string> data = await CloudSaveService.Instance.Data.LoadAsync(new HashSet<string> { PLAYER_CLOUD_KEY });
 
         List<ItemKey> list = await CloudSaveService.Instance.Data.Player.ListAllKeysAsync();

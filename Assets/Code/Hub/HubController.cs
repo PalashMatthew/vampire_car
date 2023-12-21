@@ -54,9 +54,7 @@ public class HubController : MonoBehaviour
     }
 
     void Initialize()
-    {
-        Application.targetFrameRate = 60;
-
+    {       
         screenGarage.SetActive(false);
         screenLock.SetActive(false);
         screenShop.SetActive(false);
@@ -68,15 +66,15 @@ public class HubController : MonoBehaviour
 
         _nextScreen = "fight";
 
-        if (!PlayerPrefs.HasKey("playerMoney"))
-        {
-            PlayerPrefs.SetInt("playerMoney", 1000);
-            PlayerPrefs.SetInt("playerHard", 20);
-            PlayerPrefs.SetInt("playerFuelCurrent", 20);
-            PlayerPrefs.SetInt("playerFuelMax", 20);
-            PlayerPrefs.SetInt("playerLevel", 1);
-            tFuelTimer.text = "";
-        }
+        //if (!PlayerPrefs.HasKey("playerMoney"))
+        //{
+        //    PlayerPrefs.SetInt("playerMoney", 1000);
+        //    PlayerPrefs.SetInt("playerHard", 20);
+        //    PlayerPrefs.SetInt("playerFuelCurrent", 20);
+        //    PlayerPrefs.SetInt("playerFuelMax", 20);
+        //    PlayerPrefs.SetInt("playerLevel", 1);
+        //    tFuelTimer.text = "";
+        //}
 
         #region Fuel Check
         if (PlayerPrefs.GetInt("playerFuelCurrent") >= PlayerPrefs.GetInt("playerFuelMax"))

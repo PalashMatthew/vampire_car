@@ -140,11 +140,13 @@ public class PopUpPause : MonoBehaviour
 
     private void OnApplicationPause()
     {
-        ButOpen();
+        if (!PopUpWin.isEndGame)
+            ButOpen();
     }
 
     private void OnApplicationQuit()
     {
-        ButOpen();
+        if (!PopUpWin.isEndGame)
+            ButOpen();
     }
 }

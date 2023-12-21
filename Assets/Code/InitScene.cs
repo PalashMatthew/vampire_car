@@ -18,6 +18,8 @@ public class InitScene : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         StartCoroutine(InitGame());
     }
 
@@ -25,8 +27,17 @@ public class InitScene : MonoBehaviour
     {
         if (initCount == 5)
         {
-            loader.LoadLevel("Hub");
-            initCount = 0;
+            if (!PlayerPrefs.HasKey("tutorialComplite"))
+            {
+                PlayerPrefs.SetString("tutorialComplite", "false");
+                loader.LoadLevel("Loc alpha 1");
+                initCount = 0;
+            }
+            else
+            {
+                loader.LoadLevel("Hub");
+                initCount = 0;
+            }            
         }
     }
 

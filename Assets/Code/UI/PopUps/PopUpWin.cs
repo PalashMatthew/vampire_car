@@ -49,9 +49,12 @@ public class PopUpWin : MonoBehaviour
     public GameObject objRewardScroll;
     public GameObject objButContinue;
 
+    public static bool isEndGame;
+
 
     private void Start()
     {
+        isEndGame = false;
         _popUpController = GetComponent<PopUpController>();
     }
 
@@ -62,6 +65,11 @@ public class PopUpWin : MonoBehaviour
         tLeader.text = "Вы справились лучше чем " + Random.Range(70, 86) + "% игроков";
 
         locationNum = GameObject.Find("GameplayController").GetComponent<GameplayController>().locationNum;
+
+        if (PlayerPrefs.GetInt("loc_" +  locationNum + "_maxWave") < waveController.currentWave - 1)
+        {
+            PlayerPrefs.SetInt("loc_" + locationNum + "_maxWave", waveController.currentWave - 1);
+        }
 
         int _moneyReward = 0;
         int _expReward = 0;
@@ -293,9 +301,9 @@ public class PopUpWin : MonoBehaviour
                 string rarity = "";
 
                 int rand = Random.Range(1, 101);
-                if (rand <= 85) rarity = "common";
-                if (rand > 85 && rand <= 97) rarity = "rare";
-                if (rand > 97) rarity = "epic";
+                if (rand <= 90) rarity = "common";
+                if (rand > 90 && rand <= 98) rarity = "rare";
+                if (rand > 98) rarity = "epic";
 
                 instCell = Instantiate(itemCellObj, transform.position, transform.rotation);
                 instCell.transform.parent = scrollObj;
@@ -340,6 +348,7 @@ public class PopUpWin : MonoBehaviour
     public void ButOpen()
     {
         GameplayController.isPause = true;
+        isEndGame = true;
 
         Initialize();
 

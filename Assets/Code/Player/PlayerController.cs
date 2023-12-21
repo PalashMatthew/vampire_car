@@ -237,6 +237,11 @@ public class PlayerController : MonoBehaviour
         {            
             FirstAidKit(other.gameObject.GetComponent<FirstAidKitController>().value);
 
+            if (PlayerPrefs.GetString("tutorialComplite") == "false" && Application.loadedLevelName == "Loc alpha 1")
+            {
+                GameObject.Find("TutorialController").GetComponent<TutorialController>().StartCoroutine(GameObject.Find("TutorialController").GetComponent<TutorialController>().ShowMessage4());
+            }
+
             string _hp = "";
 
             if (_playerStats.currentHp < _playerStats.maxHp)
