@@ -32,6 +32,7 @@ public class PopUpMergeFinal : MonoBehaviour
 
     [Header("Background")]
     public Image imgBackground;
+    public Image imgBackground2, imgBackground3;
     public Sprite sprBackgroundRare;
     public Sprite sprBackgroundEpic;
     public Sprite sprBackgroundLegendary;
@@ -96,6 +97,8 @@ public class PopUpMergeFinal : MonoBehaviour
         {
             case "rare":
                 imgBackground.sprite = sprBackgroundRare;
+                imgBackground2.sprite = sprBackgroundRare;
+                imgBackground3.sprite = sprBackgroundRare;
                 tRarity.text = "<color=#3498DB>Редкая</color>";
 
                 tCurrentLevel.text = "10";
@@ -148,6 +151,8 @@ public class PopUpMergeFinal : MonoBehaviour
 
             case "epic":
                 imgBackground.sprite = sprBackgroundEpic;
+                imgBackground2.sprite = sprBackgroundEpic;
+                imgBackground3.sprite = sprBackgroundEpic;
                 tRarity.text = "<color=#CE33FF>Эпическая</color>";
 
                 tCurrentLevel.text = "20";
@@ -201,6 +206,8 @@ public class PopUpMergeFinal : MonoBehaviour
 
             case "legendary":
                 imgBackground.sprite = sprBackgroundLegendary;
+                imgBackground2.sprite = sprBackgroundLegendary;
+                imgBackground3.sprite = sprBackgroundLegendary;
                 tRarity.text = "<color=yellow>Легендарная</color>";
 
                 tCurrentLevel.text = "30";

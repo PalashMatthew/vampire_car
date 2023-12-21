@@ -254,9 +254,16 @@ public class GameplayUIController : MonoBehaviour
     {
         tBossName.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_bossName" + bossNum);
 
-        if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
-            tBossHP.text = (int)GameObject.Find("BOSS").GetComponent<EnemyController>().hp + "";
-        else tBossHP.text = "0";
+        if (GameObject.Find("BOSS") != null)
+        {
+            if (GameObject.Find("BOSS").GetComponent<EnemyController>().hp > 0)
+                tBossHP.text = (int)GameObject.Find("BOSS").GetComponent<EnemyController>().hp + "";
+            else tBossHP.text = "0";
+        }
+        else
+        {
+            tBossHP.text = "";
+        }
 
         imgFillBossBar.fillAmount = (float)GameObject.Find("BOSS").GetComponent<EnemyController>().hp / GameObject.Find("BOSS").GetComponent<EnemyController>().maxHp;
 

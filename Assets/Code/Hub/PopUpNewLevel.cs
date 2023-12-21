@@ -18,7 +18,7 @@ public class PopUpNewLevel : MonoBehaviour
     {
         _popUpController = GetComponent<PopUpController>();
 
-        CheckPlayerExp();
+        //CheckPlayerExp();
     }
 
     private void Update()
@@ -47,10 +47,18 @@ public class PopUpNewLevel : MonoBehaviour
 
             ShowPopUp();
         }
+        else
+        {
+            if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
+            {
+                GameObject.Find("TutorialController").GetComponent<TutorialControllerHub>().CheckTutorialPlay();
+            }
+        }
     }
 
     public void ShowPopUp()
     {
+        _popUpController = GetComponent<PopUpController>();
         _popUpController.OpenPopUp();
         Initialize();
     }

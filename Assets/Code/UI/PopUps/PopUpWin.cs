@@ -322,15 +322,29 @@ public class PopUpWin : MonoBehaviour
                 PlayerPrefs.SetInt("item" + _itemType + "ID" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), _card.itemID);
 
                 PlayerPrefs.SetString("item" + _itemType + "Rarity" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), rarity);
+
+                if (_itemType == "Gun")
+                {
+                    PlayerPrefs.SetInt("unlockGun" + _card.itemID, 1);
+                }
                 #endregion
             }
             #endregion
         }
 
+        if (waveController.currentWave == 11)
+        {
+            if (PlayerPrefs.GetInt("maxLocation") <= locationNum)
+            {
+                PlayerPrefs.SetString("unlockNewItems", "true");
+                PlayerPrefs.SetInt("maxLocation", locationNum+1);
+            }
+        }
+
         if (GameObject.Find("Firebase") != null)
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward(waveController.currentWave - 1, locationNum, _moneyReward, _expReward, _drawingGunReward, _drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
 
-        int _dieCount = 0;
+        int _dieCount;
 
         if (GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
         {

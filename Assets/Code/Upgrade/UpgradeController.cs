@@ -207,6 +207,11 @@ public class UpgradeController : MonoBehaviour
             UpgradeCard _card;
             _card = cardsGun[Random.Range(0, cardsGun.Count)];
 
+            if (PlayerPrefs.GetInt("unlockGun" + _card.Id) == 0)
+            {
+                goto newTry;
+            }
+
             if (isGenerateUpgrade && i != 2)
             {
                 if (!activeGunCard.Contains(_card))
@@ -729,6 +734,11 @@ public class UpgradeController : MonoBehaviour
             newTry:
             UpgradeCard _card;
             _card = cardsPassive[Random.Range(0, cardsPassive.Count)];
+
+            if (PlayerPrefs.GetInt("unlockPassive" + _card.cardName) == 0)
+            {
+                goto newTry;
+            }
 
             if (_createdCards.Contains(_card))
             {

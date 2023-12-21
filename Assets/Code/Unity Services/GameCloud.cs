@@ -196,7 +196,41 @@ public class GameCloud : MonoBehaviour
             talentHealthLevel = PlayerPrefs.GetInt("talentHealthLevel"),
             talentIronLevel = PlayerPrefs.GetInt("talentIronLevel"),
             talentRecoveryHpInFirstAidKitLevel = PlayerPrefs.GetInt("talentRecoveryHpInFirstAidKitLevel"),
-            talentShotSpeedLevel = PlayerPrefs.GetInt("talentShotSpeedLevel")            
+            talentShotSpeedLevel = PlayerPrefs.GetInt("talentShotSpeedLevel"),     
+            
+            unlockGun1000 = PlayerPrefs.GetInt("unlockGun1000"),
+            unlockGun1001 = PlayerPrefs.GetInt("unlockGun1001"),
+            unlockGun1002 = PlayerPrefs.GetInt("unlockGun1002"),
+            unlockGun1003 = PlayerPrefs.GetInt("unlockGun1003"),
+            unlockGun1004 = PlayerPrefs.GetInt("unlockGun1004"),
+            unlockGun1005 = PlayerPrefs.GetInt("unlockGun1005"),
+            unlockGun1006 = PlayerPrefs.GetInt("unlockGun1006"),
+            unlockGun1007 = PlayerPrefs.GetInt("unlockGun1007"),
+            unlockGun1008 = PlayerPrefs.GetInt("unlockGun1008"),
+            unlockGun1009 = PlayerPrefs.GetInt("unlockGun1009"),
+            unlockGun1010 = PlayerPrefs.GetInt("unlockGun1010"),
+            unlockGun1011 = PlayerPrefs.GetInt("unlockGun1011"),
+            unlockGun1012 = PlayerPrefs.GetInt("unlockGun1012"),
+            unlockGun1013 = PlayerPrefs.GetInt("unlockGun1013"),
+            unlockGun1014 = PlayerPrefs.GetInt("unlockGun1014"),
+            unlockGun1015 = PlayerPrefs.GetInt("unlockGun1015"),
+
+            unlockPassiveArmor = PlayerPrefs.GetInt("unlockPassiveArmor"),
+            unlockPassiveAttackSpeed = PlayerPrefs.GetInt("unlockPassiveAttackSpeed"),
+            unlockPassiveVampirizm = PlayerPrefs.GetInt("unlockPassiveVampirizm"),
+            unlockPassiveRage = PlayerPrefs.GetInt("unlockPassiveRage"),
+            unlockPassiveMaxHpUp = PlayerPrefs.GetInt("unlockPassiveMaxHpUp"),
+            unlockPassiveMassEnemyDamage = PlayerPrefs.GetInt("unlockPassiveMassEnemyDamage"),
+            unlockPassiveLucky = PlayerPrefs.GetInt("unlockPassiveLucky"),
+            unlockPassiveKritDamageUp = PlayerPrefs.GetInt("unlockPassiveKritDamageUp"),
+            unlockPassiveKritChanceUp = PlayerPrefs.GetInt("unlockPassiveKritChanceUp"),
+            unlockPassiveBackDamage = PlayerPrefs.GetInt("unlockPassiveBackDamage"),
+            unlockPassiveDamageUp = PlayerPrefs.GetInt("unlockPassiveDamageUp"),
+            unlockPassiveDistanceDamage = PlayerPrefs.GetInt("unlockPassiveDistanceDamage"),
+            unlockPassiveDodge = PlayerPrefs.GetInt("unlockPassiveDodge"),
+            unlockPassiveEffectsDuration = PlayerPrefs.GetInt("unlockPassiveEffectsDuration"),
+            unlockPassiveHeadshot = PlayerPrefs.GetInt("unlockPassiveHeadshot"),
+            unlockPassiveHealthRecovery = PlayerPrefs.GetInt("unlockPassiveHealthRecovery")
         };
 
         Dictionary<string, object> data = new Dictionary<string, object>() { { PLAYER_CLOUD_KEY, playerData} };
@@ -214,7 +248,43 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("playerFuelCurrent", 20);
             PlayerPrefs.SetInt("playerFuelMax", 20);
             PlayerPrefs.SetInt("playerLevel", 1);
+
+            PlayerPrefs.SetInt("unlockGun1000", 1);
+            PlayerPrefs.SetInt("unlockGun1001", 1);
+            PlayerPrefs.SetInt("unlockGun1002", 1);
+            PlayerPrefs.SetInt("unlockGun1003", 0);
+            PlayerPrefs.SetInt("unlockGun1004", 1);
+            PlayerPrefs.SetInt("unlockGun1005", 0);
+            PlayerPrefs.SetInt("unlockGun1006", 0);
+            PlayerPrefs.SetInt("unlockGun1007", 0);
+            PlayerPrefs.SetInt("unlockGun1008", 0);
+            PlayerPrefs.SetInt("unlockGun1009", 1);
+            PlayerPrefs.SetInt("unlockGun1010", 1);
+            PlayerPrefs.SetInt("unlockGun1011", 0);
+            PlayerPrefs.SetInt("unlockGun1012", 0);
+            PlayerPrefs.SetInt("unlockGun1013", 0);
+            PlayerPrefs.SetInt("unlockGun1014", 1);
+            PlayerPrefs.SetInt("unlockGun1015", 0);
+
+            PlayerPrefs.SetInt("unlockPassiveArmor", 0);
+            PlayerPrefs.SetInt("unlockPassiveAttackSpeed", 1);
+            PlayerPrefs.SetInt("unlockPassiveBackDamage", 0);
+            PlayerPrefs.SetInt("unlockPassiveDamageUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveDistanceDamage", 1);
+            PlayerPrefs.SetInt("unlockPassiveDodge", 0);
+            PlayerPrefs.SetInt("unlockPassiveEffectsDuration", 0);
+            PlayerPrefs.SetInt("unlockPassiveHeadshot", 1);
+            PlayerPrefs.SetInt("unlockPassiveHealthRecovery", 1);
+            PlayerPrefs.SetInt("unlockPassiveKritChanceUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveKritDamageUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveLucky", 0);
+            PlayerPrefs.SetInt("unlockPassiveMassEnemyDamage", 0);
+            PlayerPrefs.SetInt("unlockPassiveMaxHpUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveRage", 0);
+            PlayerPrefs.SetInt("unlockPassiveVampirizm", 1);
         }
+
+        PlayerPrefs.SetString("unlockNewItems", "false");
 
         Dictionary<string, string> data = await CloudSaveService.Instance.Data.LoadAsync(new HashSet<string> { PLAYER_CLOUD_KEY });
 
@@ -336,6 +406,40 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("talentEquipmentImprovementLevel", player.talentEquipmentImprovementLevel);
             PlayerPrefs.SetInt("talentCarImprovementLevel", player.talentCarImprovementLevel);
             PlayerPrefs.SetInt("talentGunSlotLevel", player.talentGunSlotLevel);
+
+            PlayerPrefs.SetInt("unlockGun1000", player.unlockGun1000);
+            PlayerPrefs.SetInt("unlockGun1001", player.unlockGun1001);
+            PlayerPrefs.SetInt("unlockGun1002", player.unlockGun1002);
+            PlayerPrefs.SetInt("unlockGun1003", player.unlockGun1003);
+            PlayerPrefs.SetInt("unlockGun1004", player.unlockGun1004);
+            PlayerPrefs.SetInt("unlockGun1005", player.unlockGun1005);
+            PlayerPrefs.SetInt("unlockGun1006", player.unlockGun1006);
+            PlayerPrefs.SetInt("unlockGun1007", player.unlockGun1007);
+            PlayerPrefs.SetInt("unlockGun1008", player.unlockGun1008);
+            PlayerPrefs.SetInt("unlockGun1009", player.unlockGun1009);
+            PlayerPrefs.SetInt("unlockGun1010", player.unlockGun1010);
+            PlayerPrefs.SetInt("unlockGun1011", player.unlockGun1011);
+            PlayerPrefs.SetInt("unlockGun1012", player.unlockGun1012);
+            PlayerPrefs.SetInt("unlockGun1013", player.unlockGun1013);
+            PlayerPrefs.SetInt("unlockGun1014", player.unlockGun1014);
+            PlayerPrefs.SetInt("unlockGun1015", player.unlockGun1015);
+
+            PlayerPrefs.SetInt("unlockPassiveArmor", player.unlockPassiveArmor);
+            PlayerPrefs.SetInt("unlockPassiveAttackSpeed", player.unlockPassiveAttackSpeed);
+            PlayerPrefs.SetInt("unlockPassiveBackDamage", player.unlockPassiveBackDamage);
+            PlayerPrefs.SetInt("unlockPassiveDamageUp", player.unlockPassiveDamageUp);
+            PlayerPrefs.SetInt("unlockPassiveDistanceDamage", player.unlockPassiveDistanceDamage);
+            PlayerPrefs.SetInt("unlockPassiveDodge", player.unlockPassiveDodge);
+            PlayerPrefs.SetInt("unlockPassiveEffectsDuration", player.unlockPassiveEffectsDuration);
+            PlayerPrefs.SetInt("unlockPassiveHeadshot", player.unlockPassiveHeadshot);
+            PlayerPrefs.SetInt("unlockPassiveHealthRecovery", player.unlockPassiveHealthRecovery);
+            PlayerPrefs.SetInt("unlockPassiveKritChanceUp", player.unlockPassiveKritChanceUp);
+            PlayerPrefs.SetInt("unlockPassiveKritDamageUp", player.unlockPassiveKritDamageUp);
+            PlayerPrefs.SetInt("unlockPassiveLucky", player.unlockPassiveLucky);
+            PlayerPrefs.SetInt("unlockPassiveMassEnemyDamage", player.unlockPassiveMassEnemyDamage);
+            PlayerPrefs.SetInt("unlockPassiveMaxHpUp", player.unlockPassiveMaxHpUp);
+            PlayerPrefs.SetInt("unlockPassiveRage", player.unlockPassiveRage);
+            PlayerPrefs.SetInt("unlockPassiveVampirizm", player.unlockPassiveVampirizm);
             #endregion
         }
 
@@ -456,4 +560,39 @@ public class PlayerData
     public int talentEquipmentImprovementLevel;
     public int talentCarImprovementLevel;
     public int talentGunSlotLevel;
+
+    //Unlock Items
+    public int unlockGun1000;
+    public int unlockGun1001;
+    public int unlockGun1002;
+    public int unlockGun1003;
+    public int unlockGun1004;
+    public int unlockGun1005;
+    public int unlockGun1006;
+    public int unlockGun1007;
+    public int unlockGun1008;
+    public int unlockGun1009;
+    public int unlockGun1010;
+    public int unlockGun1011;
+    public int unlockGun1012;
+    public int unlockGun1013;
+    public int unlockGun1014;
+    public int unlockGun1015;
+
+    public int unlockPassiveArmor;
+    public int unlockPassiveAttackSpeed;
+    public int unlockPassiveBackDamage;
+    public int unlockPassiveDamageUp;
+    public int unlockPassiveDistanceDamage;
+    public int unlockPassiveDodge;
+    public int unlockPassiveEffectsDuration;
+    public int unlockPassiveHeadshot;
+    public int unlockPassiveHealthRecovery;
+    public int unlockPassiveKritChanceUp;
+    public int unlockPassiveKritDamageUp;
+    public int unlockPassiveLucky;
+    public int unlockPassiveMassEnemyDamage;
+    public int unlockPassiveMaxHpUp;
+    public int unlockPassiveRage;
+    public int unlockPassiveVampirizm;
 }

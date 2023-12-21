@@ -30,17 +30,17 @@ public class ChooseLocationController : MonoBehaviour
     public TMP_Text tWaveClearCount;
 
     public TMP_Text tRewards;
+    public GameObject objReward;
 
 
     private void Start()
     {
         if (!PlayerPrefs.HasKey("maxLocation"))
         {
-            PlayerPrefs.SetInt("maxLocation", maxLocNum);
+            PlayerPrefs.SetInt("maxLocation", 1);
         }
 
-        //currentLocNum = PlayerPrefs.GetInt("maxLocation");
-        currentLocNum = 1;
+        currentLocNum = PlayerPrefs.GetInt("maxLocation");
 
         butPlay.SetActive(true);
         tOpenPrevLoc.SetActive(false);
@@ -124,12 +124,14 @@ public class ChooseLocationController : MonoBehaviour
             butPlay.SetActive(false);
             tOpenPrevLoc.SetActive(true);
             imgLock.SetActive(true);
+            objReward.SetActive(false);
         } 
         else
         {
             butPlay.SetActive(true);
             tOpenPrevLoc.SetActive(false);
             imgLock.SetActive(false);
+            objReward.SetActive(true);
         }
 
         tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
@@ -188,5 +190,10 @@ public class ChooseLocationController : MonoBehaviour
 
             loader.LoadLevel(levelName[currentLocNum - 1]);
         }
+    }
+
+    public void MaxLocationUnlock()
+    {
+        PlayerPrefs.SetInt("maxLocation", 5);
     }
 }

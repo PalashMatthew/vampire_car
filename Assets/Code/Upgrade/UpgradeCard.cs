@@ -18,6 +18,7 @@ public class UpgradeCard : ScriptableObject
     }
 
     [Header("Base")]
+    public int Id;
     public string cardName;
     public string descriptionCommon;
     public string descriptionRare;

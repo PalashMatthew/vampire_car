@@ -15,7 +15,7 @@ public class TutorialControllerHub : MonoBehaviour
 
     public GameObject popUpNewLevel;
 
-    private void Start()
+    public void CheckTutorialPlay()
     {
         if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
         {

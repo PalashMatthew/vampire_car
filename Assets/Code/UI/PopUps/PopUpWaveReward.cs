@@ -188,8 +188,7 @@ public class PopUpWaveReward : MonoBehaviour
                             break;
                     }
                 }
-
-                if (locationController.currentLocNum == 2)
+                else
                 {
                     switch (rewardNum)
                     {

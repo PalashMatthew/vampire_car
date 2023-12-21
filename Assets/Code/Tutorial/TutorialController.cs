@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TutorialController : MonoBehaviour
@@ -18,6 +19,8 @@ public class TutorialController : MonoBehaviour
 
     public GameObject message5_text1, message5_text2, message5_text3;
 
+    public TMP_Text tMessage1, tMessage2, tMessage3, tMessage4, tMessage5_1, tMessage5_2, tMessage5_3;
+
 
     private void Start()
     {
@@ -27,7 +30,15 @@ public class TutorialController : MonoBehaviour
             PlayerPrefs.SetString("tutorialCards", "false");
             WaveController.isTutorialActive = true;
             StartCoroutine(ShowMessage1());
-        }    
+        }
+
+        tMessage1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage1");
+        tMessage2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage2");
+        tMessage3.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage3");
+        tMessage4.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage4");
+        tMessage5_1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage5_1");
+        tMessage5_2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage5_2");
+        tMessage5_3.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage5_3");
     }
 
     public IEnumerator ShowMessage1()

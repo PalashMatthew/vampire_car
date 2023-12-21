@@ -6,6 +6,7 @@ using System.Globalization;
 using UnityEngine.Purchasing;
 using TMPro;
 using static UnityEngine.Rendering.DebugUI;
+using static DetailCard;
 
 public class ShopController : MonoBehaviour, IStoreListener
 {   
@@ -202,6 +203,11 @@ public class ShopController : MonoBehaviour, IStoreListener
         {
             DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
 
+            if (card.itemType.ToString() == "Gun")
+            {
+                PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+            }
+
             int rand = UnityEngine.Random.Range(1, 101);
             string rarity;
 
@@ -231,6 +237,11 @@ public class ShopController : MonoBehaviour, IStoreListener
             {
                 DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
 
+                if (card.itemType.ToString() == "Gun")
+                {
+                    PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+                }
+
                 int rand = UnityEngine.Random.Range(1, 101);
                 string rarity;
 
@@ -257,6 +268,11 @@ public class ShopController : MonoBehaviour, IStoreListener
     {
         DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
 
+        if (card.itemType.ToString() == "Gun")
+        {
+            PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+        }
+
         int rand = UnityEngine.Random.Range(1, 101);
         string rarity;
 
@@ -275,6 +291,8 @@ public class ShopController : MonoBehaviour, IStoreListener
         PlayerPrefs.SetInt("AdsChestTimerSaveTime", 0);
         StartCoroutine(AdsChestTimer());
 
+        ChestSettings();
+
         popUpOpenChest.Open();
     }
 
@@ -283,6 +301,11 @@ public class ShopController : MonoBehaviour, IStoreListener
         if (PlayerPrefs.GetInt("playerKey2") > 0)
         {
             DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
+
+            if (card.itemType.ToString() == "Gun")
+            {
+                PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+            }
 
             int rand = UnityEngine.Random.Range(1, 101);
             string rarity = "";
@@ -302,16 +325,21 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase2("Key", rarity, card.itemType.ToString());
 
-            ChestSettings();
-            popUpOpenChest.Open();
-
             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") - 1);
+
+            ChestSettings();
+            popUpOpenChest.Open();            
         }
         else
         {
             if (PlayerPrefs.GetInt("playerHard") >= 300)
             {
                 DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
+
+                if (card.itemType.ToString() == "Gun")
+                {
+                    PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+                }
 
                 int rand = UnityEngine.Random.Range(1, 101);
                 string rarity = "";
