@@ -268,6 +268,9 @@ public class PopUpDailyReward : MonoBehaviour
         {
             int day = PlayerPrefs.GetInt("DailyRewardCurrentDay");
 
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DailyReward(day);
+
             if (buttonNum == day)
             {
                 if (day == 1)

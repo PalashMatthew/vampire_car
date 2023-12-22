@@ -80,7 +80,7 @@ public class TutorialController : MonoBehaviour
 
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp -= 20;
 
-        GameObject aidKitObj = Instantiate(objAidFirstKit, new Vector3(0, 1, 82f), transform.rotation);
+        GameObject aidKitObj = Instantiate(objAidFirstKit, new Vector3(-10, 1, 82f), transform.rotation);
 
         yield return new WaitForSeconds(4f);
 

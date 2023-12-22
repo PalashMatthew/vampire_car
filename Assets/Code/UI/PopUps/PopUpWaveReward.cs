@@ -152,7 +152,7 @@ public class PopUpWaveReward : MonoBehaviour
     }
 
     public void But_Reward(int rewardNum)
-    {
+    {        
         if (PlayerPrefs.GetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take") == 0)
         {
             if (PlayerPrefs.GetInt("loc_" + locationController.currentLocNum + "_maxWave") >= rewardNum * 2)
@@ -200,7 +200,7 @@ public class PopUpWaveReward : MonoBehaviour
                         case 2:
                             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
-                            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);
+                            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);                            
                             break;
 
                         case 3:

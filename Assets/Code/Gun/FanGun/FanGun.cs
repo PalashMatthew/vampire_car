@@ -48,7 +48,7 @@ public class FanGun : MonoBehaviour
 
         GameObject _bullet1 = Instantiate(objBullet, bulletPos.position, transform.rotation);
 
-        _bullet1.transform.eulerAngles = new Vector3(0, 30, 0);
+        _bullet1.transform.eulerAngles = new Vector3(0, 20, 0);
         _bullet1.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
         yield return new WaitForSeconds(0.1f);
@@ -62,7 +62,7 @@ public class FanGun : MonoBehaviour
 
         GameObject _bullet3 = Instantiate(objBullet, bulletPos.position, transform.rotation);
 
-        _bullet3.transform.eulerAngles = new Vector3(0, -30, 0);
+        _bullet3.transform.eulerAngles = new Vector3(0, -20, 0);
         _bullet3.GetComponent<DefaultGunBullet>()._gunController = _gunController;
 
         StartCoroutine(Attack());

@@ -196,6 +196,8 @@ public class PlayerController : MonoBehaviour
 
                 isDead = true;
             }
+
+            StartCoroutine(Invulnerability(1));
         }
     }
 

@@ -118,6 +118,7 @@ public class FirebaseSetup : MonoBehaviour
         Debug.Log("Event Send!\n" + s);
     }
 
+    //Done
     public void Event_DailyReward(int _dayValue)
     {
         string s = "DailyReward_Day_" + _dayValue;
@@ -267,7 +268,7 @@ public class FirebaseSetup : MonoBehaviour
         string s = "OpenCase1_" + _openType + "_" + _rare + "_" + _itemType;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
-            new Parameter("Game", s));
+            new Parameter("Monetization", s));
 
         Debug.Log("Event Send!\n" + s);
     }
@@ -277,7 +278,7 @@ public class FirebaseSetup : MonoBehaviour
         string s = "OpenCase2_" + _openType + "_" + _rare + "_" + _itemType;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
-            new Parameter("Game", s));
+            new Parameter("Monetization", s));
 
         Debug.Log("Event Send!\n" + s);
     }
@@ -287,7 +288,7 @@ public class FirebaseSetup : MonoBehaviour
         string s = "BuyMoney_Value" + _value + "_" + _firstBuy + "_AccountValue_" + _accountMoneyValue;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
-            new Parameter("Game", s));
+            new Parameter("Monetization", s));
 
         Debug.Log("Event Send!\n" + s);
     }
@@ -297,7 +298,7 @@ public class FirebaseSetup : MonoBehaviour
         string s = "BuyHard_Value" + _value + "_" + _firstBuy + "_AccountValue_" + _accountHardValue;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
-            new Parameter("Game", s));
+            new Parameter("Monetization", s));
 
         Debug.Log("Event Send!\n" + s);
     }
@@ -307,7 +308,7 @@ public class FirebaseSetup : MonoBehaviour
         string s = "BuyCar_" + _name + "_" + _priceType + "_Price_" + _price;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
-            new Parameter("Game", s));
+            new Parameter("Monetization", s));
 
         Debug.Log("Event Send!\n" + s);
     }

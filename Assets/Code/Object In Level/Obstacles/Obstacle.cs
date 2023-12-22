@@ -82,7 +82,11 @@ public class Obstacle : MonoBehaviour
     {
         GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>().instObstacles.Remove(gameObject);
 
-        //Instantiate(screwObj, transform.position, transform.rotation);
+        if (gameObject.GetComponent<Obstacles1Controller>() != null)
+        {
+            float exp = 1 * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expCoeff;
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp += exp;
+        }        
 
         GameObject _fx = Instantiate(fxExplosion, transform.position, transform.rotation);
         Destroy(_fx, 3);

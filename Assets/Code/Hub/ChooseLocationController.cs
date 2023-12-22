@@ -89,6 +89,9 @@ public class ChooseLocationController : MonoBehaviour
     private void Update()
     {
         tChapter.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_play");
+        tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
+        tLocName.text = currentLocNum + ". " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_location" + currentLocNum + "Name");
+        tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
     }
 
     void ChangeLocation()

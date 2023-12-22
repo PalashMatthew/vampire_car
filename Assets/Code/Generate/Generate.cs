@@ -157,6 +157,8 @@ public class Generate : MonoBehaviour
 
         //inst.GetComponent<EnemyController>().moveSpeedMin *= moveSpeedCoeff;
         //inst.GetComponent<EnemyController>().moveSpeedMax *= moveSpeedCoeff;
+        inst.GetComponent<EnemyController>().hp -= 5;
+        inst.GetComponent<EnemyController>().maxHp -= 5;
         inst.GetComponent<EnemyController>().Initialize();
 
         yield return new WaitForSeconds(1.3f);

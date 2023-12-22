@@ -61,6 +61,8 @@ public class EnemyController : MonoBehaviour
     public AudioClip clipHit;
     public AudioClip clipDeath;
 
+    public GameObject roadPit;
+
 
     private void Start()
     {       
@@ -291,6 +293,11 @@ public class EnemyController : MonoBehaviour
             {
                 _soundController.PlaySound(clipDeath);
             }
+
+            //if (roadPit != null)
+            //{
+            //    Instantiate(roadPit, transform.position, transform.rotation);
+            //}            
         }
     }
 

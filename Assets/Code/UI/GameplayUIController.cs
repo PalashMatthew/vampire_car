@@ -118,22 +118,35 @@ public class GameplayUIController : MonoBehaviour
         //imgFillLevelBar.fillAmount = (float)playerStats.currentExp / playerStats.levelExpNeed[playerStats.currentLevel - 1];
         imgFillLevelBar.fillAmount = playerStats.currentExp / 20f;
 
-        if (!isMinExpDone)
+        if (PlayerPrefs.GetString("tutorialCards") == "true")
+        {
+            if (!isMinExpDone)
+            {
+                if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
+                {
+                    playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+                }
+            }
+            else
+            {
+                if (playerStats.currentExp > 5 && !WaveController.isWaveEnd)
+                {
+                    playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
+                    GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
+                }
+            }
+        }
+        else
         {
             if (playerStats.currentExp > 0 && !WaveController.isWaveEnd)
             {
-                playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
-                GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
-            }
-        } 
-        else
-        {
-            if (playerStats.currentExp > 5 && !WaveController.isWaveEnd)
-            {
-                playerStats.currentExp -= Time.deltaTime * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
+                playerStats.currentExp -= (Time.deltaTime / 2) * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].expMinus;
                 GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
             }
         }
+
+        
 
         if (playerStats.currentExp > 20)
         {

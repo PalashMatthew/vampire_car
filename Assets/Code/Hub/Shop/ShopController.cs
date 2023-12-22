@@ -74,6 +74,8 @@ public class ShopController : MonoBehaviour, IStoreListener
             }
         }
         #endregion        
+
+        ChestSettings();
     }
 
     IEnumerator AdsChestTimer()
@@ -194,7 +196,6 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Key", rarity, card.itemType.ToString());
 
-            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") - 1);
             ChestSettings();
 
             popUpOpenChest.Open();

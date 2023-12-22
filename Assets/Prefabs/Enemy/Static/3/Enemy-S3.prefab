@@ -331,6 +331,7 @@ MonoBehaviour:
   newSpeed: 0
   clipHit: {fileID: 8300000, guid: a36096f271def2a43b2e2aeee2a70647, type: 3}
   clipDeath: {fileID: 8300000, guid: 9ecf47e1e218b6247b7a905b9de14f51, type: 3}
+  roadPit: {fileID: 7489017071123218984, guid: 4ac66bf9c41f32745b696fafc6a3c353, type: 3}
 --- !u!114 &2713173453650896552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +391,6 @@ MonoBehaviour:
   bulletObj: {fileID: 7265629253239235717, guid: 46f1f710b709d554fad304d796ac7dd7, type: 3}
   muzzleObj: {fileID: 4970849026858096871, guid: 3364aff89f5abe34e97f9130e162b976, type: 3}
   bulletSpawnPoint: {fileID: 4026546932161780529}
-  isShotStart: 0
 --- !u!65 &3950844211712589771
 BoxCollider:
   m_ObjectHideFlags: 0

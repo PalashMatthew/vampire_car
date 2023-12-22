@@ -804,13 +804,16 @@ public class BDLoaderController : MonoBehaviour
             PlayerPrefs.SetString("en" + _locInfo[0], _locInfo[2]);
         }
 
-        if (Application.systemLanguage == SystemLanguage.Russian)
+        if (!PlayerPrefs.HasKey("activeLang"))
         {
-            PlayerPrefs.SetString("activeLang", "ru");
+            if (Application.systemLanguage == SystemLanguage.Russian)
+            {
+                PlayerPrefs.SetString("activeLang", "ru");
+            }
+            else
+            {
+                PlayerPrefs.SetString("activeLang", "en");
+            }
         }
-        else
-        {
-            PlayerPrefs.SetString("activeLang", "en");
-        }        
     }
 }

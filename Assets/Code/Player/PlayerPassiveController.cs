@@ -68,7 +68,7 @@ public class PlayerPassiveController : MonoBehaviour
 
     public void Vampirizm(float _damage)
     {
-        if (isVampirizm)
+        if (_playerStats.vampirizm > 0)
         {
             float _procent = _damage / 100 * _playerStats.vampirizm;
             _playerStats.currentHp += _procent;

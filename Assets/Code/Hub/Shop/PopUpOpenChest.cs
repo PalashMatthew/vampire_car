@@ -55,29 +55,29 @@ public class PopUpOpenChest : MonoBehaviour
             case "common":
                 imgCard.sprite = sprCardCommon;
 
-                tRarity.text = "<color=#808B96>Обычная</color>";
+                tRarity.text = "<color=#808B96>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_common") + "</color>";
                 break;
 
             case "rare":
                 imgCard.sprite = sprCardRare;
 
-                tRarity.text = "<color=#3498DB>Редкая</color>";
+                tRarity.text = "<color=#3498DB>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rare") + "</color>";
                 break;
 
             case "epic":
                 imgCard.sprite = sprCardEpic;
 
-                tRarity.text = "<color=#CE33FF>Эпическая</color>";
+                tRarity.text = "<color=#CE33FF>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_epic") + "</color>";
                 break;
 
             case "legendary":
                 imgCard.sprite = sprCardLegendary;
 
-                tRarity.text = "<color=yellow>Легендарная</color>";
+                tRarity.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_legendary") + "</color>";
                 break;
         }
 
-        tName.text = "<wave>" + card.itemName;
+        tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_" + card.itemID + "Name");
 
         imgIcon.sprite = card.sprItem;
 

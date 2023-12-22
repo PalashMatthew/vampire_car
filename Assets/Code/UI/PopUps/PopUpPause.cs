@@ -140,13 +140,13 @@ public class PopUpPause : MonoBehaviour
 
     private void OnApplicationPause()
     {
-        if (!PopUpWin.isEndGame)
+        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
             ButOpen();
     }
 
     private void OnApplicationQuit()
     {
-        if (!PopUpWin.isEndGame)
+        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
             ButOpen();
     }
 }

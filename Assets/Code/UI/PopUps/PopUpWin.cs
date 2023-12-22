@@ -268,68 +268,71 @@ public class PopUpWin : MonoBehaviour
             _titanReward = (int)titanValue;
             #endregion
 
-            #region ItemDrop
-            int itemValue = 0;
-            int plusChance = 0;
-
-            for (int i = 1; i < waveController.currentWave; i++)
+            if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
             {
-                int rand = Random.Range(1, 101);
+                #region ItemDrop
+                int itemValue = 0;
+                int plusChance = 0;
 
-                if (rand <= waveDropItemProcent[i-1] + plusChance)
+                for (int i = 1; i < waveController.currentWave; i++)
                 {
-                    itemValue++;
-                    Debug.Log("Item Spawn");
-                } 
-                else
-                {
-                    if (itemValue > 0)
+                    int rand = Random.Range(1, 101);
+
+                    if (rand <= waveDropItemProcent[i - 1] + plusChance)
                     {
-                        plusChance = 0;
-                    } 
+                        itemValue++;
+                        Debug.Log("Item Spawn");
+                    }
                     else
                     {
-                        plusChance += 3;
+                        if (itemValue > 0)
+                        {
+                            plusChance = 0;
+                        }
+                        else
+                        {
+                            plusChance += 3;
+                        }
                     }
                 }
-            }
 
-            for (int i = 0; i < itemValue; i++)
-            {
-                DetailCard _card = detailCards[Random.Range(0, detailCards.Count)];
-
-                string rarity = "";
-
-                int rand = Random.Range(1, 101);
-                if (rand <= 90) rarity = "common";
-                if (rand > 90 && rand <= 98) rarity = "rare";
-                if (rand > 98) rarity = "epic";
-
-                instCell = Instantiate(itemCellObj, transform.position, transform.rotation);
-                instCell.transform.parent = scrollObj;
-                instCell.GetComponent<ItemDropCell>().rarity = rarity;
-                instCell.GetComponent<ItemDropCell>().sprIcon = _card.sprItem;
-                instCell.GetComponent<ItemDropCell>().Initialize();
-
-                _itemRewardCount++;
-                _itemRewardID += "_" + _card.itemID;
-
-                #region Add Item
-                string _itemType = _card.itemType.ToString();
-
-                PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) + 1);
-
-                PlayerPrefs.SetInt("item" + _itemType + "ID" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), _card.itemID);
-
-                PlayerPrefs.SetString("item" + _itemType + "Rarity" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), rarity);
-
-                if (_itemType == "Gun")
+                for (int i = 0; i < itemValue; i++)
                 {
-                    PlayerPrefs.SetInt("unlockGun" + _card.itemID, 1);
+                    DetailCard _card = detailCards[Random.Range(0, detailCards.Count)];
+
+                    string rarity = "";
+
+                    int rand = Random.Range(1, 101);
+                    if (rand <= 90) rarity = "common";
+                    if (rand > 90 && rand <= 98) rarity = "rare";
+                    if (rand > 98) rarity = "epic";
+
+                    instCell = Instantiate(itemCellObj, transform.position, transform.rotation);
+                    instCell.transform.parent = scrollObj;
+                    instCell.GetComponent<ItemDropCell>().rarity = rarity;
+                    instCell.GetComponent<ItemDropCell>().sprIcon = _card.sprItem;
+                    instCell.GetComponent<ItemDropCell>().Initialize();
+
+                    _itemRewardCount++;
+                    _itemRewardID += "_" + _card.itemID;
+
+                    #region Add Item
+                    string _itemType = _card.itemType.ToString();
+
+                    PlayerPrefs.SetInt("itemCount" + _itemType, PlayerPrefs.GetInt("itemCount" + _itemType) + 1);
+
+                    PlayerPrefs.SetInt("item" + _itemType + "ID" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), _card.itemID);
+
+                    PlayerPrefs.SetString("item" + _itemType + "Rarity" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), rarity);
+
+                    if (_itemType == "Gun")
+                    {
+                        PlayerPrefs.SetInt("unlockGun" + _card.itemID, 1);
+                    }
+                    #endregion
                 }
                 #endregion
             }
-            #endregion
         }
 
         if (waveController.currentWave == 11)

@@ -35,7 +35,7 @@ public class GenerateObstacles : MonoBehaviour
 
         if (isSpawn)
         {
-            GameObject inst = Instantiate(obstaclesObj[Random.RandomRange(0, obstaclesObj.Count)], new Vector3(Random.Range(minXSpawn, maxXSpawn), 0, 75f), transform.rotation);
+            GameObject inst = Instantiate(obstaclesObj[Random.RandomRange(0, obstaclesObj.Count)], new Vector3(Random.Range(minXSpawn, maxXSpawn), 0, 85), transform.rotation);
             instObstacles.Add(inst);
             inst.GetComponent<Obstacle>().moveSpeed = obstaclesMoveSpeed;
         }
