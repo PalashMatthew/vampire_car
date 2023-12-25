@@ -69,6 +69,7 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:11
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:13
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:12
+	implementation "com.google.android.gms:play-services-games-v2:+"
 // Android Resolver Dependencies End
 **DEPS**}
 
@@ -114,6 +115,21 @@ android {
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
     }**PACKAGING_OPTIONS**
 }
+
+buildscript {
+    repositories {
+      google()
+      mavenCentral()
+    }
+  }
+
+  allprojects {
+    repositories {
+      google()
+      mavenCentral()
+    }
+  }
+
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**
 **EXTERNAL_SOURCES**

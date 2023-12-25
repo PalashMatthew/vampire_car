@@ -10,6 +10,10 @@ public class EnemyTrackingBullet : MonoBehaviour
 
     public float lifeTime;
 
+    public GameObject mesh;
+
+    public float meshRotateSpeed;
+
     private void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -22,5 +26,10 @@ public class EnemyTrackingBullet : MonoBehaviour
         transform.DOLookAt(target.position, rotateSpeed);
 
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+
+        if (mesh != null)
+        {
+            mesh.transform.Rotate(0, 0, meshRotateSpeed * Time.deltaTime);
+        }
     }
 }

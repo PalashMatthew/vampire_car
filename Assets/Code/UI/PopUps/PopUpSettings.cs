@@ -97,13 +97,7 @@ public class PopUpSettings : MonoBehaviour
     #endregion
 
     void Initialize()
-    {
-        if (!PlayerPrefs.HasKey("soundSettings"))
-            PlayerPrefs.SetInt("soundSettings", 1);
-
-        if (!PlayerPrefs.HasKey("musicSettings"))
-            PlayerPrefs.SetInt("musicSettings", 1);
-
+    {       
         if (PlayerPrefs.GetInt("soundSettings") == 1)
             _isSoundOn = true;
         else _isSoundOn = false;

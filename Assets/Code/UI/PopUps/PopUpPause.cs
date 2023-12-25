@@ -33,6 +33,8 @@ public class PopUpPause : MonoBehaviour
 
     public void ButOpen()
     {
+        _popUpController = GetComponent<PopUpController>();
+
         GameplayController.isPause = true;
         Time.timeScale = 0;
         _popUpController.OpenPopUp();
@@ -138,6 +140,7 @@ public class PopUpPause : MonoBehaviour
         }
     }
 
+    #if UNITY_ANDROID && !UNITY_EDITOR
     private void OnApplicationPause()
     {
         if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
@@ -149,4 +152,5 @@ public class PopUpPause : MonoBehaviour
         if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
             ButOpen();
     }
+    #endif
 }

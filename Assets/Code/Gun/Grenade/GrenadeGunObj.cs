@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class GrenadeGunObj : MonoBehaviour
@@ -30,7 +31,7 @@ public class GrenadeGunObj : MonoBehaviour
     IEnumerator Move()
     {
         _isMove = true;
-        transform.DOMoveZ(endPos.z, 1.4f);
+        transform.DOMoveZ(endPos.z, 1.9f);
         transform.DOMoveX(endPos.x, 1.4f);
         grenadeObj.transform.DOMoveY(transform.position.y + 5.5f, 0.5f);
 
@@ -50,5 +51,38 @@ public class GrenadeGunObj : MonoBehaviour
         _boomObj.GetComponent<BoomObj>().Initialize();
 
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "enemy")
+        {
+            StopAllCoroutines();
+            GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
+            _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+            _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
+            _boomObj.GetComponent<BoomObj>().Initialize();
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "obstacle")
+        {
+            StopAllCoroutines();
+            GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
+            _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+            _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
+            _boomObj.GetComponent<BoomObj>().Initialize();
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "boss")
+        {
+            StopAllCoroutines();
+            GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
+            _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+            _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
+            _boomObj.GetComponent<BoomObj>().Initialize();
+            Destroy(gameObject);
+        }
     }
 }

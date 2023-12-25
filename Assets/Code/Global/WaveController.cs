@@ -154,7 +154,7 @@ public class WaveController : MonoBehaviour
         StartCoroutine(ShowUpgrade());
 
         if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveClear(currentWave - 1, Application.loadedLevelName, GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().activeGunCard.Count);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveClear(currentWave - 1, Application.loadedLevelName, GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount);
     }
 
     public void StopGame()

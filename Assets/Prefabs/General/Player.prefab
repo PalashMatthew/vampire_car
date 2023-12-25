@@ -10945,7 +10945,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a24f3fd00623c1444afc0723387e67ca, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.315
   m_Pitch: 1
   Loop: 1
@@ -11985,6 +11985,7 @@ MonoBehaviour:
   canvasNewLevel: {fileID: 5679804659600779144}
   vfxHealing: {fileID: 8375519945630579943}
   isInvulnerability: 0
+  aud: {fileID: 7631365053153789638}
 --- !u!114 &7084839444521993868
 MonoBehaviour:
   m_ObjectHideFlags: 0

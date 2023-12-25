@@ -28,24 +28,24 @@ public class GrenadeGun : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.shotSpeed);
         GameObject _gm = Instantiate(objBullet, bulletPos.position, transform.rotation);
-        _gm.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 18f);
+        _gm.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 30f);
         _gm.GetComponent<GrenadeGunObj>()._gunController = _gunController;
 
         if (_gunController.projectileValue == 2)
         {
             GameObject _gm2 = Instantiate(objBullet, bulletPos.position, transform.rotation);
-            _gm2.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x + 7, transform.position.y, transform.position.z + 15f);
+            _gm2.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x + 7, transform.position.y, transform.position.z + 24f);
             _gm2.GetComponent<GrenadeGunObj>()._gunController = _gunController;
         }
 
         if (_gunController.projectileValue == 3)
         {
             GameObject _gm2 = Instantiate(objBullet, bulletPos.position, transform.rotation);
-            _gm2.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x + 7, transform.position.y, transform.position.z + 15f);
+            _gm2.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x + 7, transform.position.y, transform.position.z + 24f);
             _gm2.GetComponent<GrenadeGunObj>()._gunController = _gunController;
 
             GameObject _gm3 = Instantiate(objBullet, bulletPos.position, transform.rotation);
-            _gm3.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x - 7, transform.position.y, transform.position.z + 15f);
+            _gm3.GetComponent<GrenadeGunObj>().endPos = new Vector3(transform.position.x - 7, transform.position.y, transform.position.z + 24f);
             _gm3.GetComponent<GrenadeGunObj>()._gunController = _gunController;
         }
 

@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -186,10 +187,12 @@ public class ChooseLocationController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("playerFuelCurrent") >= 5)
         {
+            FirebaseAnalytics.SetUserProperty("locationNum", currentLocNum.ToString());
+
             PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") - 5);
 
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"));
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"), currentLocNum);
 
             loader.LoadLevel(levelName[currentLocNum - 1]);
         }

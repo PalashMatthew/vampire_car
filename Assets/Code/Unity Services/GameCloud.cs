@@ -243,6 +243,9 @@ public class GameCloud : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("playerMoney"))
         {
+            PlayerPrefs.SetInt("soundSettings", 1);
+            PlayerPrefs.SetInt("musicSettings", 1);                
+
             PlayerPrefs.SetInt("playerMoney", 1000);
             PlayerPrefs.SetInt("playerHard", 20);
             PlayerPrefs.SetInt("playerFuelCurrent", 20);

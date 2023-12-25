@@ -1227,7 +1227,12 @@ public class PopUpDetail : MonoBehaviour
                     }
                 }
 
-                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailUpgrade(_invType, _type, garageController.activeItem.itemID, garageController.activeItem.currentLevel + 1, garageController.activeItem.itemRarity, _resBalance, _resType);
+                if (GameObject.Find("Firebase") != null)
+                {
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailUpgrade1(_invType, _type, garageController.activeItem.itemID, garageController.activeItem.currentLevel + 1);
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailUpgrade2(garageController.activeItem.itemRarity, _resBalance, _resType);
+                }
+                
                 #endregion
 
 

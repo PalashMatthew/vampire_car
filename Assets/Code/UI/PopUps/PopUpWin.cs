@@ -345,7 +345,10 @@ public class PopUpWin : MonoBehaviour
         }
 
         if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward(waveController.currentWave - 1, locationNum, _moneyReward, _expReward, _drawingGunReward, _drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
+        {
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward1(waveController.currentWave, locationNum, _moneyReward, _expReward, _drawingGunReward);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward2(_drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
+        }            
 
         int _dieCount;
 
@@ -359,7 +362,7 @@ public class PopUpWin : MonoBehaviour
         }
 
         if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
     }
 
     public void ButOpen()

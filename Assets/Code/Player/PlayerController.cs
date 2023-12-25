@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isInvulnerability;
 
+    public AudioSource aud;
+
 
     public void Initialize()
     {
@@ -50,6 +52,11 @@ public class PlayerController : MonoBehaviour
         if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
         {
             StartCoroutine(ShieldTimer());
+        }
+
+        if (PlayerPrefs.GetInt("musicSettings") == 1)
+        {
+            aud.Play();
         }
     }
 

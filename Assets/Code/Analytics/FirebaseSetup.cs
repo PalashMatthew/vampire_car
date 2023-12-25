@@ -26,6 +26,7 @@ public class FirebaseSetup : MonoBehaviour
                 Debug.Log("Firebase Initialize Success");
 
                 FirebaseAnalytics.SetUserProperty("language", PlayerPrefs.GetString("activeLang"));
+                FirebaseAnalytics.SetUserProperty("playerLevel", PlayerPrefs.GetInt("playerLevel").ToString());
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else
@@ -74,9 +75,19 @@ public class FirebaseSetup : MonoBehaviour
     }
 
     //Done
-    public void Event_DetailUpgrade(string _invStatus, string _detailType, int _id, int _level, string _rare, string _resBalance, string _resType)
+    public void Event_DetailUpgrade1(string _invStatus, string _detailType, int _id, int _level)
     {
-        string s = "DetailTakeOff_" + _invStatus + "_" + _detailType + "_ID_" + _id + "_Level_" + _level + "_" + _rare + "_" + _resBalance + "_" + _resType;
+        string s = "DetailTakeOff1_" + _invStatus + "_" + _detailType + "_ID_" + _id + "_Level_" + _level;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("PlayerProgress", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_DetailUpgrade2(string _rare, string _resBalance, string _resType)
+    {
+        string s = "DetailTakeOff2_" + _rare + "_" + _resBalance + "_" + _resType;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("PlayerProgress", s));
@@ -107,10 +118,19 @@ public class FirebaseSetup : MonoBehaviour
     }
 
     //Done
-    public void Event_WaveReward(int _waveNum, int _locNum, int _moneyCount, int _expCount, int _drawingGunCount, int _drawingDetailCount, int _titanCount, int _itemCount, string _itemsID)
+    public void Event_WaveReward1(int _waveNum, int _locNum, int _moneyCount, int _expCount, int _drawingGunCount)
     {
-        string s = "WaveReward_WaveNum_" + _waveNum + "_LocNum_" + _locNum + "_Money_" + _moneyCount + "_Exp_" + _expCount + "_DrawingGun_" + _drawingGunCount
-                                             + "_DrawingDetail_" + _drawingDetailCount + "_Titan_" + _titanCount + "_ItemCount_" + _itemCount + "_ItemsId_" + _itemsID;
+        string s = "WaveReward1_WaveNum_" + _waveNum + "_LocNum_" + _locNum + "_Money_" + _moneyCount + "_Exp_" + _expCount + "_DrawingGun_" + _drawingGunCount;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("PlayerProgress", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_WaveReward2(int _drawingDetailCount, int _titanCount, int _itemCount, string _itemsID)
+    {
+        string s = "WaveReward2__DrawingDetail_" + _drawingDetailCount + "_Titan_" + _titanCount + "_ItemCount_" + _itemCount + "_ItemsId_" + _itemsID;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("PlayerProgress", s));
@@ -132,9 +152,9 @@ public class FirebaseSetup : MonoBehaviour
 
     #region Игрокая аналитика
     //Done
-    public void Event_Play(int _fuelCount, float _damageValue, float _healthValue)
+    public void Event_Play(int _fuelCount, float _damageValue, float _healthValue, int _locNum)
     {
-        string s = "Play_FuelCount_" + _fuelCount + "_Damage_" + _damageValue + "_Health_" + _healthValue;
+        string s = "Play_FuelCount_" + _fuelCount + "_Damage_" + _damageValue + "_Health_" + _healthValue + "_LocNum_" + _locNum;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Game", s));
