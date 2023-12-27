@@ -51,7 +51,14 @@ public class MinesGunObj : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.timeOfAction);
 
-        transform.DOMove(new Vector3(25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+        if (transform.position.x < 0)
+        {
+            transform.DOMove(new Vector3(25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+        }
+        else
+        {
+            transform.DOMove(new Vector3(-25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+        }        
 
         yield return new WaitForSeconds(3);
 
@@ -70,14 +77,14 @@ public class MinesGunObj : MonoBehaviour
 
     IEnumerator Attack()
     {
-        objBomb.transform.DOMoveY(-1, 0.3f).SetEase(Ease.Linear);
+        objBomb.transform.DOMoveY(-1, 0.2f).SetEase(Ease.Linear);
         objBomb.transform.parent = null;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
 
         
 
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
 
         GameObject _boomObj = Instantiate(boomObj, objBomb.transform.position, Quaternion.identity);
         _boomObj.GetComponent<BoomObj>()._gunController = _gunController;

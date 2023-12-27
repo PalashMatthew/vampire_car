@@ -246,6 +246,8 @@ public class PopUpNewItems : MonoBehaviour
             }
             #endregion
         }
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void CheckUnlock()

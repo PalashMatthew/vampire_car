@@ -167,16 +167,24 @@ public class EnemyController : MonoBehaviour
                 } 
                 else
                 {
+                    int _currentWave = GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1;
+                    float _coeff = GameObject.Find("Generate Controller").GetComponent<Generate>().enemyCoeffList[_currentWave].damageCoeff;
+                    float _brakeDamage = brakeDamage * _coeff;
+
                     other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
-                    other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
-                    BackDamage(brakeDamage);
+                    other.gameObject.GetComponent<PlayerController>().Hit(_brakeDamage);
+                    BackDamage(_brakeDamage);
                 }
             } 
             else
             {
+                int _currentWave = GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1;
+                float _coeff = GameObject.Find("Generate Controller").GetComponent<Generate>().enemyCoeffList[_currentWave].damageCoeff;
+                float _brakeDamage = brakeDamage * _coeff;
+
                 other.gameObject.GetComponent<PlayerController>().isBrakeDamage = true;
-                other.gameObject.GetComponent<PlayerController>().Hit(brakeDamage);
-                BackDamage(brakeDamage);
+                other.gameObject.GetComponent<PlayerController>().Hit(_brakeDamage);
+                BackDamage(_brakeDamage);
             }
         }
 

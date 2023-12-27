@@ -17,6 +17,8 @@ public class PopUpBuyFuel : MonoBehaviour
         {
             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 20);
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 60);
+
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }            
     }
 

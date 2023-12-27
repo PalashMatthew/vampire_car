@@ -68,6 +68,8 @@ public class CarButtonController : MonoBehaviour
             imgButton.sprite = sprButtonPurchased;
             panelLevel.SetActive(true);
             panelPrice.SetActive(false);
+
+            tCarLevel.text = "Lv " + PlayerPrefs.GetInt(carName + "carLevel");
         }
 
         if (!isCarPurchased)
@@ -115,10 +117,5 @@ public class CarButtonController : MonoBehaviour
     public void ButUnselect()
     {
         imgOutline.SetActive(false);
-    }
-
-    public void CarPurchased()
-    {
-
     }
 }

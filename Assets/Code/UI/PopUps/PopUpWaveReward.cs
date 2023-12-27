@@ -222,6 +222,8 @@ public class PopUpWaveReward : MonoBehaviour
                 }
 
                 PlayerPrefs.SetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take", 1);
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
                 Initialize();
             }
         }

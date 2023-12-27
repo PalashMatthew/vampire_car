@@ -13,6 +13,8 @@ public class LazerGun : MonoBehaviour
     {
         _gunController = GetComponent<Gun>();
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+
+        StartCoroutine(Attack());
     }
 
     private void Start()
@@ -32,7 +34,6 @@ public class LazerGun : MonoBehaviour
             if (!_enemyInRadius.Contains(other.gameObject))
             {
                 _enemyInRadius.Add(other.gameObject);
-                StartCoroutine(Attack(other.gameObject));
             }
         }
 
@@ -41,7 +42,6 @@ public class LazerGun : MonoBehaviour
             if (!_enemyInRadius.Contains(other.gameObject))
             {
                 _enemyInRadius.Add(other.gameObject);
-                StartCoroutine(AttackBoss(other.gameObject));
             }
         }
     }
@@ -65,29 +65,18 @@ public class LazerGun : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(GameObject obj)
+    IEnumerator Attack()
     {
-        if (obj != null)
-        {
-            _gunController.DamageEnemy(obj.gameObject, gameObject);
-        }
-
         yield return new WaitForSeconds(_gunController.shotSpeed);
 
-        if (_enemyInRadius.Contains(obj))
-            StartCoroutine(Attack(obj));      
-    }
-
-    IEnumerator AttackBoss(GameObject obj)
-    {
-        if (obj != null)
+        foreach (GameObject gm in _enemyInRadius)
         {
-            _gunController.DamageBoss(obj.gameObject);
+            if (!gm.GetComponent<EnemyController>().isBoss)
+                _gunController.DamageEnemy(gm, gameObject);
+            else
+                _gunController.DamageBoss(gm);
         }
 
-        yield return new WaitForSeconds(_gunController.shotSpeed);
-
-        if (_enemyInRadius.Contains(obj))
-            StartCoroutine(Attack(obj));
+        StartCoroutine(Attack());
     }
 }

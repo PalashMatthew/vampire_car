@@ -13,7 +13,7 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
 
     public void Initialize()
     {        
-        Appodeal.setTesting(true);
+        Appodeal.setTesting(false);
         Appodeal.disableLocationPermissionCheck();
         Appodeal.muteVideosIfCallsMuted(true);
 
@@ -91,6 +91,7 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         if (placementName == "fuel_5")
         {
             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
         else if (placementName == "recovery")
         {
@@ -104,6 +105,7 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         {
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 1200);
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(1200, "-", PlayerPrefs.GetInt("playerMoney"));
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
         else if (placementName == "adsChest")
         {

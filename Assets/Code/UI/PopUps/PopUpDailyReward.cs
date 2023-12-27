@@ -222,6 +222,11 @@ public class PopUpDailyReward : MonoBehaviour
             DateTime ts;
             ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
 
+            if (ts.Day > 0)
+            {
+                seconds += ts.Day * (60 * 60 * 24);
+            }
+
             if (ts.Hour > 0)
             {
                 seconds += ts.Hour * 60 * 60;
@@ -339,6 +344,8 @@ public class PopUpDailyReward : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("DailyRewardCurrentDay", 1);
                 }
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
 
                 ButClosed();
             }

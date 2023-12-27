@@ -1,3 +1,17 @@
+buildscript {
+    repositories {
+      google()
+      mavenCentral()
+    }
+  }
+
+  allprojects {
+    repositories {
+      google()
+      mavenCentral()
+    }
+  }
+
 apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 
@@ -49,6 +63,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-app-unity:11.6.0' // Assets/Firebase/Editor/AppDependencies.xml:22
     implementation 'com.google.firebase:firebase-common:20.3.3' // Assets/Firebase/Editor/AppDependencies.xml:13
     implementation 'com.google.firebase:firebase-config-ktx:21.2.1' // Assets/Appodeal/Editor/NetworkConfigs/FirebaseDependencies.xml:12
+    implementation 'com.google.games:gpgs-plugin-support:0.11.01' // Assets/GooglePlayGames/com.google.play.games/Editor/GooglePlayGamesPluginDependencies.xml:11
     implementation 'com.ironsource.sdk:mediationsdk:7.3.0.1' // Assets/Appodeal/Editor/NetworkConfigs/IronSourceDependencies.xml:9
     implementation 'com.my.target:mytarget-sdk:5.16.5' // Assets/Appodeal/Editor/NetworkConfigs/MyTargetDependencies.xml:11
     implementation 'com.unity3d.ads:unity-ads:4.6.1' // Assets/Appodeal/Editor/NetworkConfigs/UnityDependencies.xml:9
@@ -69,7 +84,6 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:11
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:13
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4' // Assets/Appodeal/Editor/NetworkConfigs/YandexDependencies.xml:12
-	implementation "com.google.android.gms:play-services-games-v2:+"
 // Android Resolver Dependencies End
 **DEPS**}
 
@@ -115,20 +129,6 @@ android {
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
     }**PACKAGING_OPTIONS**
 }
-
-buildscript {
-    repositories {
-      google()
-      mavenCentral()
-    }
-  }
-
-  allprojects {
-    repositories {
-      google()
-      mavenCentral()
-    }
-  }
 
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**

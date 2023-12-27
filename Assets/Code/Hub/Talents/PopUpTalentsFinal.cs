@@ -102,6 +102,8 @@ public class PopUpTalentsFinal : MonoBehaviour
 
         tValue.text = "+" + value + procent;
 
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
         StartCoroutine(Animation());
     }
 

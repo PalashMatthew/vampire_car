@@ -106,10 +106,14 @@ public class PlayerController : MonoBehaviour
             if (!isBrakeDamage)
             {
                 _finalDamage = _finalDamage - _playerStats.block;
+
+                if (_finalDamage < 0) _finalDamage = 0;
             }
             else
             {
                 _finalDamage = _finalDamage - _playerStats.iron;
+
+                if (_finalDamage < 0) _finalDamage = 0;
             }
 
             if (_playerPassiveController.isDodge)

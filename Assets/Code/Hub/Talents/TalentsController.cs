@@ -100,7 +100,8 @@ public class TalentsController : MonoBehaviour
 
     private int currentMaxTalantLevel;
 
-    public GameObject butUpgrade, butBlock, butMaxLevel;
+    public GameObject butUpgrade, butBlock, butMaxLevel, butNeedLevel;
+    public TMP_Text tNeedLevel, tNeedMoney;
 
 
     private void OnEnable()
@@ -418,21 +419,53 @@ public class TalentsController : MonoBehaviour
             butUpgrade.SetActive(true);
             butMaxLevel.SetActive(false);
             butBlock.SetActive(false);
+            butNeedLevel.SetActive(false);
         }
         else
         {
             butUpgrade.SetActive(false);
 
-            if (PlayerPrefs.GetInt("playerMoney") < price || PlayerPrefs.GetInt("talentGlobalLevel") > currentMaxTalantLevel)
+            if (PlayerPrefs.GetInt("playerMoney") < price)
             {
                 butMaxLevel.SetActive(false);
                 butBlock.SetActive(true);
+                butNeedLevel.SetActive(false);
+
+                tNeedMoney.text = price.ToString();
+            }
+
+            if (PlayerPrefs.GetInt("talentGlobalLevel") > currentMaxTalantLevel)
+            {
+                butMaxLevel.SetActive(false);
+                butBlock.SetActive(false);
+                butNeedLevel.SetActive(true);
+
+                if (PlayerPrefs.GetInt("talentGlobalLevel") == 5)
+                {
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + 3;
+                }
+
+                if (PlayerPrefs.GetInt("talentGlobalLevel") == 8)
+                {
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + 5;
+                }
+
+                if (PlayerPrefs.GetInt("talentGlobalLevel") == 13)
+                {
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + 8;
+                }
+
+                if (PlayerPrefs.GetInt("talentGlobalLevel") == 19)
+                {
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + 10;
+                }
             }
 
             if (PlayerPrefs.GetInt("talentGlobalLevel") >= 100)
             {
                 butMaxLevel.SetActive(true);
                 butBlock.SetActive(false);
+                butNeedLevel.SetActive(false);
             }
         }
         #endregion

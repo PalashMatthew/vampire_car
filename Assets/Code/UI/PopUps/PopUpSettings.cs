@@ -8,6 +8,8 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using System.Threading.Tasks;
 using Firebase.Analytics;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class PopUpSettings : MonoBehaviour
 {
@@ -177,5 +179,37 @@ public class PopUpSettings : MonoBehaviour
     public void PrivacyPolicy()
     {
         Application.OpenURL("https://docs.google.com/document/d/1laNGSxcNIK3RrWfe8c7DAWKFUGrqSjK6LH7QQh9SJsQ/edit?usp=sharing");
+    }
+
+    public void ButLoginGooglePlayGames()
+    {
+        LinkWithGooglePlayGamesAsync(PlayerPrefs.GetString("userID"));
+    }
+
+    async Task LinkWithGooglePlayGamesAsync(string authCode)
+    {
+        try
+        {
+            await AuthenticationService.Instance.LinkWithGooglePlayGamesAsync(authCode);
+            Debug.Log("Link is successful.");
+        }
+        catch (AuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
+        {
+            // Prompt the player with an error message.
+            Debug.LogError("This user is already linked with another account. Log in instead.");
+        }
+
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
     }
 }

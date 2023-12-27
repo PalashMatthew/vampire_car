@@ -24,12 +24,14 @@ public class TutorialController : MonoBehaviour
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("tutorialLoc1Complite") && Application.loadedLevelName == "Loc alpha 1")
-        {
+        if (PlayerPrefs.GetString("tutorialLoc1Complite") == "false" && Application.loadedLevelName == "Loc alpha 1")
+        {            
             PlayerPrefs.SetString("tutorialLoc1Complite", "true");
             PlayerPrefs.SetString("tutorialCards", "false");
             WaveController.isTutorialActive = true;
             StartCoroutine(ShowMessage1());
+
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
 
         tMessage1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage1");
@@ -116,6 +118,7 @@ public class TutorialController : MonoBehaviour
         GameplayController.isPause = true;
         Time.timeScale = 0;
         PlayerPrefs.SetString("tutorialCards", "true");
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
 
         Message5.GetComponent<PopUpController>().OpenPopUp();
 
@@ -154,7 +157,6 @@ public class TutorialController : MonoBehaviour
 
             if (WaveController.isTutorialActive)
             {
-                Debug.Log("FALSE");
                 GameObject.Find("Generate Controller").GetComponent<Generate>().StopAllCoroutines();
                 GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave = 0;
                 GameObject.Find("GameplayController").GetComponent<WaveController>().StartWave();
@@ -164,6 +166,7 @@ public class TutorialController : MonoBehaviour
             
 
             PlayerPrefs.SetString("tutorialComplite", "true");
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
     }
 

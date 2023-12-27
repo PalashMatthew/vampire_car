@@ -50,8 +50,11 @@ public class PopUpCarUpgrade : MonoBehaviour
     public TMP_Text tTitan;
     public TMP_Text tPrice;
     public GameObject butUpgrade;
-    public GameObject butUpgradeGray;
+    public GameObject butMaxLevel;
+    public GameObject butNeedLevel;
     public GameObject butUpgradeBlock;
+    public TMP_Text tNeedLevel;
+    public TMP_Text tNeedMoney;
     public List<int> titanCount;
     public List<int> upgradePrice;
 
@@ -70,7 +73,6 @@ public class PopUpCarUpgrade : MonoBehaviour
     public Image imgLockUpgrade20Lvl;
     public Image imgLockUpgrade30Lvl;
     public Image imgLockUpgrade40Lvl;
-
 
 
     private void Start()
@@ -107,10 +109,10 @@ public class PopUpCarUpgrade : MonoBehaviour
         imgCar.sprite = _sprCarImage;
 
         #region Заполняем прогресс бары
-        float _fillDamage = (float)PlayerPrefs.GetFloat(_carName + "carDamage") / 300;
-        float _fillHealth = (float)PlayerPrefs.GetFloat(_carName + "carHealth") / 3200;
-        float _fillKrit = (float)PlayerPrefs.GetFloat(_carName + "carKritChance") / 25;
-        float _fillDodge = (float)PlayerPrefs.GetFloat(_carName + "carDodge") / 20;
+        float _fillDamage = (float)PlayerPrefs.GetFloat(_carName + "carDamage") / 170;
+        float _fillHealth = (float)PlayerPrefs.GetFloat(_carName + "carHealth") / 300;
+        float _fillKrit = (float)PlayerPrefs.GetFloat(_carName + "carKritChance") / 7.2f;
+        float _fillDodge = (float)PlayerPrefs.GetFloat(_carName + "carDodge") / 28;
 
         fillDamage.DOFillAmount(_fillDamage, 0.5f);
         fillHealth.DOFillAmount(_fillHealth, 0.5f);
@@ -157,10 +159,10 @@ public class PopUpCarUpgrade : MonoBehaviour
             fillEndDodge.gameObject.SetActive(false);
         }
 
-        fillDamageMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDamageMax") / 300f, 0.5f);
-        fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 3200f, 0.5f);
-        fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 25, 0.5f);
-        fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 20, 0.5f);
+        fillDamageMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDamageMax") / 170, 0.5f);
+        fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 300, 0.5f);
+        fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 7.2f, 0.5f);
+        fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 28, 0.5f);
         #endregion
 
         #region Устанавливаем уровень машины
@@ -373,21 +375,37 @@ public class PopUpCarUpgrade : MonoBehaviour
             butUpgrade.SetActive(false);
 
             if (PlayerPrefs.GetInt(_carName + "carLevel") < 40)
-            {                
-                butUpgradeGray.SetActive(false);
-                butUpgradeBlock.SetActive(true);
+            {           
+                if (PlayerPrefs.GetInt("playerTitan") < titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] ||
+                    PlayerPrefs.GetInt("playerMoney") < upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")])
+                {
+                    butMaxLevel.SetActive(false);
+                    butUpgradeBlock.SetActive(true);
+                    tNeedMoney.text = upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")].ToString();
+                    butNeedLevel.SetActive(false);
+                }
+                
+                if (PlayerPrefs.GetInt("playerLevel") == PlayerPrefs.GetInt(_carName + "carLevel"))
+                {
+                    butMaxLevel.SetActive(false);
+                    butUpgradeBlock.SetActive(false);
+                    butNeedLevel.SetActive(true);
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + (PlayerPrefs.GetInt(_carName + "carLevel") + 1);
+                }
             }
             else
             {
-                butUpgradeGray.SetActive(true);
+                butMaxLevel.SetActive(true);
                 butUpgradeBlock.SetActive(false);
+                butNeedLevel.SetActive(false);
             }            
         } 
         else
         {
             butUpgrade.SetActive(true);
-            butUpgradeGray.SetActive(false);
+            butMaxLevel.SetActive(false);
             butUpgradeBlock.SetActive(false);
+            butNeedLevel.SetActive(false);
         }
 
         tTitan.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_titan") + ": " + PlayerPrefs.GetInt("playerTitan") + "/" + titanCount[PlayerPrefs.GetInt(_carName + "carLevel")];
@@ -408,15 +426,16 @@ public class PopUpCarUpgrade : MonoBehaviour
                 PlayerPrefs.SetFloat(_carName + "carDamage", PlayerPrefs.GetFloat(_carName + "carDamage") + PlayerPrefs.GetFloat(_carName + "carDamageStepUp"));
                 PlayerPrefs.SetFloat(_carName + "carHealth", PlayerPrefs.GetFloat(_carName + "carHealth") + PlayerPrefs.GetFloat(_carName + "carHealthStepUp"));
                 PlayerPrefs.SetFloat(_carName + "carKritChance", PlayerPrefs.GetFloat(_carName + "carKritChance") + PlayerPrefs.GetFloat(_carName + "carKritChanceStepUp"));
-                PlayerPrefs.SetFloat(_carName + "carDodge", PlayerPrefs.GetFloat(_carName + "carDodge") + PlayerPrefs.GetFloat(_carName + "carDodgeStepUp"));
+                PlayerPrefs.SetFloat(_carName + "carDodge", PlayerPrefs.GetFloat(_carName + "carDodge") + PlayerPrefs.GetFloat(_carName + "carDodgeStepUp"));              
+
+                PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") - titanCount[PlayerPrefs.GetInt(_carName + "carLevel")]);
 
                 PlayerPrefs.SetInt(_carName + "carLevel", PlayerPrefs.GetInt(_carName + "carLevel") + 1);
 
                 changeCarController.UpdateProgressBar();
 
-                PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") - titanCount[PlayerPrefs.GetInt(_carName + "carLevel")]);
-
                 //Тут сделать изменение переменной upgradePrice
+                carItem.Initialize();
 
                 #region Events
                 string resBalans = "";
@@ -457,6 +476,8 @@ public class PopUpCarUpgrade : MonoBehaviour
                 #endregion
 
                 Initialize();
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }            
         }
     }

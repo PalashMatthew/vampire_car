@@ -380,6 +380,8 @@ public class ChangeCarController : MonoBehaviour
         playerHubVisual.ChangeCar();
 
         UpdateProgressBar();
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void UpdateProgressBar()
@@ -401,10 +403,10 @@ public class ChangeCarController : MonoBehaviour
             tDodge.text = "+" + PlayerPrefs.GetFloat(_carName + "carDodge") + "% (<color=green>+" + PlayerPrefs.GetFloat(_carName + "carDodgeStepUp") + "%</color>)";
         }
 
-        float _fillDamage = (float)PlayerPrefs.GetFloat(_carName + "carDamage") / 300;
-        float _fillHealth = (float)PlayerPrefs.GetFloat(_carName + "carHealth") / 3200;
-        float _fillKrit = (float)PlayerPrefs.GetFloat(_carName + "carKritChance") / 25;
-        float _fillDodge = (float)PlayerPrefs.GetFloat(_carName + "carDodge") / 20;
+        float _fillDamage = (float)PlayerPrefs.GetFloat(_carName + "carDamage") / 170;
+        float _fillHealth = (float)PlayerPrefs.GetFloat(_carName + "carHealth") / 300;
+        float _fillKrit = (float)PlayerPrefs.GetFloat(_carName + "carKritChance") / 7.2f;
+        float _fillDodge = (float)PlayerPrefs.GetFloat(_carName + "carDodge") / 28;
 
         fillDamage.DOFillAmount(_fillDamage, 0.5f);
         fillHealth.DOFillAmount(_fillHealth, 0.5f);
@@ -451,9 +453,9 @@ public class ChangeCarController : MonoBehaviour
             fillEndDodge.gameObject.SetActive(false);
         }
 
-        fillDamageMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDamageMax") / 300f, 0.5f);
-        fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 3200f, 0.5f);
-        fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 25, 0.5f);
-        fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 20, 0.5f);
+        fillDamageMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDamageMax") / 170, 0.5f);
+        fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 300, 0.5f);
+        fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 7.2f, 0.5f);
+        fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 28, 0.5f);
     }
 }

@@ -49,8 +49,10 @@ public class PopUpDetail : MonoBehaviour
     public List<int> upgradePrice;
     public List<int> drawingCount;
     public GameObject butUpgrade;
-    public GameObject butUpgradeGray;
-    public GameObject butUpgradeGrayNotValue;
+    public GameObject butMaxLevel;
+    public GameObject butNeedMoney;
+    public GameObject butNeedLevel;
+    public TMP_Text tNeedLevel, tNeedMoney;
 
     [Header("Level")]
     public Image fillLevel;
@@ -743,8 +745,9 @@ public class PopUpDetail : MonoBehaviour
         if (PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) < maxLevel)
         {
             butUpgrade.SetActive(true);
-            butUpgradeGray.SetActive(false);
-            butUpgradeGrayNotValue.SetActive(false);
+            butMaxLevel.SetActive(false);
+            butNeedMoney.SetActive(false);
+            butNeedLevel.SetActive(false);
 
             switch (garageController.activeItem.itemObj.itemType)
             {
@@ -773,8 +776,9 @@ public class PopUpDetail : MonoBehaviour
         else
         {
             butUpgrade.SetActive(false);
-            butUpgradeGray.SetActive(true);
-            butUpgradeGrayNotValue.SetActive(false);
+            butMaxLevel.SetActive(true);
+            butNeedMoney.SetActive(false);
+            butNeedLevel.SetActive(false);
 
             switch (garageController.activeItem.itemObj.itemType)
             {
@@ -800,7 +804,7 @@ public class PopUpDetail : MonoBehaviour
         }
 
         #region Button Check
-        if (!butUpgradeGray.activeSelf)
+        if (!butMaxLevel.activeSelf)
         {
             int currentDrawing = 0;
 
@@ -829,13 +833,29 @@ public class PopUpDetail : MonoBehaviour
             if (PlayerPrefs.GetInt("playerMoney") >= upgradePrice[garageController.activeItem.currentLevel] &&
                 currentDrawing >= drawingCount[garageController.activeItem.currentLevel] && PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
             {
-                butUpgradeGrayNotValue.SetActive(false);
+                butNeedMoney.SetActive(false);
                 butUpgrade.SetActive(true);
             }
             else
-            {
-                butUpgradeGrayNotValue.SetActive(true);
+            {                
                 butUpgrade.SetActive(false);
+
+                if (PlayerPrefs.GetInt("playerMoney") < upgradePrice[garageController.activeItem.currentLevel] ||
+                    currentDrawing < drawingCount[garageController.activeItem.currentLevel])
+                {
+                    butNeedMoney.SetActive(true);
+                    butNeedLevel.SetActive(false);
+
+                    tNeedMoney.text = upgradePrice[garageController.activeItem.currentLevel].ToString();
+                }
+
+                if (PlayerPrefs.GetInt("item" + _type + "Level" + garageController.activeItem.itemNumInInventory) >= PlayerPrefs.GetInt("playerLevel"))
+                {
+                    butNeedMoney.SetActive(false);
+                    butNeedLevel.SetActive(true);
+
+                    tNeedLevel.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_needLevel") + " " + (PlayerPrefs.GetInt("playerLevel") + 1);
+                }
             }
         }
         #endregion
@@ -1010,14 +1030,16 @@ public class PopUpDetail : MonoBehaviour
         {
             GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
             GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
-        }        
+        }
 
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         ButClosed();
     }
 
     public void ButUnselect()
     {
         garageController.ItemUnselect();
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         ButClosed();
     }
 
@@ -1255,7 +1277,9 @@ public class PopUpDetail : MonoBehaviour
                 garageController.activeItem.currentLevel += 1;
 
                 CalculateUpgradePrice();
-            }            
+            }
+
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
     }
 

@@ -361,6 +361,8 @@ public class PopUpWin : MonoBehaviour
             _dieCount = 1;
         }
 
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
         if (GameObject.Find("Firebase") != null)
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
     }
@@ -394,6 +396,7 @@ public class PopUpWin : MonoBehaviour
     {
         PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + moneyGiveValue);
         objButAds.SetActive(false);
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     IEnumerator Animation()

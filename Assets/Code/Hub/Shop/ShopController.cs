@@ -46,6 +46,11 @@ public class ShopController : MonoBehaviour, IStoreListener
             DateTime ts;
             ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
 
+            if (ts.Day > 0)
+            {
+                seconds += ts.Day * (60 * 60 * 24);
+            }
+
             if (ts.Hour > 0)
             {
                 seconds += ts.Hour * 60 * 60;
@@ -148,6 +153,8 @@ public class ShopController : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 5760);
 
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(5760, "-", PlayerPrefs.GetInt("playerMoney"));
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }
             
         }
@@ -159,6 +166,8 @@ public class ShopController : MonoBehaviour, IStoreListener
                 PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 17280);
 
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(17280, "-", PlayerPrefs.GetInt("playerMoney"));
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }
         }        
     }
@@ -178,6 +187,8 @@ public class ShopController : MonoBehaviour, IStoreListener
         PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + value);
 
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyHard(value, "-", PlayerPrefs.GetInt("playerHard"));
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void ButChest1()

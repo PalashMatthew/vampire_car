@@ -47,6 +47,8 @@ public class PopUpRepairFinal : MonoBehaviour
         {
             _soundController.PlaySound(clipNewItem);
         }
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void ButContinue()

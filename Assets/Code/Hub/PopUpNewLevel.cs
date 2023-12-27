@@ -34,6 +34,8 @@ public class PopUpNewLevel : MonoBehaviour
     {
         tLevel.text = PlayerPrefs.GetInt("playerLevel").ToString();
         tReward.text = reward[PlayerPrefs.GetInt("playerLevel")].ToString();
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void CheckPlayerExp()

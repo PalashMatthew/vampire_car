@@ -9,6 +9,7 @@ public class GrowingShotGun : MonoBehaviour
     CapsuleCollider _capsuleCollider;
 
     public ParticleSystem vfxShot;
+    public ParticleSystem vfxPrewarm;
 
     public List<GameObject> _enemy;
 
@@ -35,7 +36,11 @@ public class GrowingShotGun : MonoBehaviour
     {
         _saveDamage = _gunController.damage;
 
-        yield return new WaitForSeconds(_gunController.shotSpeed);
+        yield return new WaitForSeconds(_gunController.shotSpeed - 0.5f);
+
+        vfxPrewarm.Play();
+
+        yield return new WaitForSeconds(0.5f);
 
         vfxShot.Play();
         _capsuleCollider.enabled = true;

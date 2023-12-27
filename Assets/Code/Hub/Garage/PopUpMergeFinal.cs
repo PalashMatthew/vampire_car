@@ -330,6 +330,8 @@ public class PopUpMergeFinal : MonoBehaviour
             objReturnMoney.SetActive(false);
             objReturnDrawing.SetActive(false);
         }
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void ButOpen()

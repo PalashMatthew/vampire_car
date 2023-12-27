@@ -15,7 +15,11 @@ public class RockObstacleController : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            other.gameObject.GetComponent<PlayerController>().Hit(_controller.damage);
+            int _currentWave = GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1;
+            float _coeff = GameObject.Find("Generate Controller").GetComponent<Generate>().enemyCoeffList[_currentWave].damageCoeff;
+            float damage = _controller.damage * _coeff;
+
+            other.gameObject.GetComponent<PlayerController>().Hit(damage);
             _controller.Dead();
         }
     }

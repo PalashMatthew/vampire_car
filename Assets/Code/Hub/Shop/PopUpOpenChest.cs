@@ -131,6 +131,8 @@ public class PopUpOpenChest : MonoBehaviour
         PlayerPrefs.SetString("item" + _itemType + "Rarity" + _cellCount, rarity);
         PlayerPrefs.SetString("item" + _itemType + "Type" + _cellCount, card.itemType.ToString());
         #endregion
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     IEnumerator OffShopCanvas()

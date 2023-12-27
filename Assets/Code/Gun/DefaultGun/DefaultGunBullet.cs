@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class DefaultGunBullet : MonoBehaviour
 
     private float punchingCount;
 
+    public bool isNewBullet;
+    public GameObject mesh;
+
     
 
 
@@ -26,7 +30,12 @@ public class DefaultGunBullet : MonoBehaviour
 
         _damage = _gunController.damage;
 
-        punchingCount = _playerStats.punchingCount;        
+        punchingCount = _playerStats.punchingCount;     
+        
+        if (isNewBullet)
+        {
+            mesh.transform.DOScaleX(0.85f, 0.6f);
+        }
     }
 
 
@@ -68,5 +77,5 @@ public class DefaultGunBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
+    }    
 }

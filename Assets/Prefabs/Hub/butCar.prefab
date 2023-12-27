@@ -378,8 +378,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52.86, y: 0}
-  m_SizeDelta: {x: 38.16, y: 32.81}
+  m_AnchoredPosition: {x: -53.2, y: 0}
+  m_SizeDelta: {x: 53.36, y: 53.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2792813816812542080
 CanvasRenderer:
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dd60dc6d7d7d3914cae9f83119ab920a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afea0f1e5e9839c41bd4a2fcb6620470, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -538,6 +538,7 @@ MonoBehaviour:
   panelLevel: {fileID: 642334077148066826}
   panelPrice: {fileID: 4601972104508436228}
   changeCarController: {fileID: 0}
+  carShopID: 0
 --- !u!114 &4930601742091126530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +828,7 @@ GameObject:
   - component: {fileID: 3120763998289213806}
   - component: {fileID: 4880857994214657674}
   m_Layer: 5
-  m_Name: imgHard
+  m_Name: imgSoft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -849,8 +850,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50.9, y: 0}
-  m_SizeDelta: {x: 34.52, y: 37.13}
+  m_AnchoredPosition: {x: -54.38, y: 0.00033426}
+  m_SizeDelta: {x: 53.75, y: 53.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3120763998289213806
 CanvasRenderer:
@@ -880,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 693620c982b40ae4ca8e12083f76550c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1e454c50eb19c34f8f2aee46224fda3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

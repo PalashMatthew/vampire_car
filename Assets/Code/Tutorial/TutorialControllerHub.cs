@@ -84,5 +84,6 @@ public class TutorialControllerHub : MonoBehaviour
         PlayerPrefs.SetString("tutorialHubComplite", "true");
         popUpNewLevel.SetActive(true);
         Message8.GetComponent<PopUpController>().ClosedPopUp();
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 }
