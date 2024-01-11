@@ -24,9 +24,10 @@ public class TutorialController : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetString("tutorialLoc1Complite") == "false" && Application.loadedLevelName == "Loc alpha 1")
+        if (PlayerPrefs.GetString("tutorialComplite") == "false" && Application.loadedLevelName == "Loc alpha 1")
         {            
-            PlayerPrefs.SetString("tutorialLoc1Complite", "true");
+            PlayerPrefs.SetString("tutorialLoc1Complite", "false");
+            PlayerPrefs.SetString("tutorialComplite", "true");
             PlayerPrefs.SetString("tutorialCards", "false");
             WaveController.isTutorialActive = true;
             StartCoroutine(ShowMessage1());

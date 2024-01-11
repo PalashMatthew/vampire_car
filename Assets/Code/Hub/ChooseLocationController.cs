@@ -202,4 +202,9 @@ public class ChooseLocationController : MonoBehaviour
     {
         PlayerPrefs.SetInt("maxLocation", 5);
     }
+
+    public void ButTestPlay(string levelName)
+    {
+        loader.LoadLevel(levelName);
+    }
 }

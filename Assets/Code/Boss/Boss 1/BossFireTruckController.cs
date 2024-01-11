@@ -60,7 +60,7 @@ public class BossFireTruckController : MonoBehaviour
         #region Phase 1
         if (action == BossActions.FirstAppearance)
         {
-            if (transform.position.z > 47)
+            if (transform.position.z > 58)
                 BaseMovement();
             else
             {
@@ -207,7 +207,7 @@ public class BossFireTruckController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         transform.position = new Vector3(transform.position.x, transform.position.y, 90);
 
-        transform.DOMoveZ(47f, 2).SetEase(Ease.Linear);
+        transform.DOMoveZ(58f, 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
 
         fxShot2.gameObject.transform.eulerAngles = new Vector3(0, _rot2, 0);
@@ -219,7 +219,7 @@ public class BossFireTruckController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         transform.position = new Vector3(transform.position.x, transform.position.y, 90);
 
-        transform.DOMoveZ(47f, 2).SetEase(Ease.Linear);
+        transform.DOMoveZ(58f, 2).SetEase(Ease.Linear);
         yield return new WaitForSeconds(2);
 
         currentAttack = 1;

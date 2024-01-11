@@ -17,11 +17,31 @@ public class TutorialControllerHub : MonoBehaviour
 
     public void CheckTutorialPlay()
     {
+        PlayerPrefs.SetString("tutorialLoc1Complite", "true");
+
+        if (!PlayerPrefs.HasKey("tutorialHubStage"))
+        {
+            PlayerPrefs.SetInt("tutorialHubStage", 1);
+        }
+
         if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
         {
-            PlayerPrefs.SetString("tutorialHubComplite", "false");
-            popUpNewLevel.SetActive(false);
-            Message1.GetComponent<PopUpController>().OpenPopUp();
+            if (PlayerPrefs.GetInt("tutorialHubStage") == 1)
+            {
+                PlayerPrefs.SetString("tutorialHubComplite", "false");
+                popUpNewLevel.SetActive(false);
+                Message1.GetComponent<PopUpController>().OpenPopUp();
+            }
+
+            if (PlayerPrefs.GetInt("tutorialHubStage") == 2)
+            {
+                StartMessage3();
+            }
+
+            if (PlayerPrefs.GetInt("tutorialHubStage") == 3)
+            {
+                StartMessage5();
+            }
         }
     }
 
@@ -34,6 +54,7 @@ public class TutorialControllerHub : MonoBehaviour
     public void OffMessage2()
     {
         Message2.GetComponent<PopUpController>().ClosedPopUp();
+        PlayerPrefs.SetInt("tutorialHubStage", 2);
     }
 
     public void StartMessage3()
@@ -53,6 +74,7 @@ public class TutorialControllerHub : MonoBehaviour
     public void OffMessage4()
     {
         Message4.GetComponent<PopUpController>().ClosedPopUp();
+        PlayerPrefs.SetInt("tutorialHubStage", 3);
     }
 
     public void StartMessage5()

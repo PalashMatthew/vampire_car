@@ -51,6 +51,8 @@ public class PopUpWin : MonoBehaviour
 
     public static bool isEndGame;
 
+    GameObject instCellMoney;
+
 
     private void Start()
     {
@@ -62,7 +64,7 @@ public class PopUpWin : MonoBehaviour
     {       
         tWave.text = (waveController.currentWave - 1) + "";
 
-        tLeader.text = "Вы справились лучше чем " + Random.Range(70, 86) + "% игроков";
+        tLeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText1") + " " + Random.Range(70, 86) + "% " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage2");
 
         locationNum = GameObject.Find("GameplayController").GetComponent<GameplayController>().locationNum;
 
@@ -103,10 +105,12 @@ public class PopUpWin : MonoBehaviour
             instCell.GetComponent<ResourcesCell>().sprIcon = sprIconMoney;
             instCell.GetComponent<ResourcesCell>().Initialize();
 
+            instCellMoney = instCell;
+
             PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (int)moneyValue);
 
             objButAds.SetActive(true);
-            tAdsReward.text = "+" + (int)moneyValue;
+            tAdsReward.text = "+" + (int)moneyValue / 2f;
             moneyGiveValue = (int)moneyValue;
 
             _moneyReward = (int)moneyValue;
@@ -394,9 +398,13 @@ public class PopUpWin : MonoBehaviour
 
     public void Ads_Reward()
     {
-        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + moneyGiveValue);
+        float _reward = moneyGiveValue / 2f;
+        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (int)_reward);
         objButAds.SetActive(false);
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+        instCellMoney.GetComponent<ResourcesCell>().value += (int)_reward;
+        instCellMoney.GetComponent<ResourcesCell>().Initialize();
     }
 
     IEnumerator Animation()
@@ -442,8 +450,11 @@ public class PopUpWin : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.3f);
 
-        objButAds.SetActive(true);
-        objButAds.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        if (waveController.currentWave >= 2)
+        {
+            objButAds.SetActive(true);
+            objButAds.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);
+        }
 
         objButContinue.SetActive(true);
         objButContinue.transform.DOScale(1, 0.3f).SetEase(Ease.InOutBack);

@@ -165,6 +165,7 @@ public class GameplayUIController : MonoBehaviour
             if (isMinExpDone)
             {
                 playerStats.currentExp = 5;
+                playerStats.currentLevel = 1;
                 GameObject.Find("Upgrade Controller").GetComponent<UpgradeController>().upgradeLevelCount = (int)playerStats.currentLevel;
             }
         }

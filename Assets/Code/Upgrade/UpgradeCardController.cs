@@ -28,10 +28,6 @@ public class UpgradeCardController : MonoBehaviour
     public Image imgStarPanel;
     public Sprite sprCommonStarPanel, sprRareStarPanel, sprLegendaryStarPanel;
 
-    public Image imgCardType;
-    public Sprite sprCardTypePassive, sprCardTypeGun;
-
-
     public enum CardRarity
     {
         Common,
@@ -261,7 +257,6 @@ public class UpgradeCardController : MonoBehaviour
         string _name = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_upgCardName" + card.cardName);        
 
         tName.text = _name;
-        imgCardType.sprite = sprCardTypeGun;
 
         if (card.imageItem != null)
             imgIcon.sprite = card.imageItem;

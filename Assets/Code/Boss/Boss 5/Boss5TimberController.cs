@@ -112,7 +112,7 @@ public class Boss5TimberController : MonoBehaviour
 
         if (_enemyController.hp >= _enemyController.maxHp / 2)
         {
-            time /= 2;
+            time /= 1.5f;
         }
 
         yield return new WaitForSeconds(time);

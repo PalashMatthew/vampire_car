@@ -32,6 +32,9 @@ public class PopUpUpgrade : MonoBehaviour
 
     public TMP_Text tHeader;
 
+    public GameObject butRerollAds1, butRerollAds2;
+    public GameObject butRerollHard1, butRerollHard2;
+
 
     private void Start()
     {
@@ -194,6 +197,11 @@ public class PopUpUpgrade : MonoBehaviour
         panelPassiveUpgrade.SetActive(true);
         panelGunUpgrade.SetActive(false);
 
+        butRerollAds1.SetActive(true);
+        butRerollAds2.SetActive(true);
+        butRerollHard1.SetActive(true);
+        butRerollHard2.SetActive(true);
+
         //CardAnimation();
         CardPassiveAnim();
         //upgradeController.GenerateUpgrades();
@@ -249,17 +257,52 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollAds(string _type)
     {
+        if (_type == "gun")
+        {
+            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("gunReroll");
+        }
+
+        if (_type == "passive")
+        {
+            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("passiveReroll");
+        }        
+    }
+
+    public void CallBackRerollAds(string _type)
+    {
+        if (_type == "gun")
+        {
+            StartCoroutine(RerollGun());
+        }
+
+        if (_type == "passive")
+        {
+            StartCoroutine(RerollPassive());
+        }
+
+        butRerollAds1.SetActive(false);
+        butRerollAds2.SetActive(false);
+    }
+
+    public void ButRerollHard(string _type)
+    {
         if (_type == "gun" && PlayerPrefs.GetInt("playerHard") >= 10)
         {
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
             StartCoroutine(RerollGun());
+
+            butRerollHard1.SetActive(false);
+            butRerollHard2.SetActive(false);
         }
 
         if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
         {
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
             StartCoroutine(RerollPassive());
-        }        
+
+            butRerollHard1.SetActive(false);
+            butRerollHard2.SetActive(false);
+        }
     }
 
     IEnumerator RerollGun()

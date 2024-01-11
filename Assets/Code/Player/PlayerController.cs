@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource aud;
 
+    public GameObject hitShieldObj;
+
 
     public void Initialize()
     {
@@ -230,8 +232,10 @@ public class PlayerController : MonoBehaviour
     public IEnumerator Invulnerability(float _time)
     {
         isInvulnerability = true;
+        //hitShieldObj.SetActive(true);
         yield return new WaitForSeconds(_time);
         isInvulnerability = false;
+        //hitShieldObj.SetActive(false);
     }
 
     public IEnumerator NewLevel()
@@ -250,9 +254,10 @@ public class PlayerController : MonoBehaviour
         {            
             FirstAidKit(other.gameObject.GetComponent<FirstAidKitController>().value);
 
-            if (PlayerPrefs.GetString("tutorialComplite") == "false" && Application.loadedLevelName == "Loc alpha 1")
+            if (PlayerPrefs.GetString("tutorialLoc1Complite") == "false" && Application.loadedLevelName == "Loc alpha 1")
             {
                 GameObject.Find("TutorialController").GetComponent<TutorialController>().StartCoroutine(GameObject.Find("TutorialController").GetComponent<TutorialController>().ShowMessage4());
+                PlayerPrefs.SetString("tutorialLoc1Complite", "true");
             }
 
             string _hp = "";

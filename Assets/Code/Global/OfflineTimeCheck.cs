@@ -5,12 +5,22 @@ using System;
 
 public class OfflineTimeCheck : MonoBehaviour
 {
+    public static int totalSeconds;
+
     private void Awake()
     {
         CheckOffline();
     }
 
     private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
+        }
+    }
+
+    private void OnApplicationQuit()
     {
         PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
     }
@@ -23,10 +33,10 @@ public class OfflineTimeCheck : MonoBehaviour
         {
             ts = DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("LastSession"));
 
+            totalSeconds = (int)ts.TotalSeconds;
+
             PlayerPrefs.SetString("OfflineTimeLast", ts.ToString());
             //Debug.Log(string.Format("¬ы отсутствовали - {0} дней, {1} часов, {2} минут, {3} секунд", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
         }            
-
-        PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
     }
 }

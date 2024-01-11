@@ -98,6 +98,8 @@ public class PopUpRecovery : MonoBehaviour
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Recovery(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName);
 
         ButClosed();
+
+        StartCoroutine(PlayerShieldActivate());
     }
 
     public void ButContinueHard()
@@ -115,6 +117,15 @@ public class PopUpRecovery : MonoBehaviour
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 30);
 
             ButClosed();
+
+            StartCoroutine(PlayerShieldActivate());
         }        
+    }
+
+    IEnumerator PlayerShieldActivate()
+    {
+        GameObject.Find("Player").GetComponent<PlayerController>().hitShieldObj.SetActive(true);
+        yield return new WaitForSeconds(1);
+        GameObject.Find("Player").GetComponent<PlayerController>().hitShieldObj.SetActive(false);
     }
 }

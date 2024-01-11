@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class PopUpWaveReward : MonoBehaviour
 
     public GameObject panel2KeyReward;
 
+    public TMP_Text tLocNum;
+
 
     private void Start()
     {
@@ -25,6 +28,8 @@ public class PopUpWaveReward : MonoBehaviour
     void Initialize()
     {
         int currentLoc = locationController.currentLocNum;
+
+        tLocNum.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_locationText") + " " + currentLoc;
 
         if (currentLoc == 1)
         {
@@ -180,6 +185,8 @@ public class PopUpWaveReward : MonoBehaviour
                             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
                             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
+
+                            PlayerPrefs.SetString("caseSpecialDropEngine", "true");
                             break;
 
                         case 5:
@@ -200,7 +207,17 @@ public class PopUpWaveReward : MonoBehaviour
                         case 2:
                             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
-                            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);                            
+                            PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);          
+                            
+                            if (locationController.currentLocNum == 2)
+                            {
+                                PlayerPrefs.SetString("caseSpecialDropBrakes", "true");
+                            }
+
+                            if (locationController.currentLocNum == 3)
+                            {
+                                PlayerPrefs.SetString("caseSpecialDropSuspension", "true");
+                            }
                             break;
 
                         case 3:
@@ -212,6 +229,16 @@ public class PopUpWaveReward : MonoBehaviour
                             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 20);
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
                             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
+
+                            if (locationController.currentLocNum == 2)
+                            {
+                                PlayerPrefs.SetString("caseSpecialDropFuelSystem", "true");
+                            }
+
+                            if (locationController.currentLocNum == 3)
+                            {
+                                PlayerPrefs.SetString("caseSpecialDropTransmission", "true");
+                            }
                             break;
 
                         case 5:

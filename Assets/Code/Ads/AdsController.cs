@@ -109,12 +109,25 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         }
         else if (placementName == "adsChest")
         {
-            ShopController shopController = GameObject.Find("HubController").GetComponent<ShopController>();
-
-            shopController.GiveAdsChest();
+            StartCoroutine(GiveChest());
+        }
+        else if (placementName == "gunReroll")
+        {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().CallBackRerollAds("gun");
+        }
+        else if (placementName == "passiveReroll")
+        {
+            GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().CallBackRerollAds("passive");
         }
 
         Appodeal.cache(Appodeal.REWARDED_VIDEO);
+    }
+
+    IEnumerator GiveChest()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        GameObject.Find("HubController").GetComponent<ShopController>().GiveAdsChest();
     }
 
     //Called when rewarded video is expired and can not be shown

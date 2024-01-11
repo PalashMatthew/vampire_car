@@ -15,7 +15,7 @@ public class ShopController : MonoBehaviour, IStoreListener
     public GameObject butBuyChest1, butBuyChest2;
     public GameObject butAdsChest1;
     public GameObject butKeyChest1, butKeyChest2;
-    [HideInInspector] public bool isChest1Ads;
+    public bool isChest1Ads;
 
     public TMP_Text tKeyCountChest1, tKeyCountChest2;
 
@@ -41,32 +41,36 @@ public class ShopController : MonoBehaviour, IStoreListener
         #region Chest 1       
         if (PlayerPrefs.HasKey("OfflineTimeLast"))
         {
-            int seconds = 0;
+            int seconds = OfflineTimeCheck.totalSeconds;
 
-            DateTime ts;
-            ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
+            //DateTime ts;
+            //ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
 
-            if (ts.Day > 0)
-            {
-                seconds += ts.Day * (60 * 60 * 24);
-            }
+            //if (ts.Day > 0)
+            //{
+            //    seconds += ts.Day * (60 * 60 * 24);
+            //}
 
-            if (ts.Hour > 0)
-            {
-                seconds += ts.Hour * 60 * 60;
-            }
+            //if (ts.Hour > 0)
+            //{
+            //    seconds += ts.Hour * 60 * 60;
+            //}
 
-            if (ts.Minute > 0)
-            {
-                seconds += ts.Minute * 60;
-            }
+            //if (ts.Minute > 0)
+            //{
+            //    seconds += ts.Minute * 60;
+            //}
 
-            if (ts.Second > 0)
-            {
-                seconds += ts.Second;
-            }
+            //if (ts.Second > 0)
+            //{
+            //    seconds += ts.Second;
+            //}
+
+            Debug.Log("Seconds = " + seconds);
 
             PlayerPrefs.SetInt("AdsChestTimerSaveTime", PlayerPrefs.GetInt("AdsChestTimerSaveTime") + seconds);
+
+            Debug.Log("All Time Spend = " + PlayerPrefs.GetInt("AdsChestTimerSaveTime"));            
 
             if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") > 86400)
             {
@@ -213,8 +217,75 @@ public class ShopController : MonoBehaviour, IStoreListener
         }
         else if (PlayerPrefs.GetInt("playerKey1") > 0)
         {
+            l1:
             DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
 
+            if (PlayerPrefs.GetString("caseSpecialDropEngine") == "true")
+            {
+                if (card.itemType.ToString() != "Engine")
+                {
+                    goto l1;
+                }
+                else
+                {
+                    PlayerPrefs.SetString("caseSpecialDropEngine", "false");
+                    goto l2;
+                }
+            }
+
+            if (PlayerPrefs.GetString("caseSpecialDropBrakes") == "true")
+            {
+                if (card.itemType.ToString() != "Brakes")
+                {
+                    goto l1;
+                }
+                else
+                {
+                    PlayerPrefs.SetString("caseSpecialDropBrakes", "false");
+                    goto l2;
+                }
+            }
+
+            if (PlayerPrefs.GetString("caseSpecialDropFuelSystem") == "true")
+            {
+                if (card.itemType.ToString() != "FuelSystem")
+                {
+                    goto l1;
+                }
+                else
+                {
+                    PlayerPrefs.SetString("caseSpecialDropFuelSystem", "false");
+                    goto l2;
+                }
+            }
+
+            if (PlayerPrefs.GetString("caseSpecialDropTransmission") == "true")
+            {
+                if (card.itemType.ToString() != "Transmission")
+                {
+                    goto l1;
+                }
+                else
+                {
+                    PlayerPrefs.SetString("caseSpecialDropTransmission", "false");
+                    goto l2;
+                }
+            }
+
+            if (PlayerPrefs.GetString("caseSpecialDropSuspension") == "true")
+            {
+                if (card.itemType.ToString() != "Suspension")
+                {
+                    goto l1;
+                }
+                else
+                {
+                    PlayerPrefs.SetString("caseSpecialDropSuspension", "false");
+                    goto l2;
+                }
+            }
+
+            l2:
             if (card.itemType.ToString() == "Gun")
             {
                 PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
@@ -301,7 +372,10 @@ public class ShopController : MonoBehaviour, IStoreListener
 
         isChest1Ads = false;
         PlayerPrefs.SetInt("AdsChestTimerSaveTime", 0);
-        StartCoroutine(AdsChestTimer());
+        OfflineTimeCheck.totalSeconds = 0;
+        //StartCoroutine(AdsChestTimer());
+
+        Debug.Log("All Time Spend = " + PlayerPrefs.GetInt("AdsChestTimerSaveTime"));
 
         ChestSettings();
 

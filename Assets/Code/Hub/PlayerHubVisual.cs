@@ -32,7 +32,11 @@ public class PlayerHubVisual : MonoBehaviour
             {
                 car.GetComponent<HubCarMesh>().mesh.SetActive(true);
                 wheels.Clear();
-                wheels = car.GetComponent<HubCarMesh>().wheels;
+
+                foreach (GameObject wheel in car.GetComponent<HubCarMesh>().wheels)
+                {
+                    wheels.Add(wheel);
+                }
             } 
             else
             {

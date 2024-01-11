@@ -265,6 +265,8 @@ public class ChangeCarController : MonoBehaviour
         #endregion
 
         playerHubVisual.ChangeCar();
+
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
     }
 
     public void ButBack()
@@ -288,6 +290,8 @@ public class ChangeCarController : MonoBehaviour
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyCar(_activeCarObj.carName, "Money", _activeCarObj.price);
 
                 _isPurchaseSuccess = true;
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }
         }
 
@@ -302,6 +306,8 @@ public class ChangeCarController : MonoBehaviour
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyCar(_activeCarObj.carName, "Hard", _activeCarObj.price);
 
                 _isPurchaseSuccess = true;
+
+                GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }
         }
 
@@ -341,6 +347,8 @@ public class ChangeCarController : MonoBehaviour
             playerHubVisual.ChangeCar();
 
             UpdateProgressBar();
+
+            GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
     }
 

@@ -20,7 +20,8 @@ public class PopUpDailyReward : MonoBehaviour
     {
         _popUpController = GetComponent<PopUpController>();
 
-        Initialize();
+        if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
+            Initialize();
     }
 
     void Initialize()
@@ -217,30 +218,32 @@ public class PopUpDailyReward : MonoBehaviour
 
         if (PlayerPrefs.HasKey("OfflineTimeLast"))
         {
-            int seconds = 0;
+            int seconds = OfflineTimeCheck.totalSeconds;
 
-            DateTime ts;
-            ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
+            //DateTime ts;
+            //ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
 
-            if (ts.Day > 0)
-            {
-                seconds += ts.Day * (60 * 60 * 24);
-            }
+            //if (ts.Day > 0)
+            //{
+            //    //seconds += ts.Day * (60 * 60 * 24);
+            //}
 
-            if (ts.Hour > 0)
-            {
-                seconds += ts.Hour * 60 * 60;
-            }
+            //if (ts.Hour > 0)
+            //{
+            //    seconds += ts.Hour * 60 * 60;
+            //}
 
-            if (ts.Minute > 0)
-            {
-                seconds += ts.Minute * 60;
-            }
+            //if (ts.Minute > 0)
+            //{
+            //    seconds += ts.Minute * 60;
+            //}
 
-            if (ts.Second > 0)
-            {
-                seconds += ts.Second;
-            }
+            //if (ts.Second > 0)
+            //{
+            //    seconds += ts.Second;
+            //}
+
+            Debug.Log(seconds);
 
             PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + seconds);
 

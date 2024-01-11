@@ -66,15 +66,6 @@ public class HubController : MonoBehaviour
 
         _nextScreen = "fight";
 
-        //if (!PlayerPrefs.HasKey("playerMoney"))
-        //{
-        //    PlayerPrefs.SetInt("playerMoney", 1000);
-        //    PlayerPrefs.SetInt("playerHard", 20);
-        //    PlayerPrefs.SetInt("playerFuelCurrent", 20);
-        //    PlayerPrefs.SetInt("playerFuelMax", 20);
-        //    PlayerPrefs.SetInt("playerLevel", 1);
-        //    tFuelTimer.text = "";
-        //}
 
         #region Fuel Check
         if (PlayerPrefs.GetInt("playerFuelCurrent") >= PlayerPrefs.GetInt("playerFuelMax"))
@@ -85,25 +76,7 @@ public class HubController : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("OfflineTimeLast"))
             {
-                int seconds = 0;
-
-                DateTime ts;
-                ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
-
-                if (ts.Hour > 0)
-                {
-                    seconds += ts.Hour * 60 * 60;
-                }
-
-                if (ts.Minute > 0)
-                {
-                    seconds += ts.Minute * 60;
-                }
-
-                if (ts.Second > 0)
-                {
-                    seconds += ts.Second;
-                }
+                int seconds = OfflineTimeCheck.totalSeconds;
 
                 if (seconds > 0)
                 {
@@ -130,13 +103,12 @@ public class HubController : MonoBehaviour
 
                     int needFuel = PlayerPrefs.GetInt("playerFuelMax") - PlayerPrefs.GetInt("playerFuelCurrent");
 
-                    Debug.Log("Прошло секунд = " + seconds + " Остаток = " + ostatok);
-
                     needFuel += fuelCountPlus;
-                    if (needFuel >= PlayerPrefs.GetInt("playerFuelMax"))
+                    if (needFuel > PlayerPrefs.GetInt("playerFuelMax"))
                     {
                         PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelMax"));
                         tFuelTimer.text = "";
+                        Debug.Log("FUEL MAX");
                     }
                     else
                     {
@@ -518,6 +490,12 @@ public class HubController : MonoBehaviour
     IEnumerator FuelTimer(int _seconds)
     {
         yield return new WaitForSeconds(1);
+
+        if (PlayerPrefs.GetInt("playerFuelCurrent") == 20)
+        {
+            yield break;
+        }
+
         _seconds -= 1;
 
         PlayerPrefs.SetInt("FuelTimerSaveTime", _seconds);

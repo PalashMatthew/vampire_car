@@ -38,7 +38,7 @@ public class BossIcecreamController : MonoBehaviour
     {
         if (!isStop)
         {
-            if (transform.position.z > 47)
+            if (transform.position.z > 58)
             {
                 BaseMovement();
             }

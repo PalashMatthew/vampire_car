@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class EnemyTrackingBullet : MonoBehaviour
@@ -15,17 +16,20 @@ public class EnemyTrackingBullet : MonoBehaviour
     public float meshRotateSpeed;
 
     private void Start()
-    {
-        target = GameObject.Find("Player").transform;
-
+    {       
         Destroy(gameObject, lifeTime);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        transform.DOLookAt(target.position, rotateSpeed);
+        target = GameObject.Find("Player").transform;
 
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        var rotation = Quaternion.LookRotation(target.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+
+        //transform.DOLookAt(target.position, rotateSpeed);
+
+        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
         if (mesh != null)
         {
