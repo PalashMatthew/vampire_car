@@ -65,8 +65,6 @@ public class Gun : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log("Gun Initialize");
-
         _playerStats = GetComponentInParent<PlayerStats>();
         _passiveController = GetComponentInParent<PlayerPassiveController>();
 
@@ -96,7 +94,7 @@ public class Gun : MonoBehaviour
         if (damageCoeff != 0)
             baseDamage = baseDamage + (baseDamage / 100 * damageCoeff);
 
-        if (PlayerPrefs.GetString("activeCarID") == "Taiowa")
+        if (PlayerPrefs.GetString("selectedCarID") == "Taiowa")
         {
             if (gunName == "Dron"|| gunName == "Lazer")
             {
@@ -104,7 +102,7 @@ public class Gun : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.GetString("activeCarID") == "P-Run")
+        if (PlayerPrefs.GetString("selectedCarID") == "P-Run")
         {
             if (gunName == "RocketLauncher" || gunName == "Ice")
             {
@@ -145,13 +143,14 @@ public class Gun : MonoBehaviour
         if (damageCoeffPassive != 0)
         {
             damage = baseDamage + (baseDamage / 100 * damageCoeffPassive);
-            damageCoeffPassive = 0;
+            //damageCoeffPassive = 0;
         }
 
         if (shotSpeedCoeffPassive != 0)
         {
-            shotSpeed = shotSpeed - (shotSpeed / 100 * shotSpeedCoeffPassive);
-            shotSpeedCoeffPassive = 0;
+            //shotSpeed = shotSpeed - (shotSpeed / 100 * shotSpeedCoeffPassive);
+            shotSpeed = baseShotSpeed - (baseShotSpeed / 100 * shotSpeedCoeffPassive);
+            //shotSpeedCoeffPassive = 0;
         }
 
         if (bulletMoveSpeedCoeff == 0)
@@ -269,7 +268,9 @@ public class Gun : MonoBehaviour
 
                 r *= _playerStats.rageValue;
 
-                _damage += _damage / 100 * r;
+                float rageValue = _damage / 100 * r;
+                _damage += rageValue;
+                //Debug.Log("Rage Value = " + rageValue);
             }                
 
             if (_gm.GetComponent<EnemyController>().enemyKind == "car")
@@ -299,7 +300,7 @@ public class Gun : MonoBehaviour
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
 
             #region Effects
-            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("activeCarID") == "Lyssa")  //Если у нас сет Огня активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("selectedCarID") == "Lyssa")  //Если у нас сет Огня активен
             {
                 int rand = Random.Range(1, 101);
 
@@ -309,7 +310,7 @@ public class Gun : MonoBehaviour
                     value += PlayerPrefs.GetFloat("setValue");
                 }
 
-                if (PlayerPrefs.GetString("activeCarID") == "Lyssa")
+                if (PlayerPrefs.GetString("selectedCarID") == "Lyssa")
                 {
                     value += 3;
                 }
@@ -320,7 +321,7 @@ public class Gun : MonoBehaviour
                 }
             }
 
-            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("activeCarID") == "Aeolus")  //Если у нас сет Яда активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("selectedCarID") == "Aeolus")  //Если у нас сет Яда активен
             {
                 int rand = Random.Range(1, 101);
 
@@ -330,7 +331,7 @@ public class Gun : MonoBehaviour
                     value += PlayerPrefs.GetFloat("setValue");
                 }
 
-                if (PlayerPrefs.GetString("activeCarID") == "Aeolus")
+                if (PlayerPrefs.GetString("selectedCarID") == "Aeolus")
                 {
                     value += 5;
                 }
@@ -347,7 +348,18 @@ public class Gun : MonoBehaviour
             float _damage = _dmg;
 
             if (_playerStats.currentHp < _playerStats.maxHp / 100 * 50)
-                _damage += _damage / 100 * _playerStats.rageValue;
+            {
+                float _maxHP = _playerStats.maxHp / 100 * 50;
+
+                float r = _playerStats.currentHp / _maxHP;
+                r = 1 - r;
+
+                r *= _playerStats.rageValue;
+
+                float rageValue = _damage / 100 * r;
+                _damage += rageValue;
+                //Debug.Log("Rage Value = " + rageValue);
+            }
 
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s07")  //Если у нас сет Таран активен
             {
@@ -374,7 +386,7 @@ public class Gun : MonoBehaviour
             PlayerPrefs.SetFloat(gunName + "_Damage = ", PlayerPrefs.GetFloat(gunName + "_Damage = ") + _damage);
 
             #region Effects
-            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("activeCarID") == "Lyssa")  //Если у нас сет Огня активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s02") || PlayerPrefs.GetString("selectedCarID") == "Lyssa")  //Если у нас сет Огня активен
             {
                 int rand = Random.Range(1, 101);
 
@@ -384,7 +396,7 @@ public class Gun : MonoBehaviour
                     value += PlayerPrefs.GetFloat("setValue");
                 }
 
-                if (PlayerPrefs.GetString("activeCarID") == "Lyssa")
+                if (PlayerPrefs.GetString("selectedCarID") == "Lyssa")
                 {
                     value += 3;
                 }
@@ -395,7 +407,7 @@ public class Gun : MonoBehaviour
                 }
             }
 
-            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("activeCarID") == "Aeolus")  //Если у нас сет Яда активен
+            if ((PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s03") || PlayerPrefs.GetString("selectedCarID") == "Aeolus")  //Если у нас сет Яда активен
             {
                 int rand = Random.Range(1, 101);
 
@@ -405,7 +417,7 @@ public class Gun : MonoBehaviour
                     value += PlayerPrefs.GetFloat("setValue");
                 }
 
-                if (PlayerPrefs.GetString("activeCarID") == "Aeolus")
+                if (PlayerPrefs.GetString("selectedCarID") == "Aeolus")
                 {
                     value += 5;
                 }

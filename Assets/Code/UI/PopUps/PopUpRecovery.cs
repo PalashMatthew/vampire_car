@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GooglePlayGames.BasicApi;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,7 +19,7 @@ public class PopUpRecovery : MonoBehaviour
     {
         _popUpController = GetComponent<PopUpController>();
 
-        isRecovery = false;
+        isRecovery = false;        
     }
 
     public void ButOpen()

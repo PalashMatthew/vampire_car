@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         ChoiseCar();
 
-        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
         {
             StartCoroutine(ShieldTimer());
         }
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator ShieldTimer()
+    public IEnumerator ShieldTimer()
     {
         yield return new WaitForSeconds(PlayerPrefs.GetFloat("setValue"));
         isShield = true;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
                         StartCoroutine(HitAnim());
 
-                        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Таран активен
+                        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
                         {
                             isShield = false;
                             vfxShield.Stop();

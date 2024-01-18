@@ -24,6 +24,10 @@ public class PopUpTalentsFinal : MonoBehaviour
     public GameObject butOk;
     public GameObject particleImage;
 
+    public Image imgIcon;
+
+    public Sprite sprTalent1, sprTalent2, sprTalent3, sprTalent4, sprTalent5, sprTalent6, sprTalent7, sprTalent8, sprTalent9;
+
     [Header("Sounds")]
     public AudioClip clipNewItem;
 
@@ -51,52 +55,70 @@ public class PopUpTalentsFinal : MonoBehaviour
             case "GunSlot":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameGunSlot");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskGunSlot");
+
+                imgIcon.sprite = sprTalent7;
                 break;
 
             case "Health":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskHealth");
+
+                imgIcon.sprite = sprTalent1;
                 break;
 
             case "Damage":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskDamage");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent2;
                 break;
 
             case "Iron":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameIron");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskIron");
+
+                imgIcon.sprite = sprTalent5;
                 break;
 
             case "RecoveryHpInFirstAidKit":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameFirstAidKit");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskFirstAidKit");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent3;
                 break;
 
             case "ShotSpeed":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameShotSpeed");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskShotSpeed");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent6;
                 break;
 
             case "Block":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameBlock");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskBlock");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent4;
                 break;
 
             case "EquipmentImprovement":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameEquipments");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskEquipments");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent8;
                 break;
 
             case "CarImprovement":
                 tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameCar");
                 tDescription.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsDeskCar");
                 procent = "%";
+
+                imgIcon.sprite = sprTalent9;
                 break;
         }
 

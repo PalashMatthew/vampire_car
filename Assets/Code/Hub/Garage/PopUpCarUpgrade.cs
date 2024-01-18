@@ -478,6 +478,8 @@ public class PopUpCarUpgrade : MonoBehaviour
                 Initialize();
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+                changeCarController.CheckArrow();
             }            
         }
     }

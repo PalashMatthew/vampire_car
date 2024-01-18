@@ -93,13 +93,13 @@ public class PopUpNewItems : MonoBehaviour
                 PlayerPrefs.SetInt("unlockPassiveArmor", 1);
             }
 
-            if (PlayerPrefs.GetInt("unlockGunRage") == 0)
+            if (PlayerPrefs.GetInt("unlockPassiveRage") == 0)
             {
                 objPassiveReward2.SetActive(true);
                 imgIconPassive2.sprite = sprPassiveRage;
                 tPassiveReward2Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_upgCardNameRage");
 
-                PlayerPrefs.SetInt("unlockGunRage", 1);
+                PlayerPrefs.SetInt("unlockPassiveRage", 1);
             }
             #endregion
         }

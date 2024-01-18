@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (_enemyController.carType == EnemyController.CarType.Static)
         {
-            _zPosStop = Random.Range(39f, 56f);
+            _zPosStop = Random.Range(47, 65);
         }
 
         if (isStartRotate)

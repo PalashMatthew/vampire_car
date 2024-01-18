@@ -47,8 +47,11 @@ public class CarButtonController : MonoBehaviour
     public GameObject panelPrice;
 
     public ChangeCarController changeCarController;
+    public PopUpCarUpgrade popUpCarUpgrade;
 
     public int carShopID;
+
+    public GameObject arrowObj;
 
 
     public void Initialize()
@@ -104,7 +107,9 @@ public class CarButtonController : MonoBehaviour
 
                 tCarPriceReal.text = GameObject.Find("HubController").GetComponent<ShopController>().prices[carShopID];
             }
-        }        
+        }
+
+        CheckArrow();
     }
 
     public void ButSelect()
@@ -117,5 +122,27 @@ public class CarButtonController : MonoBehaviour
     public void ButUnselect()
     {
         imgOutline.SetActive(false);
+    }
+
+    public void CheckArrow()
+    {
+        if (PlayerPrefs.GetInt(carName + "carPurchased") == 1)
+        {
+            if (PlayerPrefs.GetInt(carName + "carLevel") < 40 &&
+                PlayerPrefs.GetInt("playerTitan") >= popUpCarUpgrade.titanCount[PlayerPrefs.GetInt(carName + "carLevel")] &&
+                PlayerPrefs.GetInt("playerLevel") > PlayerPrefs.GetInt(carName + "carLevel") &&
+                PlayerPrefs.GetInt("playerMoney") >= popUpCarUpgrade.upgradePrice[PlayerPrefs.GetInt(carName + "carLevel")])
+            {
+                arrowObj.SetActive(true);
+            }
+            else
+            {
+                arrowObj.SetActive(false);
+            }
+        }
+        else
+        {
+            arrowObj.SetActive(false);
+        }
     }
 }

@@ -52,6 +52,8 @@ public class EnemyAimShot : MonoBehaviour
 
     IEnumerator Shot()
     {
+        yield return new WaitForSeconds(1);
+
         if (transform.position.z > GameObject.Find("Player").transform.position.z)
         {
             GameObject _inst = Instantiate(bulletObj, bulletSpawnPoint.position, transform.rotation);
@@ -61,7 +63,7 @@ public class EnemyAimShot : MonoBehaviour
             _inst.GetComponent<EnemyDefaultBullet>()._controller = gameObject.GetComponent<EnemyController>();
         }
 
-        yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
+        yield return new WaitForSeconds((_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff) - 1);
 
         if (_enemyShotCount >= 3 && _enemyController.carType == EnemyController.CarType.Static)
         {

@@ -53,6 +53,11 @@ public class GenerateObstacles : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ObstaclesGen());
     }
+
+    public void StopSpawnObstacles()
+    {
+        StopAllCoroutines();
+    }
 }
 
 [System.Serializable]

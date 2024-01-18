@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static DetailCard;
 
 public class ItemCell : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class ItemCell : MonoBehaviour
     public TMP_Text tLevel;
 
     public string itemRarity;
+
+    public GameObject objNew;
 
 
     private void Awake()
@@ -134,7 +137,14 @@ public class ItemCell : MonoBehaviour
 
         itemName = itemObj.itemName;
 
-        //tLevel.text = "Lv. " + 
+        if (PlayerPrefs.GetInt("item" + itemType + "New" + itemNumInInventory) == 1)
+        {
+            objNew.SetActive(true);
+        }
+        else
+        {
+            objNew.SetActive(false);
+        }
     }
 
     private void Update()
@@ -144,6 +154,11 @@ public class ItemCell : MonoBehaviour
 
     public void ButOpen()
     {
+        PlayerPrefs.SetInt("item" + itemType + "New" + itemNumInInventory, 0);
+        objNew.SetActive(false);
+
+        GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
+
         if (cellType == CellType.Inventory)
         {
             GameObject.Find("Garage").GetComponent<GarageController>().activeItem = gameObject.GetComponent<ItemCell>();

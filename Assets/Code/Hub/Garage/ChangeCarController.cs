@@ -65,15 +65,6 @@ public class ChangeCarController : MonoBehaviour
 
     [Header("Talant")]
     public TMP_Text tTalant;
-    public Image imgTalant;
-    public Sprite sprTalantDionysus;
-    public Sprite sprTalantTaiowa;
-    public Sprite sprTalantPRun;
-    public Sprite sprTalantLyssa;
-    public Sprite sprTalantAeolus;
-    public Sprite sprTalantHyas;
-    public Sprite sprTalantHemera;
-    public Sprite sprTalantEos;
 
     private void Start()
     {
@@ -192,49 +183,41 @@ public class ChangeCarController : MonoBehaviour
         if (_carName == "Dionysus")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillDionisus");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Taiowa")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillTaiowa");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "P-Run")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillP-Run");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Lyssa")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillLyssa");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Aeolus")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillAeolus");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Hyas")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillHyas");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Hemera")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillHemera");
-            imgTalant.sprite = sprTalantDionysus;
         }
 
         if (_carName == "Eos")
         {
             tTalant.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_carSkillEos");
-            imgTalant.sprite = sprTalantDionysus;
         }
         #endregion
     }
@@ -350,6 +333,8 @@ public class ChangeCarController : MonoBehaviour
 
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }
+
+        CheckArrow();
     }
 
     public void BuyCarCallBack()
@@ -390,6 +375,8 @@ public class ChangeCarController : MonoBehaviour
         UpdateProgressBar();
 
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+        CheckArrow();
     }
 
     public void UpdateProgressBar()
@@ -465,5 +452,13 @@ public class ChangeCarController : MonoBehaviour
         fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 300, 0.5f);
         fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 7.2f, 0.5f);
         fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 28, 0.5f);
+    }
+
+    public void CheckArrow()
+    {
+        foreach (GameObject gm in carsButtons)
+        {
+            gm.GetComponent<CarButtonController>().CheckArrow();
+        }
     }
 }

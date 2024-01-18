@@ -219,11 +219,11 @@ public class GameplayUIController : MonoBehaviour
 
         if (_currentWaveTime > 9)
         {
-            tWaveTimer.text = "Волна " + _waveNum + " - 00:" + _currentWaveTime;
+            tWaveTimer.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_waveTimer") + " " + _waveNum + " - 00:" + _currentWaveTime;
         }
         else
         {
-            tWaveTimer.text = "Волна " + _waveNum + " - 00:0" + _currentWaveTime;
+            tWaveTimer.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_waveTimer") + " " + _waveNum + " - 00:0" + _currentWaveTime;
         }
 
         imgWaveFill.fillAmount = 0;
@@ -243,18 +243,18 @@ public class GameplayUIController : MonoBehaviour
 
         if (_currentWaveTime <= 0)
         {
-            tWaveTimer.text = "Волна " + _waveNum + " - 00:00";
+            tWaveTimer.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_waveTimer") + " " + _waveNum + " - 00:00";
             waveController.WaveEnd();
         } 
         else
         {
             if (_currentWaveTime > 9)
             {
-                tWaveTimer.text = "Волна " + _waveNum + " - 00:" + _currentWaveTime;
+                tWaveTimer.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_waveTimer") + " " + _waveNum + " - 00:" + _currentWaveTime;
             }
             else
             {
-                tWaveTimer.text = "Волна " + _waveNum + " - 00:0" + _currentWaveTime;
+                tWaveTimer.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_waveTimer") + " " + _waveNum + " - 00:0" + _currentWaveTime;
             }
 
             if (!_isBossFight)

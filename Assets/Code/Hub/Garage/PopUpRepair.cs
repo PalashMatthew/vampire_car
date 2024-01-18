@@ -25,6 +25,7 @@ public class PopUpRepair : MonoBehaviour
     public ItemCell itemCellGeneral;
 
     public TMP_Text tLevelCell1;
+    public GameObject levelCell1Panel;
 
     public GameObject butRepair;
 
@@ -74,6 +75,7 @@ public class PopUpRepair : MonoBehaviour
         butRepair.SetActive(false);
 
         tLevelCell1.text = "";
+        levelCell1Panel.SetActive(false);
 
         itemCellGeneral = null;
 
@@ -524,6 +526,7 @@ public class PopUpRepair : MonoBehaviour
             itemCellGeneral.MergeSelect();
 
             tLevelCell1.text = "Lv " + _itemCell.currentLevel;
+            levelCell1Panel.SetActive(true);
             #endregion
 
             #region Return Level 1
@@ -586,6 +589,7 @@ public class PopUpRepair : MonoBehaviour
         isSlot1full = false;        
 
         tLevelCell1.text = "";
+        levelCell1Panel.SetActive(false);
         itemCellGeneral = null;
 
         butRepair.SetActive(false);
@@ -655,7 +659,8 @@ public class PopUpRepair : MonoBehaviour
         SaveItem();
         LoadItem();
 
-        
+        levelCell1Panel.SetActive(false);
+
         popUpRepairFinal.Open();
     }
 
@@ -671,6 +676,7 @@ public class PopUpRepair : MonoBehaviour
                 PlayerPrefs.SetInt("item" + _itemType + "Level" + i, PlayerPrefs.GetInt("item" + _itemType + "Level" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Rarity" + i, PlayerPrefs.GetString("item" + _itemType + "Rarity" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
+                PlayerPrefs.SetInt("item" + _itemType + "New" + i, PlayerPrefs.GetInt("item" + _itemType + "Type" + (i + 1)));
 
                 if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
                 {
@@ -695,6 +701,7 @@ public class PopUpRepair : MonoBehaviour
             PlayerPrefs.DeleteKey("item" + _itemType + "Level" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Rarity" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Type" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "New" + itemCount);            
 
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);

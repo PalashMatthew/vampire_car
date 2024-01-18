@@ -32,6 +32,15 @@ public class ShopController : MonoBehaviour, IStoreListener
     private void Awake()
     {
         Initialize();
+
+        if (!PlayerPrefs.HasKey("caseSpecialDropEngine"))
+        {
+            PlayerPrefs.SetString("caseSpecialDropEngine", "true");
+            PlayerPrefs.SetString("caseSpecialDropBrakes", "true");
+            PlayerPrefs.SetString("caseSpecialDropFuelSystem", "true");
+            PlayerPrefs.SetString("caseSpecialDropSuspension", "true");
+            PlayerPrefs.SetString("caseSpecialDropTransmission", "true");
+        }
     }
 
     public void Initialize()
@@ -42,29 +51,6 @@ public class ShopController : MonoBehaviour, IStoreListener
         if (PlayerPrefs.HasKey("OfflineTimeLast"))
         {
             int seconds = OfflineTimeCheck.totalSeconds;
-
-            //DateTime ts;
-            //ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
-
-            //if (ts.Day > 0)
-            //{
-            //    seconds += ts.Day * (60 * 60 * 24);
-            //}
-
-            //if (ts.Hour > 0)
-            //{
-            //    seconds += ts.Hour * 60 * 60;
-            //}
-
-            //if (ts.Minute > 0)
-            //{
-            //    seconds += ts.Minute * 60;
-            //}
-
-            //if (ts.Second > 0)
-            //{
-            //    seconds += ts.Second;
-            //}
 
             Debug.Log("Seconds = " + seconds);
 
@@ -85,6 +71,8 @@ public class ShopController : MonoBehaviour, IStoreListener
         #endregion        
 
         ChestSettings();
+
+        GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
     }
 
     IEnumerator AdsChestTimer()
@@ -213,7 +201,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             ChestSettings();
 
-            popUpOpenChest.Open();
+            popUpOpenChest.Open(1, "tutorial");
         }
         else if (PlayerPrefs.GetInt("playerKey1") > 0)
         {
@@ -308,7 +296,7 @@ public class ShopController : MonoBehaviour, IStoreListener
             PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") - 1);
             ChestSettings();
 
-            popUpOpenChest.Open();
+            popUpOpenChest.Open(1, "key");
         }
         else if (isChest1Ads)
         {
@@ -340,7 +328,7 @@ public class ShopController : MonoBehaviour, IStoreListener
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Hard", rarity, card.itemType.ToString());
 
                 ChestSettings();
-                popUpOpenChest.Open();
+                popUpOpenChest.Open(1, "hard");
 
                 PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 60);
             }
@@ -379,7 +367,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
         ChestSettings();
 
-        popUpOpenChest.Open();
+        popUpOpenChest.Open(1, "ads");
     }
 
     public void ButChest2()
@@ -396,13 +384,13 @@ public class ShopController : MonoBehaviour, IStoreListener
             int rand = UnityEngine.Random.Range(1, 101);
             string rarity = "";
 
-            if (rand <= 45)
+            if (rand <= 65)
                 rarity = "rare";
 
-            if (rand > 45 && rand <= 95)
+            if (rand > 65 && rand <= 98)
                 rarity = "epic";
 
-            if (rand > 95)
+            if (rand > 98)
                 rarity = "legendary";
 
             popUpOpenChest.rarity = rarity;
@@ -414,7 +402,7 @@ public class ShopController : MonoBehaviour, IStoreListener
             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") - 1);
 
             ChestSettings();
-            popUpOpenChest.Open();            
+            popUpOpenChest.Open(2, "key");            
         }
         else
         {
@@ -430,13 +418,13 @@ public class ShopController : MonoBehaviour, IStoreListener
                 int rand = UnityEngine.Random.Range(1, 101);
                 string rarity = "";
 
-                if (rand <= 45)
+                if (rand <= 65)
                     rarity = "rare";
 
-                if (rand > 45 && rand <= 95)
+                if (rand > 65 && rand <= 98)
                     rarity = "epic";
 
-                if (rand > 95)
+                if (rand > 98)
                     rarity = "legendary";
 
                 popUpOpenChest.rarity = rarity;
@@ -446,11 +434,97 @@ public class ShopController : MonoBehaviour, IStoreListener
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase2("Hard", rarity, card.itemType.ToString());
 
                 ChestSettings();
-                popUpOpenChest.Open();
+                popUpOpenChest.Open(2, "hard");
 
                 PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 300);
             }
         }       
+    }
+
+    public void ButChest1Again()
+    {
+        if (PlayerPrefs.GetInt("playerHard") >= 50)
+        {            
+            StartCoroutine(OpenChest1Again());
+        }
+    }
+
+    IEnumerator OpenChest1Again()
+    {
+        popUpOpenChest.ButContinue();
+
+        yield return new WaitForSeconds(0.4f);
+
+        DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
+
+        if (card.itemType.ToString() == "Gun")
+        {
+            PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+        }
+
+        int rand = UnityEngine.Random.Range(1, 101);
+        string rarity;
+
+        if (rand <= 80)
+            rarity = "common";
+        else
+            rarity = "rare";
+
+        popUpOpenChest.rarity = rarity;
+        popUpOpenChest.card = card;
+        popUpOpenChest.chestType = 1;
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase1("Hard", rarity, card.itemType.ToString());
+
+        ChestSettings();
+        popUpOpenChest.Open(1, "hard");
+
+        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 50);
+    }
+
+    public void ButChest2Again()
+    {
+        if (PlayerPrefs.GetInt("playerHard") >= 280)
+        {
+            StartCoroutine(OpenChest2Again());
+        }
+    }
+
+    IEnumerator OpenChest2Again()
+    {
+        popUpOpenChest.ButContinue();
+
+        yield return new WaitForSeconds(0.4f);
+
+        DetailCard card = items[UnityEngine.Random.Range(0, items.Count)];
+
+        if (card.itemType.ToString() == "Gun")
+        {
+            PlayerPrefs.SetInt("unlockGun" + card.itemID, 1);
+        }
+
+        int rand = UnityEngine.Random.Range(1, 101);
+        string rarity = "";
+
+        if (rand <= 65)
+            rarity = "rare";
+
+        if (rand > 65 && rand <= 98)
+            rarity = "epic";
+
+        if (rand > 98)
+            rarity = "legendary";
+
+        popUpOpenChest.rarity = rarity;
+        popUpOpenChest.card = card;
+        popUpOpenChest.chestType = 2;
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenCase2("Hard", rarity, card.itemType.ToString());
+
+        ChestSettings();
+        popUpOpenChest.Open(2, "hard");
+
+        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 280);
     }
 
     void SetupBuilder()

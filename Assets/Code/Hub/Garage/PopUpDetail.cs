@@ -1032,13 +1032,16 @@ public class PopUpDetail : MonoBehaviour
             GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
         }
 
+        garageController.CheckArrowUpgrade();
+
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         ButClosed();
     }
 
     public void ButUnselect()
     {
-        garageController.ItemUnselect();
+        garageController.ItemUnselect();        
+
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         ButClosed();
     }
@@ -1280,6 +1283,8 @@ public class PopUpDetail : MonoBehaviour
             }
 
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+            garageController.CheckArrowUpgrade();
         }
     }
 

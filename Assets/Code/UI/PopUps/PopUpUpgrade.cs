@@ -16,6 +16,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public TMP_Text tScrewValue;
 
+    public GameObject pauseBut;
+
     public GameObject butRerollScrew;
 
     public bool isWaveUpgrade = false;
@@ -35,6 +37,8 @@ public class PopUpUpgrade : MonoBehaviour
     public GameObject butRerollAds1, butRerollAds2;
     public GameObject butRerollHard1, butRerollHard2;
 
+    public static bool buttonTapAccess;
+
 
     private void Start()
     {
@@ -43,14 +47,6 @@ public class PopUpUpgrade : MonoBehaviour
 
         panelPassiveUpgrade.SetActive(true);
         panelGunUpgrade.SetActive(false);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ButOpen();
-        }
     }
 
     void CardGunAnimation()
@@ -117,6 +113,7 @@ public class PopUpUpgrade : MonoBehaviour
         if (upgradeController.upgradeLevelCount > 0)
         {
             InitializeGunUpgrade();
+            buttonTapAccess = true;
         }
         else
         {
@@ -173,6 +170,8 @@ public class PopUpUpgrade : MonoBehaviour
             panelPassiveUpgrade.SetActive(false);
             panelGunUpgrade.SetActive(true);
             InitializeGunUpgrade();
+
+            buttonTapAccess = true;
         } 
         else
         {
@@ -190,9 +189,13 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButOpen()
     {
+        pauseBut.SetActive(false);
+
         GameplayController.isPause = true;
         isOpen = true;
         Time.timeScale = 0;
+
+        buttonTapAccess = true;
 
         panelPassiveUpgrade.SetActive(true);
         panelGunUpgrade.SetActive(false);
@@ -248,6 +251,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButClosed()
     {
+        pauseBut.SetActive(true);
+
         GameplayController.isPause = false;
         isOpen = false;
         Time.timeScale = 1;
@@ -257,51 +262,72 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollAds(string _type)
     {
-        if (_type == "gun")
-        {
-            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("gunReroll");
-        }
+        if (buttonTapAccess)
+        {            
+            if (_type == "gun")
+            {
+                GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("gunReroll");
+                //buttonTapAccess = false;
+            }
 
-        if (_type == "passive")
-        {
-            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("passiveReroll");
-        }        
+            if (_type == "passive")
+            {
+                GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("passiveReroll");
+                //buttonTapAccess = false;
+            }
+        }
     }
 
     public void CallBackRerollAds(string _type)
     {
-        if (_type == "gun")
-        {
-            StartCoroutine(RerollGun());
-        }
-
-        if (_type == "passive")
-        {
-            StartCoroutine(RerollPassive());
-        }
+        StartCoroutine(StartRerollAds(_type));
 
         butRerollAds1.SetActive(false);
         butRerollAds2.SetActive(false);
     }
 
-    public void ButRerollHard(string _type)
+    IEnumerator StartRerollAds(string _type)
     {
-        if (_type == "gun" && PlayerPrefs.GetInt("playerHard") >= 10)
-        {
-            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
-            StartCoroutine(RerollGun());
+        yield return new WaitForSeconds(0.5f);
 
-            butRerollHard1.SetActive(false);
-            butRerollHard2.SetActive(false);
+        if (_type == "gun")
+        {
+            StartCoroutine(RerollGun());
         }
 
-        if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
+        if (_type == "passive")
         {
-            PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
             StartCoroutine(RerollPassive());
+        }
 
-            butRerollHard1.SetActive(false);
-            butRerollHard2.SetActive(false);
+        buttonTapAccess = true;
+    }
+
+    public void ButRerollHard(string _type)
+    {
+        if (buttonTapAccess)
+        {            
+            if (_type == "gun" && PlayerPrefs.GetInt("playerHard") >= 10)
+            {
+                PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
+                StartCoroutine(RerollGun());
+
+                buttonTapAccess = false;
+
+                //butRerollHard1.SetActive(false);
+                //butRerollHard2.SetActive(false);
+            }
+
+            if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
+            {
+                PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 10);
+                StartCoroutine(RerollPassive());
+
+                buttonTapAccess = false;
+
+                //butRerollHard1.SetActive(false);
+                //butRerollHard2.SetActive(false);
+            }
         }
     }
 
@@ -327,6 +353,8 @@ public class PopUpUpgrade : MonoBehaviour
         cardGunAnim.Insert(0f, cardGun1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardGunAnim.Insert(0.1f, cardGun2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardGunAnim.Insert(0.2f, cardGun3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
+        buttonTapAccess = true;
     }
 
     IEnumerator RerollPassive()
@@ -352,5 +380,7 @@ public class PopUpUpgrade : MonoBehaviour
         cardPassiveAnim.Insert(0f, cardPassive1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardPassiveAnim.Insert(0.1f, cardPassive2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
         cardPassiveAnim.Insert(0.2f, cardPassive3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
+        buttonTapAccess = true;
     }
 }

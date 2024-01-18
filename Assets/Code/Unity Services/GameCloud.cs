@@ -121,12 +121,12 @@ public class GameCloud : MonoBehaviour
             playerLevel = PlayerPrefs.GetInt("playerLevel"),
             playerFuelCurrent = PlayerPrefs.GetInt("playerFuelCurrent"),
 
-            drawingGunCount = PlayerPrefs.GetInt("drawingEngineCount"),
+            drawingGunCount = PlayerPrefs.GetInt("drawingGunCount"),
             drawingEngineCount = PlayerPrefs.GetInt("drawingEngineCount"),
-            drawingBrakesCount = PlayerPrefs.GetInt("drawingEngineCount"),
-            drawingFuelSystemCount = PlayerPrefs.GetInt("drawingEngineCount"),
-            drawingSuspensionCount = PlayerPrefs.GetInt("drawingEngineCount"),
-            drawingTransmissionCount = PlayerPrefs.GetInt("drawingEngineCount"),
+            drawingBrakesCount = PlayerPrefs.GetInt("drawingBrakesCount"),
+            drawingFuelSystemCount = PlayerPrefs.GetInt("drawingFuelSystemCount"),
+            drawingSuspensionCount = PlayerPrefs.GetInt("drawingSuspensionCount"),
+            drawingTransmissionCount = PlayerPrefs.GetInt("drawingTransmissionCount"),
 
             dionysusCarPurchased = PlayerPrefs.GetInt("DionysuscarPurchased"),
             taiowaCarPurchased = PlayerPrefs.GetInt("TaiowacarPurchased"),
@@ -487,14 +487,6 @@ public class GameCloud : MonoBehaviour
             SaveData();
         }          
 #endif
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SaveData();
-        }
     }
 }
 

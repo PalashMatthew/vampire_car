@@ -49,6 +49,10 @@ public class BossFireTruckController : MonoBehaviour
     public int shotRicochetCount;
 
 
+    public GameObject objLazer1, objLazer2, objLazer3;
+    public Material matDefault, matAttack;
+
+
     private void Start()
     {
         _enemyController = GetComponent<EnemyController>();
@@ -66,7 +70,7 @@ public class BossFireTruckController : MonoBehaviour
             {
                 //action = BossActions.FindPlayer;
                 action = BossActions.ShotRicochet;
-                StartCoroutine(ShotRicochet());
+                StartCoroutine(ShotRicochet(3));
             }
         }
 
@@ -98,7 +102,7 @@ public class BossFireTruckController : MonoBehaviour
         transform.DOMoveX(_player.transform.position.x, moveSpeedFindPlayer);
     }
 
-    IEnumerator ShotRicochet()
+    IEnumerator ShotRicochet(int _count)
     {
         for (int i = 0; i < shotRicochetCount; i++)
         {
@@ -109,14 +113,16 @@ public class BossFireTruckController : MonoBehaviour
 
         yield return new WaitForSeconds(shotRicochetTimePause);
 
-        if (_enemyController.hp >= _enemyController.maxHp / 2)
+        _count--;
+
+        if (_count > 0)
         {
-            StartCoroutine(ShotRicochet());
+            StartCoroutine(ShotRicochet(_count));
         } 
         else
         {
             currentPhase = 2;
-            currentAttack = 1;
+            currentAttack = 2;
             action = BossActions.FindPlayer;
             StartCoroutine(Pause());
         }
@@ -127,6 +133,7 @@ public class BossFireTruckController : MonoBehaviour
         yield return new WaitForSeconds(2);
         DOTween.KillAll();
         action = BossActions.Pause;
+        //currentAttack = 1;
         StartCoroutine(Pause());
     }
 
@@ -152,29 +159,80 @@ public class BossFireTruckController : MonoBehaviour
             action = BossActions.FireAttack2;
             StartCoroutine(FireAttack2());
         }
+
+        if (currentAttack == 3)
+        {
+            action = BossActions.ShotRicochet;
+            StartCoroutine(ShotRicochet(3));
+        }
     }
 
     IEnumerator FireAttack1()
     {
-        fxShot1_1.gameObject.transform.LookAt(_player.transform.position, Vector3.up);
-        fxShot1_1.gameObject.transform.eulerAngles = new Vector3(0, fxShot1_1.gameObject.transform.eulerAngles.y, 0);
-        fxShot1_1.Play();
+        objLazer1.GetComponentInChildren<BoxCollider>().enabled = false;
+        objLazer2.GetComponentInChildren<BoxCollider>().enabled = false;
+        objLazer3.GetComponentInChildren<BoxCollider>().enabled = false;
 
-        yield return new WaitForSeconds(2);
+        objLazer1.SetActive(true);
+        objLazer1.GetComponentInChildren<MeshRenderer>().material = matDefault;
+        objLazer1.GetComponent<BossFireTruckLazerController>().isLookAt = true;
 
-        fxShot1_2.gameObject.transform.LookAt(_player.transform.position, Vector3.up);
-        fxShot1_2.gameObject.transform.eulerAngles = new Vector3(0, fxShot1_2.gameObject.transform.eulerAngles.y, 0);
-        fxShot1_2.Play();
+        objLazer1.GetComponentInChildren<EnemyLazerObj>().damage = (int)damage;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.7f);
 
-        fxShot1_3.gameObject.transform.LookAt(_player.transform.position, Vector3.up);
-        fxShot1_3.gameObject.transform.eulerAngles = new Vector3(0, fxShot1_3.gameObject.transform.eulerAngles.y, 0);
-        fxShot1_3.Play();
+        objLazer1.GetComponent<BossFireTruckLazerController>().isLookAt = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.7f);
 
-        currentAttack = 2;
+        objLazer1.GetComponentInChildren<MeshRenderer>().material = matAttack;
+        objLazer1.GetComponentInChildren<BoxCollider>().enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        objLazer2.SetActive(true);
+        objLazer2.GetComponentInChildren<MeshRenderer>().material = matDefault;
+        objLazer2.GetComponent<BossFireTruckLazerController>().isLookAt = true;
+
+        objLazer2.GetComponentInChildren<EnemyLazerObj>().damage = (int)damage;
+
+        yield return new WaitForSeconds(0.7f);
+
+        objLazer2.GetComponent<BossFireTruckLazerController>().isLookAt = false;
+
+        yield return new WaitForSeconds(0.7f);
+
+        objLazer2.GetComponentInChildren<MeshRenderer>().material = matAttack;
+        objLazer2.GetComponentInChildren<BoxCollider>().enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        objLazer3.SetActive(true);
+        objLazer3.GetComponentInChildren<MeshRenderer>().material = matDefault;
+        objLazer3.GetComponent<BossFireTruckLazerController>().isLookAt = true;
+
+        objLazer3.GetComponentInChildren<EnemyLazerObj>().damage = (int)damage;
+
+        yield return new WaitForSeconds(0.7f);
+
+        objLazer3.GetComponent<BossFireTruckLazerController>().isLookAt = false;
+
+        yield return new WaitForSeconds(0.7f);
+
+        objLazer3.GetComponentInChildren<MeshRenderer>().material = matAttack;
+        objLazer3.GetComponentInChildren<BoxCollider>().enabled = true;
+
+        yield return new WaitForSeconds(1f);
+
+        objLazer1.GetComponentInChildren<BoxCollider>().enabled = false;
+        objLazer2.GetComponentInChildren<BoxCollider>().enabled = false;
+        objLazer3.GetComponentInChildren<BoxCollider>().enabled = false;
+
+        objLazer1.SetActive(false);
+        objLazer2.SetActive(false);
+        objLazer3.SetActive(false);
+
+        currentAttack = 3;
 
         action = BossActions.FindPlayer;
         StartCoroutine(FindPlayerTimer());

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
   m_Name: BackDamage
   m_EditorClassIdentifier: 
+  Id: 0
   cardName: BackDamage
   descriptionCommon: 
   descriptionRare: 
@@ -28,7 +29,13 @@ MonoBehaviour:
   lv2UpgradeRare2: 0
   lv2UpgradeLegendary1: 0
   lv2UpgradeLegendary2: 0
-  imageItem: {fileID: 21300000, guid: f709e7357b5de6c4b9808a1ea00c4379, type: 3}
+  lv3UpgradeCommon1: 0
+  lv3UpgradeCommon2: 0
+  lv3UpgradeRare1: 0
+  lv3UpgradeRare2: 0
+  lv3UpgradeLegendary1: 0
+  lv3UpgradeLegendary2: 0
+  imageItem: {fileID: 21300000, guid: a0f1373400a62b544b2a19d4fcfdb072, type: 3}
   upgradeType: 0
   cardRarity: 0
   upgradePassiveType: 10

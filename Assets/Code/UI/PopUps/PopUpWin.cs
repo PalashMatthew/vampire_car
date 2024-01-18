@@ -53,18 +53,22 @@ public class PopUpWin : MonoBehaviour
 
     GameObject instCellMoney;
 
+    GameObject player;
+
 
     private void Start()
     {
         isEndGame = false;
         _popUpController = GetComponent<PopUpController>();
+
+        player = GameObject.Find("Player");
     }
 
     void Initialize()
     {       
         tWave.text = (waveController.currentWave - 1) + "";
 
-        tLeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText1") + " " + Random.Range(70, 86) + "% " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_tutorGameMessage2");
+        tLeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText1") + " " + Random.Range(70, 86) + "% " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText2");
 
         locationNum = GameObject.Find("GameplayController").GetComponent<GameplayController>().locationNum;
 
@@ -86,6 +90,8 @@ public class PopUpWin : MonoBehaviour
         if (waveController.currentWave >= 2)
         {
             #region Money Drop
+            GameObject instCell;
+
             float moneyRand = Random.Range(PlayerPrefs.GetFloat(locationNum + "dropSystemMoneyMin"), PlayerPrefs.GetFloat(locationNum + "dropSystemMoneyMax"));
             float moneyValue = 0;
 
@@ -94,26 +100,29 @@ public class PopUpWin : MonoBehaviour
                 moneyValue += moneyRand / 100 * waveDropProcent[i - 1];
             }
 
-            if (PlayerPrefs.GetString("activeCarID") == "Eos")
+            if (PlayerPrefs.GetString("selectedCarID") == "Eos")
             {
                 moneyValue = moneyValue + (moneyValue / 100 * 20);
             }
 
-            GameObject instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
-            instCell.transform.parent = scrollObj;
-            instCell.GetComponent<ResourcesCell>().value = (int)moneyValue;
-            instCell.GetComponent<ResourcesCell>().sprIcon = sprIconMoney;
-            instCell.GetComponent<ResourcesCell>().Initialize();
+            if (moneyValue > 0)
+            {
+                instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
+                instCell.transform.parent = scrollObj;
+                instCell.GetComponent<ResourcesCell>().value = (int)moneyValue;
+                instCell.GetComponent<ResourcesCell>().sprIcon = sprIconMoney;
+                instCell.GetComponent<ResourcesCell>().Initialize();
 
-            instCellMoney = instCell;
+                instCellMoney = instCell;
 
-            PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (int)moneyValue);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (int)moneyValue);
 
-            objButAds.SetActive(true);
-            tAdsReward.text = "+" + (int)moneyValue / 2f;
-            moneyGiveValue = (int)moneyValue;
+                objButAds.SetActive(true);
+                tAdsReward.text = "+" + (int)moneyValue / 2f;
+                moneyGiveValue = (int)moneyValue;
 
-            _moneyReward = (int)moneyValue;
+                _moneyReward = (int)moneyValue;
+            }            
             #endregion
 
             #region Exp Drop
@@ -125,15 +134,18 @@ public class PopUpWin : MonoBehaviour
                 expValue += expRand / 100 * waveDropProcent[i - 1];
             }
 
-            instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
-            instCell.transform.parent = scrollObj;
-            instCell.GetComponent<ResourcesCell>().value = (int)expValue;
-            instCell.GetComponent<ResourcesCell>().sprIcon = sprIconExp;
-            instCell.GetComponent<ResourcesCell>().Initialize();
+            if (expValue > 0)
+            {
+                instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
+                instCell.transform.parent = scrollObj;
+                instCell.GetComponent<ResourcesCell>().value = (int)expValue;
+                instCell.GetComponent<ResourcesCell>().sprIcon = sprIconExp;
+                instCell.GetComponent<ResourcesCell>().Initialize();
 
-            PlayerPrefs.SetInt("playerExp", PlayerPrefs.GetInt("playerExp") + (int)expValue);
+                PlayerPrefs.SetInt("playerExp", PlayerPrefs.GetInt("playerExp") + (int)expValue);
 
-            _expReward = (int)expValue;
+                _expReward = (int)expValue;
+            }            
             #endregion
 
             #region Drawing Drop
@@ -261,15 +273,19 @@ public class PopUpWin : MonoBehaviour
                 titanValue += titanRand / 100 * waveDropProcent[i - 1];
             }
 
-            instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
-            instCell.transform.parent = scrollObj;
-            instCell.GetComponent<ResourcesCell>().value = (int)titanValue;
-            instCell.GetComponent<ResourcesCell>().sprIcon = sprIconTitan;
-            instCell.GetComponent<ResourcesCell>().Initialize();
+            if (titanValue > 0)
+            {
+                instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
+                instCell.transform.parent = scrollObj;
+                instCell.GetComponent<ResourcesCell>().value = (int)titanValue;
+                instCell.GetComponent<ResourcesCell>().sprIcon = sprIconTitan;
+                instCell.GetComponent<ResourcesCell>().Initialize();
 
-            PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + (int)titanValue);
+                PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + (int)titanValue);
 
-            _titanReward = (int)titanValue;
+                _titanReward = (int)titanValue;
+            }
+            
             #endregion
 
             if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
@@ -327,7 +343,11 @@ public class PopUpWin : MonoBehaviour
 
                     PlayerPrefs.SetInt("item" + _itemType + "ID" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), _card.itemID);
 
+                    PlayerPrefs.SetInt("item" + _itemType + "Level" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), 1);
+
                     PlayerPrefs.SetString("item" + _itemType + "Rarity" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), rarity);
+
+                    PlayerPrefs.SetInt("item" + _itemType + "New" + (PlayerPrefs.GetInt("itemCount" + _itemType) - 1), 1);
 
                     if (_itemType == "Gun")
                     {
@@ -375,6 +395,8 @@ public class PopUpWin : MonoBehaviour
     {
         GameplayController.isPause = true;
         isEndGame = true;
+
+        player.SetActive(false);
 
         Initialize();
 

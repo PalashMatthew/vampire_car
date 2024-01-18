@@ -75,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         isMoveAccess = true;
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
+
+        if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
+            StartCoroutine(SetRegeneration());
     }
 
     private void Update()
@@ -101,10 +104,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator SetRegeneration()
+    public IEnumerator SetRegeneration()
     {
         yield return new WaitForSeconds(1);
-
+        
         if (gameObject.GetComponent<PlayerStats>().currentHp < gameObject.GetComponent<PlayerStats>().maxHp)
             gameObject.GetComponent<PlayerStats>().currentHp += gameObject.GetComponent<PlayerStats>().maxHp / 100 * PlayerPrefs.GetFloat("setValue");
 
@@ -127,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     void PlayerAnimation()
     {
         if (Input.GetMouseButtonUp(0))
-        {
+        {            
             mesh.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
             //wheelLeftObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
             //wheelRightObj.transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
@@ -218,7 +221,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
 
-                StartCoroutine(SetRegeneration());
+                if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
+                    StartCoroutine(SetRegeneration());
             }
         }
 #endif
@@ -303,7 +307,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             transform.DOLocalRotate(new Vector3(0, 0, 0), playerAnimRotateSpeed);
-            StartCoroutine(SetRegeneration());
+
+            if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)            
+                StartCoroutine(SetRegeneration());
         }
 #endif
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PanelCharacteristics;
 
 public class GarageController : MonoBehaviour
 {
@@ -69,6 +70,12 @@ public class GarageController : MonoBehaviour
     public ItemCell slot6Card;
 
     [Header("Slots Level")]
+    public GameObject slot1LevelPanel;
+    public GameObject slot2LevelPanel;
+    public GameObject slot3LevelPanel;
+    public GameObject slot4LevelPanel;
+    public GameObject slot5LevelPanel;
+    public GameObject slot6LevelPanel;
     public TMP_Text tSlot1Level;
     public TMP_Text tSlot2Level;
     public TMP_Text tSlot3Level;
@@ -77,6 +84,17 @@ public class GarageController : MonoBehaviour
     public TMP_Text tSlot6Level;
 
     public List<GameObject> itemMass;
+
+    [Header("Arrow")]
+    public GameObject objArrow1;
+    public GameObject objArrow2;
+    public GameObject objArrow3;
+    public GameObject objArrow4;
+    public GameObject objArrow5;
+    public GameObject objArrow6;
+    public GameObject objArrowCar;
+
+    public PopUpCarUpgrade popUpCarUpgrade;
 
 
     private void OnEnable()
@@ -94,33 +112,75 @@ public class GarageController : MonoBehaviour
         #region Slot Levels
         //1
         if (slot1Card != null)
+        {
+            slot1LevelPanel.SetActive(true);
             tSlot1Level.text = "Lv. " + slot1Card.currentLevel;
-        else tSlot1Level.text = "";
+        }
+        else
+        {
+            slot1LevelPanel.SetActive(false);
+            tSlot1Level.text = "";
+        }
 
         //2
         if (slot2Card != null)
+        {
+            slot2LevelPanel.SetActive(true);
             tSlot2Level.text = "Lv. " + slot2Card.currentLevel;
-        else tSlot2Level.text = "";
+        }            
+        else
+        {
+            slot2LevelPanel.SetActive(false);
+            tSlot2Level.text = "";
+        }            
 
         //3
         if (slot3Card != null)
+        {
+            slot3LevelPanel.SetActive(true);
             tSlot3Level.text = "Lv. " + slot3Card.currentLevel;
-        else tSlot3Level.text = "";
+        }            
+        else
+        {
+            slot3LevelPanel.SetActive(false);
+            tSlot3Level.text = "";
+        }            
 
         //4
         if (slot4Card != null)
+        {
+            slot4LevelPanel.SetActive(true);
             tSlot4Level.text = "Lv. " + slot4Card.currentLevel;
-        else tSlot4Level.text = "";
+        }            
+        else
+        {
+            slot4LevelPanel.SetActive(false);
+            tSlot4Level.text = "";
+        }            
 
         //5
         if (slot5Card != null)
+        {
+            slot5LevelPanel.SetActive(true);
             tSlot5Level.text = "Lv. " + slot5Card.currentLevel;
-        else tSlot5Level.text = "";
+        }            
+        else
+        {
+            slot5LevelPanel.SetActive(false);
+            tSlot5Level.text = "";
+        }            
 
         //6
         if (slot6Card != null)
+        {
+            slot6LevelPanel.SetActive(true);
             tSlot6Level.text = "Lv. " + slot6Card.currentLevel;
-        else tSlot6Level.text = "";
+        }            
+        else
+        {
+            slot6LevelPanel.SetActive(false);
+            tSlot6Level.text = "";
+        }            
         #endregion
     }
 
@@ -166,6 +226,8 @@ public class GarageController : MonoBehaviour
 
         LoadItem();
         LoadSlots();
+
+        CheckArrowUpgrade();
     }
 
     void LoadItem()
@@ -947,6 +1009,10 @@ public class GarageController : MonoBehaviour
                 }                    
 
                 PlayerPrefs.SetInt("slot2_itemNumInInventory", -1);
+                PlayerPrefs.SetInt("slot2_itemID", 0);
+
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = activeItem.itemObj.setID;
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
 
                 imgSlot2.sprite = sprSlotDefault;
                 imgIconSlot2.gameObject.SetActive(false);
@@ -984,6 +1050,10 @@ public class GarageController : MonoBehaviour
                 }                    
 
                 PlayerPrefs.SetInt("slot3_itemNumInInventory", -1);
+                PlayerPrefs.SetInt("slot3_itemID", 0);
+
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = activeItem.itemObj.setID;
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
 
                 imgSlot3.sprite = sprSlotDefault;
                 imgIconSlot3.gameObject.SetActive(false);
@@ -1021,6 +1091,10 @@ public class GarageController : MonoBehaviour
                 }                    
 
                 PlayerPrefs.SetInt("slot4_itemNumInInventory", -1);
+                PlayerPrefs.SetInt("slot4_itemID", 0);
+
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = activeItem.itemObj.setID;
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
 
                 imgSlot4.sprite = sprSlotDefault;
                 imgIconSlot4.gameObject.SetActive(false);
@@ -1058,6 +1132,10 @@ public class GarageController : MonoBehaviour
                 }                    
 
                 PlayerPrefs.SetInt("slot5_itemNumInInventory", -1);
+                PlayerPrefs.SetInt("slot5_itemID", 0);
+
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = activeItem.itemObj.setID;
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
 
                 imgSlot5.sprite = sprSlotDefault;
                 imgIconSlot5.gameObject.SetActive(false);
@@ -1095,6 +1173,10 @@ public class GarageController : MonoBehaviour
                 }                    
 
                 PlayerPrefs.SetInt("slot6_itemNumInInventory", -1);
+                PlayerPrefs.SetInt("slot6_itemID", 0);
+
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = activeItem.itemObj.setID;
+                GameObject.Find("PopUp Set").GetComponent<PopUpSet>().CheckSet();
 
                 imgSlot6.sprite = sprSlotDefault;
                 imgIconSlot6.gameObject.SetActive(false);
@@ -1128,6 +1210,8 @@ public class GarageController : MonoBehaviour
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_DetailTakeOff(_detailType, _detailID, _detailLevel, _detailRare);
 
         CalculateViewStats();
+
+        CheckArrowUpgrade();
     }
 
     public void CalculateViewStats()
@@ -1158,5 +1242,362 @@ public class GarageController : MonoBehaviour
 
         tDamage.text = "+" + _damage + "%";
         tHealth.text = _health + "";
+    }
+
+    public void CheckArrowUpgrade()
+    {
+        #region Slot 1
+        if (slot1Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot1Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingGunCount");
+
+            if (PlayerPrefs.GetInt("item" + "Gun" + "Level" + slot1Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot1Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot1Card.currentLevel] && 
+                    PlayerPrefs.GetInt("item" + "Gun" + "Level" + slot1Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow1.SetActive(true);
+                }
+                else
+                {
+                    objArrow1.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow1.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow1.SetActive(false);
+        }
+        #endregion
+
+        #region Slot 2
+        if (slot2Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot2Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingEngineCount");
+
+            if (PlayerPrefs.GetInt("item" + "Engine" + "Level" + slot2Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot2Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot2Card.currentLevel] &&
+                    PlayerPrefs.GetInt("item" + "Engine" + "Level" + slot2Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow2.SetActive(true);
+                }
+                else
+                {
+                    objArrow2.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow2.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow2.SetActive(false);
+        }
+        #endregion
+
+        #region Slot 3
+        if (slot3Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot3Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingBrakesCount");
+
+            if (PlayerPrefs.GetInt("item" + "Brakes" + "Level" + slot3Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot3Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot3Card.currentLevel] &&
+                    PlayerPrefs.GetInt("item" + "Brakes" + "Level" + slot3Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow3.SetActive(true);
+                }
+                else
+                {
+                    objArrow3.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow3.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow3.SetActive(false);
+        }
+        #endregion
+
+        #region Slot 4
+        if (slot4Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot4Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingFuelSystemCount");
+
+            if (PlayerPrefs.GetInt("item" + "FuelSystem" + "Level" + slot4Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot4Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot4Card.currentLevel] &&
+                    PlayerPrefs.GetInt("item" + "FuelSystem" + "Level" + slot4Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow4.SetActive(true);
+                }
+                else
+                {
+                    objArrow4.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow4.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow4.SetActive(false);
+        }
+        #endregion
+
+        #region Slot 5
+        if (slot5Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot5Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingSuspensionCount");
+
+            if (PlayerPrefs.GetInt("item" + "Suspension" + "Level" + slot5Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot5Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot5Card.currentLevel] &&
+                    PlayerPrefs.GetInt("item" + "Suspension" + "Level" + slot5Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow5.SetActive(true);
+                }
+                else
+                {
+                    objArrow5.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow5.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow5.SetActive(false);
+        }
+        #endregion
+
+        #region Slot 6
+        if (slot6Card != null)
+        {
+            int maxLevel = 10;
+
+            switch (slot6Card.itemRarity)
+            {
+                case "common":
+                    maxLevel = 10;
+                    break;
+
+                case "rare":
+                    maxLevel = 20;
+                    break;
+
+                case "epic":
+                    maxLevel = 30;
+                    break;
+
+                case "legendary":
+                    maxLevel = 40;
+                    break;
+            }
+
+            int currentDrawing = PlayerPrefs.GetInt("drawingTransmissionCount");
+
+            if (PlayerPrefs.GetInt("item" + "Transmission" + "Level" + slot6Card.itemNumInInventory) < maxLevel)
+            {
+                if (PlayerPrefs.GetInt("playerMoney") >= popUpDetail.upgradePrice[slot6Card.currentLevel] &&
+                    currentDrawing >= popUpDetail.drawingCount[slot6Card.currentLevel] &&
+                    PlayerPrefs.GetInt("item" + "Transmission" + "Level" + slot6Card.itemNumInInventory) < PlayerPrefs.GetInt("playerLevel"))
+                {
+                    objArrow6.SetActive(true);
+                }
+                else
+                {
+                    objArrow6.SetActive(false);
+                }
+            }
+            else
+            {
+                objArrow6.SetActive(false);
+            }
+        }
+        else
+        {
+            objArrow6.SetActive(false);
+        }
+        #endregion
+
+        #region Car Upgrade
+        bool arrowAccept = false;
+
+        string _carName = "";
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (i == 0)
+                _carName = "Dionysus";
+
+            if (i == 0)
+                _carName = "Lyssa";
+
+            if (i == 0)
+                _carName = "Taiowa";
+
+            if (i == 0)
+                _carName = "P-Run";
+
+            if (i == 0)
+                _carName = "Aeolus";
+
+            if (i == 0)
+                _carName = "Hyas";
+
+            if (i == 0)
+                _carName = "Hemera";
+
+            if (i == 0)
+                _carName = "Eos";
+
+            if (PlayerPrefs.GetInt(_carName + "carPurchased") == 1)
+            {
+                if (PlayerPrefs.GetInt(_carName + "carLevel") < 40 &&
+                    PlayerPrefs.GetInt("playerTitan") >= popUpCarUpgrade.titanCount[PlayerPrefs.GetInt(_carName + "carLevel")] &&
+                    PlayerPrefs.GetInt("playerLevel") > PlayerPrefs.GetInt(_carName + "carLevel") &&
+                    PlayerPrefs.GetInt("playerMoney") >= popUpCarUpgrade.upgradePrice[PlayerPrefs.GetInt(_carName + "carLevel")])
+                {
+                    arrowAccept = true;
+                }
+            }
+
+            if (arrowAccept)
+            {
+                objArrowCar.SetActive(true);
+            } 
+            else
+            {
+                objArrowCar.SetActive(false);
+            }
+        }
+
+        #endregion
     }
 }

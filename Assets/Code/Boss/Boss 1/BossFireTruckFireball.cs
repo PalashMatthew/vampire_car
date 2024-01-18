@@ -12,6 +12,9 @@ public class BossFireTruckFireball : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+
+        if (PopUpWin.isEndGame)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

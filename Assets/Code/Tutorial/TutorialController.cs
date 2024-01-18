@@ -21,9 +21,13 @@ public class TutorialController : MonoBehaviour
 
     public TMP_Text tMessage1, tMessage2, tMessage3, tMessage4, tMessage5_1, tMessage5_2, tMessage5_3;
 
+    GameObject pauseBut;
+
 
     private void Start()
     {
+        pauseBut = GameObject.Find("pauseBut");
+
         if (PlayerPrefs.GetString("tutorialComplite") == "false" && Application.loadedLevelName == "Loc alpha 1")
         {            
             PlayerPrefs.SetString("tutorialLoc1Complite", "false");
@@ -85,7 +89,7 @@ public class TutorialController : MonoBehaviour
 
         GameObject aidKitObj = Instantiate(objAidFirstKit, new Vector3(-10, 1, 82f), transform.rotation);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(6f);
 
         if (aidKitObj != null)
         {
@@ -120,6 +124,8 @@ public class TutorialController : MonoBehaviour
         Time.timeScale = 0;
         PlayerPrefs.SetString("tutorialCards", "true");
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+        pauseBut.SetActive(false);
 
         Message5.GetComponent<PopUpController>().OpenPopUp();
 
@@ -164,10 +170,13 @@ public class TutorialController : MonoBehaviour
 
                 WaveController.isTutorialActive = false;
             }
-            
+
+            pauseBut.SetActive(true);
 
             PlayerPrefs.SetString("tutorialComplite", "true");
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 5;
         }
     }
 

@@ -263,6 +263,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 736244585170897907, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 736244585170897907, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00004005432
+      objectReference: {fileID: 0}
     - target: {fileID: 1383380392538678185, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -355,6 +363,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2785578689128462782, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3210221213491370192, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -417,6 +429,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8188291719537148463, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: _bursts.Array.data[0].used
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852818212552849880, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8870594785133719995, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
@@ -3735,6 +3771,10 @@ PrefabInstance:
       propertyPath: cameraCenter
       value: 
       objectReference: {fileID: 409763057}
+    - target: {fileID: 8890347402577514824, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9211695937586817575, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
       propertyPath: m_IsActive
       value: 0

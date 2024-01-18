@@ -48,6 +48,8 @@ public class PopUpNewLevel : MonoBehaviour
             PlayerPrefs.SetInt("playerExp", newExp);
 
             ShowPopUp();
+
+            GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
         }
         else
         {

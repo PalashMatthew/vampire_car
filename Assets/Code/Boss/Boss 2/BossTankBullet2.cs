@@ -54,6 +54,9 @@ public class BossTankBullet2 : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        if (PopUpWin.isEndGame)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

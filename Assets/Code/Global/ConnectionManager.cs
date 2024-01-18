@@ -24,13 +24,12 @@ public class ConnectionManager : MonoBehaviour
 
     public void Awake()
     {
-        DontDestroyOnLoad(headObj);
+        //DontDestroyOnLoad(headObj);
 
         _popUpController = GetComponent<PopUpController>();
 
         PlayerPrefs.SetInt("internet_access", 0);
 
-        //StartCoroutine(CheckConnect());
         StartCoroutine(checkInternetConnection());
     }
 
@@ -62,7 +61,7 @@ public class ConnectionManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
 
         UnityWebRequest request = new UnityWebRequest("https://google.com");
-        yield return request.SendWebRequest();
+        yield return request;
         if (request.error != null)
         {
             //action(false);
@@ -76,7 +75,7 @@ public class ConnectionManager : MonoBehaviour
             PlayerPrefs.SetInt("internet_access", 1);
         }
 
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(9);
 
         StartCoroutine(checkInternetConnection());
     }

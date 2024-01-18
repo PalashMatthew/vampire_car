@@ -33,6 +33,8 @@ public class ChooseLocationController : MonoBehaviour
     public TMP_Text tRewards;
     public GameObject objReward;
 
+    public GameObject popUpBuyFuel;
+
 
     private void Start()
     {
@@ -90,7 +92,8 @@ public class ChooseLocationController : MonoBehaviour
     private void Update()
     {
         tChapter.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_play");
-        tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
+        //tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
+        tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward");
         tLocName.text = currentLocNum + ". " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_location" + currentLocNum + "Name");
         tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
     }
@@ -142,6 +145,8 @@ public class ChooseLocationController : MonoBehaviour
 
         tLocName.text = currentLocNum + ". " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_location" + currentLocNum + "Name");
         tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
+
+        GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
 
         #region Camera Color Settings
         if (currentLocNum == 1)
@@ -195,6 +200,10 @@ public class ChooseLocationController : MonoBehaviour
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Play(PlayerPrefs.GetInt("playerFuelCurrent"), PlayerPrefs.GetFloat("CurrentAllDamage"), PlayerPrefs.GetFloat("CurrentAllHealth"), currentLocNum);
 
             loader.LoadLevel(levelName[currentLocNum - 1]);
+        }
+        else
+        {
+            popUpBuyFuel.GetComponent<PopUpBuyFuel>().ButOpen();
         }
     }
 

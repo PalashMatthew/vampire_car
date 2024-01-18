@@ -71,10 +71,13 @@ public class LazerGun : MonoBehaviour
 
         foreach (GameObject gm in _enemyInRadius)
         {
-            if (!gm.GetComponent<EnemyController>().isBoss)
-                _gunController.DamageEnemy(gm, gameObject);
-            else
-                _gunController.DamageBoss(gm);
+            if (gm != null)
+            {
+                if (!gm.GetComponent<EnemyController>().isBoss)
+                    _gunController.DamageEnemy(gm, gameObject);
+                else
+                    _gunController.DamageBoss(gm);
+            }            
         }
 
         StartCoroutine(Attack());

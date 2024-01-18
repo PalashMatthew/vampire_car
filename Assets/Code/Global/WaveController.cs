@@ -101,17 +101,27 @@ public class WaveController : MonoBehaviour
         {
             currentWave++;
 
+            _generateObstacles.StopSpawnObstacles();
+
             for (int i = 0; i < _generateObstacles.instObstacles.Count; i++)
             {
                 if (_generateObstacles.instObstacles[i] != null)
                 {
                     Destroy(_generateObstacles.instObstacles[i]);
                 }
-            }
+            }            
 
             _gameplayController.activeEnemy.Clear();
             _generate.BossFight();
-        }        
+        }
+
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
+        {
+            GameObject.Find("Player").GetComponent<PlayerController>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerController>().ShieldTimer());
+        }
+
+        if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
+            GameObject.Find("Player").GetComponent<PlayerMovement>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerMovement>().SetRegeneration());
     }
 
     public void StartTutorialWave()

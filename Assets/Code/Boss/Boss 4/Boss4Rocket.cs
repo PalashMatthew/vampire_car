@@ -32,6 +32,9 @@ public class Boss4Rocket : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        if (PopUpWin.isEndGame)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

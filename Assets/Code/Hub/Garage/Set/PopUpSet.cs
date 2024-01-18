@@ -21,6 +21,11 @@ public class PopUpSet : MonoBehaviour
     public TMP_Text tDescription1;
     public TMP_Text tDescription2;
     public TMP_Text tDescription3;
+    public Image imgBonusPanel1;
+    public Image imgBonusPanel2;
+    public Image imgBonusPanel3;
+    public Sprite sprBonusPanelInactive;
+    public Sprite sprBonusPanelActive;
 
     [Header("Cell")]
     public Image imgCell1;
@@ -284,6 +289,8 @@ public class PopUpSet : MonoBehaviour
         tDescription1.text = setCard.bonusDescription1;
         tDescription2.text = setCard.bonusDescription2;
         tDescription3.text = setCard.bonusDescription3;
+
+        CheckSet();
     }
 
     public void OpenPopUp()
@@ -417,6 +424,11 @@ public class PopUpSet : MonoBehaviour
         if (setDetailCount < 3)
         {
             PlayerPrefs.SetInt("setActive", 0);
+            PlayerPrefs.SetFloat("setValue", 0);
+
+            imgBonusPanel1.sprite = sprBonusPanelInactive;
+            imgBonusPanel2.sprite = sprBonusPanelInactive;
+            imgBonusPanel3.sprite = sprBonusPanelInactive;
         } 
         else
         {
@@ -426,16 +438,28 @@ public class PopUpSet : MonoBehaviour
             if (setDetailCount == 3)
             {
                 PlayerPrefs.SetFloat("setValue", setCard.value1);
+
+                imgBonusPanel1.sprite = sprBonusPanelActive;
+                imgBonusPanel2.sprite = sprBonusPanelInactive;
+                imgBonusPanel3.sprite = sprBonusPanelInactive;
             }
 
             if (setDetailCount == 4)
             {
                 PlayerPrefs.SetFloat("setValue", setCard.value2);
+
+                imgBonusPanel1.sprite = sprBonusPanelInactive;
+                imgBonusPanel2.sprite = sprBonusPanelActive;
+                imgBonusPanel3.sprite = sprBonusPanelInactive;
             }
 
             if (setDetailCount == 5)
             {
                 PlayerPrefs.SetFloat("setValue", setCard.value3);
+
+                imgBonusPanel1.sprite = sprBonusPanelInactive;
+                imgBonusPanel2.sprite = sprBonusPanelInactive;
+                imgBonusPanel3.sprite = sprBonusPanelActive;
             }
         }
     }

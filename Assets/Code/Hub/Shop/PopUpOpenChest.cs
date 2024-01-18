@@ -37,14 +37,23 @@ public class PopUpOpenChest : MonoBehaviour
 
     public GameObject shopCanvas;
 
+    public GameObject butOpenChest1Again, butOpenChest2Again;
+
+    int chestNum;
+
+    string chestSettings;
+
 
     private void Start()
     {
-        _popUpController = GetComponent<PopUpController>();
+        _popUpController = GetComponent<PopUpController>();       
     }
 
-    public void Open()
+    public void Open(int _chestNum, string _chestSettings)
     {
+        chestNum = _chestNum;
+        chestSettings = _chestSettings;
+
         StartCoroutine(OffShopCanvas());
         StartCoroutine(Animation());
 
@@ -130,9 +139,10 @@ public class PopUpOpenChest : MonoBehaviour
         PlayerPrefs.SetInt("item" + _itemType + "Level" + _cellCount, 1);
         PlayerPrefs.SetString("item" + _itemType + "Rarity" + _cellCount, rarity);
         PlayerPrefs.SetString("item" + _itemType + "Type" + _cellCount, card.itemType.ToString());
+        PlayerPrefs.SetInt("item" + _itemType + "New" + _cellCount, 1);
         #endregion
 
-        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();        
     }
 
     IEnumerator OffShopCanvas()
@@ -169,11 +179,16 @@ public class PopUpOpenChest : MonoBehaviour
         imgCard.transform.DOScale(0, 0);
         butOk.transform.DOScale(0, 0);
 
+        butOpenChest1Again.SetActive(false);
+        butOpenChest2Again.SetActive(false);
         vfxCircles.gameObject.SetActive(false);
         tName.gameObject.SetActive(false);
         tRarity.gameObject.SetActive(false);
         imgCard.gameObject.SetActive(false);
         butOk.SetActive(false);
+
+        butOpenChest1Again.transform.DOScale(0, 0);
+        butOpenChest2Again.transform.DOScale(0, 0);
 
         yield return new WaitForSeconds(1.9f);
 
@@ -197,5 +212,24 @@ public class PopUpOpenChest : MonoBehaviour
         butOk.gameObject.SetActive(true);
 
         butOk.transform.DOScale(1, 0.3f);
+
+        if (PlayerPrefs.GetString("tutorialHubComplite") == "true" && chestSettings == "hard")
+        {
+            if (chestNum == 1)
+            {
+                butOpenChest1Again.SetActive(true);
+                butOpenChest2Again.SetActive(false);
+
+                butOpenChest1Again.transform.DOScale(1, 0.3f);
+            }
+
+            if (chestNum == 2)
+            {
+                butOpenChest1Again.SetActive(false);
+                butOpenChest2Again.SetActive(true);
+
+                butOpenChest2Again.transform.DOScale(1, 0.3f);
+            }
+        }
     }
 }

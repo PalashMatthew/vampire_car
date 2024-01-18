@@ -45,6 +45,9 @@ public class BossFireTruckRicochetBullet : MonoBehaviour
 
         if (transform.position.z > 80)
             Destroy(gameObject);
+
+        if (PopUpWin.isEndGame)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

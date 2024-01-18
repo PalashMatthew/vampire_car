@@ -40,7 +40,7 @@ public class HubController : MonoBehaviour
     public int maxUserLevel;
 
     [Header("Sounds")]
-    public AudioClip clipSwipe;
+    public AudioClip clipSwipe;    
 
 
     private void Start()
@@ -54,7 +54,9 @@ public class HubController : MonoBehaviour
     }
 
     void Initialize()
-    {       
+    {
+        Time.timeScale = 1;
+
         screenGarage.SetActive(false);
         screenLock.SetActive(false);
         screenShop.SetActive(false);

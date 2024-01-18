@@ -19,6 +19,8 @@ public class PopUpWaveReward : MonoBehaviour
 
     public TMP_Text tLocNum;
 
+    int currentLoc;
+
 
     private void Start()
     {
@@ -27,7 +29,23 @@ public class PopUpWaveReward : MonoBehaviour
 
     void Initialize()
     {
-        int currentLoc = locationController.currentLocNum;
+        currentLoc = 1;
+
+        for (int locNum = 1; locNum < 5; locNum++)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if (PlayerPrefs.GetInt("loc" + locNum + "reward" + i + "Take") == 0)
+                {
+                    currentLoc = locNum;
+                    goto l1;
+                }
+            }
+        }
+        
+        l1:
+
+        //int currentLoc = locationController.currentLocNum;
 
         tLocNum.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_locationText") + " " + currentLoc;
 
@@ -158,11 +176,11 @@ public class PopUpWaveReward : MonoBehaviour
 
     public void But_Reward(int rewardNum)
     {        
-        if (PlayerPrefs.GetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take") == 0)
+        if (PlayerPrefs.GetInt("loc" + currentLoc + "reward" + rewardNum + "Take") == 0)
         {
-            if (PlayerPrefs.GetInt("loc_" + locationController.currentLocNum + "_maxWave") >= rewardNum * 2)
+            if (PlayerPrefs.GetInt("loc_" + currentLoc + "_maxWave") >= rewardNum * 2)
             {
-                if (locationController.currentLocNum == 1)
+                if (currentLoc == 1)
                 {
                     switch (rewardNum)
                     {
@@ -186,7 +204,7 @@ public class PopUpWaveReward : MonoBehaviour
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
                             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
 
-                            PlayerPrefs.SetString("caseSpecialDropEngine", "true");
+                            //PlayerPrefs.SetString("caseSpecialDropEngine", "true");
                             break;
 
                         case 5:
@@ -209,15 +227,15 @@ public class PopUpWaveReward : MonoBehaviour
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
                             PlayerPrefs.SetInt("playerKey1", PlayerPrefs.GetInt("playerKey1") + 1);          
                             
-                            if (locationController.currentLocNum == 2)
-                            {
-                                PlayerPrefs.SetString("caseSpecialDropBrakes", "true");
-                            }
+                            //if (currentLoc == 2)
+                            //{
+                            //    PlayerPrefs.SetString("caseSpecialDropBrakes", "true");
+                            //}
 
-                            if (locationController.currentLocNum == 3)
-                            {
-                                PlayerPrefs.SetString("caseSpecialDropSuspension", "true");
-                            }
+                            //if (currentLoc == 3)
+                            //{
+                            //    PlayerPrefs.SetString("caseSpecialDropSuspension", "true");
+                            //}
                             break;
 
                         case 3:
@@ -230,15 +248,15 @@ public class PopUpWaveReward : MonoBehaviour
                             PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + 5);
                             PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
 
-                            if (locationController.currentLocNum == 2)
-                            {
-                                PlayerPrefs.SetString("caseSpecialDropFuelSystem", "true");
-                            }
+                            //if (currentLoc == 2)
+                            //{
+                            //    PlayerPrefs.SetString("caseSpecialDropFuelSystem", "true");
+                            //}
 
-                            if (locationController.currentLocNum == 3)
-                            {
-                                PlayerPrefs.SetString("caseSpecialDropTransmission", "true");
-                            }
+                            //if (currentLoc == 3)
+                            //{
+                            //    PlayerPrefs.SetString("caseSpecialDropTransmission", "true");
+                            //}
                             break;
 
                         case 5:
@@ -248,12 +266,14 @@ public class PopUpWaveReward : MonoBehaviour
                     }
                 }
 
-                PlayerPrefs.SetInt("loc" + locationController.currentLocNum + "reward" + rewardNum + "Take", 1);
+                PlayerPrefs.SetInt("loc" + currentLoc + "reward" + rewardNum + "Take", 1);
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
                 Initialize();
             }
         }
+
+        GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
     }
 
     public void ButOpen()

@@ -305,7 +305,7 @@ public class TalentsController : MonoBehaviour
             tCell6LevelObj.SetActive(true);
             cell6Icon.SetActive(true);
             tCell6Name.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameShotSpeed");
-            tCell6Value.text = PlayerPrefs.GetInt("talentShotSpeedCurrentValue") + "";
+            tCell6Value.text = PlayerPrefs.GetInt("talentShotSpeedCurrentValue") + "%";
 
             if (shotSpeedLevel >= shotSpeedLevelMax)
             {
@@ -518,6 +518,8 @@ public class TalentsController : MonoBehaviour
             }
 
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TalentUpgrade(PlayerPrefs.GetInt("talentGlobalLevel"), _resBalanceType, _resType);
+
+            GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
             #endregion
         }
     }
@@ -525,6 +527,11 @@ public class TalentsController : MonoBehaviour
     void SaveCheck()
     {
         if (!PlayerPrefs.HasKey("talentGlobalLevel"))
+        {
+            PlayerPrefs.SetInt("talentGlobalLevel", 1);
+        }
+
+        if (PlayerPrefs.GetInt("talentGlobalLevel") < 1)
         {
             PlayerPrefs.SetInt("talentGlobalLevel", 1);
         }

@@ -162,6 +162,8 @@ public class PopUpSettings : MonoBehaviour
 
     public async void ButDeleteAccount()
     {
+        Destroy(GameObject.Find("MusicController"));
+
         await UnityServices.InitializeAsync();
 
         await AuthenticationService.Instance.DeleteAccountAsync();

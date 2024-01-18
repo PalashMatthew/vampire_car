@@ -15,12 +15,14 @@ public class PopUpDailyReward : MonoBehaviour
     public Image imgPanel1, imgPanel2, imgPanel3, imgPanel4, imgPanel5, imgPanel6, imgPanel7;
     public Sprite sprPanelDefault, sprPanelActive;
 
+    public GameObject redPush;
+
 
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
 
-        if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
+        //if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
             Initialize();
     }
 
@@ -31,230 +33,406 @@ public class PopUpDailyReward : MonoBehaviour
             PlayerPrefs.SetInt("DailyRewardCurrentDay", 1);
         }
 
-        switch (PlayerPrefs.GetInt("DailyRewardCurrentDay"))
+        
+
+        //if (PlayerPrefs.HasKey("OfflineTimeLast"))
+        //{
+            
+        //}
+
+        if (!PlayerPrefs.HasKey("DailyRewardTimerSaveTime"))
         {
-            case 1:
-                toggle1.SetActive(false);
-                toggle2.SetActive(false);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(false);
-                shadow2.SetActive(false);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelActive;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 2:
-                toggle1.SetActive(true);
-                toggle2.SetActive(false);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(false);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelActive;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 3:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(false);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(false);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelActive;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 4:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(false);
-                toggle5.SetActive(false);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(false);
-                shadow5.SetActive(false);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelActive;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 5:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(true);
-                toggle5.SetActive(false);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(true);
-                shadow5.SetActive(false);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelActive;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 6:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(true);
-                toggle5.SetActive(true);
-                toggle6.SetActive(false);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(true);
-                shadow5.SetActive(true);
-                shadow6.SetActive(false);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelActive;
-                imgPanel7.sprite = sprPanelDefault;
-                break;
-
-            case 7:
-                toggle1.SetActive(true);
-                toggle2.SetActive(true);
-                toggle3.SetActive(true);
-                toggle4.SetActive(true);
-                toggle5.SetActive(true);
-                toggle6.SetActive(true);
-                toggle7.SetActive(false);
-
-                shadow1.SetActive(true);
-                shadow2.SetActive(true);
-                shadow3.SetActive(true);
-                shadow4.SetActive(true);
-                shadow5.SetActive(true);
-                shadow6.SetActive(true);
-                shadow7.SetActive(false);
-
-                imgPanel1.sprite = sprPanelDefault;
-                imgPanel2.sprite = sprPanelDefault;
-                imgPanel3.sprite = sprPanelDefault;
-                imgPanel4.sprite = sprPanelDefault;
-                imgPanel5.sprite = sprPanelDefault;
-                imgPanel6.sprite = sprPanelDefault;
-                imgPanel7.sprite = sprPanelActive;
-                break;
+            PlayerPrefs.SetInt("DailyRewardTimerSaveTime", 86400);
         }
 
-        if (PlayerPrefs.HasKey("OfflineTimeLast"))
+        int seconds = OfflineTimeCheck.totalSeconds;
+
+        PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + seconds);
+
+        if (PlayerPrefs.GetInt("DailyRewardTimerSaveTime") >= 86400)
         {
-            int seconds = OfflineTimeCheck.totalSeconds;
+            isRewardReady = true;
+            //ButOpen();
+            redPush.SetActive(true);
+        }
+        else
+        {
+            redPush.SetActive(false);
+            StartCoroutine(DailyRewardTimer());
+        }
 
-            //DateTime ts;
-            //ts = DateTime.Parse(PlayerPrefs.GetString("OfflineTimeLast"));
-
-            //if (ts.Day > 0)
-            //{
-            //    //seconds += ts.Day * (60 * 60 * 24);
-            //}
-
-            //if (ts.Hour > 0)
-            //{
-            //    seconds += ts.Hour * 60 * 60;
-            //}
-
-            //if (ts.Minute > 0)
-            //{
-            //    seconds += ts.Minute * 60;
-            //}
-
-            //if (ts.Second > 0)
-            //{
-            //    seconds += ts.Second;
-            //}
-
-            Debug.Log(seconds);
-
-            PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + seconds);
-
-            if (PlayerPrefs.GetInt("DailyRewardTimerSaveTime") > 86400)
+        if (isRewardReady)
+        {
+            switch (PlayerPrefs.GetInt("DailyRewardCurrentDay"))
             {
-                isRewardReady = true;
-                ButOpen();
+                case 1:
+                    toggle1.SetActive(false);
+                    toggle2.SetActive(false);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(false);
+                    shadow2.SetActive(false);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelActive;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 2:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(false);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(false);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelActive;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 3:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelActive;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 4:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelActive;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 5:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelActive;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 6:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(true);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(true);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelActive;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 7:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(true);
+                    toggle6.SetActive(true);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(true);
+                    shadow6.SetActive(true);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelActive;
+                    break;
             }
-            else
+        }
+        else
+        {
+            switch (PlayerPrefs.GetInt("DailyRewardCurrentDay"))
             {
-                StartCoroutine(DailyRewardTimer());
+                case 1:
+                    toggle1.SetActive(false);
+                    toggle2.SetActive(false);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(false);
+                    shadow2.SetActive(false);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 2:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(false);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(false);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 3:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(false);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(false);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 4:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(false);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(false);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 5:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(false);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(false);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 6:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(true);
+                    toggle6.SetActive(false);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(true);
+                    shadow6.SetActive(false);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
+
+                case 7:
+                    toggle1.SetActive(true);
+                    toggle2.SetActive(true);
+                    toggle3.SetActive(true);
+                    toggle4.SetActive(true);
+                    toggle5.SetActive(true);
+                    toggle6.SetActive(true);
+                    toggle7.SetActive(false);
+
+                    shadow1.SetActive(true);
+                    shadow2.SetActive(true);
+                    shadow3.SetActive(true);
+                    shadow4.SetActive(true);
+                    shadow5.SetActive(true);
+                    shadow6.SetActive(true);
+                    shadow7.SetActive(false);
+
+                    imgPanel1.sprite = sprPanelDefault;
+                    imgPanel2.sprite = sprPanelDefault;
+                    imgPanel3.sprite = sprPanelDefault;
+                    imgPanel4.sprite = sprPanelDefault;
+                    imgPanel5.sprite = sprPanelDefault;
+                    imgPanel6.sprite = sprPanelDefault;
+                    imgPanel7.sprite = sprPanelDefault;
+                    break;
             }
         }
     }
@@ -350,14 +528,18 @@ public class PopUpDailyReward : MonoBehaviour
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
 
-                ButClosed();
+                StopAllCoroutines();
+                Initialize();
             }
         }
     }
 
     public void ButOpen()
     {
-        _popUpController.OpenPopUp();
+        StopAllCoroutines();
+        Initialize();
+
+        _popUpController.OpenPopUp();        
     }
 
     public void ButClosed()

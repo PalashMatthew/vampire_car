@@ -1106,35 +1106,37 @@ public class UpgradeController : MonoBehaviour
                 _playerPassiveController.isPassiveHealthRecovery = true;
                 break;
 
-            case UpgradeCard.UpgradePassiveType.Rage:    
-                if (_playerPassiveController.isPassiveRage)
-                {
-                    _playerStats.rageCoeff += _value;
+            case UpgradeCard.UpgradePassiveType.Rage:
+                _playerStats.rageValue += _value;
 
-                    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
-                }
+                //if (_playerPassiveController.isPassiveRage)
+                //{
+                //    _playerStats.rageCoeff += _value;
 
-                if (!_playerPassiveController.isPassiveRage)
-                {
-                    _playerPassiveController.isPassiveRage = true;
+                //    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
+                //}
 
-                    _playerStats.rageCoeff += _value;
+                //if (!_playerPassiveController.isPassiveRage)
+                //{
+                //    _playerPassiveController.isPassiveRage = true;
 
-                    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
-                }
+                //    _playerStats.rageCoeff += _value;
+
+                //    _playerStats.rageValue = 1 + (1 / 100 * _playerStats.rageCoeff);
+                //}
                 break;
 
             case UpgradeCard.UpgradePassiveType.AttackSpeedUp:
                 foreach (Gun _gun in _playerGuns.guns)
                 {
-                    _gun.shotSpeedCoeffPassive = _value;
+                    _gun.shotSpeedCoeffPassive += _value;
                 }
                 break;
 
             case UpgradeCard.UpgradePassiveType.DamageUp:
                 foreach (Gun _gun in _playerGuns.guns)
                 {
-                    _gun.damageCoeffPassive = _value;
+                    _gun.damageCoeffPassive += _value;
                 }
                 break;
 
@@ -1789,7 +1791,7 @@ public class UpgradeController : MonoBehaviour
             #region Type 1
             if (_type1 == "Damage")
             {
-                gunObj.damageCoeffPassive = PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+                gunObj.damageCoeffPassive += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
             }
 
             if (_type1 == "Projectile")
@@ -1799,7 +1801,7 @@ public class UpgradeController : MonoBehaviour
 
             if (_type1 == "ShotSpeed")
             {
-                gunObj.shotSpeedCoeffPassive = PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
+                gunObj.shotSpeedCoeffPassive += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_1_" + _rarity);
             }
 
             if (_type1 == "Area")
@@ -1826,7 +1828,7 @@ public class UpgradeController : MonoBehaviour
             #region Type 2
             if (_type2 == "Damage")
             {
-                gunObj.damageCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+                gunObj.damageCoeffPassive += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
             }
 
             if (_type2 == "Projectile")
@@ -1836,7 +1838,7 @@ public class UpgradeController : MonoBehaviour
 
             if (_type2 == "ShotSpeed")
             {
-                gunObj.shotSpeedCoeff += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
+                gunObj.shotSpeedCoeffPassive += PlayerPrefs.GetFloat(cardGunAccept.card.cardName + "lv" + cardGunAccept.levelNum + "_2_" + _rarity);
             }
 
             if (_type2 == "Area")

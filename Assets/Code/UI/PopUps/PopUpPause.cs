@@ -27,6 +27,8 @@ public class PopUpPause : MonoBehaviour
 
     private void Start()
     {
+        GameplayController.isPause = false;
+        Time.timeScale = 1;
         _popUpController = GetComponent<PopUpController>();
         GunSlotInitialize();
     }

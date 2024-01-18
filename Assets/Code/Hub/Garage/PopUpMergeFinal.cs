@@ -99,7 +99,7 @@ public class PopUpMergeFinal : MonoBehaviour
                 imgBackground.sprite = sprBackgroundRare;
                 imgBackground2.sprite = sprBackgroundRare;
                 imgBackground3.sprite = sprBackgroundRare;
-                tRarity.text = "<color=#3498DB>Редкая</color>";
+                tRarity.text = "<color=#3498DB>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_rare") + "</color>";
 
                 tCurrentLevel.text = "10";
                 tNextLevel.text = "20";
@@ -108,14 +108,14 @@ public class PopUpMergeFinal : MonoBehaviour
                 {
                     imgIconPanel1.sprite = sprHealth;
 
-                    tNamePanel1.text = "Здоровье";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                 }
 
                 if (card.baseItemCharactersRare1 == DetailCard.ItemCharacters.DamageUp)
                 {
                     imgIconPanel1.sprite = sprDamage;
 
-                    tNamePanel1.text = "Урон";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                 }
 
                 tCurrentPanelValue1.text = currentPanelValue1 + "";
@@ -130,14 +130,14 @@ public class PopUpMergeFinal : MonoBehaviour
                     {
                         imgIconPanel2.sprite = sprHealth;
 
-                        tNamePanel2.text = "Здоровье";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                     }
 
                     if (card.baseItemCharactersRare2 == DetailCard.ItemCharacters.DamageUp)
                     {
                         imgIconPanel2.sprite = sprDamage;
 
-                        tNamePanel2.text = "Урон";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                     }
 
                     tCurrentPanelValue2.text = currentPanelValue2 + "";
@@ -153,7 +153,7 @@ public class PopUpMergeFinal : MonoBehaviour
                 imgBackground.sprite = sprBackgroundEpic;
                 imgBackground2.sprite = sprBackgroundEpic;
                 imgBackground3.sprite = sprBackgroundEpic;
-                tRarity.text = "<color=#CE33FF>Эпическая</color>";
+                tRarity.text = "<color=#CE33FF>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_epic") + "</color>";
 
                 tCurrentLevel.text = "20";
                 tNextLevel.text = "30";
@@ -162,14 +162,14 @@ public class PopUpMergeFinal : MonoBehaviour
                 {
                     imgIconPanel1.sprite = sprHealth;
 
-                    tNamePanel1.text = "Здоровье";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                 }
 
                 if (card.baseItemCharactersEpic1 == DetailCard.ItemCharacters.DamageUp)
                 {
                     imgIconPanel1.sprite = sprDamage;
 
-                    tNamePanel1.text = "Урон";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                 }
 
                 tCurrentPanelValue1.text = currentPanelValue1 + "";
@@ -184,14 +184,14 @@ public class PopUpMergeFinal : MonoBehaviour
                     {
                         imgIconPanel2.sprite = sprHealth;
 
-                        tNamePanel2.text = "Здоровье";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                     }
 
                     if (card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.DamageUp)
                     {
                         imgIconPanel2.sprite = sprDamage;
 
-                        tNamePanel2.text = "Урон";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                     }
 
                     tCurrentPanelValue2.text = currentPanelValue2 + "";
@@ -208,7 +208,7 @@ public class PopUpMergeFinal : MonoBehaviour
                 imgBackground.sprite = sprBackgroundLegendary;
                 imgBackground2.sprite = sprBackgroundLegendary;
                 imgBackground3.sprite = sprBackgroundLegendary;
-                tRarity.text = "<color=yellow>Легендарная</color>";
+                tRarity.text = "<color=yellow>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_legendary") + "</color>";
 
                 tCurrentLevel.text = "30";
                 tNextLevel.text = "40";
@@ -217,14 +217,14 @@ public class PopUpMergeFinal : MonoBehaviour
                 {
                     imgIconPanel1.sprite = sprHealth;
 
-                    tNamePanel1.text = "Здоровье";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                 }
 
                 if (card.baseItemCharactersLegendary1 == DetailCard.ItemCharacters.DamageUp)
                 {
                     imgIconPanel1.sprite = sprDamage;
 
-                    tNamePanel1.text = "Урон";
+                    tNamePanel1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                 }
 
                 tCurrentPanelValue1.text = currentPanelValue1 + "";
@@ -239,14 +239,14 @@ public class PopUpMergeFinal : MonoBehaviour
                     {
                         imgIconPanel2.sprite = sprHealth;
 
-                        tNamePanel2.text = "Здоровье";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameHealth");
                     }
 
                     if (card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.DamageUp)
                     {
                         imgIconPanel2.sprite = sprDamage;
 
-                        tNamePanel2.text = "Урон";
+                        tNamePanel2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
                     }
 
                     tCurrentPanelValue2.text = currentPanelValue2 + "";

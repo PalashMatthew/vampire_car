@@ -46,6 +46,10 @@ public class PopUpMerge : MonoBehaviour
     public TMP_Text tLevelCell2;
     public TMP_Text tLevelCell3;
     public TMP_Text tLevelCellFinal;
+    public GameObject levelCell1TextPanel;
+    public GameObject levelCell2TextPanel;
+    public GameObject levelCell3TextPanel;
+    public GameObject levelCellFinalTextPanel;
     private int maxLevel;  //Содержит самый высокий уровень среди выбранных итемов
 
     [Header("Buttons Panel")]
@@ -608,6 +612,11 @@ public class PopUpMerge : MonoBehaviour
             imgSlot3.gameObject.SetActive(true);
             imgSlotFinal.gameObject.SetActive(true);
 
+            levelCell1TextPanel.SetActive(true);
+            levelCell2TextPanel.SetActive(false);
+            levelCell3TextPanel.SetActive(false);
+            levelCellFinalTextPanel.SetActive(true);
+
             itemCell1 = _itemCell;
 
             imgSlot1.sprite = _itemCell.imgCard.sprite;
@@ -739,6 +748,7 @@ public class PopUpMerge : MonoBehaviour
             }
 
             tLevelCell2.text = "Lv " + _itemCell.currentLevel;
+            levelCell2TextPanel.SetActive(true);
 
             if (_itemCell.currentLevel > maxLevel)
             {
@@ -779,6 +789,7 @@ public class PopUpMerge : MonoBehaviour
             }
 
             tLevelCell3.text = "Lv " + _itemCell.currentLevel;
+            levelCell3TextPanel.SetActive(true);
 
             if (_itemCell.currentLevel > maxLevel)
             {
@@ -813,7 +824,12 @@ public class PopUpMerge : MonoBehaviour
                 imgSlot1.gameObject.SetActive(false);
                 imgSlot2.gameObject.SetActive(false);
                 imgSlot3.gameObject.SetActive(false);
-                imgSlotFinal.gameObject.SetActive(false);                
+                imgSlotFinal.gameObject.SetActive(false);
+
+                levelCell1TextPanel.SetActive(false);
+                levelCell2TextPanel.SetActive(false);
+                levelCell3TextPanel.SetActive(false);
+                levelCellFinalTextPanel.SetActive(false);
 
                 isSlot1full = false;
                 isSlot2full = false;
@@ -892,6 +908,8 @@ public class PopUpMerge : MonoBehaviour
                     }
                 }
 
+                levelCell2TextPanel.SetActive(false);
+
                 itemCell2.MergeDefault();
 
                 itemCell2 = null;
@@ -926,6 +944,8 @@ public class PopUpMerge : MonoBehaviour
                     }
                 }
 
+                levelCell3TextPanel.SetActive(false);
+
                 itemCell3.MergeDefault();
 
                 itemCell3 = null;
@@ -949,6 +969,7 @@ public class PopUpMerge : MonoBehaviour
                 PlayerPrefs.SetInt("item" + _itemType + "Level" + i, PlayerPrefs.GetInt("item" + _itemType + "Level" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Rarity" + i, PlayerPrefs.GetString("item" + _itemType + "Rarity" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
+                PlayerPrefs.SetInt("item" + _itemType + "New" + i, PlayerPrefs.GetInt("item" + _itemType + "New" + (i + 1)));
 
                 if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
                 {
@@ -973,6 +994,7 @@ public class PopUpMerge : MonoBehaviour
             PlayerPrefs.DeleteKey("item" + _itemType + "Level" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Rarity" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "Type" + itemCount);
+            PlayerPrefs.DeleteKey("item" + _itemType + "New" + itemCount);
 
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon1Value" + itemCount);
             PlayerPrefs.DeleteKey("item" + _itemType + "baseCharacterCommon2Value" + itemCount);
@@ -1065,6 +1087,7 @@ public class PopUpMerge : MonoBehaviour
         PlayerPrefs.SetInt("item" + _itemType + "Level" + _cellCount, maxLevel);
         PlayerPrefs.SetString("item" + _itemType + "Rarity" + _cellCount, _itemRarity);
         PlayerPrefs.SetString("item" + _itemType + "Type" + _cellCount, itemCellGeneral.itemType);
+        PlayerPrefs.SetInt("item" + _itemType + "New" + _cellCount, 1);
         #endregion
 
         popUpMergeFinal.card = itemCellGeneral.itemObj;
@@ -1161,6 +1184,8 @@ public class PopUpMerge : MonoBehaviour
 
         SaveItem();
         LoadItem();
+
+        GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
 
         popUpMergeFinal.rarity = _itemRarity;        
         popUpMergeFinal.ButOpen();        

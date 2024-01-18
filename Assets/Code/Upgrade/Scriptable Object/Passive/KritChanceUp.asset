@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2857ab2c6d2395f47b1de1b22ccbe4e0, type: 3}
   m_Name: KritChanceUp
   m_EditorClassIdentifier: 
+  Id: 0
   cardName: KritChanceUp
   descriptionCommon: +5%
   descriptionRare: +10%
@@ -28,7 +29,13 @@ MonoBehaviour:
   lv2UpgradeRare2: 0
   lv2UpgradeLegendary1: 0
   lv2UpgradeLegendary2: 0
-  imageItem: {fileID: 21300000, guid: 6f801b3ea8eb8c24fbbc3074fb880737, type: 3}
+  lv3UpgradeCommon1: 0
+  lv3UpgradeCommon2: 0
+  lv3UpgradeRare1: 0
+  lv3UpgradeRare2: 0
+  lv3UpgradeLegendary1: 0
+  lv3UpgradeLegendary2: 0
+  imageItem: {fileID: 21300000, guid: 9c89c86da318ef049bed39c01d41ffe9, type: 3}
   upgradeType: 0
   cardRarity: 0
   upgradePassiveType: 9

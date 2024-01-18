@@ -18,6 +18,9 @@ public class BossTankBullet1 : MonoBehaviour
 
         if (WaveController.isWaveEnd)
             Destroy(gameObject);
+
+        if (PopUpWin.isEndGame) 
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

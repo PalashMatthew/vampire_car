@@ -111,7 +111,7 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("TransmissionSelectKritChance")
                      + PlayerPrefs.GetFloat("carGlobalCoeffkritChance");
 
-        if (PlayerPrefs.GetString("activeCarID") == "Hyas")
+        if (PlayerPrefs.GetString("selectedCarID") == "Hyas")
         {
             kritChance += 5;
         }
@@ -228,7 +228,7 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("SuspensionSelectRage")
                      + PlayerPrefs.GetFloat("TransmissionSelectRage");
 
-        if (PlayerPrefs.GetString("activeCarID") == "Hemera")
+        if (PlayerPrefs.GetString("selectedCarID") == "Hemera")
         {
             rageCoeff += 20;
         }
@@ -272,7 +272,7 @@ public class PlayerStats : MonoBehaviour
             currentHp = maxHp;
         }
 
-        if (PlayerPrefs.GetString("activeCarID") == "Dionysus")
+        if (PlayerPrefs.GetString("selectedCarID") == "Dionysus")
         {
             if (currentHp < (maxHp / 100 * 50) && !isRecoveryHpDionisusCarTalant)
             {

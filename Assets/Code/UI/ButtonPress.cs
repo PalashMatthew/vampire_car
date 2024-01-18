@@ -14,9 +14,9 @@ public class ButtonPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public AudioClip clip;
 
 
-    private void OnEnable()
+    void OnDisable()
     {
-        //transform.DOScale(1f, 0f).SetUpdate(true);
+        transform.DOScale(1f, 0f).SetUpdate(true);
     }
 
     public void OnPointerDown(PointerEventData eventData)
