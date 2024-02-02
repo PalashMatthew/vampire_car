@@ -1085,7 +1085,7 @@ public class UpgradeController : MonoBehaviour
     }
     #endregion
 
-    public void Upgrade_Passive(string _rarity)
+    public void Upgrade_Passive(string _rarity) 
     {
         float _value;
 

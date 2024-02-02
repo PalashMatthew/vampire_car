@@ -19,17 +19,23 @@ public class PopUpBuyFuel : MonoBehaviour
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 60);
 
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyFuel("hard");
         }            
     }
 
     public void ButBuyAds()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyFuel("ads");
+
         GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("fuel_5");
     }
 
     public void ButOpen()
     {
         _popUpController.OpenPopUp();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenFuelPopUp();
     }
 
     public void ButClosed()

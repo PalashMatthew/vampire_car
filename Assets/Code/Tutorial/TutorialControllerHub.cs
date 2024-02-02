@@ -9,6 +9,7 @@ public class TutorialControllerHub : MonoBehaviour
     public GameObject Message3;
     public GameObject Message4;
     public GameObject Message5;
+    public GameObject Message5_1;
     public GameObject Message6;
     public GameObject Message7;
     public GameObject Message8;
@@ -31,6 +32,8 @@ public class TutorialControllerHub : MonoBehaviour
                 PlayerPrefs.SetString("tutorialHubComplite", "false");
                 popUpNewLevel.SetActive(false);
                 Message1.GetComponent<PopUpController>().OpenPopUp();
+
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_1");
             }
 
             if (PlayerPrefs.GetInt("tutorialHubStage") == 2)
@@ -40,7 +43,7 @@ public class TutorialControllerHub : MonoBehaviour
 
             if (PlayerPrefs.GetInt("tutorialHubStage") == 3)
             {
-                StartMessage5();
+                StartMessage5_1();
             }
         }
     }
@@ -49,6 +52,8 @@ public class TutorialControllerHub : MonoBehaviour
     {
         Message1.GetComponent<PopUpController>().ClosedPopUp();
         Message2.GetComponent<PopUpController>().OpenPopUp();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_2");
     }
 
     public void OffMessage2()
@@ -62,6 +67,8 @@ public class TutorialControllerHub : MonoBehaviour
         if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
         {            
             Message3.GetComponent<PopUpController>().OpenPopUp();
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_3");
         }            
     }
 
@@ -69,6 +76,8 @@ public class TutorialControllerHub : MonoBehaviour
     {
         Message3.GetComponent<PopUpController>().ClosedPopUp();
         Message4.GetComponent<PopUpController>().OpenPopUp();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_4");
     }
 
     public void OffMessage4()
@@ -80,25 +89,48 @@ public class TutorialControllerHub : MonoBehaviour
     public void StartMessage5()
     {
         if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
+        {
             Message5.GetComponent<PopUpController>().OpenPopUp();
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_5");
+        }
+    }
+
+    public void StartMessage5_1()
+    {
+        if (PlayerPrefs.GetString("tutorialHubComplite") != "true")
+        {
+            Message5_1.GetComponent<PopUpController>().OpenPopUp();
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_5");
+        }
     }
 
     public void StartMessage6()
     {
         Message5.GetComponent<PopUpController>().ClosedPopUp();
+        Message5_1.GetComponent<PopUpController>().ClosedPopUp();
         Message6.GetComponent<PopUpController>().OpenPopUp();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_6");
     }
 
     public void StartMessage7()
     {
         Message6.GetComponent<PopUpController>().ClosedPopUp();
         Message7.GetComponent<PopUpController>().OpenPopUp();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_7");
     }
 
     public void StartMessage8()
     {
+        PlayerPrefs.SetString("tutorialHubComplite", "true");
         Message7.GetComponent<PopUpController>().ClosedPopUp();
         Message8.GetComponent<PopUpController>().OpenPopUp();
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Hub_Stage_8");
     }
 
     public void EndTutorial()

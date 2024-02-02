@@ -18,9 +18,7 @@ public class DefaultGunBullet : MonoBehaviour
     private float punchingCount;
 
     public bool isNewBullet;
-    public GameObject mesh;
-
-    
+    public GameObject mesh;    
 
 
     private void Start()
@@ -57,7 +55,8 @@ public class DefaultGunBullet : MonoBehaviour
 
         if (other.tag == "boss")
         {
-            _gunController.DamageBoss(other.gameObject);
+            //_gunController.DamageBoss(other.gameObject);
+            _gunController.DamageBoss(other.gameObject, gameObject);
             Destroy(gameObject);
         }
 

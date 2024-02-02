@@ -984,6 +984,7 @@ GameObject:
   - component: {fileID: 5868545028221574551}
   - component: {fileID: 5542949720010089409}
   - component: {fileID: 392701383511789527}
+  - component: {fileID: 5639206112299739353}
   m_Layer: 0
   m_Name: Boss_Timber
   m_TagString: boss
@@ -1079,6 +1080,20 @@ MonoBehaviour:
   maxX: 14
   minX: -14
   localMoveSpeed: 6
+--- !u!114 &5639206112299739353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550495825923131874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf817166736db4bb2f18faf36b49be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxFire: {fileID: 0}
+  vfxPoison: {fileID: 0}
 --- !u!1 &5771902574724539818
 GameObject:
   m_ObjectHideFlags: 0

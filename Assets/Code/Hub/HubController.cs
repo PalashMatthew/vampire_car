@@ -150,6 +150,10 @@ public class HubController : MonoBehaviour
 
             imgHeader.DOFade(0.27f, 0.2f);
 
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Fight");
+
+            GetComponent<ChooseLocationController>().Initialize();
+
             StartCoroutine(ScreenSwap());
         }
     }
@@ -178,6 +182,8 @@ public class HubController : MonoBehaviour
 
             imgHeader.DOFade(0f, 0.2f);
 
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Shop");
+
             StartCoroutine(ScreenSwap());
         }
     }
@@ -204,9 +210,11 @@ public class HubController : MonoBehaviour
             imgUpgrade.GetComponent<RectTransform>().DOAnchorPos(new Vector2(243f, 0f), 0.2f);
             imgLock.GetComponent<RectTransform>().DOAnchorPos(new Vector2(435f, 0f), 0.2f);
 
-            imgHeader.DOFade(0f, 0.2f);
+            imgHeader.DOFade(0f, 0.2f);            
 
             StartCoroutine(ScreenSwap());
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Garage");
         }
     }
 
@@ -233,6 +241,8 @@ public class HubController : MonoBehaviour
             imgLock.GetComponent<RectTransform>().DOAnchorPos(new Vector2(435f, 0f), 0.2f);
 
             imgHeader.DOFade(0f, 0.2f);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Talents");
 
             StartCoroutine(ScreenSwap());
         }
@@ -261,6 +271,8 @@ public class HubController : MonoBehaviour
             imgShop.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-435f, 0f), 0.2f);
 
             imgHeader.DOFade(0f, 0.2f);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Coming Soon");
 
             StartCoroutine(ScreenSwap());
         }
@@ -304,6 +316,7 @@ public class HubController : MonoBehaviour
             if (_prevScreen == "shop")
             {
                 screenGarage.SetActive(true);
+                screenGarage.GetComponent<GarageController>().Initialize();
                 screenGarage.GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width * 2, 0);
                 screenGarage.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f);
 
@@ -313,6 +326,7 @@ public class HubController : MonoBehaviour
             if (_prevScreen == "fight")
             {
                 screenGarage.SetActive(true);
+                screenGarage.GetComponent<GarageController>().Initialize();
                 screenGarage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-Screen.width * 2, 0);
                 screenGarage.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f);
             }
@@ -320,6 +334,7 @@ public class HubController : MonoBehaviour
             if (_prevScreen == "upgrade")
             {
                 screenGarage.SetActive(true);
+                screenGarage.GetComponent<GarageController>().Initialize();
                 screenGarage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-Screen.width * 2, 0);
                 screenGarage.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f);
 
@@ -329,6 +344,7 @@ public class HubController : MonoBehaviour
             if (_prevScreen == "lock")
             {
                 screenGarage.SetActive(true);
+                screenGarage.GetComponent<GarageController>().Initialize();
                 screenGarage.GetComponent<RectTransform>().anchoredPosition = new Vector2(-Screen.width * 2, 0);
                 screenGarage.GetComponent<RectTransform>().DOAnchorPosX(0f, 0.2f);
 
@@ -543,5 +559,10 @@ public class HubController : MonoBehaviour
         {
             StartCoroutine(FuelTimer(_seconds));
         }
+    }
+
+    public void SendEventButtonOpenShop(string _type)
+    {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenShopWithButton(_type);
     }
 }

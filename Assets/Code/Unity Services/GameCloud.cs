@@ -148,6 +148,42 @@ public class GameCloud : MonoBehaviour
             hemeraCarLevel = PlayerPrefs.GetInt("HemeracarLevel"),
             eosCarLevel = PlayerPrefs.GetInt("EoscarLevel"),
 
+            dionysusCarDamage = PlayerPrefs.GetFloat("DionysuscarDamage"),
+            taiowaCarDamage = PlayerPrefs.GetFloat("TaiowacarDamage"),
+            prunCarDamage = PlayerPrefs.GetFloat("P-RuncarDamage"),
+            lyssaCarDamage = PlayerPrefs.GetFloat("LyssacarDamage"),
+            aeolusCarDamage = PlayerPrefs.GetFloat("AeoluscarDamage"),
+            hyasCarDamage = PlayerPrefs.GetFloat("HyascarDamage"),
+            hemeraCarDamage = PlayerPrefs.GetFloat("HemeracarDamage"),
+            eosCarDamage = PlayerPrefs.GetFloat("EoscarDamage"),
+
+            dionysusCarDodge = PlayerPrefs.GetFloat("DionysuscarDodge"),
+            taiowaCarDodge = PlayerPrefs.GetFloat("TaiowacarDodge"),
+            prunCarDodge = PlayerPrefs.GetFloat("P-RuncarDodge"),
+            lyssaCarDodge = PlayerPrefs.GetFloat("LyssacarDodge"),
+            aeolusCarDodge = PlayerPrefs.GetFloat("AeoluscarDodge"),
+            hyasCarDodge = PlayerPrefs.GetFloat("HyascarDodge"),
+            hemeraCarDodge = PlayerPrefs.GetFloat("HemeracarDodge"),
+            eosCarDodge = PlayerPrefs.GetFloat("EoscarDodge"),
+
+            dionysusCarHealth = PlayerPrefs.GetFloat("DionysuscarHealth"),
+            taiowaCarHealth = PlayerPrefs.GetFloat("TaiowacarHealth"),
+            prunCarHealth = PlayerPrefs.GetFloat("P-RuncarHealth"),
+            lyssaCarHealth = PlayerPrefs.GetFloat("LyssacarHealth"),
+            aeolusCarHealth = PlayerPrefs.GetFloat("AeoluscarHealth"),
+            hyasCarHealth = PlayerPrefs.GetFloat("HyascarHealth"),
+            hemeraCarHealth = PlayerPrefs.GetFloat("HemeracarHealth"),
+            eosCarHealth = PlayerPrefs.GetFloat("EoscarHealth"),
+
+            dionysusCarKritChance = PlayerPrefs.GetFloat("DionysuscarKritChance"),
+            taiowaCarKritChance = PlayerPrefs.GetFloat("TaiowacarKritChance"),
+            prunCarKritChance = PlayerPrefs.GetFloat("P-RuncarKritChance"),
+            lyssaCarKritChance = PlayerPrefs.GetFloat("LyssacarKritChance"),
+            aeolusCarKritChance = PlayerPrefs.GetFloat("AeoluscarKritChance"),
+            hyasCarKritChance = PlayerPrefs.GetFloat("HyascarKritChance"),
+            hemeraCarKritChance = PlayerPrefs.GetFloat("HemeracarKritChance"),
+            eosCarKritChance = PlayerPrefs.GetFloat("EoscarKritChance"),
+
             selectedCarId = PlayerPrefs.GetString("selectedCarID"),
 
             itemCountGun = PlayerPrefs.GetInt("itemCountGun"),
@@ -298,6 +334,42 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("HyascarLevel", player.hyasCarLevel);
             PlayerPrefs.SetInt("HemeracarLevel", player.hemeraCarLevel);
             PlayerPrefs.SetInt("EoscarLevel", player.eosCarLevel);
+
+            PlayerPrefs.SetFloat("DionysuscarDamage", player.dionysusCarDamage);
+            PlayerPrefs.SetFloat("TaiowacarDamage", player.taiowaCarDamage);
+            PlayerPrefs.SetFloat("P-RuncarDamage", player.prunCarDamage);
+            PlayerPrefs.SetFloat("LyssacarDamage", player.lyssaCarDamage);
+            PlayerPrefs.SetFloat("AeoluscarDamage", player.aeolusCarDamage);
+            PlayerPrefs.SetFloat("HyascarDamage", player.hyasCarDamage);
+            PlayerPrefs.SetFloat("HemeracarDamage", player.hemeraCarDamage);
+            PlayerPrefs.SetFloat("EoscarDamage", player.eosCarDamage);
+
+            PlayerPrefs.SetFloat("DionysuscarHealth", player.dionysusCarHealth);
+            PlayerPrefs.SetFloat("TaiowacarHealth", player.taiowaCarHealth);
+            PlayerPrefs.SetFloat("P-RuncarHealth", player.prunCarHealth);
+            PlayerPrefs.SetFloat("LyssacarHealth", player.lyssaCarHealth);
+            PlayerPrefs.SetFloat("AeoluscarHealth", player.aeolusCarHealth);
+            PlayerPrefs.SetFloat("HyascarHealth", player.hyasCarHealth);
+            PlayerPrefs.SetFloat("HemeracarHealth", player.hemeraCarHealth);
+            PlayerPrefs.SetFloat("EoscarHealth", player.eosCarHealth);
+
+            PlayerPrefs.SetFloat("DionysuscarKritChance", player.dionysusCarKritChance);
+            PlayerPrefs.SetFloat("TaiowacarKritChance", player.taiowaCarKritChance);
+            PlayerPrefs.SetFloat("P-RuncarKritChance", player.prunCarKritChance);
+            PlayerPrefs.SetFloat("LyssacarKritChance", player.lyssaCarKritChance);
+            PlayerPrefs.SetFloat("AeoluscarKritChance", player.aeolusCarKritChance);
+            PlayerPrefs.SetFloat("HyascarKritChance", player.hyasCarKritChance);
+            PlayerPrefs.SetFloat("HemeracarKritChance", player.hemeraCarKritChance);
+            PlayerPrefs.SetFloat("EoscarKritChance", player.eosCarKritChance);
+
+            PlayerPrefs.SetFloat("DionysuscarDodge", player.dionysusCarDodge);
+            PlayerPrefs.SetFloat("TaiowacarDodge", player.taiowaCarDodge);
+            PlayerPrefs.SetFloat("P-RuncarDodge", player.prunCarDodge);
+            PlayerPrefs.SetFloat("LyssacarDodge", player.lyssaCarDodge);
+            PlayerPrefs.SetFloat("AeoluscarDodge", player.aeolusCarDodge);
+            PlayerPrefs.SetFloat("HyascarDodge", player.hyasCarDodge);
+            PlayerPrefs.SetFloat("HemeracarDodge", player.hemeraCarDodge);
+            PlayerPrefs.SetFloat("EoscarDodge", player.eosCarDodge);
 
             PlayerPrefs.SetString("selectedCarID", player.selectedCarId);
 
@@ -525,6 +597,42 @@ public class PlayerData
     public int hyasCarLevel;
     public int hemeraCarLevel;
     public int eosCarLevel;
+
+    public float dionysusCarDamage;
+    public float taiowaCarDamage;
+    public float prunCarDamage;
+    public float lyssaCarDamage;
+    public float aeolusCarDamage;
+    public float hyasCarDamage;
+    public float hemeraCarDamage;
+    public float eosCarDamage;
+
+    public float dionysusCarHealth;
+    public float taiowaCarHealth;
+    public float prunCarHealth;
+    public float lyssaCarHealth;
+    public float aeolusCarHealth;
+    public float hyasCarHealth;
+    public float hemeraCarHealth;
+    public float eosCarHealth;
+
+    public float dionysusCarKritChance;
+    public float taiowaCarKritChance;
+    public float prunCarKritChance;
+    public float lyssaCarKritChance;
+    public float aeolusCarKritChance;
+    public float hyasCarKritChance;
+    public float hemeraCarKritChance;
+    public float eosCarKritChance;
+
+    public float dionysusCarDodge;
+    public float taiowaCarDodge;
+    public float prunCarDodge;
+    public float lyssaCarDodge;
+    public float aeolusCarDodge;
+    public float hyasCarDodge;
+    public float hemeraCarDodge;
+    public float eosCarDodge;
 
     public string selectedCarId;
 

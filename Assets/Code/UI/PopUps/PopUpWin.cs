@@ -17,6 +17,7 @@ public class PopUpWin : MonoBehaviour
     public TMP_Text tLeader;
     public TMP_Text tAdsReward;
     public GameObject objButAds;
+    public TMP_Text tHeader;
 
     public List<DetailCard> detailCards;
 
@@ -74,7 +75,7 @@ public class PopUpWin : MonoBehaviour
 
         if (PlayerPrefs.GetInt("loc_" +  locationNum + "_maxWave") < waveController.currentWave - 1)
         {
-            PlayerPrefs.SetInt("loc_" + locationNum + "_maxWave", waveController.currentWave - 1);
+            PlayerPrefs.SetInt("loc_" + locationNum + "_maxWave", waveController.currentWave - 1);            
         }
 
         int _moneyReward = 0;
@@ -323,9 +324,8 @@ public class PopUpWin : MonoBehaviour
                     string rarity = "";
 
                     int rand = Random.Range(1, 101);
-                    if (rand <= 90) rarity = "common";
-                    if (rand > 90 && rand <= 98) rarity = "rare";
-                    if (rand > 98) rarity = "epic";
+                    if (rand <= 95) rarity = "common";
+                    if (rand > 95) rarity = "rare";
 
                     instCell = Instantiate(itemCellObj, transform.position, transform.rotation);
                     instCell.transform.parent = scrollObj;
@@ -361,11 +361,23 @@ public class PopUpWin : MonoBehaviour
 
         if (waveController.currentWave == 11)
         {
+            tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_win");
+
             if (PlayerPrefs.GetInt("maxLocation") <= locationNum)
-            {
-                PlayerPrefs.SetString("unlockNewItems", "true");
-                PlayerPrefs.SetInt("maxLocation", locationNum+1);
+            {               
+                if (PlayerPrefs.GetInt("maxLocation") < 5)
+                {
+                    PlayerPrefs.SetString("unlockNewItems", "true");
+                    PlayerPrefs.SetInt("maxLocation", locationNum + 1);
+
+                    if (GameObject.Find("Firebase") != null)
+                        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_UnlockNewLocation(PlayerPrefs.GetInt("maxLocation"));
+                }                    
             }
+        }
+        else
+        {
+            tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_gameOver");
         }
 
         if (GameObject.Find("Firebase") != null)

@@ -255,6 +255,7 @@ public class ChangeCarController : MonoBehaviour
     public void ButBack()
     {
         canvasGarage.SetActive(true);
+        canvasGarage.GetComponent<GarageController>().Initialize();
         _popUpController.ClosedPopUp();
     }
 

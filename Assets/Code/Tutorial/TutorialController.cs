@@ -50,6 +50,8 @@ public class TutorialController : MonoBehaviour
 
     public IEnumerator ShowMessage1()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_Danger");
+
         GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().isTutorialActive = true;
         progressPanel.SetActive(false);
         upgradeMultiplierBar.SetActive(false);
@@ -69,6 +71,8 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator ShowMessage2()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_Movement");
+
         Message2.GetComponent<PopUpController>().OpenPopUp();
         StartCoroutine(Message2HandAnim());
 
@@ -83,6 +87,8 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator ShowMessage3()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_FirstAidKit");
+
         Message3.GetComponent<PopUpController>().OpenPopUp();
 
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp -= 20;
@@ -99,6 +105,8 @@ public class TutorialController : MonoBehaviour
 
     public IEnumerator ShowMessage4()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_KillEnemy");
+
         Message3.GetComponent<PopUpController>().ClosedPopUp();
 
         yield return new WaitForSeconds(0.5f);
@@ -120,6 +128,8 @@ public class TutorialController : MonoBehaviour
 
     public void Message5Start()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_Cards_1");
+
         GameplayController.isPause = true;
         Time.timeScale = 0;
         PlayerPrefs.SetString("tutorialCards", "true");
@@ -142,6 +152,8 @@ public class TutorialController : MonoBehaviour
             message5_text2.SetActive(true);
             message5_text3.SetActive(false);
 
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_Cards_2");
+
             return;
         }
 
@@ -150,6 +162,8 @@ public class TutorialController : MonoBehaviour
             message5_text1.SetActive(false);
             message5_text2.SetActive(false);
             message5_text3.SetActive(true);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Tutorial("Location_Cards_3");
 
             return;
         }

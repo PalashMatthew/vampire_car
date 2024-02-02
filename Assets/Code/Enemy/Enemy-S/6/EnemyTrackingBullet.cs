@@ -29,11 +29,13 @@ public class EnemyTrackingBullet : MonoBehaviour
 
         //transform.DOLookAt(target.position, rotateSpeed);
 
-        //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
         if (mesh != null)
         {
             mesh.transform.Rotate(0, 0, meshRotateSpeed * Time.deltaTime);
         }
+
+        //transform.position = new Vector3(transform.position.x, 1.361f, transform.position.z);
     }
 }

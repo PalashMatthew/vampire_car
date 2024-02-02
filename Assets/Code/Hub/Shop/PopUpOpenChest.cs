@@ -153,7 +153,12 @@ public class PopUpOpenChest : MonoBehaviour
 
     public void ButContinue()
     {
-        shopCanvas.SetActive(true);
+        butOpenChest1Again.SetActive(false);
+        butOpenChest2Again.SetActive(false);
+        butOk.gameObject.SetActive(false);
+
+        shopCanvas.SetActive(true);        
+
         hubController.GetComponent<ShopController>().Initialize();
 
         _popUpController.ClosedPopUp();
@@ -208,6 +213,8 @@ public class PopUpOpenChest : MonoBehaviour
         imgCard.GetComponent<RectTransform>().DOAnchorPosY(-670, 0.3f);
 
         yield return new WaitForSeconds(2f);
+
+        hubController.GetComponent<ShopController>().openChestAccess = true;
 
         butOk.gameObject.SetActive(true);
 

@@ -220,8 +220,8 @@ public class PlayerStats : MonoBehaviour
                      + PlayerPrefs.GetFloat("SuspensionSelectHealthRecovery")
                      + PlayerPrefs.GetFloat("TransmissionSelectHealthRecovery");
 
-        rageValue = 1;
-        rageCoeff += PlayerPrefs.GetFloat("GunSelectRage")
+        //rageValue = 1;
+        rageValue += PlayerPrefs.GetFloat("GunSelectRage")
                      + PlayerPrefs.GetFloat("EngineSelectRage")
                      + PlayerPrefs.GetFloat("BrakesSelectRage")
                      + PlayerPrefs.GetFloat("FuelSystemSelectRage")
@@ -230,10 +230,10 @@ public class PlayerStats : MonoBehaviour
 
         if (PlayerPrefs.GetString("selectedCarID") == "Hemera")
         {
-            rageCoeff += 20;
+            rageValue += 20;
         }
 
-        rageValue = rageValue + (rageValue / 100 * rageCoeff);
+        //rageValue = rageValue + (rageValue / 100 * rageCoeff);
 
         distanceDamageCoeff = PlayerPrefs.GetFloat("GunSelectDistanceDamage")
                      + PlayerPrefs.GetFloat("EngineSelectDistanceDamage")

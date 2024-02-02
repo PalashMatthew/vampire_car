@@ -125294,8 +125294,8 @@ MonoBehaviour:
   isCarStop: 0
   enemyKind: 
   moveSpeed: 0
-  hp: 20000
-  maxHp: 20000
+  hp: 5000
+  maxHp: 5000
   brakeDamage: 90
   moveSpeedMin: 0
   moveSpeedMax: 0
@@ -125349,6 +125349,11 @@ MonoBehaviour:
   objRicochetBullet: {fileID: 7137961230206696546, guid: 65b7059dbc24a0b4e94e61cc1409b287, type: 3}
   shotRicochetTimePause: 2
   shotRicochetCount: 5
+  objLazer1: {fileID: 0}
+  objLazer2: {fileID: 0}
+  objLazer3: {fileID: 0}
+  matDefault: {fileID: 0}
+  matAttack: {fileID: 0}
 --- !u!1 &5792054918944237409
 GameObject:
   m_ObjectHideFlags: 0

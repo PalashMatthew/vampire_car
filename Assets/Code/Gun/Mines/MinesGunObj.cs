@@ -19,6 +19,8 @@ public class MinesGunObj : MonoBehaviour
 
     public Vector3 movePos;
 
+    bool dronExit;
+
     private void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
@@ -27,6 +29,8 @@ public class MinesGunObj : MonoBehaviour
         _sphereCollider.enabled = false;
 
         StartCoroutine(DronExit());
+
+        dronExit = false;
     }
 
     IEnumerator StartAnim()
@@ -51,6 +55,8 @@ public class MinesGunObj : MonoBehaviour
     {
         yield return new WaitForSeconds(_gunController.timeOfAction);
 
+        dronExit = true;
+
         if (transform.position.x < 0)
         {
             transform.DOMove(new Vector3(25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
@@ -67,7 +73,7 @@ public class MinesGunObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "enemy")
+        if (other.tag == "enemy" || other.tag == "boss")
         {
             StopAllCoroutines();
             StartCoroutine(Attack());
@@ -80,22 +86,29 @@ public class MinesGunObj : MonoBehaviour
         objBomb.transform.DOMoveY(-1, 0.2f).SetEase(Ease.Linear);
         objBomb.transform.parent = null;
 
-        yield return new WaitForSeconds(0.2f);
-
-        
+        yield return new WaitForSeconds(0.2f);        
 
         //yield return new WaitForSeconds(0.1f);
 
         GameObject _boomObj = Instantiate(boomObj, objBomb.transform.position, Quaternion.identity);
         _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
         _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue, _boomObj.transform.localScale.y * _gunController.areaValue, _boomObj.transform.localScale.z * _gunController.areaValue);
+        _boomObj.GetComponent<BoomObj>().parentObj = gameObject;
         _boomObj.GetComponent<BoomObj>().Initialize();
 
         Destroy(objBomb);
 
-        //partVfx.gameObject.transform.DOScale(0, 0.3f);
-
-        transform.DOMove(new Vector3(25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+        if (!dronExit)
+        {
+            if (transform.position.x < 0)
+            {
+                transform.DOMove(new Vector3(25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+            }
+            else
+            {
+                transform.DOMove(new Vector3(-25f, 0f, 65f), 3f).SetEase(Ease.OutCubic);
+            }
+        }
 
         yield return new WaitForSeconds(3);
 

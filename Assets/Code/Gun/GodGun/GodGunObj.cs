@@ -16,7 +16,8 @@ public class GodGunObj : MonoBehaviour
 
         if (target.tag == "boss")
         {
-            _gunController.DamageBoss(target);
+            //_gunController.DamageBoss(target);
+            _gunController.DamageBoss(target, gameObject);
         }
 
         if (target.tag == "obstacle")

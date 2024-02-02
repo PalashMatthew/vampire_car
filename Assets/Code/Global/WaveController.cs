@@ -120,8 +120,8 @@ public class WaveController : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerController>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerController>().ShieldTimer());
         }
 
-        if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
-            GameObject.Find("Player").GetComponent<PlayerMovement>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerMovement>().SetRegeneration());
+        //if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
+        //    GameObject.Find("Player").GetComponent<PlayerMovement>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerMovement>().SetRegeneration());
     }
 
     public void StartTutorialWave()

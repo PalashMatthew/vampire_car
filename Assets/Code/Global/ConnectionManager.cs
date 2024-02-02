@@ -14,6 +14,8 @@ public class ConnectionManager : MonoBehaviour
 
     public GameObject headObj;
 
+    public GameObject butReconnect;
+
 
     public enum ConnectionStatus
     {
@@ -24,7 +26,7 @@ public class ConnectionManager : MonoBehaviour
 
     public void Awake()
     {
-        //DontDestroyOnLoad(headObj);
+        DontDestroyOnLoad(headObj);
 
         _popUpController = GetComponent<PopUpController>();
 
@@ -61,13 +63,14 @@ public class ConnectionManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
 
         UnityWebRequest request = new UnityWebRequest("https://google.com");
-        yield return request;
-        if (request.error != null)
+        yield return request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
         {
             //action(false);
             PlayerPrefs.SetInt("internet_access", 0);
             Debug.LogError("Not Connections");
             OpenPopUp();
+            yield break;
         }
         else
         {
@@ -82,11 +85,30 @@ public class ConnectionManager : MonoBehaviour
 
     public void ButReconnect()
     {
-        if (CheckInternet() == ConnectionStatus.Connected)
+        //if (CheckInternet() == ConnectionStatus.Connected)
+        //{
+        //    PlayerPrefs.SetInt("internet_access", 1);
+        //    StopAllCoroutines();
+        //    ClosePopUp();
+        //}
+
+        butReconnect.SetActive(false);
+        StartCoroutine(checkInternetConnectionAnother());
+    }
+
+    IEnumerator checkInternetConnectionAnother()
+    {
+        UnityWebRequest request = new UnityWebRequest("https://google.com");
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.Success)
         {
             PlayerPrefs.SetInt("internet_access", 1);
             StopAllCoroutines();
             ClosePopUp();
+        }
+        else
+        {
+            butReconnect.SetActive(true);
         }
     }
 
@@ -96,6 +118,10 @@ public class ConnectionManager : MonoBehaviour
         Time.timeScale = 0;
         _popUpController.OpenPopUp();
         StartCoroutine(RotateCircle());
+        butReconnect.SetActive(true);
+
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_InternetDisable();
     }
 
     void ClosePopUp()

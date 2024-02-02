@@ -6008,6 +6008,7 @@ GameObject:
   - component: {fileID: 769569277541094201}
   - component: {fileID: 7965888376283322551}
   - component: {fileID: 3892853768636224902}
+  - component: {fileID: 6489494962863321671}
   m_Layer: 0
   m_Name: Boss_Tank
   m_TagString: boss
@@ -6072,6 +6073,7 @@ MonoBehaviour:
   newSpeed: 0
   clipHit: {fileID: 0}
   clipDeath: {fileID: 0}
+  roadPit: {fileID: 0}
 --- !u!114 &3892853768636224902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6098,6 +6100,20 @@ MonoBehaviour:
   attack2ShotInterval: 1
   attack2ShotPause: 3
   damage: 45
+--- !u!114 &6489494962863321671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944416013669709902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf817166736db4bb2f18faf36b49be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxFire: {fileID: 0}
+  vfxPoison: {fileID: 0}
 --- !u!1 &6144431566227378759
 GameObject:
   m_ObjectHideFlags: 0

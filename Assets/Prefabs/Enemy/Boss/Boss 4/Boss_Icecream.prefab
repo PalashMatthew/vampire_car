@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 8063164788166640571}
   - component: {fileID: 1050626416168193285}
   - component: {fileID: 1454870898978699948}
+  - component: {fileID: 1729697559397016073}
   m_Layer: 0
   m_Name: Boss_Icecream
   m_TagString: boss
@@ -143,6 +144,7 @@ MonoBehaviour:
   newSpeed: 0
   clipHit: {fileID: 0}
   clipDeath: {fileID: 0}
+  roadPit: {fileID: 0}
 --- !u!114 &1454870898978699948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +166,20 @@ MonoBehaviour:
   maxX: 14
   minX: -14
   localMoveSpeed: 6
+--- !u!114 &1729697559397016073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512505475591224175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf817166736db4bb2f18faf36b49be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxFire: {fileID: 0}
+  vfxPoison: {fileID: 0}
 --- !u!1 &1101557482686059313
 GameObject:
   m_ObjectHideFlags: 0

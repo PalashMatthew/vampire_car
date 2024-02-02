@@ -5,9 +5,12 @@ using UnityEngine;
 public class GunDistanceAttack : MonoBehaviour
 {
     public Vector3 startCoord;
+    public bool dontCheckCoord;
+
 
     private void Start()
     {
-        startCoord = transform.position;
+        if (!dontCheckCoord)
+            startCoord = transform.position;
     }
 }

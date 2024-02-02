@@ -262,33 +262,43 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButRerollAds(string _type)
     {
-        if (buttonTapAccess)
-        {            
-            if (_type == "gun")
-            {
-                GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("gunReroll");
-                //buttonTapAccess = false;
-            }
-
-            if (_type == "passive")
-            {
-                GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("passiveReroll");
-                //buttonTapAccess = false;
-            }
+        if (_type == "gun")
+        {
+            StartCoroutine(ReturnButtonTapAccept());
+            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("gunReroll");
+            butRerollAds1.SetActive(false);
+            butRerollAds2.SetActive(false);
+            //buttonTapAccess = false;
         }
+
+        if (_type == "passive")
+        {
+            StartCoroutine(ReturnButtonTapAccept());
+            GameObject.Find("AdsManager").GetComponent<AdsController>().ShowAds("passiveReroll");
+            butRerollAds1.SetActive(false);
+            butRerollAds2.SetActive(false);
+            //buttonTapAccess = false;
+        }
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Reroll("ads");
     }
 
     public void CallBackRerollAds(string _type)
     {
         StartCoroutine(StartRerollAds(_type));
+    }
 
-        butRerollAds1.SetActive(false);
-        butRerollAds2.SetActive(false);
+    IEnumerator ReturnButtonTapAccept()
+    {
+        yield return new WaitForSeconds(1);
+        buttonTapAccess = true;
     }
 
     IEnumerator StartRerollAds(string _type)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        buttonTapAccess = true;
 
         if (_type == "gun")
         {
@@ -298,9 +308,7 @@ public class PopUpUpgrade : MonoBehaviour
         if (_type == "passive")
         {
             StartCoroutine(RerollPassive());
-        }
-
-        buttonTapAccess = true;
+        }        
     }
 
     public void ButRerollHard(string _type)
@@ -314,8 +322,8 @@ public class PopUpUpgrade : MonoBehaviour
 
                 buttonTapAccess = false;
 
-                //butRerollHard1.SetActive(false);
-                //butRerollHard2.SetActive(false);
+                butRerollHard1.SetActive(false);
+                butRerollHard2.SetActive(false);
             }
 
             if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
@@ -325,9 +333,11 @@ public class PopUpUpgrade : MonoBehaviour
 
                 buttonTapAccess = false;
 
-                //butRerollHard1.SetActive(false);
-                //butRerollHard2.SetActive(false);
+                butRerollHard1.SetActive(false);
+                butRerollHard2.SetActive(false);
             }
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Reroll("hard");
         }
     }
 

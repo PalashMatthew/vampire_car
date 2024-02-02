@@ -96,7 +96,7 @@ public class PopUpRecovery : MonoBehaviour
         GameObject.Find("Player").GetComponent<PlayerController>().isDead = false;
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Recovery(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName);
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Recovery(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, "ads");
 
         ButClosed();
 
@@ -116,6 +116,8 @@ public class PopUpRecovery : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerStats>().currentHp = GameObject.Find("Player").GetComponent<PlayerStats>().maxHp;
 
             PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 30);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Recovery(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, "hard");
 
             ButClosed();
 

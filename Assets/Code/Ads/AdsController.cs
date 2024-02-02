@@ -38,6 +38,9 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
     {
         if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
         {
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ShowAdsStart(placementName);
+
             PlayerPrefs.SetString("currentAdsPlacementName", placementName);
             Appodeal.show(Appodeal.REWARDED_VIDEO);
         }
@@ -119,6 +122,9 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         {
             GameObject.Find("PopUp Upgrade").GetComponent<PopUpUpgrade>().CallBackRerollAds("passive");
         }
+
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ShowAdsFinish(placementName);
 
         Appodeal.cache(Appodeal.REWARDED_VIDEO);
     }

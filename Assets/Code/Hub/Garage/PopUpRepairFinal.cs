@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUpRepairFinal : MonoBehaviour
 {
@@ -25,6 +26,17 @@ public class PopUpRepairFinal : MonoBehaviour
     [Header("Sounds")]
     public AudioClip clipNewItem;
 
+    [Header("Recipe")]
+    public Image recipeImg;
+    public Sprite sprGunDrawing;
+    public Sprite sprEngineDrawing;
+    public Sprite sprBrakesDrawing;
+    public Sprite sprFuelSystemDrawing;
+    public Sprite sprSuspensionDrawing;
+    public Sprite sprTransmissionDrawing;
+
+    public string itemType;
+
 
     private void Start()
     {
@@ -34,6 +46,33 @@ public class PopUpRepairFinal : MonoBehaviour
     public void Open()
     {
         _popUpController.OpenPopUp();
+
+        switch (itemType)
+        {
+            case "Gun":
+                recipeImg.sprite = sprGunDrawing;
+                break;
+
+            case "Engine":
+                recipeImg.sprite = sprEngineDrawing;
+                break;
+
+            case "Brakes":
+                recipeImg.sprite = sprBrakesDrawing;
+                break;
+
+            case "FuelSystem":
+                recipeImg.sprite = sprFuelSystemDrawing;
+                break;
+
+            case "Suspension":
+                recipeImg.sprite = sprSuspensionDrawing;
+                break;
+
+            case "Transmission":
+                recipeImg.sprite = sprTransmissionDrawing;
+                break;
+        }
 
         tName.text = "<wave>" + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_received");
         tMoneyCount.text = "x" + moneyCount;

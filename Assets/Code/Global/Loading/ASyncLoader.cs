@@ -8,12 +8,14 @@ using TMPro;
 public class ASyncLoader : MonoBehaviour
 {
     [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private GameObject loadingBar;
 
     [SerializeField] private Image loadingProgressBarFill;
 
     public void LoadLevel(string levelToLoad)
     {
         loadingScreen.SetActive(true);
+        loadingBar.SetActive(true);
 
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }

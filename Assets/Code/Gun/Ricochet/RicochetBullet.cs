@@ -58,7 +58,8 @@ public class RicochetBullet : MonoBehaviour
 
         if (other.tag == "boss")
         {
-            _gunController.DamageBoss(other.gameObject);
+            //_gunController.DamageBoss(other.gameObject);
+            _gunController.DamageBoss(other.gameObject, gameObject);
         }
 
         if (other.tag == "obstacle")

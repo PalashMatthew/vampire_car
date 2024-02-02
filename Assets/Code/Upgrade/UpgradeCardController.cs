@@ -174,9 +174,7 @@ public class UpgradeCardController : MonoBehaviour
     public void ButAccept(string _type)
     {
         if (PopUpUpgrade.buttonTapAccess)
-        {
-            _upgradeController.CardAccept(gameObject.GetComponent<UpgradeCardController>(), _type);
-
+        {           
             if (_type == "passive")
             {
                 _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoicePassiveCard());
@@ -188,20 +186,22 @@ public class UpgradeCardController : MonoBehaviour
 
             if (_type == "gun")
             {
-                _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoiceGunCard());
-
-                if (_upgradeController.upgradeLevelCount == 2)
+                if (_upgradeController.upgradeLevelCount == 1)
                 {
                     if (GameObject.Find("Firebase") != null)
                         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard2(card.cardName, cardRarity.ToString());
                 }
 
-                if (_upgradeController.upgradeLevelCount == 1)
+                if (_upgradeController.upgradeLevelCount == 0)
                 {
                     if (GameObject.Find("Firebase") != null)
                         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeGunCard1(card.cardName, cardRarity.ToString());
                 }
+
+                _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoiceGunCard());                
             }
+
+            _upgradeController.CardAccept(gameObject.GetComponent<UpgradeCardController>(), _type);
 
             PopUpUpgrade.buttonTapAccess = false;
         }

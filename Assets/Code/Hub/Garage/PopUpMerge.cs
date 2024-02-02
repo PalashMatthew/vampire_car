@@ -104,6 +104,11 @@ public class PopUpMerge : MonoBehaviour
     {
         _popUpController = GetComponent<PopUpController>();
         _popUpRepair = GetComponent<PopUpRepair>();
+
+        for (int i = 1; i < 3; i++)
+        {
+            Debug.Log("IIIIIII");
+        }
     }
 
     void Initialize()
@@ -419,14 +424,14 @@ public class PopUpMerge : MonoBehaviour
         int cellCount = 0;
 
         //Оружие
-        foreach (GameObject _item in itemGunInst)
-        {
-            PlayerPrefs.SetInt("itemGunID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemGunLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemGunRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemGunType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemGunInst)
+        //{
+        //    PlayerPrefs.SetInt("itemGunID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemGunLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemGunRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemGunType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemGunInst)
         {
@@ -438,14 +443,14 @@ public class PopUpMerge : MonoBehaviour
         //Engine
         cellCount = 0;
 
-        foreach (GameObject _item in itemEngineInst)
-        {
-            PlayerPrefs.SetInt("itemEngineID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemEngineLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemEngineRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemEngineType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemEngineInst)
+        //{
+        //    PlayerPrefs.SetInt("itemEngineID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemEngineLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemEngineRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemEngineType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemEngineInst)
         {
@@ -457,14 +462,14 @@ public class PopUpMerge : MonoBehaviour
         //Brakes
         cellCount = 0;
 
-        foreach (GameObject _item in itemBrakesInst)
-        {
-            PlayerPrefs.SetInt("itemBrakesID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemBrakesLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemBrakesRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemBrakesType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemBrakesInst)
+        //{
+        //    PlayerPrefs.SetInt("itemBrakesID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemBrakesLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemBrakesRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemBrakesType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemBrakesInst)
         {
@@ -476,14 +481,14 @@ public class PopUpMerge : MonoBehaviour
         //FuelSystem
         cellCount = 0;
 
-        foreach (GameObject _item in itemFuelSystemInst)
-        {
-            PlayerPrefs.SetInt("itemFuelSystemID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemFuelSystemLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemFuelSystemRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemFuelSystemType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemFuelSystemInst)
+        //{
+        //    PlayerPrefs.SetInt("itemFuelSystemID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemFuelSystemLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemFuelSystemRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemFuelSystemType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemFuelSystemInst)
         {
@@ -495,14 +500,14 @@ public class PopUpMerge : MonoBehaviour
         //Suspension
         cellCount = 0;
 
-        foreach (GameObject _item in itemSuspensionInst)
-        {
-            PlayerPrefs.SetInt("itemSuspensionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemSuspensionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemSuspensionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemSuspensionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemSuspensionInst)
+        //{
+        //    PlayerPrefs.SetInt("itemSuspensionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemSuspensionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemSuspensionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemSuspensionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemSuspensionInst)
         {
@@ -514,14 +519,14 @@ public class PopUpMerge : MonoBehaviour
         //Transmission
         cellCount = 0;
 
-        foreach (GameObject _item in itemTransmissionInst)
-        {
-            PlayerPrefs.SetInt("itemTransmissionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemTransmissionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemTransmissionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemTransmissionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemTransmissionInst)
+        //{
+        //    PlayerPrefs.SetInt("itemTransmissionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemTransmissionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemTransmissionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemTransmissionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemTransmissionInst)
         {
@@ -541,6 +546,8 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButClosed()
     {
+        //canvasGarage.SetActive(false);
+
         if (panelActive == "merge")
         {
             StartCoroutine(EnumSaveItem());
@@ -555,6 +562,7 @@ public class PopUpMerge : MonoBehaviour
         butRepair.SetActive(false);
         
         canvasGarage.SetActive(true);
+        canvasGarage.GetComponent<GarageController>().Initialize();
 
         _popUpController.ClosedPopUp();
     }
@@ -961,6 +969,56 @@ public class PopUpMerge : MonoBehaviour
     {
         int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);
 
+        //#region DeleteSlot       
+        //if (_itemType == "Gun")
+        //{
+        //    if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
+        //    }
+        //}
+
+        //if (_itemType == "Engine")
+        //{
+        //    if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
+        //    }
+        //}
+
+        //if (_itemType == "Brakes")
+        //{
+        //    if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
+        //    }
+        //}
+
+        //if (_itemType == "FuelSystem")
+        //{
+        //    if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
+        //    }
+        //}
+
+        //if (_itemType == "Suspension")
+        //{
+        //    if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
+        //    }
+        //}
+
+        //if (_itemType == "Transmission")
+        //{
+        //    if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
+        //    {
+        //        PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
+        //    }
+        //}
+        //#endregion
+
         if (itemCount > 1)
         {
             for (int i = _itemNum; i < itemCount - 1; i++)
@@ -1034,10 +1092,31 @@ public class PopUpMerge : MonoBehaviour
 
     public void ButMerge()
     {
-        Debug.Log("itemCell1.itemID = " + itemCell1.itemID);
-        RemoveItemInInventory(itemCell1.itemNumInInventory, itemCell1.itemType, itemCell1.gameObject);
-        RemoveItemInInventory(itemCell2.itemNumInInventory, itemCell2.itemType, itemCell2.gameObject);
-        RemoveItemInInventory(itemCell3.itemNumInInventory, itemCell3.itemType, itemCell3.gameObject);
+        int _numInInv1 = itemCell1.itemNumInInventory;
+
+        int _numInInv2 = itemCell2.itemNumInInventory;
+
+        int _numInInv3 = itemCell3.itemNumInInventory;
+
+        if (_numInInv2 > _numInInv1)
+        {
+            _numInInv2 -= 1;
+        }
+
+        if (_numInInv3 > _numInInv1)
+        {
+            _numInInv3 -= 1;
+        }
+
+        if (_numInInv3 > _numInInv2)
+        {
+            _numInInv3 -= 1;
+        }
+
+
+        RemoveItemInInventory(_numInInv1, itemCell1.itemType, itemCell1.gameObject);
+        RemoveItemInInventory(_numInInv2, itemCell2.itemType, itemCell2.gameObject);
+        RemoveItemInInventory(_numInInv3, itemCell3.itemType, itemCell3.gameObject);        
 
         #region AddNewItem
         string _itemType;
@@ -1089,6 +1168,70 @@ public class PopUpMerge : MonoBehaviour
         PlayerPrefs.SetString("item" + _itemType + "Type" + _cellCount, itemCellGeneral.itemType);
         PlayerPrefs.SetInt("item" + _itemType + "New" + _cellCount, 1);
         #endregion
+
+        #region RemoveActiveSlot
+        if (itemCell1.itemType == "Gun")
+        {
+            if (PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot1_itemNumInInventory", _cellCount);
+            }
+        }
+
+        if (itemCell1.itemType == "Engine")
+        {
+            if (PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot2_itemNumInInventory", _cellCount);
+            }
+        }
+
+        if (itemCell1.itemType == "Brakes")
+        {
+            if (PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot3_itemNumInInventory", _cellCount);
+            }
+        }
+
+        if (itemCell1.itemType == "FuelSystem")
+        {
+            if (PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot4_itemNumInInventory", _cellCount);
+            }
+        }
+
+        if (itemCell1.itemType == "Suspension")
+        {
+            if (PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot5_itemNumInInventory", _cellCount);
+            }
+        }
+
+        if (itemCell1.itemType == "Transmission")
+        {
+            if (PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                PlayerPrefs.SetInt("slot6_itemNumInInventory", _cellCount);
+            }
+        }
+        #endregion
+
+        SaveDetailStats(_itemType, _itemRarity, _cellCount);
 
         popUpMergeFinal.card = itemCellGeneral.itemObj;
         popUpMergeFinal.sprItemCell = imgSlotFinal.sprite;
@@ -1346,5 +1489,368 @@ public class PopUpMerge : MonoBehaviour
                 objPanel2.SetActive(false);
             }
         }
+    }
+
+    public void SaveDetailStats(string _type, string itemRarity, int numInv)
+    {
+        DetailCard _card = itemCell1.itemObj;
+
+        //ClearSave
+        string s = _type;
+
+        PlayerPrefs.SetFloat(s + "SelectHealth", 0);
+        PlayerPrefs.SetFloat(s + "SelectDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectRecoveryHpInFirstAidKit", 0);
+        PlayerPrefs.SetFloat(s + "SelectDodge", 0);
+        PlayerPrefs.SetFloat(s + "SelectDronDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectShotSpeed", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritChance", 0);
+        PlayerPrefs.SetFloat(s + "SelectBackDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectVampirizm", 0);
+        PlayerPrefs.SetFloat(s + "SelectArmor", 0);
+        PlayerPrefs.SetFloat(s + "SelectHealthRecovery", 0);
+        PlayerPrefs.SetFloat(s + "SelectRage", 0);
+        PlayerPrefs.SetFloat(s + "SelectDistanceDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectLucky", 0);
+        PlayerPrefs.SetFloat(s + "SelectMagnet", 0);
+        PlayerPrefs.SetFloat(s + "SelectCarDamage", 0);
+
+        #region Base Stats
+        switch (itemRarity)
+        {
+            case "common":
+
+                if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersCommon2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "rare":
+
+                if (_card.baseItemCharactersRare1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersRare1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersRare2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersRare2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersRare2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "epic":
+
+                if (_card.baseItemCharactersEpic1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersEpic1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersEpic2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "legendary":
+
+                if (_card.baseItemCharactersLegendary1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersLegendary1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersLegendary2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + numInv));
+                    }
+                }
+
+                break;
+        }
+        #endregion
+
+        #region UnicalStats
+        if (itemRarity == "rare" || itemRarity == "epic" || itemRarity == "legendary")
+        {
+            switch (_card.rareItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.rareItemCharactersValue);
+                    break;
+            }
+        }
+
+        if (itemRarity == "epic" || itemRarity == "legendary")
+        {
+            switch (_card.epicItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.epicItemCharactersValue);
+                    break;
+            }
+        }
+
+        if (itemRarity == "legendary")
+        {
+            switch (_card.legendaryItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.legendaryItemCharactersValue);
+                    break;
+            }
+        }
+        #endregion
     }
 }

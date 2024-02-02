@@ -65,7 +65,8 @@ public class PinPongBullet : MonoBehaviour
 
         if (other.tag == "boss")
         {
-            _gunController.DamageBoss(other.gameObject);
+            //_gunController.DamageBoss(other.gameObject);
+            _gunController.DamageBoss(other.gameObject, gameObject);
 
             if (_ricochetCount < _gunController.ricochetCount)
             {

@@ -125592,6 +125592,7 @@ GameObject:
   - component: {fileID: 4065156716542998985}
   - component: {fileID: 1434994434463516774}
   - component: {fileID: 5066891576864312976}
+  - component: {fileID: 3305375325309618836}
   m_Layer: 0
   m_Name: Boss_FireTruck
   m_TagString: boss
@@ -125641,8 +125642,8 @@ MonoBehaviour:
   isCarStop: 0
   enemyKind: 
   moveSpeed: 0
-  hp: 4000
-  maxHp: 4000
+  hp: 5000
+  maxHp: 5000
   brakeDamage: 20
   moveSpeedMin: 0
   moveSpeedMax: 0
@@ -125701,6 +125702,20 @@ MonoBehaviour:
   objLazer3: {fileID: 6568864346372401317}
   matDefault: {fileID: 2100000, guid: 816dce6de15850245a28e3aec3e46be8, type: 2}
   matAttack: {fileID: 2100000, guid: 95bb9ecd8e102c542a97b97e2f0b5ba8, type: 2}
+--- !u!114 &3305375325309618836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5338037640989000603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf817166736db4bb2f18faf36b49be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxFire: {fileID: 0}
+  vfxPoison: {fileID: 0}
 --- !u!1 &5666040012235401205
 GameObject:
   m_ObjectHideFlags: 0

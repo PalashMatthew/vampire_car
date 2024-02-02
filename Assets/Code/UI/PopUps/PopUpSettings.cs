@@ -37,6 +37,9 @@ public class PopUpSettings : MonoBehaviour
 
     public TMP_Text tUserID;
 
+    [Header("Delete Account")]
+    public PopUpController _popUpDeleteAccount;
+
 
     private void Start()
     {
@@ -58,6 +61,8 @@ public class PopUpSettings : MonoBehaviour
             imgSoundToggleOff.SetActive(false);
 
             PlayerPrefs.SetInt("soundSettings", 1);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Sound("On");
         } 
         else
         {
@@ -68,6 +73,8 @@ public class PopUpSettings : MonoBehaviour
             imgSoundToggleOff.SetActive(true);
 
             PlayerPrefs.SetInt("soundSettings", 0);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Sound("Off");
         }
     }
 
@@ -84,6 +91,8 @@ public class PopUpSettings : MonoBehaviour
             imgMusicToggleOff.SetActive(false);
 
             PlayerPrefs.SetInt("musicSettings", 1);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Music("On");
         }
         else
         {
@@ -94,6 +103,8 @@ public class PopUpSettings : MonoBehaviour
             imgMusicToggleOff.SetActive(true);
 
             PlayerPrefs.SetInt("musicSettings", 0);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Music("Off");
         }
     }
     #endregion
@@ -124,6 +135,8 @@ public class PopUpSettings : MonoBehaviour
     {
         _popUpController.OpenPopUp();
 
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("Settings");
+
         Initialize();
     }
 
@@ -152,12 +165,26 @@ public class PopUpSettings : MonoBehaviour
         {
             toggleEn.SetActive(true);
             toggleRu.SetActive(false);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("EN");
         }
         else
         {
             toggleEn.SetActive(false);
             toggleRu.SetActive(true);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("RU");
         }
+    }
+
+    public void ButOpenPopUpDeleteAccount()
+    {
+        _popUpDeleteAccount.OpenPopUp();
+    }
+
+    public void ButClosedPopUpDeleteAccount()
+    {
+        _popUpDeleteAccount.ClosedPopUp();
     }
 
     public async void ButDeleteAccount()
@@ -185,6 +212,8 @@ public class PopUpSettings : MonoBehaviour
 
     public void ButLoginGooglePlayGames()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_LoginGooglePlay();
+
         LinkWithGooglePlayGamesAsync(PlayerPrefs.GetString("userID"));
     }
 

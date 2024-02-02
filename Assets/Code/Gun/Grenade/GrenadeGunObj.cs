@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class GrenadeGunObj : MonoBehaviour
@@ -48,6 +49,7 @@ public class GrenadeGunObj : MonoBehaviour
         GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
         _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
         _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue, _boomObj.transform.localScale.y * _gunController.areaValue, _boomObj.transform.localScale.z * _gunController.areaValue);
+        _boomObj.GetComponent<BoomObj>().parentObj = gameObject;
         _boomObj.GetComponent<BoomObj>().Initialize();
 
         Destroy(gameObject);
@@ -60,26 +62,28 @@ public class GrenadeGunObj : MonoBehaviour
             StopAllCoroutines();
             GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
             _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+            _boomObj.GetComponent<BoomObj>().parentObj = gameObject;
             _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
             _boomObj.GetComponent<BoomObj>().Initialize();
             Destroy(gameObject);
         }
 
-        if (other.tag == "obstacle")
-        {
-            StopAllCoroutines();
-            GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
-            _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
-            _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
-            _boomObj.GetComponent<BoomObj>().Initialize();
-            Destroy(gameObject);
-        }
+        //if (other.tag == "obstacle")
+        //{
+        //    StopAllCoroutines();
+        //    GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
+        //    _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+        //    _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
+        //    _boomObj.GetComponent<BoomObj>().Initialize();
+        //    Destroy(gameObject);
+        //}
 
         if (other.tag == "boss")
         {
             StopAllCoroutines();
             GameObject _boomObj = Instantiate(boomObj, transform.position, Quaternion.identity);
             _boomObj.GetComponent<BoomObj>()._gunController = _gunController;
+            _boomObj.GetComponent<BoomObj>().parentObj = gameObject;
             _boomObj.transform.localScale = new Vector3(_boomObj.transform.localScale.x * _gunController.areaValue * 2, _boomObj.transform.localScale.y * _gunController.areaValue * 2, _boomObj.transform.localScale.z * _gunController.areaValue * 2);
             _boomObj.GetComponent<BoomObj>().Initialize();
             Destroy(gameObject);

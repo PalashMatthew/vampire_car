@@ -29,6 +29,15 @@ public class PopUpRepair : MonoBehaviour
 
     public GameObject butRepair;
 
+    [Header("Recipe")]
+    public Image recipeImg;
+    public Sprite sprGunDrawing;
+    public Sprite sprEngineDrawing;
+    public Sprite sprBrakesDrawing;
+    public Sprite sprFuelSystemDrawing;
+    public Sprite sprSuspensionDrawing;
+    public Sprite sprTransmissionDrawing;
+
     [Header("Cell")]
     public GameObject cellPrefab;
     public List<GameObject> itemMass;
@@ -116,10 +125,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot1_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot1_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemGunInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemGunInst.Add(_cell);
+                itemMass.Add(_cell);
+            }            
         }
         #endregion
 
@@ -152,10 +169,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot2_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot2_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemEngineInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemEngineInst.Add(_cell);
+                itemMass.Add(_cell);
+            }            
         }
         #endregion
 
@@ -188,10 +213,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot3_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot3_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemBrakesInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemBrakesInst.Add(_cell);
+                itemMass.Add(_cell);
+            }                
         }
         #endregion
 
@@ -224,10 +257,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot4_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot4_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemFuelSystemInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemFuelSystemInst.Add(_cell);
+                itemMass.Add(_cell);
+            }
         }
         #endregion
 
@@ -261,10 +302,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot5_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot5_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemSuspensionInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemSuspensionInst.Add(_cell);
+                itemMass.Add(_cell);
+            }
         }
         #endregion
 
@@ -298,10 +347,18 @@ public class PopUpRepair : MonoBehaviour
 
             _cell.GetComponent<ItemCell>().Initialize();
 
-            popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
+            if (PlayerPrefs.GetInt("slot6_itemID") == _cell.GetComponent<ItemCell>().itemID &&
+                PlayerPrefs.GetInt("slot6_itemNumInInventory") == _cell.GetComponent<ItemCell>().itemNumInInventory)
+            {
+                Destroy(_cell);
+            }
+            else
+            {
+                popUpDetail.CreateStatsSave(_cell.GetComponent<ItemCell>().itemObj, _cell.GetComponent<ItemCell>());
 
-            itemTransmissionInst.Add(_cell);
-            itemMass.Add(_cell);
+                itemTransmissionInst.Add(_cell);
+                itemMass.Add(_cell);
+            }
         }
         #endregion
 
@@ -359,14 +416,14 @@ public class PopUpRepair : MonoBehaviour
         int cellCount = 0;
 
         //Оружие
-        foreach (GameObject _item in itemGunInst)
-        {
-            PlayerPrefs.SetInt("itemGunID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemGunLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemGunRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemGunType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemGunInst)
+        //{
+        //    PlayerPrefs.SetInt("itemGunID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemGunLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemGunRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemGunType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemGunInst)
         {
@@ -378,14 +435,14 @@ public class PopUpRepair : MonoBehaviour
         //Engine
         cellCount = 0;
 
-        foreach (GameObject _item in itemEngineInst)
-        {
-            PlayerPrefs.SetInt("itemEngineID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemEngineLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemEngineRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemEngineType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemEngineInst)
+        //{
+        //    PlayerPrefs.SetInt("itemEngineID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemEngineLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemEngineRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemEngineType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemEngineInst)
         {
@@ -397,14 +454,14 @@ public class PopUpRepair : MonoBehaviour
         //Brakes
         cellCount = 0;
 
-        foreach (GameObject _item in itemBrakesInst)
-        {
-            PlayerPrefs.SetInt("itemBrakesID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemBrakesLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemBrakesRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemBrakesType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemBrakesInst)
+        //{
+        //    PlayerPrefs.SetInt("itemBrakesID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemBrakesLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemBrakesRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemBrakesType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemBrakesInst)
         {
@@ -416,14 +473,14 @@ public class PopUpRepair : MonoBehaviour
         //FuelSystem
         cellCount = 0;
 
-        foreach (GameObject _item in itemFuelSystemInst)
-        {
-            PlayerPrefs.SetInt("itemFuelSystemID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemFuelSystemLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemFuelSystemRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemFuelSystemType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemFuelSystemInst)
+        //{
+        //    PlayerPrefs.SetInt("itemFuelSystemID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemFuelSystemLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemFuelSystemRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemFuelSystemType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemFuelSystemInst)
         {
@@ -435,14 +492,14 @@ public class PopUpRepair : MonoBehaviour
         //Suspension
         cellCount = 0;
 
-        foreach (GameObject _item in itemSuspensionInst)
-        {
-            PlayerPrefs.SetInt("itemSuspensionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemSuspensionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemSuspensionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemSuspensionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemSuspensionInst)
+        //{
+        //    PlayerPrefs.SetInt("itemSuspensionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemSuspensionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemSuspensionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemSuspensionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemSuspensionInst)
         {
@@ -454,14 +511,14 @@ public class PopUpRepair : MonoBehaviour
         //Transmission
         cellCount = 0;
 
-        foreach (GameObject _item in itemTransmissionInst)
-        {
-            PlayerPrefs.SetInt("itemTransmissionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
-            PlayerPrefs.SetInt("itemTransmissionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
-            PlayerPrefs.SetString("itemTransmissionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
-            PlayerPrefs.SetString("itemTransmissionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
-            cellCount++;
-        }
+        //foreach (GameObject _item in itemTransmissionInst)
+        //{
+        //    PlayerPrefs.SetInt("itemTransmissionID" + cellCount, _item.GetComponent<ItemCell>().itemID);
+        //    PlayerPrefs.SetInt("itemTransmissionLevel" + cellCount, _item.GetComponent<ItemCell>().currentLevel);
+        //    PlayerPrefs.SetString("itemTransmissionRarity" + cellCount, _item.GetComponent<ItemCell>().itemRarity);
+        //    PlayerPrefs.SetString("itemTransmissionType" + cellCount, _item.GetComponent<ItemCell>().itemType);
+        //    cellCount++;
+        //}
 
         foreach (GameObject gm in itemTransmissionInst)
         {
@@ -510,6 +567,35 @@ public class PopUpRepair : MonoBehaviour
             {
                 imgSlot1.sprite = sprItemLegendary;
             }
+
+            switch (_itemCell.itemType)
+            {
+                case "Gun":
+                    recipeImg.sprite = sprGunDrawing;
+                    break;
+
+                case "Engine":
+                    recipeImg.sprite = sprEngineDrawing;
+                    break;
+
+                case "Brakes":
+                    recipeImg.sprite = sprBrakesDrawing;
+                    break;
+
+                case "FuelSystem":
+                    recipeImg.sprite = sprFuelSystemDrawing;
+                    break;
+
+                case "Suspension":
+                    recipeImg.sprite = sprSuspensionDrawing;
+                    break;
+
+                case "Transmission":
+                    recipeImg.sprite = sprTransmissionDrawing;
+                    break;
+            }
+
+            popUpRepairFinal.itemType = _itemCell.itemType;
 
             isSlot1full = true;
 
@@ -601,34 +687,69 @@ public class PopUpRepair : MonoBehaviour
 
         popUpRepairFinal.moneyCount = returnMoneyValue;
 
-        garageController.gameObject.SetActive(true);
-        garageController.activeItem = itemCellGeneral;
-        garageController.ItemUnselect();
+        //garageController.gameObject.SetActive(true);
+        //garageController.Initialize();        
 
         switch (itemCellGeneral.itemObj.itemType)
         {
             case DetailCard.ItemType.Gun:
                 PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot1Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
 
             case DetailCard.ItemType.Engine:
                 PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot2Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
 
             case DetailCard.ItemType.Brakes:
                 PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot3Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
 
             case DetailCard.ItemType.FuelSystem:
                 PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot4Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
 
             case DetailCard.ItemType.Suspension:
                 PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot5Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
 
             case DetailCard.ItemType.Transmission:
                 PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + returnDrawingValue);
+
+                //if (itemCellGeneral == garageController.slot6Card)
+                //{
+                //    garageController.activeItem = itemCellGeneral;
+                //    garageController.ItemUnselect();
+                //}
                 break;
         }
 
@@ -639,7 +760,7 @@ public class PopUpRepair : MonoBehaviour
             gm.GetComponent<ItemCell>().MergeDefault();
         }
 
-        garageController.gameObject.SetActive(false);
+        //garageController.gameObject.SetActive(false);
 
         RemoveItemInInventory(itemCellGeneral.itemNumInInventory, itemCellGeneral.itemType, itemCellGeneral.gameObject);
 
@@ -668,6 +789,54 @@ public class PopUpRepair : MonoBehaviour
     {
         int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);
 
+        if (_itemType == "Gun")
+        {
+            if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
+            }
+        }
+
+        if (_itemType == "Engine")
+        {
+            if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
+            }
+        }
+
+        if (_itemType == "Brakes")
+        {
+            if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
+            }
+        }
+
+        if (_itemType == "FuelSystem")
+        {
+            if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
+            }
+        }
+
+        if (_itemType == "Suspension")
+        {
+            if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
+            }
+        }
+
+        if (_itemType == "Transmission")
+        {
+            if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
+            {
+                PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
+            }
+        }
+
         if (itemCount > 1)
         {
             for (int i = _itemNum; i < itemCount - 1; i++)
@@ -676,7 +845,7 @@ public class PopUpRepair : MonoBehaviour
                 PlayerPrefs.SetInt("item" + _itemType + "Level" + i, PlayerPrefs.GetInt("item" + _itemType + "Level" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Rarity" + i, PlayerPrefs.GetString("item" + _itemType + "Rarity" + (i + 1)));
                 PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
-                PlayerPrefs.SetInt("item" + _itemType + "New" + i, PlayerPrefs.GetInt("item" + _itemType + "Type" + (i + 1)));
+                PlayerPrefs.SetInt("item" + _itemType + "New" + i, PlayerPrefs.GetInt("item" + _itemType + "Type" + (i + 1)));                
 
                 if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
                 {

@@ -152,8 +152,12 @@ public class PlayerController : MonoBehaviour
                         isShield = false;
                         vfxShield.Stop();
                         vfxShield.gameObject.SetActive(false);
-                    }
 
+                        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
+                        {
+                            StartCoroutine(ShieldTimer());
+                        }
+                    }
                 }
             }
             else
@@ -187,6 +191,11 @@ public class PlayerController : MonoBehaviour
                     isShield = false;
                     vfxShield.Stop();
                     vfxShield.gameObject.SetActive(false);
+
+                    if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
+                    {
+                        StartCoroutine(ShieldTimer());
+                    }
                 }
             }
 
@@ -254,12 +263,6 @@ public class PlayerController : MonoBehaviour
         {            
             FirstAidKit(other.gameObject.GetComponent<FirstAidKitController>().value);
 
-            if (PlayerPrefs.GetString("tutorialLoc1Complite") == "false" && Application.loadedLevelName == "Loc alpha 1")
-            {
-                GameObject.Find("TutorialController").GetComponent<TutorialController>().StartCoroutine(GameObject.Find("TutorialController").GetComponent<TutorialController>().ShowMessage4());
-                PlayerPrefs.SetString("tutorialLoc1Complite", "true");
-            }
-
             string _hp = "";
 
             if (_playerStats.currentHp < _playerStats.maxHp)
@@ -273,6 +276,12 @@ public class PlayerController : MonoBehaviour
 
             if (GameObject.Find("Firebase") != null)
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakeFirstAidKit(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1, Application.loadedLevelName, _hp);
+
+            if (PlayerPrefs.GetString("tutorialLoc1Complite") == "false" && Application.loadedLevelName == "Loc alpha 1")
+            {
+                GameObject.Find("TutorialController").GetComponent<TutorialController>().StartCoroutine(GameObject.Find("TutorialController").GetComponent<TutorialController>().ShowMessage4());
+                PlayerPrefs.SetString("tutorialLoc1Complite", "true");
+            }
 
             Destroy(other.gameObject);
         }

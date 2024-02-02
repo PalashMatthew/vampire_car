@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static PanelCharacteristics;
@@ -60,6 +61,12 @@ public class GarageController : MonoBehaviour
     public Image imgIconSlot4;
     public Image imgIconSlot5;
     public Image imgIconSlot6;
+    public GameObject slot1Silhouette;
+    public GameObject slot2Silhouette;
+    public GameObject slot3Silhouette;
+    public GameObject slot4Silhouette;
+    public GameObject slot5Silhouette;
+    public GameObject slot6Silhouette;
 
     [Header("Slots Card")]
     public ItemCell slot1Card;
@@ -99,7 +106,7 @@ public class GarageController : MonoBehaviour
 
     private void OnEnable()
     {
-        Initialize();
+        //Initialize();
     }
 
     private void OnDisable()
@@ -115,11 +122,13 @@ public class GarageController : MonoBehaviour
         {
             slot1LevelPanel.SetActive(true);
             tSlot1Level.text = "Lv. " + slot1Card.currentLevel;
+            slot1Silhouette.SetActive(false);
         }
         else
         {
             slot1LevelPanel.SetActive(false);
             tSlot1Level.text = "";
+            slot1Silhouette.SetActive(true);
         }
 
         //2
@@ -127,11 +136,13 @@ public class GarageController : MonoBehaviour
         {
             slot2LevelPanel.SetActive(true);
             tSlot2Level.text = "Lv. " + slot2Card.currentLevel;
+            slot2Silhouette.SetActive(false);
         }            
         else
         {
             slot2LevelPanel.SetActive(false);
             tSlot2Level.text = "";
+            slot2Silhouette.SetActive(true);
         }            
 
         //3
@@ -139,11 +150,13 @@ public class GarageController : MonoBehaviour
         {
             slot3LevelPanel.SetActive(true);
             tSlot3Level.text = "Lv. " + slot3Card.currentLevel;
+            slot3Silhouette.SetActive(false);
         }            
         else
         {
             slot3LevelPanel.SetActive(false);
             tSlot3Level.text = "";
+            slot3Silhouette.SetActive(true);
         }            
 
         //4
@@ -151,11 +164,13 @@ public class GarageController : MonoBehaviour
         {
             slot4LevelPanel.SetActive(true);
             tSlot4Level.text = "Lv. " + slot4Card.currentLevel;
+            slot4Silhouette.SetActive(false);
         }            
         else
         {
             slot4LevelPanel.SetActive(false);
             tSlot4Level.text = "";
+            slot4Silhouette.SetActive(true);
         }            
 
         //5
@@ -163,11 +178,13 @@ public class GarageController : MonoBehaviour
         {
             slot5LevelPanel.SetActive(true);
             tSlot5Level.text = "Lv. " + slot5Card.currentLevel;
+            slot5Silhouette.SetActive(false);
         }            
         else
         {
             slot5LevelPanel.SetActive(false);
             tSlot5Level.text = "";
+            slot5Silhouette.SetActive(true);
         }            
 
         //6
@@ -175,16 +192,18 @@ public class GarageController : MonoBehaviour
         {
             slot6LevelPanel.SetActive(true);
             tSlot6Level.text = "Lv. " + slot6Card.currentLevel;
+            slot6Silhouette.SetActive(false);
         }            
         else
         {
             slot6LevelPanel.SetActive(false);
             tSlot6Level.text = "";
+            slot6Silhouette.SetActive(true);
         }            
         #endregion
     }
 
-    void Initialize()
+    public void Initialize()
     {       
         if (activeCarObj == null)
         {
@@ -221,6 +240,8 @@ public class GarageController : MonoBehaviour
         fillCarLevel.DOFillAmount((float)PlayerPrefs.GetInt(activeCarObj.carName + "carLevel") / 40, 0.5f);
         fillEndCarLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt(activeCarObj.carName + "carLevel") / 40 * 233f, 0), 0.5f);
         #endregion
+
+        //popUpDetail.SaveDetailStats("Gun");
 
         CalculateViewStats();
 
@@ -970,7 +991,6 @@ public class GarageController : MonoBehaviour
                 }                
 
                 PlayerPrefs.SetInt("slot1_itemNumInInventory", -1);
-
                 PlayerPrefs.SetInt("GunIDSelect", 0);
 
                 imgSlot1.sprite = sprSlotDefault;
@@ -1216,6 +1236,8 @@ public class GarageController : MonoBehaviour
 
     public void CalculateViewStats()
     {
+        Debug.Log("Calculate Stats");
+
         float _damage = PlayerPrefs.GetFloat(activeCarObj.carName + "carDamage") 
                         + PlayerPrefs.GetFloat("carGlobalCoeffdamage") 
                         + PlayerPrefs.GetFloat("GunSelectDamage") 
@@ -1556,25 +1578,25 @@ public class GarageController : MonoBehaviour
             if (i == 0)
                 _carName = "Dionysus";
 
-            if (i == 0)
+            if (i == 1)
                 _carName = "Lyssa";
 
-            if (i == 0)
+            if (i == 2)
                 _carName = "Taiowa";
 
-            if (i == 0)
+            if (i == 3)
                 _carName = "P-Run";
 
-            if (i == 0)
+            if (i == 4)
                 _carName = "Aeolus";
 
-            if (i == 0)
+            if (i == 5)
                 _carName = "Hyas";
 
-            if (i == 0)
+            if (i == 6)
                 _carName = "Hemera";
 
-            if (i == 0)
+            if (i == 7)
                 _carName = "Eos";
 
             if (PlayerPrefs.GetInt(_carName + "carPurchased") == 1)

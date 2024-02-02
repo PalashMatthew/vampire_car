@@ -51,6 +51,8 @@ public class EnemyController : MonoBehaviour
 
     bool isWeakening;
 
+    bool isHitAnimActive = false;
+
     [Header("HP Progress Bar")]
     public Image imgHpProgressBar;
 
@@ -82,6 +84,7 @@ public class EnemyController : MonoBehaviour
         }
 
         isWeakening = false;
+        isHitAnimActive = false;
 
         //if (materialsCar.Count > 0)
         //meshRenderer.material = materialsCar[Random.Range(0, materialsCar.Count)];
@@ -204,7 +207,7 @@ public class EnemyController : MonoBehaviour
 
     #region Hit
     public void Hit(float _damage, bool _isKrit)
-    {
+    {       
         if (isVisible)
         {
             SoundController _soundController = GameObject.Find("SoundsController").GetComponent<SoundController>();
@@ -222,7 +225,9 @@ public class EnemyController : MonoBehaviour
 
             hp -= _damage;
             GetComponentInChildren<EnemyUI>().ViewDamage((int)_damage, _isKrit);
-            StartCoroutine(HitAnim());
+
+            if (!isHitAnimActive)
+                StartCoroutine(HitAnim());
 
             if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s09")  //Если у нас сет Таран активен
             {
@@ -234,16 +239,16 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
-            {
-                int rand = Random.Range(1, 101);
+            //if (GameObject.Find("Player").GetComponent<PlayerPassiveController>().isHeadshot)
+            //{
+            //    int rand = Random.Range(1, 101);
 
-                if (rand <= GameObject.Find("Player").GetComponent<PlayerStats>().headshotProcent)
-                {
-                    Dead();
-                    return;
-                }
-            }
+            //    if (rand <= GameObject.Find("Player").GetComponent<PlayerStats>().headshotProcent)
+            //    {
+            //        Dead();
+            //        return;
+            //    }
+            //}
 
             if (hp <= 0)
             {
@@ -255,25 +260,46 @@ public class EnemyController : MonoBehaviour
     public void Headshot()
     {
         GetComponentInChildren<EnemyUI>().ViewHeadshot();
-        StartCoroutine(HitAnim());
+
+        if(!isHitAnimActive)
+            StartCoroutine(HitAnim());
+
         Dead();
     }
 
     IEnumerator HitAnim()
     {
+        //if (meshRenderer != null)
+        //    meshRenderer.material.EnableKeyword("_EMISSION");
+
+        //if (skinnedMeshRenderer != null)
+        //    skinnedMeshRenderer.material.EnableKeyword("_EMISSION");
+
+        //yield return new WaitForSeconds(0.1f);
+
+        //if (meshRenderer != null)
+        //    meshRenderer.material.DisableKeyword("_EMISSION");
+
+        //if (skinnedMeshRenderer != null)
+        //    skinnedMeshRenderer.material.DisableKeyword("_EMISSION");
+
+        isHitAnimActive = true;
+
         if (meshRenderer != null)
-            meshRenderer.material.EnableKeyword("_EMISSION");
+            meshRenderer.material.SetColor("_EmissionColor", Color.white);
 
         if (skinnedMeshRenderer != null)
-            skinnedMeshRenderer.material.EnableKeyword("_EMISSION");
+            skinnedMeshRenderer.material.SetColor("_EmissionColor", Color.white);
 
         yield return new WaitForSeconds(0.1f);
 
         if (meshRenderer != null)
-            meshRenderer.material.DisableKeyword("_EMISSION");
+            meshRenderer.material.SetColor("_EmissionColor", Color.black);
 
         if (skinnedMeshRenderer != null)
-            skinnedMeshRenderer.material.DisableKeyword("_EMISSION");
+            skinnedMeshRenderer.material.SetColor("_EmissionColor", Color.black);
+
+        isHitAnimActive = false;
     }
     #endregion
 

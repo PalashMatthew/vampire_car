@@ -38,6 +38,11 @@ public class ChooseLocationController : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         if (!PlayerPrefs.HasKey("maxLocation"))
         {
             PlayerPrefs.SetInt("maxLocation", 1);
@@ -98,8 +103,10 @@ public class ChooseLocationController : MonoBehaviour
         tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
     }
 
-    void ChangeLocation()
+    public void ChangeLocation()
     {
+        string locOpen = "closed";
+
         for (int i = 1; i <= maxLocNum; i++)
         {
             if (currentLocNum == i)
@@ -111,7 +118,7 @@ public class ChooseLocationController : MonoBehaviour
         if (currentLocNum == 1)
         {
             butNext.SetActive(true);
-            butPrev.SetActive(false);
+            butPrev.SetActive(false);            
         }
 
         if (currentLocNum > 1 && currentLocNum < maxLocNum)
@@ -139,6 +146,8 @@ public class ChooseLocationController : MonoBehaviour
             tOpenPrevLoc.SetActive(false);
             imgLock.SetActive(false);
             objReward.SetActive(true);
+
+            locOpen = "open";
         }
 
         tRewards.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_reward") + "\n" + (PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") / 2) + "/5";
@@ -147,6 +156,8 @@ public class ChooseLocationController : MonoBehaviour
         tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
 
         GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ChangeLocation(currentLocNum, PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave"), locOpen);
 
         #region Camera Color Settings
         if (currentLocNum == 1)

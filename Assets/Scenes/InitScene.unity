@@ -1191,7 +1191,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &600865154
 RectTransform:
@@ -1639,16 +1639,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2006493143951705739, guid: 5542b1c43d7b8fd469e9669c171afd10, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4922178582139355708, guid: 5542b1c43d7b8fd469e9669c171afd10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1261473415}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5542b1c43d7b8fd469e9669c171afd10, type: 3}
---- !u!224 &993711436 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2006493143951705739, guid: 5542b1c43d7b8fd469e9669c171afd10, type: 3}
-  m_PrefabInstance: {fileID: 993711435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1002430875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1858,7 @@ MonoBehaviour:
   m_fontSizeMax: 21.1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1891,7 +1886,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30, y: 0, z: 0, w: 30}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1917,12 +1912,12 @@ RectTransform:
   m_LocalScale: {x: 1.00032, y: 1.00032, z: 1.00032}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 993711436}
+  m_Father: {fileID: 1476223277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -912.99994}
-  m_SizeDelta: {x: -91, y: -1855}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.0060959, y: 125.01001}
+  m_SizeDelta: {x: 1079.7, y: 249.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1397192924
 GameObject:
@@ -1968,6 +1963,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1476223277 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4922178582139355708, guid: 5542b1c43d7b8fd469e9669c171afd10, type: 3}
+  m_PrefabInstance: {fileID: 993711435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1497932134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,6 +2023,7 @@ MonoBehaviour:
   imgCircle: {fileID: 796576020}
   rotateSpeed: -1
   headObj: {fileID: 600865150}
+  butReconnect: {fileID: 968235820}
 --- !u!114 &1497932137
 MonoBehaviour:
   m_ObjectHideFlags: 0

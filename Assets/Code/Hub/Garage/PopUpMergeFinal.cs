@@ -287,7 +287,6 @@ public class PopUpMergeFinal : MonoBehaviour
             }
         }
 
-        Debug.Log(returnMoneyValue);
         if (returnMoneyValue > 0)
         {
             objReturnMoney.SetActive(true);

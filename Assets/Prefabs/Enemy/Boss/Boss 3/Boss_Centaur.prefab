@@ -1483,6 +1483,7 @@ GameObject:
   - component: {fileID: 7322489817401212938}
   - component: {fileID: 4735750140473243753}
   - component: {fileID: 744432901116670483}
+  - component: {fileID: 7225969485023577472}
   m_Layer: 0
   m_Name: Boss_Centaur
   m_TagString: boss
@@ -1547,6 +1548,7 @@ MonoBehaviour:
   newSpeed: 0
   clipHit: {fileID: 0}
   clipDeath: {fileID: 0}
+  roadPit: {fileID: 0}
 --- !u!114 &744432901116670483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1588,20 @@ MonoBehaviour:
   mesh1: {fileID: 4576620627422131557}
   mesh2: {fileID: 2569989746950360027}
   mesh3: {fileID: 866530375476721499}
+--- !u!114 &7225969485023577472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626425975505978947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bf817166736db4bb2f18faf36b49be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxFire: {fileID: 0}
+  vfxPoison: {fileID: 0}
 --- !u!1 &4691196860349704742
 GameObject:
   m_ObjectHideFlags: 0

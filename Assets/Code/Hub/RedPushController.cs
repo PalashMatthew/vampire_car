@@ -124,9 +124,9 @@ public class RedPushController : MonoBehaviour
 
     bool CheckWaveRewardRedPush()
     {
-        for (int locNum = 1; locNum < 5; locNum++)
+        for (int locNum = 1; locNum <= 5; locNum++)
         {
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 if (PlayerPrefs.GetInt("loc" + locNum + "reward" + i + "Take") == 0)
                 {
@@ -144,8 +144,6 @@ public class RedPushController : MonoBehaviour
 
     bool CheckGarageRedPush()
     {
-        Debug.Log("CheckGaragePush");
-
         int cellCount;
 
         #region Gun

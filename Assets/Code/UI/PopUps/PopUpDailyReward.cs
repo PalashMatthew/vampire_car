@@ -17,13 +17,16 @@ public class PopUpDailyReward : MonoBehaviour
 
     public GameObject redPush;
 
+    int seconds;
+
 
     private void Start()
     {
         _popUpController = GetComponent<PopUpController>();
 
-        //if (PlayerPrefs.GetString("tutorialHubComplite") == "true")
-            Initialize();
+        seconds = OfflineTimeCheck.totalSeconds;
+
+        Initialize();
     }
 
     void Initialize()
@@ -33,21 +36,16 @@ public class PopUpDailyReward : MonoBehaviour
             PlayerPrefs.SetInt("DailyRewardCurrentDay", 1);
         }
 
-        
-
-        //if (PlayerPrefs.HasKey("OfflineTimeLast"))
-        //{
-            
-        //}
+        Debug.Log("DailyRewardTimerSaveTime = " + PlayerPrefs.GetInt("DailyRewardTimerSaveTime"));
 
         if (!PlayerPrefs.HasKey("DailyRewardTimerSaveTime"))
         {
             PlayerPrefs.SetInt("DailyRewardTimerSaveTime", 86400);
-        }
-
-        int seconds = OfflineTimeCheck.totalSeconds;
+        }        
 
         PlayerPrefs.SetInt("DailyRewardTimerSaveTime", PlayerPrefs.GetInt("DailyRewardTimerSaveTime") + seconds);
+
+        seconds = 0;
 
         if (PlayerPrefs.GetInt("DailyRewardTimerSaveTime") >= 86400)
         {
@@ -538,6 +536,8 @@ public class PopUpDailyReward : MonoBehaviour
     {
         StopAllCoroutines();
         Initialize();
+
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_OpenScreen("DailyReward");
 
         _popUpController.OpenPopUp();        
     }

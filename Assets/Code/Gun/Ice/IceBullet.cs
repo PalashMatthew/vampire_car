@@ -52,6 +52,7 @@ public class IceBullet : MonoBehaviour
     {
         GameObject _inst = Instantiate(boomObj, new Vector3(transform.position.x, 0, transform.position.z), transform.rotation);
         _inst.GetComponent<IceObj>()._gunController = _gunController;
+        _inst.GetComponent<IceObj>().parentObj = gameObject;
         _inst.GetComponent<IceObj>().Initialize();
 
         Destroy(gameObject);

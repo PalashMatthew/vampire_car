@@ -76,7 +76,7 @@ public class LazerGun : MonoBehaviour
                 if (!gm.GetComponent<EnemyController>().isBoss)
                     _gunController.DamageEnemy(gm, gameObject);
                 else
-                    _gunController.DamageBoss(gm);
+                    _gunController.DamageBoss(gm, gameObject);
             }            
         }
 

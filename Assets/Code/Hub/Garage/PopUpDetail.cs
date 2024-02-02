@@ -73,6 +73,15 @@ public class PopUpDetail : MonoBehaviour
     public Image imgSetImageCell4;
     public Image imgSetImageCell5;
 
+    [Header("Recipe")]
+    public Image imgIconRecipe;
+    public Sprite sprDrawingGun;
+    public Sprite sprDrawingEngine;
+    public Sprite sprDrawingBrakes;
+    public Sprite sprDrawingFuelSystem;
+    public Sprite sprDrawingSuspension;
+    public Sprite sprDrawingTransmission;
+
 
     private void Start()
     {
@@ -812,21 +821,27 @@ public class PopUpDetail : MonoBehaviour
             {
                 case DetailCard.ItemType.Gun:
                     currentDrawing = PlayerPrefs.GetInt("drawingGunCount");
+                    imgIconRecipe.sprite = sprDrawingGun;
                     break;
                 case DetailCard.ItemType.Engine:
                     currentDrawing = PlayerPrefs.GetInt("drawingEngineCount");
+                    imgIconRecipe.sprite = sprDrawingEngine;
                     break;
                 case DetailCard.ItemType.Brakes:
                     currentDrawing = PlayerPrefs.GetInt("drawingBrakesCount");
+                    imgIconRecipe.sprite = sprDrawingBrakes;
                     break;
                 case DetailCard.ItemType.FuelSystem:
                     currentDrawing = PlayerPrefs.GetInt("drawingFuelSystemCount");
+                    imgIconRecipe.sprite = sprDrawingFuelSystem;
                     break;
                 case DetailCard.ItemType.Suspension:
                     currentDrawing = PlayerPrefs.GetInt("drawingSuspensionCount");
+                    imgIconRecipe.sprite = sprDrawingSuspension;
                     break;
                 case DetailCard.ItemType.Transmission:
                     currentDrawing = PlayerPrefs.GetInt("drawingTransmissionCount");
+                    imgIconRecipe.sprite = sprDrawingTransmission;
                     break;
             }
 
@@ -1284,11 +1299,12 @@ public class PopUpDetail : MonoBehaviour
 
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
 
+            GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
             garageController.CheckArrowUpgrade();
         }
     }
 
-    void SaveDetailStats(string _type)
+    public void SaveDetailStats(string _type)
     {
         DetailCard _card = garageController.activeItem.itemObj;
 
@@ -1654,6 +1670,7 @@ public class PopUpDetail : MonoBehaviour
     public void ButOpenSet()
     {
         GameObject.Find("PopUp Set").GetComponent<PopUpSet>().setID = garageController.activeItem.itemObj.setID;
+
         GameObject.Find("PopUp Set").GetComponent<PopUpSet>().OpenPopUp();
     }
 

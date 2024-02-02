@@ -5,9 +5,13 @@ using UnityEngine;
 public class BoomObj : MonoBehaviour
 {
     public Gun _gunController;
+    public GameObject parentObj;
 
     public void Initialize()
     {
+        GetComponent<GunDistanceAttack>().dontCheckCoord = true;
+        GetComponent<GunDistanceAttack>().startCoord = parentObj.GetComponent<GunDistanceAttack>().startCoord;
+
         StartCoroutine(EndAttack());
         StartCoroutine(OffCollider());
     }
@@ -33,7 +37,8 @@ public class BoomObj : MonoBehaviour
 
         if (other.tag == "boss")
         {
-            _gunController.DamageBoss(other.gameObject);
+            //_gunController.DamageBoss(other.gameObject);
+            _gunController.DamageBoss(other.gameObject, gameObject);
         }
     }
 

@@ -12,8 +12,7 @@ public class PlayerPassiveController : MonoBehaviour
     public bool isPunching;
     public bool isHeadshot;
     public bool isScrewValueUp;
-    public bool isDistanceDamage;
-    
+    public bool isDistanceDamage;    
 
     [Header("Health Recovery")]
     public bool isPassiveHealthRecovery;

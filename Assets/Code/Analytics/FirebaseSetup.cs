@@ -53,6 +53,17 @@ public class FirebaseSetup : MonoBehaviour
     }
 
     //Done
+    public void Event_UnlockNewLocation(int _locNum)
+    {
+        string s = "UnlockNewLocation_" + _locNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("PlayerProgress", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
     public void Event_DetailApply(string _detailType, int _id, int _level, string _rare)
     {
         string s = "DetailApply_" + _detailType + "_ID_" + _id + "_Level_" + _level + "_" + _rare;
@@ -261,6 +272,7 @@ public class FirebaseSetup : MonoBehaviour
         Debug.Log("Event Send!\n" + s);
     }
 
+    //Done
     public void Event_PlayerDie(int _waveNum, string _locNum, int _seconds, int _dieNum)
     {
         string s = "PlayerDie_WaveNum_" + _waveNum + "_LocNum_" + _locNum + "_Seconds_" + _seconds + "_DieNum_" + _dieNum;
@@ -271,15 +283,170 @@ public class FirebaseSetup : MonoBehaviour
         Debug.Log("Event Send!\n" + s);
     }
 
-    public void Event_Recovery(int _waveNum, string _locNum)
+    //Done
+    public void Event_Recovery(int _waveNum, string _locNum, string _type)
     {
-        string s = "Recovery_WaveNum_" + _waveNum + "_LocNum_" + _locNum;
+        string s = "Recovery_WaveNum_" + _waveNum + "_LocNum_" + _locNum + "RecoveryType_" + _type;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Game", s));
 
         Debug.Log("Event Send!\n" + s);
     }
+
+    //Done
+    public void Event_RecoveryCanceled()
+    {
+        string s = "RecoveryCanceled";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_OpenFuelPopUp()
+    {
+        string s = "FuelPopUpOpen";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_BuyFuel(string _type)
+    {
+        string s = "BuyFuel_" + _type;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_OpenShopWithButton(string _type)
+    {
+        string s = "OpenShopWithButton_" + _type;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_OpenScreen(string _name)
+    {
+        string s = "OpenScreen_" + _name;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_Music(string _status)
+    {
+        string s = "Music_" + _status;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_Sound(string _status)
+    {
+        string s = "Sound_" + _status;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_ChangeLanguage(string _language)
+    {
+        string s = "ChangeLanguage_" + _language;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_LoginGooglePlay()
+    {
+        string s = "Login_GooglePlay";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_WaveRewardHub(int _locNum, int _rewardNum)
+    {
+        string s = "WaveRewardHub_LocNum_" + _locNum + "_RewardNum_" + _rewardNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_Reroll(string _type)
+    {
+        string s = "Reroll_" + _type;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_ChangeLocation(int _locNum, int _waveClear, string _openStatus)
+    {
+        string s = "ChangeLocation_Num_" + _locNum + "_waveClear_" + _waveClear + "_openStatus_" + _openStatus;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_Tutorial(string blockNum)
+    {
+        string s = "Tutorial_Start_" + blockNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    //Done
+    public void Event_InternetDisable()
+    {
+        string s = "InternetDisable";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }    
     #endregion
 
     #region Монетизационная аналитика
@@ -326,6 +493,26 @@ public class FirebaseSetup : MonoBehaviour
     public void Event_BuyCar(string _name, string _priceType, float _price)
     {
         string s = "BuyCar_" + _name + "_" + _priceType + "_Price_" + _price;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_ShowAdsStart(string _name)
+    {
+        string s = "ShowAds_" + _name;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_ShowAdsFinish(string _name)
+    {
+        string s = "ShowAds_" + _name;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Monetization", s));
