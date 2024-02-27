@@ -271,7 +271,9 @@ public class GameCloud : MonoBehaviour
             tutorialGameComplite = PlayerPrefs.GetString("tutorialComplite"),
             tutorialHubComplite = PlayerPrefs.GetString("tutorialHubComplite"),
             tutorialLoc1Complite = PlayerPrefs.GetString("tutorialLoc1Complite"),
-            tutorialCards = PlayerPrefs.GetString("tutorialCards")
+            tutorialCards = PlayerPrefs.GetString("tutorialCards"),
+
+            maxLocation = PlayerPrefs.GetInt("maxLocation")
     };
 
         Dictionary<string, object> data = new Dictionary<string, object>() { { PLAYER_CLOUD_KEY, playerData} };
@@ -479,12 +481,16 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetString("tutorialHubComplite", player.tutorialHubComplite);
             PlayerPrefs.SetString("tutorialLoc1Complite", player.tutorialLoc1Complite);
             PlayerPrefs.SetString("tutorialCards", player.tutorialCards);
+
+            PlayerPrefs.SetInt("maxLocation", player.maxLocation);
             #endregion
         }
         else
         {
             if (!PlayerPrefs.HasKey("playerMoney"))
             {
+                PlayerPrefs.SetInt("maxLocation", 1);
+
                 PlayerPrefs.SetInt("soundSettings", 1);
                 PlayerPrefs.SetInt("musicSettings", 1);
 
@@ -576,6 +582,7 @@ public class PlayerData
     public int drawingFuelSystemCount;
     public int drawingSuspensionCount;
     public int drawingTransmissionCount;
+    public int maxLocation;
 
     //Cars
     public int dionysusCarPurchased;

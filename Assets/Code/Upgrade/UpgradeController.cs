@@ -68,6 +68,8 @@ public class UpgradeController : MonoBehaviour
     [Header("New Upgrade System")]
     public List<int> gunUpgradeChanceInwave;
 
+    public TMP_Text tPassiveInfo1, tPassiveInfo2, tPassiveInfo3;
+
 
     private void Start()
     {
@@ -785,6 +787,21 @@ public class UpgradeController : MonoBehaviour
 
             _createdCards.Add(_card);
             cardsPassiveController[i].card = _card;
+
+            switch (i)
+            {
+                case 0:
+                    tPassiveInfo1.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_passiveInfo" + _card.cardName);
+                    break;
+
+                case 1:
+                    tPassiveInfo2.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_passiveInfo" + _card.cardName);
+                    break;
+
+                case 2:
+                    tPassiveInfo3.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_passiveInfo" + _card.cardName);
+                    break;
+            }
         }
     }
 
@@ -1173,7 +1190,7 @@ public class UpgradeController : MonoBehaviour
                 break;
 
             case UpgradeCard.UpgradePassiveType.Lucky:
-                luckyChance *= luckyChance / 100 * _value;
+                luckyChance += luckyChance / 100 * _value;
                 break;
 
             case UpgradeCard.UpgradePassiveType.DistanceDamage:

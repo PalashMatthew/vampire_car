@@ -43,8 +43,8 @@ public class EnemyBallBullet : MonoBehaviour
         objBall2.transform.DOLocalMoveX(1f, 0);
         cylinder.transform.DOScale(new Vector3(0.23f, 0.52f, 0.23f), 0);
 
-        objBall1.transform.DOLocalMoveX(-2.8f, 3);
-        objBall2.transform.DOLocalMoveX(2.8f, 3);
-        cylinder.transform.DOScale(new Vector3(0.23f, 2.3f, 0.23f), 3);
+        objBall1.transform.DOLocalMoveX(-2.2f, 3);
+        objBall2.transform.DOLocalMoveX(2.2f, 3);
+        cylinder.transform.DOScale(new Vector3(0.23f, 2.08f, 0.23f), 3);
     }
 }

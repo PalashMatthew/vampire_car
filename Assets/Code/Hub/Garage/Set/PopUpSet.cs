@@ -65,11 +65,6 @@ public class PopUpSet : MonoBehaviour
         _popUpController = GetComponent<PopUpController>();
     }
 
-    private void Update()
-    {
-        Debug.Log("Set Value = " + PlayerPrefs.GetFloat("setValue"));
-    }
-
     void Initialize()
     {
         colorActive = new Color(1, 1, 1, 1);

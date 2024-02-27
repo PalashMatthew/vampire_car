@@ -43,7 +43,7 @@ public class ChooseLocationController : MonoBehaviour
 
     public void Initialize()
     {
-        if (!PlayerPrefs.HasKey("maxLocation"))
+        if (PlayerPrefs.GetInt("maxLocation") == 0)
         {
             PlayerPrefs.SetInt("maxLocation", 1);
         }
@@ -76,22 +76,7 @@ public class ChooseLocationController : MonoBehaviour
 
         ChangeLocation();
 
-        #region Camera Color Settings
-        if (currentLocNum == 1)
-        {
-            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-        }
-
-        if (currentLocNum == 2)
-        {
-            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
-        }
-
-        if (currentLocNum == 3)
-        {
-            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-        }
-        #endregion
+        CameraColorSettings();
     }
 
     private void Update()
@@ -159,6 +144,11 @@ public class ChooseLocationController : MonoBehaviour
 
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ChangeLocation(currentLocNum, PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave"), locOpen);
 
+        CameraColorSettings();
+    }
+
+    public void CameraColorSettings()
+    {
         #region Camera Color Settings
         if (currentLocNum == 1)
         {

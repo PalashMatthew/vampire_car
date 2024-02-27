@@ -207,13 +207,15 @@ public class GarageController : MonoBehaviour
     {       
         if (activeCarObj == null)
         {
-            for (int i = 0; i < carsButtons.Count; i++)
-            {
-                carsButtons[i].GetComponent<CarButtonController>().Initialize();
-            }
+            //for (int i = 0; i < carsButtons.Count; i++)
+            //{
+            //    carsButtons[i].GetComponent<CarButtonController>().Initialize();
+            //}
 
             foreach (GameObject _car in carsButtons)
             {
+                _car.GetComponent<CarButtonController>().Initialize();
+
                 if (_car.GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
                 {
                     _car.GetComponent<CarButtonController>().ButSelect();

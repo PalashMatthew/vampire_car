@@ -483,7 +483,7 @@ public class PopUpDailyReward : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 50);
                     PlayerPrefs.SetInt("playerKey2", PlayerPrefs.GetInt("playerKey2") + 1);
-                    PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + 5);
+                    PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + 5);
                     PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + 5);
                 }
 

@@ -31,4 +31,12 @@ public class ASyncLoader : MonoBehaviour
             yield return null;
         }
     }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Tab))
+    //    {
+    //        ScreenCapture.CaptureScreenshot(Random.Range(1, 999999) + "_image.png");
+    //    }
+    //}
 }

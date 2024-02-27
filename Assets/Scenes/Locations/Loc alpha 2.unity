@@ -379,6 +379,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f006bb4b42cff4d951adcff5d6369e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &185923525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1988683791520630499, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &185923526 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4098918731553791986, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
@@ -498,6 +509,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88a89af86c82e14aa2b21e865d9d5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &197618904 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1200880551554473772, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &197618905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9087522538466643677, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &241359288
@@ -2880,6 +2913,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Upgrade Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo1
+      value: 
+      objectReference: {fileID: 197618905}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo2
+      value: 
+      objectReference: {fileID: 197618904}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo3
+      value: 
+      objectReference: {fileID: 185923525}
     - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
       propertyPath: upgradeLevelCount
       value: 0

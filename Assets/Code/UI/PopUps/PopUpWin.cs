@@ -274,7 +274,7 @@ public class PopUpWin : MonoBehaviour
                 titanValue += titanRand / 100 * waveDropProcent[i - 1];
             }
 
-            if (titanValue > 0)
+            if (titanValue >= 1)
             {
                 instCell = Instantiate(resourceCellObj, transform.position, transform.rotation);
                 instCell.transform.parent = scrollObj;

@@ -39,6 +39,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public static bool buttonTapAccess;
 
+    public TMP_Text tPassiveInfo1, tPassiveInfo2, tPassiveInfo3;
+
 
     private void Start()
     {
@@ -72,6 +74,10 @@ public class PopUpUpgrade : MonoBehaviour
     {
         tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_passiveUpgrade");
 
+        tPassiveInfo1.gameObject.SetActive(true);
+        tPassiveInfo2.gameObject.SetActive(true);
+        tPassiveInfo3.gameObject.SetActive(true);
+
         cardPassive1.GetComponent<RectTransform>().DOAnchorPosX(-350, 0f).SetUpdate(true);
         cardPassive2.GetComponent<RectTransform>().DOAnchorPosX(0f, 0f).SetUpdate(true);
         cardPassive3.GetComponent<RectTransform>().DOAnchorPosX(350, 0f).SetUpdate(true);
@@ -82,9 +88,19 @@ public class PopUpUpgrade : MonoBehaviour
         cardPassive2.GetComponent<RectTransform>().localScale = Vector3.zero;
         cardPassive3.GetComponent<RectTransform>().localScale = Vector3.zero;
 
+        tPassiveInfo1.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+        tPassiveInfo2.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+        tPassiveInfo3.gameObject.GetComponent<RectTransform>().localScale = Vector3.zero;
+
         cardPassiveAnim.Insert(0.3f, cardPassive1.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Join(tPassiveInfo1.gameObject.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
         cardPassiveAnim.Insert(0.4f, cardPassive2.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Join(tPassiveInfo2.gameObject.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
         cardPassiveAnim.Insert(0.5f, cardPassive3.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+        cardPassiveAnim.Join(tPassiveInfo3.gameObject.GetComponent<RectTransform>().DOScale(1, 0.5f).SetEase(Ease.OutBack)).SetUpdate(true);
+
     }
 
     public IEnumerator ChoiceGunCard()
@@ -149,7 +165,11 @@ public class PopUpUpgrade : MonoBehaviour
 
     public IEnumerator ChoicePassiveCard()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        tPassiveInfo1.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true).SetEase(Ease.InBack);
+        tPassiveInfo2.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true).SetEase(Ease.InBack);
+        tPassiveInfo3.gameObject.GetComponent<RectTransform>().DOScale(0, 0.3f).SetUpdate(true).SetEase(Ease.InBack);
+
+        yield return new WaitForSecondsRealtime(0.5f);      
 
         foreach (UpgradeCardController _card in upgradeController.cardsPassiveController)
         {

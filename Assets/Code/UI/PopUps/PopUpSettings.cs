@@ -207,7 +207,7 @@ public class PopUpSettings : MonoBehaviour
 
     public void PrivacyPolicy()
     {
-        Application.OpenURL("https://docs.google.com/document/d/1laNGSxcNIK3RrWfe8c7DAWKFUGrqSjK6LH7QQh9SJsQ/edit?usp=sharing");
+        Application.OpenURL("https://docs.google.com/document/d/1s2X6nwLA6-Vl8euYdMAOY3pYWqEBYg2huoqqkXbLIiM/edit?usp=sharing");
     }
 
     public void ButLoginGooglePlayGames()

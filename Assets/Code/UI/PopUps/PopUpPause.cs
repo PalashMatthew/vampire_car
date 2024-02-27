@@ -142,17 +142,17 @@ public class PopUpPause : MonoBehaviour
         }
     }
 
-    #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
     private void OnApplicationPause()
     {
-        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
+        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd && !GameplayController.isPause)
             ButOpen();
     }
 
     private void OnApplicationQuit()
     {
-        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd)
+        if (!PopUpWin.isEndGame && !WaveController.isWaveEnd && !GameplayController.isPause)
             ButOpen();
     }
-    #endif
+#endif
 }

@@ -37,9 +37,9 @@ public class PinPongBullet : MonoBehaviour
             _ricochetCount++;
         }
 
-        if (transform.position.z > 70 && _ricochetCount < _gunController.ricochetCount)
+        if (transform.position.z > 76 && _ricochetCount < _gunController.ricochetCount)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 70f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 76f);
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y - 180f, 0);
             _ricochetCount++;
         }
