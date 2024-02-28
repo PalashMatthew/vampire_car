@@ -217,12 +217,17 @@ public class PopUpSettings : MonoBehaviour
         LinkWithGooglePlayGamesAsync(PlayerPrefs.GetString("userID"));
     }
 
+    public void ButLoadCloudSave()
+    {
+        GameObject.Find("GameCloud").GetComponent<GameCloud>().LoadData();
+    }
+
     async Task LinkWithGooglePlayGamesAsync(string authCode)
     {
         try
         {
             await AuthenticationService.Instance.LinkWithGooglePlayGamesAsync(authCode);
-            Debug.Log("Link is successful.");
+            Debug.Log("Link is successful.");            
         }
         catch (AuthenticationException ex) when (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
         {

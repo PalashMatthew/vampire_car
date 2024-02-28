@@ -14,10 +14,14 @@ public class GameCloud : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        LoadLocalData();
     }
 
     public async void CloudSaveInitialize()
     {
+        InitScene.initCount++;
+
         await UnityServices.InitializeAsync();        
     }
 
@@ -484,67 +488,94 @@ public class GameCloud : MonoBehaviour
 
             PlayerPrefs.SetInt("maxLocation", player.maxLocation);
             #endregion
+
+            Debug.Log("Data Load");
+
+            Application.LoadLevel(Application.loadedLevel);
         }
-        else
+        
+
+        
+        //InitScene.initCount++;
+    }
+
+    public void LoadLocalData()
+    {
+        if (!PlayerPrefs.HasKey("playerMoney"))
         {
-            if (!PlayerPrefs.HasKey("playerMoney"))
-            {
-                PlayerPrefs.SetInt("maxLocation", 1);
+            PlayerPrefs.SetInt("maxLocation", 1);
 
-                PlayerPrefs.SetInt("soundSettings", 1);
-                PlayerPrefs.SetInt("musicSettings", 1);
+            PlayerPrefs.SetInt("soundSettings", 1);
+            PlayerPrefs.SetInt("musicSettings", 1);
 
-                PlayerPrefs.SetInt("playerMoney", 1000);
-                PlayerPrefs.SetInt("playerHard", 20);
-                PlayerPrefs.SetInt("playerFuelCurrent", 20);
-                PlayerPrefs.SetInt("playerFuelMax", 20);
-                PlayerPrefs.SetInt("playerLevel", 1);
+            PlayerPrefs.SetInt("playerMoney", 1000);
+            PlayerPrefs.SetInt("playerHard", 200);
+            PlayerPrefs.SetInt("playerFuelCurrent", 20);
+            PlayerPrefs.SetInt("playerFuelMax", 20);
+            PlayerPrefs.SetInt("playerLevel", 1);
 
-                PlayerPrefs.SetInt("unlockGun1000", 1);
-                PlayerPrefs.SetInt("unlockGun1001", 1);
-                PlayerPrefs.SetInt("unlockGun1002", 1);
-                PlayerPrefs.SetInt("unlockGun1003", 0);
-                PlayerPrefs.SetInt("unlockGun1004", 1);
-                PlayerPrefs.SetInt("unlockGun1005", 0);
-                PlayerPrefs.SetInt("unlockGun1006", 0);
-                PlayerPrefs.SetInt("unlockGun1007", 0);
-                PlayerPrefs.SetInt("unlockGun1008", 0);
-                PlayerPrefs.SetInt("unlockGun1009", 1);
-                PlayerPrefs.SetInt("unlockGun1010", 1);
-                PlayerPrefs.SetInt("unlockGun1011", 0);
-                PlayerPrefs.SetInt("unlockGun1012", 0);
-                PlayerPrefs.SetInt("unlockGun1013", 0);
-                PlayerPrefs.SetInt("unlockGun1014", 1);
-                PlayerPrefs.SetInt("unlockGun1015", 0);
+            PlayerPrefs.SetInt("unlockGun1000", 1);
+            PlayerPrefs.SetInt("unlockGun1001", 1);
+            PlayerPrefs.SetInt("unlockGun1002", 1);
+            PlayerPrefs.SetInt("unlockGun1003", 0);
+            PlayerPrefs.SetInt("unlockGun1004", 1);
+            PlayerPrefs.SetInt("unlockGun1005", 0);
+            PlayerPrefs.SetInt("unlockGun1006", 0);
+            PlayerPrefs.SetInt("unlockGun1007", 0);
+            PlayerPrefs.SetInt("unlockGun1008", 0);
+            PlayerPrefs.SetInt("unlockGun1009", 1);
+            PlayerPrefs.SetInt("unlockGun1010", 1);
+            PlayerPrefs.SetInt("unlockGun1011", 0);
+            PlayerPrefs.SetInt("unlockGun1012", 0);
+            PlayerPrefs.SetInt("unlockGun1013", 0);
+            PlayerPrefs.SetInt("unlockGun1014", 1);
+            PlayerPrefs.SetInt("unlockGun1015", 0);
 
-                PlayerPrefs.SetInt("unlockPassiveArmor", 0);
-                PlayerPrefs.SetInt("unlockPassiveAttackSpeed", 1);
-                PlayerPrefs.SetInt("unlockPassiveBackDamage", 0);
-                PlayerPrefs.SetInt("unlockPassiveDamageUp", 1);
-                PlayerPrefs.SetInt("unlockPassiveDistanceDamage", 1);
-                PlayerPrefs.SetInt("unlockPassiveDodge", 0);
-                PlayerPrefs.SetInt("unlockPassiveEffectsDuration", 0);
-                PlayerPrefs.SetInt("unlockPassiveHeadshot", 1);
-                PlayerPrefs.SetInt("unlockPassiveHealthRecovery", 1);
-                PlayerPrefs.SetInt("unlockPassiveKritChanceUp", 1);
-                PlayerPrefs.SetInt("unlockPassiveKritDamageUp", 1);
-                PlayerPrefs.SetInt("unlockPassiveLucky", 0);
-                PlayerPrefs.SetInt("unlockPassiveMassEnemyDamage", 0);
-                PlayerPrefs.SetInt("unlockPassiveMaxHpUp", 1);
-                PlayerPrefs.SetInt("unlockPassiveRage", 0);
-                PlayerPrefs.SetInt("unlockPassiveVampirizm", 1);
+            PlayerPrefs.SetInt("unlockPassiveArmor", 0);
+            PlayerPrefs.SetInt("unlockPassiveAttackSpeed", 1);
+            PlayerPrefs.SetInt("unlockPassiveBackDamage", 0);
+            PlayerPrefs.SetInt("unlockPassiveDamageUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveDistanceDamage", 1);
+            PlayerPrefs.SetInt("unlockPassiveDodge", 0);
+            PlayerPrefs.SetInt("unlockPassiveEffectsDuration", 0);
+            PlayerPrefs.SetInt("unlockPassiveHeadshot", 1);
+            PlayerPrefs.SetInt("unlockPassiveHealthRecovery", 1);
+            PlayerPrefs.SetInt("unlockPassiveKritChanceUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveKritDamageUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveLucky", 0);
+            PlayerPrefs.SetInt("unlockPassiveMassEnemyDamage", 0);
+            PlayerPrefs.SetInt("unlockPassiveMaxHpUp", 1);
+            PlayerPrefs.SetInt("unlockPassiveRage", 0);
+            PlayerPrefs.SetInt("unlockPassiveVampirizm", 1);
 
-                PlayerPrefs.SetString("unlockNewItems", "false");
+            PlayerPrefs.SetString("unlockNewItems", "false");
 
-                PlayerPrefs.SetString("tutorialComplite", "false");
-                PlayerPrefs.SetString("tutorialHubComplite", "false");
-                PlayerPrefs.SetString("tutorialLoc1Complite", "false");
-                PlayerPrefs.SetString("tutorialCards", "false");
-            }
+            PlayerPrefs.SetString("tutorialComplite", "false");
+            PlayerPrefs.SetString("tutorialHubComplite", "false");
+            PlayerPrefs.SetString("tutorialLoc1Complite", "false");
+            PlayerPrefs.SetString("tutorialCards", "false");
+
+            PlayerPrefs.SetString("activeCarID", "Dionysus");
+            PlayerPrefs.SetString("selectedCarID", "Dionysus");
+
+            PlayerPrefs.SetInt("DionysuscarLevel", 1);
+            PlayerPrefs.SetInt("TaiowacarLevel", 1);
+            PlayerPrefs.SetInt("P-RuncarLevel", 1);
+            PlayerPrefs.SetInt("LyssacarLevel", 1);
+            PlayerPrefs.SetInt("AeoluscarLevel", 1);
+            PlayerPrefs.SetInt("HyascarLevel", 1);
+            PlayerPrefs.SetInt("HemeracarLevel", 1);
+            PlayerPrefs.SetInt("EoscarLevel", 1);
+
+            PlayerPrefs.SetInt("DionysuscarPurchased", 1);
+            PlayerPrefs.SetInt("TaiowacarPurchased", 2);
+            PlayerPrefs.SetInt("P-RuncarPurchased", 2);
+            PlayerPrefs.SetInt("LyssacarPurchased", 2);
+            PlayerPrefs.SetInt("AeoluscarPurchased", 2);
+            PlayerPrefs.SetInt("HyascarPurchased", 2);
+            PlayerPrefs.SetInt("HemeracarPurchased", 2);
+            PlayerPrefs.SetInt("EoscarPurchased", 2);
         }
-
-        Debug.Log("Data Load");
-        InitScene.initCount++;
     }
 
     private void OnApplicationPause()

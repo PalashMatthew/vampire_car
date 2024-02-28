@@ -260,9 +260,9 @@ public class BossFireTruckController : MonoBehaviour
         fxShot2.gameObject.transform.eulerAngles = new Vector3(0, fxShot2.gameObject.transform.eulerAngles.y, 0);
         fxShot2.Play();
 
-        transform.DOMoveZ(-20f, 1.5f).SetEase(Ease.Linear);
+        transform.DOMoveZ(-20f, 2.5f).SetEase(Ease.Linear);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         transform.position = new Vector3(transform.position.x, transform.position.y, 90);
 
         transform.DOMoveZ(58f, 2).SetEase(Ease.Linear);
@@ -272,9 +272,9 @@ public class BossFireTruckController : MonoBehaviour
         fxShot2.gameObject.transform.eulerAngles = new Vector3(0, fxShot2.gameObject.transform.eulerAngles.y, 0);
         fxShot2.Play();
 
-        transform.DOMoveZ(-20f, 1.5f).SetEase(Ease.Linear);
+        transform.DOMoveZ(-20f, 2.5f).SetEase(Ease.Linear);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
         transform.position = new Vector3(transform.position.x, transform.position.y, 90);
 
         transform.DOMoveZ(58f, 2).SetEase(Ease.Linear);

@@ -46,6 +46,8 @@ public class HubController : MonoBehaviour
     private void Start()
     {
         Initialize();
+
+        Debug.Log("CAR SELECTED = " + PlayerPrefs.GetString("selectedCarID"));
     }
 
     private void Update()

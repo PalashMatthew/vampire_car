@@ -20,7 +20,13 @@ public class InitScene : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        StartCoroutine(InitGame());
+        //StartCoroutine(InitGame());
+
+        readData.ReadDataInitialize();
+        cloudSave.CloudSaveInitialize();
+        firebaseSetup.FirebaseInit();
+        adsController.Initialize();
+        authManager.GooglePlayGamesInit();
     }
 
     private void Update()

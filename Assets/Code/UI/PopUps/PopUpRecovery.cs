@@ -28,7 +28,7 @@ public class PopUpRecovery : MonoBehaviour
         Time.timeScale = 0;
         _popUpController.OpenPopUp();
 
-        timerValue = 5;
+        timerValue = 10;
 
         tTimer.text = timerValue.ToString();
 

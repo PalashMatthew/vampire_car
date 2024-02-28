@@ -40,7 +40,7 @@ public class AuthManager : MonoBehaviour
     async void SignIn()
     {
         await signInAnonymous();
-        gameCloudManaer.LoadData();
+        //gameCloudManaer.LoadData();
     }
 
     async Task signInAnonymous()
@@ -105,7 +105,7 @@ public class AuthManager : MonoBehaviour
             await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(authCode);
             Debug.Log("SignIn is successful.");
             PlayerPrefs.SetString("userID", AuthenticationService.Instance.PlayerId);
-            gameCloudManaer.LoadData();
+            //gameCloudManaer.LoadData();
             InitScene.initCount++;
         }
         catch (AuthenticationException ex)
