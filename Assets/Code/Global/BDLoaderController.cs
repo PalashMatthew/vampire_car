@@ -17,26 +17,26 @@ public class BDLoaderController : MonoBehaviour
     {       
         if (!PlayerPrefs.HasKey("activeCarID"))
         {
-            PlayerPrefs.SetString("activeCarID", "Dionysus");
-            PlayerPrefs.SetString("selectedCarID", "Dionysus");
+            //PlayerPrefs.SetString("activeCarID", "Dionysus");
+            //PlayerPrefs.SetString("selectedCarID", "Dionysus");
 
-            PlayerPrefs.SetInt("DionysuscarLevel", 1);
-            PlayerPrefs.SetInt("TaiowacarLevel", 1);
-            PlayerPrefs.SetInt("P-RuncarLevel", 1);
-            PlayerPrefs.SetInt("LyssacarLevel", 1);
-            PlayerPrefs.SetInt("AeoluscarLevel", 1);
-            PlayerPrefs.SetInt("HyascarLevel", 1);
-            PlayerPrefs.SetInt("HemeracarLevel", 1);
-            PlayerPrefs.SetInt("EoscarLevel", 1);
+            //PlayerPrefs.SetInt("DionysuscarLevel", 1);
+            //PlayerPrefs.SetInt("TaiowacarLevel", 1);
+            //PlayerPrefs.SetInt("P-RuncarLevel", 1);
+            //PlayerPrefs.SetInt("LyssacarLevel", 1);
+            //PlayerPrefs.SetInt("AeoluscarLevel", 1);
+            //PlayerPrefs.SetInt("HyascarLevel", 1);
+            //PlayerPrefs.SetInt("HemeracarLevel", 1);
+            //PlayerPrefs.SetInt("EoscarLevel", 1);
 
-            PlayerPrefs.SetInt("DionysuscarPurchased", 1);
-            PlayerPrefs.SetInt("TaiowacarPurchased", 2);
-            PlayerPrefs.SetInt("P-RuncarPurchased", 2);
-            PlayerPrefs.SetInt("LyssacarPurchased", 2);
-            PlayerPrefs.SetInt("AeoluscarPurchased", 2);
-            PlayerPrefs.SetInt("HyascarPurchased", 2);
-            PlayerPrefs.SetInt("HemeracarPurchased", 2);
-            PlayerPrefs.SetInt("EoscarPurchased", 2);
+            //PlayerPrefs.SetInt("DionysuscarPurchased", 1);
+            //PlayerPrefs.SetInt("TaiowacarPurchased", 2);
+            //PlayerPrefs.SetInt("P-RuncarPurchased", 2);
+            //PlayerPrefs.SetInt("LyssacarPurchased", 2);
+            //PlayerPrefs.SetInt("AeoluscarPurchased", 2);
+            //PlayerPrefs.SetInt("HyascarPurchased", 2);
+            //PlayerPrefs.SetInt("HemeracarPurchased", 2);
+            //PlayerPrefs.SetInt("EoscarPurchased", 2);
         }
     }
 

@@ -69,7 +69,10 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
     // Called when rewarded video is shown
     public void onRewardedVideoShown()
     {
-        Debug.Log("RewardedVideo shown");
+        //string placementName = PlayerPrefs.GetString("currentAdsPlacementName");
+
+        //if (GameObject.Find("Firebase") != null)
+        //    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ShowAdsFinish(placementName);
     }
 
     // Called when reward video is clicked

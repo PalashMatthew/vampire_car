@@ -14,6 +14,8 @@ public class PopUpRecovery : MonoBehaviour
 
     public bool isRecovery;
 
+    public TMP_Text tHardValue;
+
 
     private void Start()
     {
@@ -35,6 +37,8 @@ public class PopUpRecovery : MonoBehaviour
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, 1);
 
         StartCoroutine(Timer());
+
+        tHardValue.text = "" + PlayerPrefs.GetInt("playerHard");
     }
 
     IEnumerator Timer()

@@ -359,6 +359,26 @@ public class PopUpWin : MonoBehaviour
             }
         }
 
+        int _dieCount;
+
+        if (GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
+        {
+            _dieCount = 2;
+        }
+        else
+        {
+            _dieCount = 1;
+        }
+
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+
+        if (GameObject.Find("Firebase") != null)
+        {
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward1(waveController.currentWave, locationNum, _moneyReward, _expReward, _drawingGunReward);
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward2(_drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
+        }
+
         if (waveController.currentWave == 11)
         {
             tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_win");
@@ -380,27 +400,13 @@ public class PopUpWin : MonoBehaviour
             tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_gameOver");
         }
 
-        if (GameObject.Find("Firebase") != null)
-        {
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward1(waveController.currentWave, locationNum, _moneyReward, _expReward, _drawingGunReward);
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_WaveReward2(_drawingDetailReward, _titanReward, _itemRewardCount, _itemRewardID);
-        }            
+                 
 
-        int _dieCount;
-
-        if (GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)
-        {
-            _dieCount = 2;
-        } 
-        else
-        {
-            _dieCount = 1;
-        }
+        
 
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
 
-        if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+        
     }
 
     public void ButOpen()

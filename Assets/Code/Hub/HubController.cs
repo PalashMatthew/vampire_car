@@ -40,7 +40,10 @@ public class HubController : MonoBehaviour
     public int maxUserLevel;
 
     [Header("Sounds")]
-    public AudioClip clipSwipe;    
+    public AudioClip clipSwipe;
+
+    [Header("Starter Pack")]
+    public GameObject butStarterPack;
 
 
     private void Start()
@@ -125,6 +128,15 @@ public class HubController : MonoBehaviour
             }
         }
         #endregion
+
+        if (PlayerPrefs.GetInt("starterPackPurchased") == 0)
+        {
+            butStarterPack.SetActive(true);
+        } 
+        else
+        {
+            butStarterPack.SetActive(false);
+        }
     }
 
     #region Selection Menu

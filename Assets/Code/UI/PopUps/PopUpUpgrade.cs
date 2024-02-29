@@ -41,6 +41,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public TMP_Text tPassiveInfo1, tPassiveInfo2, tPassiveInfo3;
 
+    public TMP_Text tHardValue;
+
 
     private void Start()
     {
@@ -49,6 +51,11 @@ public class PopUpUpgrade : MonoBehaviour
 
         panelPassiveUpgrade.SetActive(true);
         panelGunUpgrade.SetActive(false);
+    }
+
+    private void Update()
+    {
+        tHardValue.text = "" + PlayerPrefs.GetInt("playerHard");
     }
 
     void CardGunAnimation()
@@ -223,7 +230,7 @@ public class PopUpUpgrade : MonoBehaviour
         butRerollAds1.SetActive(true);
         butRerollAds2.SetActive(true);
         butRerollHard1.SetActive(true);
-        butRerollHard2.SetActive(true);
+        butRerollHard2.SetActive(true);        
 
         //CardAnimation();
         CardPassiveAnim();

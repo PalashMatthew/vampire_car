@@ -30,6 +30,9 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     public bool openChestAccess;
 
+    [Header("Free Money")]
+    public TMP_Text tFreeMoneyCount;
+
 
     private void Awake()
     {
@@ -178,6 +181,11 @@ public class ShopController : MonoBehaviour, IStoreListener
     public void ButBuyCar(int itemNum)
     {
         m_StoreController.InitiatePurchase(nonCItems[itemNum].Id);
+    }
+
+    public void ButBuyStarterPack()
+    {
+        m_StoreController.InitiatePurchase(nonCItems[4].Id);
     }
 
     public void AddHard(int value)
@@ -632,6 +640,10 @@ public class ShopController : MonoBehaviour, IStoreListener
         else if (product.definition.id == nonCItems[3].Id)
         {
             GameObject.Find("PopUp Change Car").GetComponent<ChangeCarController>().BuyCarCallBack();
+        }
+        else if (product.definition.id == nonCItems[4].Id)
+        {
+            GameObject.Find("PopUp StarterPack").GetComponent<PopUpStarterPack>().CallBackPurchased();
         }
 
         return PurchaseProcessingResult.Complete;

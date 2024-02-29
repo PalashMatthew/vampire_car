@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
             isBrakeDamage = false;
 
-            if (_playerStats.currentHp <= 0 && !isDead)
+            if (_playerStats.currentHp < 1 && !isDead)
             {
                 //Смерть
                 if (!GameObject.Find("PopUp Recovery").GetComponent<PopUpRecovery>().isRecovery)

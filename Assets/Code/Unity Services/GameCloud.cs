@@ -277,8 +277,10 @@ public class GameCloud : MonoBehaviour
             tutorialLoc1Complite = PlayerPrefs.GetString("tutorialLoc1Complite"),
             tutorialCards = PlayerPrefs.GetString("tutorialCards"),
 
-            maxLocation = PlayerPrefs.GetInt("maxLocation")
-    };
+            maxLocation = PlayerPrefs.GetInt("maxLocation"),
+
+            playerTitan = PlayerPrefs.GetInt("playerTitan")
+        };
 
         Dictionary<string, object> data = new Dictionary<string, object>() { { PLAYER_CLOUD_KEY, playerData} };
         await CloudSaveService.Instance.Data.ForceSaveAsync(data);
@@ -313,6 +315,7 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("playerExp", player.playerExp);
             PlayerPrefs.SetInt("playerLevel", player.playerLevel);
             PlayerPrefs.SetInt("playerFuelCurrent", player.playerFuelCurrent);
+            PlayerPrefs.SetInt("playerTitan", player.playerTitan);
 
             PlayerPrefs.SetInt("drawingEngineCount", player.drawingEngineCount);
             PlayerPrefs.SetInt("drawingBrakesCount", player.drawingBrakesCount);
@@ -513,6 +516,7 @@ public class GameCloud : MonoBehaviour
             PlayerPrefs.SetInt("playerFuelCurrent", 20);
             PlayerPrefs.SetInt("playerFuelMax", 20);
             PlayerPrefs.SetInt("playerLevel", 1);
+            PlayerPrefs.SetInt("playerTitan", 0);
 
             PlayerPrefs.SetInt("unlockGun1000", 1);
             PlayerPrefs.SetInt("unlockGun1001", 1);
@@ -613,6 +617,7 @@ public class PlayerData
     public int drawingFuelSystemCount;
     public int drawingSuspensionCount;
     public int drawingTransmissionCount;
+    public int playerTitan;
     public int maxLocation;
 
     //Cars

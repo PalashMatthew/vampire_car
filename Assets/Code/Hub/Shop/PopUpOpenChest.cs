@@ -43,6 +43,9 @@ public class PopUpOpenChest : MonoBehaviour
 
     string chestSettings;
 
+    public GameObject header;
+    public TMP_Text tHardValue;
+
 
     private void Start()
     {
@@ -58,6 +61,8 @@ public class PopUpOpenChest : MonoBehaviour
         StartCoroutine(Animation());
 
         _popUpController.OpenPopUp();
+
+        header.SetActive(false);
 
         switch (rarity)
         {
@@ -237,6 +242,9 @@ public class PopUpOpenChest : MonoBehaviour
 
                 butOpenChest2Again.transform.DOScale(1, 0.3f);
             }
+
+            header.SetActive(true);
+            tHardValue.text = "" + PlayerPrefs.GetInt("playerHard");
         }
     }
 }

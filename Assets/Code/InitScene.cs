@@ -27,6 +27,8 @@ public class InitScene : MonoBehaviour
         firebaseSetup.FirebaseInit();
         adsController.Initialize();
         authManager.GooglePlayGamesInit();
+
+        PlayerPrefs.SetInt("firstShowStarterPack", 1);
     }
 
     private void Update()
