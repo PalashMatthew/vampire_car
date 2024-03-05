@@ -802,6 +802,10 @@ public class BDLoaderController : MonoBehaviour
 
             PlayerPrefs.SetString("ru" + _locInfo[0], _locInfo[1]);
             PlayerPrefs.SetString("en" + _locInfo[0], _locInfo[2]);
+            PlayerPrefs.SetString("es" + _locInfo[0], _locInfo[3]);
+            PlayerPrefs.SetString("fr" + _locInfo[0], _locInfo[4]);
+            PlayerPrefs.SetString("ko" + _locInfo[0], _locInfo[5]);
+            PlayerPrefs.SetString("pt" + _locInfo[0], _locInfo[6]);
         }
 
         if (!PlayerPrefs.HasKey("activeLang"))
@@ -809,6 +813,26 @@ public class BDLoaderController : MonoBehaviour
             if (Application.systemLanguage == SystemLanguage.Russian)
             {
                 PlayerPrefs.SetString("activeLang", "ru");
+            }
+            else if (Application.systemLanguage == SystemLanguage.English)
+            {
+                PlayerPrefs.SetString("activeLang", "en");
+            }
+            else if(Application.systemLanguage == SystemLanguage.French)
+            {
+                PlayerPrefs.SetString("activeLang", "fr");
+            }
+            else if (Application.systemLanguage == SystemLanguage.Korean)
+            {
+                PlayerPrefs.SetString("activeLang", "ko");
+            }
+            else if (Application.systemLanguage == SystemLanguage.Portuguese)
+            {
+                PlayerPrefs.SetString("activeLang", "pt");
+            }
+            else if (Application.systemLanguage == SystemLanguage.Spanish)
+            {
+                PlayerPrefs.SetString("activeLang", "es");
             }
             else
             {

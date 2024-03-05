@@ -44,6 +44,10 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
             PlayerPrefs.SetString("currentAdsPlacementName", placementName);
             Appodeal.show(Appodeal.REWARDED_VIDEO);
         }
+        else if (placementName == "adsChest")
+        {
+            GameObject.Find("HubController").GetComponent<ShopController>().openChestAccess = true;
+        }
     }
 
     #region Rewarded Video callback handlers
@@ -109,7 +113,7 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
         }
         else if (placementName == "freeMoney")
         {
-            PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 1200);
+            PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + PlayerPrefs.GetInt("freeMoneyAdsValue"));
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(1200, "-", PlayerPrefs.GetInt("playerMoney"));
             GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
         }

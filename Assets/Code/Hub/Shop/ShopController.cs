@@ -32,6 +32,7 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     [Header("Free Money")]
     public TMP_Text tFreeMoneyCount;
+    public List<int> freeMoneyCount;
 
 
     private void Awake()
@@ -82,6 +83,9 @@ public class ShopController : MonoBehaviour, IStoreListener
         ChestSettings();
 
         GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
+
+        tFreeMoneyCount.text = freeMoneyCount[PlayerPrefs.GetInt("maxLocation") - 1] + "";
+        PlayerPrefs.SetInt("freeMoneyAdsValue", freeMoneyCount[PlayerPrefs.GetInt("maxLocation") - 1]);
     }
 
     IEnumerator AdsChestTimer()
@@ -186,6 +190,11 @@ public class ShopController : MonoBehaviour, IStoreListener
     public void ButBuyStarterPack()
     {
         m_StoreController.InitiatePurchase(nonCItems[4].Id);
+    }
+
+    public void ButBuySetPack()
+    {
+        m_StoreController.InitiatePurchase(nonCItems[6].Id);
     }
 
     public void AddHard(int value)
@@ -644,6 +653,10 @@ public class ShopController : MonoBehaviour, IStoreListener
         else if (product.definition.id == nonCItems[4].Id)
         {
             GameObject.Find("PopUp StarterPack").GetComponent<PopUpStarterPack>().CallBackPurchased();
+        }
+        else if (product.definition.id == nonCItems[6].Id)
+        {
+            GameObject.Find("PopUp SetPack").GetComponent<PopUpSetPack>().CallBackPurchased();
         }
 
         return PurchaseProcessingResult.Complete;

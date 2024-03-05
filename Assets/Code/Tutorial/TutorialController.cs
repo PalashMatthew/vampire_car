@@ -94,8 +94,9 @@ public class TutorialController : MonoBehaviour
         GameObject.Find("Player").GetComponent<PlayerStats>().currentHp -= 20;
 
         GameObject aidKitObj = Instantiate(objAidFirstKit, new Vector3(-10, 1, 82f), transform.rotation);
+        aidKitObj.GetComponent<FirstAidKitController>().moveSpeed = 16;
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3f);
 
         if (aidKitObj != null)
         {

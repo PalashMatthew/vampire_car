@@ -128,16 +128,10 @@ public class PopUpStarterPack : MonoBehaviour
                 break;
         }
 
-        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 5000);
-        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 500);
-        PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + 50);
-
-        PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 10);
-        PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + 10);
-        PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + 10);
-        PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + 10);
-        PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + 10);
-        PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + 10);
+        PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 25000);
+        PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + 250);
+        PlayerPrefs.SetInt("playerTitan", PlayerPrefs.GetInt("playerTitan") + 25);
+        PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + 25);
 
         butStarterPackObj.SetActive(false);
         ButClosed();

@@ -446,7 +446,17 @@ public class FirebaseSetup : MonoBehaviour
             new Parameter("Game", s));
 
         Debug.Log("Event Send!\n" + s);
-    }    
+    }
+
+    public void Event_Win(int _waveNum, string _locNum, int _seconds, int _dieNum)
+    {
+        string s = "PlayerWin_WaveNum_" + _waveNum + "_LocNum_" + _locNum + "_Seconds_" + _seconds + "_DieNum_" + _dieNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
     #endregion
 
     #region Монетизационная аналитика
@@ -502,7 +512,7 @@ public class FirebaseSetup : MonoBehaviour
 
     public void Event_ShowAdsStart(string _name)
     {
-        string s = "ShowAds_" + _name;
+        string s = "ShowAdsStart_" + _name;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Monetization", s));
@@ -512,7 +522,7 @@ public class FirebaseSetup : MonoBehaviour
 
     public void Event_ShowAdsFinish(string _name)
     {
-        string s = "ShowAds_" + _name;
+        string s = "ShowAdsFinish_" + _name;
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Monetization", s));

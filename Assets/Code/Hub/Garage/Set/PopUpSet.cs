@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
 
 public class PopUpSet : MonoBehaviour
 {
@@ -287,11 +288,21 @@ public class PopUpSet : MonoBehaviour
         }
         #endregion
 
-        tSetDetailCount.text = setDetailCount + "/5";
+        tSetDetailCount.text = setDetailCount + "/5";        
 
-        tDescription1.text = setCard.bonusDescription1;
-        tDescription2.text = setCard.bonusDescription2;
-        tDescription3.text = setCard.bonusDescription3;
+        string newText = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_" + setCard.setID + "Desk");
+
+        var replacement1 = newText.Replace("{value}", setCard.value1.ToString());
+
+        tDescription1.text = replacement1;
+
+        var replacement2 = newText.Replace("{value}", setCard.value2.ToString());
+
+        tDescription2.text = replacement2;
+
+        var replacement3 = newText.Replace("{value}", setCard.value3.ToString());
+
+        tDescription3.text = replacement3;
 
         CheckSet();
     }

@@ -17,7 +17,7 @@ public class FirstAidKitController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Dead());
+        StartCoroutine(Dead());        
     }
 
     private void Update()

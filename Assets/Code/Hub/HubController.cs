@@ -45,6 +45,9 @@ public class HubController : MonoBehaviour
     [Header("Starter Pack")]
     public GameObject butStarterPack;
 
+    [Header("Set Pack")]
+    public GameObject butSetPack;
+
 
     private void Start()
     {
@@ -136,6 +139,15 @@ public class HubController : MonoBehaviour
         else
         {
             butStarterPack.SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("setPackPurchased") == 0)
+        {
+            butSetPack.SetActive(true);
+        }
+        else
+        {
+            butSetPack.SetActive(false);
         }
     }
 

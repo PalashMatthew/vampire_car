@@ -57,6 +57,19 @@ public class PopUpNewLevel : MonoBehaviour
             {
                 GameObject.Find("TutorialController").GetComponent<TutorialControllerHub>().CheckTutorialPlay();
             }
+            else
+            {
+                if (PlayerPrefs.GetInt("rateActivate") == 1)
+                {
+                    if (PlayerPrefs.GetInt("maxLocation") == 3 ||
+                        PlayerPrefs.GetInt("maxLocation") == 5 ||
+                        PlayerPrefs.GetInt("maxLocation") == 7 ||
+                        PlayerPrefs.GetInt("maxLocation") == 9)
+                    {
+                        GameObject.Find("PopUp Rate").GetComponent<PopUpRate>().ButOpen();
+                    }
+                }
+            }
         }
     }
 

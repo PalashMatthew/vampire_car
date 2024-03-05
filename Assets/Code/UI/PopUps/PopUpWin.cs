@@ -368,10 +368,7 @@ public class PopUpWin : MonoBehaviour
         else
         {
             _dieCount = 1;
-        }
-
-        if (GameObject.Find("Firebase") != null)
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+        }        
 
         if (GameObject.Find("Firebase") != null)
         {
@@ -381,6 +378,9 @@ public class PopUpWin : MonoBehaviour
 
         if (waveController.currentWave == 11)
         {
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Win(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
+
             tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_win");
 
             if (PlayerPrefs.GetInt("maxLocation") <= locationNum)
@@ -390,6 +390,8 @@ public class PopUpWin : MonoBehaviour
                     PlayerPrefs.SetString("unlockNewItems", "true");
                     PlayerPrefs.SetInt("maxLocation", locationNum + 1);
 
+                    PlayerPrefs.SetInt("rateActivate", 1);
+
                     if (GameObject.Find("Firebase") != null)
                         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_UnlockNewLocation(PlayerPrefs.GetInt("maxLocation"));
                 }                    
@@ -398,15 +400,12 @@ public class PopUpWin : MonoBehaviour
         else
         {
             tHeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_gameOver");
+
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PlayerDie(GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave, Application.loadedLevelName, (int)GameObject.Find("GameplayController").GetComponent<WaveController>().secondsPass, _dieCount);
         }
 
-                 
-
-        
-
         GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
-
-        
     }
 
     public void ButOpen()
