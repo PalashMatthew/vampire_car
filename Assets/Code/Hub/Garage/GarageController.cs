@@ -204,7 +204,7 @@ public class GarageController : MonoBehaviour
     }
 
     public void Initialize()
-    {       
+    {
         if (activeCarObj == null)
         {
             //for (int i = 0; i < carsButtons.Count; i++)
@@ -212,26 +212,49 @@ public class GarageController : MonoBehaviour
             //    carsButtons[i].GetComponent<CarButtonController>().Initialize();
             //}
 
-            foreach (GameObject _car in carsButtons)
+            for (int i = 0; i < carsButtons.Count; i++)
             {
-                _car.GetComponent<CarButtonController>().Initialize();
+                carsButtons[i].GetComponent<CarButtonController>().Initialize();
 
-                if (_car.GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
+                if (carsButtons[i].GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
                 {
-                    _car.GetComponent<CarButtonController>().ButSelect();
-                    activeCarObj = _car.GetComponent<CarButtonController>();
+                    carsButtons[i].GetComponent<CarButtonController>().ButSelect();
+                    activeCarObj = carsButtons[i].GetComponent<CarButtonController>();
                 }
             }
+
+            //foreach (GameObject _car in carsButtons)
+            //{
+            //    Debug.Log("Car Name = " + _car.name);
+
+            //    _car.GetComponent<CarButtonController>().Initialize();
+
+            //    if (_car.GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
+            //    {
+            //        _car.GetComponent<CarButtonController>().ButSelect();
+            //        activeCarObj = _car.GetComponent<CarButtonController>();
+            //    }
+            //}
         } 
         else
         {
-            foreach (GameObject _car in carsButtons)
+            for (int i = 0; i < carsButtons.Count; i++)
             {
-                if (_car.GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
+                if (carsButtons[i].GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
                 {
-                    activeCarObj = _car.GetComponent<CarButtonController>();
+                    activeCarObj = carsButtons[i].GetComponent<CarButtonController>();
                 }
             }
+
+            //foreach (GameObject _car in carsButtons)
+            //{
+            //    Debug.Log("Car Name = " + _car.name);
+
+            //    if (_car.GetComponent<CarButtonController>().carName == PlayerPrefs.GetString("selectedCarID"))
+            //    {
+            //        activeCarObj = _car.GetComponent<CarButtonController>();
+            //    }
+            //}
         }
 
         tCarName.text = activeCarObj.carName;

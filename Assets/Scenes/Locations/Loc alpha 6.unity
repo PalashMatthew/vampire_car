@@ -3663,6 +3663,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090845422}
   m_CullTransparentMesh: 1
+--- !u!114 &1124964129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1988683791520630499, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1124964130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1200880551554473772, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1124964131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9087522538466643677, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+  m_PrefabInstance: {fileID: 185923523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1166465502
 GameObject:
   m_ObjectHideFlags: 0
@@ -5337,6 +5370,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Upgrade Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo1
+      value: 
+      objectReference: {fileID: 1124964131}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo2
+      value: 
+      objectReference: {fileID: 1124964130}
+    - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
+      propertyPath: tPassiveInfo3
+      value: 
+      objectReference: {fileID: 1124964129}
     - target: {fileID: 7774369961661510226, guid: c7fb3fdaac3124b44aaf66e1d34a255e, type: 3}
       propertyPath: upgradeLevelCount
       value: 0

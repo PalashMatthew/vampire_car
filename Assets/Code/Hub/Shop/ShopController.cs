@@ -55,6 +55,8 @@ public class ShopController : MonoBehaviour, IStoreListener
 
     public void Initialize()
     {
+        CheckPrice();
+
         SetupBuilder();        
 
         #region Chest 1       
@@ -597,11 +599,35 @@ public class ShopController : MonoBehaviour, IStoreListener
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         print("initialize iap failed" + error);
+
+        for (int i = 0; i < 14; i++)
+        {
+            if (i < 6)
+            {
+                tPrices[i].text = "Not Connected";
+            }
+            else
+            {
+                prices.Add("Not Connected");
+            }
+        }
     }
 
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
         print("initialize iap failed" + error);
+
+        for (int i = 0; i < 14; i++)
+        {
+            if (i < 6)
+            {
+                tPrices[i].text = "Not Connected";
+            }
+            else
+            {
+                prices.Add("Not Connected");
+            }
+        }
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
@@ -672,6 +698,8 @@ public class ShopController : MonoBehaviour, IStoreListener
         print("Success IAP Initialize");
         m_StoreController = controller;
 
+        prices.Clear();
+
         for (int i = 0; i < m_StoreController.products.all.Length; i++)
         {
             var product = m_StoreController.products.all[i];
@@ -683,6 +711,24 @@ public class ShopController : MonoBehaviour, IStoreListener
             else
             {
                 prices.Add(product.metadata.localizedPriceString);
+            }
+        }
+    }
+
+    void CheckPrice()
+    {
+        if (prices.Count == 0)
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                if (i < 6)
+                {
+                    tPrices[i].text = "Not Connected";
+                }
+                else
+                {
+                    prices.Add("Not Connected");
+                }
             }
         }
     }
