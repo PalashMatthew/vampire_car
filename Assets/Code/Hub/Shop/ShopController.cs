@@ -199,6 +199,16 @@ public class ShopController : MonoBehaviour, IStoreListener
         m_StoreController.InitiatePurchase(nonCItems[6].Id);
     }
 
+    public void ButBuyRarePass()
+    {
+        m_StoreController.InitiatePurchase(nonCItems[8].Id);
+    }
+
+    public void ButBuyEpicPass()
+    {
+        m_StoreController.InitiatePurchase(nonCItems[9].Id);
+    }
+
     public void AddHard(int value)
     {
         PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") + value);
@@ -600,7 +610,7 @@ public class ShopController : MonoBehaviour, IStoreListener
     {
         print("initialize iap failed" + error);
 
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 16; i++)
         {
             if (i < 6)
             {
@@ -617,7 +627,7 @@ public class ShopController : MonoBehaviour, IStoreListener
     {
         print("initialize iap failed" + error);
 
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 16; i++)
         {
             if (i < 6)
             {
@@ -684,6 +694,14 @@ public class ShopController : MonoBehaviour, IStoreListener
         {
             GameObject.Find("PopUp SetPack").GetComponent<PopUpSetPack>().CallBackPurchased();
         }
+        else if (product.definition.id == nonCItems[8].Id)
+        {
+            GameObject.Find("PopUp GrowthFund").GetComponent<PopUpGrowthFund>().BuyRarePassCallBack();
+        }
+        else if (product.definition.id == nonCItems[9].Id)
+        {
+            GameObject.Find("PopUp GrowthFund").GetComponent<PopUpGrowthFund>().BuyEpicPassCallBack();
+        }
 
         return PurchaseProcessingResult.Complete;
     }
@@ -719,7 +737,7 @@ public class ShopController : MonoBehaviour, IStoreListener
     {
         if (prices.Count == 0)
         {
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 16; i++)
             {
                 if (i < 6)
                 {
