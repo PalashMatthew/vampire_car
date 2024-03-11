@@ -33,10 +33,16 @@ public class EnemyTripleShot : MonoBehaviour
         {
             if (_enemyController.isCarStop)
             {
-                StartCoroutine(Shot());
+                StartCoroutine(ShotPause());
                 _startShot = true;
             }
         }
+    }
+
+    IEnumerator ShotPause()
+    {
+        yield return new WaitForSeconds(_gunController.shotSpeed * GameObject.Find("GameplayController").GetComponent<WaveController>().waveList[GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave - 1].attackSpeedCoeff);
+        StartCoroutine(Shot());
     }
 
     IEnumerator Shot()
