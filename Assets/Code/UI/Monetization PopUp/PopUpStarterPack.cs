@@ -52,6 +52,7 @@ public class PopUpStarterPack : MonoBehaviour
 
     public void ButClosed()
     {
+        StopAllCoroutines();
         _popUpController.ClosedPopUp();
     }
 
@@ -66,6 +67,8 @@ public class PopUpStarterPack : MonoBehaviour
         tOldPrice.text = oldPrice;
 
         CheckTime();
+
+        StartCoroutine(ShowPrice());
     }
 
     public void ButChangeGun(int _id)
@@ -163,5 +166,18 @@ public class PopUpStarterPack : MonoBehaviour
                 PlayerPrefs.SetInt("starterPackShow", 0);
             }
         }
+    }
+
+    IEnumerator ShowPrice()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        string newPrice = GameObject.Find("HubController").GetComponent<ShopController>().prices[4];
+        string oldPrice = GameObject.Find("HubController").GetComponent<ShopController>().prices[5];
+
+        tNewPrice.text = newPrice;
+        tOldPrice.text = oldPrice;        
+
+        StartCoroutine(ShowPrice());
     }
 }

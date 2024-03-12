@@ -135,6 +135,8 @@ public class TutorialControllerHub : MonoBehaviour
 
     public void EndTutorial()
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventTutorialComplete);
+
         PlayerPrefs.SetString("tutorialHubComplite", "true");
         popUpNewLevel.SetActive(true);
         Message8.GetComponent<PopUpController>().ClosedPopUp();

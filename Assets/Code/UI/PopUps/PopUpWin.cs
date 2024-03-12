@@ -391,6 +391,7 @@ public class PopUpWin : MonoBehaviour
                     PlayerPrefs.SetInt("maxLocation", locationNum + 1);
 
                     PlayerPrefs.SetInt("rateActivate", 1);
+                    PlayerPrefs.SetInt("pushActivate", 1);
 
                     if (GameObject.Find("Firebase") != null)
                         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_UnlockNewLocation(PlayerPrefs.GetInt("maxLocation"));

@@ -68,6 +68,16 @@ public class PopUpNewLevel : MonoBehaviour
                     {
                         GameObject.Find("PopUp Rate").GetComponent<PopUpRate>().ButOpen();
                     }
+                    else
+                    {
+                        if (PlayerPrefs.GetInt("pushActivate") == 1)
+                            GameObject.Find("PopUp Push").GetComponent<PopUpPush>().ButOpen();
+                    }
+                }
+                else
+                {
+                    if (PlayerPrefs.GetInt("pushActivate") == 1)
+                        GameObject.Find("PopUp Push").GetComponent<PopUpPush>().ButOpen();
                 }
             }
         }

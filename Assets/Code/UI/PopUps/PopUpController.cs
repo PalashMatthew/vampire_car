@@ -11,6 +11,8 @@ public class PopUpController : MonoBehaviour
 
     public float animTime = 0.3f;
 
+    public float fadeValue = 0.7f;
+
     public void Initialize()
     {
         if (imgFade != null)
@@ -30,7 +32,7 @@ public class PopUpController : MonoBehaviour
         {
             imgFade.SetActive(true);
             imgFade.GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
-            imgFade.GetComponent<Image>().DOFade(0.7f, animTime).SetUpdate(true);
+            imgFade.GetComponent<Image>().DOFade(fadeValue, animTime).SetUpdate(true);
         }
 
         objPopUp.SetActive(true);        

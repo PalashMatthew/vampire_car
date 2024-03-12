@@ -121,7 +121,7 @@ public class HubController : MonoBehaviour
                         Debug.Log("FUEL MAX");
                     }
                     else
-                    {
+                    {                      
                         PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + fuelCountPlus);
                         StartCoroutine(FuelTimer(ostatok));
                     }

@@ -35,6 +35,8 @@ public class ChooseLocationController : MonoBehaviour
 
     public GameObject popUpBuyFuel;
 
+    public Material sky1, sky2, sky3, sky4;
+
 
     private void Start()
     {
@@ -139,12 +141,12 @@ public class ChooseLocationController : MonoBehaviour
 
         tLocName.text = currentLocNum + ". " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_location" + currentLocNum + "Name");
         tWaveClearCount.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_maxWaveClear") + " " + PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave") + "/" + 10;
+        
+        CameraColorSettings();
 
         GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
 
-        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ChangeLocation(currentLocNum, PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave"), locOpen);
-
-        CameraColorSettings();
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_ChangeLocation(currentLocNum, PlayerPrefs.GetInt("loc_" + currentLocNum + "_maxWave"), locOpen);        
     }
 
     public void CameraColorSettings()
@@ -152,27 +154,62 @@ public class ChooseLocationController : MonoBehaviour
         #region Camera Color Settings
         if (currentLocNum == 1)
         {
-            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 2)
         {
-            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 3)
         {
-            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+            //mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+            RenderSettings.skybox = sky2;
         }
 
         if (currentLocNum == 4)
         {
-            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 5)
         {
-            mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);
+            //mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);\
+            RenderSettings.skybox = sky3;
+        }
+
+        if (currentLocNum == 6)
+        {
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky1;
+        }
+
+        if (currentLocNum == 7)
+        {
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky4;
+        }
+
+        if (currentLocNum == 8)
+        {
+            //mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+            RenderSettings.skybox = sky1;
+        }
+
+        if (currentLocNum == 9)
+        {
+            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            RenderSettings.skybox = sky1;
+        }
+
+        if (currentLocNum == 10)
+        {
+            //mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);
+            RenderSettings.skybox = sky1;
         }
         #endregion
     }
@@ -210,7 +247,7 @@ public class ChooseLocationController : MonoBehaviour
 
     public void MaxLocationUnlock()
     {
-        PlayerPrefs.SetInt("maxLocation", 5);
+        PlayerPrefs.SetInt("maxLocation", 10);
     }
 
     public void ButTestPlay(string levelName)

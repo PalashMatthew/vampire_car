@@ -76,6 +76,8 @@ public class ShopController : MonoBehaviour, IStoreListener
             }
             else
             {
+                GameObject.Find("PushController").GetComponent<PushNotificationController>().SendNotification("ads_chest", PlayerPrefs.GetInt("AdsChestTimerSaveTime"));
+
                 isChest1Ads = false;
                 StartCoroutine(AdsChestTimer());
             }
