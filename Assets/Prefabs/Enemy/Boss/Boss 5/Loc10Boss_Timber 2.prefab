@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 392701383511789527}
   - component: {fileID: 5639206112299739353}
   m_Layer: 0
-  m_Name: Loc5Boss_Timber 1
+  m_Name: Loc10Boss_Timber 2
   m_TagString: boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,9 +1029,9 @@ MonoBehaviour:
   isCarStop: 0
   enemyKind: 
   moveSpeed: 0
-  hp: 13000
-  maxHp: 13000
-  brakeDamage: 50
+  hp: 25000
+  maxHp: 25000
+  brakeDamage: 260
   moveSpeedMin: 0
   moveSpeedMax: 0
   meshRenderer: {fileID: 2588309135366104656}
@@ -1066,9 +1066,9 @@ MonoBehaviour:
   bulletObj: {fileID: 2290857860438269718, guid: d53df2129a665894b86d911283f41461, type: 3}
   spawnPos: {fileID: 0}
   attack1SpawnPos: {fileID: 4904802907033560751}
-  attack1BulletCount: 20
+  attack1BulletCount: 25
   attack1BulletMoveSpeed: 20
-  attack1IterationTime: 0.1
+  attack1IterationTime: 0.06
   attack2SpawnPos: {fileID: 168886009624279248}
   attack2SpawnPos2: {fileID: 7573356837817630884}
   bulletObjWood: {fileID: 2061952714958031594, guid: 761090be1923a494ba9acb946c35a236, type: 3}
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   attack1ShotPause: 4
   attack2ShotPause: 2
   attack3ShotPause: 0
-  damage: 40
+  damage: 260
   maxX: 14
   minX: -14
   localMoveSpeed: 6
