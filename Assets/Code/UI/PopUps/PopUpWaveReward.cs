@@ -33,7 +33,7 @@ public class PopUpWaveReward : MonoBehaviour
 
         for (int locNum = 1; locNum <= 10; locNum++)
         {
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 if (PlayerPrefs.GetInt("loc" + locNum + "reward" + i + "Take") == 0)
                 {

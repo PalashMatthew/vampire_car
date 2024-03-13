@@ -18,6 +18,11 @@ public class OfflineTimeCheck : MonoBehaviour
         {
             PlayerPrefs.SetString("LastSession", DateTime.Now.ToString());
         }
+        else
+        {
+            CheckOffline();
+            Debug.Log("PauseFalse");
+        }
     }
 
     private void OnApplicationQuit()
@@ -37,6 +42,8 @@ public class OfflineTimeCheck : MonoBehaviour
 
             PlayerPrefs.SetString("OfflineTimeLast", ts.ToString());
             //Debug.Log(string.Format("¬ы отсутствовали - {0} дней, {1} часов, {2} минут, {3} секунд", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
+
+            GameObject.Find("HubController").GetComponent<HubController>().FuelCheck();
         }            
     }
 }

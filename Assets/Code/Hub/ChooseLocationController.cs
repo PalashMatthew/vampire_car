@@ -247,7 +247,7 @@ public class ChooseLocationController : MonoBehaviour
 
     public void MaxLocationUnlock()
     {
-        PlayerPrefs.SetInt("maxLocation", 10);
+        PlayerPrefs.SetInt("maxLocation", 5);
     }
 
     public void ButTestPlay(string levelName)

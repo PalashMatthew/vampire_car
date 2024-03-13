@@ -385,7 +385,7 @@ public class PopUpWin : MonoBehaviour
 
             if (PlayerPrefs.GetInt("maxLocation") <= locationNum)
             {               
-                if (PlayerPrefs.GetInt("maxLocation") < 5)
+                if (PlayerPrefs.GetInt("maxLocation") < 10)
                 {
                     PlayerPrefs.SetString("unlockNewItems", "true");
                     PlayerPrefs.SetInt("maxLocation", locationNum + 1);

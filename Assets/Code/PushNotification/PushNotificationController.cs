@@ -9,8 +9,8 @@ public class PushNotificationController : MonoBehaviour
     {
         AndroidNotificationChannel channel = new AndroidNotificationChannel()
         {
-            Name = "Name",
-            Description = "Description",
+            Name = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushChannelName"),
+            Description = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushChannelDesk"),
             Id = "nameId",
             Importance = Importance.High
         };
@@ -28,9 +28,9 @@ public class PushNotificationController : MonoBehaviour
             {
                 AndroidNotification notification = new AndroidNotification()
                 {
-                    Title = "Title",
-                    Text = "Message",
-                    FireTime = System.DateTime.Now.AddSeconds(5),
+                    Title = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushFuelMaxTitle"),
+                    Text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushFuelMaxText"),
+                    FireTime = System.DateTime.Now.AddSeconds(_time),
                     SmallIcon = "small_icon",
                     LargeIcon = "large_icon"
                 };
@@ -42,9 +42,9 @@ public class PushNotificationController : MonoBehaviour
             {
                 AndroidNotification notification = new AndroidNotification()
                 {
-                    Title = "Title",
-                    Text = "Message",
-                    FireTime = System.DateTime.Now.AddSeconds(5),
+                    Title = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushAdsChestTitle"),
+                    Text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_pushAdsChestText"),
+                    FireTime = System.DateTime.Now.AddSeconds(_time),
                     SmallIcon = "small_icon",
                     LargeIcon = "large_icon"
                 };

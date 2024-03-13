@@ -61,23 +61,13 @@ public class HubController : MonoBehaviour
         ShowResouces();
     }
 
-    void Initialize()
+    private void OnEnable()
     {
-        Time.timeScale = 1;
+        FuelCheck();
+    }
 
-        screenGarage.SetActive(false);
-        screenLock.SetActive(false);
-        screenShop.SetActive(false);
-        screenUpgrade.SetActive(false);
-
-        imgHeader.DOFade(0.27f, 0);
-
-        imgBackground.SetActive(false);
-
-        _nextScreen = "fight";
-
-
-        #region Fuel Check
+    public void FuelCheck()
+    {
         if (PlayerPrefs.GetInt("playerFuelCurrent") >= PlayerPrefs.GetInt("playerFuelMax"))
         {
             tFuelTimer.text = "";
@@ -96,7 +86,7 @@ public class HubController : MonoBehaviour
                     if (PlayerPrefs.GetInt("FuelTimerSaveTime") > 0)
                     {
                         int i = 600 - PlayerPrefs.GetInt("FuelTimerSaveTime");
-                        seconds += i; 
+                        seconds += i;
                         PlayerPrefs.SetInt("FuelTimerSaveTime", 0);
                     }
 
@@ -104,7 +94,7 @@ public class HubController : MonoBehaviour
                     {
                         fuelCountPlus = seconds / 600;
                         ostatok = 600 - seconds % 600;
-                    } 
+                    }
                     else
                     {
                         fuelCountPlus = 0;
@@ -121,8 +111,9 @@ public class HubController : MonoBehaviour
                         Debug.Log("FUEL MAX");
                     }
                     else
-                    {                      
+                    {
                         PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + fuelCountPlus);
+                        StopAllCoroutines();
                         StartCoroutine(FuelTimer(ostatok));
                     }
 
@@ -130,7 +121,24 @@ public class HubController : MonoBehaviour
                 }
             }
         }
-        #endregion
+    }
+
+    void Initialize()
+    {
+        Time.timeScale = 1;
+
+        screenGarage.SetActive(false);
+        screenLock.SetActive(false);
+        screenShop.SetActive(false);
+        screenUpgrade.SetActive(false);
+
+        imgHeader.DOFade(0.27f, 0);
+
+        imgBackground.SetActive(false);
+
+        _nextScreen = "fight";
+
+        //FuelCheck();
 
         if (PlayerPrefs.GetInt("starterPackPurchased") == 0)
         {

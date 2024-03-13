@@ -821,11 +821,7 @@ public class BDLoaderController : MonoBehaviour
             else if(Application.systemLanguage == SystemLanguage.French)
             {
                 PlayerPrefs.SetString("activeLang", "fr");
-            }
-            else if (Application.systemLanguage == SystemLanguage.Korean)
-            {
-                PlayerPrefs.SetString("activeLang", "ko");
-            }
+            }            
             else if (Application.systemLanguage == SystemLanguage.Portuguese)
             {
                 PlayerPrefs.SetString("activeLang", "pt");
@@ -838,6 +834,11 @@ public class BDLoaderController : MonoBehaviour
             {
                 PlayerPrefs.SetString("activeLang", "en");
             }
+
+            //else if (Application.systemLanguage == SystemLanguage.Korean)
+            //{
+            //    PlayerPrefs.SetString("activeLang", "ko");
+            //}
         }
     }
 }
