@@ -129,8 +129,7 @@ public class PanelCharacteristics : MonoBehaviour
         else
         {
             _stats += ": " + itemCharacteristicValue + "%";
-        }
-            
+        }            
 
         if (itemCharacteristicStepValue != 0)
         {

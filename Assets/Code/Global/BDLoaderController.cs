@@ -110,7 +110,7 @@ public class BDLoaderController : MonoBehaviour
                 }
             }
 
-            if (!PlayerPrefs.HasKey("DionysuscarDamage"))
+            if (!PlayerPrefs.HasKey("firstLoadCarSettings"))
             {
                 for (int i = 0; i < _carInfo.Count; i++)
                 {
@@ -205,6 +205,8 @@ public class BDLoaderController : MonoBehaviour
                 }
             }
         }
+
+        PlayerPrefs.SetInt("firstLoadCarSettings", 1);
      }
 
     public void LoadGunUpgradeInfo(string _json)

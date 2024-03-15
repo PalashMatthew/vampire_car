@@ -847,7 +847,7 @@ public class PopUpRepair : MonoBehaviour
                 PlayerPrefs.SetString("item" + _itemType + "Type" + i, PlayerPrefs.GetString("item" + _itemType + "Type" + (i + 1)));
                 PlayerPrefs.SetInt("item" + _itemType + "New" + i, PlayerPrefs.GetInt("item" + _itemType + "Type" + (i + 1)));                
 
-                if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + i + 1))
+                if (PlayerPrefs.HasKey("item" + _itemType + "baseCharacterCommon1Value" + (i + 1)))
                 {
                     PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon1Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon1Value" + (i + 1)));
                     PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterCommon2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterCommon2Value" + (i + 1)));

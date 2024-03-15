@@ -78,6 +78,9 @@ public class PopUpMergeFinal : MonoBehaviour
     [Header("Sounds")]
     public AudioClip clipNewItem;
 
+    public Sprite sprDrawingGun, sprDrawingEngine, sprDrawingBrakes, sprDrawingFuelSystem, sprDrawingSuspension, sprDrawingTransmission;
+    public Image imgDrawing;
+
 
     private void Start()
     {
@@ -300,26 +303,32 @@ public class PopUpMergeFinal : MonoBehaviour
             switch (card.itemType)
             {
                 case DetailCard.ItemType.Gun:
+                    imgDrawing.sprite = sprDrawingGun;
                     PlayerPrefs.SetInt("drawingGunCount", PlayerPrefs.GetInt("drawingGunCount") + returnDrawingValue);
                     break;
 
                 case DetailCard.ItemType.Engine:
+                    imgDrawing.sprite = sprDrawingEngine;
                     PlayerPrefs.SetInt("drawingEngineCount", PlayerPrefs.GetInt("drawingEngineCount") + returnDrawingValue);
                     break;
 
                 case DetailCard.ItemType.Brakes:
+                    imgDrawing.sprite = sprDrawingBrakes;
                     PlayerPrefs.SetInt("drawingBrakesCount", PlayerPrefs.GetInt("drawingBrakesCount") + returnDrawingValue);
                     break;
 
                 case DetailCard.ItemType.FuelSystem:
+                    imgDrawing.sprite = sprDrawingFuelSystem;
                     PlayerPrefs.SetInt("drawingFuelSystemCount", PlayerPrefs.GetInt("drawingFuelSystemCount") + returnDrawingValue);
                     break;
 
                 case DetailCard.ItemType.Suspension:
+                    imgDrawing.sprite = sprDrawingSuspension;
                     PlayerPrefs.SetInt("drawingSuspensionCount", PlayerPrefs.GetInt("drawingSuspensionCount") + returnDrawingValue);
                     break;
 
                 case DetailCard.ItemType.Transmission:
+                    imgDrawing.sprite = sprDrawingTransmission;
                     PlayerPrefs.SetInt("drawingTransmissionCount", PlayerPrefs.GetInt("drawingTransmissionCount") + returnDrawingValue);
                     break;
             }
