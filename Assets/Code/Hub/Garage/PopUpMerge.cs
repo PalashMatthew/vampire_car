@@ -967,57 +967,7 @@ public class PopUpMerge : MonoBehaviour
 
     void RemoveItemInInventory(int _itemNum, string _itemType, GameObject _gm)
     {
-        int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);
-
-        //#region DeleteSlot       
-        //if (_itemType == "Gun")
-        //{
-        //    if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
-        //    }
-        //}
-
-        //if (_itemType == "Engine")
-        //{
-        //    if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
-        //    }
-        //}
-
-        //if (_itemType == "Brakes")
-        //{
-        //    if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
-        //    }
-        //}
-
-        //if (_itemType == "FuelSystem")
-        //{
-        //    if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
-        //    }
-        //}
-
-        //if (_itemType == "Suspension")
-        //{
-        //    if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
-        //    }
-        //}
-
-        //if (_itemType == "Transmission")
-        //{
-        //    if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
-        //    {
-        //        PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
-        //    }
-        //}
-        //#endregion
+        int itemCount = PlayerPrefs.GetInt("itemCount" + _itemType);        
 
         if (itemCount > 1)
         {
@@ -1044,6 +994,56 @@ public class PopUpMerge : MonoBehaviour
                     PlayerPrefs.SetFloat("item" + _itemType + "baseCharacterLegendary2Value" + i, PlayerPrefs.GetFloat("item" + _itemType + "baseCharacterLegendary2Value" + (i + 1)));
                 }
             }
+
+            #region RemoveActiveSlot
+            if (itemCell1.itemType == "Gun")
+            {
+                if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
+                }
+            }
+
+            if (itemCell1.itemType == "Engine")
+            {
+                if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
+                }
+            }
+
+            if (itemCell1.itemType == "Brakes")
+            {
+                if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
+                }
+            }
+
+            if (itemCell1.itemType == "FuelSystem")
+            {
+                if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
+                }
+            }
+
+            if (itemCell1.itemType == "Suspension")
+            {
+                if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
+                }
+            }
+
+            if (itemCell1.itemType == "Transmission")
+            {
+                if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
+                {
+                    PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
+                }
+            }
+            #endregion
 
             #region Удаляем инфу про удаленный итем
             itemCount -= 1;
@@ -1113,6 +1113,70 @@ public class PopUpMerge : MonoBehaviour
             _numInInv3 -= 1;
         }
 
+        #region RemoveActiveSlot
+        bool _replace = false;
+
+        if (itemCell1.itemType == "Gun")
+        {
+            if (PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+
+        if (itemCell1.itemType == "Engine")
+        {
+            if (PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+
+        if (itemCell1.itemType == "Brakes")
+        {
+            if (PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+
+        if (itemCell1.itemType == "FuelSystem")
+        {
+            if (PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+
+        if (itemCell1.itemType == "Suspension")
+        {
+            if (PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+
+        if (itemCell1.itemType == "Transmission")
+        {
+            if (PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell1.itemNumInInventory
+                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell2.itemNumInInventory
+                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell3.itemNumInInventory)
+            {
+                _replace = true;
+            }
+        }
+        #endregion
+
 
         RemoveItemInInventory(_numInInv1, itemCell1.itemType, itemCell1.gameObject);
         RemoveItemInInventory(_numInInv2, itemCell2.itemType, itemCell2.gameObject);
@@ -1172,9 +1236,7 @@ public class PopUpMerge : MonoBehaviour
         #region RemoveActiveSlot
         if (itemCell1.itemType == "Gun")
         {
-            if (PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot1_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot1_itemNumInInventory", _cellCount);
             }
@@ -1182,9 +1244,7 @@ public class PopUpMerge : MonoBehaviour
 
         if (itemCell1.itemType == "Engine")
         {
-            if (PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot2_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot2_itemNumInInventory", _cellCount);
             }
@@ -1192,9 +1252,7 @@ public class PopUpMerge : MonoBehaviour
 
         if (itemCell1.itemType == "Brakes")
         {
-            if (PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot3_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot3_itemNumInInventory", _cellCount);
             }
@@ -1202,9 +1260,7 @@ public class PopUpMerge : MonoBehaviour
 
         if (itemCell1.itemType == "FuelSystem")
         {
-            if (PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot4_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot4_itemNumInInventory", _cellCount);
             }
@@ -1212,9 +1268,7 @@ public class PopUpMerge : MonoBehaviour
 
         if (itemCell1.itemType == "Suspension")
         {
-            if (PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot5_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot5_itemNumInInventory", _cellCount);
             }
@@ -1222,9 +1276,7 @@ public class PopUpMerge : MonoBehaviour
 
         if (itemCell1.itemType == "Transmission")
         {
-            if (PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell1.itemNumInInventory
-                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell2.itemNumInInventory
-                || PlayerPrefs.GetInt("slot6_itemNumInInventory") == itemCell3.itemNumInInventory)
+            if (_replace)
             {
                 PlayerPrefs.SetInt("slot6_itemNumInInventory", _cellCount);
             }

@@ -205,6 +205,8 @@ public class GarageController : MonoBehaviour
 
     public void Initialize()
     {
+        Debug.Log(PlayerPrefs.GetInt("itemCountGun"));
+
         if (activeCarObj == null)
         {
             //for (int i = 0; i < carsButtons.Count; i++)
