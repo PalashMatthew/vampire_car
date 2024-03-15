@@ -53,7 +53,7 @@ public class HubController : MonoBehaviour
     {
         Initialize();
 
-        Debug.Log("CAR SELECTED = " + PlayerPrefs.GetString("selectedCarID"));
+        Debug.Log("CAR DAMAGE = " + PlayerPrefs.GetFloat("Dionysus" + "carDamage"));
     }
 
     private void Update()

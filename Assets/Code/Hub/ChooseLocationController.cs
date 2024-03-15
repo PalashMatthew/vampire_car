@@ -154,62 +154,62 @@ public class ChooseLocationController : MonoBehaviour
         #region Camera Color Settings
         if (currentLocNum == 1)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 2)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+           // RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 3)
         {
-            //mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
-            RenderSettings.skybox = sky2;
+            mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
+            //RenderSettings.skybox = sky2;
         }
 
         if (currentLocNum == 4)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 5)
         {
-            //mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);\
-            RenderSettings.skybox = sky3;
+            mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);
+            //RenderSettings.skybox = sky3;
         }
 
         if (currentLocNum == 6)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 7)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky4;
+            mainCamera.backgroundColor = new Color(0.2006621f, 0.3113208f, 0.02202741f);
+            //RenderSettings.skybox = sky4;
         }
 
         if (currentLocNum == 8)
         {
-            //mainCamera.backgroundColor = new Color(0.8313726f, 0.7568628f, 0.5294118f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 9)
         {
-            //mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
 
         if (currentLocNum == 10)
         {
-            //mainCamera.backgroundColor = new Color(0.1759968f, 0.3301887f, 0.3120947f);
-            RenderSettings.skybox = sky1;
+            mainCamera.backgroundColor = new Color(0.2311321f, 1f, 0.9111943f);
+            //RenderSettings.skybox = sky1;
         }
         #endregion
     }

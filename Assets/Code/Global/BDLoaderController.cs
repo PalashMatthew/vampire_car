@@ -110,96 +110,99 @@ public class BDLoaderController : MonoBehaviour
                 }
             }
 
-            for (int i = 0; i < _carInfo.Count; i++)
+            if (!PlayerPrefs.HasKey("DionysuscarDamage"))
             {
-                string _variableName = "";
-
-                if (i == 0)
+                for (int i = 0; i < _carInfo.Count; i++)
                 {
-                    _variableName = _carNameInfo[0] + "carDamage";
-                }
+                    string _variableName = "";
 
-                if (i == 1)
-                {
-                    _variableName = _carNameInfo[0] + "carHealth";
-                }
+                    if (i == 0)
+                    {
+                        _variableName = _carNameInfo[0] + "carDamage";
+                    }
 
-                if (i == 2)
-                {
-                    _variableName = _carNameInfo[0] + "carKritChance";
-                }
+                    if (i == 1)
+                    {
+                        _variableName = _carNameInfo[0] + "carHealth";
+                    }
 
-                if (i == 3)
-                {
-                    _variableName = _carNameInfo[0] + "carDodge";
-                }
+                    if (i == 2)
+                    {
+                        _variableName = _carNameInfo[0] + "carKritChance";
+                    }
 
-                if (i == 4)
-                {
-                    _variableName = _carNameInfo[0] + "carDamageMax";
-                }
+                    if (i == 3)
+                    {
+                        _variableName = _carNameInfo[0] + "carDodge";
+                    }
 
-                if (i == 5)
-                {
-                    _variableName = _carNameInfo[0] + "carHealthMax";
-                }
+                    if (i == 4)
+                    {
+                        _variableName = _carNameInfo[0] + "carDamageMax";
+                    }
 
-                if (i == 6)
-                {
-                    _variableName = _carNameInfo[0] + "carKritChanceMax";
-                }
+                    if (i == 5)
+                    {
+                        _variableName = _carNameInfo[0] + "carHealthMax";
+                    }
 
-                if (i == 7)
-                {
-                    _variableName = _carNameInfo[0] + "carDodgeMax";
-                }
+                    if (i == 6)
+                    {
+                        _variableName = _carNameInfo[0] + "carKritChanceMax";
+                    }
 
-                if (i == 8)
-                {
-                    _variableName = _carNameInfo[0] + "carDamageStepUp";
-                }
+                    if (i == 7)
+                    {
+                        _variableName = _carNameInfo[0] + "carDodgeMax";
+                    }
 
-                if (i == 9)
-                {
-                    _variableName = _carNameInfo[0] + "carHealthStepUp";
-                }
+                    if (i == 8)
+                    {
+                        _variableName = _carNameInfo[0] + "carDamageStepUp";
+                    }
 
-                if (i == 10)
-                {
-                    _variableName = _carNameInfo[0] + "carKritChanceStepUp";
-                }
+                    if (i == 9)
+                    {
+                        _variableName = _carNameInfo[0] + "carHealthStepUp";
+                    }
 
-                if (i == 11)
-                {
-                    _variableName = _carNameInfo[0] + "carDodgeStepUp";
-                }
+                    if (i == 10)
+                    {
+                        _variableName = _carNameInfo[0] + "carKritChanceStepUp";
+                    }
 
-                if (i == 12)
-                {
-                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade10lvlId", _carUpgradeNameInfo[0]);
-                    _variableName = _carNameInfo[0] + "carUpgrade10lvl";
-                }
+                    if (i == 11)
+                    {
+                        _variableName = _carNameInfo[0] + "carDodgeStepUp";
+                    }
 
-                if (i == 13)
-                {
-                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade20lvlId", _carUpgradeNameInfo[1]);
-                    _variableName = _carNameInfo[0] + "carUpgrade20lvl";
-                }
+                    if (i == 12)
+                    {
+                        PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade10lvlId", _carUpgradeNameInfo[0]);
+                        _variableName = _carNameInfo[0] + "carUpgrade10lvl";
+                    }
 
-                if (i == 14)
-                {
-                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade30lvlId", _carUpgradeNameInfo[2]);
-                    _variableName = _carNameInfo[0] + "carUpgrade30lvl";
-                }
+                    if (i == 13)
+                    {
+                        PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade20lvlId", _carUpgradeNameInfo[1]);
+                        _variableName = _carNameInfo[0] + "carUpgrade20lvl";
+                    }
 
-                if (i == 15)
-                {
-                    PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade40lvlId", _carUpgradeNameInfo[3]);
-                    _variableName = _carNameInfo[0] + "carUpgrade40lvl";
-                }
+                    if (i == 14)
+                    {
+                        PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade30lvlId", _carUpgradeNameInfo[2]);
+                        _variableName = _carNameInfo[0] + "carUpgrade30lvl";
+                    }
 
-                //Debug.Log(_variableName + _carInfo[i]);
-                PlayerPrefs.SetFloat(_variableName, _carInfo[i]);
+                    if (i == 15)
+                    {
+                        PlayerPrefs.SetString(_carNameInfo[0] + "carUpgrade40lvlId", _carUpgradeNameInfo[3]);
+                        _variableName = _carNameInfo[0] + "carUpgrade40lvl";
+                    }
+
+                    //Debug.Log(_variableName + _carInfo[i]);
+                    PlayerPrefs.SetFloat(_variableName, _carInfo[i]);
+                }
             }
         }
      }

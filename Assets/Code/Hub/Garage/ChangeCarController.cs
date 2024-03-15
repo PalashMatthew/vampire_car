@@ -71,6 +71,15 @@ public class ChangeCarController : MonoBehaviour
         _popUpController = GetComponent<PopUpController>();
     }
 
+    public void ShowCurrentCarLevel()
+    {
+        //#region Устанавливаем уровень машины
+        //tCurrentLevel.text = PlayerPrefs.GetInt(_carName + "carLevel") + "/40";
+        //fillCarLevel.DOFillAmount((float)PlayerPrefs.GetInt(_carName + "carLevel") / 40, 0.5f);
+        //fillEndCarLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt(_carName + "carLevel") / 40 * 132f, 0), 0.5f);
+        //#endregion
+    }
+
     public void OpenPopUp()
     {
         for (int i = 0; i < carsButtons.Count; i++)
@@ -453,6 +462,12 @@ public class ChangeCarController : MonoBehaviour
         fillHealthMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carHealthMax") / 300, 0.5f);
         fillKritMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carKritChanceMax") / 7.2f, 0.5f);
         fillDodgeMax.DOFillAmount((float)PlayerPrefs.GetFloat(_carName + "carDodgeMax") / 28, 0.5f);
+
+        #region Устанавливаем уровень машины
+        tCurrentLevel.text = PlayerPrefs.GetInt(_carName + "carLevel") + "/40";
+        fillCarLevel.DOFillAmount((float)PlayerPrefs.GetInt(_carName + "carLevel") / 40, 0.5f);
+        fillEndCarLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt(_carName + "carLevel") / 40 * 132f, 0), 0.5f);
+        #endregion
     }
 
     public void CheckArrow()
