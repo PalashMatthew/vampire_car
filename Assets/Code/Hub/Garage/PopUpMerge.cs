@@ -100,6 +100,8 @@ public class PopUpMerge : MonoBehaviour
     public PopUpMergeFinal popUpMergeFinal;
     public PopUpDetail popUpDetail;
 
+    public ItemCell itemCellGarage1, itemCellGarage2, itemCellGarage3, itemCellGarage4, itemCellGarage5, itemCellGarage6;
+
 
     private void Start()
     {
@@ -114,6 +116,36 @@ public class PopUpMerge : MonoBehaviour
 
     void Initialize()
     {
+        if (garageController.slot1Card != null)
+        {
+            itemCellGarage1 = garageController.slot1Card;
+        }
+
+        if (garageController.slot2Card != null)
+        {
+            itemCellGarage2 = garageController.slot2Card;
+        }
+
+        if (garageController.slot3Card != null)
+        {
+            itemCellGarage3 = garageController.slot3Card;
+        }
+
+        if (garageController.slot4Card != null)
+        {
+            itemCellGarage4 = garageController.slot4Card;
+        }
+
+        if (garageController.slot5Card != null)
+        {
+            itemCellGarage5 = garageController.slot5Card;
+        }
+
+        if (garageController.slot6Card != null)
+        {
+            itemCellGarage6 = garageController.slot6Card;
+        }
+
         panelMerge.SetActive(true);
         panelRepair.SetActive(false);
 
@@ -1002,7 +1034,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"), itemCellGarage1);
                 }
             }
 
@@ -1011,7 +1043,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot2_itemNumInInventory")), PlayerPrefs.GetInt("slot2_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot2_itemNumInInventory")), PlayerPrefs.GetInt("slot2_itemNumInInventory"), itemCellGarage2);
                 }
             }
 
@@ -1020,7 +1052,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot3_itemNumInInventory")), PlayerPrefs.GetInt("slot3_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot3_itemNumInInventory")), PlayerPrefs.GetInt("slot3_itemNumInInventory"), itemCellGarage3);
                 }
             }
 
@@ -1029,7 +1061,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot4_itemNumInInventory")), PlayerPrefs.GetInt("slot4_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot4_itemNumInInventory")), PlayerPrefs.GetInt("slot4_itemNumInInventory"), itemCellGarage4);
                 }
             }
 
@@ -1038,7 +1070,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot5_itemNumInInventory")), PlayerPrefs.GetInt("slot5_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot5_itemNumInInventory")), PlayerPrefs.GetInt("slot5_itemNumInInventory"), itemCellGarage5);
                 }
             }
 
@@ -1047,7 +1079,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot6_itemNumInInventory")), PlayerPrefs.GetInt("slot6_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot6_itemNumInInventory")), PlayerPrefs.GetInt("slot6_itemNumInInventory"), itemCellGarage6);
                 }
             }
             #endregion
@@ -1548,9 +1580,10 @@ public class PopUpMerge : MonoBehaviour
         }
     }
 
-    public void SaveDetailStats(string _type, string itemRarity, int numInv)
+    public void SaveDetailStats(string _type, string itemRarity, int numInv, ItemCell _itemCellGarage)
     {
-        DetailCard _card = itemCell1.itemObj;
+        //DetailCard _card = itemCell1.itemObj;
+        DetailCard _card = _itemCellGarage.itemObj;
 
         //ClearSave
         string s = _type;
