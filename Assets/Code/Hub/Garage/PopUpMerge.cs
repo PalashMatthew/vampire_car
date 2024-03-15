@@ -1011,7 +1011,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot2_itemNumInInventory")), PlayerPrefs.GetInt("slot2_itemNumInInventory"));
                 }
             }
 
@@ -1020,7 +1020,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot3_itemNumInInventory")), PlayerPrefs.GetInt("slot3_itemNumInInventory"));
                 }
             }
 
@@ -1029,7 +1029,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot4_itemNumInInventory")), PlayerPrefs.GetInt("slot4_itemNumInInventory"));
                 }
             }
 
@@ -1038,7 +1038,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot5_itemNumInInventory")), PlayerPrefs.GetInt("slot5_itemNumInInventory"));
                 }
             }
 
@@ -1047,7 +1047,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"));
+                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot6_itemNumInInventory")), PlayerPrefs.GetInt("slot6_itemNumInInventory"));
                 }
             }
             #endregion
@@ -1183,7 +1183,6 @@ public class PopUpMerge : MonoBehaviour
             }
         }
         #endregion
-
 
         RemoveItemInInventory(_numInInv1, itemCell1.itemType, itemCell1.gameObject);
         RemoveItemInInventory(_numInInv2, itemCell2.itemType, itemCell2.gameObject);
