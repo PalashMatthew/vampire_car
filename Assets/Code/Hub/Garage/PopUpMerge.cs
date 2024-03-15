@@ -1034,7 +1034,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot1_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot1_itemNumInInventory", PlayerPrefs.GetInt("slot1_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"), itemCellGarage1);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot1_itemNumInInventory")), PlayerPrefs.GetInt("slot1_itemNumInInventory"), itemCellGarage1);
                 }
             }
 
@@ -1043,7 +1043,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot2_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot2_itemNumInInventory", PlayerPrefs.GetInt("slot2_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot2_itemNumInInventory")), PlayerPrefs.GetInt("slot2_itemNumInInventory"), itemCellGarage2);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot2_itemNumInInventory")), PlayerPrefs.GetInt("slot2_itemNumInInventory"), itemCellGarage2);
                 }
             }
 
@@ -1052,7 +1052,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot3_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot3_itemNumInInventory", PlayerPrefs.GetInt("slot3_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot3_itemNumInInventory")), PlayerPrefs.GetInt("slot3_itemNumInInventory"), itemCellGarage3);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot3_itemNumInInventory")), PlayerPrefs.GetInt("slot3_itemNumInInventory"), itemCellGarage3);
                 }
             }
 
@@ -1061,7 +1061,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot4_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot4_itemNumInInventory", PlayerPrefs.GetInt("slot4_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot4_itemNumInInventory")), PlayerPrefs.GetInt("slot4_itemNumInInventory"), itemCellGarage4);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot4_itemNumInInventory")), PlayerPrefs.GetInt("slot4_itemNumInInventory"), itemCellGarage4);
                 }
             }
 
@@ -1070,7 +1070,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot5_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot5_itemNumInInventory", PlayerPrefs.GetInt("slot5_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot5_itemNumInInventory")), PlayerPrefs.GetInt("slot5_itemNumInInventory"), itemCellGarage5);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot5_itemNumInInventory")), PlayerPrefs.GetInt("slot5_itemNumInInventory"), itemCellGarage5);
                 }
             }
 
@@ -1079,7 +1079,7 @@ public class PopUpMerge : MonoBehaviour
                 if (PlayerPrefs.GetInt("slot6_itemNumInInventory") > _itemNum)
                 {
                     PlayerPrefs.SetInt("slot6_itemNumInInventory", PlayerPrefs.GetInt("slot6_itemNumInInventory") - 1);
-                    SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot6_itemNumInInventory")), PlayerPrefs.GetInt("slot6_itemNumInInventory"), itemCellGarage6);
+                    //SaveDetailStats(_itemType, PlayerPrefs.GetString("item" + _itemType + "Rarity" + PlayerPrefs.GetInt("slot6_itemNumInInventory")), PlayerPrefs.GetInt("slot6_itemNumInInventory"), itemCellGarage6);
                 }
             }
             #endregion
@@ -1420,7 +1420,9 @@ public class PopUpMerge : MonoBehaviour
         GameObject.Find("HubController").GetComponent<RedPushController>().CheckRedPush();
 
         popUpMergeFinal.rarity = _itemRarity;        
-        popUpMergeFinal.ButOpen();        
+        popUpMergeFinal.ButOpen();
+
+        canvasGarage.GetComponent<GarageController>().recalculateStats = true;
     }
 
     void PanelNewStatsSettings()

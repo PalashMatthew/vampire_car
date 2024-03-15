@@ -103,6 +103,8 @@ public class GarageController : MonoBehaviour
 
     public PopUpCarUpgrade popUpCarUpgrade;
 
+    public bool recalculateStats = false;
+
 
     private void OnEnable()
     {
@@ -268,14 +270,37 @@ public class GarageController : MonoBehaviour
         fillEndCarLevel.GetComponent<RectTransform>().DOAnchorPos(new Vector2((float)PlayerPrefs.GetInt(activeCarObj.carName + "carLevel") / 40 * 233f, 0), 0.5f);
         #endregion
 
-        //popUpDetail.SaveDetailStats("Gun");
-
-        CalculateViewStats();
+        //popUpDetail.SaveDetailStats("Gun");      
 
         LoadItem();
         LoadSlots();
 
+        if (recalculateStats)
+        {
+            if (slot1Card != null)
+                SaveDetailStats(slot1Card.itemType, slot1Card.itemRarity, slot1Card.itemNumInInventory, slot1Card);
+
+            if (slot2Card != null)
+                SaveDetailStats(slot2Card.itemType, slot2Card.itemRarity, slot2Card.itemNumInInventory, slot2Card);
+
+            if (slot3Card != null)
+                SaveDetailStats(slot3Card.itemType, slot3Card.itemRarity, slot3Card.itemNumInInventory, slot3Card);
+
+            if (slot4Card != null)
+                SaveDetailStats(slot4Card.itemType, slot4Card.itemRarity, slot4Card.itemNumInInventory, slot4Card);
+
+            if (slot5Card != null)
+                SaveDetailStats(slot5Card.itemType, slot5Card.itemRarity, slot5Card.itemNumInInventory, slot5Card);
+
+            if (slot6Card != null)
+                SaveDetailStats(slot6Card.itemType, slot6Card.itemRarity, slot6Card.itemNumInInventory, slot6Card);
+
+            recalculateStats = false;
+        }
+
         CheckArrowUpgrade();
+
+        CalculateViewStats();
     }
 
     void LoadItem()
@@ -1648,5 +1673,369 @@ public class GarageController : MonoBehaviour
         }
 
         #endregion
-    }    
+    }
+
+    public void SaveDetailStats(string _type, string itemRarity, int numInv, ItemCell _itemCellGarage)
+    {
+        //DetailCard _card = itemCell1.itemObj;
+        DetailCard _card = _itemCellGarage.itemObj;
+
+        //ClearSave
+        string s = _type;
+
+        PlayerPrefs.SetFloat(s + "SelectHealth", 0);
+        PlayerPrefs.SetFloat(s + "SelectDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectRecoveryHpInFirstAidKit", 0);
+        PlayerPrefs.SetFloat(s + "SelectDodge", 0);
+        PlayerPrefs.SetFloat(s + "SelectDronDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectShotSpeed", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectKritChance", 0);
+        PlayerPrefs.SetFloat(s + "SelectBackDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectVampirizm", 0);
+        PlayerPrefs.SetFloat(s + "SelectArmor", 0);
+        PlayerPrefs.SetFloat(s + "SelectHealthRecovery", 0);
+        PlayerPrefs.SetFloat(s + "SelectRage", 0);
+        PlayerPrefs.SetFloat(s + "SelectDistanceDamage", 0);
+        PlayerPrefs.SetFloat(s + "SelectLucky", 0);
+        PlayerPrefs.SetFloat(s + "SelectMagnet", 0);
+        PlayerPrefs.SetFloat(s + "SelectCarDamage", 0);
+
+        #region Base Stats
+        switch (itemRarity)
+        {
+            case "common":
+
+                if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersCommon1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersCommon2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersCommon2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterCommon2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "rare":
+
+                if (_card.baseItemCharactersRare1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersRare1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersRare2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersRare2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersRare2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterRare2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "epic":
+
+                if (_card.baseItemCharactersEpic1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersEpic1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersEpic2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersEpic2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterEpic2Value" + numInv));
+                    }
+                }
+
+                break;
+
+            case "legendary":
+
+                if (_card.baseItemCharactersLegendary1 == DetailCard.ItemCharacters.HpUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersLegendary1 == DetailCard.ItemCharacters.DamageUp)
+                {
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary1Value" + numInv));
+                }
+
+                if (_card.baseItemCharactersLegendary2 != DetailCard.ItemCharacters.none)
+                {
+                    if (_card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.HpUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + numInv));
+                    }
+
+                    if (_card.baseItemCharactersLegendary2 == DetailCard.ItemCharacters.DamageUp)
+                    {
+                        PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat("item" + _type + "baseCharacterLegendary2Value" + numInv));
+                    }
+                }
+
+                break;
+        }
+        #endregion
+
+        #region UnicalStats
+        if (itemRarity == "rare" || itemRarity == "epic" || itemRarity == "legendary")
+        {
+            switch (_card.rareItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.rareItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.rareItemCharactersValue);
+                    break;
+            }
+        }
+
+        if (itemRarity == "epic" || itemRarity == "legendary")
+        {
+            switch (_card.epicItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.epicItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.epicItemCharactersValue);
+                    break;
+            }
+        }
+
+        if (itemRarity == "legendary")
+        {
+            switch (_card.legendaryItemCharacters)
+            {
+                case DetailCard.RarityItemCharacters.HpUp:
+                    PlayerPrefs.SetFloat(_type + "SelectHealth", PlayerPrefs.GetFloat(_type + "SelectHealth") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.RecoveryHpInFirstAidKit:
+                    PlayerPrefs.SetFloat(_type + "SelectRecoveryHpInFirstAidKit", PlayerPrefs.GetFloat(_type + "SelectRecoveryHpInFirstAidKit") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Dodge:
+                    PlayerPrefs.SetFloat(_type + "SelectDodge", PlayerPrefs.GetFloat(_type + "SelectDodge") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DronDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDronDamage", PlayerPrefs.GetFloat(_type + "SelectDronDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.ShotSpeed:
+                    PlayerPrefs.SetFloat(_type + "SelectShotSpeed", PlayerPrefs.GetFloat(_type + "SelectShotSpeed") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectKritDamage", PlayerPrefs.GetFloat(_type + "SelectKritDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.KritChance:
+                    PlayerPrefs.SetFloat(_type + "SelectKritChance", PlayerPrefs.GetFloat(_type + "SelectKritChance") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.BackDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectBackDamage", PlayerPrefs.GetFloat(_type + "SelectBackDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Vampirizm:
+                    PlayerPrefs.SetFloat(_type + "SelectVampirizm", PlayerPrefs.GetFloat(_type + "SelectVampirizm") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Armor:
+                    PlayerPrefs.SetFloat(_type + "SelectArmor", PlayerPrefs.GetFloat(_type + "SelectArmor") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.HealthRecovery:
+                    PlayerPrefs.SetFloat(_type + "SelectHealthRecovery", PlayerPrefs.GetFloat(_type + "SelectHealthRecovery") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Rage:
+                    PlayerPrefs.SetFloat(_type + "SelectRage", PlayerPrefs.GetFloat(_type + "SelectRage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.DistanceDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectDistanceDamage", PlayerPrefs.GetFloat(_type + "SelectDistanceDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Lucky:
+                    PlayerPrefs.SetFloat(_type + "SelectLucky", PlayerPrefs.GetFloat(_type + "SelectLucky") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Magnet:
+                    PlayerPrefs.SetFloat(_type + "SelectMagnet", PlayerPrefs.GetFloat(_type + "SelectMagnet") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.Damage:
+                    PlayerPrefs.SetFloat(_type + "SelectDamage", PlayerPrefs.GetFloat(_type + "SelectDamage") + _card.legendaryItemCharactersValue);
+                    break;
+
+                case DetailCard.RarityItemCharacters.CarDamage:
+                    PlayerPrefs.SetFloat(_type + "SelectCarDamage", PlayerPrefs.GetFloat(_type + "SelectCarDamage") + _card.legendaryItemCharactersValue);
+                    break;
+            }
+        }
+        #endregion
+    }
 }
