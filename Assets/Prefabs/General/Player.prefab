@@ -93158,6 +93158,10 @@ PrefabInstance:
       propertyPath: gunName
       value: GrowingShot
       objectReference: {fileID: 0}
+    - target: {fileID: 4039773437409394981, guid: eb22efcd58a7f4e49a5b00f738fd818f, type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5178206245008229586, guid: eb22efcd58a7f4e49a5b00f738fd818f, type: 3}
       propertyPath: m_Name
       value: GrowingShot
@@ -93174,8 +93178,13 @@ PrefabInstance:
       propertyPath: vfxPrewarm
       value: 
       objectReference: {fileID: 7333954122204863657}
+    - target: {fileID: 7807102418089423641, guid: eb22efcd58a7f4e49a5b00f738fd818f, type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6228269585586886895, guid: eb22efcd58a7f4e49a5b00f738fd818f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2886630618060032277, guid: eb22efcd58a7f4e49a5b00f738fd818f, type: 3}
       insertIndex: -1

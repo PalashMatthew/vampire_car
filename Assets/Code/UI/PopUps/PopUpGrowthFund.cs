@@ -38,6 +38,8 @@ public class PopUpGrowthFund : MonoBehaviour
 
     public void ButOpen()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundStatus("Open");
+
         _popUpController.OpenPopUp();
 
         Initialize();
@@ -45,6 +47,8 @@ public class PopUpGrowthFund : MonoBehaviour
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundStatus("Closed");
+
         _popUpController.ClosedPopUp();
     }
 
@@ -156,6 +160,8 @@ public class PopUpGrowthFund : MonoBehaviour
 
     public void BuyRarePassCallBack()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundBuy("Rare");
+
         PlayerPrefs.SetInt("rareGrowthFundBuyed", 1);
         Initialize();
     }
@@ -168,6 +174,8 @@ public class PopUpGrowthFund : MonoBehaviour
 
     public void BuyEpicPassCallBack()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundBuy("Epic");
+
         PlayerPrefs.SetInt("epicGrowthFundBuyed", 1);
         Initialize();
     }
@@ -176,6 +184,8 @@ public class PopUpGrowthFund : MonoBehaviour
     {       
         if (num <= playerLevel)
         {
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Free", num);
+
             PlayerPrefs.SetInt("growFundOpenFree" + needPlayerLevel[num - 1], 1);
 
             if (freePassRewardName[num - 1] == "hard")
@@ -203,6 +213,8 @@ public class PopUpGrowthFund : MonoBehaviour
         {
             if (num <= playerLevel)
             {
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Rare", num);
+
                 PlayerPrefs.SetInt("growFundOpenRare" + needPlayerLevel[num - 1], 1);
 
                 if (rarePassRewardName[num - 1] == "hard")
@@ -231,6 +243,8 @@ public class PopUpGrowthFund : MonoBehaviour
         {
             if (num <= playerLevel)
             {
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Epic", num);
+
                 PlayerPrefs.SetInt("growFundOpenEpic" + needPlayerLevel[num - 1], 1);
 
                 if (epicPassRewardName[num - 1] == "hard")

@@ -112,9 +112,16 @@ public class HubController : MonoBehaviour
                     }
                     else
                     {
-                        PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + fuelCountPlus);
-                        StopAllCoroutines();
-                        StartCoroutine(FuelTimer(ostatok));
+                        if (PlayerPrefs.GetInt("playerFuelCurrent") < PlayerPrefs.GetInt("playerFuelMax"))
+                        {
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelCurrent") + fuelCountPlus);
+                            StopAllCoroutines();
+                            StartCoroutine(FuelTimer(ostatok));
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetInt("playerFuelCurrent", PlayerPrefs.GetInt("playerFuelMax"));
+                        }
                     }
 
                     tFuelValue.text = PlayerPrefs.GetInt("playerFuelCurrent") + "/" + PlayerPrefs.GetInt("playerFuelMax");
@@ -149,14 +156,7 @@ public class HubController : MonoBehaviour
             butStarterPack.SetActive(false);
         }
 
-        if (PlayerPrefs.GetInt("setPackPurchased") == 0)
-        {
-            butSetPack.SetActive(true);
-        }
-        else
-        {
-            butSetPack.SetActive(false);
-        }
+        butSetPack.SetActive(true);
     }
 
     #region Selection Menu

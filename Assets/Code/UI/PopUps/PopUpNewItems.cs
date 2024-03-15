@@ -36,8 +36,7 @@ public class PopUpNewItems : MonoBehaviour
     public TMP_Text tPassiveReward1Name, tPassiveReward2Name;
     public Image imgIconPassive1, imgIconPassive2;
 
-    public PopUpNewLevel popUpNewLevel;
-    
+    public PopUpNewLevel popUpNewLevel;    
 
 
     private void Start()

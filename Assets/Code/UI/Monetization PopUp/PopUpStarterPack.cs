@@ -45,6 +45,8 @@ public class PopUpStarterPack : MonoBehaviour
 
     public void ButOpen()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpStarterPack("Open");
+
         _popUpController.OpenPopUp();
 
         Initialize();
@@ -52,6 +54,8 @@ public class PopUpStarterPack : MonoBehaviour
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpStarterPack("Closed");
+
         StopAllCoroutines();
         _popUpController.ClosedPopUp();
     }
@@ -114,6 +118,8 @@ public class PopUpStarterPack : MonoBehaviour
 
     public void CallBackPurchased()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpStarterPackBuy();
+
         PlayerPrefs.SetInt("starterPackPurchased", 1);
 
         switch (activeGun)

@@ -161,7 +161,7 @@ public class FirebaseSetup : MonoBehaviour
     }
     #endregion
 
-    #region Игрокая аналитика
+    #region Игровая аналитика
     //Done
     public void Event_Play(int _fuelCount, float _damageValue, float _healthValue, int _locNum)
     {
@@ -457,6 +457,66 @@ public class FirebaseSetup : MonoBehaviour
 
         Debug.Log("Event Send!\n" + s);
     }
+
+    public void Event_PopUpPush(string _status, int _locNum)
+    {
+        string s = "PopUpPush_" + _status + "_LocNum_" + _locNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpRate(string _status, int _locNum)
+    {
+        string s = "PopUpRate_" + _status + "_LocNum_" + _locNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpGrowthFundStatus(string _status)
+    {
+        string s = "PopUpGrowthFund_" + _status;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpGrowthFundTakeReward(string _rareType, int _rewardNum)
+    {
+        string s = "PopUpGrowthFund_TakeReward_" + _rareType + "_RewardNum_" + _rewardNum;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpSetInApp(string _status)
+    {
+        string s = "PopUpSetInApp_" + _status;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpStarterPack(string _status)
+    {
+        string s = "PopUpStarterPack_" + _status;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Game", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
     #endregion
 
     #region Монетизационная аналитика
@@ -523,6 +583,36 @@ public class FirebaseSetup : MonoBehaviour
     public void Event_ShowAdsFinish(string _name)
     {
         string s = "ShowAdsFinish_" + _name;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }    
+
+    public void Event_PopUpGrowthFundBuy(string _num)
+    {
+        string s = "PopUpGrowthFund_BuyInApp_" + _num;
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpSetInAppBuy()
+    {
+        string s = "PopUpSetInApp_Buy";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_PopUpStarterPackBuy()
+    {
+        string s = "PopUpStarterPack_Buy";
 
         FirebaseAnalytics.LogEvent("Splash_Games",
             new Parameter("Monetization", s));

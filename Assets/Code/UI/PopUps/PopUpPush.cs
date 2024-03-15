@@ -19,11 +19,15 @@ public class PopUpPush : MonoBehaviour
         {
             _popUpController.OpenPopUp();
             PlayerPrefs.SetInt("pushActivate", 0);
+
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpPush("Open", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
         }            
     }
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpPush("Closed", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         _popUpController.ClosedPopUp();
     }
 
@@ -36,11 +40,15 @@ public class PopUpPush : MonoBehaviour
             Permission.RequestUserPermission("android.permission.POST_NOTIFICATIONS");
         }
 
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpPush("Access_True", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         ButClosed();
     }
 
     public void ButNo()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpPush("Access_False", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         PlayerPrefs.SetInt("dontSendPush", 1);
         ButClosed();
     }

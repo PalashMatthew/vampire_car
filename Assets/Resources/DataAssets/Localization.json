@@ -1947,15 +1947,6 @@
       "Chefe - Bombeiro"
     ],
     [
-      "LOC_bossName2",
-      "БОСС - Танк",
-      "Boss - Tank",
-      "Jefe - Tanque",
-      "Boss - Tank",
-      "보스 - 전차",
-      "Chefe - Tanque"
-    ],
-    [
       "LOC_bossName3",
       "БОСС - НЛО",
       "Boss - UFO",
@@ -1963,6 +1954,15 @@
       "Boss - OVNI",
       "보스 - UFO",
       "Chefe - OVNI"
+    ],
+    [
+      "LOC_bossName2",
+      "БОСС - Танк",
+      "Boss - Tank",
+      "Jefe - Tanque",
+      "Boss - Tank",
+      "보스 - 전차",
+      "Chefe - Tanque"
     ],
     [
       "LOC_bossName4",
@@ -2812,12 +2812,12 @@
     ],
     [
       "LOC_starterPackProfit",
-      "10Х выгода",
-      "10x benefits",
-      "Beneficios 10x",
-      "Avantages 10x",
-      "10 배 이점",
-      "Benefícios 10x"
+      "5Х выгода",
+      "5x benefits",
+      "Beneficios 5x",
+      "Avantages 5x",
+      "5 배 이점",
+      "Benefícios 5x"
     ],
     [
       "LOC_rate1",
@@ -2912,254 +2912,353 @@
     [
       "LOC_s01Desk",
       "{value}% не получить урон от столкновения с машинами и препяствиями",
-      "{value}% do not get damage from a collision with machines and impressions",
-      "{Value}% do not get damage from a collision with Machines and Impressions",
-      "{Value}% do not get damage from a collision with Machines and impressions",
-      "{Value}% do not get damage from a collision with Machines and impressions",
-      "{Value}% do not get damage from a collision with Machines and impressions"
+      "{value}% no damage from collisions with cars and obstacles",
+      "{value}% sin daño por colisiones con autos y obstáculos",
+      "{value}% pas de dommages en cas de collision avec des voitures et des obstacles",
+      "{value}% 자동차 및 장애물과의 충돌로 인한 피해 없음",
+      "{value}% sem dano por colisões com carros e obstáculos"
     ],
     [
       "LOC_s02Desk",
       "Противник загорается с шансом {value}%",
-      "The enemy lights up with the chance {value}%",
-      "The Enemy Lights Up with The Chance {Value}%",
-      "The Enemy Lights Up with The Chance {Value}%",
-      "The Enemy Lights Up with The Chance {Value}%",
-      "The Enemy Lights Up with The Chance {Value}%"
+      "Enemy ignites with a {value}% chance",
+      "El enemigo se incendia con un {value}% de probabilidad",
+      "L'ennemi s'enflamme avec une chance de {value}%",
+      "적에게 {value}% 확률로 불이 붙습니다.",
+      "Inimigo se incendeia com uma chance de {value}%"
     ],
     [
       "LOC_s03Desk",
       "Отравление с шансом {value}%",
-      "Poisoning with a chance {value}%",
-      "Poisoning with a Chance {Value}%",
-      "Poisoning with a Chance {Value}%",
-      "Poisoning with a Chance {Value}%",
-      "Poisoning with a Chance {Value}%"
+      "Poisoning with a {value}% chance",
+      "Envenenamiento con una probabilidad del {value}%",
+      "Empoisonnement avec une chance de {value}%",
+      "{value}%의 확률로 중독됩니다",
+      "Envenenamento com uma chance de {value}%"
     ],
     [
       "LOC_s04Desk",
       "Шанс выпадения шестеренки +{value}",
-      "The chance to fall in the gear +{value}",
-      "The Chance to Fall in the Gear +{Value}",
-      "The Chance to Fall in the Gear +{Value}",
-      "The Chance to Fall in the Gear +{Value}",
-      "The Chance to Fall in the Gear +{Value}"
+      "Chance of dropping a gear +{value}",
+      "Probabilidad de soltar un engranaje +{value}",
+      "Chance de larguer un engrenage +{value}",
+      "기어가 떨어지는 확률 +{value}",
+      "Chance de dropar uma engrenagem +{value}"
     ],
     [
       "LOC_s05Desk",
       "Регенерация при бездействии {value}%",
-      "Regeneration with inaction {value}%",
-      "Regeneration with Inaction {Value}%",
-      "Regeneration with Inaction {Value}%",
-      "Regeneration with Inaction {Value}%",
-      "Regeneration with Inaction {Value}%"
+      "Regeneration when idle {value}%",
+      "Regeneración cuando está inactivo {valor}%",
+      "Régénération en cas d'inactivité {value}%",
+      "비활성시 재생 {value}%",
+      "Regeneração quando ocioso {value}%"
     ],
     [
       "LOC_s06Desk",
       "Если в течении {value} сек не получаешь урон то игроку дается щит, поглощающий одну атаку",
-      "If during {value} you do not get damage, then the player is given a shield that absorbs one attack",
-      "If during {Value} You do not get damage, The Player Is Given a SHIELD that Absorbs One Attack",
-      "If during {value} you do not get damage, The Player Is Given a SHIELD that Absorbs One Attack",
-      "If during {value} you do not get damage, The Player Is Given a SHIELD that Absorbs One Attack",
-      "If during {value} you do not get damage, The Player Is Given a SHIELD that Absorbs One Attack"
+      "If you don't take damage for {value} seconds, the player gets a shield that absorbs one attack",
+      "Si no recibes daño durante {value} segundos, el jugador recibe un escudo que absorbe un ataque",
+      "Si vous ne subissez aucun dommage pendant {value} secondes, le joueur reçoit un bouclier qui absorbe une attaque",
+      "{value}초 동안 피해를 받지 않으면, 플레이어에게 한 번의 공격을 흡수하는 방패가 제공됩니다",
+      "Se você não receber dano por {value} segundos, o jogador recebe um escudo que absorve um ataque"
     ],
     [
       "LOC_s07Desk",
       "После получения урона в течении 3 сек увеличивает весь исходящий урон +{value}%",
-      "After receiving damage within 3 seconds increases all outgoing damage +{value}%",
-      "AFTER Receiving Damage Within 3 Seconds Increases All Outgoing Damage +{Value}%",
-      "AFTER Receiving Damage Within 3 Seconds Increases All Outgoing Damage +{Value}%",
-      "AFTER Receiving Damage Within 3 Seconds Increases All Outgoing Damage +{Value}%",
-      "AFTER Receiving Damage Within 3 Seconds Increases All Outgoing Damage +{Value}%"
+      "After taking damage for 3 seconds, increases all outgoing damage by +{value}%",
+      "Después de recibir daño durante 3 segundos, aumenta todo el daño saliente en +{value}%",
+      "Après avoir subi des dégâts pendant 3 secondes, augmente tous les dégâts sortants de +{value}%",
+      "피해를 입은 후 3초 동안, 모든 발사되는 피해가 {value}% 증가합니다",
+      "Após receber dano por 3 segundos, aumenta todo o dano de saída em +{value}%"
     ],
     [
       "LOC_s08Desk",
       "За каждое оружие +{value}% урона",
-      "For each weapon +{value}% damage",
-      "For each weapon +{value}% Damage",
-      "For each weapon +{value}% Damage",
-      "For each weapon +{value}% Damage",
-      "For each weapon +{value}% Damage"
+      "For each weapon, +{value}% damage",
+      "Por cada arma, +{value}% de daño",
+      "Pour chaque arme, +{value}% de dégâts",
+      "각 무기마다, +{value}% 피해",
+      "Para cada arma, +{value}% de dano"
     ],
     [
       "LOC_s09Desk",
       "Шанс того, что повторый урон противнику будет x2 - {value}%",
-      "The chance that repeated damage to the enemy will be x2 - {value}%",
-      "The Chance that Repeated Damage to the Enemy Will Be X2 - {Value}%",
-      "The Chance that Repeated Damage to the Enemy Will Be X2 - {Value}%",
-      "The Chance that Repeated Damage to the Enemy Will Be X2 - {Value}%",
-      "The Chance that Repeated Damage to the Enemy Will Be X2 - {Value}%"
+      "Chance of doubling damage to the opponent - {value}%",
+      "Probabilidad de duplicar el daño al oponente - {value}%",
+      "Chance de doubler les dégâts infligés à l'adversaire - {value}%",
+      "상대에게 피해를 두 배로 증가시킬 확률 - {value}%",
+      "Chance de dobrar o dano ao oponente - {value}%"
     ],
     [
       "LOC_s10Desk",
       "HP +{value}",
-      "Hp +{value}",
-      "Hp +{value}",
-      "Hp +{value}",
-      "Hp +{value}",
-      "Hp +{value}"
+      "HP +{value}",
+      "HP +{value}",
+      "HP +{value}",
+      "HP +{value}",
+      "HP +{value}"
     ],
     [
       "LOC_setPackDesk1",
       "Выбери \u003ccolor=#3498DB\u003eРЕДКИЙ\u003c/color\u003e сет",
-      "Select \u003ccolor =#3498DB\u003e Rare \u003c/Lor\u003e set",
-      "Select \u003ccolor =#3498db\u003e rare \u003c/ lor\u003e set",
-      "Select \u003ccolor =#3498db\u003e rare \u003c/ lor\u003e set",
-      "Select \u003ccolor =#3498db\u003e rare \u003c/ lor\u003e set",
-      "Select \u003ccolor =#3498db\u003e rare \u003c/ lor\u003e set"
+      "Choose a \u003ccolor=#3498DB\u003eRARE\u003c/color\u003e set",
+      "Elige un conjunto \u003ccolor=#3498DB\u003eRARO\u003c/color\u003e",
+      "Choisissez un ensemble \u003ccolor=#3498DB\u003eRARE\u003c/color\u003e",
+      "\u003ccolor=#3498DB\u003e희귀\u003c/color\u003e 세트를 선택하십시오",
+      "Escolha um conjunto \u003ccolor=#3498DB\u003eRARO\u003c/color\u003e"
     ],
     [
       "LOC_setPackHeader",
       "Собери Сет",
-      "Collect the set",
-      "Collect the Set",
-      "Collect the Set",
-      "Collect the Set",
-      "Collect the Set"
+      "Collect Set",
+      "Recoge un conjunto",
+      "Collectionner un ensemble",
+      "세트 수집",
+      "Conjunto de coleta"
     ],
     [
       "LOC_setNameFire",
       "Огонь",
       "Fire",
-      "Fire",
-      "Fire",
-      "Fire",
-      "Fire"
+      "Fuego",
+      "Feu",
+      "불",
+      "Fogo"
     ],
     [
       "LOC_setNamePoison",
       "Яд",
-      "I",
-      "I",
-      "I",
-      "I",
-      "I"
+      "Poison",
+      "Veneno",
+      "Poison",
+      "독",
+      "Venenoso"
     ],
     [
       "LOC_setNameRepair",
       "Ремонт",
       "Repair",
-      "Repair",
-      "Repair",
-      "Repair",
-      "Repair"
+      "Reparación",
+      "Réparation",
+      "수리",
+      "Reparo"
     ],
     [
       "LOC_setNameShield",
       "Щит",
       "Shield",
-      "Shield",
-      "Shield",
-      "Shield",
-      "Shield"
+      "Escudo",
+      "Bouclier",
+      "방패",
+      "Escudo"
     ],
     [
       "LOC_setNameSteel",
       "Сталь",
       "Steel",
-      "Steel",
-      "Steel",
-      "Steel",
-      "Steel"
+      "Acero",
+      "Acier",
+      "강철",
+      "Aço"
     ],
     [
       "LOC_changeLang",
       "Сменить язык",
-      "Сменить язык",
-      "Сменить язык",
-      "Сменить язык",
-      "Сменить язык",
-      "Сменить язык"
+      "Change language",
+      "Cambiar idioma",
+      "Changer de langue",
+      "언어 변경",
+      "Alterar idioma"
     ],
     [
       "LOC_growthFundName",
       "Фонд Роста",
       "Growth Fund",
-      "Growth Fund",
-      "Growth Fund",
-      "Growth Fund",
-      "Growth Fund"
+      "Fondo de Crecimiento",
+      "Fonds de croissance",
+      "성장 기금",
+      "Fundo de Crescimento"
     ],
     [
       "LOC_growthFundDesk",
       "Купите фонд роста: средства вернутся в 15-20 кратном размере!",
-      "Buy a growth fund: funds will return to 15-20 multiple size!",
-      "Buy a Growth Fund: Funds Will Return To 15-20 Multiple Size!",
-      "Buy a Growth Fund: Funds Will Return To 15-20 Multiple Size!",
-      "Buy a Growth Fund: Funds Will Return To 15-20 Multiple Size!",
-      "Buy a Growth Fund: Funds Will Return To 15-20 Multiple Size!"
+      "Buy the growth fund: funds will return 15-20 times their size!",
+      "Comprar el fondo de crecimiento: ¡los fondos se devolverán de 15 a 20 veces su tamaño!",
+      "Achetez le fonds de croissance : les fonds seront multipliés par 15 à 20 fois leur taille !",
+      "성장 기금 구매: 자금은 15-20 배로 반환됩니다!",
+      "Compre o fundo de crescimento: os fundos retornarão 15-20 vezes seu tamanho!"
     ],
     [
       "LOC_growthFundFree",
       "Бесплатно",
-      "For free",
-      "For free",
-      "For free",
-      "For free",
-      "For free"
+      "Free",
+      "Gratis",
+      "Gratuit",
+      "무료",
+      "Grátis"
     ],
     [
       "LOC_pushFuelMaxTitle",
       "Возвращайся в игру!",
       "Return to the game!",
-      "Return to the Game!",
-      "Return to the Game!",
-      "Return to the Game!",
-      "Return to the Game!"
+      "Volver al juego!",
+      "Retour au jeu !",
+      "게임으로 돌아 가기!",
+      "Voltar ao jogo!"
     ],
     [
       "LOC_pushFuelMaxText",
       "Топливо заполнилось!",
-      "The fuel is filled!",
-      "The Fuel is Filled!",
-      "The Fuel is Filled!",
-      "The Fuel is Filled!",
-      "The Fuel is Filled!"
+      "Out of fuel!",
+      "Sin combustible",
+      "Pas de carburant",
+      "연료 없음",
+      "Sem combustível!"
     ],
     [
       "LOC_pushChannelName",
       "Напоминания",
       "Reminders",
-      "Reminders",
-      "Reminders",
-      "Reminders",
-      "Reminders"
+      "Recordatorios",
+      "Rappels",
+      "알림",
+      "Lembretes"
     ],
     [
       "LOC_pushChannelDesk",
       "Игровые напоминания",
       "Game reminders",
-      "Game Reminders",
-      "Game Reminders",
-      "Game Reminders",
-      "Game Reminders"
+      "Recordatorios del juego",
+      "Rappels de jeu",
+      "게임 알림",
+      "Lembretes do jogo"
     ],
     [
       "LOC_pushAdsChestTitle",
       "Забери сундук!",
-      "Take a chest!",
-      "Take a Chest!",
-      "Take a Chest!",
-      "Take a Chest!",
-      "Take a Chest!"
+      "Claim the chest!",
+      "¡Reclamar el cofre!",
+      "Réclamer le coffre !",
+      "상자를 요청하십시오!",
+      "Reivindique o baú!"
     ],
     [
       "LOC_pushAdsChestText",
       "Бесплатный сундук готов!",
-      "A free chest is ready!",
-      "A free chest is ready!",
-      "A free chest is ready!",
-      "A free chest is ready!",
-      "A free chest is ready!"
+      "Free chest ready!",
+      "¡Cofre gratis listo!",
+      "Coffre gratuit prêt !",
+      "무료 상자 준비 완료!",
+      "Baú grátis pronto!"
     ],
     [
       "LOC_popUpPushHeader",
       "Включи уведомления!",
-      "Turn on the notifications!",
-      "Turn on the Notifications!",
-      "Turn on the Notifications!",
-      "Turn on the Notifications!",
-      "Turn on the Notifications!"
+      "Turn on notifications!",
+      "¡Activar notificaciones!",
+      "Activez les notifications !",
+      "알림을 켜십시오!",
+      "Ativar notificações!"
+    ],
+    [
+      "LOC_location6Name",
+      "Сказочный лес",
+      "Enchanted Forest",
+      "Bosque encantado",
+      "Forêt enchantée",
+      "마법의 숲",
+      "Floresta encantada"
+    ],
+    [
+      "LOC_location7Name",
+      "Болото",
+      "Swamp",
+      "Pantano",
+      "Marais",
+      "늪",
+      "Pântano"
+    ],
+    [
+      "LOC_location8Name",
+      "Пляж",
+      "Beach",
+      "Playa",
+      "Plage",
+      "해변",
+      "Praia"
+    ],
+    [
+      "LOC_location9Name",
+      "Пригород",
+      "Suburb",
+      "Suburbio",
+      "Banlieue",
+      "교외",
+      "Subúrbio"
+    ],
+    [
+      "LOC_location10Name",
+      "Ферма",
+      "Farm",
+      "Granja",
+      "Ferme",
+      "농장",
+      "Fazenda"
+    ],
+    [
+      "LOC_setPackProfit",
+      "3Х выгода",
+      "3x benefits",
+      "Beneficios 3x",
+      "Avantages 3x",
+      "3 배 이점",
+      "Benefícios 3x"
+    ],
+    [
+      "LOC_bossName6",
+      "БОСС - Пожарный",
+      "Boss - Fireman",
+      "Jefe - Bombero",
+      "Boss - Pompier",
+      "보스 - 소방관",
+      "Chefe - Bombeiro"
+    ],
+    [
+      "LOC_bossName7",
+      "БОСС - Танк",
+      "Boss - Tank",
+      "Jefe - Tanque",
+      "Boss - Tank",
+      "보스 - 전차",
+      "Chefe - Tanque"
+    ],
+    [
+      "LOC_bossName8",
+      "БОСС - НЛО",
+      "Boss - UFO",
+      "Jefe - OVNI",
+      "Boss - OVNI",
+      "보스 - UFO",
+      "Chefe - OVNI"
+    ],
+    [
+      "LOC_bossName9",
+      "БОСС - Мороженщик",
+      "Boss - Icecream",
+      "Jefe - Heladero",
+      "Boss - Glacier",
+      "보스 - 아이스크림",
+      "Chefe - Sorvete"
+    ],
+    [
+      "LOC_bossName10",
+      "БОСС - Дальнобойщик",
+      "Boss - Trucker",
+      "Jefe - Camionero",
+      "Boss - Camionneur",
+      "보스 - 트럭 운전사",
+      "Chefe - Caminhoneiro"
     ]
   ]
 }

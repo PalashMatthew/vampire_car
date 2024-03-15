@@ -35,16 +35,10 @@ public class PopUpSetPack : MonoBehaviour
         _popUpController = GetComponent<PopUpController>();
     }
 
-    public void ShowStarterPack()
-    {
-        if (PlayerPrefs.GetInt("setPackPurchased") == 0)
-        {
-            ButOpen();
-        }
-    }
-
     public void ButOpen()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpSetInApp("Open");
+
         _popUpController.OpenPopUp();
 
         Initialize();
@@ -52,6 +46,8 @@ public class PopUpSetPack : MonoBehaviour
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpSetInApp("Closed");
+
         _popUpController.ClosedPopUp();
     }
 
@@ -179,7 +175,7 @@ public class PopUpSetPack : MonoBehaviour
 
     public void CallBackPurchased()
     {
-        PlayerPrefs.SetInt("setPackPurchased", 1);
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpSetInAppBuy();
 
         AddItem(activeDetail);
 

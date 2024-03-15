@@ -43,6 +43,8 @@ public class PopUpRate : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("rateLater") == 0 && PlayerPrefs.GetInt("rateComplite") == 0)
         {
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("Open", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
             _popUpController.OpenPopUp();
 
             Initialize();
@@ -53,6 +55,7 @@ public class PopUpRate : MonoBehaviour
 
     public void ButClosed()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("Closed", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
         _popUpController.ClosedPopUp();
     }
 
@@ -65,12 +68,16 @@ public class PopUpRate : MonoBehaviour
 
     public void ButYes()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("Yes", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         panelStart.SetActive(false);
         panelRate.SetActive(true);
     }
 
     public void ButNo()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("No", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         panelStart.SetActive(false);
         panelEmail.SetActive(true);
 
@@ -79,6 +86,8 @@ public class PopUpRate : MonoBehaviour
 
     public void ButRate()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("Rate", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         PlayerPrefs.SetInt("rateComplite", 1);
 
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.SplashGames.NoBrakes");
@@ -87,11 +96,15 @@ public class PopUpRate : MonoBehaviour
 
     public void ButDontAsk()
     {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("Later", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         ButClosed();
     }
 
     public void ButSendMessage()
-    {        
+    {
+        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpRate("SendMessage", GameObject.Find("HubController").GetComponent<ChooseLocationController>().currentLocNum);
+
         try
         {
             MailMessage mail = new MailMessage();
