@@ -1411,6 +1411,7 @@ MonoBehaviour:
   imgFade: {fileID: 1779667542}
   objPopUp: {fileID: 168551171}
   animTime: 0.3
+  fadeValue: 0.7
 --- !u!1 &168551171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1628,7 @@ MonoBehaviour:
   imgFade: {fileID: 0}
   objPopUp: {fileID: 1081821732}
   animTime: 0.3
+  fadeValue: 0.7
 --- !u!1 &237265844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,6 +2765,7 @@ MonoBehaviour:
   imgFade: {fileID: 0}
   objPopUp: {fileID: 1066604722}
   animTime: 0.3
+  fadeValue: 0.7
 --- !u!1001 &778115021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4945,6 +4948,7 @@ MonoBehaviour:
   imgFade: {fileID: 975722574}
   objPopUp: {fileID: 538446851}
   animTime: 0.3
+  fadeValue: 0.7
 --- !u!1 &1613906955
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5149,7 @@ MonoBehaviour:
   imgFade: {fileID: 367631416}
   objPopUp: {fileID: 1285155668}
   animTime: 0.3
+  fadeValue: 0.7
 --- !u!1001 &1627234231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6002,75 +6007,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[0].damageCoeff
-      value: 0.4
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[0].healthCoeff
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[1].damageCoeff
-      value: 0.44
+      value: 0.3608
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[1].healthCoeff
-      value: 0.8
+      value: 0.656
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[2].damageCoeff
-      value: 0.484
+      value: 0.40656
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[2].healthCoeff
-      value: 1.1
+      value: 0.924
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[3].damageCoeff
-      value: 0.5324
+      value: 0.457864
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[3].healthCoeff
-      value: 1.4
+      value: 1.204
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[4].damageCoeff
-      value: 0.58564
+      value: 0.5153632
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[4].healthCoeff
-      value: 1.7
+      value: 1.496
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[5].damageCoeff
-      value: 0.644204
+      value: 0.5797836
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[5].healthCoeff
-      value: 2
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[6].damageCoeff
-      value: 0.7086244
+      value: 0.65193444
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[6].healthCoeff
-      value: 2.3
+      value: 2.116
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[7].damageCoeff
-      value: 0.77948684
+      value: 0.73271763
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[7].healthCoeff
-      value: 2.6
+      value: 2.444
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[8].damageCoeff
-      value: 0.8574355
+      value: 0.8402868
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[8].healthCoeff
-      value: 2.9
+      value: 2.842
       objectReference: {fileID: 0}
     - target: {fileID: 5336416963121399294, guid: 38bdcecebdf65fa4a8a8549ae70a622b, type: 3}
       propertyPath: enemyCoeffList.Array.data[9].damageCoeff
