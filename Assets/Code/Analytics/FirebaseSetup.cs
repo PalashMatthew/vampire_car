@@ -619,5 +619,25 @@ public class FirebaseSetup : MonoBehaviour
 
         Debug.Log("Event Send!\n" + s);
     }
+
+    public void Event_AdsButtonClick()
+    {
+        string s = "AdsButtonClick";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
+
+    public void Event_NotEnoughHard()
+    {
+        string s = "NotEnoughHard";
+
+        FirebaseAnalytics.LogEvent("Splash_Games",
+            new Parameter("Monetization", s));
+
+        Debug.Log("Event Send!\n" + s);
+    }
     #endregion
 }

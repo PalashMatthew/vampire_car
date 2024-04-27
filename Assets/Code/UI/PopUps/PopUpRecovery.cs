@@ -126,7 +126,12 @@ public class PopUpRecovery : MonoBehaviour
             ButClosed();
 
             StartCoroutine(PlayerShieldActivate());
-        }        
+        }      
+        else
+        {
+            if (GameObject.Find("Firebase") != null)
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
+        }
     }
 
     IEnumerator PlayerShieldActivate()

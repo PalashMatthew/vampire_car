@@ -285,7 +285,7 @@ public class ChangeCarController : MonoBehaviour
                 _isPurchaseSuccess = true;
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
-            }
+            }            
         }
 
         if (_activeCarObj.priceType == CarButtonController.PriceType.Hard)
@@ -301,6 +301,11 @@ public class ChangeCarController : MonoBehaviour
                 _isPurchaseSuccess = true;
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+            }
+            else
+            {
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
             }
         }
 

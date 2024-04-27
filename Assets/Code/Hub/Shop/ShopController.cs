@@ -34,7 +34,11 @@ public class ShopController : MonoBehaviour, IStoreListener
     public TMP_Text tFreeMoneyCount;
     public List<int> freeMoneyCount;
 
+    public TMP_Text tHardMoneyCount1, tHardMoneyCount2;
+
+
     public TMP_Text tFreeChestTime;
+    int freeChestTimerValue;
 
 
     private void Awake()
@@ -70,6 +74,8 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             PlayerPrefs.SetInt("AdsChestTimerSaveTime", PlayerPrefs.GetInt("AdsChestTimerSaveTime") + seconds);
 
+            freeChestTimerValue = 14400 - PlayerPrefs.GetInt("AdsChestTimerSaveTime");
+
             Debug.Log("All Time Spend = " + PlayerPrefs.GetInt("AdsChestTimerSaveTime"));            
 
             if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") > 14400)
@@ -93,19 +99,23 @@ public class ShopController : MonoBehaviour, IStoreListener
 
         tFreeMoneyCount.text = freeMoneyCount[PlayerPrefs.GetInt("maxLocation") - 1] + "";
         PlayerPrefs.SetInt("freeMoneyAdsValue", freeMoneyCount[PlayerPrefs.GetInt("maxLocation") - 1]);
+
+        tHardMoneyCount1.text = (PlayerPrefs.GetInt("freeMoneyAdsValue") * 5) + "";
+        tHardMoneyCount2.text = (PlayerPrefs.GetInt("freeMoneyAdsValue") * 15) + "";
     }
 
     IEnumerator AdsChestTimer()
     {
         yield return new WaitForSeconds(1);
         PlayerPrefs.SetInt("AdsChestTimerSaveTime", PlayerPrefs.GetInt("AdsChestTimerSaveTime") + 1);
+        freeChestTimerValue -= 1;
 
-        string _text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
-        string _textH = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
-        string _textM = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
+        string _text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_chesttime1");
+        string _textH = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_chesttime2");
+        string _textM = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_chesttime3");
 
-        int _h = PlayerPrefs.GetInt("AdsChestTimerSaveTime") / 60 / 60;
-        int _m = (_h * 60) - PlayerPrefs.GetInt("AdsChestTimerSaveTime") / 60;
+        int _h = freeChestTimerValue / 60 / 60;
+        int _m = (_h * 60) - freeChestTimerValue / 60;
 
         tFreeChestTime.text = _text + " - " + _h + _textH + " " + _m + _textM;
 
@@ -173,24 +183,33 @@ public class ShopController : MonoBehaviour, IStoreListener
             if (PlayerPrefs.GetInt("playerHard") >= 80)
             {
                 PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 80);
-                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 5760);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (PlayerPrefs.GetInt("freeMoneyAdsValue") * 5));
 
-                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(5760, "-", PlayerPrefs.GetInt("playerMoney"));
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney((PlayerPrefs.GetInt("freeMoneyAdsValue") * 5), "-", PlayerPrefs.GetInt("playerMoney"));
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
             }
-            
+            else
+            {
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
+            }
         }
         else if (num == 3)
         {
             if (PlayerPrefs.GetInt("playerHard") >= 200)
             {
                 PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 200);
-                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + 17280);
+                PlayerPrefs.SetInt("playerMoney", PlayerPrefs.GetInt("playerMoney") + (PlayerPrefs.GetInt("freeMoneyAdsValue") * 15));
 
-                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney(17280, "-", PlayerPrefs.GetInt("playerMoney"));
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_BuyMoney((PlayerPrefs.GetInt("freeMoneyAdsValue") * 15), "-", PlayerPrefs.GetInt("playerMoney"));
 
                 GameObject.Find("GameCloud").GetComponent<GameCloud>().SaveData();
+            }
+            else
+            {
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
             }
         }        
     }
@@ -392,6 +411,11 @@ public class ShopController : MonoBehaviour, IStoreListener
 
                     PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 60);
                 }
+                else
+                {
+                    if (GameObject.Find("Firebase") != null)
+                        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
+                }
             }
         }
     }
@@ -504,6 +528,11 @@ public class ShopController : MonoBehaviour, IStoreListener
                     popUpOpenChest.Open(2, "hard");
 
                     PlayerPrefs.SetInt("playerHard", PlayerPrefs.GetInt("playerHard") - 300);
+                }
+                else
+                {
+                    if (GameObject.Find("Firebase") != null)
+                        GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
                 }
             }
         }

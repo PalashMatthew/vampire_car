@@ -36,6 +36,9 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
 
     public void ShowAds(string placementName)
     {
+        if (GameObject.Find("Firebase") != null)
+            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_AdsButtonClick();
+
         if (Appodeal.isLoaded(Appodeal.REWARDED_VIDEO))
         {
             if (GameObject.Find("Firebase") != null)
@@ -94,6 +97,8 @@ public class AdsController : MonoBehaviour, IAppodealInitializationListener, IRe
     // Called when rewarded video is viewed until the end
     public void onRewardedVideoFinished(double amount, string name)
     {
+        Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventAdImpression);
+
         string placementName = PlayerPrefs.GetString("currentAdsPlacementName");
 
         Debug.Log(placementName);

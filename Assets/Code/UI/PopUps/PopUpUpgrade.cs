@@ -351,6 +351,8 @@ public class PopUpUpgrade : MonoBehaviour
 
                 butRerollHard1.SetActive(false);
                 butRerollHard2.SetActive(false);
+
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Reroll("hard");
             }
 
             if (_type == "passive" && PlayerPrefs.GetInt("playerHard") >= 10)
@@ -362,9 +364,17 @@ public class PopUpUpgrade : MonoBehaviour
 
                 butRerollHard1.SetActive(false);
                 butRerollHard2.SetActive(false);
+
+                GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Reroll("hard");
             }
 
-            GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_Reroll("hard");
+            if (PlayerPrefs.GetInt("playerHard") < 10)
+            {
+                if (GameObject.Find("Firebase") != null)
+                    GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_NotEnoughHard();
+            }              
+
+            
         }
     }
 

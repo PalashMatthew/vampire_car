@@ -21,6 +21,8 @@ public class PopUpWaveReward : MonoBehaviour
 
     int currentLoc;
 
+    public GameObject toggle_1, toggle_2, toggle_3, toggle_4, toggle_5;
+
 
     private void Start()
     {
