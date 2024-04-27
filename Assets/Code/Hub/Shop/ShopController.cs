@@ -34,6 +34,8 @@ public class ShopController : MonoBehaviour, IStoreListener
     public TMP_Text tFreeMoneyCount;
     public List<int> freeMoneyCount;
 
+    public TMP_Text tFreeChestTime;
+
 
     private void Awake()
     {
@@ -70,14 +72,15 @@ public class ShopController : MonoBehaviour, IStoreListener
 
             Debug.Log("All Time Spend = " + PlayerPrefs.GetInt("AdsChestTimerSaveTime"));            
 
-            if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") > 86400)
+            if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") > 14400)
             {
                 isChest1Ads = true;
+                tFreeChestTime.gameObject.SetActive(false);
             }
             else
             {
                 GameObject.Find("PushController").GetComponent<PushNotificationController>().SendNotification("ads_chest", PlayerPrefs.GetInt("AdsChestTimerSaveTime"));
-
+                tFreeChestTime.gameObject.SetActive(true);
                 isChest1Ads = false;
                 StartCoroutine(AdsChestTimer());
             }
@@ -97,7 +100,18 @@ public class ShopController : MonoBehaviour, IStoreListener
         yield return new WaitForSeconds(1);
         PlayerPrefs.SetInt("AdsChestTimerSaveTime", PlayerPrefs.GetInt("AdsChestTimerSaveTime") + 1);
 
-        if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") < 86400)
+        string _text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
+        string _textH = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
+        string _textM = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_talentsNameDamage");
+
+        int _h = PlayerPrefs.GetInt("AdsChestTimerSaveTime") / 60 / 60;
+        int _m = (_h * 60) - PlayerPrefs.GetInt("AdsChestTimerSaveTime") / 60;
+
+        tFreeChestTime.text = _text + " - " + _h + _textH + " " + _m + _textM;
+
+        //tFreeChestTime.text = 
+
+        if (PlayerPrefs.GetInt("AdsChestTimerSaveTime") < 14400)
         {
             StartCoroutine(AdsChestTimer());
         } 

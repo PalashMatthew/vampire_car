@@ -182,7 +182,7 @@ public class PopUpGrowthFund : MonoBehaviour
 
     public void ButCellFree(int num)
     {       
-        if (num <= playerLevel)
+        if (needPlayerLevel[num - 1] <= playerLevel && PlayerPrefs.GetInt("growFundOpenFree" + needPlayerLevel[num - 1]) != 1)
         {
             GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Free", num);
 
@@ -211,7 +211,7 @@ public class PopUpGrowthFund : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("rareGrowthFundBuyed") == 1)
         {
-            if (num <= playerLevel)
+            if (needPlayerLevel[num - 1] <= playerLevel && PlayerPrefs.GetInt("growFundOpenRare" + needPlayerLevel[num - 1]) != 1)
             {
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Rare", num);
 
@@ -241,7 +241,7 @@ public class PopUpGrowthFund : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("epicGrowthFundBuyed") == 1)
         {
-            if (num <= playerLevel)
+            if (needPlayerLevel[num - 1] <= playerLevel && PlayerPrefs.GetInt("growFundOpenEpic" + needPlayerLevel[num - 1]) != 1)
             {
                 GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_PopUpGrowthFundTakeReward("Epic", num);
 
