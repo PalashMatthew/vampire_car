@@ -216,6 +216,8 @@ public class PopUpUpgrade : MonoBehaviour
 
     public void ButOpen()
     {
+        WaveController.fakeCurrentWave++;
+
         pauseBut.SetActive(false);
 
         GameplayController.isPause = true;
@@ -227,10 +229,14 @@ public class PopUpUpgrade : MonoBehaviour
         panelPassiveUpgrade.SetActive(true);
         panelGunUpgrade.SetActive(false);
 
-        butRerollAds1.SetActive(true);
-        butRerollAds2.SetActive(true);
-        butRerollHard1.SetActive(true);
-        butRerollHard2.SetActive(true);        
+        if (Application.loadedLevel != 2)
+        {
+            butRerollAds1.SetActive(true);
+            butRerollAds2.SetActive(true);
+            butRerollHard1.SetActive(true);
+            butRerollHard2.SetActive(true);
+        }
+            
 
         //CardAnimation();
         CardPassiveAnim();

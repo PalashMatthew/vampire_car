@@ -192,6 +192,8 @@ public class Generate : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(BossFightEnum());
+
+        _obstacles = GetComponent<GenerateObstacles>();
         _obstacles.isBossFight = true;
     }
 
@@ -200,6 +202,7 @@ public class Generate : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         GameObject.Find("GameplayUI").GetComponent<GameplayUIController>().isShowPanelWave = false;
+        _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
 
         if (_gameplayController.activeEnemy.Count > 0)
         {

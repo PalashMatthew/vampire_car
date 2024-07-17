@@ -58,9 +58,11 @@ public class Gun : MonoBehaviour
     PlayerPassiveController _passiveController;
 
 
-    private void Start()
+    private void Awake()
     {
         //Initialize();
+        _playerStats = GetComponentInParent<PlayerStats>();
+        _passiveController = GetComponentInParent<PlayerPassiveController>();
     }
 
     public void Initialize()

@@ -1240,6 +1240,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: playerGuns
+      value: 
+      objectReference: {fileID: 345291383}
+    - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: inputSettings
       value: 2
       objectReference: {fileID: 0}
@@ -1248,9 +1252,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 360990852}
     - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: upgradeController
+      value: 
+      objectReference: {fileID: 778115022}
+    - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: _playerUIController
       value: 
       objectReference: {fileID: 360990853}
+    - target: {fileID: 3622418176541468478, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: playerPassiveController
+      value: 
+      objectReference: {fileID: 345291382}
+    - target: {fileID: 3623825019274578466, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: playerGuns
+      value: 
+      objectReference: {fileID: 345291383}
+    - target: {fileID: 3623825019274578466, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 360990849}
+    - target: {fileID: 3623825019274578466, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: waveController
+      value: 
+      objectReference: {fileID: 102085928}
+    - target: {fileID: 3623825019274578466, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: upgradeController
+      value: 
+      objectReference: {fileID: 778115022}
+    - target: {fileID: 3623825019274578466, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
+      propertyPath: playerPassiveController
+      value: 
+      objectReference: {fileID: 345291382}
     - target: {fileID: 5716426212367184059, guid: 1332d4ff03382d540ab490721de634ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 540
@@ -1841,6 +1873,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333853680}
   m_CullTransparentMesh: 1
+--- !u!114 &345291382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1433326453285278809, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+  m_PrefabInstance: {fileID: 360990848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57a7af3ed5933445bc53b73457ccdf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &345291383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6611435037227420102, guid: 30e97a11a5e049f449feb5f0ebf9a12b, type: 3}
+  m_PrefabInstance: {fileID: 360990848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a518d31b3f919840bef63ede66b17b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357145037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4402,6 +4456,10 @@ PrefabInstance:
       propertyPath: upgradeController
       value: 
       objectReference: {fileID: 778115022}
+    - target: {fileID: 7048187427516361354, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188374645771733557, guid: d83b1d979e27b844caffb2e99f2d990a, type: 3}
       propertyPath: _bursts.Array.data[0].used
       value: 0

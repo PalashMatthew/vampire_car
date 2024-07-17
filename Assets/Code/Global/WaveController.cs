@@ -11,6 +11,8 @@ public class WaveController : MonoBehaviour
     public int currentWave;
     public int enemyDestroy;
 
+    public static int fakeCurrentWave;
+
     public int lastWave;
 
     public GameObject enemyM1Obj;
@@ -48,7 +50,7 @@ public class WaveController : MonoBehaviour
         _generateObstacles = GameObject.Find("Generate Controller").GetComponent<GenerateObstacles>();
         _gameplayController = GameObject.Find("GameplayController").GetComponent<GameplayController>();
 
-        if (PlayerPrefs.GetString("tutorialLoc1Complite") == "true")
+        if (PlayerPrefs.GetString("tutorialLoc1Complite") == "true" && PlayerPrefs.GetInt("locationContinue") == 0)
         {
             StartWave();
         }              
@@ -68,7 +70,7 @@ public class WaveController : MonoBehaviour
         {
             GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
             gameplayUIController.isMinExpDone = false;
-        }
+        }        
 
         if (currentWave < lastWave)
         {
@@ -122,6 +124,43 @@ public class WaveController : MonoBehaviour
 
         //if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
         //    GameObject.Find("Player").GetComponent<PlayerMovement>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerMovement>().SetRegeneration());
+
+        fakeCurrentWave = currentWave;
+    }
+
+    public void StartBossWave()
+    {
+        secondsPass = 0;
+        isWaveEnd = false;
+
+        if (PlayerPrefs.GetString("tutorialComplite") != "false")
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().currentExp = 0;
+            gameplayUIController.isMinExpDone = false;
+        }
+
+        _generateObstacles.StopSpawnObstacles();
+
+        for (int i = 0; i < _generateObstacles.instObstacles.Count; i++)
+        {
+            if (_generateObstacles.instObstacles[i] != null)
+            {
+                Destroy(_generateObstacles.instObstacles[i]);
+            }
+        }
+
+        _gameplayController.activeEnemy.Clear();
+        _generate.BossFight();
+
+        if (PlayerPrefs.GetInt("setActive") == 1 && PlayerPrefs.GetString("setActiveID") == "s06")  //Если у нас сет Щита активен
+        {
+            GameObject.Find("Player").GetComponent<PlayerController>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerController>().ShieldTimer());
+        }
+
+        //if (PlayerPrefs.GetString("setActiveID") == "s05" && PlayerPrefs.GetInt("setActive") == 1)
+        //    GameObject.Find("Player").GetComponent<PlayerMovement>().StartCoroutine(GameObject.Find("Player").GetComponent<PlayerMovement>().SetRegeneration());
+
+        fakeCurrentWave = currentWave;
     }
 
     public void StartTutorialWave()

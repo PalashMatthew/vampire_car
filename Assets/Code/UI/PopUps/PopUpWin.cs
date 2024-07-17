@@ -66,7 +66,10 @@ public class PopUpWin : MonoBehaviour
     }
 
     void Initialize()
-    {       
+    {
+        PlayerPrefs.SetInt("locationContinue", 0);
+        PlayerPrefs.SetInt("saveTryPassiveCount", 0);
+
         tWave.text = (waveController.currentWave - 1) + "";
 
         tLeader.text = PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText1") + " " + Random.Range(70, 86) + "% " + PlayerPrefs.GetString(PlayerPrefs.GetString("activeLang") + "LOC_winStatsText2");

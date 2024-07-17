@@ -100,6 +100,9 @@ public class PopUpPause : MonoBehaviour
     {
         GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_GoToHub();
 
+        PlayerPrefs.SetInt("locationContinue", 0);
+        PlayerPrefs.SetInt("saveTryPassiveCount", 0);
+
         GameplayController.isPause = false;
         Time.timeScale = 1;
         GameObject.Find("LoadingCanvas").GetComponent<ASyncLoader>().LoadLevel("Hub");

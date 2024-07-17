@@ -48,11 +48,11 @@ public class PlayerGuns : MonoBehaviour
 
     private void Start()
     {
-        GunInitialize();
+        //GunInitialize();
         GunActivate();        
     }
 
-    void GunInitialize()
+    public void GunInitialize()
     {
         if (PlayerPrefs.GetInt("GunIDSelect") != 0)
         {
@@ -240,5 +240,56 @@ public class PlayerGuns : MonoBehaviour
             PinPongObj.SetActive(true);
             gunCount++;
         }            
+    }
+
+    public void LoadSaveTrySettings()
+    {
+        GunActivate();
+
+        for (int i = 0; i < guns.Count; i++)
+        {
+            guns[i].damage = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "damage");
+            guns[i].baseDamage = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseDamage");
+            guns[i].damageCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "damageCoeff");
+            guns[i].damageCoeffPassive = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "damageCoeffPassive");
+
+            guns[i].shotSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "shotSpeed");
+            guns[i].baseShotSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseShotSpeed");
+            guns[i].shotSpeedCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "shotSpeedCoeff");
+            guns[i].shotSpeedCoeffPassive = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "shotSpeedCoeffPassive");
+
+            guns[i].bulletMoveSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "bulletMoveSpeed");
+            guns[i].baseBulletMoveSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseBulletMoveSpeed");
+            guns[i].bulletMoveSpeedCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "bulletMoveSpeedCoeff");
+
+            guns[i].timeOfAction = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "timeOfAction");
+            guns[i].baseTimeOfAction = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseTimeOfAction");
+            guns[i].timeOfActionCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "timeOfActionCoeff");
+
+            guns[i].freezeTime = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "freezeTime");
+            guns[i].baseFreezeTime = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseFreezeTime");
+            guns[i].freezeTimeCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "freezeTimeCoeff");
+
+            guns[i].projectileValue = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "projectileValue");
+
+            guns[i].areaValue = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "areaValue");
+            guns[i].baseAreaValue = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseAreaValue");
+            guns[i].areaCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "areaCoeff");
+
+            guns[i].multiplyDamage = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "multiplyDamage");
+            guns[i].baseMultiplyDamage = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseMultiplyDamage");
+            guns[i].multiplyDamageCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "multiplyDamageCoeff");
+
+            guns[i].rotateSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "rotateSpeed");
+            guns[i].baseRotateSpeed = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "baseRotateSpeed");
+            guns[i].rotateSpeedCoeff = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "rotateSpeedCoeff");
+
+            guns[i].ricochetCount = PlayerPrefs.GetFloat("saveTry" + guns[i].gunName + "ricochetCount");            
+        }        
+
+        //foreach (Gun _gun in guns)
+        //{
+        //    _gun.Initialize();
+        //}
     }
 }

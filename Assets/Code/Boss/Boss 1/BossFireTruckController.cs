@@ -324,7 +324,7 @@ public class BossFireTruckController : MonoBehaviour
     {
         if (_enemyController.hp <= 0)
         {
-            GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave++;
+            GameObject.Find("GameplayController").GetComponent<WaveController>().currentWave = 11;
             GameObject.Find("GameplayController").GetComponent<GameplayController>().Win();
 
             GameObject _fx = Instantiate(_enemyController.fxExplosion, transform.position, transform.rotation);

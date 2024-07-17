@@ -84,82 +84,85 @@ public class UpgradeController : MonoBehaviour
         _playerGuns = GameObject.Find("Player").GetComponent<PlayerGuns>();
         _waveController = GameObject.Find("GameplayController").GetComponent<WaveController>();
 
-        #region ƒобавл€ем оружие в слот если на старте его вз€ли
-        foreach (UpgradeCard _card in cardsGun)
-        {
-            switch (_card.upgradeGunType)
-            {
-                case UpgradeCard.UpgradeGunType.Boomerang:
-                    if (Boomerang_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Bow:
-                    if (Bow_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.DefaultGun:
-                    if (DefaultGun_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Dron:
-                    if (Dron_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.FanGun:
-                    if (FanGun_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.GodGun:
-                    if (GodGun_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Grenade:
-                    if (Grenade_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.GrowingShotGun:
-                    if (GrowingShot_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Ice:
-                    if (Ice_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Lazer:
-                    if (Lazer_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Mines:
-                    if (Mines_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Partner:
-                    if (Partner_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.PinPong:
-                    if (PinPong_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Ricochet:
-                    if (Ricochet_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.RocketLauncher:
-                    if (RocketLauncher_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-                case UpgradeCard.UpgradeGunType.Tornado:
-                    if (Tornado_Level > 0)
-                        AddCardToSlot(_card);
-                    break;
-            }            
-        }        
-        #endregion
-
         generalMaxGunUpgradeCount = 0;
 
         UpdateTextLevels();
+    }
+
+    public void GenerateGunSlotTrySave()
+    {
+        #region ƒобавл€ем оружие в слот если на старте его вз€ли
+            foreach (UpgradeCard _card in cardsGun)
+            {
+                switch (_card.upgradeGunType)
+                {
+                    case UpgradeCard.UpgradeGunType.Boomerang:
+                        if (Boomerang_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Bow:
+                        if (Bow_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.DefaultGun:
+                        if (DefaultGun_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Dron:
+                        if (Dron_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.FanGun:
+                        if (FanGun_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.GodGun:
+                        if (GodGun_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Grenade:
+                        if (Grenade_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.GrowingShotGun:
+                        if (GrowingShot_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Ice:
+                        if (Ice_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Lazer:
+                        if (Lazer_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Mines:
+                        if (Mines_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Partner:
+                        if (Partner_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.PinPong:
+                        if (PinPong_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Ricochet:
+                        if (Ricochet_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.RocketLauncher:
+                        if (RocketLauncher_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                    case UpgradeCard.UpgradeGunType.Tornado:
+                        if (Tornado_Level > 0)
+                            AddCardToSlot(_card);
+                        break;
+                }
+            }
+        #endregion
     }
 
     public void GenerateGunCards()

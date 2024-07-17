@@ -180,6 +180,9 @@ public class UpgradeCardController : MonoBehaviour
                 _popUpUpgrade.StartCoroutine(_popUpUpgrade.ChoicePassiveCard());
                 GameObject.Find("PopUp Pause").GetComponent<PopUpPause>().InstPassive(imgIcon.sprite);
 
+                PlayerPrefs.SetInt("saveTryPassiveCount", PlayerPrefs.GetInt("saveTryPassiveCount") + 1);
+                PlayerPrefs.SetString("saveTryPassiveCard" + (PlayerPrefs.GetInt("saveTryPassiveCount") - 1), card.cardName);
+
                 if (GameObject.Find("Firebase") != null)
                     GameObject.Find("Firebase").GetComponent<FirebaseSetup>().Event_TakePassiveCard(card.cardName, cardRarity.ToString());
             }

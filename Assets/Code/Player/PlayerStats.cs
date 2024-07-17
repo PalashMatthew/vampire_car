@@ -65,12 +65,20 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
-        currentLevel = 1;
         playerController = GetComponent<PlayerController>();
 
-        isRecoveryHpDionisusCarTalant = false;
+        if (PlayerPrefs.GetInt("locationContinue") == 1)
+        {
+            LoadSavedStats();
+        }
+        else
+        {
+            currentLevel = 1;            
 
-        StatsInitialize();
+            isRecoveryHpDionisusCarTalant = false;
+
+            StatsInitialize();
+        }        
     }
 
     void StatsInitialize()
@@ -263,6 +271,71 @@ public class PlayerStats : MonoBehaviour
         headshotProcent = PlayerPrefs.GetFloat("carGlobalCoeffheadshot");
 
         effectDuration = PlayerPrefs.GetFloat("carGlobalCoeffeffectsDuration");
+    }
+
+    void LoadSavedStats()
+    {
+        currentLevel = 1;
+
+        isRecoveryHpDionisusCarTalant = false;
+
+        #region Health
+        maxHpBase = PlayerPrefs.GetFloat("saveTryMaxHpBase");
+        maxHpCoeff = PlayerPrefs.GetFloat("saveTryMaxHpCoeff");
+
+        maxHp = PlayerPrefs.GetFloat("saveTryMaxHp");
+        currentHp = PlayerPrefs.GetFloat("saveTryCurrentHp");
+        #endregion
+
+        #region KritChance
+        kritChance = PlayerPrefs.GetFloat("saveTryKritChance");
+        #endregion
+
+        #region Dodge
+        dodgeProcent = PlayerPrefs.GetFloat("saveTryDodgeProcent");
+        #endregion
+
+        #region Damage
+        damageCoeff = PlayerPrefs.GetFloat("saveTryDamageCoeff");
+        #endregion
+
+        #region RecoveryHpInFirstAidKit
+        recoveryHpInFirstAidKit = PlayerPrefs.GetFloat("saveTryRecoveryHpInFirstAidKit");
+        #endregion
+
+        block = PlayerPrefs.GetFloat("saveTryBlock");
+
+        iron = PlayerPrefs.GetFloat("saveTryIron");
+
+        dronDamage = PlayerPrefs.GetFloat("saveTryDronDamage");
+
+        shotSpeed = PlayerPrefs.GetFloat("saveTryShotSpeed");
+
+        kritDamage = PlayerPrefs.GetFloat("saveTryKritDamage");
+
+        backDamageProcent = PlayerPrefs.GetFloat("saveTryBackDamageProcent");
+
+        vampirizm = PlayerPrefs.GetFloat("saveTryVampirizm");
+
+        armorProcent = PlayerPrefs.GetFloat("saveTryArmorProcent");
+
+        healthRecovery = PlayerPrefs.GetFloat("saveTryHealthRecovery");
+
+        rageValue = PlayerPrefs.GetFloat("saveTryRageValue");
+
+        rageCoeff = PlayerPrefs.GetFloat("saveTryRageCoeff");
+
+        distanceDamageCoeff = PlayerPrefs.GetFloat("saveTryDistanceDamageCoeff");
+
+        lucky = PlayerPrefs.GetFloat("saveTryLucky");
+
+        carDamage = PlayerPrefs.GetFloat("saveTryCarDamage");
+
+        massEnemyDamage = PlayerPrefs.GetFloat("saveTryMassEnemyDamage");
+
+        headshotProcent = PlayerPrefs.GetFloat("saveTryHeadshotProcent");
+
+        effectDuration = PlayerPrefs.GetFloat("saveTryEffectDuration");
     }
 
     private void Update()
